@@ -1,0 +1,70 @@
+{
+    "extends": [
+        "@microsoft/gulp-core-build-typescript/lib/defaultTslint.json",
+        "tslint-react"
+    ],
+    "rules": {
+        "function-name": [
+            true,
+            {
+                "method-regex": "^[a-z][\\w\\d]+$",
+                "private-method-regex": "^_[a-z][\\w\\d]+$",
+                "protected-method-regex": "^[_]?[a-z][\\w\\d]+$",
+                "static-method-regex": "^[a-z][\\w\\d]+$",
+                "function-regex": "^[_]?[a-z][\\w\\d]+$"
+            }
+        ],
+        "jsx-curly-spacing": {
+            "when": "always"
+        },
+        "jsx-no-bind": false,
+        "jsx-boolean-value": false,
+        "jsx-equals-spacing": "never",
+        "jsx-key": false,
+        "jsx-no-lambda": false,
+        "jsx-self-close": false,
+        "jsx-wrap-multiline": false,
+        "jsx-no-multiline-js": false,
+        "jsx-no-string-ref": false,
+        "jsx-ban-props": false,
+        "no-duplicate-variable": true,
+        "use-isnan": true,
+        "triple-equals": false,
+        "max-line-length": [
+            false,
+            140
+        ],
+        "no-arg": true,
+        "radix": true,
+        "typedef": [
+            false
+        ],
+        "no-unused-expression": [
+            false
+        ],
+        "prefer-const": false,
+        "quotemark": [
+            true,
+            "single",
+            "jsx-single"
+        ],
+        "no-inferrable-types": [
+            false
+        ],
+        "no-null-keyword": false,
+        "export-name": false,
+        "trailing-comma": [
+            false
+        ],
+        "whitespace": [
+            false
+        ],
+        "no-trailing-whitespace": false,
+        "no-switch-case-fall-through": false,
+        "variable-name": false,
+        "no-unused-variable": false,
+        "jsx-alignment": false,
+        "no-any": false,
+        "no-internal-module": false
+    }
+}

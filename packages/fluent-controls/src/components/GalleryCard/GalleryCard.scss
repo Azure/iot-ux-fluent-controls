@@ -1,0 +1,69 @@
+@import '../../common/CSS';
+
+$md-card-bg-color: #eaeaea;
+$md-card-header-color: #eaea00;
+$md-card-icon-color: #00eaea;
+
+$md-card-fixed-width: 284px;
+$md-card-fixed-height: 284px;
+$md-card-fixed-background-height: 160px;
+$md-card-fixed-content-height: $md-card-fixed-height - $md-card-fixed-background-height;
+
+$md-card-content-margin: 20px 20px 16px 20px;
+
+$md-card-icon-width: 96px;
+$md-card-icon-height: 96px;
+$md-card-icon-top: ($md-card-fixed-background-height - $md-card-icon-height);
+$md-card-icon-left: ($md-card-fixed-width - $md-card-icon-width);
+
+@mixin circle($width, $color) {
+    width: $width;
+    height: $width;
+    background: $color;
+    border-radius: $width/2;
+}
+
+.md-card {
+    display: inline-block;
+    position: relative;
+    background-color: $md-card-bg-color;
+    overflow: hidden;
+
+    .md-fixed & {
+        width: $md-card-fixed-width;
+    }
+}
+
+.md-card-background {
+    display: block;
+    position: relative;
+    width: 100%;
+    background-color: $md-card-header-color;
+
+    .md-fixed & {
+        height: 160px;
+    }
+}
+
+.md-card-icon {
+    position: absolute;
+
+    .md-fixed & {
+        top: $md-card-icon-top;
+        left: $md-card-icon-left;
+
+        @include circle($md-card-icon-width, $md-card-icon-color);
+    }
+    
+}
+
+.md-card-content {
+    display: block;
+    position: relative;
+
+    margin: $md-card-content-margin;
+
+    .md-fixed & {
+        height: $md-card-fixed-content-height;
+    }
+}
