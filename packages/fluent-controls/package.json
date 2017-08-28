@@ -41,6 +41,8 @@
         "prop-types": "^15.5.10"
     },
     "dependencies": {
+        "classnames": "^2.2.5",
+        "react": "^15.6.1"
     },
     "pre-commit": [
         "tslint"

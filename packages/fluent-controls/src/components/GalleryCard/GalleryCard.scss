@@ -1,8 +1,12 @@
+@import "../../common/normalize";
 @import '../../common/CSS';
+@import '../../common/icons';
+@import '../../common/overrides';
 
 $md-card-bg-color: #eaeaea;
 $md-card-header-color: #eaea00;
 $md-card-icon-color: #00eaea;
+$md-icon-default-bg: rgba(0,0,0,0);
 
 $md-card-fixed-width: 284px;
 $md-card-fixed-height: 284px;
@@ -16,54 +20,173 @@ $md-card-icon-height: 96px;
 $md-card-icon-top: ($md-card-fixed-background-height - $md-card-icon-height);
 $md-card-icon-left: ($md-card-fixed-width - $md-card-icon-width);
 
-@mixin circle($width, $color) {
+@mixin circle($width) {
     width: $width;
     height: $width;
-    background: $color;
     border-radius: $width/2;
 }
 
 .md-card {
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+
     display: inline-block;
     position: relative;
     background-color: $md-card-bg-color;
     overflow: hidden;
+    margin: 10px;
 
-    .md-fixed & {
-        width: $md-card-fixed-width;
+    &.md-fixed {
+        height: 284px;
     }
 }
 
-.md-card-background {
+%md-card-background {
     display: block;
     position: relative;
     width: 100%;
-    background-color: $md-card-header-color;
+    background-color: transparent;
 
-    .md-fixed & {
-        height: 160px;
+    &.md-fixed {
+        width: $md-card-fixed-width;
+        height: $md-card-fixed-background-height;
     }
 }
 
-.md-card-icon {
+.md-background-image {
+    @extend %md-card-background;
+
+    background-size:cover;    
+}
+
+.md-background-color {
+    @extend %md-card-background;
+
+    background-color: $md-card-header-color;
+}
+
+%md-icon {
+    font-family: "icons";
+    font-style: normal;
+    font-weight: normal;
+
     position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    color: white;
+}
 
-    .md-fixed & {
-        top: $md-card-icon-top;
-        left: $md-card-icon-left;
+.md-icon-xsmall {
+    @extend %md-icon;
+    font-size: 16px;
+}
 
-        @include circle($md-card-icon-width, $md-card-icon-color);
+.md-icon-small {
+    @extend %md-icon;
+    font-size: 32px;
+}
+
+.md-icon-medium {
+    @extend %md-icon;
+    font-size: 48px;
+}
+
+.md-icon-large {
+    @extend %md-icon;
+    font-size: 64px;
+}
+
+.md-icon-xlarge {
+    @extend %md-icon;    
+    font-size: 80px;
+}
+
+.md-icon-xxlarge {
+    @extend %md-icon;    
+    font-size: 96px;
+}
+
+.md-icon-background {
+    @extend %md-icon;    
+    @include circle(120px);
+
+    &.md-icon-xsmall {
+        @include circle(16px);
     }
-    
+
+    &.md-icon-small {
+        @include circle(32px);
+    }
+
+    &.md-icon-medium {
+        @include circle(48px);
+    }
+
+    &.md-icon-large {
+        @include circle(64px);
+    }
+
+    &.md-icon-xlarge {
+        @include circle(80px);
+    }
+
+    &.md-icon-xxlarge {
+        @include circle(96px);
+    }
 }
 
 .md-card-content {
-    display: block;
+    display: inline-block;
     position: relative;
-
+    overflow: hidden;
     margin: $md-card-content-margin;
+    font-family: $font-family-base;
+    
+    header {
+        font-size: 16px;
+        line-height: 20px;
+        color: #212121;
+        margin-bottom: 4px;
+    }
+
+    section {
+        font-size: 13px;
+        line-height: 16px;
+        color: #666666;
+        margin-bottom: 16px
+    }
+
+    footer {
+        font-size: 14px;
+        line-height: 20px;
+        color: #3062d6;
+    }
 
     .md-fixed & {
-        height: $md-card-fixed-content-height;
+        text-overflow: ellipsis;
     }
+}
+
+.md-banner {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 4px;
+
+    background-color: #000000;
+
+    color: #eaeaea;
+    font-family: $font-family-base;    
+    text-overflow: ellipsis;
+    text-align: center;
 }

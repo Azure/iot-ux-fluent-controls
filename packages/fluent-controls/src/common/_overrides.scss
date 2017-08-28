@@ -1,0 +1,50 @@
+// overrides to the bootstrap variables
+
+$common-font-stack: "Segoe UI Regular", "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif;
+$font-family-base: $common-font-stack;
+
+// header font
+$headings-font-family: $font-family-base;
+$headings-font-weight: normal;
+$headings-line-height: 1.5;
+$font-size-h1: 36px;
+$font-size-h2: 20px;
+$font-size-h3: 18px;
+$font-size-h4: 16px;
+
+// general text font
+$font-size-text: 14px;
+$font-size-base: $font-size-text;
+$font-size-small: 12px;
+
+// body font color
+$text-color: black;
+
+// gutters
+
+// large gutter size - use this for the outer gutters on the edge of the container
+$lg-gutter: 20px;
+
+// standard gutter size - use this for interior gutters between components inside a container
+$gutter: 16px;
+
+// small gutter size - use this for interior gutters that are more tightly packed than the standard gutter size
+$sm-gutter: 10px;
+
+// narrow gutter size - use this for interior gutters between buttons/actions in a tile view
+$narrow-gutter: 4px;
+
+// @todo - deprecate these non-standard gutter sizes
+$md-gutter: 15px;
+$xs-gutter: 9px;
+$grid-gutter-width: $gutter;
+
+// buttons
+$btn-default-color: #000000;
+$btn-default-bg: #cccccc;
+$btn-default-border: #cccccc;
+
+$btn-primary-color: #ffffff;
+$btn-primary-bg: #2680E3;
+$btn-primary-border: #2680E3;
+

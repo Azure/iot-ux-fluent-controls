@@ -1,0 +1,126 @@
+
+$theme-dark: #005a9e;
+$theme-primary: #0078d7;
+$theme-secondary: #2488d8;
+$theme-primary-alt: #4ba0e4;
+$theme-light: #b3d6f2;
+$theme-lighter: #deecf9;
+
+// Neutral colors
+$black: #000000;
+$neutral-primary: #333333; 
+$neutral-secondary: #3c3c3c;
+$neutral-primary-alt: #444444;
+$neutral-secondary-alt: #666666;
+$neutralTertiary: #a6a6a6;
+$neutral-tertiary: $neutralTertiary;
+$neutral-tertiary-hover: #b9b9b9;
+$neutralTertiaryAlt: #c8c8c8;
+$neutral-tertiary-alt: $neutralTertiaryAlt;
+$neutral-tertiary-alt-hover: #dbdbdb;
+$neutral-light: #eaeaea;
+$neutral-lighter:#f4f4f4;
+$neutral-lighter-alt: #f8f8f8;  
+$white: #ffffff;
+
+$coolgrey-1: #1f2328;
+$coolgrey-2: #31373e;
+$coolgrey-3: #3d4147;
+$coolgrey-4: #4b5157;
+$coolgrey-5: #62666c;
+
+// Entity Colors
+$entity-location: #107c10;
+$entity-device: #ff8c00;
+$entity-device-hover: #FAA43B;
+$entity-product: #008272;
+$entity-product-hover: #3B9C90;
+
+$content-background-color: white;
+
+$navigation-panel-bg: #414953;
+$navigation-panel-hover-bg: $coolgrey-5;
+$navigation-panel-overflow-hover-bg: #7A818B;
+$navbar-bg: $coolgrey-1;
+$masthead-bg: #222222;
+$masthead-border: $coolgrey-4;
+$masthead-hover-color: $coolgrey-3;
+
+$color-text-dark: #000000;
+$color-text-light: white;
+$color-text-hover: #2680e3;
+
+$color-dropdown-bg: #eee;
+$color-dropdown-border: #ddd;
+$color-hover: $coolgrey-3;
+
+$sidebar-border-color: #767676;
+
+$lightweight-font-color: #cbcbcb;
+
+$grid-tile-placeholder-color: #808080;
+$border-bottom-title: #c0c0c0;
+
+$shadow-width: 10px;
+$shadow-width-long: 24px;
+$pane-box-shadow: -8px 0px 24px -8px;
+$pane-box-shadow-rtl: 8px 0px 24px -8px;
+
+$shadow-gradient-color: rgba(#000,0.8);
+$shadow-gradient-pane-color: rgba($sidebar-border-color, 0.5);
+$shadow-gradient: 0px 0px $shadow-width $shadow-gradient-color;
+$shadow-gradient-long: 0px 0px $shadow-width-long $shadow-gradient-color;
+$shadow-gradient-no-top: -3px 3px $shadow-width -3px $shadow-gradient-color;
+$shadow-gradient-pane: $pane-box-shadow $shadow-gradient-pane-color;
+$shadow-gradient-pane-rtl: $pane-box-shadow-rtl $shadow-gradient-pane-color;
+
+$color-disabled: $coolgrey-5;
+$color-disabled-light: #cccccc;
+$color-disabled-text: #999999;
+
+$workspace-bg: #eaeaea;
+
+$itemList-content-text: #666666;
+$itemList-border-status: #808080;
+$itemList-content-border: #d3d3d3;
+
+$grid-header-border: #CCC;
+$grid-row-hover-bg: #d0e6f7;
+$grid-row-selected-bg: #b9c3d8;
+$grid-status-green: green;
+$grid-status-orange: orange;
+$grid-status-default: lightgray;
+
+$color-grid-selected: #b9c3d7;
+$color-grid-selected-unfocused: #d8d8d8;
+$color-grid-hover: #d0e6f7;
+$color-grid-border: #cccccc;
+$color-pane-action-disabled: #666666;
+
+$context-menu-border-color: $color-grid-border;
+$context-menu-background-color: white;
+
+$searchbar-background-color: white;
+$searchbar-border: 1px solid #ccc;
+
+$content-subheader-background-color: $content-background-color;
+
+$required-asterisk-color: red;
+$dashed-viewport-color: rgba(255,255,255,.75);
+$dashed-viewport-boxshadow: 1px 1px 5px rgba(255, 255, 255, .5), inset -1px -1px 2px rgba(255, 255, 255, .5);
+$dashed-viewport-textshadow: 1px 1px 5px rgba(255, 255, 255, .5), -1px -1px 2px rgba(255, 255, 255, .5);
+$tile-background: white;
+
+$builder-text-color: white;
+$builder-background-color: $theme-dark;
+
+$list-container-special-action: $neutral-secondary-alt;
+
+$blast-shield-background: rgba(0,0,0,0.5);
+
+$form-control-border-color: #ccc;
+
+$error-color: red;
+$description-color: #666666;
+
+$readonly-form-control-color: #e6e6e6;
