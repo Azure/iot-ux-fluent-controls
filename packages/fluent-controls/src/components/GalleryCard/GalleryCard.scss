@@ -4,6 +4,8 @@
 @import '../../common/overrides';
 
 $md-card-bg-color: #eaeaea;
+$md-card-bg-color: #eaeaea;
+$md-card-hover-border-color: #000000;
 $md-card-header-color: #eaea00;
 $md-card-icon-color: #00eaea;
 $md-icon-default-bg: rgba(0,0,0,0);
@@ -30,6 +32,7 @@ $md-card-icon-left: ($md-card-fixed-width - $md-card-icon-width);
     * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
     }
     
     a {
@@ -40,10 +43,18 @@ $md-card-icon-left: ($md-card-fixed-width - $md-card-icon-width);
     position: relative;
     background-color: $md-card-bg-color;
     overflow: hidden;
+    border: 1px solid $md-card-bg-color;
     margin: 10px;
+    box-sizing: border-box;
+    
+    &:hover {
+        border: 1px solid $md-card-hover-border-color;
+        box-shadow: 0px 0px 10px 1px rgba(0,0,0,0.75);
+    }
 
     &.md-fixed {
         height: 284px;
+        width: 284px;
     }
 }
 
@@ -57,12 +68,17 @@ $md-card-icon-left: ($md-card-fixed-width - $md-card-icon-width);
         width: $md-card-fixed-width;
         height: $md-card-fixed-background-height;
     }
+    
+    .md-fullbg & {
+        height: 100%;
+    }
 }
 
 .md-background-image {
     @extend %md-card-background;
 
-    background-size:cover;    
+    background-size: cover;
+    transition: background-image 5s ease-in-out;
 }
 
 .md-background-color {
@@ -144,34 +160,42 @@ $md-card-icon-left: ($md-card-fixed-width - $md-card-icon-width);
 }
 
 .md-card-content {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
     position: relative;
     overflow: hidden;
-    margin: $md-card-content-margin;
+    padding: $md-card-content-margin;
     font-family: $font-family-base;
+    box-sizing: border-box;
     
     header {
         font-size: 16px;
         line-height: 20px;
         color: #212121;
         margin-bottom: 4px;
+        flex: 0 0 20px;
     }
 
     section {
         font-size: 13px;
         line-height: 16px;
         color: #666666;
-        margin-bottom: 16px
+        margin-bottom: 16px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     footer {
         font-size: 14px;
         line-height: 20px;
         color: #3062d6;
+        flex: 0 0 16px;
     }
 
     .md-fixed & {
         text-overflow: ellipsis;
+        height: $md-card-fixed-content-height;
     }
 }
 

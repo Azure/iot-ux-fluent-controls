@@ -27,19 +27,27 @@ export interface GalleryCardType {
 
 }
 
+export enum IconSize {
+    xsmall = 1,
+    small,
+    medium,
+    large,
+    xlarge,
+    xxlarge
+}
+
 export const CardTest = () => {
     
     const out1 = () => {
         let bg = (
             <SolidBackground backgroundColor="green" fixed>
                 <IconBackground backgroundColor="yellow" />
-                <Icon icon='cancelLegacy' xlarge />
-                <Banner backgroundColor="#333">Coming soon!</Banner>
+                <Icon icon='cancelLegacy' size={IconSize.xlarge} />
             </SolidBackground>
         );
 
         return (
-            <GalleryCard background={bg}>
+            <GalleryCard background={bg} banner="Coming soon!">
                 <header>Title</header>
                 <section>Lorem ipsum</section>
                 <footer><button>Action!</button></footer>
@@ -51,15 +59,14 @@ export const CardTest = () => {
         let bg = (
             <ImageBackground src="/card-bg.png" fixed>
                 <IconBackground backgroundColor="yellow" />
-                <Icon icon='cancelLegacy' xlarge >Cancel Application</Icon>
+                <Icon icon='cancelLegacy' size={IconSize.xlarge}></Icon>
             </ImageBackground>
         );
 
         return (
             <GalleryCard background={bg} fixed>
                 <header>Title</header>
-                <section>Lorem ipsum</section>
-                <section>Lorem ipsum</section>
+                <section>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumv Lorem ipsum ipsum Lorem ipsumv Lorem ipsum ipsum Lorem ipsumv Lorem ipsum ipsum Lorem ipsumv Lorem ipsum</section>
                 <footer><button>Action!</button></footer>
             </GalleryCard>
         );
@@ -68,15 +75,13 @@ export const CardTest = () => {
     const out3 = () => {
         let bg = (
             <SolidBackground backgroundColor="green" fixed>
-                <Icon icon='cancelLegacy' xlarge />
+                <Icon icon='cancelLegacy' size={IconSize.xlarge} />
             </SolidBackground>
         );
 
         return (
             <GalleryCard background={bg}>
                 <header>Title</header>
-                <section>Lorem ipsum</section>
-                <section>Lorem ipsum</section>
                 <section>Lorem ipsum</section>
                 <footer><button>Action!</button></footer>
             </GalleryCard>
@@ -86,12 +91,25 @@ export const CardTest = () => {
     const out4 = () => {
         let bg = (
             <SolidBackground backgroundColor="green" fixed>
-                <Icon icon='cancelLegacy' xlarge />
+                <Icon icon='cancelLegacy' size={IconSize.xlarge} />
             </SolidBackground>
         );
 
         return (
             <GalleryCard background={bg}>
+            </GalleryCard>
+        );
+    };
+
+    const out5 = () => {
+        let bg = (
+            <SolidBackground backgroundColor="green">
+                <Icon icon='cancelLegacy' size={IconSize.xlarge} />
+            </SolidBackground>
+        );
+
+        return (
+            <GalleryCard background={bg} fixed href="#">
             </GalleryCard>
         );
     };
@@ -102,6 +120,7 @@ export const CardTest = () => {
             {out2()}
             {out3()}
             {out4()}
+            {out5()}
         </div>
     );
 }
@@ -161,24 +180,22 @@ export const SolidBackground = (props: SolidBackgroundProps) => {
 export interface IconProps extends React.Props<ImageBackgroundType> {
     icon: string;    
 
-    xsmall?: boolean;
-    small?: boolean;
-    medium?: boolean;
-    large?: boolean;
-    xlarge?: boolean;
+    size?: IconSize;
 
     className?: string;
 }
 
 export const Icon = (props: IconProps) => {
     let icon_cls = `icon-${props.icon}`;
+    let size = props.size || IconSize.medium;
     let cls = cx({
         // 'md-icon': true,
-        'md-icon-xsmall': !!props.xsmall,
-        'md-icon-small': !!props.small,
-        'md-icon-medium': !!props.medium,
-        'md-icon-large': !!props.large,
-        'md-icon-xlarge': !!props.xlarge
+        'md-icon-xsmall': size === IconSize.xsmall,
+        'md-icon-small': size === IconSize.small,
+        'md-icon-medium': size === IconSize.medium,
+        'md-icon-large': size === IconSize.large,
+        'md-icon-xlarge': size === IconSize.xlarge,
+        'md-icon-xxlarge': size === IconSize.xxlarge
     }, icon_cls, props.className);
 
     return (<span className={cls}></span>)
@@ -203,8 +220,6 @@ export const IconBackground = (props: IconBackgroundProps) => {
 };
 
 export interface BannerProps extends React.Props<ImageBackgroundType> {
-    backgroundColor?: string;
-
     className?: string;
 }
 
@@ -218,6 +233,7 @@ export const Banner = (props: BannerProps) => {
 
 export interface GalleryCardProps extends React.Props<GalleryCardType> {
     background: JSX.Element;
+    banner?: string;
 
     href?: string;
     onClick?: any;
@@ -231,7 +247,8 @@ export interface GalleryCardProps extends React.Props<GalleryCardType> {
 export const GalleryCard = (props: GalleryCardProps) => {
     let css = cx({
         "md-card": true,
-        "md-fixed": !!props.fixed
+        "md-fixed": !!props.fixed,
+        'md-fullbg': !props.children
     }, props.className || '');
 
     let content_cls = cx({
@@ -240,23 +257,29 @@ export const GalleryCard = (props: GalleryCardProps) => {
 
     let output_props: any = {
         className: css,
-        href: props.href || ''
+        onClick: props.onClick,
+        href: props.href
     };
 
     if (props.dataTestHook) {
         output_props['data-test-hook'] = props.dataTestHook;
     }
 
+    const banner = props.banner ? (
+        <Banner>{props.banner}</Banner>
+    ) : null;
+    
     const content = props.children ? (
         <div className={content_cls}>
             {props.children}
         </div>
     ) : null;
-    
+
     return (
-        <div {...output_props} >
+        <a {...output_props} >
             {props.background}
             {content}
-        </div>
+            {banner}
+        </a>
     );
 };
