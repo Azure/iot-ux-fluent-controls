@@ -6,9 +6,8 @@
         "jsx": "react",
         "experimentalDecorators": true,
         "noImplicitAny": false,
-        "declaration": true,
-        "declarationDir": "./static/dist",
-        "sourceMap": true
+        "sourceMap": true,
+        "outDir": "static/lib"
     },
     "files": [
         "./src/index.ts"
