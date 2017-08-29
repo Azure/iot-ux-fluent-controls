@@ -1,10 +1,13 @@
 @import '../../common/overrides';
 
-$md-card-bg-color: #eaeaea;
-$md-card-bg-color: #eaeaea;
+$md-card-bg-color: #EAEAEA;
+$md-card-border-color: #C0C0C0;
 $md-card-hover-border-color: #000000;
-$md-card-header-color: #eaea00;
-$md-card-icon-color: #00eaea;
+$md-card-header-color: #EAEA00;
+$md-card-icon-color: #00EAEA;
+$md-card-header-font-color: #212121;
+$md-card-section-font-color: #666666;
+$md-card-banner-bg-color: #000000;
 $md-icon-default-bg: rgba(0, 0, 0, 0);
 
 $md-card-fixed-width: 284px;
@@ -19,6 +22,8 @@ $md-card-icon-height: 96px;
 $md-card-icon-top: ($md-card-fixed-background-height - $md-card-icon-height);
 $md-card-icon-left: ($md-card-fixed-width - $md-card-icon-width);
 
+$md-card-hover-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+
 .md-card {
   display: inline-block;
   position: relative;
@@ -30,12 +35,12 @@ $md-card-icon-left: ($md-card-fixed-width - $md-card-icon-width);
 
   &:hover {
     border: 1px solid $md-card-hover-border-color;
-    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+    box-shadow: $md-card-hover-shadow;
   }
 
   &.md-fixed {
-    height: 284px;
-    width: 284px;
+    height: $md-card-fixed-width;
+    width: $md-card-fixed-height;
   }
 
   * {
@@ -88,7 +93,7 @@ $md-card-icon-left: ($md-card-fixed-width - $md-card-icon-width);
   header {
     font-size: 16px;
     line-height: 20px;
-    color: #212121;
+    color: $md-card-header-font-color;
     margin-bottom: 4px;
     flex: 0 0 20px;
   }
@@ -96,7 +101,7 @@ $md-card-icon-left: ($md-card-fixed-width - $md-card-icon-width);
   section {
     font-size: 13px;
     line-height: 16px;
-    color: #666666;
+    color: $md-card-section-font-color;
     margin-bottom: 16px;
     overflow: hidden;
     white-space: nowrap;
@@ -123,7 +128,7 @@ $md-card-icon-left: ($md-card-fixed-width - $md-card-icon-width);
   left: 0px;
   right: 0px;
   padding: 4px;
-  background-color: #000000;
+  background-color: $md-card-banner-bg-color;
   color: #eaeaea;
   font-family: $font-family-base;
   text-overflow: ellipsis;
