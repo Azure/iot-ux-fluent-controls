@@ -18,8 +18,8 @@ ReactDOM.render(
 
 // Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept("./pages/GalleryCard", () => {
-    const NextApp = require<{CardTest: typeof CardTest}>("./pages/GalleryCard").CardTest;
+  module.hot.accept('./pages/GalleryCard', () => {
+    const NextApp = require<{CardTest: typeof CardTest}>('./pages/GalleryCard').CardTest;
     ReactDOM.render(
       <AppContainer>
         <NextApp />
