@@ -15,6 +15,7 @@ app.use(require('webpack-hot-middleware')(compiler));
 app.use('/SegMDL2.1.6.ttf', express.static(path.join(__dirname, 'static/fonts/SegMDL2.1.6.ttf')));
 app.use('/SegMDL2.1.6.woff', express.static(path.join(__dirname, 'static/fonts/SegMDL2.1.6.woff')));
 app.use('/normalize.css', express.static(path.join(__dirname, 'static/css/normalize.css')));
+app.use('/icons.css', express.static(path.join(__dirname, 'static/css/icons.css')));
 
 app.get('*', function (req, res) {
 	res.sendFile(path.join(__dirname, 'index.html'));
