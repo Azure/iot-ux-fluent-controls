@@ -25,14 +25,4 @@ module.exports = {
         { test: /\.tsx?$/, loader: 'awesome-typescript-loader' }
     ],
   },
-
-  // externals: [
-  //   {
-  //     'react': 'React',
-  //   },
-  //   {
-  //     'react-dom': 'ReactDOM'
-  //   }
-  // ],
-
 };

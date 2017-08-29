@@ -1,0 +1,5 @@
+@mixin circle($width) {
+    width: $width;
+    height: $width;
+    border-radius: $width/2;
+}
