@@ -14,7 +14,7 @@ export const CardTest = () => {
         );
 
         return (
-            <GalleryCard background={bg} banner='Coming soon!'>
+            <GalleryCard background={bg} banner='Coming soon!' fixed>
                 <header>Title</header>
                 <section>Lorem ipsum</section>
                 <footer><button>Action!!!!</button></footer>
@@ -42,14 +42,14 @@ export const CardTest = () => {
     const out3 = () => {
         let bg = (
             <SolidBackground backgroundColor='green' fixed>
-                <GalleryCardIcon centered icon='cancelLegacy' size={Size.xlarge} />
+                <GalleryCardIcon icon='cancelLegacy' fontSize={72} />
             </SolidBackground>
         );
 
         return (
-            <GalleryCard background={bg}>
-                <header>T itle</header>
-                <section>Lorem ipsum</section>
+            <GalleryCard background={bg} fixed>
+                <header>Title</header>
+                <section>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsumv Lorem ipsum ipsum Lorem ipsumv Lorem ipsum ipsum Lorem ipsumv Lorem ipsum ipsum Lorem ipsumv Lorem ipsum</section>
                 <footer><button>Action!</button></footer>
             </GalleryCard>
         );
