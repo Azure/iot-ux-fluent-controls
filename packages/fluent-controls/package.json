@@ -1,6 +1,6 @@
 {
     "name": "@azure-iot/ux-method",
-    "version": "0.1.0-alpha.8",
+    "version": "0.1.0-alpha.9",
     "description": "Microsoft Method React Framework",
     "main": "static/lib/index.js",
     "scripts": {
