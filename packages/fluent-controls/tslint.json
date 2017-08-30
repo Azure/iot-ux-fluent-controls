@@ -1,70 +1,55 @@
 {
-    "extends": [
-        "@microsoft/gulp-core-build-typescript/lib/defaultTslint.json",
-        "tslint-react"
-    ],
     "rules": {
-        "function-name": [
+        "class-name": true,
+        "curly": true,
+        "comment-format": [
             true,
-            {
-                "method-regex": "^[a-z][\\w\\d]+$",
-                "private-method-regex": "^_[a-z][\\w\\d]+$",
-                "protected-method-regex": "^[_]?[a-z][\\w\\d]+$",
-                "static-method-regex": "^[a-z][\\w\\d]+$",
-                "function-regex": "^[_]?[a-z][\\w\\d]+$"
-            }
+            "check-space"
         ],
-        "jsx-curly-spacing": {
-            "when": "always"
-        },
-        "jsx-no-bind": false,
-        "jsx-boolean-value": false,
-        "jsx-equals-spacing": "never",
-        "jsx-key": false,
-        "jsx-no-lambda": false,
-        "jsx-self-close": false,
-        "jsx-wrap-multiline": false,
-        "jsx-no-multiline-js": false,
-        "jsx-no-string-ref": false,
-        "jsx-ban-props": false,
+        "indent": [
+            true,
+            "spaces"
+        ],
         "no-duplicate-variable": true,
-        "use-isnan": true,
-        "triple-equals": false,
-        "max-line-length": [
-            false,
-            140
+        "no-eval": true,
+        "no-internal-module": false,
+        "no-trailing-whitespace": false,
+        "no-var-keyword": true,
+        "one-line": [
+            true,
+            "check-open-brace",
+            "check-whitespace"
         ],
-        "no-arg": true,
-        "radix": true,
-        "typedef": [
-            false
-        ],
-        "no-unused-expression": [
-            false
-        ],
-        "prefer-const": false,
         "quotemark": [
             true,
-            "single",
-            "jsx-single"
+            "single"
         ],
-        "no-inferrable-types": [
-            false
+        "semicolon": true,
+        "triple-equals": [
+            true,
+            "allow-null-check"
         ],
-        "no-null-keyword": false,
-        "export-name": false,
-        "trailing-comma": [
-            false
+        "typedef-whitespace": [
+            true,
+            {
+                "call-signature": "nospace",
+                "index-signature": "nospace",
+                "parameter": "nospace",
+                "property-declaration": "nospace",
+                "variable-declaration": "nospace"
+            }
+        ],
+        "variable-name": [
+            true,
+            "ban-keywords"
         ],
         "whitespace": [
-            false
-        ],
-        "no-trailing-whitespace": false,
-        "no-switch-case-fall-through": false,
-        "variable-name": false,
-        "no-unused-variable": false,
-        "jsx-alignment": false,
-        "no-any": false,
-        "no-internal-module": false
+            true,
+            "check-branch",
+            "check-decl",
+            "check-operator",
+            "check-separator",
+            "check-type"
+        ]
     }
 }

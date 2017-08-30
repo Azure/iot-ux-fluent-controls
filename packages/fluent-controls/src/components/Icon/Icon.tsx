@@ -1,4 +1,3 @@
-/* tslint:disable:interface-name */
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 const cssName = classNames.bind(require('./Icon.scss'));
