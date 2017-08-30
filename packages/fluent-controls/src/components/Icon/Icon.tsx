@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 const cssName = classNames.bind(require('./Icon.scss'));
 
-export enum IconSize {
+export enum Size {
     // 16px
     xsmall = 1,
     // 32px
@@ -23,41 +23,64 @@ export interface IconBackgroundType {}
 export interface IconProps extends React.Props<IconType> {
     icon: string;    
 
-    size?: IconSize;
+    size?: Size;
+    centered?: boolean;
+    fontSize?: number;
+    color?: string;
 
     className?: string;
 }
 
 export interface IconBackgroundProps extends React.Props<IconBackgroundType> {
     backgroundColor: string;
+
+    diameter?: number;
+    centered?: boolean;
     
     className?: string;
 }
 
 export const Icon = (props: IconProps) => {
     let iconClassName = `icon-${props.icon}`;
-    let size = props.size || IconSize.medium;
+    let size = props.size || Size.medium;
     let cls = cssName({
-        // 'md-icon': true,
-        'md-icon-xsmall': size === IconSize.xsmall,
-        'md-icon-small': size === IconSize.small,
-        'md-icon-medium': size === IconSize.medium,
-        'md-icon-large': size === IconSize.large,
-        'md-icon-xlarge': size === IconSize.xlarge,
-        'md-icon-xxlarge': size === IconSize.xxlarge
+        // 'icon': true,
+        'icon-xsmall': size === Size.xsmall,
+        'icon-small': size === Size.small,
+        'icon-medium': size === Size.medium,
+        'icon-large': size === Size.large,
+        'icon-xlarge': size === Size.xlarge,
+        'icon-xxlarge': size === Size.xxlarge,
+        'centered': props.centered
     }, iconClassName, props.className);
 
-    return (<span className={cls}></span>);
+    let style = { color: props.color };
+    if (props.fontSize) {
+        style['fontSize'] = `${props.fontSize}px`;
+    }
+
+    return (
+        <span className={cls} style={style}>
+            {props.children}
+        </span>
+    );
 };
 
 export const IconBackground = (props: IconBackgroundProps) => {
     let cls = cssName({
-        'md-icon-background': true
+        'icon-background': true,
+        'centered': props.centered
     }, props.className);
 
     let style = {
         backgroundColor: props.backgroundColor
     };
+
+    if (props.diameter) {
+        style['width'] = `${props.diameter}px`;
+        style['height'] = `${props.diameter}px`;
+        style['borderRadius'] = `${props.diameter / 2}px`;
+    }
 
     return (<div className={cls} style={style}></div>);
 };

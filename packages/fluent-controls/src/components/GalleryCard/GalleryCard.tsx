@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, IconSize, IconBackground} from '../Icon';
+import {Icon, Size, IconProps} from '../Icon';
 const cssName = classNames.bind(require('./GalleryCard.scss'));
 
 export interface SolidBackgroundType {}
@@ -21,8 +21,8 @@ export interface ImageBackgroundProps extends React.Props<ImageBackgroundType> {
 
 export const ImageBackground = (props: ImageBackgroundProps) => {
     let cls = cssName({
-        'md-background-image': true,
-        'md-fixed': !!props.fixed
+        'background-image': true,
+        'fixed': !!props.fixed
     }, props.className);
 
     let style = {
@@ -48,8 +48,8 @@ export const SolidBackground = (props: SolidBackgroundProps) => {
     let bgColor = props.backgroundColor || '#eaeaea';
 
     let cls = cssName({
-        'md-background-color': true,
-        'md-fixed': !!props.fixed
+        'background-color': true,
+        'fixed': !!props.fixed
     }, props.className);
 
     let style = {
@@ -69,10 +69,46 @@ export interface BannerProps extends React.Props<BannerType> {
 
 export const Banner = (props: BannerProps) => {
     let cls = cssName({
-        'md-banner': true,
+        'banner': true,
     }, props.className);
 
     return (<div className={cls}>{props.children}</div>);
+};
+
+export interface GalleryCardIconProps extends IconProps {
+    title?: string;
+}
+
+export const GalleryCardIcon = (props: GalleryCardIconProps) => {
+    let fontSize;
+    if (props.size) {
+        // if the size is set, pass fontSize through
+        fontSize = props.fontSize;
+    } else {
+        // if size is not set, then provide a default override for fontSize
+        fontSize = props.fontSize ? props.fontSize : 72;
+    }
+
+    const outputProps = {
+        icon: props.icon,
+        size: props.size,
+        color: props.color || 'white',
+        centered: props.centered || true,
+        fontSize: fontSize,
+        className: cssName('gallery-card-icon', props.className)
+    };
+
+    let title;
+    if (props.title) {
+        let className = cssName('icon-title');
+        title = (
+            <span className={className}>
+                {props.title}
+            </span>
+        );
+    }
+
+    return (<Icon {...outputProps}>{title}</Icon>);
 };
 
 export interface GalleryCardProps extends React.Props<GalleryCardType> {
@@ -90,13 +126,13 @@ export interface GalleryCardProps extends React.Props<GalleryCardType> {
 
 export const GalleryCard = (props: GalleryCardProps) => {
     let css = cssName({
-        'md-card': true,
-        'md-fixed': !!props.fixed,
-        'md-fullbg': !props.children
+        'card': true,
+        'fixed': !!props.fixed,
+        'fullbg': !props.children
     }, props.className || '');
 
     let contentClassName = cssName({
-        'md-card-content': true,
+        'card-content': true,
     });
 
     let outputProps: any = {

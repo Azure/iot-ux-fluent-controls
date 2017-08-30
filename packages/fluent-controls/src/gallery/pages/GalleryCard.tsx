@@ -1,15 +1,15 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, IconSize, IconBackground} from '../../Icon';
-import {SolidBackground, ImageBackground, GalleryCard} from '../../GalleryCard';
+import {Icon, Size, IconBackground} from '../../Icon';
+import {SolidBackground, ImageBackground, GalleryCardIcon, GalleryCard} from '../../GalleryCard';
 
 export const CardTest = () => {
     
     const out1 = () => {
         let bg = (
             <SolidBackground backgroundColor='green' fixed>
-                <IconBackground backgroundColor='yellow' />
-                <Icon icon='smartcardVirtual' size={IconSize.xlarge} />
+                <IconBackground diameter={120} centered backgroundColor='yellow' />
+                <GalleryCardIcon icon='smartcardVirtual' />
             </SolidBackground>
         );
 
@@ -25,8 +25,8 @@ export const CardTest = () => {
     const out2 = () => {
         let bg = (
             <ImageBackground src='/card-bg.png' fixed>
-                <IconBackground backgroundColor='yellow' />
-                <Icon icon='cancelLegacy' size={IconSize.xlarge}></Icon>
+                <IconBackground diameter={120} centered backgroundColor='yellow' />
+                <GalleryCardIcon icon='cancelLegacy' fontSize={72} />
             </ImageBackground>
         );
 
@@ -42,7 +42,7 @@ export const CardTest = () => {
     const out3 = () => {
         let bg = (
             <SolidBackground backgroundColor='green' fixed>
-                <Icon icon='cancelLegacy' size={IconSize.xlarge} />
+                <GalleryCardIcon centered icon='cancelLegacy' size={Size.xlarge} />
             </SolidBackground>
         );
 
@@ -58,7 +58,7 @@ export const CardTest = () => {
     const out4 = () => {
         let bg = (
             <SolidBackground backgroundColor='green' fixed>
-                <Icon icon='cancelLegacy' size={IconSize.xlarge} />
+                <GalleryCardIcon icon='cancelLegacy' size={Size.xlarge} />
             </SolidBackground>
         );
 
@@ -69,9 +69,13 @@ export const CardTest = () => {
     };
 
     const out5 = () => {
+        let style: any = {
+            'fontSize': '16px',
+            'display': 'block'
+        };
         let bg = (
             <SolidBackground backgroundColor='green'>
-                <Icon icon='cancelLegacy' size={IconSize.xlarge} />
+                <GalleryCardIcon centered icon='cancelLegacy' size={Size.xlarge} title='This is text under icon!' />
             </SolidBackground>
         );
 

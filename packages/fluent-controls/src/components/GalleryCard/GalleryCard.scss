@@ -1,46 +1,46 @@
 @import '../../common/overrides';
 
-$md-card-bg-color: #EAEAEA;
-$md-card-border-color: #C0C0C0;
-$md-card-hover-border-color: #000000;
-$md-card-header-color: #EAEA00;
-$md-card-icon-color: #00EAEA;
-$md-card-header-font-color: #212121;
-$md-card-section-font-color: #666666;
-$md-card-banner-bg-color: #000000;
-$md-icon-default-bg: rgba(0, 0, 0, 0);
+$card-bg-color: #EAEAEA;
+$card-border-color: #C8C8C8;
+$card-hover-border-color: #000000;
+$card-header-color: #EAEA00;
+$card-icon-color: #00EAEA;
+$card-header-font-color: #212121;
+$card-section-font-color: #666666;
+$card-banner-bg-color: #000000;
+$icon-default-bg: rgba(0, 0, 0, 0);
 
-$md-card-fixed-width: 284px;
-$md-card-fixed-height: 284px;
-$md-card-fixed-background-height: 160px;
-$md-card-fixed-content-height: $md-card-fixed-height - $md-card-fixed-background-height;
+$card-fixed-width: 284px;
+$card-fixed-height: 284px;
+$card-fixed-background-height: 160px;
+$card-fixed-content-height: $card-fixed-height - $card-fixed-background-height;
 
-$md-card-content-margin: 20px 20px 16px 20px;
+$card-content-margin: 20px 20px 16px 20px;
 
-$md-card-icon-width: 96px;
-$md-card-icon-height: 96px;
-$md-card-icon-top: ($md-card-fixed-background-height - $md-card-icon-height);
-$md-card-icon-left: ($md-card-fixed-width - $md-card-icon-width);
+$card-icon-width: 96px;
+$card-icon-height: 96px;
+$card-icon-top: ($card-fixed-background-height - $card-icon-height);
+$card-icon-left: ($card-fixed-width - $card-icon-width);
 
-$md-card-hover-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+$card-hover-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
 
-.md-card {
+.card {
   display: inline-block;
   position: relative;
-  background-color: $md-card-bg-color;
+  background-color: $card-bg-color;
   overflow: hidden;
-  border: 1px solid $md-card-bg-color;
+  border: 1px solid $card-bg-color;
   margin: 10px;
   box-sizing: border-box;
 
   &:hover {
-    border: 1px solid $md-card-hover-border-color;
-    box-shadow: $md-card-hover-shadow;
+    border: 1px solid $card-hover-border-color;
+    box-shadow: $card-hover-shadow;
   }
 
-  &.md-fixed {
-    height: $md-card-fixed-width;
-    width: $md-card-fixed-height;
+  &.fixed {
+    height: $card-fixed-width;
+    width: $card-fixed-height;
   }
 
   * {
@@ -54,46 +54,46 @@ $md-card-hover-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
   }
 }
 
-%md-card-background {
+%card-background {
   display: block;
   position: relative;
   width: 100%;
   background-color: transparent;
   transition: background-color 0.2s ease-in-out;
 
-  &.md-fixed {
-    width: $md-card-fixed-width;
-    height: $md-card-fixed-background-height;
+  &.fixed {
+    width: $card-fixed-width;
+    height: $card-fixed-background-height;
   }
 
-  .md-fullbg & {
+  .fullbg & {
     height: 100%;
   }
 }
 
-.md-background-image {
-    @extend %md-card-background;
+.background-image {
+    @extend %card-background;
     background-size: cover;
 }
 
-.md-background-color {
-    @extend %md-card-background;
-    background-color: $md-card-header-color;
+.background-color {
+    @extend %card-background;
+    background-color: $card-header-color;
 }
 
-.md-card-content {
+.card-content {
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  padding: $md-card-content-margin;
+  padding: $card-content-margin;
   font-family: $font-family-base;
   box-sizing: border-box;
 
   header {
     font-size: 16px;
     line-height: 20px;
-    color: $md-card-header-font-color;
+    color: $card-header-font-color;
     margin-bottom: 4px;
     flex: 0 0 20px;
   }
@@ -101,7 +101,7 @@ $md-card-hover-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
   section {
     font-size: 13px;
     line-height: 16px;
-    color: $md-card-section-font-color;
+    color: $card-section-font-color;
     margin-bottom: 16px;
     overflow: hidden;
     white-space: nowrap;
@@ -115,22 +115,34 @@ $md-card-hover-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
     flex: 0 0 16px;
   }
   
-  .md-fixed & {
+  .fixed & {
     text-overflow: ellipsis;
-    height: $md-card-fixed-content-height;
+    height: $card-fixed-content-height;
   }
 }
 
-.md-banner {
+.banner {
   display: block;
   position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
   padding: 4px;
-  background-color: $md-card-banner-bg-color;
+  background-color: $card-banner-bg-color;
   color: #eaeaea;
   font-family: $font-family-base;
   text-overflow: ellipsis;
   text-align: center;
+}
+
+.gallery-card-icon {
+  background-color: transparent;
+  color: white;
+  text-align: center;
+
+  .icon-title {
+    display: block;
+    font-family: $font-family-base;
+    font-size: 14px;
+  }
 }
