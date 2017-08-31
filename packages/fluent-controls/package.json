@@ -1,8 +1,9 @@
 {
     "name": "@azure-iot/ux-method",
-    "version": "0.1.0-alpha.11",
+    "version": "0.1.0-alpha.12",
     "description": "Microsoft Method React Framework",
-    "main": "static/lib/index.js",
+    "main": "./static/lib/index.js",
+    "types": "./static/lib/index.d.ts",
     "scripts": {
         "start": "webpack-dev-server --config webpack.dev.js",
         "build": "tsc && copyfiles -e src/gallery/**/*.scss src/**/*.scss static/lib -u 1",
