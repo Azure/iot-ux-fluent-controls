@@ -114,6 +114,7 @@ export const GalleryCardIcon = (props: GalleryCardIconProps) => {
 export interface GalleryCardProps extends React.Props<GalleryCardType> {
     background: JSX.Element;
     banner?: string;
+    title?: string;
 
     href?: string;
     onClick?: any;
@@ -138,7 +139,8 @@ export const GalleryCard = (props: GalleryCardProps) => {
     let outputProps: any = {
         className: css,
         onClick: props.onClick,
-        href: props.href
+        href: props.href,
+        title: props.title
     };
 
     if (props.dataTestHook) {
