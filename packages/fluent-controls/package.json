@@ -5,7 +5,7 @@
     "main": "static/lib/index.js",
     "scripts": {
         "start": "webpack-dev-server --config webpack.dev.js",
-        "build": "tsc && copyfiles src/**/*.scss static/lib -u 1",
+        "build": "tsc && copyfiles -e src/gallery/**/*.scss src/**/*.scss static/lib -u 1",
         "bundle": "webpack --config webpack.config.js",
         "test": "echo \"Error: no test specified\" && exit 1",
         "tslint": "tslint './src/**/*.ts{,x}'",
