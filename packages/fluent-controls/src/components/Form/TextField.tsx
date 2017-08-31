@@ -1,110 +1,62 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {Icon, IconSize, IconBackground} from '../Icon';
+import {TextInput} from './TextInput';
 const cssName = classNames.bind(require('./TextField.scss'));
-
-export interface TextInputType {}
-
-export interface TextInputState {
-    cancelFocused: boolean;
-}
-
-export interface TextInputProps extends React.Props<TextInputType> {
-    value: string;
-    placeholder?: string;
-
-    error?: boolean;
-    disabled?: boolean;
-
-    onChange: (newValue: string) => void;
-    onClear: () => void;
-}
-
-export class TextInput extends React.Component<TextInputProps, TextInputState> {
-    constructor(props: TextInputProps) {
-        super(props);
-    }
-
-    onChange(event) {
-
-    }
-
-    render() {
-        const containerClass = cssName('input-container');
-        const inputClass = cssName({
-            'input': true, 'error': this.props.error
-        });
-        const cancelClass = cssName('cancel', 'icon icon-cancelLegacy');
-
-        return (
-            <div className={containerClass}>
-                <input 
-                    className={inputClass}
-                    onChange={this.onChange}
-                    type='text' required /> 
-                <button className={cancelClass} />
-            </div>
-        );
-    }
-}
 
 export interface TextFieldType {}
 
-export interface TextFieldState {
-    cancelFocused: false;
-}
-
 export interface TextFieldProps extends React.Props<TextFieldType> {
+    name: string;
+    value: string;
+    placeholder?: string;
+    
     label: React.ReactNode;
     error?: React.ReactNode;
-    // value: string;
-    placeholder?: string;
-
+    
     disabled?: boolean;
     required?: boolean;
 
-    // onChange: (newValue: string) => void;
-    // onClear: () => void;
+    onChange?: (newValue: string) => void;
+    onClear?: () => void;
+
+    className?: string;
 }
 
-export class TextField extends React.Component<TextFieldProps, TextFieldState> {
-    constructor(props: TextFieldProps) {
-        super(props);
-    }
+export const TextField = (props: TextFieldProps) => {
+    const labelClass = cssName('label');
+    const containerClass = cssName({
+        'input-container': true,
+        'input-error': props.error,
+        'required': props.required,
+    }, props.className);
+    const inputClass = cssName({
+        'input': true,
+        'input-error': props.error
+    });
+    const errorClass = cssName('field-error');    
 
-    render() {
-        let labelClass = cssName('label');
-        let containerClass = cssName('input-container', 'input-error');
-        let inputClass = cssName('input', 'input-error');
-        let errorClass = cssName('field-error');
-        let requiredClass = cssName('required');
-        let cancelClass = cssName('cancel', 'icon icon-cancelLegacy');
-        let iconClass = cssName('error-icon', 'icon icon-cancelLegacy');
-        let errorTextClass = cssName('error-text', 'icon icon-cancelLegacy');
+    return (
+        <div className={containerClass} >
+            <label className={labelClass} htmlFor={props.name} >
+                {props.label}
+            </label>
+            <TextInput
+                name={props.name}
+                value={props.value}
+                placeholder={props.placeholder}
+                onChange={props.onChange}
+                onClear={props.onClear}
+                disabled={props.disabled}
+                error={!!props.error}
+            />
 
-        let parentStyle = {
-            'width': '500px',
-            'marginLeft': '20px',
-            'marginBottom': '10px'
-        };
-
-        return (
-            <div style={parentStyle}>
-                <div className={labelClass}>
-                    Form Field <span className={requiredClass}>*</span>
-                </div>
-                <div className={containerClass}>
-                    <input className={inputClass} type='text' placeholder='ComingSoon!' required /> 
-                    <button className={cancelClass} onClick={() => alert('lol')} />
-                </div>
-
-                <div className={errorClass}>
-                    <span className={iconClass}>This Field is Required</span>
-                </div>
+            <div className={errorClass}>
+                {props.error}
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export interface FormFieldType {}
 
