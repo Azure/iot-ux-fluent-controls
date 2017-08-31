@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, Size, IconProps} from '../Icon';
+import {Icon, IconSize, IconProps} from '../Icon';
 const cssName = classNames.bind(require('./GalleryCard.scss'));
 
 export interface SolidBackgroundType {}

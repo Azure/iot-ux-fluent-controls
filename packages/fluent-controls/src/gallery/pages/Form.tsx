@@ -6,7 +6,7 @@ export const FormTest = () => {
     
     const out1 = () => {
         return (
-            <TextField label='Coming soon!'>
+            <TextField label={'Coming soon!'}>
             </TextField>
         );
     };
@@ -27,7 +27,7 @@ export const FormTest = () => {
 
     const out4 = () => {
         return (
-            <TextField label='Coming soon!' placeholder='Coming!' initialValue='testing'>
+            <TextField label='Coming soon!' placeholder='Coming!'>
             </TextField>
         );
     };

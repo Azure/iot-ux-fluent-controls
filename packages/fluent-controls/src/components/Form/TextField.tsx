@@ -1,23 +1,70 @@
-/* tslint:disable:interface-name */
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, Size, IconBackground} from '../Icon';
+import {Icon, IconSize, IconBackground} from '../Icon';
 const cssName = classNames.bind(require('./TextField.scss'));
+
+export interface TextInputType {}
+
+export interface TextInputState {
+    cancelFocused: boolean;
+}
+
+export interface TextInputProps extends React.Props<TextInputType> {
+    value: string;
+    placeholder?: string;
+
+    error?: boolean;
+    disabled?: boolean;
+
+    onChange: (newValue: string) => void;
+    onClear: () => void;
+}
+
+export class TextInput extends React.Component<TextInputProps, TextInputState> {
+    constructor(props: TextInputProps) {
+        super(props);
+    }
+
+    onChange(event) {
+
+    }
+
+    render() {
+        const containerClass = cssName('input-container');
+        const inputClass = cssName({
+            'input': true, 'error': this.props.error
+        });
+        const cancelClass = cssName('cancel', 'icon icon-cancelLegacy');
+
+        return (
+            <div className={containerClass}>
+                <input 
+                    className={inputClass}
+                    onChange={this.onChange}
+                    type='text' required /> 
+                <button className={cancelClass} />
+            </div>
+        );
+    }
+}
 
 export interface TextFieldType {}
 
 export interface TextFieldState {
-    value: string;
+    cancelFocused: false;
 }
 
 export interface TextFieldProps extends React.Props<TextFieldType> {
+    label: React.ReactNode;
+    error?: React.ReactNode;
+    // value: string;
+    placeholder?: string;
+
     disabled?: boolean;
     required?: boolean;
-    placeholder?: string;
-    initialValue?: string;
-    label: string;
-    
-    className?: string;
+
+    // onChange: (newValue: string) => void;
+    // onClear: () => void;
 }
 
 export class TextField extends React.Component<TextFieldProps, TextFieldState> {
@@ -25,7 +72,7 @@ export class TextField extends React.Component<TextFieldProps, TextFieldState> {
         super(props);
     }
 
-    public render() {
+    render() {
         let labelClass = cssName('label');
         let containerClass = cssName('input-container', 'input-error');
         let inputClass = cssName('input', 'input-error');
@@ -48,7 +95,7 @@ export class TextField extends React.Component<TextFieldProps, TextFieldState> {
                 </div>
                 <div className={containerClass}>
                     <input className={inputClass} type='text' placeholder='ComingSoon!' required /> 
-                    <span className={cancelClass} />
+                    <button className={cancelClass} onClick={() => alert('lol')} />
                 </div>
 
                 <div className={errorClass}>
@@ -86,7 +133,7 @@ export const FormField = (props: FormFieldProps) => {
     if (error) {
         footer = (
             <footer>
-                <Icon icon='error' size={Size.xsmall} />
+                <Icon icon='error' size={IconSize.xsmall} />
                 <span className={''}>{error}</span>
             </footer>
         );

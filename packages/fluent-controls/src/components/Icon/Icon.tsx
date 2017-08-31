@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 const cssName = classNames.bind(require('./Icon.scss'));
 
-export enum Size {
+export enum IconSize {
     // 16px
     xsmall = 1,
     // 32px
@@ -23,10 +23,12 @@ export interface IconBackgroundType {}
 export interface IconProps extends React.Props<IconType> {
     icon: string;    
 
-    size?: Size;
+    size?: IconSize;
     centered?: boolean;
     fontSize?: number;
     color?: string;
+
+    props?: any;
 
     className?: string;
 }
@@ -42,15 +44,15 @@ export interface IconBackgroundProps extends React.Props<IconBackgroundType> {
 
 export const Icon = (props: IconProps) => {
     let iconClassName = `icon-${props.icon}`;
-    let size = props.size || Size.medium;
+    let size = props.size || IconSize.medium;
     let cls = cssName({
         // 'icon': true,
-        'icon-xsmall': size === Size.xsmall,
-        'icon-small': size === Size.small,
-        'icon-medium': size === Size.medium,
-        'icon-large': size === Size.large,
-        'icon-xlarge': size === Size.xlarge,
-        'icon-xxlarge': size === Size.xxlarge,
+        'icon-xsmall': size === IconSize.xsmall,
+        'icon-small': size === IconSize.small,
+        'icon-medium': size === IconSize.medium,
+        'icon-large': size === IconSize.large,
+        'icon-xlarge': size === IconSize.xlarge,
+        'icon-xxlarge': size === IconSize.xxlarge,
         'centered': props.centered
     }, iconClassName, props.className);
 
@@ -60,7 +62,7 @@ export const Icon = (props: IconProps) => {
     }
 
     return (
-        <span className={cls} style={style}>
+        <span className={cls} style={style} {...props.props}>
             {props.children}
         </span>
     );

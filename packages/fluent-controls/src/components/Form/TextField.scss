@@ -7,6 +7,8 @@ $selection-text-color: #ffffff;
 $disabled-text-color: #888888;
 $error-text-color: #ffffff;
 $error-color: #d02e00;
+$cancel-default-color: #666666;
+$cancel-default-color: #666666;
 
 $default-border-color: #666666;
 $inactive-border-color: #c8c8c8;
@@ -29,9 +31,6 @@ $disabled-background-color: #dcdcdc;
         margin: 0;
         padding: 0;
     }
-}
-
-.field-label {
 }
 
 .label {
@@ -89,7 +88,8 @@ $disabled-background-color: #dcdcdc;
                 padding-right: 32px;
 
                 + .cancel {
-                    display: inline;
+                    color: $cancel-default-color;
+                    pointer-events: auto;
                 }
             }
         }
@@ -101,7 +101,8 @@ $disabled-background-color: #dcdcdc;
                 padding-right: 32px;
 
                 + .cancel {
-                    display: inline;
+                    color: $cancel-default-color;
+                    pointer-events: auto;
                 }
             }
         }
@@ -125,20 +126,39 @@ $disabled-background-color: #dcdcdc;
             background-color: $selection-background-color;
         }
 
-        .input-error & {
+        &.error {
             border: 1px solid $error-color;            
         }
     }
 
     .cancel {
-        display: none;
+        float:right;
+        color: transparent;
         font-size: 12px;
         line-height: 32px;
         position: absolute;
         top: 0px;
         right: 8px;
+        border: none;
+        background-color: transparent;
+        outline: none;
+        pointer-events: none;
         cursor: pointer;
+        
+        &:focus {
+            color: $cancel-default-color;
+            pointer-events: auto;
+        }
+
+        &:active {
+            color: $cancel-default-color;
+            pointer-events: auto;
+        }
     }
+}
+
+.cancel:focus ~ .input{
+    padding-right: 32px;
 }
 
 .input-error {

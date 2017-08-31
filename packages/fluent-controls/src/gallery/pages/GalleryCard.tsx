@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, Size, IconBackground} from '../../Icon';
+import {Icon, IconSize, IconBackground} from '../../Icon';
 import {SolidBackground, ImageBackground, GalleryCardIcon, GalleryCard} from '../../GalleryCard';
+const cssName = classNames.bind(require('./GalleryCard.scss'));
 
 export const CardTest = () => {
     
@@ -14,7 +15,7 @@ export const CardTest = () => {
         );
 
         return (
-            <GalleryCard background={bg} banner='Coming soon!' fixed>
+            <GalleryCard  className={cssName('management-card')}  background={bg} banner='Coming soon!' fixed>
                 <header>Title</header>
                 <section>Lorem ipsum</section>
                 <footer><button>Action!!!!</button></footer>
@@ -58,7 +59,7 @@ export const CardTest = () => {
     const out4 = () => {
         let bg = (
             <SolidBackground backgroundColor='green' fixed>
-                <GalleryCardIcon icon='cancelLegacy' size={Size.xlarge} />
+                <GalleryCardIcon icon='cancelLegacy' size={IconSize.xlarge} />
             </SolidBackground>
         );
 
@@ -75,7 +76,7 @@ export const CardTest = () => {
         };
         let bg = (
             <SolidBackground backgroundColor='green'>
-                <GalleryCardIcon centered icon='cancelLegacy' size={Size.xlarge} title='This is text under icon!' />
+                <GalleryCardIcon centered icon='cancelLegacy' size={IconSize.xlarge} title='This is text under icon!' />
             </SolidBackground>
         );
 
