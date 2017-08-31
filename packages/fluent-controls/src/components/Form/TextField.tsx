@@ -25,8 +25,7 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
 
 export const TextField = (props: TextFieldProps) => {
     const labelClass = cssName('label');
-    const containerClass = cssName({
-        'input-container': true,
+    const containerClass = cssName('input-container', {
         'input-error': props.error,
         'required': props.required,
     }, props.className);
@@ -54,50 +53,6 @@ export const TextField = (props: TextFieldProps) => {
             <div className={errorClass}>
                 {props.error}
             </div>
-        </div>
-    );
-};
-
-export interface FormFieldType {}
-
-export interface FormFieldProps extends React.Props<FormFieldType> {
-    label: string;
-    error?: string;
-
-    disabled?: boolean;
-    required?: boolean;
-
-    children: JSX.Element;
-    
-    className?: string;
-}
-
-export const FormField = (props: FormFieldProps) => {
-    let { required, disabled, error } = this.props;
-
-    let className = cssName({
-        'form-field': true,
-        'field-required': required,
-        'field-disabled': disabled
-    }, this.props.className);
-
-    let footer;
-    if (error) {
-        footer = (
-            <footer>
-                <Icon icon='error' size={IconSize.xsmall} />
-                <span className={''}>{error}</span>
-            </footer>
-        );
-    }
-
-    return (
-        <div className={className}>
-            <header>
-                {this.props.label}
-            </header>
-            {this.props.children}
-            {footer}
         </div>
     );
 };
