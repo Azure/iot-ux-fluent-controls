@@ -25,8 +25,7 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
 
 export const TextField = (props: TextFieldProps) => {
     const labelClass = cssName('label');
-    const containerClass = cssName({
-        'input-container': true,
+    const containerClass = cssName('input-container', {
         'input-error': props.error,
         'required': props.required,
     }, props.className);
