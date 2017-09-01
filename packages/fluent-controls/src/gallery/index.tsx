@@ -2,13 +2,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
-import {FormTest} from './pages/Form';
+import {SelectInputTest} from './pages/Form';
 
 const rootEl = document.getElementById('content');
 
 ReactDOM.render(
  <AppContainer>
-   <FormTest />
+   <SelectInputTest />
  </AppContainer>,
  rootEl
 );
@@ -16,7 +16,7 @@ ReactDOM.render(
 // Hot Module Replacement API
 if (module.hot) {
  module.hot.accept('./pages/Form', () => {
-   const NextApp = require<{FormTest: typeof FormTest}>('./pages/Form').FormTest;
+   const NextApp = require<{SelectInputTest: typeof SelectInputTest}>('./pages/Form').SelectInputTest;
    ReactDOM.render(
      <AppContainer>
        <NextApp />

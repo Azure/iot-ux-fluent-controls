@@ -1,15 +1,14 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, IconSize, IconBackground} from '../Icon';
-import {TextInput} from './TextInput';
-const cssName = classNames.bind(require('./TextField.scss'));
+import {SelectInput, SelectOption} from './SelectInput';
+const cssName = classNames.bind(require('./SelectField.scss'));
 
-export interface TextFieldType {}
+export interface SelectFieldType {}
 
-export interface TextFieldProps extends React.Props<TextFieldType> {
+export interface SelectFieldProps extends React.Props<SelectFieldType> {
     name: string;
     value: string;
-    placeholder?: string;
+    options: SelectOption[];
     
     label: React.ReactNode;
     error?: React.ReactNode;
@@ -17,16 +16,14 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     disabled?: boolean;
     required?: boolean;
 
-    onChange: (newValue: string) => void;
-    onClear: () => void;
+    onChange: (newValue: any) => void;
 
     className?: string;
 }
 
-export const TextField = (props: TextFieldProps) => {
+export const SelectField = (props: SelectFieldProps) => {
     const labelClass = cssName('label');
-    const containerClass = cssName({
-        'input-container': true,
+    const containerClass = cssName('input-container', {
         'input-error': props.error,
         'required': props.required,
     }, props.className);
@@ -41,14 +38,13 @@ export const TextField = (props: TextFieldProps) => {
             <label className={labelClass} htmlFor={props.name} >
                 {props.label}
             </label>
-            <TextInput
+            <SelectInput
                 name={props.name}
                 value={props.value}
-                placeholder={props.placeholder}
                 onChange={props.onChange}
-                onClear={props.onClear}
                 disabled={props.disabled}
                 error={!!props.error}
+                options={props.options}
             />
 
             <div className={errorClass}>
