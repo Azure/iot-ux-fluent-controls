@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {Icon, IconSize, IconBackground} from '../Icon';
 import {TextInput} from './TextInput';
-const cssName = classNames.bind(require('./TextField.scss'));
+const css = classNames.bind(require('./TextField.scss'));
 
 export interface TextFieldType {}
 
@@ -24,16 +24,16 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
 }
 
 export const TextField = (props: TextFieldProps) => {
-    const labelClass = cssName('label');
-    const containerClass = cssName('input-container', {
+    const labelClass = css('label');
+    const containerClass = css('input-container', {
         'input-error': props.error,
         'required': props.required,
     }, props.className);
-    const inputClass = cssName({
+    const inputClass = css({
         'input': true,
         'input-error': props.error
     });
-    const errorClass = cssName('field-error');    
+    const errorClass = css('field-error');    
 
     return (
         <div className={containerClass} >

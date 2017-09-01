@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {Icon, IconSize, IconBackground} from '../Icon';
-const cssName = classNames.bind(require('./TextInput.scss'));
+const css = classNames.bind(require('./TextInput.scss'));
 
 export interface TextInputType {}
 
@@ -59,13 +59,13 @@ export class TextInput extends React.Component<TextInputProps, TextInputState> {
     }
 
     render() {
-        const containerClass = cssName('input-container');
-        const inputClass = cssName({
+        const containerClass = css('input-container');
+        const inputClass = css({
             'input': true,
             'error': this.props.error,
             'cancel-focused': this.state.cancelFocused
         });
-        const cancelClass = cssName(
+        const cancelClass = css(
             'cancel', 'icon icon-cancelLegacy'
         );
 

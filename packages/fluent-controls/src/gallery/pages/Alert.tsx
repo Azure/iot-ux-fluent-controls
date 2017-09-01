@@ -15,7 +15,7 @@ export const AlertTest = () => {
     const out2 = () => {
         return (
             <Alert icon='cancelLegacy' type={AlertType.Information} onClose={() => { alert('it worked!'); }}>
-                This is an alert! This is an alert! This is an alert! This is an alert!
+                This is an alert! This is an alert! This is an alert! This is an alert! GGggg
             </Alert>
         );
     };

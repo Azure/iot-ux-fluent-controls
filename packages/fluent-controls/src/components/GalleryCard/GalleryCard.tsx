@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {Icon, IconSize, IconProps} from '../Icon';
-const cssName = classNames.bind(require('./GalleryCard.scss'));
+const css = classNames.bind(require('./GalleryCard.scss'));
 
 export interface SolidBackgroundType {}
 
@@ -20,7 +20,7 @@ export interface ImageBackgroundProps extends React.Props<ImageBackgroundType> {
 }
 
 export const ImageBackground = (props: ImageBackgroundProps) => {
-    let cls = cssName({
+    let cls = css({
         'background-image': true,
         'fixed': !!props.fixed
     }, props.className);
@@ -47,7 +47,7 @@ export interface SolidBackgroundProps extends React.Props<SolidBackgroundType> {
 export const SolidBackground = (props: SolidBackgroundProps) => {
     let bgColor = props.backgroundColor || '#eaeaea';
 
-    let cls = cssName({
+    let cls = css({
         'background-color': true,
         'fixed': !!props.fixed
     }, props.className);
@@ -68,7 +68,7 @@ export interface BannerProps extends React.Props<BannerType> {
 }
 
 export const Banner = (props: BannerProps) => {
-    let cls = cssName({
+    let cls = css({
         'banner': true,
     }, props.className);
 
@@ -95,12 +95,12 @@ export const GalleryCardIcon = (props: GalleryCardIconProps) => {
         color: props.color || 'white',
         centered: props.centered || true,
         fontSize: fontSize,
-        className: cssName('gallery-card-icon', props.className)
+        className: css('gallery-card-icon', props.className)
     };
 
     let title;
     if (props.title) {
-        let className = cssName('icon-title');
+        let className = css('icon-title');
         title = (
             <span className={className}>
                 {props.title}
@@ -126,18 +126,18 @@ export interface GalleryCardProps extends React.Props<GalleryCardType> {
 }
 
 export const GalleryCard = (props: GalleryCardProps) => {
-    let css = cssName({
+    let classNames = css({
         'card': true,
         'fixed': !!props.fixed,
         'fullbg': !props.children
     }, props.className || '');
 
-    let contentClassName = cssName({
+    let contentClassName = css({
         'card-content': true,
     });
 
     let outputProps: any = {
-        className: css,
+        className: classNames,
         onClick: props.onClick,
         href: props.href,
         title: props.title

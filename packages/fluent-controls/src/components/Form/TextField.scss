@@ -9,7 +9,7 @@
     display: block;
     color: $default-text-color;
     font-family: $font-family-base;
-    font-size: 14px;
+    font-size: $font-size-text;
     line-height: 20px;
     vertical-align: center;
     
@@ -33,7 +33,7 @@
     color: $error-text-color;
     
     font-family: $font-family-base;
-    font-size: 12px;
+    font-size: $font-size-small;
     line-height: 20px;
 
     width: 100%;

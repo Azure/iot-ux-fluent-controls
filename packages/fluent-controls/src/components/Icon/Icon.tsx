@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-const cssName = classNames.bind(require('./Icon.scss'));
+const css = classNames.bind(require('./Icon.scss'));
 
 export enum IconSize {
     // 16px
@@ -45,7 +45,7 @@ export interface IconBackgroundProps extends React.Props<IconBackgroundType> {
 export const Icon = (props: IconProps) => {
     let iconClassName = `icon-${props.icon}`;
     let size = props.size || IconSize.medium;
-    let cls = cssName({
+    let cls = css({
         // 'icon': true,
         'icon-xsmall': size === IconSize.xsmall,
         'icon-small': size === IconSize.small,
@@ -69,7 +69,7 @@ export const Icon = (props: IconProps) => {
 };
 
 export const IconBackground = (props: IconBackgroundProps) => {
-    let cls = cssName({
+    let cls = css({
         'icon-background': true,
         'centered': props.centered
     }, props.className);

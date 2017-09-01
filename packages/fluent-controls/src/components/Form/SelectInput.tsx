@@ -1,6 +1,6 @@
 import * as React from 'react'; 
 import * as classNames from 'classnames/bind';
-const cssName = classNames.bind(require('./SelectInput.scss'));
+const css = classNames.bind(require('./SelectInput.scss'));
 
 export interface SelectInputType {}
 
@@ -25,11 +25,11 @@ export interface SelectInputProps extends React.Props<SelectInputType> {
 }
 
 export const SelectInput = (props: SelectInputProps) => {
-    const containerClass = cssName('combo-container');
-    const comboClass = cssName(
+    const containerClass = css('combo-container');
+    const comboClass = css(
         'combo', {'error': props.error}
     );
-    const arrowClassName = cssName(
+    const arrowClassName = css(
         'arrow', 'icon icon-chevronDown4Legacy'
     );
 

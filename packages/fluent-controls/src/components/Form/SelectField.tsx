@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {SelectInput, SelectOption} from './SelectInput';
-const cssName = classNames.bind(require('./SelectField.scss'));
+const css = classNames.bind(require('./SelectField.scss'));
 
 export interface SelectFieldType {}
 
@@ -22,16 +22,16 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
 }
 
 export const SelectField = (props: SelectFieldProps) => {
-    const labelClass = cssName('label');
-    const containerClass = cssName('input-container', {
+    const labelClass = css('label');
+    const containerClass = css('input-container', {
         'input-error': props.error,
         'required': props.required,
     }, props.className);
-    const inputClass = cssName({
+    const inputClass = css({
         'input': true,
         'input-error': props.error
     });
-    const errorClass = cssName('field-error');    
+    const errorClass = css('field-error');    
 
     return (
         <div className={containerClass} >
@@ -46,7 +46,6 @@ export const SelectField = (props: SelectFieldProps) => {
                 error={!!props.error}
                 options={props.options}
             />
-
             <div className={errorClass}>
                 {props.error}
             </div>
