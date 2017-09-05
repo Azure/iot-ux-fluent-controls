@@ -14,5 +14,9 @@ module.exports = {
   propsParser: require('react-docgen-typescript').parse,
 
   assetsDir: './static/',
-  webpackConfig: require('./webpack.styleguide.js')  
+  webpackConfig: require('./webpack.styleguide.js'),
+
+  require: [
+    path.join(__dirname, './static/css/icons.css'),
+  ]
 };

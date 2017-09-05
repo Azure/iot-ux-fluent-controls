@@ -43,6 +43,10 @@ module.exports = {
                 loader: 'source-map-loader'
             },
             {
+                test: /\.css$/,
+                loaders: ['style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[local]']
+            },
+            {
                 test: /\.scss$/,
                 loaders: ['style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[path]_[name]_[local]', 'sass-loader'] 
             }
