@@ -10,13 +10,19 @@ export interface TextInputState {
 }
 
 export interface TextInputProps extends React.Props<TextInputType> {
+    /** HTML form element name */
     name: string;
+    /** Current value of HTML input elemenet */
     value: string;
+    /** HTML input element placeholder */
     placeholder?: string;
 
+    /** Apply error styling to input element */
     error?: boolean;
+    /** Disable HTML input element */
     disabled?: boolean;
 
+    /** Callback for HTML input element onChange events */
     onChange: (newValue: string) => void;
 }
 
@@ -74,6 +80,7 @@ export class TextInput extends React.Component<TextInputProps, TextInputState> {
                 onClick={this.onClear}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
+                tabIndex={-1}
             />;
 
         return (
