@@ -42,7 +42,7 @@ export interface AlertProps extends React.Props<AlertComponentType> {
 }
 
 /**
- * Alert showing Information, Warning, or Error text with icon
+ * Alert showing Information, Warning, or Error with text, icon, and optional close button
  * 
  * @param props Control properties (defined in `AlertProps` interface)
  */
@@ -85,3 +85,5 @@ export const Alert = (props: AlertProps) => {
         </div>
     );
 };
+
+export default Alert;
