@@ -6,19 +6,35 @@ const css = classNames.bind(require('./GalleryCard.scss'));
 export interface GalleryCardType {}
 
 export interface GalleryCardProps extends React.Props<GalleryCardType> {
+    /** Element to display as `GalleryCard` background */
     background: JSX.Element;
+    /** Banner string to display above the `GalleryCard` background */
     banner?: string;
+    /** Accessibility title on top level anchor tag */
     title?: string;
 
+    /** Link URL for top level anchor tag */
     href?: string;
+    /** Callback for `GalleryCard` `onClick` events */
     onClick?: any;
 
+    /** Fixed width and height (284 pixels) */
     fixed?: boolean;
 
+    /** Classname to append to top level element */
     className?: string;
+    /** Data test hook string for testing */
     dataTestHook?: string;
 }
 
+/**
+ * Gallery Card control
+ * 
+ * You should usually mark this control as `fixed` because the container
+ * element gets its width from its content like the background and children
+ * 
+ * @param props Control properties (Defined in `GalleryCardProps` interface)
+ */
 export const GalleryCard = (props: GalleryCardProps) => {
     let classNames = css({
         'card': true,
@@ -66,6 +82,7 @@ export interface BannerProps extends React.Props<BannerType> {
     className?: string;
 }
 
+/** TODO: Remove this Banner control. GalleryCard banner is now a string */
 export const Banner = (props: BannerProps) => {
     let cls = css({
         'banner': true,

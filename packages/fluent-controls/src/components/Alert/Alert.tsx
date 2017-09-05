@@ -12,17 +12,40 @@ export enum AlertType {
 export interface AlertComponentType {}
 
 export interface AlertProps extends React.Props<AlertComponentType> {
+    /** Icon name (from Segoe UI MDL font) */
     icon: string;
+    /**
+     * Alert type described using `AlertType` enum
+     * 
+     * (`AlertType.[Information | Warning | Error]`)
+     */
     type?: AlertType;
     
+    /** 
+     * Callback for close button
+     * 
+     * (If empty, the close button is not displayed)
+     */    
     onClose?: () => void;
     
+    /** Fixed width (284 pixels) */
     fixed?: boolean;
+    /**
+     * Alert displays multiple lines
+     * 
+     * (By default, alerts only show one line with ellipsis overflow)
+     */
     multiline?: boolean;
 
+    /** Classname to append to top level element */
     className?: string;
 }
 
+/**
+ * Alert showing Information, Warning, or Error text with icon
+ * 
+ * @param props Control properties (defined in `AlertProps` interface)
+ */
 export const Alert = (props: AlertProps) => {
     const type = props.type || AlertType.Information;
     const className = css({

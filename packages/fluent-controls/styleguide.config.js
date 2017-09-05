@@ -2,7 +2,7 @@ const path = require('path');
 const glob = require('glob');
 
 module.exports = {
-  title: 'React Style Guide Example',
+  title: 'Microsoft Method UI Framework Documentation',
   components: function () {
     return glob.sync(path.resolve(__dirname, 'src/components/**/*.tsx'))
       .filter(function (module) {
@@ -11,7 +11,6 @@ module.exports = {
   },
   resolver: require('react-docgen').resolver.findAllComponentDefinitions,
 
-  //propsParser: require('../../lib/propTypesParser').parse,
   propsParser: require('react-docgen-typescript').parse,
 
   assetsDir: './static/',

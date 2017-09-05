@@ -12,20 +12,25 @@ export interface TextInputState {
 export interface TextInputProps extends React.Props<TextInputType> {
     /** HTML form element name */
     name: string;
-    /** Current value of HTML input elemenet */
+    /** Current value of HTML input element */
     value: string;
     /** HTML input element placeholder */
     placeholder?: string;
 
     /** Apply error styling to input element */
     error?: boolean;
-    /** Disable HTML input element */
+    /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
 
-    /** Callback for HTML input element onChange events */
+    /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
 }
 
+/**
+ * Low level text input control
+ * 
+ * (Use the `TextField` control instead when making a form with standard styling)
+ */
 export class TextInput extends React.Component<TextInputProps, TextInputState> {
     inputElement: HTMLInputElement;
 

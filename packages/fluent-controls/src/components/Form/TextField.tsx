@@ -7,21 +7,35 @@ const css = classNames.bind(require('./TextField.scss'));
 export interface TextFieldType {}
 
 export interface TextFieldProps extends React.Props<TextFieldType> {
+    /** HTML form element name */
     name: string;
+    /** Current value of HTML input element */
     value: string;
+    /** HTML input element placeholder */
     placeholder?: string;
     
+    /** Label to display above input element */
     label: React.ReactNode;
+    /** Error to display below input element */
     error?: React.ReactNode;
     
+    /** Disable HTML input element */
     disabled?: boolean;
+    /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
 
+    /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
 
+    /** Classname to append to top level element */
     className?: string;
 }
 
+/**
+ * High level form text field
+ * 
+ * @param props Control properties (defined in `TextFieldProps` interface)
+ */
 export const TextField = (props: TextFieldProps) => {
     const labelClass = css('label');
     const containerClass = css('input-container', {
