@@ -18,7 +18,6 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     required?: boolean;
 
     onChange: (newValue: string) => void;
-    onClear: () => void;
 
     className?: string;
 }
@@ -45,7 +44,6 @@ export const TextField = (props: TextFieldProps) => {
                 value={props.value}
                 placeholder={props.placeholder}
                 onChange={props.onChange}
-                onClear={props.onClear}
                 disabled={props.disabled}
                 error={!!props.error}
             />

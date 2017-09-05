@@ -18,7 +18,6 @@ export interface TextInputProps extends React.Props<TextInputType> {
     disabled?: boolean;
 
     onChange: (newValue: string) => void;
-    onClear: () => void;
 }
 
 export class TextInput extends React.Component<TextInputProps, TextInputState> {
@@ -43,9 +42,9 @@ export class TextInput extends React.Component<TextInputProps, TextInputState> {
     }
 
     onClear(event) {
-        this.props.onClear();
-        event.stopPropagation();
         this.inputElement.focus();
+        this.props.onChange('');
+        event.stopPropagation();
     }
 
     onFocus(event) {
