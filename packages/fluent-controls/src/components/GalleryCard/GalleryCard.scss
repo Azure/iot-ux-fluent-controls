@@ -1,0 +1,148 @@
+@import '../../common/overrides';
+
+$card-bg-color: #EAEAEA;
+$card-border-color: #C8C8C8;
+$card-hover-border-color: #000000;
+$card-header-color: #EAEA00;
+$card-icon-color: #00EAEA;
+$card-header-font-color: #212121;
+$card-section-font-color: #666666;
+$card-banner-bg-color: #000000;
+$icon-default-bg: rgba(0, 0, 0, 0);
+
+$card-fixed-width: 284px;
+$card-fixed-height: 284px;
+$card-fixed-background-height: 160px;
+$card-fixed-content-height: $card-fixed-height - $card-fixed-background-height;
+
+$card-content-margin: 20px 20px 16px 20px;
+
+$card-icon-width: 96px;
+$card-icon-height: 96px;
+$card-icon-top: ($card-fixed-background-height - $card-icon-height);
+$card-icon-left: ($card-fixed-width - $card-icon-width);
+
+$card-hover-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+
+.card {
+  display: inline-block;
+  position: relative;
+  background-color: $card-bg-color;
+  overflow: hidden;
+  border: 1px solid $card-border-color;
+  margin: 10px;
+  box-sizing: border-box;
+
+  &:hover {
+    border: 1px solid $card-hover-border-color;
+    box-shadow: $card-hover-shadow;
+  }
+
+  &.fixed {
+    height: $card-fixed-width;
+    width: $card-fixed-height;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+%card-background {
+  display: block;
+  position: relative;
+  width: 100%;
+  background-color: transparent;
+  transition: background-color 0.2s ease-in-out;
+
+  &.fixed {
+    width: $card-fixed-width;
+    height: $card-fixed-background-height;
+  }
+
+  .fullbg & {
+    height: 100%;
+  }
+}
+
+.background-image {
+    @extend %card-background;
+    background-size: cover;
+}
+
+.background-color {
+    @extend %card-background;
+    background-color: $card-header-color;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding: $card-content-margin;
+  font-family: $font-family-base;
+  box-sizing: border-box;
+
+  header {
+    font-size: 16px;
+    line-height: 20px;
+    color: $card-header-font-color;
+    margin-bottom: 4px;
+    flex: 0 0 20px;
+  }
+
+  section {
+    font-size: 13px;
+    line-height: 16px;
+    color: $card-section-font-color;
+    margin-bottom: 16px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  
+  footer {
+    font-size: 14px;
+    line-height: 20px;
+    color: #3062d6;
+    flex: 0 0 16px;
+  }
+  
+  .fixed & {
+    text-overflow: ellipsis;
+    height: $card-fixed-content-height;
+  }
+}
+
+.banner {
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 4px;
+  background-color: $card-banner-bg-color;
+  color: #eaeaea;
+  font-family: $font-family-base;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.gallery-card-icon {
+  background-color: transparent;
+  color: white;
+  text-align: center;
+
+  .icon-title {
+    display: block;
+    font-family: $font-family-base;
+    font-size: 14px;
+  }
+}

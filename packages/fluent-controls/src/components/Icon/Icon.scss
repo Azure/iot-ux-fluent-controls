@@ -1,0 +1,113 @@
+// sass-lint:disable pseudo-element 
+// sass-lint:disable force-pseudo-nesting 
+// sass-lint:disable class-name-format
+@import '../../common/mixins';
+
+@font-face {
+  font-family: 'icons';
+  src: url('/SegMDL2.1.6.woff') format('woff'), url('/SegMDL2.1.6.ttf') format('truetype');
+}
+
+%icon {
+  font-family: "icons";
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none none none;
+
+  &:before {
+    text-decoration: none;
+  }
+}
+
+%centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.icon-xsmall {
+  @extend %icon;
+  font-size: 16px;
+
+  &.centered {
+    @extend %centered;
+  }
+}
+
+.icon-small {
+  @extend %icon;
+  font-size: 32px;
+
+  &.centered {
+    @extend %centered;
+  }
+}
+
+.icon-medium {
+  @extend %icon;
+  font-size: 48px;
+
+  &.centered {
+    @extend %centered;
+  }
+}
+
+.icon-large {
+  @extend %icon;
+  font-size: 64px;
+
+  &.centered {
+    @extend %centered;
+  }
+}
+
+.icon-xlarge {
+  @extend %icon;
+  font-size: 80px;
+
+  &.centered {
+    @extend %centered;
+  }
+}
+
+.icon-xxlarge {
+  @extend %icon;
+  font-size: 96px;
+
+  &.centered {
+    @extend %centered;
+  }
+}
+
+.icon-background {
+  @include circle(48px);
+
+  &.icon-xsmall {
+    @include circle(16px);
+  }
+
+  &.icon-small {
+    @include circle(32px);
+  }
+
+  &.icon-medium {
+    @include circle(48px);
+  }
+
+  &.icon-large {
+    @include circle(64px);
+  }
+
+  &.icon-xlarge {
+    @include circle(80px);
+  }
+
+  &.icon-xxlarge {
+    @include circle(96px);
+  }
+
+  &.centered {
+    @extend %centered;
+  }
+}
