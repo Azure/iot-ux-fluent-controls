@@ -2,30 +2,30 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
-// import {SelectInputTest} from './pages/Form';
+import {TextFieldTest} from './pages/Form';
 
-// const rootEl = document.getElementById('content');
+const rootEl = document.getElementById('content');
 
-// ReactDOM.render(
-//  <AppContainer>
-//    <SelectInputTest />
-//  </AppContainer>,
-//  rootEl
-// );
+ReactDOM.render(
+ <AppContainer>
+   <TextFieldTest />
+ </AppContainer>,
+ rootEl
+);
 
-// // Hot Module Replacement API
-// if (module.hot) {
-//  module.hot.accept('./pages/Form', () => {
-//    const NextApp = require<{SelectInputTest: typeof SelectInputTest}>('./pages/Form').SelectInputTest;
-//    ReactDOM.render(
-//      <AppContainer>
-//        <NextApp />
-//      </AppContainer>
-//      ,
-//      rootEl
-//    );
-//  });
-// }
+// Hot Module Replacement API
+if (module.hot) {
+ module.hot.accept('./pages/Form', () => {
+   const NextApp = require<{TextFieldTest: typeof TextFieldTest}>('./pages/Form').TextFieldTest;
+   ReactDOM.render(
+     <AppContainer>
+       <NextApp />
+     </AppContainer>
+     ,
+     rootEl
+   );
+ });
+}
 
 
 // import {CardTest} from './pages/GalleryCard';
@@ -53,27 +53,27 @@ import { AppContainer } from 'react-hot-loader';
 //   });
 // }
 
-import {AlertTest} from './pages/Alert';
+// import {AlertTest} from './pages/Alert';
 
-const rootEl = document.getElementById('content');
+// const rootEl = document.getElementById('content');
 
-ReactDOM.render(
- <AppContainer>
-   <AlertTest />
- </AppContainer>,
- rootEl
-);
+// ReactDOM.render(
+//  <AppContainer>
+//    <AlertTest />
+//  </AppContainer>,
+//  rootEl
+// );
 
-// Hot Module Replacement API
-if (module.hot) {
- module.hot.accept('./pages/Alert', () => {
-   const NextApp = require<{AlertTest: typeof AlertTest}>('./pages/Alert').AlertTest;
-   ReactDOM.render(
-     <AppContainer>
-       <NextApp />
-     </AppContainer>
-     ,
-     rootEl
-   );
- });
-}
+// // Hot Module Replacement API
+// if (module.hot) {
+//  module.hot.accept('./pages/Alert', () => {
+//    const NextApp = require<{AlertTest: typeof AlertTest}>('./pages/Alert').AlertTest;
+//    ReactDOM.render(
+//      <AppContainer>
+//        <NextApp />
+//      </AppContainer>
+//      ,
+//      rootEl
+//    );
+//  });
+// }

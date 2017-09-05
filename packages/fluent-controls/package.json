@@ -10,7 +10,9 @@
         "bundle": "webpack --config webpack.config.js",
         "test": "echo \"Error: no test specified\" && exit 1",
         "tslint": "tslint './src/**/*.ts{,x}'",
-        "sasslint": "sass-lint -c .sass-lint.yml 'src/**/*.scss' -v -q"
+        "sasslint": "sass-lint -c .sass-lint.yml 'src/**/*.scss' -v -q",
+        "docs": "styleguidist server",
+        "docs:build": "styleguidist build"
     },
     "repository": {
         "type": "git",
@@ -35,8 +37,10 @@
         "pre-commit": "^1.2.2",
         "prop-types": "15.5.10",
         "react": "15.6.1",
+        "react-docgen-typescript": "^1.0.0",
         "react-dom": "15.6.1",
         "react-hot-loader": "^3.0.0-beta.7",
+        "react-styleguidist": "^6.0.22",
         "sass-lint": "^1.11.1",
         "sass-loader": "^6.0.6",
         "source-map-loader": "^0.2.1",

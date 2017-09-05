@@ -93,7 +93,7 @@ export class SelectInputTest extends React.Component<any, any> {
 
     render() {
         return (
-            <div>
+            <div style={{ width: "1200px", margin: "20px"}}>
                 {this.create(0)}
                 {this.create(1)}
                 {this.create(2)}
