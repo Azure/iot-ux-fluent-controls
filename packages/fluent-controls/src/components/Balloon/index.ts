@@ -1,1 +1,1 @@
-export * from './SimpleBalloon';
+export * from './Balloon';

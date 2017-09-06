@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 const css = classNames.bind(require('./SimpleBalloon.scss'));
 
-export interface SimpleBalloonType {}
+export interface BalloonType {}
 
 export enum BallonPosition {
     Top = 'top',
@@ -17,7 +17,7 @@ export enum BalloonAlignment {
     End = 'end'
 }
 
-export interface SimpleBalloonProps extends React.Props<SimpleBalloonType> {
+export interface BalloonProps extends React.Props<BalloonType> {
     /** Contents of balloon */
     tooltip: React.ReactNode | React.ReactNode[];
 
@@ -54,7 +54,7 @@ export interface SimpleBalloonProps extends React.Props<SimpleBalloonType> {
  * 
  * @param props Control properties (defined in `SimpleBalloonProps` interface)
  */
-export const SimpleBalloon = (props: SimpleBalloonProps) => {
+export const Balloon = (props: BalloonProps) => {
     const position = props.position || 'top';
     const align = props.align || 'center';
     const balloonClassName = css('balloon', `${position}-${align}`, props.balloonClassName);
@@ -73,4 +73,4 @@ export const SimpleBalloon = (props: SimpleBalloonProps) => {
     );
 };
 
-export default SimpleBalloon;
+export default Balloon;
