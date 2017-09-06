@@ -9,13 +9,20 @@
 }
 
 %icon {
-  font-family: "icons";
   font-style: normal;
   font-weight: normal;
-  text-decoration: none none none;
-
+  font-family: $font-family-base;
+  
   &:before {
+    font-family: "icons";
     text-decoration: none;
+  }
+  
+  &:not(:empty) {
+    &:before {
+      margin-right: 8px;
+      vertical-align: -15%;
+    }
   }
 }
 

@@ -1,0 +1,230 @@
+@import '../../common/overrides';
+
+$balloon-bg: #333333;
+$text-color: #ffffff;
+
+@mixin arrow($location, $offset: 'center') {
+    &:before {
+        content:'';
+        display:block;
+        width:0;
+        height:0;
+        
+        position:absolute;
+
+        @if $location == 'top' {
+            top: -7.5px;
+            @if $offset == 'start' {
+                left: 8px;
+            } @else if $offset == 'end' {
+                right: 8px;
+            } @else {
+                left: 50%;
+                transform: translate(-50%, 0);
+            }
+        
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;    
+            border-bottom: 8px solid $balloon-bg;
+        } @else if $location == 'left' {
+            left: -7.5px;
+            @if $offset == 'start' {
+                top: 8px;
+            } @else if $offset == 'end' {
+                bottom: 8px;
+            } @else {
+                top: 50%;
+                transform: translate(0, -50%);
+            }
+        
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;    
+            border-right: 8px solid $balloon-bg;
+        } @else if $location == 'right' {
+            right: -7.5px;
+            @if $offset == 'start' {
+                top: 8px;
+            } @else if $offset == 'end' {
+                bottom: 8px;
+            } @else {
+                top: 50%;
+                transform: translate(0, -50%);
+            }
+        
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;    
+            border-left: 8px solid $balloon-bg;
+        } @else {
+            bottom: -7.5px;
+            @if $offset == 'start' {
+                left: 8px;
+            } @else if $offset == 'end' {
+                right: 8px;
+            } @else {
+                left: 50%;
+                transform: translate(-50%, 0);
+            }
+        
+            border-top: 8px solid $balloon-bg;
+            border-left: 8px solid transparent;    
+            border-right: 8px solid transparent;
+        }
+    }
+}
+
+@mixin position($location, $offset: 'center') {
+    @if $location == 'top' {
+        top: -12px;
+        @if $offset == 'start' {
+            left: 0px;
+            transform: translate(0, -100%);
+        } @else if $offset == 'end' {
+            right: 0px;
+            transform: translate(0, -100%);
+        } @else {
+            left: 50%;
+            transform: translate(-50%, -100%);
+        }
+    } @else if $location == 'left' {
+        left: -12px;
+        @if $offset == 'start' {
+            top: -6px;
+            transform: translate(-100%);
+        } @else if $offset == 'end' {
+            bottom: -6px;
+            transform: translate(-100%);
+        } @else {
+            top: 50%;
+            transform: translate(-100%, -50%);
+        }
+    } @else if $location == 'right' {
+        right: -12px;
+        @if $offset == 'start' {
+            top: -6px;
+            transform: translate(100%);
+        } @else if $offset == 'end' {
+            bottom: -6px;
+            transform: translate(100%);
+        } @else {
+            top: 50%;
+            transform: translate(100%, -50%);
+        }
+    } @else {
+        bottom: -12px;
+        @if $offset == 'start' {
+            left: 0px;
+            transform: translate(0, 100%);
+        } @else if $offset == 'end' {
+            right: 0px;
+            transform: translate(0, 100%);
+        } @else {
+            left: 50%;
+            transform: translate(-50%, 100%);
+        }
+    }
+}
+
+.balloon-container {
+    display: inline-block;
+    text-decoration: none;
+    position: relative;
+
+    .balloon {
+        display: none;
+        position: absolute;
+        z-index: 99;
+        font-family: $font-family-base;
+        padding: 12px 16px 16px 16px;
+        background-color: $balloon-bg;
+        color: $text-color;
+        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+        
+        .inner-container {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            &.multiline {
+                white-space: normal;
+            }
+        }
+        
+        header + section {
+            margin-top: 16px;
+        }
+        
+        section + section {
+            margin-top: 16px;
+        }
+
+        section + footer {
+            margin-top: 16px;
+        }
+    }
+}
+
+.balloon-container:hover {
+    .balloon {
+        display: inline;
+    }
+
+    .top-start {
+        @include position('top', 'start');
+        @include arrow('bottom', 'start');
+    }
+
+    .top-center {
+        @include position('top', 'center');
+        @include arrow('bottom', 'center');
+    }
+    
+    .top-end {
+        @include position('top', 'end');
+        @include arrow('bottom', 'end');
+    }
+
+    .bottom-start {
+        @include position('bottom', 'start');
+        @include arrow('top', 'start');
+    }
+
+    .bottom-center {
+        @include position('bottom', 'center');
+        @include arrow('top', 'center');
+    }
+    
+    .bottom-end {
+        @include position('bottom', 'end');
+        @include arrow('top', 'end');
+    }
+
+    .left-start {
+        @include position('left', 'start');
+        @include arrow('right', 'start');
+    }
+
+    .left-center {
+        @include position('left', 'center');
+        @include arrow('right', 'center');
+    }
+    
+    .left-end {
+        @include position('left', 'end');
+        @include arrow('right', 'end');
+    }
+
+    .right-start {
+        @include position('right', 'start');
+        @include arrow('left', 'start');
+    }
+
+    .right-center {
+        @include position('right', 'center');
+        @include arrow('left', 'center');
+    }
+    
+    .right-end {
+        @include position('right', 'end');
+        @include arrow('left', 'end');
+    }
+}

@@ -18,5 +18,6 @@ module.exports = {
 
   require: [
     path.join(__dirname, './static/css/icons.css'),
+    path.join(__dirname, './static/css/examples.css'),
   ]
 };
