@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-const css = classNames.bind(require('./SimpleBalloon.scss'));
+const css = classNames.bind(require('./Balloon.scss'));
 
 export interface BalloonType {}
 
