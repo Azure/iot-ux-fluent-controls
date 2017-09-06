@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./Balloon.scss'));
 
 export interface BalloonType {}
@@ -19,7 +20,7 @@ export enum BalloonAlignment {
 
 export interface BalloonProps extends React.Props<BalloonType> {
     /** Contents of balloon */
-    tooltip: React.ReactNode | React.ReactNode[];
+    tooltip: MethodNode;
 
     /**
      * Where to display Balloon relative to child element
@@ -49,8 +50,8 @@ export interface BalloonProps extends React.Props<BalloonType> {
 /**
  * SimpleBalloon shows tooltip (with HTML) on hover over child
  * 
- * NOTE: If the parent element of this control is `overflow: hidden` then the
- * balloon will NOT show up.
+ * NOTE: If a parent element of this control is `overflow: hidden` then the
+ * balloon may not show up.
  * 
  * @param props Control properties (defined in `SimpleBalloonProps` interface)
  */
