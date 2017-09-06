@@ -3,7 +3,7 @@ import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconBackground} from '../Icon';
 import {TextInput} from './TextInput';
-const css = classNames.bind(require('./TextField.scss'));
+const css = classNames.bind(require('./Field.scss'));
 
 export interface TextFieldType {}
 

@@ -2,13 +2,13 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 
-import {TextFieldTest} from './pages/Form';
+import {RadioFieldTest} from './pages/Form';
 
 const rootEl = document.getElementById('content');
 
 ReactDOM.render(
  <AppContainer>
-   <TextFieldTest />
+   <RadioFieldTest />
  </AppContainer>,
  rootEl
 );
@@ -16,7 +16,7 @@ ReactDOM.render(
 // Hot Module Replacement API
 if (module.hot) {
  module.hot.accept('./pages/Form', () => {
-   const NextApp = require<{TextFieldTest: typeof TextFieldTest}>('./pages/Form').TextFieldTest;
+   const NextApp = require<{RadioFieldTest: typeof RadioFieldTest}>('./pages/Form').RadioFieldTest;
    ReactDOM.render(
      <AppContainer>
        <NextApp />
@@ -26,6 +26,31 @@ if (module.hot) {
    );
  });
 }
+
+// import {TextFieldTest} from './pages/Form';
+
+// const rootEl = document.getElementById('content');
+
+// ReactDOM.render(
+//  <AppContainer>
+//    <TextFieldTest />
+//  </AppContainer>,
+//  rootEl
+// );
+
+// // Hot Module Replacement API
+// if (module.hot) {
+//  module.hot.accept('./pages/Form', () => {
+//    const NextApp = require<{TextFieldTest: typeof TextFieldTest}>('./pages/Form').TextFieldTest;
+//    ReactDOM.render(
+//      <AppContainer>
+//        <NextApp />
+//      </AppContainer>
+//      ,
+//      rootEl
+//    );
+//  });
+// }
 
 
 // import {CardTest} from './pages/GalleryCard';

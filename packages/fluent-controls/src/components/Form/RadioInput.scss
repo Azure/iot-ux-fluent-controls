@@ -1,0 +1,130 @@
+@import 'common';
+
+$default-border: 1px solid #666666;
+$checked-border: 1px solid #00b7c3;
+$hover-border: 1px solid #333333;
+$focused-border: 1px dashed #333333;
+$disabled-border: 1px solid #a6a6a6;
+
+$default-text-color: #212121;
+$disabled-text-color: #a6a6a6;
+$default-fill: #333333;
+
+
+.radio-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    font-family: $font-family-base;
+    box-sizing: border-box;
+
+    color: $default-text-color;
+    font-size: $font-size-text;
+    line-height: 16px;
+
+    & + & {
+        margin-top: 12px;
+    }
+
+    input {
+        position: relative;
+        width: 0px;
+        height: 0px;
+        margin: 0px;
+        padding: 0px;
+        border: none;
+
+        &:checked {
+            & ~ .radio-button {
+                border: $checked-border;
+            }
+
+            & ~ .radio-fill{
+                background-color: $default-fill;
+            }
+        }
+        
+        &:focus ~ .radio-border {
+            border: $focused-border;        
+        }
+
+        &:hover:not(:checked) ~ .radio-button {
+            border: $hover-border;
+        }
+    
+        &:focus:not(:checked) ~ .radio-button {
+            border: $default-border;
+        }
+    }
+
+    .radio-fill {
+        display: inline-block;
+        position: relative;
+        left: -12px;
+        top: -6px;
+        width: 8px;
+        height: 8px;
+        border-radius: 4px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .radio-border {
+        box-sizing: border-box;
+        display: inline-block;
+        position: relative;
+        left: -26px;
+        top: 0px;
+        width: 20px;
+        height: 20px;
+    }
+
+    .radio-button {
+        box-sizing: border-box;
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border-radius: 8px;
+        border: $default-border;
+        outline: none;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        vertical-align: top;
+        margin-top: 2px;
+
+        .radio-fill {
+            display: none;
+        }
+
+        .radio-border {
+            display: none;
+        }
+
+        &.disabled {
+            border: $disabled-border !important;
+        }
+    }
+
+    .radio-text {
+        box-sizing: border-box;
+        display: inline-block;
+        position: relative;
+        top: 50%;
+        left: -20px;
+        vertical-align: top;
+        
+    }
+
+    .radio-fill.disabled {
+        background-color: $disabled-text-color !important;
+    }
+
+    .radio-label {
+        display: inline-block;
+    }
+
+    .radio-label.disabled {
+        color: $disabled-text-color;
+    }
+}

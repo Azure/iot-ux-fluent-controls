@@ -1,22 +1,22 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, FormOption} from '../../Common';
-import {SelectInput} from './SelectInput';
+import {RadioInput} from './RadioInput';
 const css = classNames.bind(require('./Field.scss'));
 
-export interface SelectFieldType {}
+export interface RadioFieldType {}
 
-export interface SelectFieldProps extends React.Props<SelectFieldType> {
+export interface RadioFieldProps extends React.Props<RadioFieldType> {
     /** HTML form element name */
     name: string;
     /** 
-     * Current value of HTML select element
+     * Current value of HTML radio button element
      * 
-     * This must be an `Object` that is in `SelectInputProps.options`
+     * This must be an `Object` that is in `RadioFieldProps.options`
      */
     value: any;
     /** 
-     * List of HTML select element options in the format:
+     * List of HTML radio button element options in the format:
      * 
      * `{
      *     label: string,
@@ -35,7 +35,7 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
 
-    /** Callback for HTML select element `onChange` events */
+    /** Callback for HTML radio button element `onChange` events */
     onChange: (newValue: any) => void;
 
     /** Classname to append to top level element */
@@ -45,14 +45,14 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
 /**
  * High level form select box control
  * 
- * IMPORTANT: The options provided to this control must all be UNIQUE. The 
- * `value` property of option tags is the numerical index of the option in
- * `SelectField.options` so `SelectField.value` is compared to each value in
+ * IMPORTANT: The options provided to this control must all be UNIQUE. The
+ * `value` property of radio buttons is the numerical index of the option in
+ * `RadioField.options` so `RadioField.value` is compared to each value in
  * `options` (===) to decide which option is the one currently selected.
  * 
- * @param props: Object fulfilling `SelectFieldProps` interface
+ * @param props: Object fulfilling `RadioFieldProps` interface
  */
-export const SelectField = (props: SelectFieldProps) => {
+export const RadioField = (props: RadioFieldProps) => {
     const labelClass = css('label');
     const containerClass = css('input-container', {
         'input-error': props.error,
@@ -64,19 +64,31 @@ export const SelectField = (props: SelectFieldProps) => {
     });
     const errorClass = css('field-error');    
 
+    const onChange = (newValue) => {
+        const index = parseInt(newValue);
+        props.onChange(props.options[index].value);
+    };
+
+    const options = props.options.map((option, index) => {
+        return (
+            <RadioInput
+                name={props.name}
+                value={`${index}`}
+                label={option.label}
+                checked={props.value === option.value}
+                onChange={onChange}
+                disabled={props.disabled}
+                key={`${props.name}-${index}`}
+            />
+        );
+    });
+
     return (
         <div className={containerClass} >
             <label className={labelClass} htmlFor={props.name} >
                 {props.label}
             </label>
-            <SelectInput
-                name={props.name}
-                value={props.value}
-                onChange={props.onChange}
-                disabled={props.disabled}
-                error={!!props.error}
-                options={props.options}
-            />
+            {options}
             <div className={errorClass}>
                 {props.error}
             </div>
@@ -84,4 +96,4 @@ export const SelectField = (props: SelectFieldProps) => {
     );
 };
 
-export default SelectField;
+export default RadioField;
