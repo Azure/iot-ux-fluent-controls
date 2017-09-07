@@ -4,11 +4,21 @@ import { TextField } from '../../Form';
 import { SelectField } from '../../Form';
 import { RadioField } from '../../Form';
 
+export const FormFieldTest = () => {
+    return (
+        <div>
+            <div><RadioFieldTest /></div>
+            <div><SelectFieldTest /></div>
+            <div><TextFieldTest /></div>
+        </div>
+    );
+};
+
 interface SelectObj {
     output: string;
 }
 
-export class SelectInputTest extends React.Component<any, any> {
+export class SelectFieldTest extends React.Component<any, any> {
     names: string[];
     labels: string[];
     errors: string[];
@@ -94,7 +104,7 @@ export class SelectInputTest extends React.Component<any, any> {
 
     render() {
         return (
-            <div style={{ width: '1200px', margin: '20px'}}>
+            <div style={{ margin: '20px'}}>
                 {this.create(0)}
                 {this.create(1)}
                 {this.create(2)}
@@ -197,7 +207,7 @@ export class RadioFieldTest extends React.Component<any, any> {
 
     render() {
         return (
-            <div style={{ width: '1200px', margin: '20px'}}>
+            <div style={{ margin: '20px'}}>
                 {this.create(0)}
                 {this.create(1)}
                 {this.create(2)}
@@ -282,7 +292,7 @@ export class TextFieldTest extends React.Component<any, any> {
 
     render() {
         return (
-            <div>
+            <div style={{ margin: '20px'}}>
                 {this.create(0)}
                 {this.create(1)}
                 {this.create(2)}

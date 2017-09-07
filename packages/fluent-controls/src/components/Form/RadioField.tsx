@@ -30,6 +30,8 @@ export interface RadioFieldProps extends React.Props<RadioFieldType> {
     /** Error to display below input element */
     error?: MethodNode;
     
+    /** Allow radio buttons to show up in columns */
+    columns?: boolean;
     /** Disable HTML input element */
     disabled?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
@@ -78,6 +80,7 @@ export const RadioField = (props: RadioFieldProps) => {
                 checked={props.value === option.value}
                 onChange={onChange}
                 disabled={props.disabled}
+                columns={props.columns}
                 key={`${props.name}-${index}`}
             />
         );
@@ -85,12 +88,16 @@ export const RadioField = (props: RadioFieldProps) => {
 
     return (
         <div className={containerClass} >
-            <label className={labelClass} htmlFor={props.name} >
-                {props.label}
-            </label>
+            <div>
+                <label className={labelClass} htmlFor={props.name} >
+                    {props.label}
+                </label>
+            </div>
             {options}
-            <div className={errorClass}>
-                {props.error}
+            <div>
+                <div className={errorClass}>
+                    {props.error}
+                </div>
             </div>
         </div>
     );

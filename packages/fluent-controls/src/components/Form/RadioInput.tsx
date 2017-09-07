@@ -17,7 +17,9 @@ export interface RadioInputProps extends React.Props<RadioInputType> {
     /** Label for HTML input element */
     label: MethodNode;
 
-    /** Check  */
+    /** Allow multiple columns for radio button */
+    columns?: boolean;
+    /** Checked */
     checked?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
@@ -35,7 +37,7 @@ export interface RadioInputProps extends React.Props<RadioInputType> {
  */
 export const RadioInput = (props: RadioInputProps) => {
     const classes = {'disabled': props.disabled};
-    const containerClass = css('radio-container');
+    const containerClass = css('radio-container', {'columns': props.columns});
     const optionTextClass = css('radio-text');
     const radioClass = css('radio-button', classes);
     const fillClass = css('radio-fill', classes);

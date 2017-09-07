@@ -1,4 +1,5 @@
 @import 'overrides';
+@import 'colormap';
 
 @mixin default_font {
     
@@ -8,4 +9,107 @@
     width: $width;
     height: $width;
     border-radius: $width/2;
+}
+
+@function md-color($color-keys...) {
+    $result: $color-map;
+    @each $key in $color-keys {
+        $result: map-get($result, $key);
+    }
+    @return $result;
+}
+
+@mixin md-box-position($option) {
+    @if $option == 'absolute' {
+        position: absolute;
+    } @else if $option == 'relative' {
+        position: relative;
+    } @else if $option == 'fixed' {
+        position: fixed;
+    }
+}
+
+@mixin md-box-display($option) {
+    @if $option == 'inline' {
+        display: inline;
+    } @else if $option == 'block' {
+        display: block;
+    } @else if $option == 'inline-block' {
+        display: inline-block;
+    } @else if $option == 'table-cell' {
+        display: table-cell;
+    } @else if $option == 'flex' {
+        display: flex;
+    } @else if $option == 'flex-column' {
+        display: flex;
+        flex-direction: column;
+    } @else if $option == 'flex-row' {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+@mixin md-box-overflow($option) {
+    @if $option == 'hidden' {
+        overflow: hidden;
+    } @else if $option == 'scroll' {
+        overflow: scroll;
+    } @else if $option == 'visible' {
+        overflow: visible;
+    } @else if $option == 'auto' {
+        overflow: auto;
+    } @else if $option == 'x-hidden' {
+        overflow-x: hidden;
+    } @else if $option == 'x-scroll' {
+        overflow-x: scroll;
+    } @else if $option == 'x-visible' {
+        overflow-x: visible;
+    } @else if $option == 'x-auto' {
+        overflow-x: auto;
+    } @else if $option == 'y-hidden' {
+        overflow-y: hidden;
+    } @else if $option == 'y-scroll' {
+        overflow-y: scroll;
+    } @else if $option == 'y-visible' {
+        overflow-y: visible;
+    } @else if $option == 'y-auto' {
+        overflow-y: auto;
+    } @else if $option == 'ellipsis' {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    } @else if $option == 'y-ellipsis' {
+        overflow-y: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+@mixin md-box-float($option) {
+    @if $option == 'float-left' {
+        float: left;
+    } @else if $option == 'float-right' {
+        float: right;
+    } @else if $option == 'float-none' {
+        float: none;
+    } @else if $option == 'clear-left' {
+        clear: left;
+    } @else if $option == 'clear-right' {
+        clear: right;
+    } @else if $option == 'clear-both' {
+        clear: both;
+    }
+}
+
+@mixin md-box($options...) {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+    @each $option in $options {
+        @include md-box-display($option);
+        @include md-box-position($option);
+        @include md-box-overflow($option);
+        @include md-box-float($option);
+    }
 }

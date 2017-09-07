@@ -6,39 +6,33 @@
 }
 
 .label {
-    display: block;
-    color: $default-text-color;
+    @include md-box(inline-block);
+    color: md-color(shade, 2);
     font-family: $font-family-base;
     font-size: $font-size-text;
     line-height: 20px;
-    vertical-align: center;
     
     margin-bottom: 4px;
 
     &.disabled {
-        color: $disabled-text-color;
+        color: md-color(shade, a);
     }
 
     .required &::after {
         content: ' *';
-        color: $error-color;
+        color: md-color(text, error);
     }
 }
 
 .field-error {
-    display: block;
-    box-sizing: border-box;
+    @include md-box(inline-block, ellipsis);
     height: 20px;
-    padding-top: 4px;
+    margin-top: 4px;
+    max-width: 100%;
     
-    color: $error-text-color;
+    color: md-color(text, error);
     
     font-family: $font-family-base;
     font-size: $font-size-small;
     line-height: 20px;
-
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }

@@ -1,0 +1,48 @@
+$color-map: (
+    transparent: transparent,
+
+    text: (
+        error: #d02e00,
+        black: #000000,
+        white: #ffffff,
+    ),
+
+    alert: (
+        info: #dcdcdc,
+        warning: #f9e385,
+        error: #d02e00
+    ),
+
+    form: (
+        selected: #00b7c3,
+    ),
+
+    combo: (
+        hover: #3062d6,
+        selected-text: #002050
+    ),
+
+    shadow: (
+        default: rgba(0, 0, 0, 0.75)
+    ),
+
+    // To keep black-gray-white colors consistent across controls
+    shade: (
+        0: #000000,
+        1: #111111,
+        2: #212121,
+        3: #333333,
+        4: #4a4a4a,
+        5: #555555,
+        6: #666666,
+        7: #767676,
+        8: #888888,
+        9: #999999,
+        a: #a6a6a6,
+        b: #bbbbbb,
+        c: #c8c8c8,
+        d: #dcdcdc,
+        e: #EAEAEA,
+        f: #ffffff
+    )
+);
