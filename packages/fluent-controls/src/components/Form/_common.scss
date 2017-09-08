@@ -12,6 +12,20 @@ $cancel-default-color: #666666;
 
 $default-border-color: #666666;
 $inactive-border-color: #c8c8c8;
+$disabled-border-color: #dcdcdc;
+$default-border: 1px solid $default-border-color;
+$inactive-border: 1px solid $inactive-border-color;
+$disabled-border: 1px solid $disabled-border-color;
+$error-border: 1px solid $error-color;
 
 $selection-background-color: #3062d6;
 $disabled-background-color: #dcdcdc;
+
+$select-option-hover: #dcdcdc;
+$select-option-selected:  #00b7c3;
+$select-option-pressed: #212121;
+
+$select-text-default: #212121;
+$select-text-pressed: #ffffff;
+$select-text-selected: #002050;
+$select-arrow-color: #4a4a4a;

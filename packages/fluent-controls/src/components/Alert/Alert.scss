@@ -13,7 +13,6 @@ $error-text: #ffffff;
     position: relative;
     display: flex;
     flex-direction: row;
-    overflow: hidden;
     box-sizing: border-box;
 
     width: 100%;
@@ -23,6 +22,10 @@ $error-text: #ffffff;
     color: $default-text;
 
     .icon {
+        font-family: "icons";
+        font-style: normal;
+        font-weight: normal;
+
         flex: 0 0 16px;
         margin: 8px;
         line-height: 16px;
@@ -30,18 +33,18 @@ $error-text: #ffffff;
     }
 
     .text {
-        margin-top: 6px;
+        margin-top: 4px;
         margin-bottom: 8px;
         margin-right: 12px;
 
         font-family: $font-family;
         font-size: 16px;
-        line-height: 16px;
+        line-height: 20px;
         color: $default-text;
 
         width: 100%;
         overflow: hidden;
-        display: inline-block;
+        display: block;
         text-overflow: ellipsis;
         white-space: nowrap;
         
@@ -77,6 +80,10 @@ $error-text: #ffffff;
     &.error {
         background-color: $error-bg;
         color: $error-text;
+
+        .text {
+            color: $error-text;
+        }
     }
 
     &.multiline {

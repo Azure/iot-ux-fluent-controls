@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {Icon, IconSize, IconBackground} from '../../Icon';
 import {SolidBackground, ImageBackground, GalleryCardIcon, GalleryCard} from '../../GalleryCard';
-const cssName = classNames.bind(require('./GalleryCard.scss'));
+const css = classNames.bind(require('./GalleryCard.scss'));
 
 export const CardTest = () => {
     
@@ -15,7 +15,7 @@ export const CardTest = () => {
         );
 
         return (
-            <GalleryCard  className={cssName('management-card')}  background={bg} banner='Coming soon!' fixed>
+            <GalleryCard  className={css('management-card')}  background={bg} banner='Coming soon!' fixed>
                 <header>Title</header>
                 <section>Lorem ipsum</section>
                 <footer><button>Action!!!!</button></footer>

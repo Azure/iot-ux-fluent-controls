@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {Icon, IconSize, IconBackground} from '../Icon';
-const cssName = classNames.bind(require('./TextInput.scss'));
+const css = classNames.bind(require('./TextInput.scss'));
 
 export interface TextInputType {}
 
@@ -10,17 +10,27 @@ export interface TextInputState {
 }
 
 export interface TextInputProps extends React.Props<TextInputType> {
+    /** HTML form element name */
     name: string;
+    /** Current value of HTML input element */
     value: string;
+    /** HTML input element placeholder */
     placeholder?: string;
 
+    /** Apply error styling to input element */
     error?: boolean;
+    /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
 
+    /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
-    onClear: () => void;
 }
 
+/**
+ * Low level text input control
+ * 
+ * (Use the `TextField` control instead when making a form with standard styling)
+ */
 export class TextInput extends React.Component<TextInputProps, TextInputState> {
     inputElement: HTMLInputElement;
 
@@ -43,9 +53,9 @@ export class TextInput extends React.Component<TextInputProps, TextInputState> {
     }
 
     onClear(event) {
-        this.props.onClear();
-        event.stopPropagation();
         this.inputElement.focus();
+        this.props.onChange('');
+        event.stopPropagation();
     }
 
     onFocus(event) {
@@ -59,13 +69,13 @@ export class TextInput extends React.Component<TextInputProps, TextInputState> {
     }
 
     render() {
-        const containerClass = cssName('input-container');
-        const inputClass = cssName({
+        const containerClass = css('input-container');
+        const inputClass = css({
             'input': true,
             'error': this.props.error,
             'cancel-focused': this.state.cancelFocused
         });
-        const cancelClass = cssName(
+        const cancelClass = css(
             'cancel', 'icon icon-cancelLegacy'
         );
 
@@ -75,6 +85,7 @@ export class TextInput extends React.Component<TextInputProps, TextInputState> {
                 onClick={this.onClear}
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
+                tabIndex={-1}
             />;
 
         return (

@@ -1,18 +1,28 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, IconSize, IconBackground} from '../Icon';
-import {TextInput} from './TextInput';
-const css = classNames.bind(require('./TextField.scss'));
+import {SelectInput, SelectOption} from './SelectInput';
+const css = classNames.bind(require('./SelectField.scss'));
 
-export interface TextFieldType {}
+export interface SelectFieldType {}
 
-export interface TextFieldProps extends React.Props<TextFieldType> {
+export interface SelectFieldProps extends React.Props<SelectFieldType> {
     /** HTML form element name */
     name: string;
-    /** Current value of HTML input element */
-    value: string;
-    /** HTML input element placeholder */
-    placeholder?: string;
+    /** 
+     * Current value of HTML select element
+     * 
+     * This must be an `Object` that is in `SelectInputProps.options`
+     */
+    value: any;
+    /** 
+     * List of HTML select element options in the format:
+     * 
+     * `{
+     *     label: string,
+     *     value: any
+     * }`
+     */
+    options: SelectOption[];
     
     /** Label to display above input element */
     label: React.ReactNode;
@@ -24,19 +34,24 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
 
-    /** Callback for HTML input element `onChange` events */
-    onChange: (newValue: string) => void;
+    /** Callback for HTML select element `onChange` events */
+    onChange: (newValue: any) => void;
 
     /** Classname to append to top level element */
     className?: string;
 }
 
 /**
- * High level form text field
+ * High level form select box control
  * 
- * @param props Control properties (defined in `TextFieldProps` interface)
+ * IMPORTANT: The options provided to this control must all be UNIQUE. The 
+ * `value` property of option tags is the numerical index of the option in
+ * `SelectField.options` so `SelectField.value` is compared to each value in
+ * `options` (===) to decide which option is the one currently selected.
+ * 
+ * @param props: Object fulfilling `SelectFieldProps` interface
  */
-export const TextField = (props: TextFieldProps) => {
+export const SelectField = (props: SelectFieldProps) => {
     const labelClass = css('label');
     const containerClass = css('input-container', {
         'input-error': props.error,
@@ -53,15 +68,14 @@ export const TextField = (props: TextFieldProps) => {
             <label className={labelClass} htmlFor={props.name} >
                 {props.label}
             </label>
-            <TextInput
+            <SelectInput
                 name={props.name}
                 value={props.value}
-                placeholder={props.placeholder}
                 onChange={props.onChange}
                 disabled={props.disabled}
                 error={!!props.error}
+                options={props.options}
             />
-
             <div className={errorClass}>
                 {props.error}
             </div>

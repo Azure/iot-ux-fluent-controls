@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-const cssName = classNames.bind(require('./Icon.scss'));
+const css = classNames.bind(require('./Icon.scss'));
 
 export enum IconSize {
     // 16px
@@ -18,34 +18,51 @@ export enum IconSize {
 }
 
 export interface IconType {}
-export interface IconBackgroundType {}
 
 export interface IconProps extends React.Props<IconType> {
-    icon: string;    
+    /** Icon name (from Segoe UI MDL font) */
+    icon: string;
 
+    /**
+     * Icon font size as defined by `IconSize` enum
+     * 
+     * `IconSize.[xsmall | small | medium | large | xlarge | xxlarge]`
+     * 
+     * Starts at 16 pixels (`IconSize.xsmall`) and increases 16 pixels at a
+     * time until 96 pixels (`IconSize.xxlarge`)
+     * 
+     * Defaults to `IconSize.medium` (48 pixels)
+     */
     size?: IconSize;
-    centered?: boolean;
+    /**
+     * Icon font size
+     * 
+     * Overrides `IconProps.size`
+     */
     fontSize?: number;
+    /** Icon color (accepts string color names and RGB hex values) */
     color?: string;
+    /** Center vertically and horizontally in parent element */
+    centered?: boolean;
 
+    /** Properties to pass through to top level element */
     props?: any;
 
+    /** Classname to append to top level element */
     className?: string;
 }
 
-export interface IconBackgroundProps extends React.Props<IconBackgroundType> {
-    backgroundColor: string;
-
-    diameter?: number;
-    centered?: boolean;
-    
-    className?: string;
-}
-
+/**
+ * Icon loaded from Segoe UI MDL icons font
+ * 
+ * Renders children so this control can be used with text
+ * 
+ * @param props Control properties (Defined in `IconProps` interface)
+ */
 export const Icon = (props: IconProps) => {
     let iconClassName = `icon-${props.icon}`;
     let size = props.size || IconSize.medium;
-    let cls = cssName({
+    let cls = css({
         // 'icon': true,
         'icon-xsmall': size === IconSize.xsmall,
         'icon-small': size === IconSize.small,
@@ -66,23 +83,4 @@ export const Icon = (props: IconProps) => {
             {props.children}
         </span>
     );
-};
-
-export const IconBackground = (props: IconBackgroundProps) => {
-    let cls = cssName({
-        'icon-background': true,
-        'centered': props.centered
-    }, props.className);
-
-    let style = {
-        backgroundColor: props.backgroundColor
-    };
-
-    if (props.diameter) {
-        style['width'] = `${props.diameter}px`;
-        style['height'] = `${props.diameter}px`;
-        style['borderRadius'] = `${props.diameter / 2}px`;
-    }
-
-    return (<div className={cls} style={style}></div>);
 };
