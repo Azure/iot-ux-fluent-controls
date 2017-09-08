@@ -5,6 +5,10 @@
 $balloon-border: 8.5px solid md-color(shade, 3);
 $transparent-border: 8.5px solid md-color(transparent);
 
+$background-default-color: md-color(shade, 3);
+
+$text-default-color: md-color(shade, f);
+
 @mixin arrow($location, $offset: 'center') {
     &:before {
         content:'';
@@ -137,8 +141,8 @@ $transparent-border: 8.5px solid md-color(transparent);
         z-index: 99;
         font-family: $font-family-base;
         padding: 12px 16px 16px 16px;
-        background-color: md-color(shade, 3);
-        color: md-color(shade, f);
+        background-color: $background-default-color;
+        color: $text-default-color;
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
         
         .inner-container {

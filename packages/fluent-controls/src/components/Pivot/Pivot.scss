@@ -1,0 +1,120 @@
+@import '../../common/overrides';
+@import '../../common/mixins';
+
+$text-selected-color: md-color(shade, 2);
+$text-unselected-color: md-color(shade, 6);
+$text-disabled-color: md-color(shade, a);
+$text-hover-color: md-color(shade, 2);
+
+$focus-border: 1px dashed md-color(shade, 3);
+
+$selected-border: 2px solid md-color(form, selected);
+$disabled-border: 2px solid md-color(shade, a);
+
+$menu-border: 1px solid md-color(shade, d);
+
+.pivot {
+    @include md-box(inline-block);
+    outline: none;    
+    margin-left: 20px;
+}
+
+.pivot-menu {
+    @include md-box(block, relative);
+    border-bottom: $menu-border;
+}
+
+.pivot-container {
+    @include md-box(inline-block, relative);
+    padding: 0px 1px 0px 1px;
+
+    .pivot-icon-label {
+        font-family: $font-family-base;
+        font-size: 14px;
+        line-height: 14px;
+    
+        color: $text-unselected-color;
+    }
+
+    &:hover {
+        color: $text-hover-color;
+        .pivot-icon, .pivot-label, .pivot-icon-label {
+            color: $text-hover-color;
+        }
+    }
+
+    &.selected {
+        color: $text-selected-color;
+
+        .pivot-icon, .pivot-label, .pivot-icon-label {
+            color: $text-selected-color;
+        }
+
+        .pivot-border {
+            border-bottom: $selected-border;
+        }
+    }
+
+    &.disabled {
+        color: $text-disabled-color;
+
+        .pivot-icon, .pivot-label, .pivot-icon-label {
+            color: $text-disabled-color;
+        }
+
+        &.selected .pivot-border {
+            border-bottom: $disabled-border;
+        }
+    }
+
+    .pivot-icon {
+        @include md-box(inline-block, relative);
+        @extend .pivot-icon-label;
+        visibility: hidden;        
+        white-space: nowrap;
+        min-height: 28px;
+        max-height: 48px;
+    }
+
+    .pivot-icon + .pivot-icon {
+        @include md-box(block, absolute);
+        visibility: visible;
+        top: 50%;
+        transform: translate(0, -25%);
+    }
+
+    .pivot-label {
+        @include md-box(inline-block, relative);
+        @extend .pivot-icon-label;
+        visibility: hidden;        
+        white-space: nowrap;
+        min-height: 28px;
+        max-height: 48px;
+    }
+
+    .pivot-label + .pivot-label {
+        @include md-box(block, absolute);
+        visibility: visible;
+        top: 50%;
+        transform: translate(0, -25%);
+    }
+
+    .focus-border {
+        @include md-box(block, absolute);
+        left: -4px;
+        right: -4px;
+
+        top: 50%;
+        transform: translate(0, -50%);
+        
+        height: 18px;
+    }
+
+    .pivot-border {
+        @include md-box(block, absolute);
+        left: 0px;
+        width: 100%;
+        bottom: 0px;
+        height: 10px;
+    }
+}

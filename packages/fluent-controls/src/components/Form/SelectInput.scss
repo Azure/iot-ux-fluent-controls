@@ -1,18 +1,29 @@
 @import 'common';
 
+$text-default-color: md-color(shade, 2);
+$text-checked-color: md-color(combo, selected-text);
+$text-disabled-color: md-color(shade, 8);
+$text-selection-color: md-color(text, white);
+
+$background-checked-color: md-color(form, selected);
+$background-disabled-color: md-color(shade, d);
+$background-selection-color: md-color(combo, hover);
+
+$arrow-default-color: md-color(shade, 4);
+
 .combo-container {
     @include md-box(relative, block);
     width: 100%;
     font-family: $font-family-base;
 
-    color: md-color(shade, 2);
+    color: $text-default-color;
     font-size: $font-size-text;
     line-height: 16px;
 
     .arrow {
         @include md-box(absolute, block);
         font-size: $font-size-small;
-        color: md-color(shade, 4);
+        color: $arrow-default-color;
         right: 8px;
         top: 8px;
         pointer-events: none;
@@ -35,8 +46,8 @@
             height: 32px;
             
             &:checked {
-                background-color: md-color(form, selected);
-                color: md-color(combo, selected-text);
+                background-color: $background-checked-color;
+                color: $text-checked-color;
             }
         }
 
@@ -53,14 +64,14 @@
         }
         
         &:disabled {
-            color: md-color(shade, 8);
+            color: $text-disabled-color;
             border: $disabled-border;
-            background-color: md-color(shade, d);
+            background-color: $background-disabled-color;
         }
 
         &::selection {
-            color: md-color(text, white);
-            background-color: md-color(combo, hover);
+            color: $text-selection-color;
+            background-color: $background-selection-color;
         }
 
         &.error:not(:disabled) {

@@ -36,7 +36,7 @@ export interface RadioInputProps extends React.Props<RadioInputType> {
  * @param props Control properties (defined in `RadioInputProps` interface)
  */
 export const RadioInput = (props: RadioInputProps) => {
-    const classes = {'disabled': props.disabled};
+    const classes = {'disabled': props.disabled, 'selected': props.checked};
     const containerClass = css('radio-container', {'columns': props.columns});
     const optionTextClass = css('radio-text');
     const radioClass = css('radio-button', classes);
@@ -63,9 +63,9 @@ export const RadioInput = (props: RadioInputProps) => {
                     onClick={onClick}
                 />
                 <span className={radioClass}></span>
+                <span className={optionTextClass}>{props.label}</span>
                 <span className={fillClass}></span>
                 <span className={borderClass}></span>
-                <span className={optionTextClass}>{props.label}</span>
             </label>
         </div>
     );

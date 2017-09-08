@@ -3,6 +3,13 @@
 
 $font-family: join('Segoe UI Semilight', $font-family-base);
 
+$background-info-color: md-color(alert, info);
+$background-warning-color: md-color(alert, warning);
+$background-error-color: md-color(alert, error);
+
+$text-default-color: md-color(shade, 3);
+$text-error-color: md-color(shade, f);
+
 .alert {
     position: relative;
     display: flex;
@@ -12,18 +19,15 @@ $font-family: join('Segoe UI Semilight', $font-family-base);
     width: 100%;
     height: 32px;
     
-    background-color: md-color(alert, info);
-    color: md-color(shade, 3);
+    background-color: $background-info-color;
+    color: $text-default-color;
 
     .icon {
-        font-family: "icons";
-        font-style: normal;
-        font-weight: normal;
-
+        @include md-box(inline-block, relative);
+        padding-left: 8px;
+        padding-top: 6px;
         flex: 0 0 16px;
-        margin: 8px;
         line-height: 16px;
-        vertical-align: text-top;
     }
 
     .text {
@@ -34,7 +38,7 @@ $font-family: join('Segoe UI Semilight', $font-family-base);
         font-family: $font-family;
         font-size: 16px;
         line-height: 20px;
-        color: md-color(shade, 3);
+        color: $text-default-color;
 
         width: 100%;
         overflow: hidden;
@@ -49,11 +53,9 @@ $font-family: join('Segoe UI Semilight', $font-family-base);
 
     .close {
         flex: 0 0 16px;
-        margin-top: 8px;
-        margin-right: 12px;
+        margin-top: 6px;
         margin-left: auto;
         line-height: 16px;
-        vertical-align: middle;
         cursor: pointer;
     }
 
@@ -62,21 +64,21 @@ $font-family: join('Segoe UI Semilight', $font-family-base);
     }
 
     &.info {
-        background-color: md-color(alert, info);
-        color: md-color(shade, 3);
+        background-color: $background-info-color;
+        color: $text-default-color;
     }
 
     &.warning {
-        background-color: md-color(alert, warning);
-        color: md-color(shade, 3);
+        background-color: $background-warning-color;
+        color: $text-default-color;
     }
 
     &.error {
-        background-color: md-color(alert, error);
-        color: md-color(shade, f);
+        background-color: $background-error-color;
+        color: $text-error-color;
 
         .text {
-            color: md-color(shade, f);
+            color: $text-error-color;
         }
     }
 

@@ -6,11 +6,16 @@ $hover-border: 1px solid md-color(shade, 3);
 $focused-border: 1px dashed md-color(shade, 3);
 $disabled-border: 1px solid md-color(shade, a);
 
+$background-checked-color: md-color(shade, 3);
+$background-disabled-color: md-color(shade, a);
+
+$text-default-color: md-color(shade, 2);
+$text-disabled-color: md-color(shade, a);
+
 .radio-container {
     @include md-box(block, relative);
     font-family: $font-family-base;
-
-    color: md-color(shade, 2);
+    color: $text-default-color;
     font-size: $font-size-text;
     line-height: 16px;
 
@@ -24,46 +29,51 @@ $disabled-border: 1px solid md-color(shade, a);
 
     input {
         @include md-box(inline-block, relative);
+
         width: 0px;
         height: 0px;
         border: none;
-
-        &:checked {
-            & ~ .radio-button {
-                border: $checked-border;
-            }
-
-            & ~ .radio-fill{
-                background-color: md-color(shade, 3);
-            }
-        }
         
         &:focus ~ .radio-border {
             border: $focused-border;        
         }
 
-        &:hover:not(:checked) ~ .radio-button {
+        &:hover:not(:checked) ~ .radio-button:not(.disabled) {
             border: $hover-border;
         }
     
         &:focus:not(:checked) ~ .radio-button {
-            border: $default-border;
+            border: $hover-border;
         }
     }
 
-    .radio-fill {
+    .radio-text {
         @include md-box(inline-block, relative);
-        left: -12px;
-        top: -6px;
+        vertical-align: top;
+        padding-left: 8px;
+    }
+
+    .radio-fill {
+        @include md-box(inline-block, absolute);
+        left: 4px;
+        top: 4px;
         width: 8px;
         height: 8px;
         border-radius: 4px;
+
+        &.selected {
+            background-color: $background-checked-color;
+
+            &.disabled {
+                background-color: $background-disabled-color;
+            }
+        }
     }
 
     .radio-border {
-        @include md-box(inline-block, relative);
-        left: -26px;
-        top: 0px;
+        @include md-box(inline-block, absolute);
+        left: -2px;
+        top: -2px;
         width: 20px;
         height: 20px;
     }
@@ -76,37 +86,21 @@ $disabled-border: 1px solid md-color(shade, a);
         border: $default-border;
         outline: none;
         vertical-align: top;
-        margin-top: 2px;
 
-        .radio-fill {
-            display: none;
-        }
-
-        .radio-border {
-            display: none;
+        &.selected {
+            border: $checked-border;
         }
 
         &.disabled {
-            border: $disabled-border !important;
+            border: $disabled-border;
         }
     }
 
-    .radio-text {
-        @include md-box(inline-block, relative);
-        top: 50%;
-        left: -20px;
-        vertical-align: top;
-    }
-
-    .radio-fill.disabled {
-        background-color: md-color(shade, a) !important;
-    }
-
     .radio-label {
-        @include md-box(inline-block);
-    }
+        @include md-box(inline-block, relative);
 
-    .radio-label.disabled {
-        color: md-color(shade, a);
+        &.disabled {
+            color: $text-disabled-color;
+        }
     }
 }
