@@ -113,3 +113,69 @@
         @include md-box-float($option);
     }
 }
+
+@mixin md-property($property, $values, $fn: md-passthrough, $args: ()) {
+    @if map-has-key($values, 'default') {
+        @if map-get($values, 'default') {
+            #{$property}: call($fn, map-get($values, 'default'), $args...);
+        }
+    }
+
+    @if map-has-key($values, 'focus') {
+        @if map-get($values, 'focus') {
+            &:focus {
+                #{$property}: call($fn, map-get($values, 'focus'), $args...);
+            }
+        }
+    }
+
+    @if map-has-key($values, 'hover') {
+        @if map-get($values, 'hover') {
+            &:hover {
+                #{$property}: call($fn, map-get($values, 'hover'), $args...);
+            }
+        }
+    }
+
+    @if map-has-key($values, 'selected') {
+        @if map-get($values, 'selected') {
+            &.selected {
+                #{$property}: call($fn, map-get($values, 'selected'), $args...);
+            }
+        }
+    }
+
+    @if map-has-key($values, 'disabled') {
+        @if map-get($values, 'disabled') {
+            &:disabled, &.disabled {
+                #{$property}: call($fn, map-get($values, 'disabled'), $args...);
+            }
+        }
+    }
+
+    @if map-has-key($values, 'active') {
+        @if map-get($values, 'active') {
+            &:active {
+                #{$property}: call($fn, map-get($values, 'active'), $args...);
+            }
+        }
+    }
+}
+
+@function md-passthrough($arg) {
+    @return $arg;
+}
+
+@mixin md-text-color($default: false, $focus: false, $hover: false, $selected: false, $disabled: false, $active: false) {
+    @include md-property(
+        $property: 'color',
+        $values: (
+            default: $default,
+            focus: $focus,
+            hover: $hover,
+            selected: $selected,
+            disabled: $disabled,
+            active: $active
+        )
+    );
+}

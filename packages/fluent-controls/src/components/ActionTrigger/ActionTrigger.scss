@@ -1,0 +1,57 @@
+@import '../../common/overrides';
+@import '../../common/mixins';
+
+$text-default-color: md-color(shade, 6);
+$text-disabled-color: md-color(shade, a);
+$text-hover-color: md-color(shade, 3);
+
+$focus-border: 1px dashed md-color(shade, 3);
+
+a {
+    outline: none;
+}
+
+.action-trigger {
+    @include md-box(inline-block, relative, ellipsis);
+    font-family: $font-family-base;
+    font-size: 14px;
+    line-height: 16px;
+
+    color: $text-default-color;
+    padding: 8px;
+
+    text-decoration: none;
+    outline: none;
+
+    a:focus > & {
+        border: $focus-border;
+        color: $text-hover-color;
+        padding: 7px;
+
+        &.disabled {
+            border: none;
+            color: $text-disabled-color;
+            padding: 8px;
+        }
+    }
+
+    &:hover {
+        color: $text-hover-color;
+    }
+    
+    &.disabled {
+        color: $text-disabled-color;
+    }
+
+    .suffix {
+        margin-left: 8px;
+
+        &:before {
+            margin: 0;
+        }
+    }
+
+    .label {
+        margin-left: 8px;
+    }
+}

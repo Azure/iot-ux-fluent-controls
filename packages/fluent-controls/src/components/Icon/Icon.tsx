@@ -85,11 +85,18 @@ export const Icon = (props: IconProps) => {
         style['fontSize'] = `${props.fontSize}px`;
     }
 
-    return (
-        <span className={cls} style={style} {...props.props}>
+    let label;
+    if (props.children) {
+        label = (
             <span className={props.labelClassName}>
                 {props.children}
             </span>
+        );
+    }
+
+    return (
+        <span className={cls} style={style} {...props.props}>
+            {label}
         </span>
     );
 };
