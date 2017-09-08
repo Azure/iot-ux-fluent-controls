@@ -25,14 +25,13 @@ $text-error-color: md-color(shade, f);
     .icon {
         @include md-box(inline-block, relative);
         padding-left: 8px;
-        padding-top: 8px;
+        padding-top: 4px;
         flex: 0 0 16px;
-        line-height: 16px;
     }
 
     .text {
         margin-left: 8px;
-        margin-top: 4px;
+        margin-top: 6px;
         margin-bottom: 8px;
         margin-right: 12px;
 

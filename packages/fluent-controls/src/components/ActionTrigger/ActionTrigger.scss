@@ -7,10 +7,6 @@ $text-hover-color: md-color(shade, 3);
 
 $focus-border: 1px dashed md-color(shade, 3);
 
-a {
-    outline: none;
-}
-
 .action-trigger {
     @include md-box(inline-block, relative, ellipsis);
     font-family: $font-family-base;
@@ -43,7 +39,7 @@ a {
         color: $text-disabled-color;
     }
 
-    .suffix {
+    .suffix {        
         margin-left: 8px;
 
         &:before {

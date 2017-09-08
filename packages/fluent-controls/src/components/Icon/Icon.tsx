@@ -95,8 +95,6 @@ export const Icon = (props: IconProps) => {
     }
 
     return (
-        <span className={cls} style={style} {...props.props}>
-            {label}
-        </span>
+        <span className={cls} style={style} {...props.props}>{label}</span>
     );
 };
