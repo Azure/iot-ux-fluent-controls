@@ -1,25 +1,26 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./Balloon.scss'));
 
 export interface BalloonType {}
 
 export enum BallonPosition {
-    Top = 'top',
-    Bottom = 'bottom',
-    Left = 'left',
-    Right = 'right'
+    Top = 1,
+    Bottom,
+    Left,
+    Right
 }
 
 export enum BalloonAlignment {
-    Start = 'start',
-    Center = 'center',
-    End = 'end'
+    Start = 1,
+    Center,
+    End
 }
 
 export interface BalloonProps extends React.Props<BalloonType> {
     /** Contents of balloon */
-    tooltip: React.ReactNode | React.ReactNode[];
+    tooltip: MethodNode;
 
     /**
      * Where to display Balloon relative to child element
@@ -49,14 +50,37 @@ export interface BalloonProps extends React.Props<BalloonType> {
 /**
  * SimpleBalloon shows tooltip (with HTML) on hover over child
  * 
- * NOTE: If the parent element of this control is `overflow: hidden` then the
- * balloon will NOT show up.
+ * NOTE: If a parent element of this control is `overflow: hidden` then the
+ * balloon may not show up.
  * 
  * @param props Control properties (defined in `SimpleBalloonProps` interface)
  */
 export const Balloon = (props: BalloonProps) => {
-    const position = props.position || 'top';
-    const align = props.align || 'center';
+    let position;
+    switch (props.position) {
+        case BallonPosition.Bottom:
+            position = 'bottom';
+            break;
+        case BallonPosition.Left:
+            position = 'left';
+            break;
+        case BallonPosition.Right:
+            position = 'right';
+            break;
+        default:
+            position = 'top';
+    }
+    let align;
+    switch (props.align) {
+        case BalloonAlignment.Start:
+            align = 'start';
+            break;
+        case BalloonAlignment.End:
+            align = 'end';
+            break;
+        default:
+            align = 'center';
+    }
     const balloonClassName = css('balloon', `${position}-${align}`, props.balloonClassName);
     const innerClassName = css('inner-container', {'multiline': props.multiline});
     const containerClassName = css('balloon-container', props.className);

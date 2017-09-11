@@ -1,3 +1,7 @@
 .md-ballon-fixed-width {
     width: 120px;
 }
+
+a {
+    outline: none;
+}

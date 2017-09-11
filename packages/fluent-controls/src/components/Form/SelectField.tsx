@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {SelectInput, SelectOption} from './SelectInput';
-const css = classNames.bind(require('./SelectField.scss'));
+import {MethodNode, FormOption} from '../../Common';
+import {SelectInput} from './SelectInput';
+const css = classNames.bind(require('./Field.scss'));
 
 export interface SelectFieldType {}
 
@@ -22,12 +23,12 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
      *     value: any
      * }`
      */
-    options: SelectOption[];
+    options: FormOption[];
     
     /** Label to display above input element */
-    label: React.ReactNode;
+    label: MethodNode;
     /** Error to display below input element */
-    error?: React.ReactNode;
+    error?: MethodNode;
     
     /** Disable HTML input element */
     disabled?: boolean;
@@ -82,3 +83,5 @@ export const SelectField = (props: SelectFieldProps) => {
         </div>
     );
 };
+
+export default SelectField;

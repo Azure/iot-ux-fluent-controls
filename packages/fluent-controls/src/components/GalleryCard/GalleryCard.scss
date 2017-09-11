@@ -1,14 +1,5 @@
 @import '../../common/overrides';
-
-$card-bg-color: #EAEAEA;
-$card-border-color: #C8C8C8;
-$card-hover-border-color: #000000;
-$card-header-color: #EAEA00;
-$card-icon-color: #00EAEA;
-$card-header-font-color: #212121;
-$card-section-font-color: #666666;
-$card-banner-bg-color: #000000;
-$icon-default-bg: rgba(0, 0, 0, 0);
+@import '../../common/mixins';
 
 $card-fixed-width: 284px;
 $card-fixed-height: 284px;
@@ -22,19 +13,25 @@ $card-icon-height: 96px;
 $card-icon-top: ($card-fixed-background-height - $card-icon-height);
 $card-icon-left: ($card-fixed-width - $card-icon-width);
 
-$card-hover-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
+$card-hover-shadow: 0px 0px 10px 1px md-color(shadow, default);
+$card-default-border: 1px solid md-color(shade, 0);
+
+$background-default-color: md-color(shade, 2);
+$background-solid-color: md-color(shade, e);
+$background-banner-color: md-color(shade, e);
+
+$text-header-color: md-color(shade, 2);
+$text-section-color: md-color(shade, 6);
+$text-banner-color: md-color(shade, 0);
 
 .card {
-  display: inline-block;
-  position: relative;
-  background-color: $card-bg-color;
-  overflow: hidden;
-  border: 1px solid $card-border-color;
+  @include md-box(inline-block, relative, hidden);
+  background-color: $background-default-color;
+  border: $card-default-border;
   margin: 10px;
-  box-sizing: border-box;
 
-  &:hover {
-    border: 1px solid $card-hover-border-color;
+  &:focus, &:hover {
+    border: $card-default-border;
     box-shadow: $card-hover-shadow;
   }
 
@@ -55,8 +52,7 @@ $card-hover-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
 }
 
 %card-background {
-  display: block;
-  position: relative;
+  @include md-box(block, relative);
   width: 100%;
   background-color: transparent;
   transition: background-color 0.2s ease-in-out;
@@ -78,40 +74,33 @@ $card-hover-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
 
 .background-color {
     @extend %card-background;
-    background-color: $card-header-color;
+    background-color: $background-solid-color;
 }
 
 .card-content {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
+  @include md-box(relative, hidden, flex-column);
   padding: $card-content-margin;
   font-family: $font-family-base;
-  box-sizing: border-box;
 
   header {
     font-size: 16px;
     line-height: 20px;
-    color: $card-header-font-color;
+    color: $text-header-color;
     margin-bottom: 4px;
     flex: 0 0 20px;
   }
 
   section {
+    @include md-box(ellipsis);
     font-size: 13px;
     line-height: 16px;
-    color: $card-section-font-color;
+    color: $text-section-color;
     margin-bottom: 16px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
   
   footer {
     font-size: $font-size-text;
     line-height: 20px;
-    color: #3062d6;
     flex: 0 0 16px;
   }
   
@@ -122,14 +111,13 @@ $card-hover-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
 }
 
 .banner {
-  display: block;
-  position: absolute;
+  @include md-box(block, absolute);
   top: 0px;
   left: 0px;
   right: 0px;
   padding: 4px;
-  background-color: $card-banner-bg-color;
-  color: #eaeaea;
+  background-color: $background-banner-color;
+  color: $text-banner-color;
   font-family: $font-family-base;
   text-overflow: ellipsis;
   text-align: center;
@@ -141,7 +129,7 @@ $card-hover-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.75);
   text-align: center;
 
   .icon-title {
-    display: block;
+    @include md-box(block);
     font-family: $font-family-base;
     font-size: $font-size-text;
   }

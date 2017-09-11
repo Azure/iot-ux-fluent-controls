@@ -1,18 +1,12 @@
 import * as React from 'react'; 
 import * as classNames from 'classnames/bind';
+import {FormOption} from '../../Common';
 const css = classNames.bind(require('./SelectInput.scss'));
 
 export interface SelectInputType {}
 
 export interface SelectInputState {
     cancelFocused: boolean;
-}
-
-export interface SelectOption {
-    /** Text label to show as the select box option */
-    label: string;
-    /** Value of select box option */
-    value: any;
 }
 
 export interface SelectInputProps extends React.Props<SelectInputType> {
@@ -32,7 +26,7 @@ export interface SelectInputProps extends React.Props<SelectInputType> {
      *     value: any
      * }`
      */
-    options: SelectOption[];
+    options: FormOption[];
     
     /** Apply error styling to input element */
     error?: boolean;
@@ -82,7 +76,6 @@ export const SelectInput = (props: SelectInputProps) => {
         <div className={containerClass}>
             <select 
                 className={comboClass}
-                value={value}
                 onChange={onChange}
                 disabled={props.disabled}
             >

@@ -7,9 +7,9 @@ Balloon above:
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position="top" align="start">Start</Balloon> - 
-    <Balloon tooltip={tooltip} position="top" align="center">Center</Balloon> - 
-    <Balloon tooltip={tooltip} position="top" align="end">End</Balloon>
+    <Balloon tooltip={tooltip} position={1} align={1}>Start</Balloon> - 
+    <Balloon tooltip={tooltip} position={1} align={2}>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={1} align={3}>End</Balloon>
 </div>
 ```
 
@@ -19,9 +19,9 @@ Balloon below:
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position="bottom" align="start">Start</Balloon> - 
-    <Balloon tooltip={tooltip} position="bottom" align="center">Center</Balloon> - 
-    <Balloon tooltip={tooltip} position="bottom" align="end">End</Balloon>
+    <Balloon tooltip={tooltip} position={2} align={1}>Start</Balloon> - 
+    <Balloon tooltip={tooltip} position={2} align={2}>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={2} align={3}>End</Balloon>
 </div>
 ```
 
@@ -31,9 +31,9 @@ Balloon to the left:
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position="left" align="start">Start</Balloon> - 
-    <Balloon tooltip={tooltip} position="left" align="center">Center</Balloon> - 
-    <Balloon tooltip={tooltip} position="left" align="end">End</Balloon>
+    <Balloon tooltip={tooltip} position={3} align={1}>Start</Balloon> - 
+    <Balloon tooltip={tooltip} position={3} align={2}>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={3} align={3}>End</Balloon>
 </div>
 ```
 
@@ -43,9 +43,9 @@ Balloon to the right:
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position="right" align="start">Start</Balloon> - 
-    <Balloon tooltip={tooltip} position="right" align="center">Center</Balloon> - 
-    <Balloon tooltip={tooltip} position="right" align="end">End</Balloon>
+    <Balloon tooltip={tooltip} position={4} align={1}>Start</Balloon> - 
+    <Balloon tooltip={tooltip} position={4} align={2}>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={4} align={3}>End</Balloon>
 </div>
 ```
 
@@ -57,9 +57,9 @@ Balloon above:
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position="top" align="start" multiline><span>Start</span></Balloon> - 
-    <Balloon tooltip={tooltip} position="top" align="center" multiline>Center</Balloon> - 
-    <Balloon tooltip={tooltip} position="top" align="end" multiline>End</Balloon>
+    <Balloon tooltip={tooltip} position={1} align={1} multiline><span>Start</span></Balloon> - 
+    <Balloon tooltip={tooltip} position={1} align={2} multiline>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={1} align={3} multiline>End</Balloon>
 </div>
 ```
 
@@ -69,9 +69,9 @@ Balloon below:
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position="bottom" align="start" multiline>Start</Balloon> - 
-    <Balloon tooltip={tooltip} position="bottom" align="center" multiline>Center</Balloon> - 
-    <Balloon tooltip={tooltip} position="bottom" align="end" multiline>End</Balloon>
+    <Balloon tooltip={tooltip} position={2} align={1} multiline>Start</Balloon> - 
+    <Balloon tooltip={tooltip} position={2} align={2} multiline>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={2} align={3} multiline>End</Balloon>
 </div>
 ```
 
@@ -81,9 +81,9 @@ Balloon to the left:
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position="left" align="start" multiline>Start</Balloon> - 
-    <Balloon tooltip={tooltip} position="left" align="center" multiline>Center</Balloon> - 
-    <Balloon tooltip={tooltip} position="left" align="end" multiline>End</Balloon>
+    <Balloon tooltip={tooltip} position={3} align={1} multiline>Start</Balloon> - 
+    <Balloon tooltip={tooltip} position={3} align={2} multiline>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={3} align={3} multiline>End</Balloon>
 </div>
 ```
 
@@ -93,9 +93,9 @@ Balloon to the right:
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position="right" align="start" multiline>Start</Balloon> - 
-    <Balloon tooltip={tooltip} position="right" align="center" multiline>Center</Balloon> - 
-    <Balloon tooltip={tooltip} position="right" align="end" multiline>End</Balloon>
+    <Balloon tooltip={tooltip} position={4} align={1} multiline>Start</Balloon> - 
+    <Balloon tooltip={tooltip} position={4} align={2} multiline>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={4} align={3} multiline>End</Balloon>
 </div>
 ```
 

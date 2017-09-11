@@ -1,28 +1,36 @@
 @import 'common';
 
+$text-default-color: md-color(shade, 2);
+$text-checked-color: md-color(combo, selected-text);
+$text-disabled-color: md-color(shade, 8);
+$text-selection-color: md-color(text, white);
+
+$background-checked-color: md-color(form, selected);
+$background-disabled-color: md-color(shade, d);
+$background-selection-color: md-color(combo, hover);
+
+$arrow-default-color: md-color(shade, 4);
+
 .combo-container {
-    position: relative;
-    display: block;
+    @include md-box(relative, block);
     width: 100%;
     font-family: $font-family-base;
-    box-sizing: border-box;
 
-    color: $default-text-color;
+    color: $text-default-color;
     font-size: $font-size-text;
     line-height: 16px;
 
     .arrow {
-        position: absolute;
-        display: block;
+        @include md-box(absolute, block);
         font-size: $font-size-small;
-        color: $select-arrow-color;
+        color: $arrow-default-color;
         right: 8px;
         top: 8px;
         pointer-events: none;
     }
 
     .combo {
-        box-sizing: border-box;
+        @include md-box();
         width: 100%;
         height: 32px;
         padding: 0px 12px 0px 12px;
@@ -38,8 +46,8 @@
             height: 32px;
             
             &:checked {
-                background-color: $select-option-selected;
-                color: $select-text-selected;
+                background-color: $background-checked-color;
+                color: $text-checked-color;
             }
         }
 
@@ -56,14 +64,14 @@
         }
         
         &:disabled {
-            color: $disabled-text-color;
+            color: $text-disabled-color;
             border: $disabled-border;
-            background-color: $disabled-background-color;
+            background-color: $background-disabled-color;
         }
 
         &::selection {
-            color: $selection-text-color;
-            background-color: $selection-background-color;
+            color: $text-selection-color;
+            background-color: $background-selection-color;
         }
 
         &.error:not(:disabled) {

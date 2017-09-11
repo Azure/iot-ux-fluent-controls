@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconProps} from '../Icon';
 const css = classNames.bind(require('./GalleryCard.scss'));
 
@@ -7,7 +8,7 @@ export interface GalleryCardType {}
 
 export interface GalleryCardProps extends React.Props<GalleryCardType> {
     /** Element to display as `GalleryCard` background */
-    background: JSX.Element;
+    background: MethodNode;
     /** Banner string to display above the `GalleryCard` background */
     banner?: string;
     /** Accessibility title on top level anchor tag */

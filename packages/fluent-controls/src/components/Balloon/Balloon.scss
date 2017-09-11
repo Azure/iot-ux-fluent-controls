@@ -1,11 +1,13 @@
 @import '../../common/overrides';
-
-$balloon-bg: #333333;
-$text-color: #ffffff;
+@import '../../common/mixins';
 
 // Spec says 8px but setting to 8.5px to deal with browser rounding errors
-$balloon-border: 8.5px solid $balloon-bg;
-$transparent-border: 8.5px solid transparent;
+$balloon-border: 8.5px solid md-color(shade, 3);
+$transparent-border: 8.5px solid md-color(transparent);
+
+$background-default-color: md-color(shade, 3);
+
+$text-default-color: md-color(shade, f);
 
 @mixin arrow($location, $offset: 'center') {
     &:before {
@@ -139,8 +141,8 @@ $transparent-border: 8.5px solid transparent;
         z-index: 99;
         font-family: $font-family-base;
         padding: 12px 16px 16px 16px;
-        background-color: $balloon-bg;
-        color: $text-color;
+        background-color: $background-default-color;
+        color: $text-default-color;
         box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
         
         .inner-container {

@@ -16,7 +16,7 @@ Error Alert
 With close button and text overflow
 ```js
 let onClose = () => alert('Alert close button pushed!');
-<Alert icon="error" type={2} onClose={onClose}>This is an error alert with a close button! This is an error alert with a close button! This is an error alert with a close button! This is an error alert with a close button!</Alert>
+<Alert icon="error" type={2} onClose={onClose}>This is an error alert with a close button! pp This is an error alert with a close button! This is an error alert with a close button! This is an error alert with a close button!</Alert>
 ```
 
 Multiline alert

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconBackground} from '../Icon';
 import {TextInput} from './TextInput';
-const css = classNames.bind(require('./TextField.scss'));
+const css = classNames.bind(require('./Field.scss'));
 
 export interface TextFieldType {}
 
@@ -15,9 +16,9 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     placeholder?: string;
     
     /** Label to display above input element */
-    label: React.ReactNode;
+    label: MethodNode;
     /** Error to display below input element */
-    error?: React.ReactNode;
+    error?: MethodNode;
     
     /** Disable HTML input element */
     disabled?: boolean;

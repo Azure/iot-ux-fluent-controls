@@ -1,13 +1,14 @@
 @import '../../common/overrides';
+@import '../../common/mixins';
 
 $font-family: join('Segoe UI Semilight', $font-family-base);
 
-$info-bg: #dcdcdc;
-$warning-bg: #f9e385;
-$error-bg: #d02e00;
+$background-info-color: md-color(alert, info);
+$background-warning-color: md-color(alert, warning);
+$background-error-color: md-color(alert, error);
 
-$default-text: #333333;
-$error-text: #ffffff;
+$text-default-color: md-color(shade, 3);
+$text-error-color: md-color(shade, f);
 
 .alert {
     position: relative;
@@ -18,29 +19,26 @@ $error-text: #ffffff;
     width: 100%;
     height: 32px;
     
-    background-color: $info-bg;
-    color: $default-text;
+    background-color: $background-info-color;
+    color: $text-default-color;
 
     .icon {
-        font-family: "icons";
-        font-style: normal;
-        font-weight: normal;
-
+        @include md-box(inline-block, relative);
+        padding-left: 8px;
+        padding-top: 4px;
         flex: 0 0 16px;
-        margin: 8px;
-        line-height: 16px;
-        vertical-align: text-top;
     }
 
     .text {
-        margin-top: 4px;
+        margin-left: 8px;
+        margin-top: 6px;
         margin-bottom: 8px;
         margin-right: 12px;
 
         font-family: $font-family;
         font-size: 16px;
         line-height: 20px;
-        color: $default-text;
+        color: $text-default-color;
 
         width: 100%;
         overflow: hidden;
@@ -55,11 +53,9 @@ $error-text: #ffffff;
 
     .close {
         flex: 0 0 16px;
-        margin-top: 8px;
-        margin-right: 12px;
+        margin-top: 6px;
         margin-left: auto;
         line-height: 16px;
-        vertical-align: middle;
         cursor: pointer;
     }
 
@@ -68,21 +64,21 @@ $error-text: #ffffff;
     }
 
     &.info {
-        background-color: $info-bg;
-        color: $default-text;
+        background-color: $background-info-color;
+        color: $text-default-color;
     }
 
     &.warning {
-        background-color: $warning-bg;
-        color: $default-text;
+        background-color: $background-warning-color;
+        color: $text-default-color;
     }
 
     &.error {
-        background-color: $error-bg;
-        color: $error-text;
+        background-color: $background-error-color;
+        color: $text-error-color;
 
         .text {
-            color: $error-text;
+            color: $text-error-color;
         }
     }
 
