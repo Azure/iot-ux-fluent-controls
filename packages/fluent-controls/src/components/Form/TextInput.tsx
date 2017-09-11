@@ -16,14 +16,18 @@ export interface TextInputProps extends React.Props<TextInputType> {
     value: string;
     /** HTML input element placeholder */
     placeholder?: string;
-    /** HTML input element type (default: 'text') */
+    /**
+     * HTML input element type
+     * 
+     * Default: text
+     */
     type?: string;
 
     /** Node to draw to the left of the input box */
     prefix?: MethodNode;
     /** Class to append to prefix container */
     prefixClassName?: string;
-    /** Node to draw to the right  of the input box */
+    /** Node to draw to the right of the input box */
     postfix?: MethodNode;
     /** Class to append to postfix container */
     postfixClassName?: string;
@@ -35,6 +39,9 @@ export interface TextInputProps extends React.Props<TextInputType> {
 
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
+
+    /** Class to append to top level element */
+    className?: string;
 }
 
 /**
@@ -43,7 +50,7 @@ export interface TextInputProps extends React.Props<TextInputType> {
  * (Use the `TextField` control instead when making a form with standard styling)
  */
 export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextInputProps) => {
-    const containerClassName = css('text-input-container');
+    const containerClassName = css('text-input-container', props.className);
     const inputContainerClassName = css('input-container');
     const inputClassName = css({
         'input': true,
@@ -90,6 +97,7 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
                     value={props.value}
                     className={inputClassName}
                     onInput={onChange}
+                    placeholder={props.placeholder}
                     // This is not the same as props.required
                     // (this gives us :valid css selector)
                     required

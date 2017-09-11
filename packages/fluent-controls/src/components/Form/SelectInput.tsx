@@ -32,9 +32,14 @@ export interface SelectInputProps extends React.Props<SelectInputType> {
     error?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
+    /** Shows empty option when nothing is selected */
+    hasEmpty?: boolean;
 
     /** Callback for HTML select element onChange events */
     onChange: (newValue: any) => void;
+
+    /** Classname to append to top level element */
+    className?: string;
 }
 
 /**
@@ -50,7 +55,7 @@ export interface SelectInputProps extends React.Props<SelectInputType> {
  * @param props Control properties (defined in `SelectInputProps` interface)
  */
 export const SelectInput = (props: SelectInputProps) => {
-    const containerClass = css('combo-container');
+    const containerClass = css('combo-container', props.className);
     const comboClass = css(
         'combo', {'error': props.error}
     );
@@ -58,13 +63,17 @@ export const SelectInput = (props: SelectInputProps) => {
         'arrow', 'icon icon-chevronDown4Legacy'
     );
 
-    let value;
-    const options = props.options.map((opt, index) => {
+    let value = -1;
+    let options = props.options.map((opt, index) => {
         if (opt.value === props.value) {
             value = index;
         }
         return <option value={index} key={index}>{opt.label}</option>;
     });
+
+    if (value === -1 && props.hasEmpty) {
+        options = [<option value='-1' key='-1'/>].concat(options);
+    }
 
     const onChange = (event) => {
         const index = parseInt(event.target.value);
@@ -85,3 +94,5 @@ export const SelectInput = (props: SelectInputProps) => {
         </div>
     );
 };
+
+export default SelectInput;

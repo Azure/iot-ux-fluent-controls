@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, FormOption} from '../../Common';
 import {RadioInput} from './RadioInput';
+import {FormField} from './FormField';
 const css = classNames.bind(require('./Field.scss'));
 
 export interface RadioFieldType {}
@@ -36,12 +37,16 @@ export interface RadioFieldProps extends React.Props<RadioFieldType> {
     disabled?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
+    /** Display horizontal loading animation instead of error */
+    loading?: boolean;
 
     /** Callback for HTML radio button element `onChange` events */
     onChange: (newValue: any) => void;
 
     /** Classname to append to top level element */
     className?: string;
+    /** Classname to append to top level element of RadioInput */
+    inputClassName?: string;
 }
 
 /**
@@ -55,51 +60,40 @@ export interface RadioFieldProps extends React.Props<RadioFieldType> {
  * @param props: Object fulfilling `RadioFieldProps` interface
  */
 export const RadioField = (props: RadioFieldProps) => {
-    const labelClass = css('label');
-    const containerClass = css('input-container', {
-        'input-error': props.error,
-        'required': props.required,
-    }, props.className);
-    const inputClass = css({
-        'input': true,
-        'input-error': props.error
-    });
-    const errorClass = css('field-error');    
-
     const onChange = (newValue) => {
         const index = parseInt(newValue);
         props.onChange(props.options[index].value);
     };
-
+    
     const options = props.options.map((option, index) => {
         return (
             <RadioInput
                 name={props.name}
                 value={`${index}`}
                 label={option.label}
-                checked={props.value === option.value}
-                onChange={onChange}
-                disabled={props.disabled}
                 columns={props.columns}
+                checked={props.value === option.value}
+                disabled={props.disabled}
+                onChange={onChange}
+                className={props.inputClassName}
                 key={`${props.name}-${index}`}
             />
         );
     });
 
     return (
-        <div className={containerClass} >
+        <FormField
+            name={props.name}
+            label={props.label}
+            error={props.error}
+            loading={props.loading}
+            required={props.required}
+            className={props.className}
+        >
             <div>
-                <label className={labelClass} htmlFor={props.name} >
-                    {props.label}
-                </label>
+                {options}
             </div>
-            {options}
-            <div>
-                <div className={errorClass}>
-                    {props.error}
-                </div>
-            </div>
-        </div>
+        </FormField>
     );
 };
 

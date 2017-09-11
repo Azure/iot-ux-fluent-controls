@@ -44,6 +44,10 @@ $arrow-default-color: md-color(shade, 4);
 
         option {
             height: 32px;
+
+            &:first {
+                display: none;
+            }
             
             &:checked {
                 background-color: $background-checked-color;
