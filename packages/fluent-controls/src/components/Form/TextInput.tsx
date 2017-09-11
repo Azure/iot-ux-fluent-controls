@@ -61,7 +61,6 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
     );
 
     const onChange = (event) => {
-        console.log('ad');
         if (props.value !== event.target.value) {
             props.onChange(event.target.value);
         }
