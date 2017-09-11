@@ -1,0 +1,70 @@
+@import '../../common/mixins';
+
+$background-color: md-color(shade, 4);
+
+@mixin horizontal-loader-keyframes($name, $num-dots: 6, $diameter: 6px, $gap: 12px) {
+    $pixels: ($num-dots / 2) * ($diameter + $gap);
+    @keyframes #{$name} {
+        0% {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        33% {
+            opacity: 1;
+            transform: translateX(calc(50% - 48px));
+        }
+        66% {
+            opacity: 1;
+            transform: translateX(calc(50% - 48px));
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(200%);
+        }
+    }
+}
+
+@mixin horizontal-loader-child($name, $num, $num-dots, $diameter, $gap, $duration, $delay, $timing) {
+    $class-name: '.#{$name}';
+    $inner-class-name: '#{$class-name}-inner';
+    $padding: ($gap + $diameter) * ($num - 1);
+    $total-delay: ($num-dots - $num) * $delay;
+
+    #{$class-name} #{$inner-class-name}:nth-child(#{$num}) {
+        animation: #{$name} $duration $total-delay infinite $timing;
+        padding-left: $padding;
+    }
+}
+
+@mixin horizontal-loader($name, $num-dots: 6, $diameter: 6px, $gap: 12px, $duration: 3s, $delay: 200ms, $timing: ease-in-out, $height: 20px, $color: black) {
+    $class-name: '.#{$name}';
+    $inner-class-name: '#{$class-name}-inner';
+
+    @include horizontal-loader-keyframes($name, $num-dots, $diameter, $gap);
+
+    #{$class-name} {
+        @include md-box(inline-block, relative, hidden);
+        height: $height;
+        width: 100%;
+    }
+    
+    #{$inner-class-name} {
+        @include md-box(inline-block, absolute);
+        width: 100%;
+        opacity: 0;
+    }
+    
+    #{$inner-class-name} > div {
+        @include md-box(inline-block);
+        width: $diameter;
+        height: $diameter;
+        border-radius: $diameter;
+        background-color: $color;
+    }
+
+    @for $num from 1 through $num-dots {
+        @include horizontal-loader-child($name, $num, $num-dots, $diameter, $gap, $duration, $delay, $timing);
+    }
+}
+
+@include horizontal-loader('cs-loader');
