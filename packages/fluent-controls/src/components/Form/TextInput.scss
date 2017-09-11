@@ -1,7 +1,13 @@
 @import 'common';
 
-.input-container {
-    @include md-box(block, relative);
+$prefix-color: md-color(shade, 6);
+$prefix-background: md-color(shade, c);
+
+$postfix-color: md-color(shade, 6);
+$postfix-background: md-color(shade, c);
+
+.text-input-container {
+    @include md-box(flex, relative);
     width: 100%;
     font-family: $font-family-base;
 
@@ -9,8 +15,13 @@
     font-size: $font-size-text;
     line-height: 20px;
 
+    .input-container {
+        @include md-box(block, relative);
+        flex-grow: 1;
+    }
+
     .input {
-        @include md-box(inline-block, relative);
+        @include md-box(block, relative);
         width: 100%;
         height: 32px;
         padding: 8px 8px 8px 12px;
@@ -19,11 +30,6 @@
 
         &:valid {
             padding: 8px 12px 8px 12px;
-
-            &.cancel-focused {
-                padding-right: 32px;
-                border: $default-border;
-            }
         }
 
         &:hover {
@@ -78,6 +84,14 @@
         &.error:not(:disabled) {
             border: $error-border;
         }
+
+        &::-ms-clear {
+            display: none;
+        }
+
+        &:invalid {
+            -moz-mox-shadow: none;
+        }
     }
 
     .cancel {
@@ -99,4 +113,52 @@
             pointer-events: auto;
         }
     }
+
+    .prefix {
+        @include md-box(table-cell, relative);
+        color: $prefix-color;
+        padding-right: 8px;
+        
+        height: 32px;
+        line-height: 32px;
+
+        white-space: nowrap;
+        
+        flex-grow: 0;
+    }
+
+    .postfix {
+        @include md-box(inline-block, relative);
+        color: $prefix-color;
+        padding-left: 8px;
+        
+        height: 32px;
+        line-height: 32px;
+
+        white-space: nowrap;
+        
+        flex-grow: 0;
+    }
+}
+
+.prefix-addon {
+    border-left: $inactive-border;
+    border-top: $inactive-border;
+    border-bottom: $inactive-border;
+
+    background-color: $prefix-background;
+    color: $prefix-color;
+
+    padding-right: 8px;
+}
+
+.postfix-addon {
+    border-right: $inactive-border;
+    border-top: $inactive-border;
+    border-bottom: $inactive-border;
+    
+    padding-left: 8px;
+    
+    background-color: $prefix-background;
+    color: $prefix-color;
 }
