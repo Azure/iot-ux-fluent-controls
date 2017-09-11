@@ -20,7 +20,7 @@ export interface ToggleProps extends React.Props<ToggleType> {
  * 
  * @param props Control properties (defined in `ToggleProps` interface)
  */
-export const Toggle = (props: ToggleProps) => {
+export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps) => {
     const containerClassName = css('toggle', {'toggle-on': props.on, 'disabled': props.disabled});
     const buttonClassName = css('toggle-button');
     const switchClassName = css('toggle-switch');
@@ -44,6 +44,10 @@ export const Toggle = (props: ToggleProps) => {
             <div className={labelClassName}>{label}</div>
         </div>
     );
+};
+
+Toggle.defaultProps = {
+
 };
 
 export default Toggle;

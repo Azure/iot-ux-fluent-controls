@@ -5,10 +5,18 @@ const css = classNames.bind(require('./GalleryCard.scss'));
 export interface SolidBackgroundType {}
 
 export interface SolidBackgroundProps extends React.Props<SolidBackgroundType> {
-    /** Background color (accepts string color names and RGB hex values) */
+    /**
+     * Background color (accepts string color names and RGB hex values)
+     * 
+     * Default: #eaeaea
+     */
     backgroundColor?: string;
     
-    /** Fixed width and height (284 x ?? pixels) */
+    /**
+     * Fixed width and height (284 x ?? pixels)
+     * 
+     * Default: true
+     */
     fixed?: boolean;
     
     /** Classname to append to top level element */
@@ -22,7 +30,7 @@ export interface SolidBackgroundProps extends React.Props<SolidBackgroundType> {
  * 
  * @param props Control properties (Defined in `ImageBackgroundProps` interface)
  */
-export const SolidBackground = (props: SolidBackgroundProps) => {
+export const SolidBackground: React.StatelessComponent<SolidBackgroundProps> = (props: SolidBackgroundProps) => {
     let bgColor = props.backgroundColor || '#eaeaea';
 
     let cls = css({
@@ -40,3 +48,10 @@ export const SolidBackground = (props: SolidBackgroundProps) => {
         </div>
     );
 };
+
+SolidBackground.defaultProps = {
+    backgroundColor: '#eaeaea',
+    fixed: true
+};
+
+export default SolidBackground;

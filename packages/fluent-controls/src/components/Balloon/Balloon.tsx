@@ -5,7 +5,7 @@ const css = classNames.bind(require('./Balloon.scss'));
 
 export interface BalloonType {}
 
-export enum BallonPosition {
+export enum BalloonPosition {
     Top = 1,
     Bottom,
     Left,
@@ -29,7 +29,7 @@ export interface BalloonProps extends React.Props<BalloonType> {
      * 
      * Default: BalloonPosition.Top
      */
-    position?: BallonPosition;
+    position?: BalloonPosition;
     /**
      * Alignment of Balloon relative to child
      * 
@@ -55,16 +55,16 @@ export interface BalloonProps extends React.Props<BalloonType> {
  * 
  * @param props Control properties (defined in `SimpleBalloonProps` interface)
  */
-export const Balloon = (props: BalloonProps) => {
+export const Balloon: React.StatelessComponent<BalloonProps> = (props: BalloonProps) => {
     let position;
     switch (props.position) {
-        case BallonPosition.Bottom:
+        case BalloonPosition.Bottom:
             position = 'bottom';
             break;
-        case BallonPosition.Left:
+        case BalloonPosition.Left:
             position = 'left';
             break;
-        case BallonPosition.Right:
+        case BalloonPosition.Right:
             position = 'right';
             break;
         default:
@@ -95,6 +95,11 @@ export const Balloon = (props: BalloonProps) => {
             </span>
         </span>
     );
+};
+
+Balloon.defaultProps = {
+    position: BalloonPosition.Top,
+    align: BalloonAlignment.Center
 };
 
 export default Balloon;
