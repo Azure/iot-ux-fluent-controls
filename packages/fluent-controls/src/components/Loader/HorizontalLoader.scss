@@ -7,7 +7,11 @@ $background-color: md-color(shade, 4);
     @keyframes #{$name} {
         0% {
             opacity: 0;
-            transform: translateX(-100%);
+            transform: translateX(0);
+        }
+        15% {
+            opacity: 0;
+            transform: translateX(0);
         }
         33% {
             opacity: 1;
@@ -17,9 +21,13 @@ $background-color: md-color(shade, 4);
             opacity: 1;
             transform: translateX(calc(50% - 48px));
         }
+        85% {
+            opacity: 0;
+            transform: translateX(100%);
+        }
         100% {
             opacity: 0;
-            transform: translateX(200%);
+            transform: translateX(100%);
         }
     }
 }
@@ -67,4 +75,4 @@ $background-color: md-color(shade, 4);
     }
 }
 
-@include horizontal-loader('cs-loader');
+@include horizontal-loader('horizontal-loader');

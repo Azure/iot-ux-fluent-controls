@@ -18,23 +18,24 @@ export interface HorizontalLoaderProps extends React.Props<HorizontalLoaderType>
  * 
  * @param props Control properties (defined in `HorizontalLoaderProps` interface)
  */
-export const HorizontalLoader = (props: HorizontalLoaderProps) => {
-    const className = css('cs-loader-inner');
-    const containerClassName = css('cs-loader');
+export const HorizontalLoader: React.StatelessComponent<HorizontalLoaderProps> = (props: HorizontalLoaderProps) => {
+    const className = css('horizontal-loader-inner');
+    const containerClassName = css('horizontal-loader');
+
+    let dots = [];
+    for (let i = 0; i < props.dots; i++) {
+        dots.push(<div className={className} key={i}><div /></div>);
+    }
     
     return (
         <div className={containerClassName}>
-            <div className={className}><div></div></div>
-            <div className={className}><div></div></div>
-            <div className={className}><div></div></div>
-            <div className={className}><div></div></div>
-            <div className={className}><div></div></div>
-            <div className={className}><div></div></div>
+            {dots}
         </div>
     );
 };
 
+HorizontalLoader.defaultProps = {
+    dots: 6
+};
+
 export default HorizontalLoader;
-
-
-
