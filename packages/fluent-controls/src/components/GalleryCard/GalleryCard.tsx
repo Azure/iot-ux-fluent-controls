@@ -23,6 +23,8 @@ export interface GalleryCardProps extends React.Props<GalleryCardType> {
      * Default: true
      */
     fixed?: boolean;
+    /** Disables interaction CSS */
+    disabled?: boolean;
 
     /** Classname to append to top level element */
     className?: string;
@@ -42,7 +44,8 @@ export const GalleryCard: React.StatelessComponent<GalleryCardProps> = (props: G
     let classNames = css({
         'card': true,
         'fixed': !!props.fixed,
-        'fullbg': !props.children
+        'fullbg': !props.children,
+        'disabled': props.disabled
     }, props.className || '');
 
     let contentClassName = css({
