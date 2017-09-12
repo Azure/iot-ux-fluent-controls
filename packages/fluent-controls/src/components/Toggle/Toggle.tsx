@@ -9,7 +9,9 @@ export interface ToggleProps extends React.Props<ToggleType> {
     /** Disable Action Trigger */
     disabled?: boolean;
 
-    onChange?: (newValue: boolean) => void;
+    name: string;
+
+    onChange: (newValue: boolean) => void;
 
     /** Classname to append to top level element */
     className?: string;
@@ -38,7 +40,12 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
 
     return (
         <div className={containerClassName}>
-            <button className={buttonClassName} onClick={onClick} tabIndex={tabIndex} />
+            <button
+                className={buttonClassName}
+                onClick={onClick}
+                tabIndex={tabIndex}
+                name={props.name}
+            />
             <div className={focusClassName} />
             <div className={switchClassName} />
             <div className={labelClassName}>{label}</div>
