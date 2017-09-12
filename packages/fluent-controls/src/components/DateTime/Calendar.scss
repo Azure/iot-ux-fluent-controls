@@ -24,28 +24,35 @@ $weekday-border: 1px solid md-color(shade, c);
     .calendar-header {
         @include md-box(block, relative);
         margin-left: 16px;
-        margin-top: 16px;
         font-family: $font-family;
 
         .calendar-month {
             @include md-box(inline-block, relative);
+            margin-top: 16px;
             color: $header-color;
             font-size: 16px;
             line-height: 16px;
             text-align: left;
             width: 208px;
+            vertical-align: top;
         }
 
         .calendar-chevron {
             @include md-box(inline-block, relative);
             text-align: center;
+            vertical-align: bottom;
             line-height: 16px;
             margin-left: 4px;
+            padding-top: 8px;
             width: 40px;
+            text-decoration: none;
 
-            background-color: md-color(shade, e);
+            &:visited {
+                color: inherit;
+            }
+
             &.disabled {
-                display: none;
+                pointer-events: none;
             }
         }
     }
@@ -53,13 +60,14 @@ $weekday-border: 1px solid md-color(shade, c);
     .calendar-days {
         @include md-box(block, relative);
         width: 100%;
-        margin-top: 16px;
+        margin-top: 8px;
         margin-bottom: 8px;
         padding-left: 8px;
         padding-bottom: 8px;
         border-bottom: $weekday-border;
+        color: $weekday-color;
         
-        & > div {
+        & > div  {
             @include md-box(inline-block, relative);
             width: 40px;
             text-align: center;
@@ -73,12 +81,12 @@ $weekday-border: 1px solid md-color(shade, c);
     .calendar-row {
         margin-left: 8px;
 
-        & > div.selected {
+        & > a.selected {
             color: $selected-color;
             background-color: $selected-bg-color;
         }
 
-        & > div {
+        & > a {
             @include md-box(inline-block, relative);
             width: 40px;
             height: 40px;
@@ -87,18 +95,22 @@ $weekday-border: 1px solid md-color(shade, c);
             text-align: center;
             vertical-align: middle;
 
-            background-color: md-color(shade, e);
+            text-decoration: none;
 
-            &:hover:not(.disabled):not(.selected) {
+            &:hover:not(.selected), &:focus:not(.selected)  {
                 background-color: $hover-bg-color;
+            }
+
+            &:visited {
+                color: inherit;
             }
         }
 
-        & > div + div {
+        & > a + a {
             margin-left: 4px;
         }
 
-        .disabled {
+        a.disabled {
             color: $different-month-color;
         }
     }
