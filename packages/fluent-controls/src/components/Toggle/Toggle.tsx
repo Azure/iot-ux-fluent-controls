@@ -9,7 +9,9 @@ export interface ToggleProps extends React.Props<ToggleType> {
     /** Disable Action Trigger */
     disabled?: boolean;
 
-    onChange?: (newValue: boolean) => void;
+    name: string;
+
+    onChange: (newValue: boolean) => void;
 
     /** Classname to append to top level element */
     className?: string;
@@ -20,7 +22,7 @@ export interface ToggleProps extends React.Props<ToggleType> {
  * 
  * @param props Control properties (defined in `ToggleProps` interface)
  */
-export const Toggle = (props: ToggleProps) => {
+export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps) => {
     const containerClassName = css('toggle', {'toggle-on': props.on, 'disabled': props.disabled});
     const buttonClassName = css('toggle-button');
     const switchClassName = css('toggle-switch');
@@ -38,12 +40,21 @@ export const Toggle = (props: ToggleProps) => {
 
     return (
         <div className={containerClassName}>
-            <button className={buttonClassName} onClick={onClick} tabIndex={tabIndex} />
+            <button
+                className={buttonClassName}
+                onClick={onClick}
+                tabIndex={tabIndex}
+                name={props.name}
+            />
             <div className={focusClassName} />
             <div className={switchClassName} />
             <div className={labelClassName}>{label}</div>
         </div>
     );
+};
+
+Toggle.defaultProps = {
+
 };
 
 export default Toggle;

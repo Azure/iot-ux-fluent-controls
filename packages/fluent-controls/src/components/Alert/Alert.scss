@@ -32,8 +32,8 @@ $text-error-color: md-color(shade, f);
     .text {
         margin-left: 8px;
         margin-top: 6px;
-        margin-bottom: 8px;
         margin-right: 12px;
+        padding-bottom: 8px;
 
         font-family: $font-family;
         font-size: 16px;
@@ -41,8 +41,8 @@ $text-error-color: md-color(shade, f);
         color: $text-default-color;
 
         width: 100%;
-        overflow: hidden;
         display: block;
+        overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         
@@ -55,6 +55,7 @@ $text-error-color: md-color(shade, f);
         flex: 0 0 16px;
         margin-top: 6px;
         margin-left: auto;
+        margin-right: 8px;
         line-height: 16px;
         cursor: pointer;
     }

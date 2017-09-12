@@ -8,7 +8,11 @@ export interface ImageBackgroundProps extends React.Props<ImageBackgroundType> {
     /** Background image url */
     src: string;
 
-    /** Fixed width and height (284 x ?? pixels) */
+    /**
+     * Fixed width and height (284 x ?? pixels)
+     * 
+     * Default: true
+     */
     fixed?: boolean;
     
     /** Classname to append to top level element */
@@ -22,7 +26,7 @@ export interface ImageBackgroundProps extends React.Props<ImageBackgroundType> {
  * 
  * @param props Control properties (Defined in `ImageBackgroundProps` interface)
  */
-export const ImageBackground = (props: ImageBackgroundProps) => {
+export const ImageBackground: React.StatelessComponent<ImageBackgroundProps> = (props: ImageBackgroundProps) => {
     let cls = css({
         'background-image': true,
         'fixed': !!props.fixed
@@ -38,3 +42,9 @@ export const ImageBackground = (props: ImageBackgroundProps) => {
         </div>
     );
 };
+
+ImageBackground.defaultProps = {
+    fixed: true
+};
+
+export default ImageBackground;

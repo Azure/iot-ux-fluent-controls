@@ -1,13 +1,13 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {Icon, IconSize, IconBackground} from '../Icon';
+import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./TextInput.scss'));
 
-export interface TextInputType {}
+export const prefixClassName = css('prefix-addon');
+export const postfixClassName = css('postfix-addon');
 
-export interface TextInputState {
-    cancelFocused: boolean;
-}
+export interface TextInputType {}
 
 export interface TextInputProps extends React.Props<TextInputType> {
     /** HTML form element name */
@@ -16,7 +16,22 @@ export interface TextInputProps extends React.Props<TextInputType> {
     value: string;
     /** HTML input element placeholder */
     placeholder?: string;
+    /**
+     * HTML input element type
+     * 
+     * Default: text
+     */
+    type?: string;
 
+    /** Node to draw to the left of the input box */
+    prefix?: MethodNode;
+    /** Class to append to prefix container */
+    prefixClassName?: string;
+    /** Node to draw to the right of the input box */
+    postfix?: MethodNode;
+    /** Class to append to postfix container */
+    postfixClassName?: string;
+    
     /** Apply error styling to input element */
     error?: boolean;
     /** Disable HTML input element and apply disabled styling */
@@ -24,6 +39,9 @@ export interface TextInputProps extends React.Props<TextInputType> {
 
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
+
+    /** Class to append to top level element */
+    className?: string;
 }
 
 /**
@@ -31,79 +49,68 @@ export interface TextInputProps extends React.Props<TextInputType> {
  * 
  * (Use the `TextField` control instead when making a form with standard styling)
  */
-export class TextInput extends React.Component<TextInputProps, TextInputState> {
-    inputElement: HTMLInputElement;
+export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextInputProps) => {
+    const containerClassName = css('text-input-container', props.className);
+    const inputContainerClassName = css('input-container');
+    const inputClassName = css({
+        'input': true,
+        'error': props.error
+    });
+    const cancelClassName = css(
+        'cancel', 'icon icon-cancelLegacy'
+    );
 
-    constructor(props: TextInputProps) {
-        super(props);
-
-        this.state = { cancelFocused: false };
-
-        this.onChange = this.onChange.bind(this);
-        this.onClear = this.onClear.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onBlur = this.onBlur.bind(this);
-    }
-
-    onChange(event) {
-        const newValue = '';
-        console.log(event);
-
-        this.props.onChange(this.inputElement.value);
-    }
-
-    onClear(event) {
-        this.inputElement.focus();
-        this.props.onChange('');
+    const onChange = (event) => {
+        if (props.value !== event.target.value) {
+            props.onChange(event.target.value);
+        }
         event.stopPropagation();
+    };
+
+    const clearButton = props.disabled ? '' :
+        <button
+            className={cancelClassName}
+            onClick={() => props.onChange('')}
+            tabIndex={-1}
+        />;
+
+    let prefix = null;
+    if (props.prefix) {
+        const className = css('prefix', props.prefixClassName);
+        prefix = <div className={className}>{props.prefix}</div>;
     }
 
-    onFocus(event) {
-        this.setState({ cancelFocused: true });
-        event.stopPropagation();
+    let postfix = null;
+    if (props.postfix) {
+        const className = css('postfix', props.postfixClassName);
+        postfix = <div className={className}>{props.postfix}</div>;
     }
 
-    onBlur(event) {
-        this.setState({ cancelFocused: false });        
-        event.stopPropagation();
-    }
-
-    render() {
-        const containerClass = css('input-container');
-        const inputClass = css({
-            'input': true,
-            'error': this.props.error,
-            'cancel-focused': this.state.cancelFocused
-        });
-        const cancelClass = css(
-            'cancel', 'icon icon-cancelLegacy'
-        );
-
-        const clearButton = this.props.disabled ? '' :
-            <button
-                className={cancelClass}
-                onClick={this.onClear}
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
-                tabIndex={-1}
-            />;
-
-        return (
-            <div className={containerClass}>
+    return (
+        <div className={containerClassName}>
+            {prefix}
+            <div className={inputContainerClassName}>
                 <input 
-                    type='text'
-                    name={this.props.name}
-                    value={this.props.value}
-                    className={inputClass}
-                    onChange={this.onChange}
-                    ref={(input) => this.inputElement = input }
+                    type={props.type}
+                    name={props.name}
+                    value={props.value}
+                    className={inputClassName}
+                    onInput={onChange}
+                    placeholder={props.placeholder}
                     // This is not the same as props.required
                     // (this gives us :valid css selector)
                     required
-                    disabled={this.props.disabled}
-                /> 
+                    disabled={props.disabled}
+                />
                 {clearButton}
             </div>
-        );
-    }
-}
+            {postfix}
+        </div>
+    );
+};
+
+TextInput.defaultProps = {
+    type: 'text'
+};
+
+export default TextInput;

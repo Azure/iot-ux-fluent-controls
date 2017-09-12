@@ -25,6 +25,8 @@ $text-disabled-color: md-color(shade, a);
 
     &.columns {
         display: inline-block;
+            
+        margin-right: 8px;
     }
 
     input {

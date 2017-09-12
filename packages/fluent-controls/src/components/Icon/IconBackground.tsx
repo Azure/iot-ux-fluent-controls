@@ -22,7 +22,7 @@ export interface IconBackgroundProps extends React.Props<IconBackgroundType> {
  * 
  * @param props Control properties (Defined by `IconBackgroundProps` interface)
  */
-export const IconBackground = (props: IconBackgroundProps) => {
+export const IconBackground: React.StatelessComponent<IconBackgroundProps> = (props: IconBackgroundProps) => {
     let cls = css({
         'icon-background': true,
         'centered': props.centered
@@ -40,3 +40,9 @@ export const IconBackground = (props: IconBackgroundProps) => {
 
     return (<div className={cls} style={style}></div>);
 };
+
+IconBackground.defaultProps = {
+
+};
+
+export default IconBackground;

@@ -25,7 +25,7 @@ export interface ActionTriggerProps extends React.Props<ActionTriggerComponentTy
  * 
  * @param props Control properties (defined in `ActionTriggerProps` interface)
  */
-export const ActionTrigger = (props: ActionTriggerProps) => {
+export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (props: ActionTriggerProps) => {
     const className = css('action-trigger', {'disabled': props.disabled});
     const labelClassName = css('label');
 
@@ -42,6 +42,10 @@ export const ActionTrigger = (props: ActionTriggerProps) => {
                 size={IconSize.xsmall}
             >{props.label}</Icon>{suffix}</div>
     );
+};
+
+ActionTrigger.defaultProps = {
+    
 };
 
 export default ActionTrigger;

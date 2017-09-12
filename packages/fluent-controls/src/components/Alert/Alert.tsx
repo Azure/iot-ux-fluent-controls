@@ -13,7 +13,7 @@ export interface AlertComponentType {}
 
 export interface AlertProps extends React.Props<AlertComponentType> {
     /** Icon name (from Segoe UI MDL font) */
-    icon: string;
+    icon?: string;
     /**
      * Alert type described using `AlertType` enum
      * 
@@ -46,19 +46,29 @@ export interface AlertProps extends React.Props<AlertComponentType> {
  * 
  * @param props Control properties (defined in `AlertProps` interface)
  */
-export const Alert = (props: AlertProps) => {
-    const type = props.type || AlertType.Information;
+export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) => {
     const className = css({
         'alert': true,
-        'info': type === AlertType.Information,
-        'warning': type === AlertType.Warning,
-        'error': type === AlertType.Error,
+        'info': props.type === AlertType.Information,
+        'warning': props.type === AlertType.Warning,
+        'error': props.type === AlertType.Error,
         'multiline': props.multiline,
         'fixed': !!props.fixed
     }, props.className);
 
+    let iconName = props.icon;
+    if (!props.icon) {
+        if (props.type === AlertType.Information) {
+            iconName = 'info';
+        } else if (props.type === AlertType.Warning) {
+            iconName = 'warning';
+        } else if (props.type === AlertType.Error) {
+            iconName = 'error';
+        }
+    }
+
     const iconClassName = css('icon');
-    const icon = <Icon className={iconClassName} size={IconSize.xsmall} icon={props.icon} />;
+    const icon = <Icon className={iconClassName} size={IconSize.xsmall} icon={iconName} />;
 
     const textClassName = css('text');
     const text = <div className={textClassName}>{props.children}</div>;
@@ -84,6 +94,10 @@ export const Alert = (props: AlertProps) => {
             {close}
         </div>
     );
+};
+
+Alert.defaultProps = {
+    type: AlertType.Information
 };
 
 export default Alert;

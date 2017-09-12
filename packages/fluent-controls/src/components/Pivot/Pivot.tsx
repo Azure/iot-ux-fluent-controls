@@ -30,9 +30,6 @@ export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
     const placeholderClassName = css('pivot-placeholder');
     const iconClassName = css('pivot-icon');
     
-    console.log(pivotClassName);
-    console.log(menuClassName);
-
     let contents;
     if (props.icon) {
         const labelClassName = css('pivot-icon-label');
@@ -61,6 +58,10 @@ export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
             </div>
         </div>
     );
+};
+
+Pivot.defaultProps = {
+
 };
 
 export default Pivot;

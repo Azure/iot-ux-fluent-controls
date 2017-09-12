@@ -81,7 +81,6 @@ export class SelectFieldTest extends React.Component<any, any> {
                 newErrors[index] = null;
             }
             this.setState({values: newValues, errors: newErrors});
-            console.log(newValue);
         };
 
         const options = this.state.options.map(opt => {
@@ -178,7 +177,6 @@ export class RadioFieldTest extends React.Component<any, any> {
                 newErrors[index] = null;
             }
             this.setState({values: newValues, errors: newErrors});
-            console.log(newValue);
         };
 
         const options = this.state.options.map(opt => {

@@ -26,6 +26,9 @@ export interface RadioInputProps extends React.Props<RadioInputType> {
 
     /** Callback for HTML radio button element onChange events */
     onChange: (newValue: string) => void;
+
+    /** Classname to append to top level element */
+    className?: string;
 }
 
 /**
@@ -37,7 +40,7 @@ export interface RadioInputProps extends React.Props<RadioInputType> {
  */
 export const RadioInput = (props: RadioInputProps) => {
     const classes = {'disabled': props.disabled, 'selected': props.checked};
-    const containerClass = css('radio-container', {'columns': props.columns});
+    const containerClass = css('radio-container', {'columns': props.columns}, props.className);
     const optionTextClass = css('radio-text');
     const radioClass = css('radio-button', classes);
     const fillClass = css('radio-fill', classes);

@@ -2,25 +2,29 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconProps} from '../Icon';
+import {SolidBackground} from './SolidBackground';
 const css = classNames.bind(require('./GalleryCard.scss'));
 
 export interface GalleryCardType {}
 
 export interface GalleryCardProps extends React.Props<GalleryCardType> {
-    /** Element to display as `GalleryCard` background */
-    background: MethodNode;
+    /**
+     * Element to display as `GalleryCard` background
+     * 
+     * Default: Solid background with color #eaeaea
+     * */
+    background?: MethodNode;
     /** Banner string to display above the `GalleryCard` background */
     banner?: string;
-    /** Accessibility title on top level anchor tag */
-    title?: string;
 
-    /** Link URL for top level anchor tag */
-    href?: string;
-    /** Callback for `GalleryCard` `onClick` events */
-    onClick?: any;
-
-    /** Fixed width and height (284 pixels) */
+    /**
+     * Fixed width and height (284 pixels)
+     * 
+     * Default: true
+     */
     fixed?: boolean;
+    /** Disables interaction CSS */
+    disabled?: boolean;
 
     /** Classname to append to top level element */
     className?: string;
@@ -36,11 +40,12 @@ export interface GalleryCardProps extends React.Props<GalleryCardType> {
  * 
  * @param props Control properties (Defined in `GalleryCardProps` interface)
  */
-export const GalleryCard = (props: GalleryCardProps) => {
+export const GalleryCard: React.StatelessComponent<GalleryCardProps> = (props: GalleryCardProps) => {
     let classNames = css({
         'card': true,
         'fixed': !!props.fixed,
-        'fullbg': !props.children
+        'fullbg': !props.children,
+        'disabled': props.disabled
     }, props.className || '');
 
     let contentClassName = css({
@@ -48,10 +53,7 @@ export const GalleryCard = (props: GalleryCardProps) => {
     });
 
     let outputProps: any = {
-        className: classNames,
-        onClick: props.onClick,
-        href: props.href,
-        title: props.title
+        className: classNames
     };
 
     if (props.dataTestHook) {
@@ -69,12 +71,17 @@ export const GalleryCard = (props: GalleryCardProps) => {
     ) : null;
 
     return (
-        <a {...outputProps} >
+        <div {...outputProps} >
             {props.background}
             {content}
             {banner}
-        </a>
+        </div>
     );
+};
+
+GalleryCard.defaultProps = {
+    fixed: true,
+    background: <SolidBackground />
 };
 
 export interface BannerType {}
@@ -84,7 +91,7 @@ export interface BannerProps extends React.Props<BannerType> {
 }
 
 /** TODO: Remove this Banner control. GalleryCard banner is now a string */
-export const Banner = (props: BannerProps) => {
+export const Banner: React.StatelessComponent<BannerProps> = (props: BannerProps) => {
     let cls = css({
         'banner': true,
     }, props.className);
@@ -96,7 +103,7 @@ export interface GalleryCardIconProps extends IconProps {
     title?: string;
 }
 
-export const GalleryCardIcon = (props: GalleryCardIconProps) => {
+export const GalleryCardIcon: React.StatelessComponent<GalleryCardIconProps> = (props: GalleryCardIconProps) => {
     let fontSize;
     if (props.size) {
         // if the size is set, pass fontSize through
@@ -127,3 +134,5 @@ export const GalleryCardIcon = (props: GalleryCardIconProps) => {
 
     return (<Icon {...outputProps}>{title}</Icon>);
 };
+
+export default GalleryCard;

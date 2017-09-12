@@ -31,7 +31,7 @@ export interface IconProps extends React.Props<IconType> {
      * Starts at 16 pixels (`IconSize.xsmall`) and increases 16 pixels at a
      * time until 96 pixels (`IconSize.xxlarge`)
      * 
-     * Defaults to `IconSize.medium` (48 pixels)
+     * Defaults: `IconSize.medium` (48x48 pixels)
      */
     size?: IconSize;
     /**
@@ -66,17 +66,16 @@ export interface IconProps extends React.Props<IconType> {
  * 
  * @param props Control properties (Defined in `IconProps` interface)
  */
-export const Icon = (props: IconProps) => {
+export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {
     let iconClassName = `icon-${props.icon}`;
-    let size = props.size || IconSize.medium;
     let cls = css({
         // 'icon': true,
-        'icon-xsmall': size === IconSize.xsmall,
-        'icon-small': size === IconSize.small,
-        'icon-medium': size === IconSize.medium,
-        'icon-large': size === IconSize.large,
-        'icon-xlarge': size === IconSize.xlarge,
-        'icon-xxlarge': size === IconSize.xxlarge,
+        'icon-xsmall': props.size === IconSize.xsmall,
+        'icon-small': props.size === IconSize.small,
+        'icon-medium': props.size === IconSize.medium,
+        'icon-large': props.size === IconSize.large,
+        'icon-xlarge': props.size === IconSize.xlarge,
+        'icon-xxlarge': props.size === IconSize.xxlarge,
         'centered': props.centered
     }, iconClassName, props.className);
 
@@ -98,3 +97,9 @@ export const Icon = (props: IconProps) => {
         <span className={cls} style={style} {...props.props}>{label}</span>
     );
 };
+
+Icon.defaultProps = {
+    size: IconSize.medium
+};
+
+export default Icon;
