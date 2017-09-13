@@ -13,21 +13,19 @@ $card-icon-height: 96px;
 $card-icon-top: ($card-fixed-background-height - $card-icon-height);
 $card-icon-left: ($card-fixed-width - $card-icon-width);
 
-$card-hover-shadow: 0px 0px 10px 1px md-color(shadow, default);
 $card-default-border: 1px solid md-color(shade, a);
 $card-hover-border: 1px solid md-color(shade, 3);
 
 $background-default-color: md-color(shade, e);
 $background-solid-color: md-color(shade, e);
-$background-banner-color: md-color(shade, e);
+$background-banner-color: md-color(shade, 3);
 
 $text-header-color: md-color(shade, 2);
 $text-section-color: md-color(shade, 6);
-$text-banner-color: md-color(shade, 0);
+$text-banner-color: md-color(shade, e);
 
 a:focus .card:not(.disabled) {
   border: $card-hover-border;
-  box-shadow: $card-hover-shadow;
 }
 
 .card {
@@ -38,7 +36,6 @@ a:focus .card:not(.disabled) {
 
   &:hover:not(.disabled) {
     border: $card-hover-border;
-    box-shadow: $card-hover-shadow;
   }
 
   &.fixed {
