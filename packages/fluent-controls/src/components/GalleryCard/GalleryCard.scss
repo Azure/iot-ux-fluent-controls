@@ -19,7 +19,7 @@ $card-hover-border: 1px solid md-color(shade, 3);
 
 $background-default-color: md-color(shade, e);
 $background-solid-color: md-color(shade, e);
-$background-banner-color: md-color(shade, e);
+$background-banner-color: md-color(shade, 3);
 
 $text-header-color: md-color(shade, 2);
 $text-section-color: md-color(shade, 6);
@@ -38,7 +38,6 @@ a:focus .card:not(.disabled) {
 
   &:hover:not(.disabled) {
     border: $card-hover-border;
-    box-shadow: $card-hover-shadow;
   }
 
   &.fixed {
