@@ -81,6 +81,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
     };
 
     inputElement?: any;
+    cursorPos: number;
 
     constructor(props: DatePickerProps) {
         super(props);
@@ -108,6 +109,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         };
 
         this.inputElement = null;
+        this.cursorPos = null;
     }
 
     componentDidMount() {
@@ -120,6 +122,14 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         window.removeEventListener('focusin', this.handleDropdown);
     }
 
+    componentDidUpdate() {
+        if (this.cursorPos !== null) {
+            this.inputElement.selectionStart = this.cursorPos;
+            this.inputElement.selectionEnd = this.cursorPos;
+            this.cursorPos = null;
+        }
+    }
+
     handleMonth(newValue, position) {
         const lastNum = parseInt(newValue[newValue.length - 1]);
         const suffix = (position < 3 ? '/' : '');
@@ -127,23 +137,19 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             if (lastNum > 1) {
                 if (position > 1) {
                     newValue = replaceAt(newValue, newValue.length - 1, '0');
-                }
-                else {
+                } else {
                     newValue = '0' + lastNum.toString();
                 }
                 newValue += suffix;
             }
-        }
-        else {
+        } else {
             const otherLastNum = parseInt(newValue[newValue.length - 2]);
             if (otherLastNum < 1) {
                 newValue += suffix;
-            }
-            else {
+            } else {
                 if (lastNum < 3) {
                     newValue += suffix;
-                }
-                else {
+                } else {
                     newValue = this.state.value;
                 }
             }
@@ -158,23 +164,19 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             if (lastNum > 3) {
                 if (position > 1) {
                     newValue = replaceAt(newValue, newValue.length - 1, '0');
-                }
-                else {
+                } else {
                     newValue = '0' + lastNum.toString();
                 }
                 newValue += suffix;
             }
-        }
-        else {
+        } else {
             const otherLastNum = parseInt(newValue[newValue.length - 2]);
             if (otherLastNum < 3) {
                 newValue += suffix;
-            }
-            else {
+            } else {
                 if (lastNum < 2) {
                     newValue += suffix;
-                }
-                else {
+                } else {
                     newValue = this.state.value;
                 }
             }
@@ -186,51 +188,39 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         if (this.props.format === DateFormat.YYYYMMDD) {
             if (newValue.length === 4) {
                 newValue += '/';
-            }
-            else if (newValue.length === 6) {
+            } else if (newValue.length === 6) {
                 newValue = this.handleMonth(newValue, 2);
-            }
-            else if (newValue.length === 7) {
+            } else if (newValue.length === 7) {
                 newValue = this.handleMonth(newValue, 2);
-            }
-            else if (newValue.length === 9) {
+            } else if (newValue.length === 9) {
                 newValue = this.handleDay(newValue, 3);
-            }
-            else if (newValue.length > 10) {
+            } else if (newValue.length > 10) {
                 newValue = newValue.slice(0, 10);
             }
         }
         else if (this.props.format === DateFormat.MMDDYYYY) {
             if (newValue.length === 1) {
                 newValue = this.handleMonth(newValue, 1);
-            }
-            else if (newValue.length === 2) {
+            } else if (newValue.length === 2) {
                 newValue = this.handleMonth(newValue, 1);
-            }
-            else if (newValue.length === 4) {
+            } else if (newValue.length === 4) {
                 newValue = this.handleDay(newValue, 2);
-            }
-            else if (newValue.length === 5) {
+            } else if (newValue.length === 5) {
                 newValue = this.handleDay(newValue, 2);
-            }
-            else if (newValue.length > 10) {
+            } else if (newValue.length > 10) {
                 newValue = newValue.slice(0, 10);
             }
         }
         else if (this.props.format === DateFormat.DDMMYYYY) {
             if (newValue.length === 1) {
                 newValue = this.handleDay(newValue, 1);
-            }
-            else if (newValue.length === 2) {
+            } else if (newValue.length === 2) {
                 newValue = this.handleDay(newValue, 1);
-            }
-            else if (newValue.length === 4) {
+            } else if (newValue.length === 4) {
                 newValue = this.handleMonth(newValue, 2);
-            }
-            else if (newValue.length === 5) {
+            } else if (newValue.length === 5) {
                 newValue = this.handleMonth(newValue, 2);
-            }
-            else if (newValue.length > 10) {
+            } else if (newValue.length > 10) {
                 newValue = newValue.slice(0, 10);
             }
         }
@@ -252,8 +242,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             if (state.length !== value.length) {
                 if (state[0] !== value[0]) {
                     value[0] = state[0].substr(0, state[0].length - 1) + state[1];
-                }
-                else {
+                } else {
                     value[1] = state[1].substr(0, state[1].length - 1) + state[2];
                 }
             }
@@ -271,8 +260,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 }
             }
             newValue = '' + year + month + date;
-        }
-        else if (this.props.format === DateFormat.MMDDYYYY) {
+        } else if (this.props.format === DateFormat.MMDDYYYY) {
             month = values;
             if (values.length > 2) {
                 month = values.substr(0, 2) + '/';
@@ -283,8 +271,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 }
             }
             newValue = '' + month + date + year;
-        }
-        else if (this.props.format === DateFormat.DDMMYYYY) {
+        } else if (this.props.format === DateFormat.DDMMYYYY) {
             date = values;
             if (values.length > 2) {
                 date = values.substr(0, 2) + '/';
@@ -304,6 +291,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         if (newValue.length !== 10) {
             valid = false;
         }
+
         let split = newValue.split('/');
         if (split.length !== 3) {
             valid = false;
@@ -311,6 +299,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 split.push('-1');
             }
         }
+
         let year, month, date;
         if (this.props.format === DateFormat.DDMMYYYY) {
             year = parseInt(split[2]);
@@ -327,6 +316,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             month = parseInt(split[1]);
             date = parseInt(split[2]);
         }
+
         if (isNaN(year) || year < 0) {
             valid = false;
         }
@@ -336,6 +326,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         if (isNaN(date) || date < 1 || date > 31) {
             valid = false;
         }
+
         if (valid) {
             let parsed = new Date(year, month - 1, date);
             if (month !== parsed.getMonth() + 1 || date !== parsed.getDate()) {
@@ -345,13 +336,23 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         return { year: year, month: month, date: date, valid: valid };
     }
 
+    handleCursorPosition(newValue: string) {
+
+    }
+
     onInput(event) {
         let newValue = event.target.value;
         let insertion = false;
         let deletion = this.state.deletion;
         if (this.state.value.length > newValue.length) {
             /** If the user starts deleting, stop smart input handling */
-            if (this.state.value.length - newValue.length === 1) {
+            let formatValue = this.handleReformat(newValue);
+            if (formatValue === this.state.value) {
+                const pos = this.inputElement.selectionStart;
+                const diff = this.state.value.split('/').length - formatValue.split('/').length;
+                this.cursorPos = pos - diff;
+                newValue = formatValue;
+            } else if (this.state.value.length - newValue.length === 1) {
                 let oldValue = this.state.value[this.state.value.length - 1];
                 if (this.state.value.length > 0) {
                     if (newValue[newValue.length - 1] !== oldValue) {
@@ -385,12 +386,35 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 newValue = this.state.value;
             }
         }
+
         if (newValue.length === 0) {
             deletion = false;
         }
-        if (deletion) {
-            newValue = this.handleReformat(newValue);
-        }
+
+        // if (deletion && this.state.value.length > newValue.length) {
+        //     const pos = this.inputElement.selectionStart;
+        //     let posMod = 0;
+        //     let index = 0;
+        //     let oldIndex = 0;
+        //     let passing = false;
+        //     for (index = 0; index < newValue.length; index++) {
+        //         if (newValue[index] === this.state.value[oldIndex]) {
+        //             oldIndex++;
+        //             passing = false;
+        //         } else {
+        //             if (!passing) {
+        //                 passing = true;
+        //                 oldIndex++;
+        //             }
+        //             if (this.state.value[index] === '/') {
+        //                 posMod -= 1;
+        //             }
+        //         }
+        //     }
+        //     this.cursorPos = pos + posMod;
+        //     newValue = this.handleReformat(newValue);
+        // }        
+
         let result = this.parse(newValue);
         if (result.valid) {
             this.setState({
@@ -409,12 +433,14 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         if (event.target === this.inputElement) {
             return;
         }
+
         let className = css('dropdown');
         let target = event.target;
         for (let i = 0; i < 6; i++) {
             if (hasClassName(target, className)) {
                 break;
             }
+
             if (target.parentElement) {
                 target = i < 5 ? target.parentElement : null;
                 continue;
@@ -424,6 +450,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 break;
             }
         }
+
         if (!target) {
             this.setState({ visible: false });
         }
@@ -439,6 +466,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             visible: false,
             dateValue: new Date(newValue)
         });
+
         this.props.onChange(newValue.toUTCString());
     }
 
@@ -446,11 +474,13 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         if (event.charCode >= 48 && event.charCode <= 57) {
             return;
         }
+
         if (event.charCode === 47) {
             if (this.state.value.split('/').length < 3) {
                 return;
             }
         }
+
         event.preventDefault();
     }
 
