@@ -11,9 +11,9 @@ export enum DateFormat {
 }
 
 const _placeholders = [
-    'DD/MM/YYYY',
-    'MM/DD/YYYY',
-    'YYYY/MM/DD'
+    'dd/mm/yyyy',
+    'mm/dd/yyyy',
+    'yyyy/mm/dd'
 ];
 
 const _formaters = [
@@ -32,6 +32,10 @@ const formatDate = (date: Date, format: DateFormat) => {
 
 const hasClassName = (target, className) => {
     return ` ${target.className} `.indexOf(` ${className} `) > -1;
+};
+
+const replaceAt = (value: string, index: number, newValue: string) => {
+    return value.substr(0, index) + newValue + value.substr(index, +value.length);
 };
 
 export interface DatePickerType {}
@@ -59,8 +63,11 @@ export interface DatePickerProps extends React.Props<DatePickerType> {
 
 export interface DatePickerState {
     value: string;
-    visible: boolean;
     dateValue?: Date;
+
+    visible: boolean;
+    deletion: boolean;
+    error: boolean;
 }
 
 /**
@@ -81,6 +88,8 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         this.handleDropdown = this.handleDropdown.bind(this);
         this.onFocus = this.onFocus.bind(this);
         this.onSelect = this.onSelect.bind(this);
+        this.onInput = this.onInput.bind(this);
+        this.onKeyPress = this.onKeyPress.bind(this);
 
         let value = '';
         if (props.initialValue) {
@@ -94,6 +103,8 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         this.state = {
             value: value,
             visible: false,
+            deletion: false,
+            error: false
         };
 
         this.inputElement = null;
@@ -109,30 +120,312 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         window.removeEventListener('focusin', this.handleDropdown);
     }
 
+    handleMonth(newValue, position) {
+        const lastNum = parseInt(newValue[newValue.length - 1]);
+        const suffix = (position < 3 ? '/' : '');
+        if (newValue.length === 1 || newValue[newValue.length - 2] === '/') {
+            if (lastNum > 1) {
+                if (position > 1) {
+                    newValue = replaceAt(newValue, newValue.length - 1, '0');
+                }
+                else {
+                    newValue = '0' + lastNum.toString();
+                }
+                newValue += suffix;
+            }
+        }
+        else {
+            const otherLastNum = parseInt(newValue[newValue.length - 2]);
+            if (otherLastNum < 1) {
+                newValue += suffix;
+            }
+            else {
+                if (lastNum < 3) {
+                    newValue += suffix;
+                }
+                else {
+                    newValue = this.state.value;
+                }
+            }
+        }
+        return newValue;
+    }
+
+    handleDay(newValue, position) {
+        const lastNum = parseInt(newValue[newValue.length - 1]);
+        const suffix = (position < 3 ? '/' : '');
+        if (newValue.length === 1 || newValue[newValue.length - 2] === '/') {
+            if (lastNum > 3) {
+                if (position > 1) {
+                    newValue = replaceAt(newValue, newValue.length - 1, '0');
+                }
+                else {
+                    newValue = '0' + lastNum.toString();
+                }
+                newValue += suffix;
+            }
+        }
+        else {
+            const otherLastNum = parseInt(newValue[newValue.length - 2]);
+            if (otherLastNum < 3) {
+                newValue += suffix;
+            }
+            else {
+                if (lastNum < 2) {
+                    newValue += suffix;
+                }
+                else {
+                    newValue = this.state.value;
+                }
+            }
+        }
+        return newValue;
+    }
+
+    handleTyping(newValue: string) {
+        if (this.props.format === DateFormat.YYYYMMDD) {
+            if (newValue.length === 4) {
+                newValue += '/';
+            }
+            else if (newValue.length === 6) {
+                newValue = this.handleMonth(newValue, 2);
+            }
+            else if (newValue.length === 7) {
+                newValue = this.handleMonth(newValue, 2);
+            }
+            else if (newValue.length === 9) {
+                newValue = this.handleDay(newValue, 3);
+            }
+            else if (newValue.length > 10) {
+                newValue = newValue.slice(0, 10);
+            }
+        }
+        else if (this.props.format === DateFormat.MMDDYYYY) {
+            if (newValue.length === 1) {
+                newValue = this.handleMonth(newValue, 1);
+            }
+            else if (newValue.length === 2) {
+                newValue = this.handleMonth(newValue, 1);
+            }
+            else if (newValue.length === 4) {
+                newValue = this.handleDay(newValue, 2);
+            }
+            else if (newValue.length === 5) {
+                newValue = this.handleDay(newValue, 2);
+            }
+            else if (newValue.length > 10) {
+                newValue = newValue.slice(0, 10);
+            }
+        }
+        else if (this.props.format === DateFormat.DDMMYYYY) {
+            if (newValue.length === 1) {
+                newValue = this.handleDay(newValue, 1);
+            }
+            else if (newValue.length === 2) {
+                newValue = this.handleDay(newValue, 1);
+            }
+            else if (newValue.length === 4) {
+                newValue = this.handleMonth(newValue, 2);
+            }
+            else if (newValue.length === 5) {
+                newValue = this.handleMonth(newValue, 2);
+            }
+            else if (newValue.length > 10) {
+                newValue = newValue.slice(0, 10);
+            }
+        }
+        return newValue;
+    }
+
+    handleDeletion(newValue: string) {
+        if (this.state.value[this.state.value.length - 1] === '/') {
+            return newValue.substr(0, newValue.length - 1);
+        }
+        return newValue;
+    }
+
+    handleReformat(newValue: string) {
+        let values;
+        let value = newValue.split('/');
+        if (this.state.value.length - 1 === newValue.length) {
+            let state = this.state.value.split('/');
+            if (state.length !== value.length) {
+                if (state[0] !== value[0]) {
+                    value[0] = state[0].substr(0, state[0].length - 1) + state[1];
+                }
+                else {
+                    value[1] = state[1].substr(0, state[1].length - 1) + state[2];
+                }
+            }
+        }
+        values = value.join('');
+        let year = '', month = '', date = '';
+        if (this.props.format === DateFormat.YYYYMMDD) {
+            year = values;
+            if (values.length > 4) {
+                year = values.substr(0, 4) + '/';
+                month = values.substr(4, values.length);
+                if (values.length > 6) {
+                    month = values.substr(4, 2) + '/';
+                    date = values.substr(7, values.length);
+                }
+            }
+            newValue = '' + year + month + date;
+        }
+        else if (this.props.format === DateFormat.MMDDYYYY) {
+            month = values;
+            if (values.length > 2) {
+                month = values.substr(0, 2) + '/';
+                date = values.substr(2, values.length);
+                if (values.length > 4) {
+                    date = values.substr(2, 2) + '/';
+                    year = values.substr(4, values.length);
+                }
+            }
+            newValue = '' + month + date + year;
+        }
+        else if (this.props.format === DateFormat.DDMMYYYY) {
+            date = values;
+            if (values.length > 2) {
+                date = values.substr(0, 2) + '/';
+                month = values.substr(2, values.length);
+                if (values.length > 4) {
+                    month = values.substr(2, 2) + '/';
+                    year = values.substr(4, values.length);
+                }
+            }
+            newValue = '' + date + month + year;
+        }
+        return newValue;
+    }
+
+    parse(newValue: string) {
+        let valid = true;
+        if (newValue.length !== 10) {
+            valid = false;
+        }
+        let split = newValue.split('/');
+        if (split.length !== 3) {
+            valid = false;
+            while (split.length < 3) {
+                split.push('-1');
+            }
+        }
+        let year, month, date;
+        if (this.props.format === DateFormat.DDMMYYYY) {
+            year = parseInt(split[2]);
+            month = parseInt(split[1]);
+            date = parseInt(split[0]);
+        }
+        else if (this.props.format === DateFormat.MMDDYYYY) {
+            year = parseInt(split[2]);
+            month = parseInt(split[0]);
+            date = parseInt(split[1]);
+        }
+        else if (this.props.format === DateFormat.YYYYMMDD) {
+            year = parseInt(split[0]);
+            month = parseInt(split[1]);
+            date = parseInt(split[2]);
+        }
+        if (isNaN(year) || year < 0) {
+            valid = false;
+        }
+        if (isNaN(month) || month < 1 || month > 12) {
+            valid = false;
+        }
+        if (isNaN(date) || date < 1 || date > 31) {
+            valid = false;
+        }
+        if (valid) {
+            let parsed = new Date(year, month - 1, date);
+            if (month !== parsed.getMonth() + 1 || date !== parsed.getDate()) {
+                valid = false;
+            }
+        }
+        return { year: year, month: month, date: date, valid: valid };
+    }
+
+    onInput(event) {
+        let newValue = event.target.value;
+        let insertion = false;
+        let deletion = this.state.deletion;
+        if (this.state.value.length > newValue.length) {
+            /** If the user starts deleting, stop smart input handling */
+            if (this.state.value.length - newValue.length === 1) {
+                let oldValue = this.state.value[this.state.value.length - 1];
+                if (this.state.value.length > 0) {
+                    if (newValue[newValue.length - 1] !== oldValue) {
+                        newValue = this.handleDeletion(newValue);
+                        deletion = false;
+                    }
+                    else {
+                        deletion = true;
+                    }
+                }
+            }
+            else {
+                deletion = true;
+            }
+        }
+        else if (this.state.value.length < newValue.length) {
+            if (newValue.length <= 10) {
+                /** If the user types in the middle of the date, stop smart input handling */
+                let oldSlice = this.state.value.substr(0, this.state.value.length - 1);
+                let newSlice = newValue.substr(0, newValue.length - 2);
+                if (newValue.length > 1 && newSlice !== oldSlice) {
+                    deletion = true;
+                }
+                else {
+                    if (!deletion) {
+                        newValue = this.handleTyping(newValue);
+                    }
+                }
+            }
+            else {
+                newValue = this.state.value;
+            }
+        }
+        if (newValue.length === 0) {
+            deletion = false;
+        }
+        if (deletion) {
+            newValue = this.handleReformat(newValue);
+        }
+        let result = this.parse(newValue);
+        if (result.valid) {
+            this.setState({
+                value: newValue,
+                deletion: deletion,
+                error: false,
+                dateValue: new Date(result.year, result.month - 1, result.date)
+            });
+        }
+        else {
+            this.setState({ value: newValue, deletion: deletion, error: true });
+        }
+    }
+
     handleDropdown(event) {
         if (event.target === this.inputElement) {
             return;
         }
-
-        const className = css('dropdown');
-
+        let className = css('dropdown');
         let target = event.target;
         for (let i = 0; i < 6; i++) {
             if (hasClassName(target, className)) {
                 break;
             }
-
             if (target.parentElement) {
                 target = i < 5 ? target.parentElement : null;
                 continue;
-            } else {
+            }
+            else {
                 target = null;
                 break;
             }
         }
-
         if (!target) {
-            this.setState({visible: false});            
+            this.setState({ visible: false });
         }
     }
 
@@ -146,12 +439,24 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             visible: false,
             dateValue: new Date(newValue)
         });
-        this.props.onChange(newValue.toISOString());
+        this.props.onChange(newValue.toUTCString());
+    }
+
+    onKeyPress(event) {
+        if (event.charCode >= 48 && event.charCode <= 57) {
+            return;
+        }
+        if (event.charCode === 47) {
+            if (this.state.value.split('/').length < 3) {
+                return;
+            }
+        }
+        event.preventDefault();
     }
 
     render() {
         const containerClassName = css('date-picker-container', this.props.className);
-        const inputClassName = css('input', {'error': this.props.error});
+        const inputClassName = css('input', {'error': this.state.error || this.props.error});
         const dropdownClassName = css('dropdown', {'visible': this.state.visible});
 
         const icon = <Icon
@@ -172,6 +477,8 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                         className={inputClassName}
                         onFocus={this.onFocus}
                         placeholder={placeholder}
+                        onInput={this.onInput}
+                        onKeyPress={this.onKeyPress}
                         // This is not the same as props.required
                         // (this gives us :valid css selector)
                         required

@@ -29,8 +29,6 @@ $calendar-bg-color: md-color(shade, f);
         padding: 8px 32px 8px 12px;
         border: $inactive-border;
         outline: none;
-        color: transparent;
-        text-shadow: 0 0 0 $default-text-color;
 
         &:hover {
             border: $default-border;
