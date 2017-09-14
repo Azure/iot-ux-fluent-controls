@@ -34,7 +34,7 @@
 
 .icon-xsmall {
   @extend %icon;
-  .icon-small:before {
+  .icon-xsmall:before {
     font-size: 16px;
   }
 
@@ -56,7 +56,7 @@
 
 .icon-medium {
   @extend %icon;
-  .icon-small:before {
+  .icon-medium:before {
     font-size: 48px;
   }
 
@@ -67,7 +67,7 @@
 
 .icon-large {
   @extend %icon;
-  .icon-small:before {
+  .icon-large:before {
     font-size: 64px;
   }
 
@@ -78,7 +78,7 @@
 
 .icon-xlarge {
   @extend %icon;
-  .icon-small:before {
+  .icon-xlarge:before {
     font-size: 80px;
   }
 
@@ -89,7 +89,7 @@
 
 .icon-xxlarge {
   @extend %icon;
-  .icon-small:before {
+  .icon-xxlarge:before {
     font-size: 96px;
   }
 
