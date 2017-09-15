@@ -44,8 +44,8 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         tabAccessible: false
     };
 
-    monthNames: string[] = [];
-    dayNames: string[] = [];
+    monthNames: string[];
+    dayNames: string[];
 
     constructor(props: CalendarProps) {
         super(props);
@@ -76,6 +76,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
         this.monthNames = [];
         const date = new Date();
+        this.monthNames = [];
         for (let month = 0; month < 12; month++) {
             date.setMonth(month);
             this.monthNames.push(
@@ -83,12 +84,13 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
             );
         }
 
+        this.dayNames = [];
         date.setDate(date.getDate() - date.getDay());
         for (let day = 0; day < 7; day++) {
-            date.setDate(date.getDate() + day);
             this.dayNames.push(
                 date.toLocaleDateString(locale, {weekday: 'short'}).toUpperCase()
             );
+            date.setDate(date.getDate() + 1);
         }
     }
 
@@ -218,7 +220,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         });
 
         const weekdays = this.dayNames.map(day => {
-            return <div>{day}</div>;
+            return <div key={day}>{day}</div>;
         });
 
         return (
@@ -235,13 +237,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                     </button>
                 </div>
                 <div className={css('calendar-days')}>
-                    <div>SUN</div>
-                    <div>MON</div>
-                    <div>TUE</div>
-                    <div>WED</div>
-                    <div>THU</div>
-                    <div>FRI</div>
-                    <div>SAT</div>
+                    {weekdays}
                 </div>
                 {content}
             </div>
