@@ -44,8 +44,8 @@ export const CheckboxInput = (props: CheckboxInputProps) => {
 
     const id = `${props.name}_checkbox`;
 
-    const onClick = (event) => {
-        // props.onChange(event.);
+    const onChange = (event) => {
+        props.onChange(event.target.checked);
     };
 
     return (
@@ -57,7 +57,7 @@ export const CheckboxInput = (props: CheckboxInputProps) => {
                     name={props.name}
                     disabled={props.disabled}
                     checked={props.checked}
-                    onClick={onClick}
+                    onChange={onChange}
                 />
                 <span className={css('checkbox-button', classes)}></span>
                 <span className={css('checkbox-text')}>{props.label}</span>
