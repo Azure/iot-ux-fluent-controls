@@ -9,13 +9,13 @@ export const char9: number = 57;
 export const charSlash: number = 47;
 export const weekLength = 7;
 
-export const _placeholders = [
+export const placeholders = [
     'mm/dd/yyyy',
     'dd/mm/yyyy',
     'yyyy/mm/dd'
 ];
 
-export const _formaters = [
+const formatters = [
     (year: string, month: string, day: string) => `${month}/${day}/${year}`,
     (year: string, month: string, day: string) => `${day}/${month}/${year}`,
     (year: string, month: string, day: string) => `${year}/${month}/${day}`,
@@ -26,7 +26,7 @@ export const formatDate = (date: Date, format: DateFormat) => {
     let monthString = month > 9 ? `${month}` : `0${month}`;
     let day = date.getDate();
     let dayString = day > 9 ? `${day}` : `0${day}`;
-    return _formaters[format](`${date.getFullYear()}`, monthString, dayString);
+    return formatters[format](`${date.getFullYear()}`, monthString, dayString);
 };
 
 export const hasClassName = (target, className) => {

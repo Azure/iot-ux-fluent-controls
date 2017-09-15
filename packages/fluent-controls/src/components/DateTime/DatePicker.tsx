@@ -448,7 +448,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             className={css('calendar-icon')}
         />;
 
-        const placeholder = helpers._placeholders[this.props.format];
+        const placeholder = helpers.placeholders[this.props.format];
 
         const parsed = this.parse(this.state.value);
 
