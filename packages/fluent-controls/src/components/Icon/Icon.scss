@@ -3,11 +3,6 @@
 // sass-lint:disable class-name-format
 @import '../../common/mixins';
 
-@font-face {
-  font-family: 'icons';
-  src: url('/fonts/SegMDL2.1.6.woff') format('woff'), url('/fonts/SegMDL2.1.6.ttf') format('truetype');
-}
-
 %icon {
   font-style: normal;
   font-weight: normal;
