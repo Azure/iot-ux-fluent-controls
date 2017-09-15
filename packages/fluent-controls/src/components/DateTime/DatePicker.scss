@@ -1,0 +1,155 @@
+@import '../Form/common';
+
+$prefix-color: md-color(shade, 6);
+$prefix-background: md-color(shade, c);
+
+$postfix-color: md-color(shade, 6);
+$postfix-background: md-color(shade, c);
+
+$calendar-bg-color: md-color(shade, f);
+
+$calendar-z-index: $z-index-medium-step;
+
+.date-picker-container {
+    @include md-box(flex, relative);
+    width: 100%;
+    font-family: $font-family-base;
+
+    color: $default-text-color;
+    font-size: $font-size-text;
+    line-height: 20px;
+
+    .input-container {
+        @include md-box(block, relative);
+        flex-grow: 1;
+    }
+
+    .input {
+        @include md-box(block, relative);
+        width: 100%;
+        height: 32px;
+        padding: 8px 32px 8px 12px;
+        border: $inactive-border;
+        outline: none;
+
+        &:hover {
+            border: $default-border;
+        }
+    
+        &:focus {
+            border: $default-border;
+        }
+
+        &:active {
+            border: $default-border;
+        }
+        
+        &:disabled {
+            color: $disabled-text-color;
+            border: $disabled-border;
+            background-color: $disabled-background-color;
+    
+            &::placeholder {
+                color: $disabled-text-color;
+            }
+        }
+    
+        &::placeholder {
+            color: $placeholder-text-color;
+        }
+    
+        &::selection {
+            color: $selection-text-color;
+            background-color: $selection-background-color;
+        }
+
+        &.error:not(:disabled) {
+            border: $error-border;
+        }
+
+        &::-ms-clear {
+            display: none;
+        }
+
+        &:invalid {
+            -moz-mox-shadow: none;
+        }
+    }
+
+    .calendar-icon {
+        @include md-box(absolute, float-right);
+        font-size: $font-size-small;
+        line-height: 16px;
+        padding: 4px;
+        top: 4px;
+        right: 8px;
+        border: none;
+        background-color: transparent;
+        outline: none;
+        pointer-events: none;
+        cursor: pointer;
+    }
+
+    .dropdown {
+        @include md-box(display-none, absolute);
+        left: 0px;
+        z-index: $calendar-z-index;
+
+        &.visible {
+            display: inline-block;
+        }
+
+        &:not(.above) {
+            top: 100%;    
+        }
+
+        &.above {
+            top: 0px;
+            transform: translateY(-100%);
+        }
+
+        .dropdown-triangle {
+            @include md-box(block, absolute);
+            width: 8px;
+            height: 8px;
+            left: 16px;
+        }
+
+        &:not(.above) .dropdown-triangle {
+            top: calc(100% + 1px);
+    
+            background-color: $calendar-bg-color;
+            border-left: $default-border;
+            border-top: $default-border;
+            transform: rotateZ(45deg);
+        }
+
+        &.above .dropdown-triangle {
+            bottom: calc(100% + 1px);
+    
+            background-color: $calendar-bg-color;
+            border-right: $default-border;
+            border-bottom: $default-border;
+            transform: rotateZ(45deg);
+        }
+
+        .calendar {
+            @include md-box(inline-block, absolute);
+            width: 320px;
+
+            background-color: $calendar-bg-color;
+            border: $default-border;
+            padding-bottom: 8px;
+        }
+
+        &:not(.above) .calendar {
+            top: calc(100% + 5px);
+        }
+
+        &.above .calendar {
+            bottom: calc(100% + 5px);
+        }
+    }
+
+
+}
