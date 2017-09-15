@@ -4,9 +4,14 @@ export enum DateFormat {
     YYYYMMDD
 }
 
+export const char0: number = 48;
+export const char9: number = 57;
+export const charSlash: number = 47;
+export const weekLength = 7;
+
 export const _placeholders = [
-    'dd/mm/yyyy',
     'mm/dd/yyyy',
+    'dd/mm/yyyy',
     'yyyy/mm/dd'
 ];
 
@@ -38,7 +43,34 @@ export const dateIsValid = (date: Date) => {
     const day = date.getDate();
     return (
         !isNaN(year) && !isNaN(month) && !isNaN(day) &&
-        year > 1000 && month >= 0 && month < 12 &&
+        year > 0 && month >= 0 && month < 12 &&
         day > 0 && day < 32
     );
+};
+
+export const getLocalWeekdays = (locale) => {
+    const date = new Date();
+    const dayNames = [];
+    date.setDate(date.getDate() - date.getDay());
+    for (let day = 0; day < weekLength; day++) {
+        dayNames.push(
+            date.toLocaleDateString(locale, {weekday: 'short'}).toUpperCase()
+        );
+        date.setDate(date.getDate() + 1);
+    }
+
+    return dayNames;
+};
+
+export const getLocalMonths = (locale) => {
+    const date = new Date();
+    const monthNames = [];
+    for (let month = 0; month < 12; month++) {
+        date.setMonth(month);
+        monthNames.push(
+            date.toLocaleDateString(locale, {month: 'long'})
+        );
+    }
+
+    return monthNames;
 };

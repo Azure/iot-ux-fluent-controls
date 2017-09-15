@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {ActionTrigger} from '../ActionTrigger';
-import {dateIsValid} from './helpers';
+import * as helpers from './helpers';
 const css = classNames.bind(require('./Calendar.scss'));
 
 export interface CalendarComponentType {}
@@ -15,8 +15,8 @@ export interface CalendarProps extends React.Props<CalendarComponentType> {
     /** Month to display (otherwise shows the month from value) */
     month?: number;
 
-    /** Whether Calendar buttons are in tab order */
-    tabAccessible?: boolean;
+    /** Tab index of calendar buttons */
+    tabIndex?: number;
 
     /**
      * Callback for date change events
@@ -36,31 +36,30 @@ export interface CalendarState {
 
 /**
  * Calendar control
- * 
+ *
  * @param props Control properties (defined in `CalendarProps` interface)
  */
 export class Calendar extends React.Component<CalendarProps, CalendarState> {
     static defaultProps = {
-        tabAccessible: false
+        tabIndex: -1
     };
 
-    monthNames: string[];
-    dayNames: string[];
+    private monthNames: string[];
+    private dayNames: string[];
 
     constructor(props: CalendarProps) {
+        const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
+        let currentDate = new Date();
+
         super(props);
 
-        let currentDate;
         if (this.props.value) {
             currentDate = this.props.value;
-        } else {
-            currentDate = new Date();
         }
-
         if (props.month === 0 || props.month > 0) {
             currentDate.setMonth(props.month);
         }
-        if (props.year > 1000) {
+        if (props.year > 0) {
             currentDate.setFullYear(props.year);
         }
 
@@ -69,29 +68,9 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
             detached: false
         };
 
-        this.onClick = this.onClick.bind(this);
-        this.onPrevMonth = this.onPrevMonth.bind(this);
-        this.onNextMonth = this.onNextMonth.bind(this);
+        this.monthNames = helpers.getLocalMonths(locale);
 
-        const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
-        this.monthNames = [];
-        const date = new Date();
-        this.monthNames = [];
-        for (let month = 0; month < 12; month++) {
-            date.setMonth(month);
-            this.monthNames.push(
-                date.toLocaleDateString(locale, {month: 'long'})
-            );
-        }
-
-        this.dayNames = [];
-        date.setDate(date.getDate() - date.getDay());
-        for (let day = 0; day < 7; day++) {
-            this.dayNames.push(
-                date.toLocaleDateString(locale, {weekday: 'short'}).toUpperCase()
-            );
-            date.setDate(date.getDate() + 1);
-        }
+        this.dayNames = helpers.getLocalWeekdays(locale);
     }
 
     componentWillReceiveProps(newProps: CalendarProps) {
@@ -102,13 +81,13 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
             update = true;
         }
         if (
-            newProps.month !== this.props.month && 
+            newProps.month !== this.props.month &&
             (newProps.month === 0 || newProps.month > 0)
         ) {
             date.setMonth(newProps.month);
             update = true;
         }
-        if (update && !this.state.detached && dateIsValid(date)) {
+        if (update && !this.state.detached && helpers.dateIsValid(date)) {
             this.setState({currentDate: date});
         }
     }
@@ -125,7 +104,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
 
     onPrevMonth(event) {
         event.preventDefault();
-        
+
         /** Dates are mutable so we're going to copy it over */
         const date = this.state.currentDate;
         const newDate = new Date(date.getFullYear(), date.getMonth() - 1, 1);
@@ -135,7 +114,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
 
     onNextMonth(event) {
         event.preventDefault();
-        
+
         /** Dates are mutable so we're going to copy it over */
         const date = this.state.currentDate;
         const newDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
@@ -146,26 +125,30 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
     render() {
         const rowClassName = css('calendar-row');
         const colClassName = css('disabled');
-        const tabIndex = this.props.tabAccessible ? 0 : -1;        
+        const tabIndex = this.props.tabIndex;
 
         const curYear = this.state.currentDate.getFullYear();
         const curMonth = this.state.currentDate.getMonth();
         const curDate = this.state.currentDate.getDate();
         const curDay = this.state.currentDate.getDay();
 
+        const weekdays = this.dayNames.map(day => {
+            return <div key={day}>{day}</div>;
+        });
+
         // First day of `month`
         let start = new Date(curYear, curMonth, 1);
         // Last day of `month`
         let end = new Date(curYear, curMonth + 1, 0);
+        let rows = [], row = [];
 
         start.setDate(start.getDate() - start.getDay());
         end.setDate(end.getDate() + (6 - end.getDay()));
 
-        let rows = [], row = [];
         while (start <= end) {
             // We have to copy the date, otherwise it will get modified in place
             row.push(new Date(start));
-            if (row.length >= 7) {
+            if (row.length >= helpers.weekLength) {
                 rows.push(row);
                 row = [];
             }
@@ -179,7 +162,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                     event.preventDefault();
                 };
                 const date = col.getDate();
-                
+
                 /** Grayed out day from another month */
                 if (col.getMonth() !== curMonth) {
                     return (
@@ -193,7 +176,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                         </button>
                     );
                 }
-                
+
                 /** Selected day */
                 if (this.props.value) {
                     const isSelected = (
@@ -230,10 +213,6 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
             );
         });
 
-        const weekdays = this.dayNames.map(day => {
-            return <div key={day}>{day}</div>;
-        });
-
         return (
             <div className={css('calendar', this.props.className)}>
                 <div className={css('calendar-header')}>
@@ -242,14 +221,14 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                     </div>
                     <button
                         className={css('calendar-chevron')}
-                        onClick={this.onPrevMonth}
+                        onClick={event => this.onPrevMonth(event)}
                         tabIndex={tabIndex}
                     >
                         <ActionTrigger icon='chevronUp' />
                     </button>
                     <button
                         className={css('calendar-chevron')}
-                        onClick={this.onNextMonth}
+                        onClick={event => this.onNextMonth(event)}
                         tabIndex={tabIndex}
                     >
                         <ActionTrigger icon='chevronDown' />

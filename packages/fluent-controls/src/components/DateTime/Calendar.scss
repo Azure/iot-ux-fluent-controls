@@ -75,10 +75,9 @@ $weekday-border: 1px solid md-color(shade, c);
     .calendar-days {
         @include md-box(block, relative);
         width: 100%;
-        margin-top: 8px;
-        margin-bottom: 8px;
+        margin: 8px 0px;
         padding-left: 8px;
-        padding-bottom: 8px;
+        padding-bottom: 6px;
         border-bottom: $weekday-border;
         color: $weekday-color;
         

@@ -15,16 +15,18 @@ export interface DatePickerProps extends React.Props<DatePickerType> {
     name: string;
     /** Initial value of date picker */
     initialValue?: Date | string;
-    
+
+    /** Tab index for calendar control */
+    tabIndex?: number;
     /** Apply error styling to input element */
     error?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
     /**
      * Treat the Date object with the local timezone
-     * 
+     *
      * (UNIMPLEMENTED)
-     * 
+     *
      * Default: true
      */
     localTimezone?: boolean;
@@ -54,13 +56,14 @@ export interface DatePickerState {
 
 /**
  * Low level date picker control
- * 
+ *
  * (Use the `DateField` control instead when making a form with standard styling)
  */
 export class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
     static defaultProps = {
         format: DateFormat.MMDDYYYY,
-        localTimezone: true
+        tabIndex: -1,
+        localTimezone: true,
     };
 
     inputElement?: any;
@@ -69,13 +72,6 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
 
     constructor(props: DatePickerProps) {
         super(props);
-
-        this.handleDropdown = this.handleDropdown.bind(this);
-        this.onFocus = this.onFocus.bind(this);
-        this.onSelect = this.onSelect.bind(this);
-        this.onInput = this.onInput.bind(this);
-        this.onPaste = this.onPaste.bind(this);
-        this.onKeyPress = this.onKeyPress.bind(this);
 
         let value = '';
         let invalid = false;
@@ -95,7 +91,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 }
             }
         }
-        
+
         this.state = {
             value: value,
             visible: false,
@@ -109,13 +105,13 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
     }
 
     componentDidMount() {
-        window.addEventListener('click', this.handleDropdown);
-        window.addEventListener('focusin', this.handleDropdown);
+        window.addEventListener('click', this.handleDropdown.bind(this));
+        window.addEventListener('focusin', this.handleDropdown.bind(this));
     }
 
     componentWillUnmount() {
-        window.removeEventListener('click', this.handleDropdown);
-        window.removeEventListener('focusin', this.handleDropdown);
+        window.removeEventListener('click', this.handleDropdown.bind(this));
+        window.removeEventListener('focusin', this.handleDropdown.bind(this));
     }
 
     componentDidUpdate(oldProps: DatePickerProps, oldState: DatePickerState) {
@@ -324,7 +320,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 );
                 let newSlice = newValue.substr(0, newValue.length - 2);
                 if (newValue.length > 1 && newSlice !== oldSlice) {
-                    /** 
+                    /**
                      * If the user types in the middle of the date, stop smart
                      * input handling
                      */
@@ -340,9 +336,9 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 }
             } else {
                 /**
-                 * If the current value isn't invalid, prevent the user from 
+                 * If the current value isn't invalid, prevent the user from
                  * typing more than 10 characters into the input
-                 * 
+                 *
                  * (Do NOT do this if the user pastes in an invalid value)
                  */
                 if (!invalid) {
@@ -353,7 +349,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
 
         if (newValue.length === 0) {
             invalid = false;
-        }      
+        }
 
         let result = this.parse(newValue);
         if (result.valid) {
@@ -371,10 +367,10 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
     /**
      * Whenever focus changes or user clicks something, decide if the
      * calendar should stay open or close
-     * 
+     *
      * This handler needs to be added to the 'focus' and 'click' events for
      * the whole window
-     * 
+     *
      * @param event Focus or Click event
      */
     handleDropdown(event) {
@@ -408,7 +404,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
     }
 
     onFocus() {
-        this.setState({visible: true});        
+        this.setState({visible: true});
     }
 
     onSelect(newValue: Date) {
@@ -421,11 +417,11 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
     }
 
     onKeyPress(event) {
-        if (event.charCode >= 48 && event.charCode <= 57) {
+        if (event.charCode >= helpers.char0 && event.charCode <= helpers.char9) {
             return;
         }
 
-        if (event.charCode === 47) {
+        if (event.charCode === helpers.charSlash) {
             if (this.state.value.split('/').length < 3) {
                 return;
             }
@@ -447,7 +443,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         });
 
         const icon = <Icon
-            icon='calendar' 
+            icon='calendar'
             size={IconSize.xsmall}
             className={css('calendar-icon')}
         />;
@@ -459,16 +455,16 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         return (
             <div className={containerClassName}>
                 <div className={css('input-container')}>
-                    <input 
+                    <input
                         type='text'
                         name={this.props.name}
                         value={this.state.value}
                         className={inputClassName}
-                        onFocus={this.onFocus}
+                        onFocus={event => this.onFocus()}
                         placeholder={placeholder}
-                        onInput={this.onInput}
-                        onPaste={this.onPaste}
-                        onKeyPress={this.onKeyPress}
+                        onInput={event => this.onInput(event)}
+                        onPaste={event => this.onPaste(event)}
+                        onKeyPress={event => this.onKeyPress(event)}
                         /** React warns about Input without onChange handler */
                         onChange={() => {}}
                         /**
@@ -484,10 +480,11 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 <div className={dropdownClassName}>
                     <Calendar
                         value={this.state.dateValue}
-                        onChange={this.onSelect}
+                        onChange={newValue => this.onSelect(newValue)}
                         className={css('calendar')}
                         year={parsed.year || null}
                         month={parsed.month - 1 || null}
+                        tabIndex={this.props.tabIndex}
                     />
                     <div className={css('dropdown-triangle')} />
                 </div>
