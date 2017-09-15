@@ -23,7 +23,7 @@ const _formaters = [
 ];
 
 const formatDate = (date: Date, format: DateFormat) => {
-    let month = date.getMonth();
+    let month = date.getMonth() + 1;
     let monthString = month > 9 ? `${month}` : `0${month}`;
     let day = date.getDate();
     let dayString = day > 9 ? `${day}` : `0${day}`;
@@ -66,7 +66,7 @@ export interface DatePickerState {
     dateValue?: Date;
 
     visible: boolean;
-    deletion: boolean;
+    invalid: boolean;
     error: boolean;
 }
 
@@ -82,6 +82,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
 
     inputElement?: any;
     cursorPos: number;
+    paste: boolean;
 
     constructor(props: DatePickerProps) {
         super(props);
@@ -90,6 +91,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         this.onFocus = this.onFocus.bind(this);
         this.onSelect = this.onSelect.bind(this);
         this.onInput = this.onInput.bind(this);
+        this.onPaste = this.onPaste.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
 
         let value = '';
@@ -104,12 +106,13 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         this.state = {
             value: value,
             visible: false,
-            deletion: false,
+            invalid: false,
             error: false
         };
 
         this.inputElement = null;
         this.cursorPos = null;
+        this.paste = false;
     }
 
     componentDidMount() {
@@ -122,11 +125,18 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         window.removeEventListener('focusin', this.handleDropdown);
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(oldProps: DatePickerProps, oldState: DatePickerState) {
         if (this.cursorPos !== null) {
             this.inputElement.selectionStart = this.cursorPos;
             this.inputElement.selectionEnd = this.cursorPos;
             this.cursorPos = null;
+        }
+        if (oldState.value !== this.state.value) {
+            if (this.state.dateValue) {
+                this.props.onChange(this.state.dateValue.toUTCString());
+            } else {
+                this.props.onChange('invalid');
+            }
         }
     }
 
@@ -336,14 +346,11 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         return { year: year, month: month, date: date, valid: valid };
     }
 
-    handleCursorPosition(newValue: string) {
-
-    }
-
     onInput(event) {
         let newValue = event.target.value;
         let insertion = false;
-        let deletion = this.state.deletion;
+        let invalid = this.paste || this.state.invalid;
+        this.paste = false;
         if (this.state.value.length > newValue.length) {
             /** If the user starts deleting, stop smart input handling */
             let formatValue = this.handleReformat(newValue);
@@ -357,15 +364,15 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 if (this.state.value.length > 0) {
                     if (newValue[newValue.length - 1] !== oldValue) {
                         newValue = this.handleDeletion(newValue);
-                        deletion = false;
+                        invalid = false;
                     }
                     else {
-                        deletion = true;
+                        invalid = true;
                     }
                 }
             }
             else {
-                deletion = true;
+                invalid = true;
             }
         }
         else if (this.state.value.length < newValue.length) {
@@ -374,10 +381,10 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 let oldSlice = this.state.value.substr(0, this.state.value.length - 1);
                 let newSlice = newValue.substr(0, newValue.length - 2);
                 if (newValue.length > 1 && newSlice !== oldSlice) {
-                    deletion = true;
+                    invalid = true;
                 }
                 else {
-                    if (!deletion) {
+                    if (!invalid) {
                         newValue = this.handleTyping(newValue);
                     }
                 }
@@ -388,44 +395,20 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         }
 
         if (newValue.length === 0) {
-            deletion = false;
-        }
-
-        // if (deletion && this.state.value.length > newValue.length) {
-        //     const pos = this.inputElement.selectionStart;
-        //     let posMod = 0;
-        //     let index = 0;
-        //     let oldIndex = 0;
-        //     let passing = false;
-        //     for (index = 0; index < newValue.length; index++) {
-        //         if (newValue[index] === this.state.value[oldIndex]) {
-        //             oldIndex++;
-        //             passing = false;
-        //         } else {
-        //             if (!passing) {
-        //                 passing = true;
-        //                 oldIndex++;
-        //             }
-        //             if (this.state.value[index] === '/') {
-        //                 posMod -= 1;
-        //             }
-        //         }
-        //     }
-        //     this.cursorPos = pos + posMod;
-        //     newValue = this.handleReformat(newValue);
-        // }        
+            invalid = false;
+        }      
 
         let result = this.parse(newValue);
         if (result.valid) {
             this.setState({
                 value: newValue,
-                deletion: deletion,
+                invalid: invalid,
                 error: false,
                 dateValue: new Date(result.year, result.month - 1, result.date)
             });
         }
         else {
-            this.setState({ value: newValue, deletion: deletion, error: true });
+            this.setState({ value: newValue, invalid: invalid, error: true });
         }
     }
 
@@ -466,8 +449,6 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             visible: false,
             dateValue: new Date(newValue)
         });
-
-        this.props.onChange(newValue.toUTCString());
     }
 
     onKeyPress(event) {
@@ -482,6 +463,10 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         }
 
         event.preventDefault();
+    }
+
+    onPaste(event) {
+        this.paste = true;
     }
 
     render() {
@@ -508,6 +493,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                         onFocus={this.onFocus}
                         placeholder={placeholder}
                         onInput={this.onInput}
+                        onPaste={this.onPaste}
                         onKeyPress={this.onKeyPress}
                         // This is not the same as props.required
                         // (this gives us :valid css selector)

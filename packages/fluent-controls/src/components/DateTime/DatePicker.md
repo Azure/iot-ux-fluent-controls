@@ -1,5 +1,5 @@
 ```jsx
-let onChange = (newValue) => alert(newValue);
+let onChange = (newValue) => console.log(newValue);
 
 <div>
     <DatePicker name="date-picker" onChange={onChange} />
