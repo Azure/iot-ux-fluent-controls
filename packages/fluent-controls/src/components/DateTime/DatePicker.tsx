@@ -265,7 +265,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             date = parseInt(split[2]);
         }
 
-        if (isNaN(year) || year < 1000) {
+        if (isNaN(year) || year < 1) {
             valid = false;
         }
         if (isNaN(month) || month < 1 || month > 12) {

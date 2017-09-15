@@ -76,7 +76,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
     componentWillReceiveProps(newProps: CalendarProps) {
         const date = new Date(this.state.currentDate);
         let update = false;
-        if (newProps.year !== this.props.year && newProps.year >= 1000) {
+        if (newProps.year !== this.props.year && newProps.year > 0) {
             date.setFullYear(newProps.year);
             update = true;
         }
