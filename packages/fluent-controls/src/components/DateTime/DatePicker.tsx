@@ -23,6 +23,8 @@ export interface DatePickerProps extends React.Props<DatePickerType> {
     /**
      * Treat the Date object with the local timezone
      * 
+     * (UNIMPLEMENTED)
+     * 
      * Default: true
      */
     localTimezone?: boolean;
