@@ -14,6 +14,8 @@ $background-disabled-color: md-color(shade, a);
 $text-default-color: md-color(shade, 2);
 $text-disabled-color: md-color(shade, a);
 
+$fill-default-bg: md-color(selected, dark);
+
 .checkbox-container {
     @include md-box(block, relative);
     font-family: $font-family-base;
@@ -51,7 +53,7 @@ $text-disabled-color: md-color(shade, a);
         top: 8px;
         width: 4px;
         height: 4px;
-        background-color: 
+        background-color: $fill-default-bg;
     }
 
     .checkbox-border {
