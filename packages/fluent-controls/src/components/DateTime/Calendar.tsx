@@ -1,29 +1,22 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {ActionTrigger} from '../ActionTrigger';
+import {dateIsValid} from './helpers';
 const css = classNames.bind(require('./Calendar.scss'));
-
-const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-];
-
 
 export interface CalendarComponentType {}
 
 export interface CalendarProps extends React.Props<CalendarComponentType> {
     /** Current selected date */
     value?: Date;
+
+    /** Year to display (otherwise shows the year from value) */
+    year?: number;
+    /** Month to display (otherwise shows the month from value) */
+    month?: number;
+
+    /** Whether Calendar buttons are in tab order */
+    tabAccessible?: boolean;
 
     /**
      * Callback for date change events
@@ -35,7 +28,10 @@ export interface CalendarProps extends React.Props<CalendarComponentType> {
 }
 
 export interface CalendarState {
+    /** Date of the current month open in view */
     currentDate: Date;
+    /** Whether or not props.year/month updates update the view */
+    detached: boolean;
 }
 
 /**
@@ -44,6 +40,13 @@ export interface CalendarState {
  * @param props Control properties (defined in `CalendarProps` interface)
  */
 export class Calendar extends React.Component<CalendarProps, CalendarState> {
+    static defaultProps = {
+        tabAccessible: false
+    };
+
+    monthNames: string[] = [];
+    dayNames: string[] = [];
+
     constructor(props: CalendarProps) {
         super(props);
 
@@ -54,18 +57,67 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
             currentDate = new Date();
         }
 
+        if (props.month === 0 || props.month > 0) {
+            currentDate.setMonth(props.month);
+        }
+        if (props.year > 1000) {
+            currentDate.setFullYear(props.year);
+        }
+
         this.state = {
-            currentDate: currentDate
+            currentDate: currentDate,
+            detached: false
         };
 
         this.onClick = this.onClick.bind(this);
         this.onPrevMonth = this.onPrevMonth.bind(this);
         this.onNextMonth = this.onNextMonth.bind(this);
+
+        const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
+        this.monthNames = [];
+        const date = new Date();
+        for (let month = 0; month < 12; month++) {
+            date.setMonth(month);
+            this.monthNames.push(
+                date.toLocaleDateString(locale, {month: 'long'})
+            );
+        }
+
+        date.setDate(date.getDate() - date.getDay());
+        for (let day = 0; day < 7; day++) {
+            date.setDate(date.getDate() + day);
+            this.dayNames.push(
+                date.toLocaleDateString(locale, {weekday: 'short'}).toUpperCase()
+            );
+        }
+    }
+
+    componentWillReceiveProps(newProps: CalendarProps) {
+        const date = new Date(this.state.currentDate);
+        let update = false;
+        if (newProps.year !== this.props.year && newProps.year >= 1000) {
+            date.setFullYear(newProps.year);
+            update = true;
+        }
+        if (
+            newProps.month !== this.props.month && 
+            (newProps.month === 0 || newProps.month > 0)
+        ) {
+            date.setMonth(newProps.month);
+            update = true;
+        }
+        if (update && !this.state.detached && dateIsValid(date)) {
+            this.setState({currentDate: date});
+        }
     }
 
     onClick(date: Date) {
         if (this.props.onChange) {
             this.props.onChange(date);
+            this.setState({
+                currentDate: date,
+                detached: false
+            });
         }
     }
 
@@ -76,7 +128,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         const date = this.state.currentDate;
         const newDate = new Date(date.getFullYear(), date.getMonth() - 1, 1);
 
-        this.setState({currentDate: newDate});
+        this.setState({currentDate: newDate, detached: true});
     }
 
     onNextMonth(event) {
@@ -86,7 +138,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         const date = this.state.currentDate;
         const newDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
 
-        this.setState({currentDate: newDate});
+        this.setState({currentDate: newDate, detached: true});
     }
 
     render() {
@@ -128,9 +180,9 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                 /** Grayed out day from another month */
                 if (col.getMonth() !== curMonth) {
                     return (
-                        <a href='#' className={colClassName} onClick={onClick} key={date}>
+                        <button className={colClassName} onClick={onClick} key={date}>
                             {date}
-                        </a>
+                        </button>
                     );
                 }
                 
@@ -143,18 +195,18 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                     );
                     if (isSelected) {
                         return (
-                            <a href='#' className={css('selected')} onClick={onClick} key={date}>
+                            <button className={css('selected')} onClick={onClick} key={date}>
                                 {date}
-                            </a>
+                            </button>
                         );
                     }
                 }
 
                 /** Everything else */
                 return (
-                    <a href='#' onClick={onClick} key={date}>
+                    <button onClick={onClick} key={date}>
                         {date}
-                    </a>
+                    </button>
                 );
             });
 
@@ -165,18 +217,22 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
             );
         });
 
+        const weekdays = this.dayNames.map(day => {
+            return <div>{day}</div>;
+        });
+
         return (
             <div className={css('calendar', this.props.className)}>
                 <div className={css('calendar-header')}>
                     <div className={css('calendar-month')}>
-                        {`${months[curMonth]} ${curYear}`}
+                        {`${this.monthNames[curMonth]} ${curYear}`}
                     </div>
-                    <a href='#' className={css('calendar-chevron')} onClick={this.onPrevMonth}>
+                    <button className={css('calendar-chevron')} onClick={this.onPrevMonth}>
                         <ActionTrigger icon='chevronUp' />
-                    </a>
-                    <a href='#' className={css('calendar-chevron')} onClick={this.onNextMonth}>
+                    </button>
+                    <button className={css('calendar-chevron')} onClick={this.onNextMonth}>
                         <ActionTrigger icon='chevronDown' />
-                    </a>
+                    </button>
                 </div>
                 <div className={css('calendar-days')}>
                     <div>SUN</div>

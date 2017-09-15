@@ -7,6 +7,7 @@ $header-color: md-color(shade, 2);
 $weekday-color: md-color(shade, 5);
 $selected-color: md-color(form, switch);
 
+$default-bg-color: md-color(transparent);
 $hover-bg-color: md-color(shade, d);
 $selected-bg-color: md-color(form, selected);
 
@@ -25,6 +26,20 @@ $weekday-border: 1px solid md-color(shade, c);
         @include md-box(block, relative);
         margin-left: 16px;
         font-family: $font-family;
+
+        & button {
+            text-decoration: none;
+            background-color: $default-bg-color;
+            border: none;
+
+            &:hover {
+                cursor: pointer;
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
 
         .calendar-month {
             @include md-box(inline-block, relative);
@@ -81,12 +96,12 @@ $weekday-border: 1px solid md-color(shade, c);
     .calendar-row {
         margin-left: 8px;
 
-        & > a.selected {
+        & > button.selected {
             color: $selected-color;
             background-color: $selected-bg-color;
         }
 
-        & > a {
+        & > button {
             @include md-box(inline-block, relative);
             width: 40px;
             height: 40px;
@@ -96,21 +111,28 @@ $weekday-border: 1px solid md-color(shade, c);
             vertical-align: middle;
 
             text-decoration: none;
+            background-color: $default-bg-color;
+            border: none;
 
             &:hover:not(.selected), &:focus:not(.selected)  {
                 background-color: $hover-bg-color;
+                cursor: pointer;
             }
 
             &:visited {
                 color: inherit;
             }
+
+            &:focus {
+                outline: none;
+            }
         }
 
-        & > a + a {
+        & > button + button {
             margin-left: 4px;
         }
 
-        a.disabled {
+        button.disabled {
             color: $different-month-color;
         }
     }

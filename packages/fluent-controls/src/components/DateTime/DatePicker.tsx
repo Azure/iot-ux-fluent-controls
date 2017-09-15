@@ -2,41 +2,11 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {Calendar} from './Calendar';
 import {Icon, IconSize} from '../Icon';
+import * as helpers from './helpers';
+import {DateFormat} from './helpers';
 const css = classNames.bind(require('./DatePicker.scss'));
 
-export enum DateFormat {
-    MMDDYYYY = 0,
-    DDMMYYYY,
-    YYYYMMDD
-}
-
-const _placeholders = [
-    'dd/mm/yyyy',
-    'mm/dd/yyyy',
-    'yyyy/mm/dd'
-];
-
-const _formaters = [
-    (year: string, month: string, day: string) => `${month}/${day}/${year}`,
-    (year: string, month: string, day: string) => `${day}/${month}/${year}`,
-    (year: string, month: string, day: string) => `${year}/${month}/${day}`,
-];
-
-const formatDate = (date: Date, format: DateFormat) => {
-    let month = date.getMonth() + 1;
-    let monthString = month > 9 ? `${month}` : `0${month}`;
-    let day = date.getDate();
-    let dayString = day > 9 ? `${day}` : `0${day}`;
-    return _formaters[format](`${date.getFullYear()}`, monthString, dayString);
-};
-
-const hasClassName = (target, className) => {
-    return ` ${target.className} `.indexOf(` ${className} `) > -1;
-};
-
-const replaceAt = (value: string, index: number, newValue: string) => {
-    return value.substr(0, index) + newValue + value.substr(index, +value.length);
-};
+export {DateFormat} from './helpers';
 
 export interface DatePickerType {}
 
@@ -50,6 +20,16 @@ export interface DatePickerProps extends React.Props<DatePickerType> {
     error?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
+    /**
+     * Treat the Date object with the local timezone
+     * 
+     * Default: true
+     */
+    localTimezone?: boolean;
+    /**
+     * Show Calendar below date picker input
+     */
+    showAbove?: boolean;
 
     /** Date format in text input */
     format?: DateFormat;
@@ -77,7 +57,8 @@ export interface DatePickerState {
  */
 export class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
     static defaultProps = {
-        format: DateFormat.MMDDYYYY
+        format: DateFormat.MMDDYYYY,
+        localTimezone: true
     };
 
     inputElement?: any;
@@ -95,18 +76,28 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         this.onKeyPress = this.onKeyPress.bind(this);
 
         let value = '';
+        let invalid = false;
         if (props.initialValue) {
             if (typeof props.initialValue === 'string') {
-                value = formatDate(new Date(props.initialValue), props.format);
+                const date = new Date(props.initialValue);
+                if (helpers.dateIsValid(date)) {
+                    value = helpers.formatDate(date, props.format);
+                } else {
+                    value = props.initialValue;
+                    invalid = true;
+                }
             } else {
-                value = formatDate(props.initialValue, props.format);
+                value = helpers.formatDate(props.initialValue, props.format);
+                if (!helpers.dateIsValid(props.initialValue)) {
+                    invalid = true;
+                }
             }
         }
         
         this.state = {
             value: value,
             visible: false,
-            invalid: false,
+            invalid: invalid,
             error: false
         };
 
@@ -133,7 +124,8 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         }
         if (oldState.value !== this.state.value) {
             if (this.state.dateValue) {
-                this.props.onChange(this.state.dateValue.toUTCString());
+                const date = new Date(this.state.dateValue);
+                this.props.onChange(date.toUTCString());
             } else {
                 this.props.onChange('invalid');
             }
@@ -146,7 +138,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         if (newValue.length === 1 || newValue[newValue.length - 2] === '/') {
             if (lastNum > 1) {
                 if (position > 1) {
-                    newValue = replaceAt(newValue, newValue.length - 1, '0');
+                    newValue = helpers.replaceAt(newValue, newValue.length - 1, '0');
                 } else {
                     newValue = '0' + lastNum.toString();
                 }
@@ -173,7 +165,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         if (newValue.length === 1 || newValue[newValue.length - 2] === '/') {
             if (lastNum > 3) {
                 if (position > 1) {
-                    newValue = replaceAt(newValue, newValue.length - 1, '0');
+                    newValue = helpers.replaceAt(newValue, newValue.length - 1, '0');
                 } else {
                     newValue = '0' + lastNum.toString();
                 }
@@ -244,58 +236,6 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         return newValue;
     }
 
-    handleReformat(newValue: string) {
-        let values;
-        let value = newValue.split('/');
-        if (this.state.value.length - 1 === newValue.length) {
-            let state = this.state.value.split('/');
-            if (state.length !== value.length) {
-                if (state[0] !== value[0]) {
-                    value[0] = state[0].substr(0, state[0].length - 1) + state[1];
-                } else {
-                    value[1] = state[1].substr(0, state[1].length - 1) + state[2];
-                }
-            }
-        }
-        values = value.join('');
-        let year = '', month = '', date = '';
-        if (this.props.format === DateFormat.YYYYMMDD) {
-            year = values;
-            if (values.length > 4) {
-                year = values.substr(0, 4) + '/';
-                month = values.substr(4, values.length);
-                if (values.length > 6) {
-                    month = values.substr(4, 2) + '/';
-                    date = values.substr(7, values.length);
-                }
-            }
-            newValue = '' + year + month + date;
-        } else if (this.props.format === DateFormat.MMDDYYYY) {
-            month = values;
-            if (values.length > 2) {
-                month = values.substr(0, 2) + '/';
-                date = values.substr(2, values.length);
-                if (values.length > 4) {
-                    date = values.substr(2, 2) + '/';
-                    year = values.substr(4, values.length);
-                }
-            }
-            newValue = '' + month + date + year;
-        } else if (this.props.format === DateFormat.DDMMYYYY) {
-            date = values;
-            if (values.length > 2) {
-                date = values.substr(0, 2) + '/';
-                month = values.substr(2, values.length);
-                if (values.length > 4) {
-                    month = values.substr(2, 2) + '/';
-                    year = values.substr(4, values.length);
-                }
-            }
-            newValue = '' + date + month + year;
-        }
-        return newValue;
-    }
-
     parse(newValue: string) {
         let valid = true;
         if (newValue.length !== 10) {
@@ -327,7 +267,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             date = parseInt(split[2]);
         }
 
-        if (isNaN(year) || year < 0) {
+        if (isNaN(year) || year < 1000) {
             valid = false;
         }
         if (isNaN(month) || month < 1 || month > 12) {
@@ -348,49 +288,64 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
 
     onInput(event) {
         let newValue = event.target.value;
-        let insertion = false;
-        let invalid = this.paste || this.state.invalid;
-        this.paste = false;
-        if (this.state.value.length > newValue.length) {
+        let invalid = this.state.invalid;
+        if (this.paste) {
+            const date = new Date(newValue);
+            if (helpers.dateIsValid(date)) {
+                invalid = false;
+                newValue = helpers.formatDate(date, this.props.format);
+            } else {
+                invalid = true;
+            }
+            this.paste = false;
+        }
+        if (this.state.value.length >= newValue.length) {
             /** If the user starts deleting, stop smart input handling */
-            let formatValue = this.handleReformat(newValue);
-            if (formatValue === this.state.value) {
-                const pos = this.inputElement.selectionStart;
-                const diff = this.state.value.split('/').length - formatValue.split('/').length;
-                this.cursorPos = pos - diff;
-                newValue = formatValue;
-            } else if (this.state.value.length - newValue.length === 1) {
+            if (this.state.value.length - newValue.length === 1) {
                 let oldValue = this.state.value[this.state.value.length - 1];
                 if (this.state.value.length > 0) {
                     if (newValue[newValue.length - 1] !== oldValue) {
                         newValue = this.handleDeletion(newValue);
                         invalid = false;
-                    }
-                    else {
+                    } else {
                         invalid = true;
                     }
                 }
-            }
-            else {
+            } else {
                 invalid = true;
             }
-        }
-        else if (this.state.value.length < newValue.length) {
+        } else if (this.state.value.length < newValue.length) {
+            /** If the user is adding to newValue */
             if (newValue.length <= 10) {
-                /** If the user types in the middle of the date, stop smart input handling */
-                let oldSlice = this.state.value.substr(0, this.state.value.length - 1);
+                let oldSlice = this.state.value.substr(
+                    0, this.state.value.length - 1
+                );
                 let newSlice = newValue.substr(0, newValue.length - 2);
                 if (newValue.length > 1 && newSlice !== oldSlice) {
+                    /** 
+                     * If the user types in the middle of the date, stop smart
+                     * input handling
+                     */
                     invalid = true;
-                }
-                else {
+                } else {
+                    /**
+                     * If the current value isn't invalid, handle the user
+                     * typing (handleTyping handles formatting as you type)
+                     */
                     if (!invalid) {
                         newValue = this.handleTyping(newValue);
                     }
                 }
-            }
-            else {
-                newValue = this.state.value;
+            } else {
+                /**
+                 * If the current value isn't invalid, prevent the user from 
+                 * typing more than 10 characters into the input
+                 * 
+                 * (Do NOT do this if the user pastes in an invalid value)
+                 */
+                if (!invalid) {
+                    newValue = this.state.value;
+                }
             }
         }
 
@@ -402,16 +357,24 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         if (result.valid) {
             this.setState({
                 value: newValue,
-                invalid: invalid,
+                invalid: false,
                 error: false,
                 dateValue: new Date(result.year, result.month - 1, result.date)
             });
-        }
-        else {
+        } else {
             this.setState({ value: newValue, invalid: invalid, error: true });
         }
     }
 
+    /**
+     * Whenever focus changes or user clicks something, decide if the
+     * calendar should stay open or close
+     * 
+     * This handler needs to be added to the 'focus' and 'click' events for
+     * the whole window
+     * 
+     * @param event Focus or Click event
+     */
     handleDropdown(event) {
         if (event.target === this.inputElement) {
             return;
@@ -419,16 +382,19 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
 
         let className = css('dropdown');
         let target = event.target;
+        /**
+         * Go back several levels to check whether the user is clicking in the
+         * calendar (which causes the text input to lose focus)
+        */
         for (let i = 0; i < 6; i++) {
-            if (hasClassName(target, className)) {
+            if (helpers.hasClassName(target, className)) {
                 break;
             }
 
             if (target.parentElement) {
                 target = i < 5 ? target.parentElement : null;
                 continue;
-            }
-            else {
+            } else {
                 target = null;
                 break;
             }
@@ -445,7 +411,8 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
 
     onSelect(newValue: Date) {
         this.setState({
-            value: formatDate(newValue, this.props.format),
+            value: helpers.formatDate(newValue, this.props.format),
+            error: false,
             visible: false,
             dateValue: new Date(newValue)
         });
@@ -472,7 +439,10 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
     render() {
         const containerClassName = css('date-picker-container', this.props.className);
         const inputClassName = css('input', {'error': this.state.error || this.props.error});
-        const dropdownClassName = css('dropdown', {'visible': this.state.visible});
+        const dropdownClassName = css('dropdown', {
+            'visible': this.state.visible,
+            'above': this.props.showAbove
+        });
 
         const icon = <Icon
             icon='calendar' 
@@ -480,7 +450,9 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             className={css('calendar-icon')}
         />;
 
-        const placeholder = _placeholders[this.props.format];
+        const placeholder = helpers._placeholders[this.props.format];
+
+        const parsed = this.parse(this.state.value);
 
         return (
             <div className={containerClassName}>
@@ -495,8 +467,12 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                         onInput={this.onInput}
                         onPaste={this.onPaste}
                         onKeyPress={this.onKeyPress}
-                        // This is not the same as props.required
-                        // (this gives us :valid css selector)
+                        /** React warns about Input without onChange handler */
+                        onChange={() => {}}
+                        /**
+                         * This is not the same as props.required
+                         * (this gives us :valid css selector)
+                         */
                         required
                         disabled={this.props.disabled}
                         ref={(element) => this.inputElement = element}
@@ -508,6 +484,8 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                         value={this.state.dateValue}
                         onChange={this.onSelect}
                         className={css('calendar')}
+                        year={parsed.year || null}
+                        month={parsed.month - 1 || null}
                     />
                     <div className={css('dropdown-triangle')} />
                 </div>

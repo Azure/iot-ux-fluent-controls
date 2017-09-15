@@ -90,34 +90,64 @@ $calendar-bg-color: md-color(shade, f);
 
     .dropdown {
         @include md-box(display-none, absolute);
-        top: 100%;
         left: 0px;
         z-index: 99;
 
         &.visible {
             display: inline-block;
         }
+
+        &:not(.above) {
+            top: 100%;    
+        }
+
+        &.above {
+            top: 0px;
+            transform: translateY(-100%);
+        }
+
+        .dropdown-triangle {
+            @include md-box(block, absolute);
+            width: 8px;
+            height: 8px;
+            left: 16px;
+        }
+
+        &:not(.above) .dropdown-triangle {
+            top: calc(100% + 1px);
+    
+            background-color: $calendar-bg-color;
+            border-left: $default-border;
+            border-top: $default-border;
+            transform: rotateZ(45deg);
+        }
+
+        &.above .dropdown-triangle {
+            bottom: calc(100% + 1px);
+    
+            background-color: $calendar-bg-color;
+            border-right: $default-border;
+            border-bottom: $default-border;
+            transform: rotateZ(45deg);
+        }
+
+        .calendar {
+            @include md-box(inline-block, absolute);
+            width: 320px;
+
+            background-color: $calendar-bg-color;
+            border: $default-border;
+            padding-bottom: 8px;
+        }
+
+        &:not(.above) .calendar {
+            top: calc(100% + 5px);
+        }
+
+        &.above .calendar {
+            bottom: calc(100% + 5px);
+        }
     }
 
-    .dropdown-triangle {
-        @include md-box(block, absolute);
-        width: 8px;
-        height: 8px;
-        top: calc(100% + 1px);
-        left: 16px;
 
-        background-color: $calendar-bg-color;
-        border-left: $default-border;
-        border-top: $default-border;
-        transform: rotateZ(45deg);
-    }
-
-    .calendar {
-        @include md-box(inline-block, absolute);
-        width: 320px;
-        top: calc(100% + 5px);
-
-        background-color: $calendar-bg-color;
-        border: $default-border;
-    }
 }
