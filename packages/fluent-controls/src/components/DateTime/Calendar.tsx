@@ -146,6 +146,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
     render() {
         const rowClassName = css('calendar-row');
         const colClassName = css('disabled');
+        const tabIndex = this.props.tabAccessible ? 0 : -1;        
 
         const curYear = this.state.currentDate.getFullYear();
         const curMonth = this.state.currentDate.getMonth();
@@ -182,7 +183,12 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                 /** Grayed out day from another month */
                 if (col.getMonth() !== curMonth) {
                     return (
-                        <button className={colClassName} onClick={onClick} key={date}>
+                        <button
+                            className={colClassName}
+                            onClick={onClick}
+                            key={date}
+                            tabIndex={tabIndex}
+                        >
                             {date}
                         </button>
                     );
@@ -197,7 +203,12 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                     );
                     if (isSelected) {
                         return (
-                            <button className={css('selected')} onClick={onClick} key={date}>
+                            <button
+                                className={css('selected')}
+                                onClick={onClick}
+                                key={date}
+                                tabIndex={tabIndex}
+                            >
                                 {date}
                             </button>
                         );
@@ -206,7 +217,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
 
                 /** Everything else */
                 return (
-                    <button onClick={onClick} key={date}>
+                    <button onClick={onClick} key={date} tabIndex={tabIndex}>
                         {date}
                     </button>
                 );
@@ -229,10 +240,18 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                     <div className={css('calendar-month')}>
                         {`${this.monthNames[curMonth]} ${curYear}`}
                     </div>
-                    <button className={css('calendar-chevron')} onClick={this.onPrevMonth}>
+                    <button
+                        className={css('calendar-chevron')}
+                        onClick={this.onPrevMonth}
+                        tabIndex={tabIndex}
+                    >
                         <ActionTrigger icon='chevronUp' />
                     </button>
-                    <button className={css('calendar-chevron')} onClick={this.onNextMonth}>
+                    <button
+                        className={css('calendar-chevron')}
+                        onClick={this.onNextMonth}
+                        tabIndex={tabIndex}
+                    >
                         <ActionTrigger icon='chevronDown' />
                     </button>
                 </div>
