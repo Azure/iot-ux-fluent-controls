@@ -189,3 +189,29 @@
         )
     );
 }
+
+$exmap: (
+    radio-field: (
+        hover: 'x',
+        selected: '',
+        disabled: ()
+    )
+);
+
+@function md-property-selector($prefix, $selector) {
+    @if $selector == 'hover' {
+        @return '#{$prefix}:hover';
+    } @else {
+        @return '#{$prefix}#{$selector}';
+    }
+}
+
+@mixin md-property-inner($selector, $prop, $map) {
+
+}
+
+@mixin md-property($prop, $selectors) {
+    @each $key in map-keys($selectors) {
+        @include md-property-inner('&', $prop, map-get($selectors, $key));
+    }
+}
