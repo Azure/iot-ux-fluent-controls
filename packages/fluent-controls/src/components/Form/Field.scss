@@ -39,4 +39,8 @@ $text-error-color: md-color(text, error);
     font-family: $font-family-base;
     font-size: $font-size-small;
     line-height: 20px;
+
+    &.hidden {
+        display: none;
+    }
 }

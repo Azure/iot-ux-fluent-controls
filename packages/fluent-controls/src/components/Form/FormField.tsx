@@ -17,6 +17,8 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     loading?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
+    /** Set error field to display: none */
+    hideError?: boolean;
 
     /** Classname to append to top level element */
     className?: string;
@@ -44,7 +46,7 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
                 {props.label}
             </label>
             {props.children}
-            <div className={css('field-error')}>
+            <div className={css('field-error', {'hidden': props.hideError})}>
                 {error}
             </div>
         </div>
@@ -53,7 +55,8 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
 
 FormField.defaultProps = {
     loading: false,
-    required: false
+    required: false,
+    hideError: false
 };
 
 export default FormField;
