@@ -1,5 +1,9 @@
-// overrides to the bootstrap variables
+$z-index-small-step: 10;
+$z-index-medium-step: 100;
+$z-index-large-step: 1000;
 
+
+// overrides to the bootstrap variables
 $common-font-stack: "Segoe UI Regular", "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif;
 $font-family-base: $common-font-stack;
 

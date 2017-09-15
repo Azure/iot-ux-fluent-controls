@@ -8,6 +8,8 @@ $postfix-background: md-color(shade, c);
 
 $calendar-bg-color: md-color(shade, f);
 
+$calendar-z-index: $z-index-medium-step;
+
 .date-picker-container {
     @include md-box(flex, relative);
     width: 100%;
@@ -91,7 +93,7 @@ $calendar-bg-color: md-color(shade, f);
     .dropdown {
         @include md-box(display-none, absolute);
         left: 0px;
-        z-index: 99;
+        z-index: $calendar-z-index;
 
         &.visible {
             display: inline-block;

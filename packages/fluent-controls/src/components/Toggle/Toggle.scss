@@ -32,6 +32,8 @@ $label-disabled-color: md-color(shade, a);
 
 $switch-transition: 75ms ease-in-out;
 
+$border-z-index: $z-index-small-step;
+
 .toggle {
     @include md-box(inline-block, relative);
 
@@ -79,7 +81,7 @@ $switch-transition: 75ms ease-in-out;
         height: 24px;
 
         border: $focus-border;
-        z-index: 99;
+        z-index: $border-z-index;
         pointer-events: none;
     }
 
