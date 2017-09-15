@@ -17,6 +17,8 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     loading?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
+    /** Set error field to display: none */
+    hideError?: boolean;
 
     /** Classname to append to top level element */
     className?: string;
@@ -28,12 +30,10 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
  * @param props Control properties (defined in `FormFieldProps` interface)
  */
 export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormFieldProps) => {
-    const labelClass = css('label');
     const containerClass = css('input-container', {
         'input-error': props.error,
         'required': props.required,        
     }, props.className);
-    const errorClass = css('field-error');
 
     let error = props.error;
     if (props.loading) {
@@ -42,11 +42,11 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
 
     return (
         <div className={containerClass} >
-            <label className={labelClass} htmlFor={props.name} >
+            <label className={css('label')} htmlFor={props.name} >
                 {props.label}
             </label>
             {props.children}
-            <div className={errorClass}>
+            <div className={css('field-error', {'hidden': props.hideError})}>
                 {error}
             </div>
         </div>
@@ -55,7 +55,8 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
 
 FormField.defaultProps = {
     loading: false,
-    required: false
+    required: false,
+    hideError: false
 };
 
 export default FormField;

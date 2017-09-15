@@ -5,3 +5,4 @@ export * from './SelectField';
 export * from './SelectInput';
 export * from './TextField';
 export * from './TextInput';
+export * from './ToggleField';

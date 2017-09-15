@@ -7,6 +7,7 @@ const initialState = {
     field3: '',
     field4: '',
     field5: '',
+    field6: '',
 };
 
 <div>
@@ -50,6 +51,15 @@ const initialState = {
             placeholder='Field 5'
             onChange={(newValue) => setState({field5: newValue})}
             disabled
+        />
+    </FormField>
+    <FormField name='form-field6' label='Label 6' required error='This field is required' hideError>
+        <TextInput
+            name='form-field6'
+            value={state.field6}
+            placeholder='Field 6'
+            onChange={(newValue) => setState({field6: newValue})}
+            error
         />
     </FormField>
 </div>

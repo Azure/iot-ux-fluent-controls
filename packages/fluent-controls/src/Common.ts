@@ -7,4 +7,8 @@ export interface FormOption {
     label: MethodNode;
     /** Value of select box option */
     value: any;
+    /** Option should be hidden */
+    hidden?: boolean;
+    /** Option should be disabled */
+    disabled?: boolean;
 }

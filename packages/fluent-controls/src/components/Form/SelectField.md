@@ -7,11 +7,12 @@ const initialState = {
     field3: '',
     field4: '',
     options: [
+        {label: '', value: {name: 'option0'}, hidden: true},
         {label: 'Select Option 1', value: {name: 'option1'}},
         {label: 'Select Option 2', value: {name: 'option2'}},
         {label: 'Select Option 3', value: {name: 'option3'}},
         {label: 'Select Option 4', value: {name: 'option4'}},
-        {label: 'Select Option 5', value: {name: 'option5'}}
+        {label: 'Select Option 5', value: {name: 'option5'}, disabled: true}
     ]
 };
 

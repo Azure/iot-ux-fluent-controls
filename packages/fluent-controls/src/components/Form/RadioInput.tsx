@@ -23,6 +23,8 @@ export interface RadioInputProps extends React.Props<RadioInputType> {
     checked?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
+    /** Hide HTML input element */
+    hidden?: boolean;
 
     /** Callback for HTML radio button element onChange events */
     onChange: (newValue: string) => void;
@@ -40,12 +42,10 @@ export interface RadioInputProps extends React.Props<RadioInputType> {
  */
 export const RadioInput = (props: RadioInputProps) => {
     const classes = {'disabled': props.disabled, 'selected': props.checked};
-    const containerClass = css('radio-container', {'columns': props.columns}, props.className);
-    const optionTextClass = css('radio-text');
-    const radioClass = css('radio-button', classes);
-    const fillClass = css('radio-fill', classes);
-    const borderClass = css('radio-border', classes);
-    const labelClass = css('radio-label', classes);
+    const containerClass = css('radio-container', {
+        'columns': props.columns,
+        'hidden': props.hidden
+    }, props.className);
 
     const id = `${props.name}_${props.value}`;
 
@@ -55,20 +55,21 @@ export const RadioInput = (props: RadioInputProps) => {
 
     return (
         <div className={containerClass}>
-            <label className={labelClass} htmlFor={id}>
+            <label className={css('radio-label', classes)} htmlFor={id}>
                 <input
                     id={id}
                     type='radio'
                     value={props.value}
                     name={props.name}
                     disabled={props.disabled}
+                    hidden={props.hidden}
                     checked={props.checked}
                     onClick={onClick}
                 />
-                <span className={radioClass}></span>
-                <span className={optionTextClass}>{props.label}</span>
-                <span className={fillClass}></span>
-                <span className={borderClass}></span>
+                <span className={css('radio-button', classes)}></span>
+                <span className={css('radio-text')}>{props.label}</span>
+                <span className={css('radio-fill', classes)}></span>
+                <span className={css('radio-border', classes)}></span>
             </label>
         </div>
     );

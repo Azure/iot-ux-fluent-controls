@@ -8,7 +8,7 @@ const SolidBackground = require('./SolidBackground').SolidBackground;
         </GalleryCard>
     </a>
     <a href='#'>
-        <GalleryCard>
+        <GalleryCard banner='Coming soon!'>
             <header>Header</header>
             <section>Content</section>
         </GalleryCard>
