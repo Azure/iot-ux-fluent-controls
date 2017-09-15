@@ -59,7 +59,7 @@ $switch-transition: 75ms ease-in-out;
     .toggle-switch {
         @include md-box(block, absolute);
         left: 5px;
-        top: 5px;
+        top: 6px;
 
         width: 10px;
         height: 10px;
