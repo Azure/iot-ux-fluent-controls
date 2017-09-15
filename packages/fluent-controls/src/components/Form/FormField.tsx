@@ -28,12 +28,10 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
  * @param props Control properties (defined in `FormFieldProps` interface)
  */
 export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormFieldProps) => {
-    const labelClass = css('label');
     const containerClass = css('input-container', {
         'input-error': props.error,
         'required': props.required,        
     }, props.className);
-    const errorClass = css('field-error');
 
     let error = props.error;
     if (props.loading) {
@@ -42,11 +40,11 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
 
     return (
         <div className={containerClass} >
-            <label className={labelClass} htmlFor={props.name} >
+            <label className={css('label')} htmlFor={props.name} >
                 {props.label}
             </label>
             {props.children}
-            <div className={errorClass}>
+            <div className={css('field-error')}>
                 {error}
             </div>
         </div>

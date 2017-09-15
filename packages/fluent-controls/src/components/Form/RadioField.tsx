@@ -73,7 +73,8 @@ export const RadioField = (props: RadioFieldProps) => {
                 label={option.label}
                 columns={props.columns}
                 checked={props.value === option.value}
-                disabled={props.disabled}
+                disabled={props.disabled || option.disabled}
+                hidden={option.hidden}
                 onChange={onChange}
                 className={props.inputClassName}
                 key={`${props.name}-${index}`}

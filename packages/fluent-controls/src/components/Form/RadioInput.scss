@@ -105,4 +105,8 @@ $text-disabled-color: md-color(shade, a);
             color: $text-disabled-color;
         }
     }
+
+    &.hidden {
+        display: none;
+    }
 }

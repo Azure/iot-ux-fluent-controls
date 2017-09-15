@@ -32,8 +32,6 @@ export interface SelectInputProps extends React.Props<SelectInputType> {
     error?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
-    /** Shows empty option when nothing is selected */
-    hasEmpty?: boolean;
 
     /** Callback for HTML select element onChange events */
     onChange: (newValue: any) => void;
@@ -68,12 +66,17 @@ export const SelectInput = (props: SelectInputProps) => {
         if (opt.value === props.value) {
             value = index;
         }
-        return <option value={index} key={index}>{opt.label}</option>;
+        return (
+            <option
+                value={index}
+                key={index}
+                disabled={opt.disabled}
+                hidden={opt.hidden}
+            >
+                {opt.label}
+            </option>
+        );
     });
-
-    if (value === -1 && props.hasEmpty) {
-        options = [<option value='-1' key='-1'/>].concat(options);
-    }
 
     const onChange = (event) => {
         const index = parseInt(event.target.value);
@@ -84,6 +87,7 @@ export const SelectInput = (props: SelectInputProps) => {
     return (
         <div className={containerClass}>
             <select 
+                name={props.name}
                 className={comboClass}
                 onChange={onChange}
                 disabled={props.disabled}
