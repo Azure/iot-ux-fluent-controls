@@ -192,26 +192,84 @@
 
 $exmap: (
     radio-field: (
-        hover: 'x',
-        selected: '',
-        disabled: ()
+        -hover: 'x',
+        &hover: 'x',
+        +selected: '',
+        _disabled: ()
     )
 );
 
-@function md-property-selector($prefix, $selector) {
-    @if $selector == 'hover' {
-        @return '#{$prefix}:hover';
+@function md-selector-parse($selector, $root: false, $prev: false) {
+    $selector: '#{$selector}';
+    $slice: str-slice($selector, 1, 1);
+    @if $slice == '+' {
+        $parsed: md-selector-parse(str-slice($selector, 2), $prev: '+');
+        @return '.#{$parsed}';
+    } @else if $slice == '-' {
+        $parsed: md-selector-parse(str-slice($selector, 2), $prev: '-', $root: true);
+        @return ':not(#{$parsed})';
+    } @else if $slice == '_' {
+        $parsed: md-selector-parse(str-slice($selector, 2), $prev: '_');
+        @if $prev == '+' or $prev == '-' {
+            @return '.#{parsed}';
+        }
+        @return ' #{$parsed}';
     } @else {
-        @return '#{$prefix}#{$selector}';
+        @if $prev {
+            @if $selector == 'hover' {
+                @return ':hover';
+            } @else if $selector == 'focus' {
+                @return ':focus';
+            } @else if $selector == 'selected' {
+                @return ':selected';
+            }
+        }
+
+        @if $root {
+            @return '.#{$selector}';
+        }
+        @return '#{$selector}';
     }
 }
 
-@mixin md-property-inner($selector, $prop, $map) {
-
+@mixin md-property-inner($prefix, $prop, $map) {
+    @if type-of($map) == 'map' {
+        @each $key in map-keys($map) {
+            @if $key == 'default' {
+                #{$prefix} {
+                    #{$prop}: map-get($map, $key);
+                }
+            } @else {
+                $suffix: md-selector-parse($key);
+                @include md-property-inner('#{$prefix}#{$suffix}', $prop, map-get($map, $key));
+            }
+        }
+    } @else {
+        #{$prefix} {
+            #{$prop}: $map;
+        }
+    }
 }
 
-@mixin md-property($prop, $selectors) {
-    @each $key in map-keys($selectors) {
-        @include md-property-inner('&', $prop, map-get($selectors, $key));
+@mixin md-property($prop, $map) {
+    @each $key in map-keys($map) {
+        @if $key == 'default' {
+            #{$prop}: map-get($map, $key)
+        } @else {
+            $prefix: md-selector-parse($key, $root: true);
+            @include md-property-inner('#{$prefix}', $prop, map-get($map, $key));
+        }
     }
+}
+
+@mixin md-text-color($map) {
+    @include md-property('color', $map);
+}
+
+@mixin md-background-color($map) {
+    @include md-property('background-color', $map);
+}
+
+@mixin md-border($map) {
+    @include md-property('border', $map);
 }

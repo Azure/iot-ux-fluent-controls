@@ -82,15 +82,15 @@ $fill-default-bg: md-color(selected, dark);
     }
 }
 
-.checkbox-container.disabled {
-
-}
-
-.checkbox-container.selected {
-
-}
-
-
-.checkbox-container.indeterminate {
-
+.checkbox-container {
+    @include md-text-color((
+        default: white,
+        checkbox-label: (
+            default: blue,
+            +hover: (
+                default: green,
+                checkbox-label: red
+            )
+        )
+    ));
 }

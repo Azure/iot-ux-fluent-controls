@@ -60,7 +60,7 @@ export const CheckboxInput = (props: CheckboxInputProps) => {
                     onChange={onChange}
                 />
                 <span className={css('checkbox-button', classes)}></span>
-                <span className={css('checkbox-text')}>{props.label}</span>
+                <label className={css('checkbox-text')} htmlFor={id}>{props.label}</label>
                 <span className={css('checkbox-fill', classes)}></span>
                 <span className={css('checkbox-border', classes)}></span>
             </label>
