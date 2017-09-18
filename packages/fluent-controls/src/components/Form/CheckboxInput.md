@@ -38,6 +38,7 @@ const initialState = {
         label={label}
         checked={state.check5}
         onChange={value => setState({check5: value})}
+        indeterminate
     />
     <CheckboxInput
         name='checkbox6'
