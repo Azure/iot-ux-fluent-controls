@@ -88,6 +88,7 @@ export const SelectInput = (props: SelectInputProps) => {
         <div className={containerClass}>
             <select 
                 name={props.name}
+                value={props.value}
                 className={comboClass}
                 onChange={onChange}
                 disabled={props.disabled}
