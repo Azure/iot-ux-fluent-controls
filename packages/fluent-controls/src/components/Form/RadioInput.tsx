@@ -67,7 +67,7 @@ export const RadioInput = (props: RadioInputProps) => {
                     onClick={onClick}
                 />
                 <span className={css('radio-button', classes)}></span>
-                <label className={css('radio-text')} htmlFor={id}>{props.label}</label>
+                <span className={css('radio-text')}>{props.label}</span>
                 <span className={css('radio-fill', classes)}></span>
                 <span className={css('radio-border', classes)}></span>
             </label>
