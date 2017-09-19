@@ -26,8 +26,8 @@ export interface ComboInputProps extends React.Props<ComboInputType> {
      */
     options: FormOption[];
     optionMap?: (option: FormOption) => string;
-    optionFilter?: (newValue: string, option: string) => boolean;
-    optionSelect?: (newValue: string, option: string) => boolean;
+    optionFilter?: (newValue: string, option: FormOption) => boolean;
+    optionSelect?: (newValue: string, option: FormOption) => boolean;
     optionLabel?: (newValue: string, option: FormOption) => MethodNode;
 
     /** Apply error styling to input element */
@@ -55,7 +55,7 @@ const defaultMap = (option: FormOption) => {
     return '';
 };
 
-const defaultFilter = (newValue: string, option: string) => true;
+const defaultFilter = (newValue: string, option: FormOption) => !option.hidden;
 
 const defaultSelect = (newValue: string, option: string) => {
     console.log(`defaultSelect: ${newValue} === ${option} is ${newValue === option}`);
@@ -71,21 +71,28 @@ const defaultLabel = (newValue: string, option: FormOption) => option.label;
  */
 export class ComboInput extends React.Component<ComboInputProps, ComboInputState> {
     static defaultProps =  {
-        optionFilter: defaultFilter,
         optionMap: defaultMap,
-        optionSelect: defaultSelect,
         optionLabel: defaultLabel
     };
 
-    inputElement?: any;
+    inputElement: any;
+    optionFilter: (newValue: string, option: FormOption) => boolean;
+    optionSelect: (newValue: string, option: FormOption) => boolean;
 
     constructor(props: ComboInputProps) {
         super(props);
-
+        
         this.state = {
             visible: false,
             hovered: null
         };
+        
+        const map = props.optionMap;
+        this.inputElement = null;
+        this.optionFilter = !!props.optionFilter ? props.optionFilter 
+            : defaultFilter;
+        this.optionSelect = !!props.optionSelect ? props.optionSelect
+            : (newValue, option) => defaultSelect(newValue, map(option));
     }
 
     componentDidMount() {
@@ -100,6 +107,9 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
 
     handleDropdown(event) {
         if (event.target === this.inputElement) {
+            return;
+        }
+        if (!this.state.visible) {
             return;
         }
 
@@ -124,33 +134,67 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
         }
 
         if (!target) {
-            this.setState({ visible: false });
+            this.hideDropdown();
         } else {
             event.preventDefault();
         }
     }
 
     onFocus(event) {
-        this.setState({visible: true});
+        this.showDropdown();
     }
 
-    getHoveredIndex(options: FormOption[]) {
-        
+    getOptionIndex(options: FormOption[], value: FormOption): number {
+        for (let index = 0; index < options.length; index++) {
+            if (value === options[index]) {
+                return index;
+            }
+        }
+        return -1;
     }
 
-    onKeyPress(event) {
-        switch (event.charCode) {
+    getDropdownIndex(options: FormOption[]) {
+        return this.getOptionIndex(options, this.state.hovered);
+    }
+
+    onKeyDown(event) {
+        let index, options;
+        const setState = index => this.setState({
+            visible: true,
+            hovered: options[index]
+        });
+
+        switch (event.keyCode) {
             case keyCode.down:
-                
-                if (index < 0) {
-                    index = 0;
+               options = this.getVisibleOptions();
+               index = this.getDropdownIndex(options);
+               if (index < 0) {
+                    setState(0);
                 } else if (index === this.props.options.length - 1) {
-                    index = 0;
+                    setState(0);
                 } else {
-                    index++;
+                    setState(index + 1);
+                }
+                break;
+            case keyCode.up:
+                options = this.getVisibleOptions();
+                index = this.getDropdownIndex(options);
+                if (index < 0) {
+                    setState(options.length - 1);
+                } else if (index === 0) {
+                    setState(options.length - 1);
+                } else {
+                    setState(index - 1);
+                }
+                break;
+            case keyCode.enter:
+                if (this.state.visible) {
+                    this.props.onChange(this.state.hovered.value);
+                    this.hideDropdown();
                 }
                 break;
             default:
+                this.setState({visible: true});
                 return;
         }
         event.preventDefault();
@@ -160,28 +204,50 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
         if (typeof(this.props.value) === 'string') {
             return this.props.value;
         } else {
-            return this.props.optionMap(this.props.value);
+            let result = null;
+            this.props.options.forEach(option => {
+                if (option.value === this.props.value) {
+                    result = option;
+                }
+            });
+
+            if (result) {
+                return this.props.optionMap(result);
+            }
         }
+        return '';
     }
 
     getVisibleOptions(): FormOption[] {
-        return this.props.options.filter(option => {
-            return this.props.optionFilter(
-                this.getValue(),
-                this.props.optionMap(option)
-            );
-        });
+        let filter = option => !option.hidden;
+        if (typeof(this.props.value) === 'string') {
+            filter = option => {
+                return this.optionFilter(
+                    this.getValue(),
+                    option
+                );
+            };
+        }
+        return this.props.options.filter(filter);
     }
 
-    onChange(event) {
+    onInputChange(event) {
         const newValue = event.target.value;
-        const options = this.props.options.map(this.props.optionMap);
-        const result = options.filter(option => this.props.optionSelect(option, newValue));
+        const options = this.getVisibleOptions();
+        const result = options.filter(option => this.optionSelect(newValue, option));
         if (result.length > 0) {
-            this.props.onChange(result[0]);
+            this.props.onChange(result[0].value);
         } else {
             this.props.onChange(newValue);
         }
+    }
+
+    showDropdown() {
+        this.setState({visible: true});
+    }
+
+    hideDropdown() {
+        this.setState({visible: false, hovered: null});
     }
 
     render () {
@@ -196,14 +262,14 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
         const options = this.getVisibleOptions().map((option, index) => {
             const strValue = this.props.optionMap(option);
             const onClick = (event) => {
-                this.props.onChange(option);
-                this.setState({visible: false});
+                this.props.onChange(option.value);
+                this.hideDropdown();
             };
             const onHover = (event) => {
                 this.setState({hovered: option});
             };
             const optionClassName = css('option', {
-                'selected': this.props.optionSelect(strValue, value),
+                'selected': this.optionSelect(value, option),
                 'hover': this.state.hovered === option
             });
 
@@ -239,10 +305,10 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
                         name={this.props.name}
                         value={value}
                         className={inputClassName}
-                        onChange={event => this.onChange(event)}
+                        onChange={event => this.onInputChange(event)}
                         placeholder={this.props.placeholder}
                         onFocus={event => this.onFocus(event)}
-                        onKeyPress={event => this.onKeyPress(event)}
+                        onKeyDown={event => this.onKeyDown(event)}
                         // This is not the same as this.props.required
                         // (this gives us :valid css selector)
                         required
