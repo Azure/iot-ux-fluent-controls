@@ -72,6 +72,7 @@ export const SelectInput = (props: SelectInputProps) => {
                 key={index}
                 disabled={opt.disabled}
                 hidden={opt.hidden}
+                selected={opt.value === props.value}
             >
                 {opt.label}
             </option>
