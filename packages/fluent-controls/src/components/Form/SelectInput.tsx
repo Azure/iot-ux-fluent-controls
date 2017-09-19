@@ -72,6 +72,7 @@ export const SelectInput = (props: SelectInputProps) => {
                 key={index}
                 disabled={opt.disabled}
                 hidden={opt.hidden}
+                selected={opt.value === props.value}
             >
                 {opt.label}
             </option>
@@ -88,6 +89,7 @@ export const SelectInput = (props: SelectInputProps) => {
         <div className={containerClass}>
             <select 
                 name={props.name}
+                value={props.value}
                 className={comboClass}
                 onChange={onChange}
                 disabled={props.disabled}
