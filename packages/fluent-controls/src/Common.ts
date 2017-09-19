@@ -12,3 +12,22 @@ export interface FormOption {
     /** Option should be disabled */
     disabled?: boolean;
 }
+
+export const keyCode = {
+    backspace: 8,
+    tab: 9,
+    enter: 13,
+    shift: 16,
+    ctrl: 17,
+    alt: 18,
+    escape: 27,
+    space: 32,
+    left: 37,
+    up: 38,
+    right: 39,
+    down: 40
+};
+
+export const hasClassName = (target, className) => {
+    return ` ${target.className} `.indexOf(` ${className} `) > -1;
+};

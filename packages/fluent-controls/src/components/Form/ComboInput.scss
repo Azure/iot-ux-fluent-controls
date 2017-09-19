@@ -1,10 +1,14 @@
 @import 'common';
 
-$prefix-color: md-color(shade, 6);
-$prefix-background: md-color(shade, c);
+$chevron-color: md-color(shade, a);
+$cancel-color: md-color(shade, 6);
 
-$postfix-color: md-color(shade, 6);
-$postfix-background: md-color(shade, c);
+$dropdown-border: 1px solid md-color(shade, c);
+$dropdown-bg-color: md-color(shade, f);
+
+$option-bg-color: md-color(shade, f);
+$option-selected-bg-color: md-color(selected, default);
+$option-hover-bg-color: md-color(shade, d);
 
 .combo-input-container {
     @include md-box(flex, relative);
@@ -95,8 +99,8 @@ $postfix-background: md-color(shade, c);
     }
 
     .cancel {
-        @include md-box(absolute, float-right);
-        color: transparent;
+        @include md-box(absolute);
+        color: $cancel-color;
         font-size: $font-size-small;
         line-height: 16px;
         padding: 4px;
@@ -116,24 +120,42 @@ $postfix-background: md-color(shade, c);
 
     .chevron {
         @include md-box(inline-block, absolute);
+        color: $chevron-color;
         font-size: $font-size-small;
-        width: 16px;
-        height: 16px;
+        line-height: 16px;
         padding: 4px;
         top: 4px;
         right: 8px;
+        border: none;
+        background-color: transparent;
         outline: none;
         pointer-events: none;
-        cursor: pointer;
     }
 
     .dropdown {
         @include md-box(display-none, absolute);
         left: 0px;
         top: 100%;
-
+        width: 100%;
+    
         &.visible {
             display: inline-block;
+            background-color: $dropdown-bg-color;
+            border: $dropdown-border;
         }
+    }
+
+    .option {
+        @include md-box(block);
+        cursor: pointer;
+        background-color: $option-bg-color;
+    }
+
+    .option.selected {
+        background-color: $option-selected-bg-color;
+    }
+
+    .option.hover:not(.selected) {
+        background-color: $option-hover-bg-color;
     }
 }

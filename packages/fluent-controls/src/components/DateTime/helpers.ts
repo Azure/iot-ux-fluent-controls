@@ -1,3 +1,5 @@
+export {hasClassName} from '../../Common';
+
 export enum DateFormat {
     MMDDYYYY = 0,
     DDMMYYYY,
@@ -27,10 +29,6 @@ export const formatDate = (date: Date, format: DateFormat) => {
     let day = date.getDate();
     let dayString = day > 9 ? `${day}` : `0${day}`;
     return formatters[format](`${date.getFullYear()}`, monthString, dayString);
-};
-
-export const hasClassName = (target, className) => {
-    return ` ${target.className} `.indexOf(` ${className} `) > -1;
 };
 
 export const replaceAt = (value: string, index: number, newValue: string) => {
