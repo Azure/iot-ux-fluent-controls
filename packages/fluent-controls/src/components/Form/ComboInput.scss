@@ -24,12 +24,12 @@ $postfix-background: md-color(shade, c);
         @include md-box(block, relative);
         width: 100%;
         height: 32px;
-        padding: 8px 8px 8px 12px;
+        padding: 8px 32px 8px 12px;
         border: $inactive-border;
         outline: none;
 
         &:valid {
-            padding: 8px 12px 8px 12px;
+            padding: 8px 36px 8px 12px;
         }
 
         &:hover {
@@ -40,7 +40,7 @@ $postfix-background: md-color(shade, c);
             border: $default-border;
 
             &:valid {
-                padding-right: 32px;
+                padding-right: 68px;
 
                 + .cancel {
                     color: $cancel-default-color;
@@ -101,7 +101,7 @@ $postfix-background: md-color(shade, c);
         line-height: 16px;
         padding: 4px;
         top: 4px;
-        right: 8px;
+        right: 40px;
         border: none;
         background-color: transparent;
         outline: none;
@@ -111,6 +111,29 @@ $postfix-background: md-color(shade, c);
         &:active {
             color: $cancel-default-color;
             pointer-events: auto;
+        }
+    }
+
+    .chevron {
+        @include md-box(inline-block, absolute);
+        font-size: $font-size-small;
+        width: 16px;
+        height: 16px;
+        padding: 4px;
+        top: 4px;
+        right: 8px;
+        outline: none;
+        pointer-events: none;
+        cursor: pointer;
+    }
+
+    .dropdown {
+        @include md-box(display-none, absolute);
+        left: 0px;
+        top: 100%;
+
+        &.visible {
+            display: inline-block;
         }
     }
 }
