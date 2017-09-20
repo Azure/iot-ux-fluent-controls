@@ -1,4 +1,6 @@
 export * from './FormField';
+export * from './CheckboxField';
+export * from './CheckboxInput';
 export * from './RadioField';
 export * from './RadioInput';
 export * from './SelectField';
