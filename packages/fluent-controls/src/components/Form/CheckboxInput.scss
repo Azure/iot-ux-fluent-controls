@@ -112,16 +112,16 @@ $fill-disabled: md-color(shade, a);
     @include md-box(block, relative);
     font-family: $font-family-base;
     font-size: $font-size-text;
-    line-height: 16px;
+    line-height: 4*$grid;
 
     & + &:not(.columns) {
-        margin-top: 12px;
+        margin-top: 3*$gutter;
     }
 
     &.columns {
         display: inline-block;
             
-        margin-right: 8px;
+        margin-right: 2*$gutter;
     }
 
     input {
@@ -135,29 +135,29 @@ $fill-disabled: md-color(shade, a);
     .checkbox-text {
         @include md-box(inline-block, relative);
         vertical-align: top;
-        padding-left: 8px;
+        padding-left: 2*$gutter;
     }
 
     .checkbox-fill {
         @include md-box(display-none, absolute);
-        left: 6px;
-        top: 6px;
-        width: 4px;
-        height: 4px;
+        left: 1.5*$gutter;
+        top: 1.5*$gutter;
+        width: $grid;
+        height: $grid;
     }
 
     .checkbox-border {
         @include md-box(inline-block, absolute);
         left: -2px;
         top: -2px;
-        width: 20px;
-        height: 20px;
+        width: 5*$grid;
+        height: 5*$grid;
     }
 
     .checkbox-button {
         @include md-box(inline-block, relative);
-        width: 16px;
-        height: 16px;
+        width: 4*$grid;
+        height: 4*$grid;
         outline: none;
         vertical-align: top;
     }
@@ -168,8 +168,8 @@ $fill-disabled: md-color(shade, a);
 
     .checkbox-checkmark {
         @include md-box(display-none, absolute);
-        font-size: 12px;
-        line-height: 12px;
+        font-size: 3*$grid;
+        line-height: 3*$grid;
         left: 2px;
     }
 
