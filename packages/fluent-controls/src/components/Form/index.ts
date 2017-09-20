@@ -1,3 +1,5 @@
+export * from './ComboInput';
+export * from './ComboField';
 export * from './FormField';
 export * from './RadioField';
 export * from './RadioInput';

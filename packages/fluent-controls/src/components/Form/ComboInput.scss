@@ -6,9 +6,17 @@ $cancel-color: md-color(shade, 6);
 $dropdown-border: 1px solid md-color(shade, c);
 $dropdown-bg-color: md-color(shade, f);
 
+$option-color: md-color(shade, 2);
+$option-disabled-color: md-color(shade, 8);
+$option-active-color: md-color(shade, f);
+$option-selected-color: md-color(selected, dark);
 $option-bg-color: md-color(shade, f);
+$option-active-bg-color: md-color(shade, 0);
 $option-selected-bg-color: md-color(selected, default);
+$option-hover-selected-bg-color: md-color(selected, hover);
 $option-hover-bg-color: md-color(shade, d);
+
+$dropdown-z-index: $z-index-medium-step;
 
 .combo-input-container {
     @include md-box(flex, relative);
@@ -32,34 +40,20 @@ $option-hover-bg-color: md-color(shade, d);
         border: $inactive-border;
         outline: none;
 
-        &:valid {
-            padding: 8px 36px 8px 12px;
-        }
-
         &:hover {
             border: $default-border;
         }
-    
-        &:focus {
+
+        &:focus, &:active, &.visible {
             border: $default-border;
 
-            &:valid {
-                padding-right: 68px;
-
-                + .cancel {
-                    color: $cancel-default-color;
-                    pointer-events: auto;
-                }
+            &:not(.disabled) {
+                padding-right: 64px;
             }
-        }
 
-        &:active {
-            border: $default-border;
-
-            &:valid {
-                padding-right: 32px;
-
+            &:valid:not(.disabled) {
                 + .cancel {
+                    display: inline-block;
                     color: $cancel-default-color;
                     pointer-events: auto;
                 }
@@ -99,20 +93,20 @@ $option-hover-bg-color: md-color(shade, d);
     }
 
     .cancel {
-        @include md-box(absolute);
+        @include md-box(display-none, absolute);
         color: $cancel-color;
-        font-size: $font-size-small;
+        font-size: $font-size-text;
         line-height: 16px;
         padding: 4px;
         top: 4px;
-        right: 40px;
+        right: 32px;
         border: none;
         background-color: transparent;
         outline: none;
         pointer-events: none;
         cursor: pointer;
 
-        &:active {
+        &:active, &:focus {
             color: $cancel-default-color;
             pointer-events: auto;
         }
@@ -137,6 +131,8 @@ $option-hover-bg-color: md-color(shade, d);
         left: 0px;
         top: 100%;
         width: 100%;
+        padding: 4px 0px;
+        z-index: $dropdown-z-index;
     
         &.visible {
             display: inline-block;
@@ -147,15 +143,48 @@ $option-hover-bg-color: md-color(shade, d);
 
     .option {
         @include md-box(block);
-        cursor: pointer;
+        width: 100%;
+        height: 32px;
+        line-height: 32px;
+        padding: 0px 12px;
+
+        border: none;
+        box-shadow: none;
+        outline: none;
+        border-radius: 0px;
+        text-align: left;
+        
         background-color: $option-bg-color;
+        
+        color: $option-color;
+
+        &:not(.disabled) {
+            cursor: pointer;
+        }
+
+        &.selected {
+            color: $option-selected-color;
+            background-color: $option-selected-bg-color;
+        }
+
+        &.hover:not(.disabled) {
+            &:not(.selected) {
+                background-color: $option-hover-bg-color;
+            }
+
+            &.selected {
+                background-color: $option-hover-selected-bg-color;
+            }
+
+            &:active {
+                color: $option-active-color;
+                background-color: $option-active-bg-color;
+            }
+        }
+        
+        &.disabled {
+            color: $option-disabled-color;
+        }
     }
 
-    .option.selected {
-        background-color: $option-selected-bg-color;
-    }
-
-    .option.hover:not(.selected) {
-        background-color: $option-hover-bg-color;
-    }
 }
