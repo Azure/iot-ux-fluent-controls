@@ -338,7 +338,7 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
 
         const clearButton = this.props.disabled ? '' :
             <button
-                className={css('cancel', 'icon icon-cancelLegacy')}
+                className={css('cancel', 'icon icon-cancel')}
                 onClick={() => {
                     this.inputElement.focus();
                     this.props.onChange('');
