@@ -1,0 +1,10 @@
+@import '../../common/overrides';
+@import '../../common/mixins';
+
+.time-container {
+    @include md-box(inline-block, relative);
+    font-family: $font-family-base;
+    display: block;
+    
+
+}
