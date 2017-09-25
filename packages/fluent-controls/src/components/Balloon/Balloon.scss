@@ -171,7 +171,7 @@ $balloon-z-index: $z-index-medium-step;
     }
 }
 
-.balloon-container:hover {
+.balloon-container:hover, .balloon-container.is-expanded {
     .balloon {
         display: inline;
     }

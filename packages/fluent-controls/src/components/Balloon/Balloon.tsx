@@ -45,6 +45,8 @@ export interface BalloonProps extends React.Props<BalloonType> {
     className?: string;
     /** Classname to append to inner balloon element */
     balloonClassName?: string;
+    /** Forces the balloon to be expanded */
+    expanded?: boolean;
 }
 
 /**
@@ -83,7 +85,7 @@ export const Balloon: React.StatelessComponent<BalloonProps> = (props: BalloonPr
     }
     const balloonClassName = css('balloon', `${position}-${align}`, props.balloonClassName);
     const innerClassName = css('inner-container', {'multiline': props.multiline});
-    const containerClassName = css('balloon-container', props.className);
+    const containerClassName = css('balloon-container', props.className, { 'is-expanded': props.expanded });
 
     return (
         <span className={containerClassName}>
