@@ -12,8 +12,18 @@ export interface TimeInputProps extends React.Props<TimeInputType> {
     /** Value */
     value?: string | Date;
 
+    /**
+     * Treat the Date object with the local timezone
+     *
+     * Default: true
+     */
+    localTimezone?: boolean;
+    /** Display the seconds dropdown */
+    showSeconds?: boolean;
     /** Use 24 hour clock */
     militaryTime?: boolean;
+    /** Apply error styling */
+    error?: boolean;
     /** Disable input */
     disabled?: boolean;
 
@@ -27,10 +37,10 @@ export interface TimeInputProps extends React.Props<TimeInputType> {
 }
 
 export interface TimeInputState {
-    hours: number,
-    minutes: number,
-    seconds: number,
-    period: 'AM' | 'PM' | '24H',   
+    hours: number;
+    minutes: number;
+    seconds: number;
+    period: 'AM' | 'PM' | '24H';
 }
 
 /**
@@ -40,8 +50,10 @@ export interface TimeInputState {
  */
 export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
     static defaultProps = {
+        showSeconds: false,
         militaryTime: false,
         disabled: false,
+        localTimezone: true
     };
 
     hours: FormOption[];
@@ -51,27 +63,19 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
 
     constructor(props: TimeInputProps) {
         super(props);
-        let time;
-        if (props.value) {
-            time = typeof(props.value) === 'string' ? new Date(props.value) : props.value;
-        } else {
-            time = new Date();
-            time = new Date(Date.UTC(
-                time.getUTCFullYear(),
-                time.getUTCMonth(),
-                time.getUTCDate(),
-                0, 0, 0, 0
-            ));
-        }
+        const time = this.handleTimezone(props.value);
 
-        const hours = !isNaN(time.getUTCHours()) ? time.getUTCHours() : 0;
-        const minutes = time.getUTCMinutes();
-        const seconds = time.getUTCSeconds();
+        const hoursTz = this.props.localTimezone ? time.getHours() : time.getUTCHours();
+        const hours = !isNaN(hoursTz) ? hoursTz : 0;
+        const minutesTz = this.props.localTimezone ? time.getMinutes() : time.getUTCMinutes();
+        const minutes = !isNaN(minutesTz) ? minutesTz : 0;
+        const secondsTz = this.props.localTimezone ? time.getSeconds() : time.getUTCSeconds();
+        const seconds = !isNaN(secondsTz) ? secondsTz : 0;
         this.state = {
-            hours: !props.militaryTime && hours > 11 ? hours - 12 : hours,
+            hours: !this.props.militaryTime && hours > 11 ? hours - 12 : hours,
             minutes: !isNaN(minutes) ? minutes : 0,
             seconds: !isNaN(seconds) ? seconds : 0,
-            period: props.militaryTime ? '24H' : (hours < 12 ? 'AM' : 'PM')
+            period: this.props.militaryTime ? '24H' : (hours < 12 ? 'AM' : 'PM')
         };
 
         const numHours = props.militaryTime ? 24 : 12;
@@ -92,7 +96,32 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
         this.options = [
             {label: 'AM', value: 'AM'},
             {label: 'PM', value: 'PM'}
-        ]
+        ];
+    }
+
+    handleTimezone(value: string | Date): Date {
+        let time;
+        if (value) {
+            time = typeof(value) === 'string' ? new Date(value) : value;
+        } else {
+            time = new Date();
+            if (this.props.localTimezone) {
+                time = new Date(
+                    time.getFullYear(),
+                    time.getMonth(),
+                    time.getDate(),
+                    0, 0, 0, 0
+                );
+            } else {
+                time = new Date(Date.UTC(
+                    time.getUTCFullYear(),
+                    time.getUTCMonth(),
+                    time.getUTCDate(),
+                    0, 0, 0, 0
+                ));
+            }
+        }
+        return time;
     }
 
     componentWillReceiveProps(newProps) {
@@ -113,10 +142,10 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
     }
 
     update(name: 'hours' | 'minutes' | 'seconds' | 'period', value: string | number, period?: 'AM' | 'PM' | '24H') {
-        const date = new Date();
+        const date = this.handleTimezone(this.props.value);
         const newState = {...this.state};
         if (name !== 'period') {
-            newState[name] = typeof(value) === 'string' ? parseInt(value): value;
+            newState[name] = typeof(value) === 'string' ? parseInt(value) : value;
         } else if (value === 'AM' || value === 'PM') {
             newState.period = value;
         }
@@ -124,42 +153,102 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             newState.period = period;
         }
 
-        const hours = newState.hours;
-        this.props.onChange(new Date(Date.UTC(
-            date.getUTCFullYear(),
-            date.getUTCMonth(),
-            date.getUTCDate(),
-            !this.props.militaryTime && newState.period === 'PM' ? hours + 12 : hours,
-            newState.minutes,
-            newState.seconds
-        )).toUTCString());
+        const hours = !this.props.militaryTime && newState.period === 'PM' 
+            ? newState.hours + 12 : newState.hours;
+        
+        if (this.props.localTimezone) {
+            /** This is required incase the component consumer wants to track the date */
+            date.setHours(hours);
+            date.setMinutes(newState.minutes);
+            date.setSeconds(newState.seconds);
+            this.props.onChange(new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes(),
+                date.getSeconds()
+            ).toUTCString());
+        } else {
+            /** This is required incase the component consumer wants to track the date */
+            date.setUTCHours(hours);
+            date.setUTCMinutes(newState.minutes);
+            date.setUTCSeconds(newState.seconds);
+            this.props.onChange(new Date(Date.UTC(
+                date.getUTCFullYear(),
+                date.getUTCMonth(),
+                date.getUTCDate(),
+                date.getUTCHours(),
+                date.getUTCMinutes(),
+                date.getUTCSeconds()
+            )).toUTCString());
+        }
         this.setState(newState);
     }
 
     render() {
-        const inputClassName = css('time-input', this.props.inputClassName);
+        const hours = this.state.hours < 10 ? `0${this.state.hours}` : this.state.hours;
+        const minutes = this.state.minutes < 10 ? `0${this.state.minutes}` : this.state.minutes;
+        const seconds = this.state.seconds < 10 ? `0${this.state.seconds}` : this.state.seconds;
+        const inputClassName = css('time-input', {'error': this.props.error}, this.props.inputClassName);
 
-        const period = this.props.militaryTime ? '' : <SelectInput
+        const optionMap = (option) => {
+            return <option
+                value={option.value}
+                key={option.value}
+                disabled={option.disabled}
+                hidden={option.hidden}
+            >
+                {option.label}
+            </option>;
+        };
+
+        const period = this.props.militaryTime ? '' : <select 
             name={this.props.name}
             value={this.state.period}
-            options={this.options}
-            onChange={value => this.update('period', value)}
+            disabled={this.props.disabled}
+            onChange={event => this.update('period', event.target.value)}
+            className={css(inputClassName, 'time-period')}
+        >
+            <option value='AM'>AM</option>
+            <option value='PM'>PM</option>
+        </select>;
+
+        const secondsInput = this.props.showSeconds !== true ? '' : <select 
+            name={this.props.name}
+            value={seconds}
+            disabled={this.props.disabled}
+            onChange={event => this.update('seconds', event.target.value)}
             className={inputClassName}
-        />;
+        >
+            {this.seconds.map(option => optionMap(option))}
+        </select>;
 
         return (
             <div className={css('time-container', this.props.className)} >
-                <SelectInput
+                <select 
                     name={this.props.name}
-                    value={this.state.hours}
-                    options={this.hours}
-                    onChange={value => this.update('hours', value)}
+                    value={hours}
+                    disabled={this.props.disabled}
+                    onChange={event => this.update('hours', event.target.value)}
                     className={inputClassName}
-                />
+                >
+                    {this.hours.map(option => optionMap(option))}                    
+                </select>
+                <select 
+                    name={this.props.name}
+                    value={minutes}
+                    disabled={this.props.disabled}
+                    onChange={event => this.update('minutes', event.target.value)}
+                    className={inputClassName}
+                >
+                    {this.minutes.map(option => optionMap(option))}                
+                </select>
+                {secondsInput}
                 {period}        
             </div>
         );
     }
-};
+}
 
 export default TimeInput;

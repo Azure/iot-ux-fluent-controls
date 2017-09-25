@@ -1,66 +1,117 @@
-```jsx
-const TextInput = require('./TextInput').TextInput;
+### Default Example with Local Timezone
 
+```jsx
 const initialState = {
-    field1: '',
-    field2: '',
-    field3: '',
-    field4: '',
-    field5: '',
-    field6: '',
+    value: 'Mon, 25 Sep 2017 03:07:00 GMT'
 };
 
 <div>
-    <FormField name='form-field1' label='Label 1'>
-        <TextInput
-            name='form-field1'
-            value={state.field1}
-            placeholder='Field 1'
-            onChange={(newValue) => setState({field1: newValue})}
-        />
-    </FormField>
-    <FormField name='form-field2' label='Label 2' required>
-        <TextInput
-            name='form-field2'
-            value={state.field2}
-            placeholder='Field 2'
-            onChange={(newValue) => setState({field2: newValue})}
-        />
-    </FormField>
-    <FormField name='form-field3' label='Label 3' required error='This field is required'>
-        <TextInput
-            name='form-field3'
-            value={state.field3}
-            placeholder='Field 3'
-            onChange={(newValue) => setState({field3: newValue})}
-            error
-        />
-    </FormField>
-    <FormField name='form-field4' label='Label 4' required loading>
-        <TextInput
-            name='form-field4'
-            value={state.field4}
-            placeholder='Field 4'
-            onChange={(newValue) => setState({field4: newValue})}
-        />
-    </FormField>
-    <FormField name='form-field5' label='Label 5' >
-        <TextInput
-            name='form-field5'
-            value={state.field5}
-            placeholder='Field 5'
-            onChange={(newValue) => setState({field5: newValue})}
-            disabled
-        />
-    </FormField>
-    <FormField name='form-field6' label='Label 6' required error='This field is required' hideError>
-        <TextInput
-            name='form-field6'
-            value={state.field6}
-            placeholder='Field 6'
-            onChange={(newValue) => setState({field6: newValue})}
-            error
-        />
-    </FormField>
+    <div style={{marginBottom: '20px'}}>
+        Current value:  {state.value}
+    </div>
+    <TimeInput
+        name="time-input-0"
+        value={state.value}
+        onChange={newValue => setState({value: newValue})}
+    />
+</div>
+```
+
+### Default Example with GMT Timezone
+```jsx
+const initialState = {
+    value: 'Mon, 25 Sep 2017 03:07:00 GMT'
+};
+
+<div>
+    <div style={{marginBottom: '20px'}}>
+        Current value:  {state.value}
+    </div>
+    <TimeInput
+        name="time-input-1"
+        value={state.value}
+        onChange={newValue => setState({value: newValue})}
+        localTimezone={false}
+    />
+</div>
+```
+
+### Military Time Example with Local Timezone
+```jsx
+const initialState = {
+    value: 'Mon, 25 Sep 2017 03:07:00 GMT'
+};
+
+<div>
+    <div style={{marginBottom: '20px'}}>
+        Current value:  {state.value}
+    </div>
+    <TimeInput
+        name="time-input-1"
+        value={state.value}
+        onChange={newValue => setState({value: newValue})}
+        militaryTime={true}
+    />
+</div>
+```
+
+### Military Time Example with GMT Timezone
+```jsx
+const initialState = {
+    value: 'Mon, 25 Sep 2017 03:07:00 GMT'
+};
+
+<div>
+    <div style={{marginBottom: '20px'}}>
+        Current value:  {state.value}
+    </div>
+    <TimeInput
+        name="time-input-1"
+        value={state.value}
+        onChange={newValue => setState({value: newValue})}
+        militaryTime={true}
+        localTimezone={false}
+    />
+</div>
+```
+
+### Example with Seconds Field
+
+```jsx
+const initialState = {
+    value: 'Mon, 25 Sep 2017 03:07:00 GMT'
+};
+
+<div>
+    <div style={{marginBottom: '20px'}}>
+        Current value:  {state.value}
+    </div>
+    <TimeInput
+        name="time-input-1"
+        value={state.value}
+        onChange={newValue => setState({value: newValue})}
+        showSeconds={true}
+    />
+</div>
+```
+
+### Military Time Example with Seconds Field
+
+```jsx
+const initialState = {
+    value: 'Mon, 25 Sep 2017 03:07:00 GMT'
+};
+
+<div>
+    <div style={{marginBottom: '20px'}}>
+        Current value:  {state.value}
+    </div>
+    <TimeInput
+        name="time-input-1"
+        value={state.value}
+        onChange={newValue => setState({value: newValue})}
+        showSeconds={true}
+        militaryTime={true}
+    />
 </div>
 ```

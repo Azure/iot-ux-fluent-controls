@@ -171,3 +171,42 @@ const initialState = {
     />
 </div>
 ```
+
+
+### Error Example
+
+```jsx
+class ComboError extends React.Component {
+    constructor(props) {
+        super(props);
+        this.options = [
+            {label: 'Label 1', value: 'Option 1'},
+            {label: 'Label 2', value: 'Option 2'},
+            {label: 'Label 3', value: 'Option 3'},
+            {label: 'Label 4', value: 'Option 4', hidden: true},
+            {label: 'Label 5', value: 'Option 5', disabled: true},
+        ];
+
+        this.state = {value: 'text'};
+    }
+    render() {
+
+        return <div>
+            <div style={{marginBottom: '20px'}}>
+                Current value:  {
+                    typeof(this.state.value) === 'string' ? `"${this.state.value}"`
+                        : <pre>{JSON.stringify(this.state.value, null, 2)}</pre>
+                }
+            </div>
+            <ComboInput
+                name="combo-input"
+                value={this.state.value}
+                onChange={newValue => this.setState({value: newValue})}
+                options={this.options}
+                placeholder='Example placeholder'
+            />
+        </div>;
+    }
+}
+<ComboError />
+```
