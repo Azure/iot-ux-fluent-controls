@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {MethodNode, FormOption} from '../../Common';
+import {MethodNode, FormOption, keyCode} from '../../Common';
 import {SelectInput} from '../Form/SelectInput';
 const css = classNames.bind(require('./TimeInput.scss'));
 
@@ -13,7 +13,7 @@ export interface TimeInputProps extends React.Props<TimeInputType> {
     value?: string | Date;
 
     /**
-     * Treat the Date object with the local timezone
+     * Show the time in the local timezone instead of GMT
      *
      * Default: true
      */

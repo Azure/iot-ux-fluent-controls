@@ -20,7 +20,6 @@ $z-index-focus: 2*$z-index-small-step;
 
 .time-input {
     @include md-box(inline-block, relative);
-    width: 12*$grid;
     text-align: center;
 }
 
@@ -30,11 +29,12 @@ $z-index-focus: 2*$z-index-small-step;
 
     color: $text-default-color;
     font-size: $font-size-text;
-    line-height: 16px;
+    line-height: 4*$grid;
 
     .time-input {
         @include md-box();
-        height: 32px;
+        width: 12*$grid;
+        height: 8*$grid;
         border: $inactive-border;
         outline: none;
         -webkit-appearance: none;
@@ -46,7 +46,7 @@ $z-index-focus: 2*$z-index-small-step;
         margin-left: -1px;
 
         option {
-            height: 32px;
+            height: 8*$grid;
             padding: 0px 4*$gutter;
 
             &:first {
