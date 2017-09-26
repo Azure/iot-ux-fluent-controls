@@ -61,7 +61,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
         const value = this.props.value;
 
         return (
-            <div className={css('textarea-container')}>
+            <div className={css('textarea-container', this.props.className)}>
                 <textarea
                     name={this.props.name}
                     value={value}
