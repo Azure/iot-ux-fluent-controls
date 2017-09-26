@@ -23,6 +23,8 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
 
     /** Classname to append to top level element */
     className?: string;
+    /** Classname to append to top level error element */
+    errorClassName?: string;
 }
 
 /**
@@ -52,7 +54,7 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
             <div className={css('content')}>
                 {props.children}
             </div>
-            <FormError hidden={props.hideError}>
+            <FormError className={props.errorClassName} hidden={props.hideError}>
                 {error}
             </FormError>
         </div>
