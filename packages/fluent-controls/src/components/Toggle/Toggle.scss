@@ -34,6 +34,9 @@ $switch-transition: 75ms ease-in-out;
 
 $border-z-index: $z-index-small-step;
 
+$border-radius: 10px;
+$switch-border-radius: 5px;
+
 .toggle {
     @include md-box(inline-block, relative);
 
@@ -43,10 +46,10 @@ $border-z-index: $z-index-small-step;
         outline: none;
         border: $off-border;
         background-color: $off-background-color;
-        border-radius: 10px;
+        border-radius: $border-radius;
 
-        width: 40px;
-        height: 20px;
+        width: 10*$grid;
+        height: 5*$grid;
         
         &:hover {
             border: $off-hover-border;
@@ -60,12 +63,12 @@ $border-z-index: $z-index-small-step;
 
     .toggle-switch {
         @include md-box(block, absolute);
-        left: 5px;
-        top: 6px;
+        left: 1.5*$gutter;
+        top: 1.5*$gutter;
 
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
+        width: 2.5*$grid;
+        height: 2.5*$grid;
+        border-radius: $switch-border-radius;
 
         background-color: $switch-on-color;
         transition: $switch-transition;
@@ -77,8 +80,8 @@ $border-z-index: $z-index-small-step;
         @include md-box(display-none, absolute);
         top: -1px;
         left: -2px;
-        width: 44px;
-        height: 24px;
+        width: 11*$grid;
+        height: 6*$grid;
 
         border: $focus-border;
         z-index: $border-z-index;
@@ -87,10 +90,10 @@ $border-z-index: $z-index-small-step;
 
     .toggle-label { 
         @include md-box(inline-block, relative);
-        margin-left: 8px;
+        margin-left: 2*$gutter;
 
         font-family: $font-family-base;
-        font-size: 14px;
+        font-size: $font-size-text;
         color: $label-color;
 
         vertical-align: top;
