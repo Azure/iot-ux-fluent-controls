@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, IconSize, IconBackground} from '../Icon';
+import {Icon, IconSize} from '../Icon';
 import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./TextInput.scss'));
 
