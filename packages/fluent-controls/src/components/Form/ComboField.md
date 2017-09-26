@@ -1,6 +1,6 @@
 ### Combo Field
 
-`ComboField` is a hybrid of the SelectField and TextField controls. It functions as a "new or existing" text field where the user can type in a custom value or pick from a list of values provided by the control.
+`ComboField` is a hybrid of the SelectField and TextField controls. It functions as a 'new or existing' text field where the user can type in a custom value or pick from a list of values provided by the control.
 
 `ComboField` consumes the property `options: FormOption[]` which specify each option's `value` and `label`. The former can be any object while the latter can be any React node (or a string). `ComboField` also consumes a `value: string | FormOption` property that sets the current value of the `ComboField` text field. If `value` is a `string`, the user is typing in a custom value and if it is an object, the user has either typed in a value equal to one of the options or has selected an option from the dropdown list.
 
@@ -26,13 +26,13 @@ const initialState = {
 <div>
     <div style={{marginBottom: '20px'}}>
         Current value:  {
-            typeof(state.value) === 'string' ? `"${state.value}"`
+            typeof(state.value) === 'string' ? `'${state.value}'`
                 : <pre>{JSON.stringify(state.value, null, 2)}</pre>
         }
     </div>
     <ComboField
-        name="combo-field1"
-        label="Combo Field 1"
+        name='combo-field1'
+        label='Combo Field 1'
         value={state.value}
         onChange={newValue => setState({value: newValue})}
         options={state.options}
@@ -64,13 +64,13 @@ const initialState = {
 <div>
     <div style={{marginBottom: '20px', height: '64px', overflowY: 'scroll'}}>
         Current value:  {
-            typeof(state.value) === 'string' ? `"${state.value}"`
+            typeof(state.value) === 'string' ? `'${state.value}'`
                 : <pre>{JSON.stringify(state.value, null, 2)}</pre>
         }
     </div>
     <ComboField
-        name="combo-field2"
-        label="Combo Field 2"
+        name='combo-field2'
+        label='Combo Field 2'
         options={state.options}
         value={state.value}
         onChange={newValue => setState({value: newValue})}
@@ -128,13 +128,13 @@ const initialState = {
 <div>
     <div style={{marginBottom: '20px', height: '64px', overflowY: 'scroll'}}>
         Current value:  {
-            typeof(state.value) === 'string' ? `"${state.value}"`
+            typeof(state.value) === 'string' ? `'${state.value}'`
                 : <pre>{JSON.stringify(state.value, null, 2)}</pre>
         }
     </div>
     <ComboField
-        name="combo-field3"
-        label="Combo Field 3"
+        name='combo-field3'
+        label='Combo Field 3'
         options={state.options}
         value={state.value}
         onChange={newValue => setState({value: newValue})}
@@ -162,12 +162,12 @@ const initialState = {
 
 <div>
     <ComboField
-        name="combo-field4"
-        label="Combo Field 4"
+        name='combo-field4'
+        label='Combo Field 4'
         value={state.options[0].value}
         onChange={newValue => setState({value: newValue})}
         options={state.options}
-        error="This is an error!"
+        error='This is an error!'
     />
 </div>
 ```
@@ -188,8 +188,8 @@ const initialState = {
 
 <div>
     <ComboField
-        name="combo-field5"
-        label="Combo Field 5"
+        name='combo-field5'
+        label='Combo Field 5'
         value={state.options[0].value}
         onChange={newValue => setState({value: newValue})}
         options={state.options}

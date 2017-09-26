@@ -1,6 +1,6 @@
 ### Combo Input
 
-`ComboInput` is a hybrid of the SelectInput and TextInput controls. It functions as a "new or existing" text field where the user can type in a custom value or pick from a list of values provided by the control.
+`ComboInput` is a hybrid of the SelectInput and TextInput controls. It functions as a 'new or existing' text field where the user can type in a custom value or pick from a list of values provided by the control.
 
 `ComboInput` consumes the property `options: FormOption[]` which specify each option's `value` and `label`. The former can be any object while the latter can be any React node (or a string). `ComboInput` also consumes a `value: string | FormOption` property that sets the current value of the `ComboInput` text field. If `value` is a `string`, the user is typing in a custom value and if it is an object, the user has either typed in a value equal to one of the options or has selected an option from the dropdown list.
 
@@ -26,12 +26,12 @@ const initialState = {
 <div>
     <div style={{marginBottom: '20px'}}>
         Current value:  {
-            typeof(state.value) === 'string' ? `"${state.value}"`
+            typeof(state.value) === 'string' ? `'${state.value}'`
                 : <pre>{JSON.stringify(state.value, null, 2)}</pre>
         }
     </div>
     <ComboInput
-        name="combo-input"
+        name='combo-input'
         value={state.value}
         onChange={newValue => setState({value: newValue})}
         options={state.options}
@@ -63,12 +63,12 @@ const initialState = {
 <div>
     <div style={{marginBottom: '20px', height: '64px', overflowY: 'scroll'}}>
         Current value:  {
-            typeof(state.value) === 'string' ? `"${state.value}"`
+            typeof(state.value) === 'string' ? `'${state.value}'`
                 : <pre>{JSON.stringify(state.value, null, 2)}</pre>
         }
     </div>
     <ComboInput
-        name="combo-input"
+        name='combo-input'
         options={state.options}
         value={state.value}
         onChange={newValue => setState({value: newValue})}
@@ -125,12 +125,12 @@ const initialState = {
 <div>
     <div style={{marginBottom: '20px', height: '64px', overflowY: 'scroll'}}>
         Current value:  {
-            typeof(state.value) === 'string' ? `"${state.value}"`
+            typeof(state.value) === 'string' ? `'${state.value}'`
                 : <pre>{JSON.stringify(state.value, null, 2)}</pre>
         }
     </div>
     <ComboInput
-        name="combo-input"
+        name='combo-input'
         options={state.options}
         value={state.value}
         onChange={newValue => setState({value: newValue})}
@@ -158,12 +158,12 @@ const initialState = {
 <div>
     <div style={{marginBottom: '20px', height: '64px', overflowY: 'scroll'}}>
         Current value:  {
-            typeof(state.value) === 'string' ? `"${state.value}"`
+            typeof(state.value) === 'string' ? `'${state.value}'`
                 : <pre>{JSON.stringify(state.value, null, 2)}</pre>
         }
     </div>
     <ComboInput
-        name="combo-input"
+        name='combo-input'
         value={state.options[0].value}
         onChange={newValue => setState({value: newValue})}
         options={state.options}
