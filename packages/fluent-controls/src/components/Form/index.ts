@@ -2,6 +2,7 @@ export * from './CheckboxField';
 export * from './CheckboxInput';
 export * from './ComboInput';
 export * from './ComboField';
+export * from './FormError';
 export * from './FormField';
 export * from './NumberField';
 export * from './RadioField';
