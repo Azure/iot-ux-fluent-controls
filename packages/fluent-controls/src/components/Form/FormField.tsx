@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
 import {HorizontalLoader} from '../Loader';
+import {FormError} from './FormError';
 const css = classNames.bind(require('./Field.scss'));
 
 export interface FormFieldType {}
@@ -51,9 +52,9 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
             <div className={css('content')}>
                 {props.children}
             </div>
-            <div className={css('field-error', {'hidden': props.hideError})}>
+            <FormError hidden={props.hideError}>
                 {error}
-            </div>
+            </FormError>
         </div>
     );
 };
