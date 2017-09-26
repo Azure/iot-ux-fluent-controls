@@ -54,7 +54,7 @@ $focus-border: 1px dashed md-color(shade, 3);
         vertical-align: bottom;
         margin-left: 2*$gutter;
 
-        max-width: 200px;
+        max-width: 50*$grid;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
