@@ -15,8 +15,6 @@ $text-error-color: md-color(text, error);
     font-family: $font-family-base;
     font-size: $font-size-text;
     line-height: 20px;
-    
-    margin-bottom: 4px;
 
     &.disabled {
         color: $text-disabled-color;
@@ -26,12 +24,16 @@ $text-error-color: md-color(text, error);
         content: ' *';
         color: $text-error-color;
     }
+
+    & + .content {
+        margin-top: $gutter;    
+    }
 }
 
 .field-error {
     @include md-box(inline-block, ellipsis);
-    height: 20px;
-    margin-top: 4px;
+    height: 5*$grid;
+    margin-top: $gutter;
     width: 100%;
     
     color: $text-error-color;

@@ -53,12 +53,36 @@ const initialState = {
             disabled
         />
     </FormField>
-    <FormField name='form-field6' label='Label 6' required error='This field is required' hideError>
+    <FormField name='form-field6' error='This field is required!'>
         <TextInput
             name='form-field6'
             value={state.field6}
             placeholder='Field 6'
             onChange={(newValue) => setState({field6: newValue})}
+        />
+    </FormField>
+    <FormField name='form-field7' error='This field is required!'>
+        <TextInput
+            name='form-field7'
+            value={state.field7}
+            placeholder='Field 7'
+            onChange={(newValue) => setState({field7: newValue})}
+        />
+    </FormField>
+    <FormField name='form-field8' error='This field is required!' hideError>
+        <TextInput
+            name='form-field8'
+            value={state.field8}
+            placeholder='Field 8'
+            onChange={(newValue) => setState({field8: newValue})}
+        />
+    </FormField>
+    <FormField name='form-field9' label='Label 9' required error='This field is required' hideError>
+        <TextInput
+            name='form-field9'
+            value={state.field9}
+            placeholder='Field 9'
+            onChange={(newValue) => setState({field9: newValue})}
             error
         />
     </FormField>

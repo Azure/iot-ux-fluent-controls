@@ -10,7 +10,7 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     /** HTML element name for label accessibility */
     name: string;
     /** Label to display above input element */
-    label: MethodNode;
+    label?: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
     /** Display horizontal loading animation instead of error */
@@ -40,12 +40,17 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
         error = <HorizontalLoader dots={6} />;
     }
 
+    const label = props.label ? 
+        <label className={css('label')} htmlFor={props.name} >
+            {props.label}
+        </label> : '';
+
     return (
         <div className={containerClass} >
-            <label className={css('label')} htmlFor={props.name} >
-                {props.label}
-            </label>
-            {props.children}
+            {label}
+            <div className={css('content')}>
+                {props.children}
+            </div>
             <div className={css('field-error', {'hidden': props.hideError})}>
                 {error}
             </div>

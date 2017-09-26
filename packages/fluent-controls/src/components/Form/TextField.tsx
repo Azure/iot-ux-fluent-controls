@@ -42,7 +42,7 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     required?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
-
+    
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
 

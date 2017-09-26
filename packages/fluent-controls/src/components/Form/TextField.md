@@ -38,8 +38,29 @@ const initialState = {
     />
     <TextField
         name='form-field5'
-        label='Label 5'
+        label=''
         placeholder='Field 5'
+        onChange={(newValue) => setState({field4: newValue})}
+    />
+    <TextField
+        name='form-field6'
+        label=''
+        placeholder='Field 6'
+        onChange={(newValue) => setState({field4: newValue})}
+        error='This is an error'
+    />
+    <TextField
+        name='form-field7'
+        label=''
+        placeholder='Field 7'
+        onChange={(newValue) => setState({field4: newValue})}
+        error='This is an error'
+        hideError
+    />
+    <TextField
+        name='form-field8'
+        label='Label 5'
+        placeholder='Field 8'
         onChange={(newValue) => setState({field5: newValue})}
         disabled
     />
