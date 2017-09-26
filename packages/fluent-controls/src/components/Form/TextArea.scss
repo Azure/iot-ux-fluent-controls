@@ -1,0 +1,50 @@
+@import 'common';
+
+.textarea {
+    @include md-box(block, relative);
+    width: 100%;
+    padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
+    
+    font-family: $font-family-base;
+    color: $default-text-color;
+    font-size: $font-size-text;
+    line-height: 20px;
+    
+    border: $inactive-border;
+    outline: none;
+
+    &:hover {
+        border: $default-border;
+    }
+
+    &:focus {
+        border: $default-border;
+    }
+
+    &:active {
+        border: $default-border;
+    }
+    
+    &:disabled {
+        color: $disabled-text-color;
+        border: $disabled-border;
+        background-color: $disabled-background-color;
+    }
+
+    &::selection {
+        color: $selection-text-color;
+        background-color: $selection-background-color;
+    }
+
+    &.error:not(:disabled) {
+        border: $error-border;
+    }
+
+    &::-ms-clear {
+        display: none;
+    }
+
+    &:invalid {
+        -moz-mox-shadow: none;
+    }
+}
