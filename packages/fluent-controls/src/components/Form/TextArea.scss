@@ -1,8 +1,21 @@
 @import 'common';
 
+.textarea-container {
+    @include md-box(block, relative);
+
+    .textarea-ghost {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        visibility: hidden;
+    }
+}
+
 .textarea {
     @include md-box(block, relative);
     width: 100%;
+    min-height: 13*$grid;
     padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
     
     font-family: $font-family-base;
@@ -29,6 +42,14 @@
         color: $disabled-text-color;
         border: $disabled-border;
         background-color: $disabled-background-color;
+
+        &::placeholder {
+            color: $disabled-text-color;
+        }
+    }
+
+    &::placeholder {
+        color: $placeholder-text-color;
     }
 
     &::selection {
