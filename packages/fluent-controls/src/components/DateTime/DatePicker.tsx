@@ -13,7 +13,12 @@ export interface DatePickerType {}
 export interface DatePickerProps extends React.Props<DatePickerType> {
     /** HTML form element name */
     name: string;
-    /** Initial value of date picker */
+    /**
+     * Initial value of date picker
+     * 
+     * The onChange callback API does not receives invalid Date UTC ISO strings
+     * so we can only provide an initialValue to the DatePicker
+     */
     initialValue?: Date | string;
 
     /** Tab index for calendar control */
@@ -38,7 +43,14 @@ export interface DatePickerProps extends React.Props<DatePickerType> {
     /** Date format in text input */
     format?: DateFormat;
 
-    /** Callback for HTML input element `onChange` events */
+    /**
+     * Callback for HTML input element `onChange` events
+     * 
+     * When the user enters a valid date, onChange receives a UTC ISO string.
+     * 
+     * When the string value in the text input is not a valid date, onChange
+     * receives the string "invalid"
+     * */
     onChange: (newValue: string) => void;
 
     /** Class to append to top level element */
