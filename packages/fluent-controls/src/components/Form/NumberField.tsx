@@ -71,7 +71,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
                 postfixClassName={props.postfixClassName}
                 error={!!props.error}
                 disabled={props.disabled}
-                onChange={value => props.onChange(parseInt(value)) }
+                onChange={value => props.onChange(value ? parseInt(value) : null) }
                 className={props.inputClassName}
             />
         </FormField>
