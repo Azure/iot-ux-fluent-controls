@@ -3,6 +3,7 @@ export * from './CheckboxInput';
 export * from './ComboInput';
 export * from './ComboField';
 export * from './FormField';
+export * from './NumberField';
 export * from './RadioField';
 export * from './RadioInput';
 export * from './SelectField';
