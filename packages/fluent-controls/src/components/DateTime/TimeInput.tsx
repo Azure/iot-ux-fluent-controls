@@ -11,6 +11,8 @@ export interface TimeInputProps extends React.Props<TimeInputType> {
     name: string;
     /** Value */
     value?: string | Date;
+    /** FormOptions for AM/PM dropdown */
+    periodOptions?: FormOption[];
 
     /**
      * Show the time in the local timezone instead of GMT
@@ -93,7 +95,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             this.seconds.push({label: value, value: value});
         }
 
-        this.options = [
+        this.options = props.periodOptions ? props.periodOptions : [
             {label: 'AM', value: 'AM'},
             {label: 'PM', value: 'PM'}
         ];
