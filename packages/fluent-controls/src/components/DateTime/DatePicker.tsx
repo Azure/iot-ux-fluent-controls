@@ -30,8 +30,6 @@ export interface DatePickerProps extends React.Props<DatePickerType> {
     /**
      * Treat the Date object with the local timezone
      *
-     * (UNIMPLEMENTED)
-     *
      * Default: true
      */
     localTimezone?: boolean;
@@ -87,11 +85,34 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
 
         let value = '';
         let invalid = false;
+        const newDate = new Date();
+        let dateValue = this.props.localTimezone
+            ? newDate
+            : new Date(Date.UTC(
+                newDate.getUTCFullYear(),
+                newDate.getUTCMonth(),
+                newDate.getUTCDate(),
+                newDate.getUTCHours(),
+                newDate.getUTCMinutes(),
+                newDate.getUTCSeconds()
+            )
+        );
         if (props.initialValue) {
             if (typeof props.initialValue === 'string') {
                 const date = new Date(props.initialValue);
                 if (helpers.dateIsValid(date)) {
-                    value = helpers.formatDate(date, props.format);
+                    const newDateValue = this.props.localTimezone
+                        ? date : new Date(Date.UTC(
+                            date.getUTCFullYear(),
+                            date.getUTCMonth(),
+                            date.getUTCDate(),
+                            date.getUTCHours(),
+                            date.getUTCMinutes(),
+                            date.getUTCSeconds(),
+                        )
+                    );
+                    value = helpers.formatDate(newDateValue, props.format);
+                    dateValue = newDateValue;
                 } else {
                     value = props.initialValue;
                     invalid = true;
@@ -100,6 +121,18 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 value = helpers.formatDate(props.initialValue, props.format);
                 if (!helpers.dateIsValid(props.initialValue)) {
                     invalid = true;
+                } else {
+                    dateValue = this.props.localTimezone
+                        ? props.initialValue
+                        : new Date(Date.UTC(
+                            props.initialValue.getUTCFullYear(),
+                            props.initialValue.getUTCMonth(),
+                            props.initialValue.getUTCDate(),
+                            props.initialValue.getUTCHours(),
+                            props.initialValue.getUTCMinutes(),
+                            props.initialValue.getUTCSeconds()
+                        )
+                    );
                 }
             }
         }
@@ -108,7 +141,8 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             value: value,
             visible: false,
             invalid: invalid,
-            error: false
+            error: false,
+            dateValue: dateValue
         };
 
         this.inputElement = null;
@@ -134,7 +168,16 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         }
         if (oldState.value !== this.state.value) {
             if (this.state.dateValue) {
-                const date = new Date(this.state.dateValue);
+                const date = this.props.localTimezone
+                    ? new Date(this.state.dateValue)
+                    : new Date(Date.UTC(
+                        this.state.dateValue.getUTCFullYear(),
+                        this.state.dateValue.getUTCMonth(),
+                        this.state.dateValue.getUTCDate(),
+                        this.state.dateValue.getUTCHours(),
+                        this.state.dateValue.getUTCMinutes(),
+                        this.state.dateValue.getUTCSeconds(),
+                    ));
                 this.props.onChange(date.toUTCString());
             } else {
                 this.props.onChange('invalid');
@@ -288,8 +331,27 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         }
 
         if (valid) {
-            let parsed = new Date(year, month - 1, date);
-            if (month !== parsed.getMonth() + 1 || date !== parsed.getDate()) {
+            let parsed = this.props.localTimezone
+                ? new Date(
+                    year,
+                    month - 1,
+                    date,
+                    this.state.dateValue.getHours(),
+                    this.state.dateValue.getMinutes(),
+                    this.state.dateValue.getSeconds()
+                )
+                : new Date(Date.UTC(
+                    year,
+                    month - 1,
+                    date,
+                    this.state.dateValue.getUTCHours(),
+                    this.state.dateValue.getUTCMinutes(),
+                    this.state.dateValue.getUTCSeconds()
+            ));
+            const isNotValid = this.props.localTimezone
+                ? (month !== parsed.getMonth() + 1 || date !== parsed.getDate())
+                : (month !== parsed.getUTCMonth() + 1 || date !== parsed.getUTCDate());
+            if (isNotValid) {
                 valid = false;
             }
         }
@@ -300,7 +362,24 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         let newValue = event.target.value;
         let invalid = this.state.invalid;
         if (this.paste) {
-            const date = new Date(newValue);
+            const parsedDate = new Date(newValue);
+            const date = this.props.localTimezone
+                ? new Date(
+                    parsedDate.getFullYear(),
+                    parsedDate.getMonth(),
+                    parsedDate.getDate(),
+                    this.state.dateValue.getHours(),
+                    this.state.dateValue.getMinutes(),
+                    this.state.dateValue.getSeconds()
+                )
+                : new Date(Date.UTC(
+                    parsedDate.getUTCFullYear(),
+                    parsedDate.getUTCMonth(),
+                    parsedDate.getUTCDate(),
+                    this.state.dateValue.getUTCHours(),
+                    this.state.dateValue.getUTCMinutes(),
+                    this.state.dateValue.getUTCSeconds()
+            ));
             if (helpers.dateIsValid(date)) {
                 invalid = false;
                 newValue = helpers.formatDate(date, this.props.format);
@@ -369,7 +448,23 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 value: newValue,
                 invalid: false,
                 error: false,
-                dateValue: new Date(result.year, result.month - 1, result.date)
+                dateValue: this.props.localTimezone
+                    ? new Date(
+                        result.year,
+                        result.month,
+                        result.date,
+                        this.state.dateValue.getHours(),
+                        this.state.dateValue.getMinutes(),
+                        this.state.dateValue.getSeconds()
+                    )
+                    : new Date(Date.UTC(
+                        result.year,
+                        result.month,
+                        result.date,
+                        this.state.dateValue.getUTCHours(),
+                        this.state.dateValue.getUTCMinutes(),
+                        this.state.dateValue.getUTCSeconds()
+                ))
             });
         } else {
             this.setState({ value: newValue, invalid: invalid, error: true });
@@ -420,11 +515,28 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
     }
 
     onSelect(newValue: Date) {
+        const date = this.props.localTimezone
+            ? new Date(
+                newValue.getFullYear(),
+                newValue.getMonth(),
+                newValue.getDate(),
+                this.state.dateValue.getHours(),
+                this.state.dateValue.getMinutes(),
+                this.state.dateValue.getSeconds()
+            )
+            : new Date(Date.UTC(
+                newValue.getUTCFullYear(),
+                newValue.getUTCMonth(),
+                newValue.getUTCDate(),
+                this.state.dateValue.getUTCHours(),
+                this.state.dateValue.getUTCMinutes(),
+                this.state.dateValue.getUTCSeconds()
+            ));
         this.setState({
             value: helpers.formatDate(newValue, this.props.format),
             error: false,
             visible: false,
-            dateValue: new Date(newValue)
+            dateValue: date
         });
     }
 

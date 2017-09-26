@@ -15,6 +15,13 @@ export interface CalendarProps extends React.Props<CalendarComponentType> {
     /** Month to display (otherwise shows the month from value) */
     month?: number;
 
+    /**
+     * Treat the Date object with the local timezone
+     *
+     * Default: true
+     */
+    localTimezone?: boolean;
+
     /** Tab index of calendar buttons */
     tabIndex?: number;
 
@@ -41,6 +48,7 @@ export interface CalendarState {
  */
 export class Calendar extends React.Component<CalendarProps, CalendarState> {
     static defaultProps = {
+        localTimezone: true,
         tabIndex: -1
     };
 
@@ -57,10 +65,18 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
             currentDate = this.props.value;
         }
         if (props.month === 0 || props.month > 0) {
-            currentDate.setMonth(props.month);
+            if (props.localTimezone) {
+                currentDate.setMonth(props.month);
+            } else {
+                currentDate.setUTCMonth(props.month);
+            }
         }
         if (props.year > 0) {
-            currentDate.setFullYear(props.year);
+            if (props.localTimezone) {
+                currentDate.setFullYear(props.year);
+            } else {
+                currentDate.setUTCFullYear(props.year);
+            }
         }
 
         this.state = {
@@ -77,14 +93,22 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         const date = new Date(this.state.currentDate);
         let update = false;
         if (newProps.year !== this.props.year && newProps.year > 0) {
-            date.setFullYear(newProps.year);
+            if (this.props.localTimezone) {
+                date.setFullYear(newProps.year);
+            } else {
+                date.setUTCFullYear(newProps.year);
+            }
             update = true;
         }
         if (
             newProps.month !== this.props.month &&
             (newProps.month === 0 || newProps.month > 0)
         ) {
-            date.setMonth(newProps.month);
+            if (this.props.localTimezone) {
+                date.setMonth(newProps.month);
+            } else {
+                date.setUTCMonth(newProps.month);
+            }
             update = true;
         }
         if (update && !this.state.detached && helpers.dateIsValid(date)) {
@@ -107,7 +131,9 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
 
         /** Dates are mutable so we're going to copy it over */
         const date = this.state.currentDate;
-        const newDate = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+        const newDate = this.props.localTimezone
+            ? new Date(date.getFullYear(), date.getMonth() - 1, 1)
+            : new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() - 1, 1));
 
         this.setState({currentDate: newDate, detached: true});
     }
@@ -117,7 +143,9 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
 
         /** Dates are mutable so we're going to copy it over */
         const date = this.state.currentDate;
-        const newDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+        const newDate = this.props.localTimezone
+            ? new Date(date.getFullYear(), date.getMonth() + 1, 1)
+            : new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 1));
 
         this.setState({currentDate: newDate, detached: true});
     }
@@ -127,9 +155,15 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         const colClassName = css('disabled');
         const tabIndex = this.props.tabIndex;
 
-        const curYear = this.state.currentDate.getFullYear();
-        const curMonth = this.state.currentDate.getMonth();
-        const curDate = this.state.currentDate.getDate();
+        const curYear = this.props.localTimezone
+            ? this.state.currentDate.getFullYear()
+            : this.state.currentDate.getUTCFullYear();
+        const curMonth = this.props.localTimezone
+            ? this.state.currentDate.getMonth()
+            : this.state.currentDate.getUTCMonth();
+        const curDate = this.props.localTimezone
+            ? this.state.currentDate.getDate()
+            : this.state.currentDate.getUTCDate();
         const curDay = this.state.currentDate.getDay();
 
         const weekdays = this.dayNames.map(day => {
@@ -142,8 +176,13 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         let end = new Date(curYear, curMonth + 1, 0);
         let rows = [], row = [];
 
-        start.setDate(start.getDate() - start.getDay());
-        end.setDate(end.getDate() + (6 - end.getDay()));
+        if (this.props.localTimezone) {
+            start.setDate(start.getDate() - start.getDay());
+            end.setDate(end.getDate() + (6 - end.getDay()));
+        } else {
+            start.setUTCDate(start.getUTCDate() - start.getDay());
+            end.setUTCDate(end.getUTCDate() + (6 - end.getDay()));
+        }
 
         while (start <= end) {
             // We have to copy the date, otherwise it will get modified in place
@@ -152,7 +191,11 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                 rows.push(row);
                 row = [];
             }
-            start.setDate(start.getDate() + 1);
+            if (this.props.localTimezone) {
+                start.setDate(start.getDate() + 1);
+            } else {
+                start.setUTCDate(start.getUTCDate() + 1);
+            }
         }
 
         const content = rows.map((row, rowIndex) => {
@@ -161,10 +204,11 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                     this.onClick(col);
                     event.preventDefault();
                 };
-                const date = col.getDate();
+                const date = this.props.localTimezone ? col.getDate() : col.getUTCDate();
 
+                const colMonth = this.props.localTimezone ? col.getMonth() : col.getUTCMonth();
                 /** Grayed out day from another month */
-                if (col.getMonth() !== curMonth) {
+                if (colMonth !== curMonth) {
                     return (
                         <button
                             className={colClassName}
@@ -179,10 +223,14 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
 
                 /** Selected day */
                 if (this.props.value) {
-                    const isSelected = (
+                    const isSelected = this.props.localTimezone ? (
                         date === this.props.value.getDate() &&
                         col.getMonth() === this.props.value.getMonth() &&
                         col.getFullYear() === this.props.value.getFullYear()
+                    ) : (
+                        date === this.props.value.getUTCDate() &&
+                        col.getUTCMonth() === this.props.value.getUTCMonth() &&
+                        col.getUTCFullYear() === this.props.value.getUTCFullYear()
                     );
                     if (isSelected) {
                         return (
@@ -242,4 +290,5 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         );
     }
 }
+
 export default Calendar;
