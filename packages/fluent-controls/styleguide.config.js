@@ -16,6 +16,8 @@ module.exports = {
   assetsDir: './static/',
   webpackConfig: require('./webpack.styleguide.js'),
 
+  styleguideDir: './static/docs/',
+
   require: [
     path.join(__dirname, './static/css/icons.css'),
     path.join(__dirname, './static/css/examples.css'),
