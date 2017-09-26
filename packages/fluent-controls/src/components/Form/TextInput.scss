@@ -23,13 +23,13 @@ $postfix-background: md-color(shade, c);
     .input {
         @include md-box(block, relative);
         width: 100%;
-        height: 32px;
-        padding: 8px 8px 8px 12px;
+        height: 8*$grid;
+        padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
         border: $inactive-border;
         outline: none;
 
         &:valid {
-            padding: 8px 12px 8px 12px;
+            padding: 2*$gutter 3*$gutter 2*$gutter 3*$gutter;
         }
 
         &:hover {
@@ -39,8 +39,8 @@ $postfix-background: md-color(shade, c);
         &:focus {
             border: $default-border;
 
-            &:valid {
-                padding-right: 32px;
+            &:valid:not(.no-cancel) {
+                padding-right: 8*$gutter;
 
                 + .cancel {
                     color: $cancel-default-color;
@@ -52,8 +52,8 @@ $postfix-background: md-color(shade, c);
         &:active {
             border: $default-border;
 
-            &:valid {
-                padding-right: 32px;
+            &:valid:not(.no-cancel) {
+                padding-right: 8*$gutter;
 
                 + .cancel {
                     color: $cancel-default-color;
@@ -99,9 +99,9 @@ $postfix-background: md-color(shade, c);
         color: transparent;
         font-size: $font-size-small;
         line-height: 16px;
-        padding: 4px;
-        top: 4px;
-        right: 8px;
+        padding: $gutter;
+        top: $gutter;
+        right: 2*$gutter;
         border: none;
         background-color: transparent;
         outline: none;
@@ -112,15 +112,19 @@ $postfix-background: md-color(shade, c);
             color: $cancel-default-color;
             pointer-events: auto;
         }
+
+        &.no-cancel {
+            display: none;
+        }
     }
 
     .prefix {
         @include md-box(table-cell, relative);
         color: $prefix-color;
-        padding-right: 8px;
+        padding-right: 2*$gutter;
         
-        height: 32px;
-        line-height: 32px;
+        height: 8*$grid;
+        line-height: 8*$grid;
 
         white-space: nowrap;
         
@@ -130,10 +134,10 @@ $postfix-background: md-color(shade, c);
     .postfix {
         @include md-box(inline-block, relative);
         color: $prefix-color;
-        padding-left: 8px;
+        padding-left: 2*$gutter;
         
-        height: 32px;
-        line-height: 32px;
+        height: 8*$grid;
+        line-height: 8*$grid;
 
         white-space: nowrap;
         
@@ -149,7 +153,7 @@ $postfix-background: md-color(shade, c);
     background-color: $prefix-background;
     color: $prefix-color;
 
-    padding-right: 8px;
+    padding-right: 2*$gutter;
 }
 
 .postfix-addon {
@@ -157,7 +161,7 @@ $postfix-background: md-color(shade, c);
     border-top: $inactive-border;
     border-bottom: $inactive-border;
     
-    padding-left: 8px;
+    padding-left: 2*$gutter;
     
     background-color: $prefix-background;
     color: $prefix-color;

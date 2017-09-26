@@ -54,11 +54,10 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
     const inputContainerClassName = css('input-container');
     const inputClassName = css({
         'input': true,
-        'error': props.error
+        'error': props.error,
+        'no-cancel': props.type === 'number'
     });
-    const cancelClassName = css(
-        'cancel', 'icon icon-cancelLegacy'
-    );
+    const cancelClassName = css('cancel', 'icon icon-cancelLegacy');
 
     const onChange = (event) => {
         if (props.value !== event.target.value) {
@@ -67,7 +66,7 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
         event.stopPropagation();
     };
 
-    const clearButton = props.disabled ? '' :
+    const clearButton = props.disabled || props.type === 'number' ? '' :
         <button
             className={cancelClassName}
             onClick={() => props.onChange('')}
