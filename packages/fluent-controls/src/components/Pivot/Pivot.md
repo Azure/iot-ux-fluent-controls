@@ -9,5 +9,7 @@ const pivotClassName = require('./Pivot').pivotClassName;
     <a href='#' className={ pivotClassName }><Pivot icon='error' text='Pivot 3' disabled/></a>
     <a href='#' className={ pivotClassName }><Pivot text='Pivot 4'/></a>
     <a href='#' className={ pivotClassName }><Pivot text='Pivot 4' selected disabled/></a>
+    <a href='#' className={ pivotClassName }><Pivot text='View Connection Information' selected /></a>
+    <a href='#' className={ pivotClassName }><Pivot text='View Connection Information Information' selected /></a>
 </div>
 ```

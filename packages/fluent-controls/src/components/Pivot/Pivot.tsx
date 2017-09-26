@@ -54,8 +54,7 @@ export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
             {contents}
             <div className={borderClassName}></div>
             <div className={focusClassName}></div>
-            <div className={innerClassName}>
-            </div>
+            <div className={innerClassName}></div>
         </div>
     );
 };
