@@ -28,6 +28,8 @@ export interface GalleryCardProps extends React.Props<GalleryCardType> {
 
     /** Classname to append to top level element */
     className?: string;
+    /** Classname to append to content element */
+    contentClassName?: string;
     /** Data test hook string for testing */
     dataTestHook?: string;
 }
@@ -50,7 +52,7 @@ export const GalleryCard: React.StatelessComponent<GalleryCardProps> = (props: G
 
     let contentClassName = css({
         'card-content': true,
-    });
+    }, props.contentClassName);
 
     let outputProps: any = {
         className: classNames

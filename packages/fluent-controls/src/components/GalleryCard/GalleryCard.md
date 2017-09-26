@@ -14,6 +14,12 @@ const SolidBackground = require('./SolidBackground').SolidBackground;
         </GalleryCard>
     </a>
     <a href='#'>
+        <GalleryCard banner='This is a very long banner. This is a very long banner. This is a very long banner. '>
+            <header>Header</header>
+            <section>Content</section>
+        </GalleryCard>
+    </a>
+    <a href='#'>
         <GalleryCard disabled>
             <header>Header</header>
             <section>Content</section>

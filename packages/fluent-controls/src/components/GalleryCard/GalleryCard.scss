@@ -32,7 +32,7 @@ a:focus .card:not(.disabled) {
   @include md-box(inline-block, relative, hidden);
   background-color: $background-default-color;
   border: $card-default-border;
-  margin: 10px;
+  margin: 2.5*$gutter;
 
   &:hover:not(.disabled) {
     border: $card-hover-border;
@@ -89,8 +89,8 @@ a:focus .card:not(.disabled) {
     font-size: 16px;
     line-height: 20px;
     color: $text-header-color;
-    margin-bottom: 4px;
-    flex: 0 0 20px;
+    margin-bottom: $gutter;
+    flex: 0 0 5*$grid;
   }
 
   section {
@@ -98,13 +98,13 @@ a:focus .card:not(.disabled) {
     font-size: 13px;
     line-height: 16px;
     color: $text-section-color;
-    margin-bottom: 16px;
+    margin-bottom: 4*$gutter;
   }
   
   footer {
     font-size: $font-size-text;
     line-height: 20px;
-    flex: 0 0 16px;
+    flex: 0 0 4*$grid;
   }
   
   .fixed & {
@@ -118,10 +118,12 @@ a:focus .card:not(.disabled) {
   top: 0px;
   left: 0px;
   right: 0px;
-  padding: 4px;
+  padding: $gutter;
   background-color: $background-banner-color;
   color: $text-banner-color;
   font-family: $font-family-base;
+  overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
   text-align: center;
 }
