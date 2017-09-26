@@ -52,7 +52,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
 
     componentDidUpdate(prevProps: TextAreaProps, prevState: TextAreaState) {
         const height = this.ghost.offsetHeight;
-        if (prevProps.value !== this.props.value && height > 52) {
+        if (this.props.autogrow && prevProps.value !== this.props.value && height > 52) {
             this.textarea.style.height = `${height}px`;
         }
     }
@@ -71,12 +71,14 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     placeholder={this.props.placeholder}
                     ref={element => this.textarea = element}
                 />
-                <pre
-                    className={css('textarea', 'textarea-ghost')}
-                    ref={element => this.ghost = element}
-                >
-                    {value + (value[value.length - 1] === '\n' ? '\n' : '')}
-                </pre>
+                {this.props.autogrow ? 
+                    <pre
+                        className={css('textarea', 'textarea-ghost')}
+                        ref={element => this.ghost = element}
+                    >
+                        {value + (value[value.length - 1] === '\n' ? '\n' : '')}
+                    </pre> 
+                : ''}
             </div>
         );
     }
