@@ -16,18 +16,19 @@ $menu-border: 1px solid md-color(shade, d);
 .pivot {
     @include md-box(inline-block);
     outline: none;    
-    margin-left: 20px;
+    margin-left: 5*$gutter;
 }
 
 .pivot-menu {
     @include md-box(block, relative);
     border-bottom: $menu-border;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .pivot-container {
     @include md-box(inline-block, relative);
     padding: 0px 1px 0px 1px;
-
 
     .pivot-icon, .pivot-icon-label {
         @include md-box();
@@ -38,7 +39,7 @@ $menu-border: 1px solid md-color(shade, d);
     }
 
     .pivot-icon-label {
-        margin-left: 8px;
+        margin-left: 2*$gutter;
         font-family: $font-family-base;
         font-size: 14px;
         line-height: 16px;
@@ -82,8 +83,8 @@ $menu-border: 1px solid md-color(shade, d);
         @extend .pivot-icon-label;
         visibility: hidden;        
         white-space: nowrap;
-        min-height: 28px;
-        max-height: 48px;
+        min-height: 7*$grid;
+        max-height: 12*$grid;
     }
 
     .pivot-icon + .pivot-icon {
@@ -98,8 +99,8 @@ $menu-border: 1px solid md-color(shade, d);
         @extend .pivot-icon-label;
         visibility: hidden;        
         white-space: nowrap;
-        min-height: 28px;
-        max-height: 48px;
+        min-height: 7*$grid;
+        max-height: 12*$gutter;
     }
 
     .pivot-label + .pivot-label {
@@ -111,13 +112,13 @@ $menu-border: 1px solid md-color(shade, d);
 
     .focus-border {
         @include md-box(block, absolute);
-        left: -4px;
-        right: -4px;
+        left: -1*$gutter;
+        right: -1*$gutter;
 
         top: 50%;
         transform: translate(0, -50%);
         
-        height: 18px;
+        height: 4.5*$grid;
     }
 
     .pivot-border {
@@ -125,6 +126,6 @@ $menu-border: 1px solid md-color(shade, d);
         left: 0px;
         width: 100%;
         bottom: 0px;
-        height: 10px;
+        height: 2.5*$grid;
     }
 }
