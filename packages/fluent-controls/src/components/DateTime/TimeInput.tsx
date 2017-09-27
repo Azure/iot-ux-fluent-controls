@@ -55,7 +55,8 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
         showSeconds: false,
         militaryTime: false,
         disabled: false,
-        localTimezone: true
+        localTimezone: true,
+        periodOptions: null
     };
 
     hours: FormOption[];
@@ -65,20 +66,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
 
     constructor(props: TimeInputProps) {
         super(props);
-        const time = this.handleTimezone(props.value);
-
-        const hoursTz = this.props.localTimezone ? time.getHours() : time.getUTCHours();
-        const hours = !isNaN(hoursTz) ? hoursTz : 0;
-        const minutesTz = this.props.localTimezone ? time.getMinutes() : time.getUTCMinutes();
-        const minutes = !isNaN(minutesTz) ? minutesTz : 0;
-        const secondsTz = this.props.localTimezone ? time.getSeconds() : time.getUTCSeconds();
-        const seconds = !isNaN(secondsTz) ? secondsTz : 0;
-        this.state = {
-            hours: !this.props.militaryTime && hours > 11 ? hours - 12 : hours,
-            minutes: !isNaN(minutes) ? minutes : 0,
-            seconds: !isNaN(seconds) ? seconds : 0,
-            period: this.props.militaryTime ? '24H' : (hours < 12 ? 'AM' : 'PM')
-        };
+        this.state = this.handleState(props);
 
         const numHours = props.militaryTime ? 24 : 12;
         this.hours = [];
@@ -101,10 +89,37 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
         ];
     }
 
+    handleState(props: TimeInputProps): TimeInputState {
+        const time = this.handleTimezone(props.value);
+        
+        const hoursTz = this.props.localTimezone ? time.getHours() : time.getUTCHours();
+        const hours = !isNaN(hoursTz) ? hoursTz : 0;
+        const minutesTz = this.props.localTimezone ? time.getMinutes() : time.getUTCMinutes();
+        const minutes = !isNaN(minutesTz) ? minutesTz : 0;
+        const secondsTz = this.props.localTimezone ? time.getSeconds() : time.getUTCSeconds();
+        const seconds = !isNaN(secondsTz) ? secondsTz : 0;
+        return {
+            hours: !this.props.militaryTime && hours > 11 ? hours - 12 : hours,
+            minutes: !isNaN(minutes) ? minutes : 0,
+            seconds: !isNaN(seconds) ? seconds : 0,
+            period: this.props.militaryTime ? '24H' : (hours < 12 ? 'AM' : 'PM')
+        };
+    }
+
     handleTimezone(value: string | Date): Date {
         let time;
         if (value) {
             time = typeof(value) === 'string' ? new Date(value) : value;
+            time = this.props.localTimezone
+                ? time
+                : new Date(Date.UTC(
+                    time.getUTCFullYear(),
+                    time.getUTCMonth(),
+                    time.getUTCDate(),
+                    time.getUTCHours(),
+                    time.getUTCMinutes(),
+                    time.getUTCSeconds()
+                ));
         } else {
             time = new Date();
             if (this.props.localTimezone) {
@@ -127,6 +142,15 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
     }
 
     componentWillReceiveProps(newProps) {
+        let newState: any = {};
+        let update = false;
+        let newHours = this.state.hours;
+        if (newProps.value !== this.props.value) {
+            newState = this.handleState(newProps);
+            newHours = newState.hours;
+            update = true;
+        }
+
         if (this.props.militaryTime !== newProps.militaryTime) {
             const numHours = newProps.militaryTime ? 24 : 12;
             this.hours = [];
@@ -135,11 +159,18 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                 this.hours.push({label: value, value: value});
             }
 
-            const hours = !newProps.militaryTime && this.state.hours > 11
-                 ? this.state.hours - 12 : this.state.hours;
+            const hours = !newProps.militaryTime && newHours > 11
+                 ? newHours - 12 : newHours;
             const period = newProps.militaryTime ? '24H'
-                : (this.state.hours > 11 ? 'PM' : 'AM');
-            this.update('hours', hours, period);
+                : (newHours > 11 ? 'PM' : 'AM');
+            
+            newState.hours = hours;
+            newState.period = period;
+            update = true;
+        }
+        
+        if (update) {
+            this.setState(newState);
         }
     }
 

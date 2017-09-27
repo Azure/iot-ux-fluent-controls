@@ -1,0 +1,17 @@
+@import '../../common/overrides';
+@import '../../common/mixins';
+
+.datetime-field {
+    .date-picker, .time-picker {
+        @include md-box(inline-block, relative);
+        width: 50%;
+    }
+    
+    .date-picker {
+        padding-right: $gutter;        
+    }
+
+    .time-picker {
+        padding-left: $gutter;
+    }
+}
