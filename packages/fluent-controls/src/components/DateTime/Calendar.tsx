@@ -111,7 +111,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
             }
             update = true;
         }
-        if (update && !this.state.detached && helpers.dateIsValid(date)) {
+        if (update && !this.state.detached && helpers.dateIsValid(date, this.props.localTimezone)) {
             this.setState({currentDate: date});
         }
     }

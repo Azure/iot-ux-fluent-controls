@@ -23,22 +23,23 @@ const formatters = [
     (year: string, month: string, day: string) => `${year}/${month}/${day}`,
 ];
 
-export const formatDate = (date: Date, format: DateFormat) => {
-    let month = date.getMonth() + 1;
-    let monthString = month > 9 ? `${month}` : `0${month}`;
-    let day = date.getDate();
-    let dayString = day > 9 ? `${day}` : `0${day}`;
-    return formatters[format](`${date.getFullYear()}`, monthString, dayString);
+export const formatDate = (date: Date, format: DateFormat, localTimezone: boolean) => {
+    const month = (localTimezone ? date.getMonth() : date.getUTCMonth()) + 1;
+    const monthString = month > 9 ? `${month}` : `0${month}`;
+    const day = localTimezone ? date.getDate() : date.getUTCDate();
+    const dayString = day > 9 ? `${day}` : `0${day}`;
+    const year = localTimezone ? date.getFullYear() : date.getUTCFullYear();
+    return formatters[format](`${year}`, monthString, dayString);
 };
 
 export const replaceAt = (value: string, index: number, newValue: string) => {
     return value.substr(0, index) + newValue + value.substr(index, +value.length);
 };
 
-export const dateIsValid = (date: Date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const day = date.getDate();
+export const dateIsValid = (date: Date, localTimezone: boolean) => {
+    const year = localTimezone ? date.getFullYear() : date.getUTCFullYear();
+    const month = localTimezone ? date.getMonth() : date.getUTCMonth();
+    const day = localTimezone ? date.getDate() : date.getUTCDate();
     return (
         !isNaN(year) && !isNaN(month) && !isNaN(day) &&
         year > 0 && month >= 0 && month < 12 &&
