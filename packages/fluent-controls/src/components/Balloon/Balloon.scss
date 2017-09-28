@@ -3,7 +3,7 @@
 
 // Spec says 8px but setting to 8.5px to deal with browser rounding errors
 $balloon-border: 8.5px solid md-color(shade, 3);
-$transparent-border: 8.5px solid md-color(transparent);
+$transparent-border: 8.5px solid md-color(inherit);
 
 $background-default-color: md-color(shade, 3);
 
@@ -15,74 +15,59 @@ $balloon-z-index: $z-index-medium-step;
     &:before {
         content:'';
         display:block;
-        width:0;
-        height:0;
+        width: 2*$grid;
+        height: 2*$grid;
+        background-color: inherit;
+        position: absolute;
+        transform: rotateZ(45deg);
         
-        position:absolute;
-
         @if $location == 'top' {
-            top: -7.5px;
+            top: -1*$gutter;
             @if $offset == 'start' {
-                left: 8px;
+                left: 3*$gutter;
             } @else if $offset == 'end' {
-                right: 8px;
+                right: 3*$gutter;
             } @else {
                 left: 50%;
-                transform: translate(-50%, 0);
+                transform: translateX(-50%) rotateZ(45deg);
             }
-        
-            border-left: $transparent-border;
-            border-right: $transparent-border;    
-            border-bottom: $balloon-border;
         } @else if $location == 'left' {
-            left: -7.5px;
+            left: -1*$gutter;
             @if $offset == 'start' {
-                top: 8px;
+                top: 3*$gutter;
             } @else if $offset == 'end' {
-                bottom: 8px;
+                bottom: 3*$gutter;
             } @else {
                 top: 50%;
-                transform: translate(0, -50%);
+                transform: translateY(-50%) rotateZ(45deg);
             }
-        
-            border-top: $transparent-border;
-            border-bottom: $transparent-border;    
-            border-right: $balloon-border;
         } @else if $location == 'right' {
-            right: -7.5px;
+            right: -1*$gutter;
             @if $offset == 'start' {
-                top: 8px;
+                top: 3*$gutter;
             } @else if $offset == 'end' {
-                bottom: 8px;
+                bottom: 3*$gutter;
             } @else {
                 top: 50%;
-                transform: translate(0, -50%);
+                transform: translateY(-50%) rotateZ(45deg);
             }
-        
-            border-top: $transparent-border;
-            border-bottom: $transparent-border;    
-            border-left: $balloon-border;
         } @else {
-            bottom: -7.5px;
+            bottom: -1*$gutter;
             @if $offset == 'start' {
-                left: 8px;
+                left: 3*$gutter;
             } @else if $offset == 'end' {
-                right: 8px;
+                right: 3*$gutter;
             } @else {
                 left: 50%;
-                transform: translate(-50%, 0);
+                transform: translateX(-50%) rotateZ(45deg);
             }
-        
-            border-top: $balloon-border;
-            border-left: $transparent-border;    
-            border-right: $transparent-border;
         }
     }
 }
 
 @mixin position($location, $offset: 'center') {
     @if $location == 'top' {
-        top: -12px;
+        top: -3*$gutter;
         @if $offset == 'start' {
             left: 0px;
             transform: translate(0, -100%);
@@ -94,31 +79,31 @@ $balloon-z-index: $z-index-medium-step;
             transform: translate(-50%, -100%);
         }
     } @else if $location == 'left' {
-        left: -12px;
+        left: -3*$gutter;
         @if $offset == 'start' {
-            top: -6px;
+            top: -1.5*$gutter;
             transform: translate(-100%);
         } @else if $offset == 'end' {
-            bottom: -6px;
+            bottom: -1.5*$gutter;
             transform: translate(-100%);
         } @else {
             top: 50%;
             transform: translate(-100%, -50%);
         }
     } @else if $location == 'right' {
-        right: -12px;
+        right: -3*$gutter;
         @if $offset == 'start' {
-            top: -6px;
+            top: -1.5*$gutter;
             transform: translate(100%);
         } @else if $offset == 'end' {
-            bottom: -6px;
+            bottom: -1.5*$gutter;
             transform: translate(100%);
         } @else {
             top: 50%;
             transform: translate(100%, -50%);
         }
     } @else {
-        bottom: -12px;
+        bottom: -3*$gutter;
         @if $offset == 'start' {
             left: 0px;
             transform: translate(0, 100%);
@@ -133,41 +118,45 @@ $balloon-z-index: $z-index-medium-step;
 }
 
 .balloon-container {
-    display: inline-block;
+    @include md-box(inline-block);
+    
     text-decoration: none;
     position: relative;
 
-    .balloon {
-        display: none;
-        position: absolute;
-        z-index: $balloon-z-index;
-        font-family: $font-family-base;
-        padding: 12px 16px 16px 16px;
-        background-color: $background-default-color;
-        color: $text-default-color;
-        box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
-        
-        .inner-container {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+}
 
-            &.multiline {
-                white-space: normal;
-            }
-        }
-        
-        header + section {
-            margin-top: 16px;
-        }
-        
-        section + section {
-            margin-top: 16px;
-        }
+.balloon {
+    display: none;
+    position: absolute;
+    z-index: $balloon-z-index;
+    font-family: $font-family-base;
+    padding: 3*$gutter 4*$gutter 4*$gutter 4*$gutter;
+    color: inherit;
+    background-color: inherit;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    background-color: $background-default-color;
+    color: $text-default-color;
+    
+    .inner-container {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
 
-        section + footer {
-            margin-top: 16px;
+        &.multiline {
+            white-space: normal;
         }
+    }
+    
+    header + section {
+        margin-top: 4*$gutter;
+    }
+    
+    section + section {
+        margin-top: 4*$gutter;
+    }
+
+    section + footer {
+        margin-top: 4*$gutter;
     }
 }
 

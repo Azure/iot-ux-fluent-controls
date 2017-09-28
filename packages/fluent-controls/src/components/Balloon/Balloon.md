@@ -3,7 +3,7 @@
 
 Balloon above:
 
-```js
+```jsx
 let tooltip = 'This is a simple balloon!';
 
 <div>
@@ -15,7 +15,7 @@ let tooltip = 'This is a simple balloon!';
 
 Balloon below:
 
-```js
+```jsx
 let tooltip = 'This is a simple balloon!';
 
 <div>
@@ -27,7 +27,7 @@ let tooltip = 'This is a simple balloon!';
 
 Balloon to the left:
 
-```js
+```jsx
 let tooltip = 'This is a simple balloon!';
 
 <div>
@@ -39,7 +39,7 @@ let tooltip = 'This is a simple balloon!';
 
 Balloon to the right:
 
-```js
+```jsx
 let tooltip = 'This is a simple balloon!';
 
 <div>
@@ -53,7 +53,7 @@ let tooltip = 'This is a simple balloon!';
 
 Balloon above:
 
-```js
+```jsx
 let tooltip = 'This is a simple balloon!';
 
 <div>
@@ -65,7 +65,7 @@ let tooltip = 'This is a simple balloon!';
 
 Balloon below:
 
-```js
+```jsx
 let tooltip = 'This is a simple balloon!';
 
 <div>
@@ -77,7 +77,7 @@ let tooltip = 'This is a simple balloon!';
 
 Balloon to the left:
 
-```js
+```jsx
 let tooltip = 'This is a simple balloon!';
 
 <div>
@@ -89,7 +89,7 @@ let tooltip = 'This is a simple balloon!';
 
 Balloon to the right:
 
-```js
+```jsx
 let tooltip = 'This is a simple balloon!';
 
 <div>
@@ -101,28 +101,69 @@ let tooltip = 'This is a simple balloon!';
 
 ## Other examples
 
-```js
+```jsx
 let Icon = require('../Icon').Icon;
+const classnames = require('classnames/bind');
+const css = classnames.bind(require('../Examples/Balloon.scss'));
+
 let tooltip = (
     <span>
         This is a simple balloon! This is a simple balloon! This is a simple balloon! This is a simple balloon!
     </span>
 );
 
-<Balloon tooltip={tooltip} multiline balloonClassName='md-ballon-fixed-width'>
+<Balloon tooltip={tooltip} multiline balloonClassName={css('ballon-fixed-width')}>
     <Icon icon='info'>This is a fixed width tooltip</Icon>
 </Balloon>
 ```
 
-```js
+```jsx
 let Icon = require('../Icon').Icon;
+const classnames = require('classnames/bind');
+const css = classnames.bind(require('../Examples/Balloon.scss'));
+
 let tooltip = (
     <span>
         This is a simple balloon!
     </span>
 );
 
-<Balloon tooltip={tooltip} balloonClassName='md-ballon-fixed-width'>
+<Balloon tooltip={tooltip} balloonClassName={css('ballon-fixed-width')}>
+    <Icon icon='info'>This is a single line fixed width tooltip</Icon>
+</Balloon>
+```
+
+### Changing Balloon Background color
+
+```jsx
+let Icon = require('../Icon').Icon;
+const classnames = require('classnames/bind');
+const css = classnames.bind(require('../Examples/Balloon.scss'));
+
+let tooltip = (
+    <span>
+        This is a simple balloon!
+    </span>
+);
+
+<Balloon tooltip={tooltip} balloonClassName={css('balloon-yellow')}>
+    <Icon icon='info'>This is a styled balloon</Icon>
+</Balloon>
+``` 
+
+### Show Balloon using Property
+
+```jsx
+let Icon = require('../Icon').Icon;
+const classnames = require('classnames/bind');
+const css = classnames.bind(require('../Examples/Balloon.scss'));
+let tooltip = (
+    <span>
+        This is a simple balloon!
+    </span>
+);
+
+<Balloon tooltip={tooltip} position={4} balloonClassName={css('ballon-fixed-width')} expanded>
     <Icon icon='info'>This is a single line fixed width tooltip</Icon>
 </Balloon>
 ```
