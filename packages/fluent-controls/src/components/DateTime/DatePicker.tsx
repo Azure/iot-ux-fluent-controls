@@ -81,6 +81,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         format: DateFormat.MMDDYYYY,
         tabIndex: -1,
         localTimezone: true,
+        showAbove: false,
     };
 
     inputElement?: any;
