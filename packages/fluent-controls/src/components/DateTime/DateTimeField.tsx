@@ -2,7 +2,7 @@ import { DatePickerProps } from '../../index';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, FormOption} from '../../Common';
-import {FormField} from '../Form/FormField';
+import {FormField} from '../Field/FormField';
 import {TimeInput} from './TimeInput';
 import {DatePicker, DateFormat} from './DatePicker';
 import * as helpers from './helpers';

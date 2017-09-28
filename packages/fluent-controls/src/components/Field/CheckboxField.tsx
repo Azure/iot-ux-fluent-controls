@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, FormOption} from '../../Common';
-import {CheckboxInput} from './CheckboxInput';
+import {CheckboxInput} from '../Input/CheckboxInput';
 import {FormField} from './FormField';
 const css = classNames.bind(require('./Field.scss'));
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, FormOption} from '../../Common';
-import {SelectInput} from './SelectInput';
+import {SelectInput} from '../Input/SelectInput';
 import {FormField} from './FormField';
 const css = classNames.bind(require('./Field.scss'));
 

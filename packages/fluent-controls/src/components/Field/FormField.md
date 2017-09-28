@@ -1,5 +1,5 @@
 ```jsx
-const TextInput = require('./TextInput').TextInput;
+const TextInput = require('../Input/TextInput').TextInput;
 
 const initialState = {
     field1: '',

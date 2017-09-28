@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, FormOption} from '../../Common';
 import {TimeInput} from './TimeInput';
-import {FormField} from '../Form/FormField';
+import {FormField} from '../Field/FormField';
 
 export interface TimeFieldType {}
 

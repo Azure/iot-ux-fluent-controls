@@ -1,6 +1,6 @@
 @import '../../common/overrides';
 @import '../../common/mixins';
-@import '../Form/common';
+@import '../Input/common';
 
 $text-default-color: md-color(shade, 2);
 $text-checked-color: md-color(combo, selected-text);

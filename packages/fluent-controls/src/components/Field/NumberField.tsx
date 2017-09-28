@@ -1,26 +1,19 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
-import {Icon, IconSize, IconBackground} from '../Icon';
-import {TextInput} from './TextInput';
+import {TextInput} from '../Input/TextInput';
 import {FormField} from './FormField';
 const css = classNames.bind(require('./Field.scss'));
 
-export interface TextFieldType {}
+export interface NumberFieldType {}
 
-export interface TextFieldProps extends React.Props<TextFieldType> {
+export interface NumberFieldProps extends React.Props<NumberFieldType> {
     /** HTML form element name */
     name: string;
     /** Current value of HTML input element */
-    value: string;
+    value: number;
     /** HTML input element placeholder */
     placeholder?: string;
-    /**
-     * HTML input element type 
-     * 
-     * Default: text
-     */
-    type?: string;
     
     /** Label to display above input element */
     label: MethodNode;
@@ -42,9 +35,9 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     required?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
-    
+
     /** Callback for HTML input element `onChange` events */
-    onChange: (newValue: string) => void;
+    onChange: (newValue: number) => void;
 
     /** Classname to append to top level element */
     className?: string;
@@ -55,9 +48,9 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
 /**
  * High level form text field
  * 
- * @param props Control properties (defined in `TextFieldProps` interface)
+ * @param props Control properties (defined in `NumberFieldProps` interface)
  */
-export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextFieldProps) => {
+export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: NumberFieldProps) => {
     return (
         <FormField
             name={props.name}
@@ -69,24 +62,23 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
         >
             <TextInput
                 name={props.name}
-                value={props.value}
+                value={props.value ? props.value.toString() : '0'}
                 placeholder={props.placeholder}
-                type={props.type}
+                type={'number'}
                 prefix={props.prefix}
                 prefixClassName={props.prefixClassName}
                 postfix={props.postfix}
                 postfixClassName={props.postfixClassName}
                 error={!!props.error}
                 disabled={props.disabled}
-                onChange={props.onChange}
+                onChange={value => props.onChange(value ? parseInt(value) : null) }
                 className={props.inputClassName}
             />
         </FormField>
     );
 };
 
-TextField.defaultProps = {
-    type: 'text'
+NumberField.defaultProps = {
 };
 
-export default TextField;
+export default NumberField;
