@@ -1,7 +1,8 @@
 import * as React from 'react';
-import * as chaiEnzyme from "chai-enzyme";
-import { expect } from "chai";
+import * as chaiEnzyme from 'chai-enzyme';
+import { expect } from 'chai';
 import { mount } from 'enzyme';
+import {  } from 'karma';
 
 import {DatePicker, DateFormat} from './DatePicker';
 
