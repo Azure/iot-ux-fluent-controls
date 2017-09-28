@@ -24,6 +24,11 @@ $menu-border: 1px solid md-color(shade, d);
     border-bottom: $menu-border;
     white-space: nowrap;
     overflow: hidden;
+
+    a.disabled {
+        pointer-events: none;
+        cursor: default;
+    }
 }
 
 .pivot-container {
@@ -100,7 +105,7 @@ $menu-border: 1px solid md-color(shade, d);
         visibility: hidden;        
         white-space: nowrap;
         min-height: 7*$grid;
-        max-height: 12*$gutter;
+        max-height: 12*$grid;
     }
 
     .pivot-label + .pivot-label {

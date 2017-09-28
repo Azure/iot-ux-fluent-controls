@@ -20,6 +20,9 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
     label: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
+
+    onLabel?: MethodNode;
+    offLabel?: MethodNode;
     
     /** Disable HTML input element */
     disabled?: boolean;
@@ -58,6 +61,8 @@ export const ToggleField = (props: ToggleFieldProps) => {
                     name={props.name}
                     disabled={props.disabled}
                     onChange={props.onChange}
+                    onLabel={props.onLabel}
+                    offLabel={props.offLabel}
                     className={props.inputClassName}
                 />
             </div>
