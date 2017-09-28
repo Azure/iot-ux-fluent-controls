@@ -25,9 +25,11 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     format?: DateFormat;
     /** Tab index for calendar control */
     tabIndex?: number;
-    /** FormOptions for AM/PM dropdown */
-    periodOptions?: FormOption[];
-    
+    /** Label for "AM" select option */
+    amLabel?: string;
+    /** Label for "PM" select option */
+    pmLabel?: string;
+
     /**
      * Display the date in local timezone instead of GMT
      *
@@ -191,7 +193,6 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeF
     }
 
     onChange(newDate: string | Date, newTime: string | Date): Date {
-        console.log(`onChange called: ${newDate} -> ${newTime}`);
         if (newDate === 'invalid' || newTime === 'invalid' || !newDate || !newTime) {
             this.props.onChange('invalid');
             return null;
@@ -252,8 +253,6 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeF
     }
 
     render() {
-        console.log(this.state);
-        console.log('-----------------------------------------');
         return (
             <FormField
                 name={this.props.name}
@@ -280,7 +279,8 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeF
                 <TimeInput
                     name={this.props.name}
                     value={this.state.lastTime}
-                    periodOptions={this.props.periodOptions}
+                    amLabel={this.props.amLabel}
+                    pmLabel={this.props.pmLabel}
                     localTimezone={this.props.localTimezone}
                     showSeconds={this.props.showSeconds}
                     militaryTime={this.props.militaryTime}

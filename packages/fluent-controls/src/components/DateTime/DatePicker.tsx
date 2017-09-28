@@ -189,7 +189,6 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 )
             );
         } 
-        console.log(`initialValue: ${initialValue}`);
         return {
             value: value,
             invalid: invalid,
@@ -250,7 +249,6 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
              * is null, then state.value is invalid
              */
             if (this.state.dateValue) {
-                console.log(this.state.dateValue);
                 const hasVal = !!this.state.initialValue;
 
                 /** 
@@ -278,15 +276,12 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                         hasVal ? this.state.initialValue.getUTCSeconds() : 0,
                     ));
                 if (typeof(this.paste) === 'string' && this.props.onPaste) {
-                    console.log(`onPaste: ${this.paste}`);
                     this.props.onPaste(this.paste);
                 } else {
-                    console.log(`onChange: ${date.toUTCString()}`);
                     this.props.onChange(date.toUTCString());
                 }
                 this.paste = false;
             } else {
-                console.log(`onChange: invalid`);
                 this.props.onChange('invalid');
             }
         }
@@ -527,7 +522,6 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                     } else {
                         invalid = true;
                     }
-                    console.log(`invalid: ${invalid}`);
                 }
             } else {
                 invalid = true;
@@ -581,7 +575,6 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         }
 
         let result = this.parse(newValue);
-        console.log(result);
         if (result.valid) {
             this.setState({
                 value: newValue,
@@ -689,8 +682,6 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         const placeholder = helpers.placeholders[this.props.format];
 
         const parsed = this.parse(this.state.value);
-
-        console.log(this.state);
 
         return (
             <div className={containerClassName}>

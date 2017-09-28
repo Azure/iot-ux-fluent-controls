@@ -11,8 +11,10 @@ export interface TimeFieldProps extends React.Props<TimeFieldType> {
     name: string;
     /** Value */
     value?: string | Date;
-    /** FormOptions for AM/PM dropdown */
-    periodOptions?: FormOption[];
+    /** Label for "AM" select option */
+    amLabel?: string;
+    /** Label for "PM" select option */
+    pmLabel?: string;
 
     /**
      * Show the time in the local timezone instead of GMT
@@ -64,7 +66,8 @@ export const TimeField: React.StatelessComponent<TimeFieldProps> = (props: TimeF
             <TimeInput
                 name={props.name}
                 value={props.value}
-                periodOptions={props.periodOptions}
+                amLabel={props.amLabel}
+                pmLabel={props.pmLabel}
                 localTimezone={props.localTimezone}
                 showSeconds={props.showSeconds}
                 militaryTime={props.militaryTime}
@@ -82,7 +85,8 @@ TimeField.defaultProps = {
     militaryTime: false,
     disabled: false,
     localTimezone: true,
-    periodOptions: null
+    amLabel: 'AM',
+    pmLabel: 'PM'
 };
 
 export default TimeField;
