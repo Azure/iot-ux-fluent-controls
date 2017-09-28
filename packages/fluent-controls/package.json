@@ -5,7 +5,6 @@
     "main": "./static/lib/index.js",
     "types": "./static/lib/index.d.ts",
     "scripts": {
-        "start": "webpack-dev-server --config webpack.dev.js",
         "build": "tsc && copyfiles -e src/components/Examples/**/*.scss src/**/*.scss static/lib -u 1",
         "bundle": "webpack --config webpack.config.js",
         "test": "echo \"Error: no test specified\" && exit 1",
