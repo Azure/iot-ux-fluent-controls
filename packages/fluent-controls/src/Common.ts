@@ -2,15 +2,34 @@ import * as React from 'react';
 
 export type MethodNode = React.ReactElement<any> | Array<React.ReactElement<any>> | React.ReactChildren | React.ReactNode;
 
-export interface FormOption {
-    /** Text label to show as the select box option */
+export interface LabelOption {
+    /** Text label to show */
     label: MethodNode;
+    /** Label be hidden */
+    hidden?: boolean;
+    /** Label be disabled */
+    disabled?: boolean;
+}
+
+export interface FormOption extends LabelOption {
     /** Value of select box option */
     value: any;
-    /** Option should be hidden */
-    hidden?: boolean;
-    /** Option should be disabled */
-    disabled?: boolean;
+}
+
+export interface LinkOption extends LabelOption {
+    /** Anchor href */
+    href: string;
+    /** Anchor onclick */
+    onClick?: (event) => void;
+    /** Accessibility title */
+    title?: string;
+}
+
+export interface PivotOption extends LinkOption {
+    /** Pivot item icon */
+    icon?: string;
+    /** Pivot key (used for selecting active Pivot) */
+    key: string;
 }
 
 export const keyCode = {

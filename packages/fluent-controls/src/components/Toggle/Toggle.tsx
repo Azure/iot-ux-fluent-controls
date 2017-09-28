@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./Toggle.scss'));
 
 export interface ToggleType {}
@@ -10,6 +11,9 @@ export interface ToggleProps extends React.Props<ToggleType> {
     disabled?: boolean;
 
     name: string;
+
+    onLabel?: MethodNode;
+    offLabel?: MethodNode;
 
     onChange: (newValue: boolean) => void;
 
@@ -36,7 +40,7 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
     };
 
     const tabIndex = props.disabled ? -1 : null;
-    const label = props.on ? 'On' : 'Off';
+    const label = props.on ? props.onLabel : props.offLabel;
 
     return (
         <div className={containerClassName}>
@@ -54,7 +58,8 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
 };
 
 Toggle.defaultProps = {
-
+    onLabel: 'On',
+    offLabel: 'Off'
 };
 
 export default Toggle;

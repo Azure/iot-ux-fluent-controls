@@ -11,7 +11,7 @@ export interface PivotType {}
 
 export interface PivotProps extends React.Props<PivotType> {
     icon?: string;
-    text: string;
+    text: string | MethodNode;
 
     selected?: boolean;
     disabled?: boolean;
