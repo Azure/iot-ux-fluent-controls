@@ -175,7 +175,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             }
         }
         
-        if (initialValue.toUTCString() === 'Invalid Date') {
+        if (!initialValue || initialValue.toUTCString() === 'Invalid Date') {
             const today = new Date();
             initialValue = local
                 ? today
@@ -188,7 +188,8 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                     today.getUTCSeconds()
                 )
             );
-        } 
+        }
+
         return {
             value: value,
             invalid: invalid,
@@ -524,7 +525,9 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                     }
                 }
             } else {
-                invalid = true;
+                if (newValue.length === 0) {
+                    invalid = true;
+                }
             }
         } else if (this.state.value.length < newValue.length) {
             /** If the user is adding to newValue */
@@ -565,17 +568,20 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             invalid = false;
         }
 
+        let initialValue = this.state.initialValue;
         if (newValue.length > 11) {
             const date = new Date(newValue);
             if (helpers.dateIsValid(date, this.props.localTimezone)) {
                 invalid = false;
                 newValue = helpers.formatDate(date, this.props.format, this.props.localTimezone);
                 this.paste = date.toUTCString();
+                initialValue = date;
             }
         }
 
         let result = this.parse(newValue);
         if (result.valid) {
+            const isLocal = !!this.props.localTimezone;
             this.setState({
                 value: newValue,
                 invalid: false,
@@ -583,10 +589,20 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 dateValue: new Date(
                     result.year, 
                     result.month - 1,
-                    result.date)
+                    result.date,
+                    isLocal ? initialValue.getHours() : initialValue.getUTCHours(),
+                    isLocal ? initialValue.getMinutes() : initialValue.getUTCMinutes(),
+                    isLocal ? initialValue.getSeconds() : initialValue.getUTCSeconds()
+                ),
+                initialValue: initialValue
             });
         } else {
-            this.setState({ value: newValue, invalid: invalid, error: true, dateValue: null });
+            this.setState({
+                value: newValue,
+                invalid: invalid,
+                error: true,
+                dateValue: null
+            });
         }
     }
 
