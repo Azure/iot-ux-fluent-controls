@@ -44,7 +44,11 @@ export const keyCode = {
     left: 37,
     up: 38,
     right: 39,
-    down: 40
+    down: 40,
+    pageup:   33,
+    pagedown: 34,
+    end:      35,
+    home:     36,
 };
 
 export const hasClassName = (target, className) => {

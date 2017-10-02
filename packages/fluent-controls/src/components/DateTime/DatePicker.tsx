@@ -4,6 +4,7 @@ import {Calendar} from './Calendar';
 import {Icon, IconSize} from '../Icon';
 import * as helpers from './helpers';
 import {DateFormat} from './helpers';
+import {keyCode} from '../../Common';
 const css = classNames.bind(require('./DatePicker.scss'));
 
 export {DateFormat} from './helpers';
@@ -84,9 +85,10 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         showAbove: false,
     };
 
-    inputElement?: any;
-    cursorPos: number;
-    paste: boolean | string;
+    private inputElement?: any;
+    private cursorPos: number;
+    private paste: boolean | string;
+    private calendar: Calendar;
 
     constructor(props: DatePickerProps) {
         super(props);
@@ -285,6 +287,9 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             } else {
                 this.props.onChange('invalid');
             }
+        }
+        if (this.state.visible !== oldState.visible && !this.state.visible) {
+            this.calendar.stopAccessibility();
         }
     }
 
@@ -672,7 +677,14 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                     return;
                 }
             }
-    
+
+            event.preventDefault();
+        }
+    }
+
+    onKeyUp(event) {
+        if (event.keyCode === keyCode.enter) {
+            this.calendar.startAccessibility();
             event.preventDefault();
         }
     }
@@ -712,6 +724,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                         onInput={event => this.onInput(event)}
                         onPaste={event => this.onPaste(event)}
                         onKeyPress={event => this.onKeyPress(event)}
+                        onKeyUp={event => this.onKeyUp(event)}
                         /** React warns about Input without onChange handler */
                         onChange={() => {}}
                         /**
@@ -732,6 +745,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                         year={parsed.year || null}
                         month={parsed.month - 1 || null}
                         tabIndex={this.props.tabIndex}
+                        ref={element => this.calendar = element}
                     />
                     <div className={css('dropdown-triangle')} />
                 </div>

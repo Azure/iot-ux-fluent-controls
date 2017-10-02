@@ -2,13 +2,15 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {ActionTrigger} from '../ActionTrigger';
 import * as helpers from './helpers';
+import {MethodDate} from './helpers';
+import {keyCode} from '../../Common';
 const css = classNames.bind(require('./Calendar.scss'));
 
 export interface CalendarComponentType {}
 
 export interface CalendarProps extends React.Props<CalendarComponentType> {
     /** Current selected date */
-    value?: Date;
+    value?: Date | string;
 
     /** Year to display (otherwise shows the year from value) */
     year?: number;
@@ -36,9 +38,11 @@ export interface CalendarProps extends React.Props<CalendarComponentType> {
 
 export interface CalendarState {
     /** Date of the current month open in view */
-    currentDate: Date;
+    currentDate: MethodDate;
     /** Whether or not props.year/month updates update the view */
     detached: boolean;
+    /** Whether accessibility is activated */
+    accessibility: boolean;
 }
 
 /**
@@ -51,68 +55,174 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         localTimezone: true,
         tabIndex: -1
     };
-
+    
+    private value: MethodDate;
     private monthNames: string[];
     private dayNames: string[];
+    private buttons: HTMLButtonElement[];
 
     constructor(props: CalendarProps) {
         const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
-        let currentDate = new Date();
-
         super(props);
-
-        if (this.props.value) {
-            currentDate = this.props.value;
+        if (typeof(this.props.value) === 'string') {
+            this.value = MethodDate.fromString(this.props.localTimezone, this.props.value);
+        } else {
+            this.value = MethodDate.fromDate(this.props.localTimezone, this.props.value);
+        }
+        
+        let currentDate = this.value.copy();
+        if (props.year > 0) {
+            currentDate.year = props.year;
         }
         if (props.month === 0 || props.month > 0) {
-            if (props.localTimezone) {
-                currentDate.setMonth(props.month);
-            } else {
-                currentDate.setUTCMonth(props.month);
-            }
+            currentDate.month = props.month;
         }
-        if (props.year > 0) {
-            if (props.localTimezone) {
-                currentDate.setFullYear(props.year);
-            } else {
-                currentDate.setUTCFullYear(props.year);
-            }
-        }
-
+        currentDate.date = 1;
         this.state = {
             currentDate: currentDate,
-            detached: false
+            detached: false,
+            accessibility: false
         };
 
         this.monthNames = helpers.getLocalMonths(locale);
 
         this.dayNames = helpers.getLocalWeekdays(locale);
+
+        this.buttons = [];
+
+        this.onKeyDown = this.onKeyDown.bind(this);
+    }
+
+    get focusedButton(): HTMLButtonElement {
+        return this.buttons[this.state.currentDate.date - 1];
+    }
+
+    get focusedYear(): number {
+        return this.state.currentDate.year;
+    }
+
+    get focusedMonth(): number {
+        return this.state.currentDate.month;        
+    }
+
+    get focusedDate(): number {
+        return this.state.currentDate.date;        
+    }
+
+    public startAccessibility() {
+        const newDate = this.state.currentDate.copy();
+        newDate.date = 1;
+
+        this.setState({
+            accessibility: true,
+            currentDate: newDate
+        });
+    }
+
+    public stopAccessibility() {
+        this.setState({
+            accessibility: false
+        });
+    }
+
+    componentWillMount() {
+        window.addEventListener('keydown', this.onKeyDown);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.onKeyDown);
+    }
+
+    componentDidUpdate(oldProps: CalendarProps, oldState: CalendarState) {
+        if (this.state.accessibility && this.state.currentDate !== oldState.currentDate) {
+            this.focusedButton.focus();
+        }
     }
 
     componentWillReceiveProps(newProps: CalendarProps) {
-        const date = new Date(this.state.currentDate);
+        const date = this.state.currentDate.copy();
         let update = false;
         if (newProps.year !== this.props.year && newProps.year > 0) {
-            if (this.props.localTimezone) {
-                date.setFullYear(newProps.year);
-            } else {
-                date.setUTCFullYear(newProps.year);
-            }
+            date.year = newProps.year;
             update = true;
         }
         if (
             newProps.month !== this.props.month &&
             (newProps.month === 0 || newProps.month > 0)
         ) {
-            if (this.props.localTimezone) {
-                date.setMonth(newProps.month);
-            } else {
-                date.setUTCMonth(newProps.month);
-            }
+            date.month = newProps.month;
             update = true;
         }
-        if (update && !this.state.detached && helpers.dateIsValid(date, this.props.localTimezone)) {
+        if (update && !this.state.detached && date.isValid()) {
             this.setState({currentDate: date});
+        }
+    }
+
+    onKeyDown(event) {
+        if (!this.state.accessibility) {
+            return;
+        }
+        if (document.activeElement === this.focusedButton) {
+            const date = this.state.currentDate.copy();
+            let detached = this.state.detached;
+            let newDay = date.date;
+            let newMonth = date.month;
+            let newYear = date.year;
+            let weekMove = false;
+            switch (event.keyCode) {
+                case keyCode.left:
+                    newDay -= 1;
+                    break;
+                case keyCode.right:
+                    newDay += 1;
+                    break;
+                case keyCode.up:
+                    weekMove = true;
+                    newDay -= 7;
+                    break;
+                case keyCode.down:
+                    weekMove = true;
+                    newDay += 7;
+                    break;
+                case keyCode.pageup:
+                    if (event.ctrlKey) {
+                        newYear -= 1;
+                    } else {
+                        newMonth -= 1;
+                    }
+                    break;
+                case keyCode.pagedown:
+                    if (event.ctrlKey) {
+                        newYear += 1;
+                    } else {
+                        newMonth += 1;
+                    }
+                    break;
+                case keyCode.home:
+                    newDay = 1;
+                    break;
+                case keyCode.end:
+                    newDay = 0;
+                    newMonth += 1;
+                    break;
+                default:
+                    return;
+            }
+            date.year = newYear;
+            date.month = newMonth;
+            date.date = newDay;
+
+            if (newDay > 0 && date.date !== newDay && !weekMove) {
+                date.month += 1;
+                date.date = 0;
+            }
+            
+            event.stopPropagation();
+            event.preventDefault();
+            this.setState({
+                currentDate: date,
+                detached: detached
+            });
         }
     }
 
@@ -120,9 +230,18 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         if (this.props.onChange) {
             this.props.onChange(date);
             this.setState({
-                currentDate: date,
-                detached: false
+                currentDate: MethodDate.fromDate(this.props.localTimezone, date),
+                detached: false,
+                accessibility: false
             });
+        }
+    }
+
+    onFocus(event, date: number) {
+        if (!this.state.accessibility) {
+            const newDate = this.state.currentDate.copy();
+            newDate.date = date;
+            this.setState({currentDate: newDate, accessibility: true});
         }
     }
 
@@ -130,11 +249,16 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         event.preventDefault();
 
         /** Dates are mutable so we're going to copy it over */
-        const date = this.state.currentDate;
-        const newDate = this.props.localTimezone
-            ? new Date(date.getFullYear(), date.getMonth() - 1, 1)
-            : new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() - 1, 1));
+        const newDate = this.state.currentDate.copy();
+        const curDate = newDate.date;
+        const targetMonth = newDate.month === 0 ? 11 : newDate.month - 1;
+        newDate.month -= 1;
 
+        if (newDate.month !== targetMonth || newDate.date !== curDate) {
+            newDate.date = 1;
+            newDate.month = targetMonth + 1;
+            newDate.date = 0;
+        }
         this.setState({currentDate: newDate, detached: true});
     }
 
@@ -142,11 +266,15 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         event.preventDefault();
 
         /** Dates are mutable so we're going to copy it over */
-        const date = this.state.currentDate;
-        const newDate = this.props.localTimezone
-            ? new Date(date.getFullYear(), date.getMonth() + 1, 1)
-            : new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 1));
+        const newDate = this.state.currentDate.copy();
+        const curDate = newDate.date;
+        const targetMonth = newDate.month === 11 ? 0 : newDate.month + 1;
+        newDate.month += 1;
 
+        if (newDate.month !== targetMonth || newDate.date !== curDate) {
+            newDate.date = 1;
+            newDate.month = targetMonth + 1;
+        }
         this.setState({currentDate: newDate, detached: true});
     }
 
@@ -155,58 +283,49 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         const colClassName = css('disabled');
         const tabIndex = this.props.tabIndex;
 
-        const curYear = this.props.localTimezone
-            ? this.state.currentDate.getFullYear()
-            : this.state.currentDate.getUTCFullYear();
-        const curMonth = this.props.localTimezone
-            ? this.state.currentDate.getMonth()
-            : this.state.currentDate.getUTCMonth();
-        const curDate = this.props.localTimezone
-            ? this.state.currentDate.getDate()
-            : this.state.currentDate.getUTCDate();
-        const curDay = this.state.currentDate.getDay();
+        const curYear = this.state.currentDate.year;
+        const curMonth = this.state.currentDate.month;
+        const curDate = this.state.currentDate.date;
 
         const weekdays = this.dayNames.map(day => {
             return <div key={day}>{day}</div>;
         });
 
         // First day of `month`
-        let start = new Date(curYear, curMonth, 1);
+        let start = this.state.currentDate.copy();
+        start.date = 1;
+        
         // Last day of `month`
-        let end = new Date(curYear, curMonth + 1, 0);
+        let end = this.state.currentDate.copy();
+        end.date = 1;
+        end.month += 1;
+        end.date = 0;
+
         let rows = [], row = [];
 
-        if (this.props.localTimezone) {
-            start.setDate(start.getDate() - start.getDay());
-            end.setDate(end.getDate() + (6 - end.getDay()));
-        } else {
-            start.setUTCDate(start.getUTCDate() - start.getDay());
-            end.setUTCDate(end.getUTCDate() + (6 - end.getDay()));
-        }
+        start.date = start.date - start.getDay();
+        end.date = end.date + (6 - end.getDay());
 
-        while (start <= end) {
+        while (start.isBefore(end)) {
             // We have to copy the date, otherwise it will get modified in place
-            row.push(new Date(start));
+            row.push(start.copy());
             if (row.length >= helpers.weekLength) {
                 rows.push(row);
                 row = [];
             }
-            if (this.props.localTimezone) {
-                start.setDate(start.getDate() + 1);
-            } else {
-                start.setUTCDate(start.getUTCDate() + 1);
-            }
+            start.date += 1;
         }
-
+        
+        this.buttons = [];
         const content = rows.map((row, rowIndex) => {
             let inner = row.map((col, colIndex) => {
                 const onClick = (event) => {
                     this.onClick(col);
                     event.preventDefault();
                 };
-                const date = this.props.localTimezone ? col.getDate() : col.getUTCDate();
+                const date = col.date;
 
-                const colMonth = this.props.localTimezone ? col.getMonth() : col.getUTCMonth();
+                const colMonth = col.month;
                 /** Grayed out day from another month */
                 if (colMonth !== curMonth) {
                     return (
@@ -223,14 +342,10 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
 
                 /** Selected day */
                 if (this.props.value) {
-                    const isSelected = this.props.localTimezone ? (
-                        date === this.props.value.getDate() &&
-                        col.getMonth() === this.props.value.getMonth() &&
-                        col.getFullYear() === this.props.value.getFullYear()
-                    ) : (
-                        date === this.props.value.getUTCDate() &&
-                        col.getUTCMonth() === this.props.value.getUTCMonth() &&
-                        col.getUTCFullYear() === this.props.value.getUTCFullYear()
+                    const isSelected = (
+                        date === this.value.date &&
+                        col.month === this.value.month &&
+                        col.year === this.value.year
                     );
                     if (isSelected) {
                         return (
@@ -239,6 +354,12 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                                 onClick={onClick}
                                 key={date}
                                 tabIndex={tabIndex}
+                                ref={element => {
+                                    if (element) {
+                                        this.buttons.push(element);
+                                    }
+                                }}
+                                onFocus={event => this.onFocus(event, date)}
                             >
                                 {date}
                             </button>
@@ -248,7 +369,17 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
 
                 /** Everything else */
                 return (
-                    <button onClick={onClick} key={date} tabIndex={tabIndex}>
+                    <button
+                        onClick={onClick}
+                        key={date}
+                        tabIndex={tabIndex}
+                        ref={element => {
+                            if (element) {
+                                this.buttons.push(element);
+                            }
+                        }}
+                        onFocus={event => this.onFocus(event, date)}
+                    >
                         {date}
                     </button>
                 );
