@@ -57,6 +57,9 @@ export const hasClassName = (target, className) => {
 };
 
 export const dateIsValid = (date: Date, localTimezone: boolean) => {
+    if (!date || date.toUTCString() === 'Invalid Date') {
+        return false;
+    }
     const year =  localTimezone ? date.getFullYear() : date.getUTCFullYear();
     const month = localTimezone ? date.getMonth()    : date.getUTCMonth();
     const day =   localTimezone ? date.getDate()     : date.getUTCDate();
@@ -118,8 +121,11 @@ export class MethodDate implements Date {
         );
     }
 
-    static fromString(localTimezone: boolean, dateString: string) {
+    static fromString(localTimezone: boolean, dateString: string): MethodDate {
         const date = new Date(dateString);
+        if (date.toUTCString() === 'Invalid Date') {
+            return null;
+        }
         return new MethodDate(
             localTimezone,
             localTimezone ? date.getFullYear() : date.getUTCFullYear(),
