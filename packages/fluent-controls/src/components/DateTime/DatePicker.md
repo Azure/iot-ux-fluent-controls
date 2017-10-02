@@ -43,28 +43,30 @@ const initialState = {value: ''};
 ```
 
 ```jsx
-const initialState = {value: 'Sep 20, 2010 00:00:00 GMT'};
+const initialValue = 'Sep 20, 2010 00:00:00 GMT';
+const initialState = {value: ''};
 
 <div>
     <div>Current Value: {state.value}</div>
     <DatePicker
         name='date-picker'
         onChange={(newValue) => setState({value: newValue}) }
-        initialValue={state.value}
+        initialValue={initialValue}
         disabled 
     />
 </div>
 ```
 
 ```jsx
-const initialState = {value: 'Sep 20, 2010 00:00:00 GMT'};
+const initialValue = 'Sep 20, 2010 00:00:00 GMT';
+const initialState = {value: ''};
 
 <div>
     <div>Current Value: {state.value}</div>
     <DatePicker
         name='date-picker'
         onChange={(newValue) => setState({value: newValue}) }
-        initialValue={state.value}
+        initialValue={initialValue}
         showAbove error 
     />
 </div>

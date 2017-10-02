@@ -64,10 +64,13 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
     constructor(props: CalendarProps) {
         const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
         super(props);
+        
         if (typeof(this.props.value) === 'string') {
             this.value = MethodDate.fromString(this.props.localTimezone, this.props.value);
-        } else {
+        } else if (this.props.value) {
             this.value = MethodDate.fromDate(this.props.localTimezone, this.props.value);
+        } else {
+            this.value = new MethodDate(this.props.localTimezone);
         }
         
         let currentDate = this.value.copy();
@@ -155,6 +158,15 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         }
         if (update && !this.state.detached && date.isValid()) {
             this.setState({currentDate: date});
+        }
+        if (this.props.value !== newProps.value) {
+            if (typeof(newProps.value) === 'string') {
+                this.value = MethodDate.fromString(newProps.localTimezone, newProps.value);
+            } else if (newProps.value) {
+                this.value = MethodDate.fromDate(newProps.localTimezone, newProps.value);
+            } else {
+                this.value = new MethodDate(newProps.localTimezone);
+            }
         }
     }
 
@@ -343,6 +355,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                 /** Selected day */
                 if (this.props.value) {
                     const isSelected = (
+                        this.props.value &&
                         date === this.value.date &&
                         col.month === this.value.month &&
                         col.year === this.value.year

@@ -117,26 +117,34 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         let value = '';
         let invalid = false;
         let initialValue: MethodDate = null;
+        let dateValue: MethodDate = null;
         if (props.initialValue) {
             if (typeof(props.initialValue) === 'string') {
                 const date = MethodDate.fromString(local, props.initialValue);
                 if (helpers.dateIsValid(date, local)) {
                     initialValue = date;
+                    dateValue = date;
                     value = helpers.formatDate(date, props.format, local);
                 } else {
                     value = props.initialValue;
                     invalid = true;
                 }
             } else {
-                value = helpers.formatDate(
-                    props.initialValue,
-                    props.format,
-                    local
-                );
-                if (!helpers.dateIsValid(props.initialValue, local)) {
-                    invalid = true;
+                if (props.initialValue) {
+                    value = helpers.formatDate(
+                        props.initialValue,
+                        props.format,
+                        local
+                    );
+                    if (!helpers.dateIsValid(props.initialValue, local)) {
+                        invalid = true;
+                    } else {
+                        initialValue = MethodDate.fromDate(local, props.initialValue);
+                        dateValue = initialValue;
+                    }
                 } else {
-                    initialValue = MethodDate.fromDate(local, props.initialValue);
+                    initialValue = new MethodDate(local);
+                    invalid = true;
                 }
             }
         }
@@ -144,13 +152,14 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         if (!initialValue || initialValue.toUTCString() === 'Invalid Date') {
             const today = new MethodDate(local);
             initialValue = today;
+            dateValue = null;
         }
         
         return {
             value: value,
             invalid: invalid,
             initialValue: initialValue,
-            dateValue: initialValue,
+            dateValue: dateValue,
         };
     }
 
@@ -683,7 +692,11 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 </div>
                 <div className={dropdownClassName}>
                     <Calendar
-                        value={this.state.dateValue}
+                        value={
+                            this.state.dateValue
+                                ? this.state.dateValue.toDate()
+                                : null
+                        }
                         onChange={newValue => this.onSelect(newValue)}
                         className={css('calendar')}
                         year={parsed.year || null}
