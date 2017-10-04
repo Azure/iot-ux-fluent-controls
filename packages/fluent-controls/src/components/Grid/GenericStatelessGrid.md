@@ -1,4 +1,0 @@
-### Generic Stateless Grid
-
-```jsx
-```

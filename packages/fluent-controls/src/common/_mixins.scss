@@ -1,8 +1,36 @@
 @import 'overrides';
 @import 'colormap';
 
-@mixin default_font {
-    
+@mixin md-default-font {
+    font-family: $font-family-base;
+    font-size: $font-size-text;
+    line-height: 20px;
+}
+
+@mixin md-default-button {
+    border: none;
+    outline: none;
+    background: none;
+    box-shadow: none;
+    text-decoration: none;
+
+    &:focus {
+        border: none;
+        outline: none;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:disabled:hover {
+        cursor: initial;
+    }
+}
+
+@mixin md-default-anchor {
+    outline: none;
+    text-decoration: none;
 }
 
 @mixin circle($width) {
