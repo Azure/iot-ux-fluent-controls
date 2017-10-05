@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {MethodNode} from '../../Common';
-import {DatePicker, DateFormat} from './DatePicker';
+import {MethodNode, DateFormat} from '../../Common';
+import {DatePicker} from './DatePicker';
 import {FormField} from '../Field/FormField';
 
 export interface DateFieldType {}

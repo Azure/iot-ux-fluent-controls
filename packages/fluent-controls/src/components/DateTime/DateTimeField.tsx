@@ -1,11 +1,10 @@
 import { DatePickerProps } from '../../index';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {MethodNode, FormOption} from '../../Common';
+import {MethodNode, FormOption, dateIsValid, DateFormat} from '../../Common';
 import {FormField} from '../Field/FormField';
 import {TimeInput} from './TimeInput';
-import {DatePicker, DateFormat} from './DatePicker';
-import * as helpers from './helpers';
+import {DatePicker} from './DatePicker';
 const css = classNames.bind(require('./DateTimeField.scss'));
 
 export interface DateTimeFieldType {}
@@ -98,7 +97,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeF
         if (props.initialValue) {
             if (typeof props.initialValue === 'string') {
                 const date = new Date(props.initialValue);
-                if (helpers.dateIsValid(date, local)) {
+                if (dateIsValid(date, local)) {
                     /** 
                      * This is where DateTimeField receives an initial Date value
                      * so this is where localTimezone/GMT have to be handled.
@@ -121,7 +120,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeF
                     invalid = true;
                 }
             } else {
-                if (!helpers.dateIsValid(props.initialValue, local)) {
+                if (!dateIsValid(props.initialValue, local)) {
                     invalid = true;
                 } else {
                     /** 
@@ -175,7 +174,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeF
 
     onDatePaste(newDate: string): boolean {
         const date = new Date(newDate);
-        if (helpers.dateIsValid(date, this.props.localTimezone)) {
+        if (dateIsValid(date, this.props.localTimezone)) {
             const utcDate = date.toUTCString();
             this.setState({
                 initialDate: date,

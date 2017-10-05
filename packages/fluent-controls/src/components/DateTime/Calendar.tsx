@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {ActionTrigger} from '../ActionTrigger';
-import * as helpers from './helpers';
-import {MethodDate} from './helpers';
-import {keyCode} from '../../Common';
+import {getLocalMonths, getLocalWeekdays} from './helpers';
+import {keyCode, MethodDate, weekLength} from '../../Common';
 const css = classNames.bind(require('./Calendar.scss'));
 
 export interface CalendarComponentType {}
@@ -59,7 +58,8 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
     private value: MethodDate;
     private monthNames: string[];
     private dayNames: string[];
-    private buttons: HTMLButtonElement[];
+    private buttons: {[date: string]: HTMLButtonElement};
+    private buttonIndex: number;
 
     constructor(props: CalendarProps) {
         const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
@@ -87,29 +87,19 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
             accessibility: false
         };
 
-        this.monthNames = helpers.getLocalMonths(locale);
+        this.monthNames = getLocalMonths(locale);
 
-        this.dayNames = helpers.getLocalWeekdays(locale);
+        this.dayNames = getLocalWeekdays(locale);
 
-        this.buttons = [];
+        this.buttons = {};
+        this.buttonIndex = 0;
+        this.dayRef = this.dayRef.bind(this);
 
         this.onKeyDown = this.onKeyDown.bind(this);
     }
 
     get focusedButton(): HTMLButtonElement {
         return this.buttons[this.state.currentDate.date - 1];
-    }
-
-    get focusedYear(): number {
-        return this.state.currentDate.year;
-    }
-
-    get focusedMonth(): number {
-        return this.state.currentDate.month;        
-    }
-
-    get focusedDate(): number {
-        return this.state.currentDate.date;        
     }
 
     public startAccessibility() {
@@ -128,6 +118,13 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         });
     }
 
+    dayRef(element: HTMLButtonElement) {
+        if (element) {
+            this.buttons[this.buttonIndex] = element;
+            this.buttonIndex++;
+        }
+    }
+
     componentWillMount() {
         window.addEventListener('keydown', this.onKeyDown);
     }
@@ -140,6 +137,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         if (this.state.accessibility && this.state.currentDate !== oldState.currentDate) {
             this.focusedButton.focus();
         }
+        this.buttonIndex = 0;        
     }
 
     componentWillReceiveProps(newProps: CalendarProps) {
@@ -238,18 +236,18 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         }
     }
 
-    onClick(date: Date) {
+    onClick(date: MethodDate) {
         if (this.props.onChange) {
-            this.props.onChange(date);
+            this.props.onChange(date.dateObject);
             this.setState({
-                currentDate: MethodDate.fromDate(this.props.localTimezone, date),
+                currentDate: MethodDate.fromDate(this.props.localTimezone, date.dateObject),
                 detached: false,
                 accessibility: false
             });
         }
     }
 
-    onFocus(event, date: number) {
+    onFocus(date: number, event) {
         if (!this.state.accessibility) {
             const newDate = this.state.currentDate.copy();
             newDate.date = date;
@@ -315,36 +313,36 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
 
         let rows = [], row = [];
 
-        start.date = start.date - start.getDay();
-        end.date = end.date + (6 - end.getDay());
+        start.date = start.date - start.dateObject.getDay();
+        end.date = end.date + (6 - end.dateObject.getDay());
 
         while (start.isBefore(end)) {
             // We have to copy the date, otherwise it will get modified in place
             row.push(start.copy());
-            if (row.length >= helpers.weekLength) {
+            if (row.length >= weekLength) {
                 rows.push(row);
                 row = [];
             }
             start.date += 1;
         }
         
-        this.buttons = [];
         const content = rows.map((row, rowIndex) => {
             let inner = row.map((col, colIndex) => {
                 const onClick = (event) => {
                     this.onClick(col);
                     event.preventDefault();
                 };
-                const date = col.date;
 
+                const date = col.date;
                 const colMonth = col.month;
+                const key = `${colMonth}-${date}`;
                 /** Grayed out day from another month */
                 if (colMonth !== curMonth) {
                     return (
                         <button
                             className={colClassName}
                             onClick={onClick}
-                            key={date}
+                            key={key}
                             tabIndex={tabIndex}
                         >
                             {date}
@@ -365,14 +363,10 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                             <button
                                 className={css('selected')}
                                 onClick={onClick}
-                                key={date}
+                                key={key}
                                 tabIndex={tabIndex}
-                                ref={element => {
-                                    if (element) {
-                                        this.buttons.push(element);
-                                    }
-                                }}
-                                onFocus={event => this.onFocus(event, date)}
+                                ref={this.dayRef}
+                                onFocus={this.onFocus.bind(this, date)}
                             >
                                 {date}
                             </button>
@@ -384,14 +378,10 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                 return (
                     <button
                         onClick={onClick}
-                        key={date}
+                        key={key}
                         tabIndex={tabIndex}
-                        ref={element => {
-                            if (element) {
-                                this.buttons.push(element);
-                            }
-                        }}
-                        onFocus={event => this.onFocus(event, date)}
+                        ref={this.dayRef}
+                        onFocus={this.onFocus.bind(this, date)}
                     >
                         {date}
                     </button>
@@ -404,7 +394,6 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                 </div>
             );
         });
-
         return (
             <div className={css('calendar', this.props.className)}>
                 <div className={css('calendar-header')}>

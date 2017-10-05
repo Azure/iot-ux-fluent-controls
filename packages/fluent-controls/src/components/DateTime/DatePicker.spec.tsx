@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as sinon from 'sinon';
 import { expect, assert } from 'chai';
 import { mount, ReactWrapper } from 'enzyme';
-import { DatePicker, DatePickerProps, DateFormat } from './DatePicker';
+import { DateFormat} from '../../Common';
+import { DatePicker, DatePickerProps} from './DatePicker';
 
 class DatePickerWrapper extends ReactWrapper<DatePickerProps, any> {
     input: any;
