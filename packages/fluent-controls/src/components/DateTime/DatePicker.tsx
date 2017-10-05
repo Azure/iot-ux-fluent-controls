@@ -2,12 +2,9 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {Calendar} from './Calendar';
 import {Icon, IconSize} from '../Icon';
-import * as helpers from './helpers';
-import {DateFormat} from './helpers';
-import {keyCode, MethodDate} from '../../Common';
+import {replaceAt, formatDate, placeholders} from './helpers';
+import {keyCode, MethodDate, dateIsValid, hasClassName, DateFormat} from '../../Common';
 const css = classNames.bind(require('./DatePicker.scss'));
-
-export {DateFormat} from './helpers';
 
 export interface DatePickerType {}
 
@@ -121,22 +118,22 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         if (props.initialValue) {
             if (typeof(props.initialValue) === 'string') {
                 const date = MethodDate.fromString(local, props.initialValue);
-                if (helpers.dateIsValid(date, local)) {
+                if (date && dateIsValid(date.dateObject, local)) {
                     initialValue = date;
                     dateValue = date;
-                    value = helpers.formatDate(date, props.format, local);
+                    value = formatDate(date.dateObject, props.format, local);
                 } else {
                     value = props.initialValue;
                     invalid = true;
                 }
             } else {
                 if (props.initialValue) {
-                    value = helpers.formatDate(
+                    value = formatDate(
                         props.initialValue,
                         props.format,
                         local
                     );
-                    if (!helpers.dateIsValid(props.initialValue, local)) {
+                    if (!dateIsValid(props.initialValue, local)) {
                         invalid = true;
                     } else {
                         initialValue = MethodDate.fromDate(local, props.initialValue);
@@ -149,7 +146,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             }
         }
         
-        if (!initialValue || initialValue.toUTCString() === 'Invalid Date') {
+        if (!initialValue || initialValue.dateObject.toUTCString() === 'Invalid Date') {
             const today = new MethodDate(local);
             initialValue = today;
             dateValue = null;
@@ -213,7 +210,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                 if (typeof(this.paste) === 'string' && this.props.onPaste) {
                     this.props.onPaste(this.paste);
                 } else {
-                    this.props.onChange(this.state.dateValue.toUTCString());
+                    this.props.onChange(this.state.dateValue.dateObject.toUTCString());
                 }
                 this.paste = false;
             } else {
@@ -246,7 +243,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                  * zero to it (ie, 2 => 02, 9 => 09, etc.)
                  */
                 if (position > 1) {
-                    newValue = helpers.replaceAt(newValue, newValue.length - 1, '0');
+                    newValue = replaceAt(newValue, newValue.length - 1, '0');
                 } else {
                     newValue = '0' + lastNum.toString();
                 }
@@ -290,7 +287,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                  * zero to it (ie, 4 => 04, 9 => 09, etc.)
                  */
                 if (position > 1) {
-                    newValue = helpers.replaceAt(newValue, newValue.length - 1, '0');
+                    newValue = replaceAt(newValue, newValue.length - 1, '0');
                 } else {
                     newValue = '0' + lastNum.toString();
                 }
@@ -443,10 +440,10 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             const date = MethodDate.fromString(this.props.localTimezone, newValue);
             if (date) {
                 invalid = false;
-                newValue = helpers.formatDate(date, this.props.format, this.props.localTimezone);
+                newValue = formatDate(date.dateObject, this.props.format, this.props.localTimezone);
                 initialValue = date;
                 dateValue = date.copy();
-                this.paste = date.toUTCString();
+                this.paste = date.dateObject.toUTCString();
             } else {
                 invalid = true;
                 dateValue = null;
@@ -517,7 +514,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             const date = MethodDate.fromString(this.props.localTimezone, newValue);
             if (date) {
                 invalid = false;
-                newValue = helpers.formatDate(date, this.props.format, this.props.localTimezone);
+                newValue = formatDate(date.dateObject, this.props.format, this.props.localTimezone);
                 initialValue = date;
                 dateValue = date;
             } else {
@@ -545,9 +542,9 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                  */
                 if (result.year < 100) {
                     if (this.props.localTimezone) {
-                        dateValue.setFullYear(result.year, result.month - 1, result.date);
+                        dateValue.dateObject.setFullYear(result.year, result.month - 1, result.date);
                     } else {
-                        dateValue.setUTCFullYear(result.year, result.month - 1, result.date);
+                        dateValue.dateObject.setUTCFullYear(result.year, result.month - 1, result.date);
                     }
                 }
             } else {
@@ -588,7 +585,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
          * calendar (which causes the text input to lose focus)
         */
         for (let i = 0; i < 6; i++) {
-            if (helpers.hasClassName(target, className)) {
+            if (hasClassName(target, className)) {
                 break;
             }
 
@@ -612,7 +609,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
 
     onSelect(newValue: Date) {
         this.setState({
-            value: helpers.formatDate(newValue, this.props.format, this.props.localTimezone),
+            value: formatDate(newValue, this.props.format, this.props.localTimezone),
             error: false,
             visible: false,
             dateValue: MethodDate.fromDate(this.props.localTimezone, newValue)
@@ -621,11 +618,11 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
 
     onKeyPress(event) {
         if (this.state.value.length < 10) {
-            if (event.charCode >= helpers.char0 && event.charCode <= helpers.char9) {
+            if (event.charCode >= keyCode['0'] && event.charCode <= keyCode['9']) {
                 return;
             }
     
-            if (event.charCode === helpers.charSlash) {
+            if (event.charCode === keyCode.slash) {
                 if (this.state.value.split('/').length < 3) {
                     return;
                 }
@@ -660,7 +657,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             className={css('calendar-icon')}
         />;
 
-        const placeholder = helpers.placeholders[this.props.format];
+        const placeholder = placeholders[this.props.format];
 
         const parsed = this.parse(this.state.value);
 

@@ -1,15 +1,4 @@
-export {hasClassName} from '../../Common';
-
-export enum DateFormat {
-    MMDDYYYY = 0,
-    DDMMYYYY,
-    YYYYMMDD
-}
-
-export const char0: number = 48;
-export const char9: number = 57;
-export const charSlash: number = 47;
-export const weekLength = 7;
+import {hasClassName, DateFormat, weekLength} from '../../Common';
 
 export const placeholders = [
     'mm/dd/yyyy',
@@ -63,5 +52,3 @@ export const getLocalMonths = (locale) => {
 
     return monthNames;
 };
-
-export {MethodDate, dateIsValid} from '../../Common';

@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {ActionTrigger} from '../ActionTrigger';
-import * as helpers from './helpers';
-import {MethodDate} from './helpers';
-import {keyCode} from '../../Common';
+import {getLocalMonths, getLocalWeekdays} from './helpers';
+import {keyCode, MethodDate, weekLength} from '../../Common';
 const css = classNames.bind(require('./Calendar.scss'));
 
 export interface CalendarComponentType {}
@@ -87,9 +86,9 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
             accessibility: false
         };
 
-        this.monthNames = helpers.getLocalMonths(locale);
+        this.monthNames = getLocalMonths(locale);
 
-        this.dayNames = helpers.getLocalWeekdays(locale);
+        this.dayNames = getLocalWeekdays(locale);
 
         this.buttons = [];
 
@@ -315,13 +314,13 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
 
         let rows = [], row = [];
 
-        start.date = start.date - start.getDay();
-        end.date = end.date + (6 - end.getDay());
+        start.date = start.date - start.dateObject.getDay();
+        end.date = end.date + (6 - end.dateObject.getDay());
 
         while (start.isBefore(end)) {
             // We have to copy the date, otherwise it will get modified in place
             row.push(start.copy());
-            if (row.length >= helpers.weekLength) {
+            if (row.length >= weekLength) {
                 rows.push(row);
                 row = [];
             }
