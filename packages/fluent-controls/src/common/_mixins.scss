@@ -19,12 +19,8 @@
         outline: none;
     }
 
-    &:hover {
+    &:not(:disabled) {
         cursor: pointer;
-    }
-
-    &:disabled:hover {
-        cursor: initial;
     }
 }
 

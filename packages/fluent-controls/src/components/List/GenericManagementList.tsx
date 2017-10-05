@@ -93,7 +93,7 @@ export interface GenericManagementListProps<T> extends React.Props<GenericManage
  * 
  * @param props Control properties (defined in `GenericManagementListProps` interface)
  */
-export class GenericManagementList<T> extends React.Component<GenericManagementListProps<T>> {
+export class GenericManagementList<T> extends React.PureComponent<GenericManagementListProps<T>> {
     static defaultProps = {
         name: 'management-list',
         selectAllLabel: 'Select All',
@@ -104,9 +104,6 @@ export class GenericManagementList<T> extends React.Component<GenericManagementL
     render() {
         let columns = this.props.columns.map(col => []);
         this.props.columns.forEach((column, colIndex) => {
-            if (column.hidden) {
-                return;
-            }
             let onClick: (event) => void = null;
             let labelSuffix: MethodNode = '';
             const sortable = column.onAscending && column.onDescending;
@@ -254,6 +251,10 @@ export class GenericManagementList<T> extends React.Component<GenericManagementL
 export function CreateManagementList<T>(): React.StatelessComponent<GenericManagementListProps<T>> {
     return (props: GenericManagementListProps<T>) => {
         return (
+            /**
+             * JSX can't render generic components because it can't parse <>
+             * specialization syntax so we have to use React.createElement
+             */
             React.createElement(
                 GenericManagementList,
                 props,

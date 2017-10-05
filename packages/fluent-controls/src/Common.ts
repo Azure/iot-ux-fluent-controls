@@ -278,6 +278,4 @@ export interface GridColumn<T> {
     onDescending?: () => void;
     /** Direction to sort when the column is first clicked */
     defaultDirection?: SortDirection;
-    /** Hide the column */
-    hidden?: boolean;
 }
