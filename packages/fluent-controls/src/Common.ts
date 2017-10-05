@@ -100,19 +100,7 @@ export class MethodDate {
                 this.dateObject = new Date(year);
             }
         } else {
-            const today = new Date();
-            year =    localTimezone ? today.getFullYear() : today.getUTCFullYear();
-            month =   localTimezone ? today.getMonth()    : today.getUTCMonth();
-            date =    localTimezone ? today.getDate()     : today.getUTCDate();
-            hours =   localTimezone ? today.getHours()    : today.getUTCHours();
-            minutes = localTimezone ? today.getMinutes()  : today.getUTCMinutes();
-            seconds = localTimezone ? today.getSeconds()  : today.getUTCSeconds();
-
-            if (localTimezone) {
-                this.dateObject = new Date(year, month, date, hours, minutes, seconds);
-            } else {
-                this.dateObject = new Date(Date.UTC(year, month, date, hours, minutes, seconds));
-            }
+            this.dateObject = new Date();
         }
 
         this.localTimezone = localTimezone;

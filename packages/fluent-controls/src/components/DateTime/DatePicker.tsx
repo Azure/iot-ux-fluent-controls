@@ -100,6 +100,9 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
 
         this.inputElement = null;
         this.paste = false;
+
+        this.inputRef = this.inputRef.bind(this);
+        this.calendarRef = this.calendarRef.bind(this);
     }
 
     /**
@@ -643,6 +646,14 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         this.paste = true;
     }
 
+    inputRef(element: HTMLInputElement) {
+        this.inputElement = element;
+    }
+
+    calendarRef(element: Calendar) {
+        this.calendar = element;
+    }    
+
     render() {
         const containerClassName = css('date-picker-container', this.props.className);
         const inputClassName = css('input', {'error': this.state.error || this.props.error});
@@ -683,7 +694,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                          */
                         required
                         disabled={this.props.disabled}
-                        ref={(element) => this.inputElement = element}
+                        ref={this.inputRef}
                     />
                     {icon}
                 </div>
@@ -699,7 +710,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                         year={parsed.year || null}
                         month={parsed.month - 1 || null}
                         tabIndex={this.props.tabIndex}
-                        ref={element => this.calendar = element}
+                        ref={this.calendarRef}
                     />
                     <div className={css('dropdown-triangle')} />
                 </div>
