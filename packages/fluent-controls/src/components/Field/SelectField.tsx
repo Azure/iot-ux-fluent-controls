@@ -36,7 +36,9 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
     /** Display horizontal loading animation instead of error */
-    loading?: boolean;    
+    loading?: boolean;
+    /** Autofocus */
+    autoFocus?: boolean;   
 
     /** Callback for HTML select element `onChange` events */
     onChange: (newValue: any) => void;
@@ -75,6 +77,7 @@ export const SelectField = (props: SelectFieldProps) => {
                 disabled={props.disabled}
                 onChange={props.onChange}
                 className={props.inputClassName}
+                autoFocus={props.autoFocus}
             />
         </FormField>
     );

@@ -36,6 +36,8 @@ export interface TextInputProps extends React.Props<TextInputType> {
     error?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
+    /** Autofocus */
+    autoFocus?: boolean;
 
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
@@ -100,6 +102,7 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
                     // (this gives us :valid css selector)
                     required
                     disabled={props.disabled}
+                    autoFocus={props.autoFocus}
                 />
                 {clearButton}
             </div>

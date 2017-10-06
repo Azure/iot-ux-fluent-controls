@@ -26,6 +26,8 @@ export interface CheckboxInputProps extends React.Props<CheckboxInputType> {
     disabled?: boolean;
     /** Shows the checkbox in indeterminate state */
     indeterminate?: boolean;
+    /** Autofocus */
+    autoFocus?: boolean;
 
     /** Callback for HTML radio button element onChange events */
     onChange: (newValue: boolean) => void;
@@ -66,6 +68,7 @@ export const CheckboxInput = (props: CheckboxInputProps) => {
                     hidden={props.hidden}
                     checked={props.checked}
                     onChange={onChange}
+                    autoFocus={props.autoFocus}
                 />
                 <span className={css('checkbox-button')}></span>
                 <span className={css('checkbox-text')}>{props.label}</span>

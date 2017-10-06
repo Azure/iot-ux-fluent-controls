@@ -70,6 +70,8 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
     required?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
+    /** Autofocus */
+    autoFocus?: boolean;
 
 
     /** Callback for HTML input element `onChange` events */
@@ -115,6 +117,7 @@ export const ComboField = (props: ComboFieldProps) => {
                     disabled={props.disabled}
                     onChange={props.onChange}
                     className={props.inputClassName}
+                    autoFocus={props.autoFocus}
                 />
             </div>
         </FormField>

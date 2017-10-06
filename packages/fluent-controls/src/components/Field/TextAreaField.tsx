@@ -28,6 +28,8 @@ export interface TextAreaFieldProps extends React.Props<TextAreaFieldType> {
     required?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
+    /** Autofocus */
+    autoFocus?: boolean;
 
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
@@ -62,6 +64,7 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
                 onChange={props.onChange}
                 className={props.inputClassName}
                 autogrow={props.autogrow}
+                autoFocus={props.autoFocus}
             />
         </FormField>
     );

@@ -9,6 +9,8 @@ export interface ToggleProps extends React.Props<ToggleType> {
     on?: boolean;
     /** Disable Action Trigger */
     disabled?: boolean;
+    /** AutoFocus */
+    autoFocus?: boolean;
 
     name: string;
 
@@ -49,6 +51,7 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
                 onClick={onClick}
                 tabIndex={tabIndex}
                 name={props.name}
+                autoFocus={props.autoFocus}
             />
             <div className={focusClassName} />
             <div className={switchClassName} />

@@ -25,6 +25,8 @@ export interface RadioInputProps extends React.Props<RadioInputType> {
     disabled?: boolean;
     /** Hide HTML input element */
     hidden?: boolean;
+    /** Autofocus */
+    autoFocus?: boolean;
 
     /** Callback for HTML radio button element onChange events */
     onChange: (newValue: string) => void;
@@ -65,6 +67,7 @@ export const RadioInput = (props: RadioInputProps) => {
                     hidden={props.hidden}
                     checked={props.checked}
                     onClick={onClick}
+                    autoFocus={props.autoFocus}
                 />
                 <span className={css('radio-button', classes)}></span>
                 <span className={css('radio-text')}>{props.label}</span>

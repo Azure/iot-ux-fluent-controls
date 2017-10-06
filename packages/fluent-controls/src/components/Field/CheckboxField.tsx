@@ -28,6 +28,8 @@ export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
     required?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
+    /** Autofocus */
+    autoFocus?: boolean;
 
     /** Callback for HTML checkbox element `onChange` events */
     onChange: (newValue: boolean) => void;
@@ -66,6 +68,7 @@ export const CheckboxField = (props: CheckboxFieldProps) => {
                     disabled={props.disabled}
                     onChange={props.onChange}
                     className={props.inputClassName}
+                    autoFocus={props.autoFocus}
                 />
             </div>
         </FormField>

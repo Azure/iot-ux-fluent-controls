@@ -62,6 +62,8 @@ export interface ComboInputProps extends React.Props<ComboInputType> {
     error?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
+    /** Autofocus */
+    autoFocus?: boolean;
 
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string | FormOption) => void;
@@ -363,6 +365,7 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
                         required
                         disabled={this.props.disabled}
                         ref={(element) => this.inputElement = element}
+                        autoFocus={this.props.autoFocus}
                     />
                     {clearButton}
                     <span className={css('chevron', 'icon icon-chevronDown')} />

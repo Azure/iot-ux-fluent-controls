@@ -32,6 +32,8 @@ export interface SelectInputProps extends React.Props<SelectInputType> {
     error?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
+    /** Autofocus */
+    autoFocus?: boolean;
 
     /** Callback for HTML select element onChange events */
     onChange: (newValue: any) => void;
@@ -92,6 +94,7 @@ export const SelectInput = (props: SelectInputProps) => {
                 className={comboClass}
                 onChange={onChange}
                 disabled={props.disabled}
+                autoFocus={props.autoFocus}
             >
                 {options}
             </select>

@@ -29,7 +29,9 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
     /** Display horizontal loading animation instead of error */
-    loading?: boolean;    
+    loading?: boolean;
+    /** Auto Focus */
+    autoFocus?: boolean;
 
     /** Callback for `onChange` events */
     onChange: (newValue: any) => void;
@@ -64,6 +66,7 @@ export const ToggleField = (props: ToggleFieldProps) => {
                     onLabel={props.onLabel}
                     offLabel={props.offLabel}
                     className={props.inputClassName}
+                    autoFocus={props.autoFocus}
                 />
             </div>
         </FormField>

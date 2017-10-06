@@ -39,6 +39,8 @@ export interface RadioFieldProps extends React.Props<RadioFieldType> {
     required?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
+    /** Autofocus */
+    autoFocus?: boolean;
 
     /** Callback for HTML radio button element `onChange` events */
     onChange: (newValue: any) => void;
@@ -78,6 +80,7 @@ export const RadioField = (props: RadioFieldProps) => {
                 onChange={onChange}
                 className={props.inputClassName}
                 key={`${props.name}-${index}`}
+                autoFocus={props.autoFocus && index === 0}
             />
         );
     });

@@ -19,6 +19,8 @@ export interface TextAreaProps extends React.Props<TextAreaType> {
     disabled?: boolean;
     /** Grow text area to fit user text */
     autogrow?: boolean;
+    /** Autofocus */
+    autoFocus?: boolean;
 
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
@@ -70,6 +72,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     disabled={this.props.disabled}
                     placeholder={this.props.placeholder}
                     ref={element => this.textarea = element}
+                    autoFocus={this.props.autoFocus}
                 />
                 {this.props.autogrow ? 
                     <pre
