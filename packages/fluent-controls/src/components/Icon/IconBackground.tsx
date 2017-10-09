@@ -1,8 +1,13 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {DivProps, Elements as Attr} from '../../Attributes';
 const css = classNames.bind(require('./Icon.scss'));
 
 export interface IconBackgroundType {}
+
+export interface IconBackgroundAttributes {
+    container?: DivProps;
+}
 
 export interface IconBackgroundProps extends React.Props<IconBackgroundType> {
     /** Background color of circle */
@@ -15,6 +20,8 @@ export interface IconBackgroundProps extends React.Props<IconBackgroundType> {
     
     /** Classname to append to top level element */
     className?: string;
+
+    attr?: IconBackgroundAttributes;
 }
 
 /**
@@ -38,11 +45,13 @@ export const IconBackground: React.StatelessComponent<IconBackgroundProps> = (pr
         style['borderRadius'] = `${props.diameter / 2}px`;
     }
 
-    return (<div className={cls} style={style}></div>);
+    return (<Attr.div className={cls} style={style} attr={props.attr.container}/>);
 };
 
 IconBackground.defaultProps = {
-
+    attr: {
+        container: {}
+    }
 };
 
 export default IconBackground;
