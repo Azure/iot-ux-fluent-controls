@@ -167,3 +167,21 @@ let tooltip = (
     <Icon icon='info'>This is a single line fixed width tooltip</Icon>
 </Balloon>
 ```
+
+### Changing Balloon Background color using Attribute Override
+
+```jsx
+let Icon = require('../Icon').Icon;
+const classnames = require('classnames/bind');
+const css = classnames.bind(require('../Examples/Balloon.scss'));
+
+let tooltip = (
+    <span>
+        This is a simple balloon!
+    </span>
+);
+
+<Balloon tooltip={tooltip} attr={{balloonContainer: {className: css('balloon-yellow')}}}>
+    <Icon icon='info'>This is a styled balloon</Icon>
+</Balloon>
+``` 

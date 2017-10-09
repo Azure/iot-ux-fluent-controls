@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as classNames from 'classnames';
 import {MethodNode} from './Common';
 
 export const AttrElement: (element: keyof React.ReactHTML) => (props: any) => React.ReactElement<any> = element => props => {
@@ -15,7 +16,7 @@ export const AttrElement: (element: keyof React.ReactHTML) => (props: any) => Re
         return React.createElement(element, props, ...children);
     }
     
-    const className = (props.className || '') + ' ' + (attr.className || '');
+    const className = classNames(props.className, attr.className);
     if (props.className) {
         delete props.className;
     }
