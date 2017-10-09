@@ -264,3 +264,18 @@ export class MethodDate {
         }
     }
 }
+
+export type SortDirection = null | 'ascending' | 'descending';
+
+export interface GridColumn<T> {
+    /** Label for this column */
+    label: MethodNode;
+    /** Function mapping the row type T to a value to display for this column */
+    mapColumn: ((row: T) => MethodNode) | keyof T;
+    /** Callback for when the column is sorted in ascending order */
+    onAscending?: () => void;
+    /** Callback for when the column is sorted in descending order */
+    onDescending?: () => void;
+    /** Direction to sort when the column is first clicked */
+    defaultDirection?: SortDirection;
+}

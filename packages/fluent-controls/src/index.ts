@@ -8,6 +8,7 @@ export * from './Field';
 export * from './GalleryCard';
 export * from './Icon';
 export * from './Input';
+export * from './List';
 export * from './Loader';
 export * from './Pivot';
 export * from './Toggle';
