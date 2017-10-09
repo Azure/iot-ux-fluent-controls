@@ -64,6 +64,30 @@ export interface ComboInputProps extends React.Props<ComboInputType> {
     disabled?: boolean;
     /** Autofocus */
     autoFocus?: boolean;
+    /**
+     * Show label instead of FormOption value in ComboInput text box when a 
+     * value from the FormOptions is selected
+     * 
+     * Since the ComboInput has a text input, it cannot draw an arbitrary 
+     * MethodNode as the textbox value. If props.optionLabel returns a string,
+     * then you can show the label text in the textbox instead of the option
+     * value itself.
+     * 
+     * Note: If the label and value are different and showLabel is true,
+     * when the user starts typing after making a selection in the dropdown,
+     * it will not reselect the option unless optionSelect checks the label
+     * string as well as the value.
+     * 
+     * For example:
+     * ```js
+     * optionSelect = (newValue, option) => {
+     *     return newValue === option.value || newValue === option.label.toString();
+     * }
+     * ```
+     * 
+     * Default: true
+     */
+    showLabel?: boolean;
 
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string | FormOption) => void;
@@ -103,7 +127,8 @@ const defaultLabel = (newValue: string, option: FormOption) => option.label;
 export class ComboInput extends React.Component<ComboInputProps, ComboInputState> {
     static defaultProps =  {
         optionMap: defaultMap,
-        optionLabel: defaultLabel
+        optionLabel: defaultLabel,
+        showLabel: true
     };
 
     inputElement: any;
@@ -309,8 +334,21 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
             }, this.props.dropdownClassName
         );
 
+        this.props.options.forEach(option => {
+            
+        });
+
+        let inputValue = '';
         const value = this.getValue();
+        let result = null;
         const options = this.getVisibleOptions().map((option, index) => {
+            const checkLabel = this.props.showLabel
+                ? this.props.optionLabel(value, option).toString === this.props.value
+                : false;
+            if (option.value === this.props.value || checkLabel) {
+                result = option;
+            }
+
             const optionClassName = css('option', {
                 'selected': this.optionSelect(value, option),
                 'hover': this.state.hovered === option,
@@ -338,6 +376,16 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
             );
         });
 
+        if (result) {
+            inputValue = this.props.showLabel 
+                ? this.props.optionLabel(value, result).toString()
+                : value;
+        } else {
+            if (typeof(this.props.value) === 'string') {
+                inputValue = this.props.value;
+            }
+        }
+
         const clearButton = this.props.disabled ? '' :
             <button
                 className={css('cancel', 'icon icon-cancel')}
@@ -354,7 +402,7 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
                     <input 
                         type='text'
                         name={this.props.name}
-                        value={value}
+                        value={inputValue}
                         className={inputClassName}
                         onChange={event => this.onInputChange(event)}
                         placeholder={this.props.placeholder}
