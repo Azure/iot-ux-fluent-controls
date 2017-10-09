@@ -1,12 +1,26 @@
 import { DEFAULT_ENCODING } from 'crypto';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon} from '../Icon';
+import {DivProps, ButtonProps, Elements as Attr} from '../../Attributes';
+import {Icon, IconAttributes} from '../Icon';
 import {MethodNode, GridColumn, SortDirection} from '../../Common';
-import {CheckboxInput} from '../Input/CheckboxInput';
+import {CheckboxInput, CheckboxInputAttributes} from '../Input/CheckboxInput';
 const css = classNames.bind(require('./GenericManagementList.scss'));
 
 export interface GenericManagementListComponentType {}
+
+export interface GenericManagementListAttributes {
+    container?: DivProps;
+    column?: DivProps;
+    rowHeader?: ButtonProps;
+    rowContent?: DivProps;
+    rowHeaderChevron?: IconAttributes;
+    selectAllContainer?: DivProps;
+    selectAllEmptyContainer?: DivProps;
+    selectAllCheckbox?: CheckboxInputAttributes;
+    selectRowContainer?: DivProps;
+    selectRowCheckbox?: CheckboxInputAttributes;
+}
 
 export interface GenericManagementListProps<T> extends React.Props<GenericManagementListComponentType> {
     /**
@@ -76,6 +90,8 @@ export interface GenericManagementListProps<T> extends React.Props<GenericManage
 
     /** Classname to append to top level element */
     className?: string;
+
+    attr?: GenericManagementListAttributes;
 }
 
 /**
@@ -98,7 +114,19 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
         name: 'management-list',
         selectAllLabel: 'Select All',
         selectLabel: () => '',
-        defaultDirection: 'ascending'
+        defaultDirection: 'ascending',
+        attr: {
+            container: {},
+            column: {},
+            rowHeader: {},
+            rowContent: {},
+            rowHeaderChevron: {},
+            selectAllContainer: {},
+            selectAllEmptyContainer: {},
+            selectAllCheckbox: {},
+            selectRowContainer: {},
+            selectRowCheckbox: {},
+        }
     };
 
     render() {
@@ -121,6 +149,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         icon={icon}
                         fontSize={12}
                         className={css('sort-direction')}
+                        attr={this.props.attr.rowHeaderChevron}
                     />;
                 } else {
                     onClick = column.defaultDirection === 'descending'
@@ -129,14 +158,15 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                 }
             }
             columns[colIndex].push(
-                <button
+                <Attr.button
                     className={css('column-header')}
                     key={`header-${colIndex}`}
                     onClick={onClick}
                     disabled={!sortable}
+                    attr={this.props.attr.rowHeader}
                 >
                     {column.label}{labelSuffix}
-                </button>
+                </Attr.button>
             );
             columns[colIndex].push(
                 this.props.rows.map((row, rowIndex) => {
@@ -156,12 +186,13 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         }
                     }
                     return (
-                        <div
+                        <Attr.div
                             className={css('column-content')}
                             key={rowIndex}
+                            attr={this.props.attr.rowContent}
                         >
                             {content}
-                        </div>
+                        </Attr.div>
                     );
                 }
             ));
@@ -176,24 +207,32 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
             const allSelected = selected.filter(row => row).length === selected.length;
             const checkboxCol = [];
             const selectAll = !this.props.onSelectAll
-                ? <div className={css('checkbox-empty')}></div>
+                ? <Attr.div
+                    className={css('checkbox-empty')}
+                    attr={this.props.attr.selectAllEmptyContainer}
+                />
                 : <CheckboxInput
                     name={`${this.props.name}-select-all`}
                     label={
-                        <div className={css('select-all-label')}>
+                        <Attr.div className={css('select-all-label')}>
                             {this.props.selectAllLabel}
-                        </div>
+                        </Attr.div>
                     }
                     checked={allSelected}
                     onChange={newValue => this.props.onSelectAll(newValue)}
+                    attr={this.props.attr.selectAllCheckbox}
                 />;
 
             checkboxCol.push(
-                <div className={css('column-header', 'checkbox', {
-                    'checkbox-empty': !this.props.onSelectAll
-                })} key={'select-all'}>
+                <Attr.div
+                    className={css('column-header', 'checkbox', {
+                        'checkbox-empty': !this.props.onSelectAll
+                    })}
+                    key={'select-all'}
+                    attr={this.props.attr.selectAllContainer}
+                >
                     {selectAll}
-                </div>
+                </Attr.div>
             );
 
             this.props.rows.forEach((row, index) => {
@@ -213,13 +252,17 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                     }
                 }
                 checkboxCol.push(
-                    <div className={css('column-content', 'checkbox')} key={`select-${index}`}>
+                    <Attr.div
+                        className={css('column-content', 'checkbox')}
+                        key={`select-${index}`}
+                        attr={this.props.attr.selectRowContainer}
+                    >
                         <CheckboxInput
                             name={`${this.props.name}-select-${index}`}
                             label={
-                                <div className={css('select-all-label')}>
+                                <Attr.div className={css('select-all-label')}>
                                     {selectLabel}
-                                </div>
+                                </Attr.div>
                             }
                             checked={
                                 this.props.isSelected instanceof Function
@@ -227,23 +270,32 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                                     : !!row[this.props.isSelected]
                             }
                             onChange={newValue => this.props.onSelect(row, newValue)}
+                            attr={this.props.attr.selectRowCheckbox}
                         />
-                    </div>
+                    </Attr.div>
                 );
             });
             columns = [checkboxCol, ...columns];
         }
 
         return (
-            <div className={css('list-container')}>
+            <Attr.div
+                className={css('list-container')}
+                attr={this.props.attr.container}
+            >
                 {columns.map((col, index) => (
-                    <div className={css('column', {
-                        'checkbox': index === 0 && this.props.isSelected && this.props.onSelect
-                    })} key={index}>
+                    <Attr.div
+                        className={css('column', {
+                            'checkbox': index === 0 
+                                && this.props.isSelected && this.props.onSelect
+                        })}
+                        key={index}
+                        attr={this.props.attr.column}
+                    >
                         {col}
-                    </div>
+                    </Attr.div>
                 ))}
-            </div>
+            </Attr.div>
         );
     }
 }

@@ -1,8 +1,13 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {DivProps, Elements as Attr} from '../../Attributes';
 const css = classNames.bind(require('./GalleryCard.scss'));
 
 export interface ImageBackgroundType {}
+
+export interface ImageBackgroundAttributes {
+    container?: DivProps;
+}
 
 export interface ImageBackgroundProps extends React.Props<ImageBackgroundType> {
     /** Background image url */
@@ -17,6 +22,8 @@ export interface ImageBackgroundProps extends React.Props<ImageBackgroundType> {
     
     /** Classname to append to top level element */
     className?: string;
+
+    attr?: ImageBackgroundAttributes;
 }
 
 /**
@@ -37,14 +44,17 @@ export const ImageBackground: React.StatelessComponent<ImageBackgroundProps> = (
     };
 
     return (
-        <div className={cls} style={style}>
+        <Attr.div className={cls} style={style} attr={props.attr.container}>
             {props.children}
-        </div>
+        </Attr.div>
     );
 };
 
 ImageBackground.defaultProps = {
-    fixed: true
+    fixed: true,
+    attr: {
+        container: {}
+    }
 };
 
 export default ImageBackground;

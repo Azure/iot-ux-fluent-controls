@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, IconSize} from '../Icon';
+import {DivProps, Elements as Attr} from '../../Attributes';
+import {Icon, IconSize, IconAttributes} from '../Icon';
 const css = classNames.bind(require('./Alert.scss'));
 
 export enum AlertType {
@@ -10,6 +11,13 @@ export enum AlertType {
 }
 
 export interface AlertComponentType {}
+
+export interface AlertAttributes {
+    container?: DivProps;
+    icon?: IconAttributes;
+    text?: DivProps;
+    closeIcon?: IconAttributes;
+}
 
 export interface AlertProps extends React.Props<AlertComponentType> {
     /** Icon name (from Segoe UI MDL font) */
@@ -39,6 +47,8 @@ export interface AlertProps extends React.Props<AlertComponentType> {
 
     /** Classname to append to top level element */
     className?: string;
+
+    attr?: AlertAttributes;
 }
 
 /**
@@ -68,15 +78,30 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
     }
 
     const iconClassName = css('icon');
-    const icon = <Icon className={iconClassName} size={IconSize.xsmall} icon={iconName} />;
+    const icon = <Icon
+        className={iconClassName} 
+        size={IconSize.xsmall}
+        icon={iconName}
+        attr={props.attr.icon}
+    />;
 
     const textClassName = css('text');
-    const text = <div className={textClassName}>{props.children}</div>;
+    const text = (
+        <Attr.div
+            className={textClassName}
+            attr={props.attr.text}
+        >
+            {props.children}
+        </Attr.div>
+    );
 
     let close;
     if (props.onClose) {
         const closeClassName = css('close');
-        const closeProps = { container: {onClick: props.onClose} };
+        const closeProps = {
+            ...props.attr.closeIcon,
+            container: {onClick: props.onClose}
+        };
         close = (
             <Icon 
                 className={closeClassName} 
@@ -88,16 +113,22 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
     }
 
     return (
-        <div className={className} >
+        <Attr.div className={className} attr={props.attr.container}>
             {icon}
             {text}
             {close}
-        </div>
+        </Attr.div>
     );
 };
 
 Alert.defaultProps = {
-    type: AlertType.Information
+    type: AlertType.Information,
+    attr: {
+        container: {},
+        icon: {},
+        text: {},
+        closeIcon: {},
+    }
 };
 
 export default Alert;

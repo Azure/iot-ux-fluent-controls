@@ -1,11 +1,18 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
-import {Icon, IconSize, IconProps} from '../Icon';
+import {Icon, IconSize, IconProps, IconAttributes} from '../Icon';
 import {SolidBackground} from './SolidBackground';
 const css = classNames.bind(require('./GalleryCard.scss'));
 
 export interface GalleryCardType {}
+
+export interface GalleryCardAttributes {
+    container?: DivProps;
+    content?: DivProps;
+    banner?: BannerAttributes;
+}
 
 export interface GalleryCardProps extends React.Props<GalleryCardType> {
     /**
@@ -32,6 +39,8 @@ export interface GalleryCardProps extends React.Props<GalleryCardType> {
     contentClassName?: string;
     /** Data test hook string for testing */
     dataTestHook?: string;
+
+    attr?: GalleryCardAttributes;
 }
 
 /**
@@ -63,33 +72,43 @@ export const GalleryCard: React.StatelessComponent<GalleryCardProps> = (props: G
     }
 
     const banner = props.banner ? (
-        <Banner>{props.banner}</Banner>
+        <Banner attr={props.attr.banner}>{props.banner}</Banner>
     ) : null;
     
     const content = props.children ? (
-        <div className={contentClassName}>
+        <Attr.div className={contentClassName} attr={props.attr.content}>
             {props.children}
-        </div>
+        </Attr.div>
     ) : null;
 
     return (
-        <div {...outputProps} >
+        <Attr.div {...outputProps} attr={props.attr.container}>
             {props.background}
             {content}
             {banner}
-        </div>
+        </Attr.div>
     );
 };
 
 GalleryCard.defaultProps = {
     fixed: true,
-    background: <SolidBackground />
+    background: <SolidBackground />,
+    attr: {
+        container: {},
+        content: {},
+        banner: {},
+    }
 };
 
 export interface BannerType {}
 
+export interface BannerAttributes {
+    container?: DivProps;
+}
+
 export interface BannerProps extends React.Props<BannerType> {
     className?: string;
+    attr?: BannerAttributes;
 }
 
 /** TODO: Remove this Banner control. GalleryCard banner is now a string */
@@ -98,11 +117,24 @@ export const Banner: React.StatelessComponent<BannerProps> = (props: BannerProps
         'banner': true,
     }, props.className);
 
-    return (<div className={cls}>{props.children}</div>);
+    return (<Attr.div className={cls} attr={props.attr.container}>
+        {props.children}
+    </Attr.div>);
 };
+
+Banner.defaultProps = {
+    attr: {
+        container: {}
+    }
+};
+
+export interface GalleryCardIconAttributes {
+    text?: SpanProps;
+}
 
 export interface GalleryCardIconProps extends IconProps {
     title?: string;
+    attr?: GalleryCardIconAttributes & IconAttributes;
 }
 
 export const GalleryCardIcon: React.StatelessComponent<GalleryCardIconProps> = (props: GalleryCardIconProps) => {
@@ -128,13 +160,20 @@ export const GalleryCardIcon: React.StatelessComponent<GalleryCardIconProps> = (
     if (props.title) {
         let className = css('icon-title');
         title = (
-            <span className={className}>
+            <Attr.span className={className} attr={props.attr.text}>
                 {props.title}
-            </span>
+            </Attr.span>
         );
     }
 
     return (<Icon {...outputProps}>{title}</Icon>);
+};
+
+GalleryCardIcon.defaultProps = {
+    attr: {
+        text: {},
+        ...Icon.defaultProps.attr
+    }
 };
 
 export default GalleryCard;

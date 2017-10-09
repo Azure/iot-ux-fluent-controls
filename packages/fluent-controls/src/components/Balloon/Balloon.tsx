@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./Balloon.scss'));
 
@@ -16,6 +17,12 @@ export enum BalloonAlignment {
     Start = 1,
     Center,
     End
+}
+
+export interface BalloonAttributes {
+    container?: SpanProps;
+    balloonContainer?: DivProps;
+    balloon?: SpanProps;
 }
 
 export interface BalloonProps extends React.Props<BalloonType> {
@@ -47,6 +54,8 @@ export interface BalloonProps extends React.Props<BalloonType> {
     balloonClassName?: string;
     /** Forces the balloon to be expanded */
     expanded?: boolean;
+
+    attr?: BalloonAttributes;
 }
 
 /**
@@ -88,20 +97,25 @@ export const Balloon: React.StatelessComponent<BalloonProps> = (props: BalloonPr
     const containerClassName = css('balloon-container', props.className, { 'is-expanded': props.expanded });
 
     return (
-        <span className={containerClassName}>
+        <Attr.span className={containerClassName} attr={props.attr.container}>
             {props.children}
-            <span className={balloonClassName}>
-                <div className={innerClassName}>
+            <Attr.span className={balloonClassName} attr={props.attr.balloonContainer}>
+                <Attr.div className={innerClassName} attr={props.attr.balloon}>
                     {props.tooltip}
-                </div>
-            </span>
-        </span>
+                </Attr.div>
+            </Attr.span>
+        </Attr.span>
     );
 };
 
 Balloon.defaultProps = {
     position: BalloonPosition.Top,
-    align: BalloonAlignment.Center
+    align: BalloonAlignment.Center,
+    attr: {
+        container: {},
+        balloonContainer: {},
+        balloon: {},
+    }
 };
 
 export default Balloon;

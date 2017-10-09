@@ -1,13 +1,23 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
-import {Icon, IconSize} from '../Icon';
+import {Icon, IconSize, IconAttributes} from '../Icon';
 const css = classNames.bind(require('./Pivot.scss'));
 
 export const pivotClassName = css('pivot');
 export const menuClassName = css('pivot-menu');
 
 export interface PivotType {}
+
+export interface PivotAttributes {
+    container?: DivProps;
+    bottomBorder?: DivProps;
+    focusBorder?: DivProps;
+    content?: SpanProps;
+    innerContent?: DivProps;
+    icon?: IconAttributes;
+}
 
 export interface PivotProps extends React.Props<PivotType> {
     icon?: string;
@@ -17,6 +27,8 @@ export interface PivotProps extends React.Props<PivotType> {
     disabled?: boolean;
 
     className?: string;
+
+    attr?: PivotAttributes;
 }
 
 export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
@@ -39,28 +51,39 @@ export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
                 size={IconSize.xsmall}
                 className={iconClassName}
                 labelClassName={labelClassName}
+                attr={props.attr.icon}
             >
                 {props.text}
             </Icon>
         );
     } else {
         const labelClassName = css('pivot-label');        
-        contents = <span className={labelClassName}>{props.text}</span>;
+        contents = (
+            <Attr.span className={labelClassName} attr={props.attr.content}>
+                {props.text}
+            </Attr.span>
+        );
     }
     
     return (
-        <div className={containerClassName}>
+        <Attr.div className={containerClassName} attr={props.attr.container}>
             {contents}
             {contents}
-            <div className={borderClassName}></div>
-            <div className={focusClassName}></div>
-            <div className={innerClassName}></div>
-        </div>
+            <Attr.div className={borderClassName} attr={props.attr.bottomBorder}/>
+            <Attr.div className={focusClassName} attr={props.attr.focusBorder}/>
+            <Attr.div className={innerClassName} attr={props.attr.innerContent}/>
+        </Attr.div>
     );
 };
 
 Pivot.defaultProps = {
-
+    attr: {
+        container: {},
+        bottomBorder: {},
+        focusBorder: {},
+        content: {},
+        icon: Icon.defaultProps.attr,
+    }
 };
 
 export default Pivot;
