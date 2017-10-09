@@ -93,7 +93,7 @@ export interface GenericManagementListProps<T> extends React.Props<GenericManage
  * 
  * @param props Control properties (defined in `GenericManagementListProps` interface)
  */
-export class GenericManagementList<T> extends React.PureComponent<GenericManagementListProps<T>> {
+export class GenericManagementList<T> extends React.PureComponent<GenericManagementListProps<T>, {}> {
     static defaultProps = {
         name: 'management-list',
         selectAllLabel: 'Select All',
