@@ -248,20 +248,4 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
     }
 }
 
-export function CreateManagementList<T>(): React.StatelessComponent<GenericManagementListProps<T>> {
-    return (props: GenericManagementListProps<T>) => {
-        return (
-            /**
-             * JSX can't render generic components because it can't parse <>
-             * specialization syntax so we have to use React.createElement
-             */
-            React.createElement(
-                GenericManagementList,
-                props,
-                null
-            )
-        );
-    };
-}
-
 export default GenericManagementList;

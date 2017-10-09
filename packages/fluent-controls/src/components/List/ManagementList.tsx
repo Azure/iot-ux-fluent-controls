@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {MethodNode, GridColumn, SortDirection} from '../../Common';
-import {CreateManagementList, GenericManagementListProps} from './GenericManagementList';
+import {GenericManagementList, GenericManagementListProps} from './GenericManagementList';
 
 export interface ManagementListComponentType {}
 
@@ -17,8 +17,11 @@ export type ManagementListProps = GenericManagementListProps<any>;
  * @param props Control properties (defined in `ManagementListProps` interface)
  */
 export const ManagementList: React.StatelessComponent<ManagementListProps> = (props: ManagementListProps) => {
-    const List = CreateManagementList<any>();
-    return <List {...props}/>;
+    return React.createElement(
+        GenericManagementList,
+        props,
+        null
+    );
 };
 
 export default ManagementList;
