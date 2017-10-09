@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
-import {TextArea} from '../Input/TextArea';
-import {FormField} from './FormField';
+import {TextArea, TextAreaAttributes} from '../Input/TextArea';
+import {FormField, FormFieldAttributes} from './FormField';
 const css = classNames.bind(require('./Field.scss'));
 
 export interface TextAreaFieldType {}
@@ -38,6 +38,8 @@ export interface TextAreaFieldProps extends React.Props<TextAreaFieldType> {
     className?: string;
     /** Classname to append to top level element of TextArea */
     inputClassName?: string;
+
+    attr?: TextAreaAttributes & FormFieldAttributes;
 }
 
 /**
@@ -54,6 +56,12 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
             loading={props.loading}
             required={props.required}
             className={props.className}
+            attr={{
+                fieldContainer: props.attr.fieldContainer,
+                fieldContent: props.attr.fieldContent,
+                fieldError: props.attr.fieldError,
+                fieldLabel: props.attr.fieldLabel,                
+            }}
         >
             <TextArea
                 name={props.name}
@@ -65,12 +73,21 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
                 className={props.inputClassName}
                 autogrow={props.autogrow}
                 autoFocus={props.autoFocus}
+                attr={{
+                    container: props.attr.container,
+                    textarea: props.attr.textarea,
+                    pre: props.attr.pre,
+                }}
             />
         </FormField>
     );
 };
 
 TextAreaField.defaultProps = {
+    attr: {
+        ...FormField.defaultProps.attr,
+        ...TextArea.defaultProps.attr
+    }
 };
 
 export default TextAreaField;

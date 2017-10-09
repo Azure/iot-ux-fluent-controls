@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, FormOption} from '../../Common';
-import {TimeInput} from './TimeInput';
-import {FormField} from '../Field/FormField';
+import {TimeInput, TimeInputAttributes} from './TimeInput';
+import {FormField, FormFieldAttributes} from '../Field/FormField';
 
 export interface TimeFieldType {}
 
@@ -46,6 +46,8 @@ export interface TimeFieldProps extends React.Props<TimeFieldType> {
     className?: string;
     /** Classname to append to top level element of TextInput */
     inputClassName?: string;
+
+    attr?: TimeInputAttributes & FormFieldAttributes;
 }
 
 /**
@@ -62,6 +64,12 @@ export const TimeField: React.StatelessComponent<TimeFieldProps> = (props: TimeF
             loading={props.loading}
             required={props.required}
             className={props.className}
+            attr={{
+                fieldContainer: props.attr.fieldContainer,
+                fieldContent: props.attr.fieldContent,
+                fieldError: props.attr.fieldError,
+                fieldLabel: props.attr.fieldLabel,
+            }}
         >
             <TimeInput
                 name={props.name}
@@ -75,6 +83,17 @@ export const TimeField: React.StatelessComponent<TimeFieldProps> = (props: TimeF
                 disabled={props.disabled}
                 onChange={props.onChange}
                 className={props.inputClassName}
+                attr={{
+                    container: this.props.attr.container,
+                    hourSelect: this.props.attr.hourSelect,
+                    hourOption: this.props.attr.hourOption,
+                    minuteSelect: this.props.attr.minuteSelect,
+                    minuteOption: this.props.attr.minuteOption,
+                    secondSelect: this.props.attr.secondSelect,
+                    secondOption: this.props.attr.secondOption,
+                    periodSelect: this.props.attr.periodSelect,
+                    periodOption: this.props.attr.periodOption,
+                }}
             />
         </FormField>
     );
@@ -86,7 +105,11 @@ TimeField.defaultProps = {
     disabled: false,
     localTimezone: true,
     amLabel: 'AM',
-    pmLabel: 'PM'
+    pmLabel: 'PM',
+    attr: {
+        ...FormField.defaultProps.attr,
+        ...TimeInput.defaultProps.attr
+    }
 };
 
 export default TimeField;

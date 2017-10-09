@@ -1,8 +1,13 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {DivProps, Elements as Attr} from '../../Attributes';
 const css = classNames.bind(require('./Field.scss'));
 
 export interface FormErrorType {}
+
+export interface FormErrorAttributes {
+    container?: DivProps;
+}
 
 export interface FormErrorProps extends React.Props<FormErrorType> {
     /** Hide error */
@@ -10,6 +15,8 @@ export interface FormErrorProps extends React.Props<FormErrorType> {
 
     /** Classname to append to top level element */
     className?: string;
+
+    attr?: FormErrorAttributes;
 }
 
 /**
@@ -19,12 +26,21 @@ export interface FormErrorProps extends React.Props<FormErrorType> {
  */
 export const FormError: React.StatelessComponent<FormErrorProps> = (props: FormErrorProps) => {
     return (
-        <div className={css('field-error', {
-            'hidden': props.hidden
-        }, props.className)}>
+        <Attr.div 
+            className={css('field-error', {
+                'hidden': props.hidden
+            }, props.className)}
+            attr={props.attr.container}
+        >
             {props.children}
-        </div>
+        </Attr.div>
     );
+};
+
+FormError.defaultProps = {
+    attr: {
+        container: {}
+    }
 };
 
 export default FormError;

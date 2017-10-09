@@ -76,13 +76,13 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
     let close;
     if (props.onClose) {
         const closeClassName = css('close');
-        const closeProps = { onClick: props.onClose };
+        const closeProps = { container: {onClick: props.onClose} };
         close = (
             <Icon 
                 className={closeClassName} 
                 size={IconSize.xsmall}
                 icon='cancelLegacy'
-                props={closeProps}
+                attr={closeProps}
             />
         );
     }

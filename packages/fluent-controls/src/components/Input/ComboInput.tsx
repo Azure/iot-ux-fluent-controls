@@ -1,10 +1,21 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize} from '../Icon';
 import {MethodNode, FormOption, keyCode, hasClassName} from '../../Common';
 const css = classNames.bind(require('./ComboInput.scss'));
 
 export interface ComboInputType {}
+
+export interface ComboInputAttributes {
+    container?: DivProps;
+    textbox?: DivProps;
+    input?: InputProps;
+    clearButton?: ButtonProps;
+    chevron?: SpanProps;
+    dropdown?: DivProps;
+    option?: ButtonProps;
+}
 
 export interface ComboInputProps extends React.Props<ComboInputType> {
     /** HTML form element name */
@@ -98,6 +109,8 @@ export interface ComboInputProps extends React.Props<ComboInputType> {
     inputClassName?: string;
     /** Class to append to top level dropdown element */
     dropdownClassName?: string;
+
+    attr?: ComboInputAttributes;
 }
 
 export interface ComboInputState {
@@ -128,7 +141,16 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
     static defaultProps =  {
         optionMap: defaultMap,
         optionLabel: defaultLabel,
-        showLabel: true
+        showLabel: true,
+        attr: {
+            container: {},
+            textbox: {},
+            input: {},
+            clearButton: {},
+            chevron: {},
+            dropdown: {},
+            option: {},
+        }
     };
 
     inputElement: HTMLInputElement;
@@ -367,15 +389,16 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
             };
 
             return (
-                <button
+                <Attr.button
                     className={optionClassName}
                     onClick={onClick}
                     onMouseOver={onHover}
                     tabIndex={-1}
                     key={index}
+                    attr={this.props.attr.option}
                 >
                     {this.props.optionLabel(value, option)}
-                </button>
+                </Attr.button>
             );
         });
 
@@ -390,19 +413,27 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
         }
 
         const clearButton = this.props.disabled ? '' :
-            <button
+            <Attr.button
                 className={css('cancel', 'icon icon-cancel')}
                 onClick={() => {
                     this.inputElement.focus();
                     this.props.onChange('');
                 }}
                 tabIndex={-1}
+                attr={this.props.attr.clearButton}
             />;
 
         return (
-            <div className={containerClassName} ref={this.containerRef}>
-                <div className={css('input-container')}>
-                    <input 
+            <Attr.div
+                className={containerClassName}
+                attr={this.props.attr.container}
+                ref={this.containerRef}
+            >
+                <Attr.div
+                    className={css('input-container')}
+                    attr={this.props.attr.textbox}
+                >
+                    <Attr.input 
                         type='text'
                         name={this.props.name}
                         value={inputValue}
@@ -417,14 +448,21 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
                         disabled={this.props.disabled}
                         ref={(element) => this.inputElement = element}
                         autoFocus={this.props.autoFocus}
+                        attr={this.props.attr.input}
                     />
                     {clearButton}
-                    <span className={css('chevron', 'icon icon-chevronDown')} />
-                    <div className={dropdownClassName}>
+                    <Attr.span
+                        className={css('chevron', 'icon icon-chevronDown')} 
+                        attr={this.props.attr.chevron}
+                    />
+                    <Attr.div
+                        className={dropdownClassName}
+                        attr={this.props.attr.dropdown}
+                    >
                         {options}
-                    </div>
-                </div>
-            </div>
+                    </Attr.div>
+                </Attr.div>
+            </Attr.div>
         );
     }
 }

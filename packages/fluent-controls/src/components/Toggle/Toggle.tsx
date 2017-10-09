@@ -1,9 +1,18 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {DivProps, ButtonProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./Toggle.scss'));
 
 export interface ToggleType {}
+
+export interface ToggleAttributes {
+    container?: DivProps;
+    button?: ButtonProps;
+    border?: DivProps;
+    switch?: DivProps;
+    text?: DivProps;
+}
 
 export interface ToggleProps extends React.Props<ToggleType> {
     on?: boolean;
@@ -21,6 +30,8 @@ export interface ToggleProps extends React.Props<ToggleType> {
 
     /** Classname to append to top level element */
     className?: string;
+
+    attr?: ToggleAttributes;
 }
 
 /**
@@ -29,11 +40,10 @@ export interface ToggleProps extends React.Props<ToggleType> {
  * @param props Control properties (defined in `ToggleProps` interface)
  */
 export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps) => {
-    const containerClassName = css('toggle', {'toggle-on': props.on, 'disabled': props.disabled});
-    const buttonClassName = css('toggle-button');
-    const switchClassName = css('toggle-switch');
-    const focusClassName = css('toggle-border');
-    const labelClassName = css('toggle-label');
+    const containerClassName = css('toggle', {
+        'toggle-on': props.on,
+        'disabled': props.disabled
+    });
 
     const onClick = (event) => {
         if (!props.disabled && props.onChange) {
@@ -45,24 +55,34 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
     const label = props.on ? props.onLabel : props.offLabel;
 
     return (
-        <div className={containerClassName}>
-            <button
-                className={buttonClassName}
+        <Attr.div className={containerClassName} attr={props.attr.container}>
+            <Attr.button
+                className={css('toggle-button')}
                 onClick={onClick}
                 tabIndex={tabIndex}
                 name={props.name}
                 autoFocus={props.autoFocus}
+                attr={props.attr.button}
             />
-            <div className={focusClassName} />
-            <div className={switchClassName} />
-            <div className={labelClassName}>{label}</div>
-        </div>
+            <Attr.div className={css('toggle-border')} attr={props.attr.border}/>
+            <Attr.div className={css('toggle-switch')} attr={props.attr.switch}/>
+            <Attr.div className={css('toggle-label')} attr={props.attr.text}>
+                {label}
+            </Attr.div>
+        </Attr.div>
     );
 };
 
 Toggle.defaultProps = {
     onLabel: 'On',
-    offLabel: 'Off'
+    offLabel: 'Off',
+    attr: {
+        container: {},
+        button: {},
+        border: {},
+        switch: {},
+        text: {},
+    }
 };
 
 export default Toggle;

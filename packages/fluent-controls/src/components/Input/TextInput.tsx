@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {DivProps, ButtonProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize} from '../Icon';
 import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./TextInput.scss'));
@@ -8,6 +9,16 @@ export const prefixClassName = css('prefix-addon');
 export const postfixClassName = css('postfix-addon');
 
 export interface TextInputType {}
+
+
+export interface TextInputAttributes {
+    container?: DivProps;
+    input?: InputProps;
+    inputContainer?: DivProps;
+    prefix?: DivProps;
+    postfix?: DivProps;
+    clearButton?: ButtonProps;
+}
 
 export interface TextInputProps extends React.Props<TextInputType> {
     /** HTML form element name */
@@ -44,6 +55,8 @@ export interface TextInputProps extends React.Props<TextInputType> {
 
     /** Class to append to top level element */
     className?: string;
+
+    attr?: TextInputAttributes;
 }
 
 /**
@@ -69,29 +82,41 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
     };
 
     const clearButton = props.disabled || props.type === 'number' ? '' :
-        <button
+        <Attr.button
             className={cancelClassName}
             onClick={() => props.onChange('')}
             tabIndex={-1}
+            attr={props.attr.clearButton}
         />;
 
     let prefix = null;
     if (props.prefix) {
         const className = css('prefix', props.prefixClassName);
-        prefix = <div className={className}>{props.prefix}</div>;
+        prefix = (
+            <Attr.div className={className} attr={props.attr.prefix}>
+                {props.prefix}
+            </Attr.div>
+        );
     }
 
     let postfix = null;
     if (props.postfix) {
         const className = css('postfix', props.postfixClassName);
-        postfix = <div className={className}>{props.postfix}</div>;
+        postfix = (
+            <Attr.div className={className} attr={props.attr.postfix}>
+                {props.postfix}
+            </Attr.div>
+        );
     }
 
     return (
-        <div className={containerClassName}>
+        <Attr.div className={containerClassName} attr={props.attr.container}>
             {prefix}
-            <div className={inputContainerClassName}>
-                <input 
+            <Attr.div
+                className={inputContainerClassName}
+                attr={props.attr.inputContainer}
+            >
+                <Attr.input 
                     type={props.type}
                     name={props.name}
                     value={props.value}
@@ -103,16 +128,25 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
                     required
                     disabled={props.disabled}
                     autoFocus={props.autoFocus}
+                    attr={props.attr.input}
                 />
                 {clearButton}
-            </div>
+            </Attr.div>
             {postfix}
-        </div>
+        </Attr.div>
     );
 };
 
 TextInput.defaultProps = {
-    type: 'text'
+    type: 'text',
+    attr: {
+        container: {},
+        input: {},
+        inputContainer: {},
+        prefix: {},
+        postfix: {},
+        clearButton: {},
+    }
 };
 
 export default TextInput;

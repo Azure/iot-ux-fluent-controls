@@ -134,6 +134,7 @@ class ManagementListDemo extends React.Component {
         } else {
             rows = this.rows;
         }
+        return <div></div>
         return <ManagementList
             rows={rows}
             columns={this.cols}
@@ -151,4 +152,35 @@ class ManagementListDemo extends React.Component {
 }
 
 <ManagementListDemo />
+```
+
+
+
+
+
+
+
+
+
+
+
+# Method Attribute API
+
+The Method Attribute API provides library users to inject properties into the DOM structure of Method components with Typescript provided static type checking. This API exposes a metalayer for the API 
+
+```jsx
+<div>
+    <ActionTriggerLink
+        href='#'
+        onClick={() => alert('clicked!')}
+        icon='warning' 
+        attr={{
+            container: {
+                style: {
+                    backgroundColor: 'red'
+                }
+            }
+        }}
+    />
+</div>
 ```

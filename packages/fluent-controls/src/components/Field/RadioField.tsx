@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, FormOption} from '../../Common';
-import {RadioInput} from '../Input/RadioInput';
-import {FormField} from './FormField';
+import {RadioInput, RadioInputAttributes} from '../Input/RadioInput';
+import {FormField, FormFieldAttributes} from './FormField';
 const css = classNames.bind(require('./Field.scss'));
 
 export interface RadioFieldType {}
@@ -49,6 +49,8 @@ export interface RadioFieldProps extends React.Props<RadioFieldType> {
     className?: string;
     /** Classname to append to top level element of RadioInput */
     inputClassName?: string;
+
+    attr?: RadioInputAttributes & FormFieldAttributes;
 }
 
 /**
@@ -61,7 +63,7 @@ export interface RadioFieldProps extends React.Props<RadioFieldType> {
  * 
  * @param props: Object fulfilling `RadioFieldProps` interface
  */
-export const RadioField = (props: RadioFieldProps) => {
+export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: RadioFieldProps) => {
     const onChange = (newValue) => {
         const index = parseInt(newValue);
         props.onChange(props.options[index].value);
@@ -80,7 +82,16 @@ export const RadioField = (props: RadioFieldProps) => {
                 onChange={onChange}
                 className={props.inputClassName}
                 key={`${props.name}-${index}`}
-                autoFocus={props.autoFocus && index === 0}
+                autoFocus={props.autoFocus}
+                attr={{
+                    container: props.attr.container,
+                    label: props.attr.label,
+                    input: props.attr.input,
+                    radio: props.attr.radio,
+                    text: props.attr.text,
+                    fill: props.attr.fill,
+                    border: props.attr.border,
+                }}
             />
         );
     });
@@ -93,12 +104,25 @@ export const RadioField = (props: RadioFieldProps) => {
             loading={props.loading}
             required={props.required}
             className={props.className}
+            attr={{
+                fieldContainer: props.attr.fieldContainer,
+                fieldContent: props.attr.fieldContent,
+                fieldError: props.attr.fieldError,
+                fieldLabel: props.attr.fieldLabel,                
+            }}
         >
             <div>
                 {options}
             </div>
         </FormField>
     );
+};
+
+RadioField.defaultProps = {
+    attr: {
+        ...FormField.defaultProps.attr,
+        ...RadioInput.defaultProps.attr
+    }
 };
 
 export default RadioField;

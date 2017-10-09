@@ -1,12 +1,23 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Calendar} from './Calendar';
-import {Icon, IconSize} from '../Icon';
+import {DivProps, SpanProps, InputProps, Elements as Attr} from '../../Attributes';
+import {Calendar, CalendarAttributes} from './Calendar';
+import {Icon, IconSize, IconAttributes} from '../Icon';
 import {replaceAt, formatDate, placeholders} from './helpers';
 import {keyCode, MethodDate, dateIsValid, DateFormat} from '../../Common';
 const css = classNames.bind(require('./DatePicker.scss'));
 
 export interface DatePickerType {}
+
+export interface DatePickerAttributes {
+    container: DivProps;
+    inputContainer: DivProps;
+    input: InputProps;
+    inputIcon: IconAttributes;
+    dropdownContainer: DivProps;
+    dropdownTriangle: DivProps;
+    calendar: CalendarAttributes;
+}
 
 export interface DatePickerProps extends React.Props<DatePickerType> {
     /** HTML form element name */
@@ -57,6 +68,8 @@ export interface DatePickerProps extends React.Props<DatePickerType> {
 
     /** Class to append to top level element */
     className?: string;
+
+    attr?: DatePickerAttributes;
 }
 
 export interface DatePickerState {
@@ -80,6 +93,15 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         tabIndex: -1,
         localTimezone: true,
         showAbove: false,
+        attr: {
+            container: {},
+            inputContainer: {},
+            input: {},
+            inputIcon: {},
+            dropdownContainer: {},
+            dropdownTriangle: {},
+            calendar: {},
+        }
     };
 
     private containerElement: HTMLDivElement;    
@@ -672,6 +694,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
             icon='calendar'
             size={IconSize.xsmall}
             className={css('calendar-icon')}
+            attr={this.props.attr.inputIcon}
         />;
 
         const placeholder = placeholders[this.props.format];
@@ -679,9 +702,16 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         const parsed = this.parse(this.state.value);
 
         return (
-            <div className={containerClassName} ref={this.containerRef}>
-                <div className={css('input-container')}>
-                    <input
+            <Attr.div
+                className={containerClassName}
+                ref={this.containerRef}
+                attr={this.props.attr.container}
+            >
+                <Attr.div
+                    className={css('input-container')}
+                    attr={this.props.attr.inputContainer}
+                >
+                    <Attr.input
                         type='text'
                         name={this.props.name}
                         value={this.state.value}
@@ -701,10 +731,14 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                         required
                         disabled={this.props.disabled}
                         ref={this.inputRef}
+                        attr={this.props.attr.input}
                     />
                     {icon}
-                </div>
-                <div className={dropdownClassName}>
+                </Attr.div>
+                <Attr.div
+                    className={dropdownClassName}
+                    attr={this.props.attr.dropdownContainer}
+                >
                     <Calendar
                         value={
                             this.state.dateValue
@@ -717,10 +751,14 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                         month={parsed.month - 1 || null}
                         tabIndex={this.props.tabIndex}
                         ref={this.calendarRef}
+                        attr={this.props.attr.calendar}
                     />
-                    <div className={css('dropdown-triangle')} />
-                </div>
-            </div>
+                    <Attr.div
+                        className={css('dropdown-triangle')} 
+                        attr={this.props.attr.dropdownTriangle}
+                    />
+                </Attr.div>
+            </Attr.div>
         );
     }
 }

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, FormOption} from '../../Common';
-import {CheckboxInput} from '../Input/CheckboxInput';
-import {FormField} from './FormField';
+import {CheckboxInput, CheckboxInputAttributes} from '../Input/CheckboxInput';
+import {FormField, FormFieldAttributes} from './FormField';
 const css = classNames.bind(require('./Field.scss'));
 
 export interface CheckboxFieldType {}
@@ -38,6 +38,8 @@ export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
     className?: string;
     /** Classname to append to top level element of CheckboxInput */
     inputClassName?: string;
+
+    attr?: FormFieldAttributes & CheckboxInputAttributes;
 }
 
 /**
@@ -50,7 +52,7 @@ export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
  * 
  * @param props: Object fulfilling `CheckboxFieldProps` interface
  */
-export const CheckboxField = (props: CheckboxFieldProps) => {
+export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (props: CheckboxFieldProps) => {
     return (
         <FormField
             name={props.name}
@@ -59,6 +61,12 @@ export const CheckboxField = (props: CheckboxFieldProps) => {
             loading={props.loading}
             required={props.required}
             className={props.className}
+            attr={{
+                fieldContainer: props.attr.fieldContainer,
+                fieldContent: props.attr.fieldContent,
+                fieldError: props.attr.fieldError,
+                fieldLabel: props.attr.fieldLabel,                
+            }}
         >
             <div>
                 <CheckboxInput
@@ -69,10 +77,28 @@ export const CheckboxField = (props: CheckboxFieldProps) => {
                     onChange={props.onChange}
                     className={props.inputClassName}
                     autoFocus={props.autoFocus}
+                    attr={{
+                        container: props.attr.container,
+                        label: props.attr.label,
+                        input: props.attr.input,
+                        text: props.attr.text,
+                        checkbox: props.attr.checkbox,
+                        indeterminateFill: props.attr.indeterminateFill,
+                        checkmarkIcon: props.attr.checkmarkIcon,
+                        border: props.attr.border,
+                    }}
                 />
             </div>
         </FormField>
     );
 };
+
+CheckboxField.defaultProps = {
+    attr: {
+        ...FormField.defaultProps.attr,
+        ...CheckboxInput.defaultProps.attr
+    }
+};
+
 
 export default CheckboxField;

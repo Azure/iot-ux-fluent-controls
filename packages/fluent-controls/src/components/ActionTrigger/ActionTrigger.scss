@@ -60,3 +60,7 @@ $focus-border: 1px dashed md-color(shade, 3);
         text-overflow: ellipsis;
     }
 }
+
+.action-trigger-button {
+    @include md-default-button();
+}

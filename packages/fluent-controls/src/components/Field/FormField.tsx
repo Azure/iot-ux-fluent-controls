@@ -1,11 +1,19 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {DivProps, LabelProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 import {HorizontalLoader} from '../Loader';
-import {FormError} from './FormError';
+import {FormError, FormErrorAttributes} from './FormError';
 const css = classNames.bind(require('./Field.scss'));
 
 export interface FormFieldType {}
+
+export interface FormFieldAttributes {
+    fieldContainer?: DivProps;
+    fieldLabel?: LabelProps;
+    fieldContent?: DivProps;
+    fieldError?: FormErrorAttributes;
+}
 
 export interface FormFieldProps extends React.Props<FormFieldType> {
     /** HTML element name for label accessibility */
@@ -25,6 +33,8 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     className?: string;
     /** Classname to append to top level error element */
     errorClassName?: string;
+
+    attr?: FormFieldAttributes;
 }
 
 /**
@@ -44,27 +54,41 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
     }
 
     const label = props.label ? 
-        <label className={css('label')} htmlFor={props.name} >
+        <Attr.label
+            className={css('label')}
+            htmlFor={props.name} 
+            attr={props.attr.fieldLabel}
+        >
             {props.label}
-        </label> : '';
+        </Attr.label> : '';
 
     return (
-        <div className={containerClass} >
+        <Attr.div className={containerClass} attr={props.attr.fieldContainer}>
             {label}
-            <div className={css('content')}>
+            <Attr.div className={css('content')} attr={props.attr.fieldContent}>
                 {props.children}
-            </div>
-            <FormError className={props.errorClassName} hidden={props.hideError}>
+            </Attr.div>
+            <FormError
+                className={props.errorClassName}
+                hidden={props.hideError}
+                attr={props.attr.fieldError}
+            >
                 {error}
             </FormError>
-        </div>
+        </Attr.div>
     );
 };
 
 FormField.defaultProps = {
     loading: false,
     required: false,
-    hideError: false
+    hideError: false,
+    attr: {
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+    }
 };
 
 export default FormField;

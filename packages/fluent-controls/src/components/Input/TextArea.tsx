@@ -1,9 +1,16 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {DivProps, SpanProps, PreProps, TextAreaProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./TextArea.scss'));
 
 export interface TextAreaType {}
+
+export interface TextAreaAttributes {
+    container?: DivProps;
+    textarea?: TextAreaProps;
+    pre?: PreProps;
+}
 
 export interface TextAreaProps extends React.Props<TextAreaType> {
     /** HTML form element name */
@@ -27,6 +34,8 @@ export interface TextAreaProps extends React.Props<TextAreaType> {
 
     /** Class to append to top level element */
     className?: string;
+
+    attr?: TextAreaAttributes;
 }
 
 export interface TextAreaState {
@@ -42,7 +51,12 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
         autogrow: true,
         error: false,
         disabled: false,
-        value: ''
+        value: '',
+        attr: {
+            container: {},
+            textarea: {},
+            pre: {}
+        }
     };
 
     private textarea: HTMLTextAreaElement;
@@ -63,8 +77,11 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
         const value = this.props.value;
 
         return (
-            <div className={css('textarea-container', this.props.className)}>
-                <textarea
+            <Attr.div
+                className={css('textarea-container', this.props.className)}
+                attr={this.props.attr.container}
+            >
+                <Attr.textarea
                     name={this.props.name}
                     value={value}
                     className={css('textarea', {'error': this.props.error})}
@@ -73,16 +90,18 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     placeholder={this.props.placeholder}
                     ref={element => this.textarea = element}
                     autoFocus={this.props.autoFocus}
+                    attr={this.props.attr.textarea}
                 />
                 {this.props.autogrow ? 
-                    <pre
+                    <Attr.pre
                         className={css('textarea', 'textarea-ghost')}
                         ref={element => this.ghost = element}
+                        attr={this.props.attr.pre}
                     >
                         {value + (value[value.length - 1] === '\n' ? '\n' : '')}
-                    </pre> 
+                    </Attr.pre> 
                 : ''}
-            </div>
+            </Attr.div>
         );
     }
 }

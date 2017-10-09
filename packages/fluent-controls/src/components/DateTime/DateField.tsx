@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, DateFormat} from '../../Common';
-import {DatePicker} from './DatePicker';
-import {FormField} from '../Field/FormField';
+import {DatePicker, DatePickerAttributes} from './DatePicker';
+import {FormField, FormFieldAttributes} from '../Field/FormField';
 
 export interface DateFieldType {}
 
@@ -52,6 +52,8 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
     className?: string;
     /** Classname to append to top level element of TextInput */
     inputClassName?: string;
+
+    attr?: DatePickerAttributes & FormFieldAttributes;
 }
 
 /**
@@ -68,6 +70,13 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
             loading={props.loading}
             required={props.required}
             className={props.className}
+            attr={{
+                fieldContainer: props.attr.fieldContainer,
+                fieldContent: props.attr.fieldContent,
+                fieldError: props.attr.fieldError,
+                fieldLabel: props.attr.fieldLabel,
+            }}
+            
         >
             <DatePicker
                 name={props.name}
@@ -80,6 +89,15 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
                 disabled={props.disabled}
                 onChange={props.onChange}
                 className={props.inputClassName}
+                attr={{
+                    container: props.attr.container,
+                    inputContainer: props.attr.inputContainer,
+                    input: props.attr.input,
+                    inputIcon: props.attr.inputIcon,
+                    dropdownContainer: props.attr.dropdownContainer,
+                    dropdownTriangle: props.attr.dropdownTriangle,
+                    calendar: props.attr.calendar,
+                }}
             />
         </FormField>
     );
@@ -90,6 +108,10 @@ DateField.defaultProps = {
     tabIndex: -1,
     localTimezone: true,
     showAbove: false,
+    attr: {
+        ...FormField.defaultProps.attr,
+        ...DatePicker.defaultProps.attr
+    }
 };
 
 export default DateField;

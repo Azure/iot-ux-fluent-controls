@@ -1,0 +1,59 @@
+import * as React from 'react';
+import {MethodNode} from '../../Common';
+import {ActionTrigger, ActionTriggerProps, ActionTriggerAttributes} from '../ActionTrigger';
+import {Elements as Attr, AnchorProps, SpanProps, DivProps} from '../../Attributes';
+
+export interface ActionTriggerLinkAttributes extends ActionTriggerAttributes {
+    anchor?: AnchorProps;    
+}
+
+
+export interface ActionTriggerLinkProps {
+    /** Icon name (from Segoe UI MDL font) */
+    icon: string;
+    /** Icon name for icon on the right of ActionTrigger (from Segoe UI MDL font) */
+    rightIcon?: string;
+    /** Action trigger label */
+    label?: string;
+
+    /** Disable Action Trigger */
+    disabled?: boolean;
+
+    /** Classname to append to top level element */
+    className?: string;
+
+    /** Anchor href */
+    href: string;
+    /** Anchor onClick callback */
+    onClick?: () => void;
+    /** Anchor accessibility title */
+    title?: string;
+
+    attr?: ActionTriggerLinkAttributes;
+}
+
+export const ActionTriggerLink: React.StatelessComponent<ActionTriggerLinkProps> = (props: ActionTriggerLinkProps) => {
+    return (
+        <Attr.a 
+            href={props.href}
+            onClick={props.onClick}
+            className={props.className}
+            attr={props.attr.anchor}
+        >
+            <ActionTrigger
+                icon={props.icon}
+                rightIcon={props.rightIcon}
+                label={props.label}
+                disabled={props.disabled}
+                className={props.className}
+                attr={props.attr}
+            />
+        </Attr.a>
+    );
+};
+
+ActionTriggerLink.defaultProps = {
+    attr: {anchor: {}, icon: {}, ...ActionTrigger.defaultProps.attr}
+};
+
+export default ActionTriggerLink;

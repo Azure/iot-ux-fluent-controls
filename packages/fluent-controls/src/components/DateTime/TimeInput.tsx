@@ -1,10 +1,23 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {DivProps, OptionProps, SelectProps, Elements as Attr} from '../../Attributes';
 import {MethodNode, FormOption, keyCode} from '../../Common';
 import {SelectInput} from '../Input/SelectInput';
 const css = classNames.bind(require('./TimeInput.scss'));
 
 export interface TimeInputType {}
+
+export interface TimeInputAttributes {
+    container?: DivProps;
+    hourSelect?: SelectProps;
+    hourOption?: OptionProps;
+    minuteSelect?: SelectProps;
+    minuteOption?: OptionProps;
+    secondSelect?: SelectProps;
+    secondOption?: OptionProps;
+    periodSelect?: SelectProps;
+    periodOption?: OptionProps;
+}
 
 export interface TimeInputProps extends React.Props<TimeInputType> {
     /** HTML element name for label accessibility */
@@ -39,6 +52,8 @@ export interface TimeInputProps extends React.Props<TimeInputType> {
     className?: string;
     /** Classname to append to HTML input elements */
     inputClassName?: string;
+
+    attr?: TimeInputAttributes;
 }
 
 export interface TimeInputState {
@@ -59,7 +74,18 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
         militaryTime: false,
         disabled: false,
         localTimezone: true,
-        periodOptions: null
+        periodOptions: null,
+        attr: {
+            container: {},
+            hourSelect: {},
+            hourOption: {},
+            minuteSelect: {},
+            minuteOption: {},
+            secondSelect: {},
+            secondOption: {},
+            periodSelect: {},
+            periodOption: {},
+        }
     };
 
     hours: FormOption[];
@@ -228,61 +254,85 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
         const seconds = this.state.seconds < 10 ? `0${this.state.seconds}` : this.state.seconds;
         const inputClassName = css('time-input', {'error': this.props.error}, this.props.inputClassName);
 
-        const optionMap = (option) => {
-            return <option
+        const optionMap = (option, attr) => {
+            return <Attr.option
                 value={option.value}
                 key={option.value}
                 disabled={option.disabled}
                 hidden={option.hidden}
+                attr={attr}
             >
                 {option.label}
-            </option>;
+            </Attr.option>;
         };
 
-        const period = this.props.militaryTime ? '' : <select 
+        const period = this.props.militaryTime ? '' : <Attr.select 
             name={this.props.name}
             value={this.state.period}
             disabled={this.props.disabled}
             onChange={event => this.update('period', event.target.value)}
             className={css(inputClassName, 'time-period')}
+            attr={this.props.attr.periodSelect}
         >
-            <option value='AM'>AM</option>
-            <option value='PM'>PM</option>
-        </select>;
+            <Attr.option
+                value='AM'
+                attr={this.props.attr.periodOption}
+            >
+                AM
+            </Attr.option>
+            <Attr.option
+                value='PM'
+                attr={this.props.attr.periodOption}
+            >
+                PM
+            </Attr.option>
+        </Attr.select>;
 
-        const secondsInput = this.props.showSeconds !== true ? '' : <select 
+        const secondsInput = this.props.showSeconds !== true ? '' : <Attr.select 
             name={this.props.name}
             value={seconds}
             disabled={this.props.disabled}
             onChange={event => this.update('seconds', event.target.value)}
             className={inputClassName}
+            attr={this.props.attr.secondSelect}
         >
-            {this.seconds.map(option => optionMap(option))}
-        </select>;
+            {this.seconds.map(option => 
+                optionMap(option, this.props.attr.secondOption)
+            )}
+        </Attr.select>;
 
         return (
-            <div className={css('time-container', this.props.className)} >
-                <select 
+            <Attr.div
+                className={css('time-container', this.props.className)} 
+                attr={this.props.attr.container}
+            >
+                <Attr.select 
                     name={this.props.name}
                     value={hours}
                     disabled={this.props.disabled}
                     onChange={event => this.update('hours', event.target.value)}
                     className={inputClassName}
+                    attr={this.props.attr.hourSelect}
                 >
-                    {this.hours.map(option => optionMap(option))}                    
-                </select>
-                <select 
+                    {this.hours.map(option =>
+                        optionMap(option, this.props.attr.hourOption)
+                    )}
+                </Attr.select>
+                <Attr.select 
                     name={this.props.name}
                     value={minutes}
                     disabled={this.props.disabled}
                     onChange={event => this.update('minutes', event.target.value)}
                     className={inputClassName}
+                    attr={this.props.attr.minuteSelect}
                 >
-                    {this.minutes.map(option => optionMap(option))}                
-                </select>
+                    {this.minutes.map(option =>
+                        optionMap(option, this.props.attr.minuteOption)
+                    )}          
+                </Attr.select>
                 {secondsInput}
                 {period}        
-            </div>
+            </Attr.div>
         );
     }
 }

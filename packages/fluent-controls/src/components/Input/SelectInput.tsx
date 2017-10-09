@@ -1,12 +1,20 @@
 import * as React from 'react'; 
 import * as classNames from 'classnames/bind';
-import {FormOption} from '../../Common';
+import {DivProps, SpanProps, SelectProps, OptionProps, Elements as Attr} from '../../Attributes';
+ import {FormOption} from '../../Common';
 const css = classNames.bind(require('./SelectInput.scss'));
 
 export interface SelectInputType {}
 
 export interface SelectInputState {
     cancelFocused: boolean;
+}
+
+export interface SelectInputAttributes {
+    container?: DivProps;
+    select?: SelectProps;
+    option?: OptionProps;
+    chevron?: SpanProps;
 }
 
 export interface SelectInputProps extends React.Props<SelectInputType> {
@@ -40,6 +48,8 @@ export interface SelectInputProps extends React.Props<SelectInputType> {
 
     /** Classname to append to top level element */
     className?: string;
+
+    attr?: SelectInputAttributes;
 }
 
 /**
@@ -54,7 +64,7 @@ export interface SelectInputProps extends React.Props<SelectInputType> {
  * 
  * @param props Control properties (defined in `SelectInputProps` interface)
  */
-export const SelectInput = (props: SelectInputProps) => {
+export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: SelectInputProps) => {
     const containerClass = css('combo-container', props.className);
     const comboClass = css(
         'combo', {'error': props.error}
@@ -69,14 +79,15 @@ export const SelectInput = (props: SelectInputProps) => {
             value = index;
         }
         return (
-            <option
+            <Attr.option
                 value={index}
                 key={index}
                 disabled={opt.disabled}
                 hidden={opt.hidden}
+                attr={props.attr.option}
             >
                 {opt.label}
-            </option>
+            </Attr.option>
         );
     });
 
@@ -87,20 +98,30 @@ export const SelectInput = (props: SelectInputProps) => {
     };
 
     return (
-        <div className={containerClass}>
-            <select 
+        <Attr.div className={containerClass} attr={props.attr.container}>
+            <Attr.select 
                 name={props.name}
                 value={value}
                 className={comboClass}
                 onChange={onChange}
                 disabled={props.disabled}
                 autoFocus={props.autoFocus}
+                attr={props.attr.select}
             >
                 {options}
-            </select>
-            <span className={arrowClassName} />
-        </div>
+            </Attr.select>
+            <Attr.span className={arrowClassName} attr={props.attr.chevron}/>
+        </Attr.div>
     );
 };
+
+SelectInput.defaultProps = {
+    attr: {
+        container: {},
+        select: {},
+        option: {},
+        chevron: {},
+    }
+}
 
 export default SelectInput;

@@ -1,11 +1,24 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {ActionTrigger} from '../ActionTrigger';
+import {DivProps, SpanProps, ButtonProps, Elements as Attr} from '../../Attributes';
+import {ActionTriggerButton, ActionTriggerButtonAttributes} from '../ActionTrigger';
 import {getLocalMonths, getLocalWeekdays} from './helpers';
 import {keyCode, MethodDate, weekLength} from '../../Common';
 const css = classNames.bind(require('./Calendar.scss'));
 
 export interface CalendarComponentType {}
+
+export interface CalendarAttributes {
+    container?: DivProps;
+    header?: DivProps;
+    monthHeader?: DivProps;
+    prevMonthButton?: ButtonProps;
+    nextMonthButton?: ButtonProps;
+    weekDayHeader?: DivProps;
+    dateContainer?: DivProps;
+    dateButton?: ButtonProps;
+    dateRow?: DivProps;
+}
 
 export interface CalendarProps extends React.Props<CalendarComponentType> {
     /** Current selected date */
@@ -33,6 +46,8 @@ export interface CalendarProps extends React.Props<CalendarComponentType> {
 
     /** Classname to append to top level element */
     className?: string;
+
+    attr?: CalendarAttributes;
 }
 
 export interface CalendarState {
@@ -52,7 +67,18 @@ export interface CalendarState {
 export class Calendar extends React.Component<CalendarProps, CalendarState> {
     static defaultProps = {
         localTimezone: true,
-        tabIndex: -1
+        tabIndex: -1,
+        attr: {
+            container: {},
+            header: {},
+            monthHeader: {},
+            prevMonthButton: {},
+            nextMonthButton: {},
+            weekDayHeader: {},
+            dateContainer: {},
+            dateButton: {},
+            dateRow: {},
+        }
     };
     
     private value: MethodDate;
@@ -298,7 +324,11 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
         const curDate = this.state.currentDate.date;
 
         const weekdays = this.dayNames.map(day => {
-            return <div key={day}>{day}</div>;
+            return (
+                <Attr.div key={day} attr={this.props.attr.weekDayHeader}>
+                    {day}
+                </Attr.div>
+            );
         });
 
         // First day of `month`
@@ -339,14 +369,15 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                 /** Grayed out day from another month */
                 if (colMonth !== curMonth) {
                     return (
-                        <button
+                        <Attr.button
                             className={colClassName}
                             onClick={onClick}
                             key={key}
                             tabIndex={tabIndex}
+                            attr={this.props.attr.dateButton}
                         >
                             {date}
-                        </button>
+                        </Attr.button>
                     );
                 }
 
@@ -360,66 +391,84 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                     );
                     if (isSelected) {
                         return (
-                            <button
+                            <Attr.button
                                 className={css('selected')}
                                 onClick={onClick}
                                 key={key}
                                 tabIndex={tabIndex}
                                 ref={this.dayRef}
                                 onFocus={this.onFocus.bind(this, date)}
+                                attr={this.props.attr.dateButton}
                             >
                                 {date}
-                            </button>
+                            </Attr.button>
                         );
                     }
                 }
 
                 /** Everything else */
                 return (
-                    <button
+                    <Attr.button
                         onClick={onClick}
                         key={key}
                         tabIndex={tabIndex}
                         ref={this.dayRef}
                         onFocus={this.onFocus.bind(this, date)}
+                        attr={this.props.attr.dateButton}
                     >
                         {date}
-                    </button>
+                    </Attr.button>
                 );
             });
 
             return (
-                <div className={rowClassName} key={rowIndex}>
+                <Attr.div
+                    className={rowClassName}
+                    key={rowIndex}
+                    attr={this.props.attr.dateRow}
+                >
                     {inner}
-                </div>
+                </Attr.div>
             );
         });
         return (
-            <div className={css('calendar', this.props.className)}>
-                <div className={css('calendar-header')}>
-                    <div className={css('calendar-month')}>
+            <Attr.div
+                className={css('calendar', this.props.className)}
+                attr={this.props.attr.container}
+            >
+                <Attr.div
+                    className={css('calendar-header')}
+                    attr={this.props.attr.header}
+                >
+                    <Attr.div
+                        className={css('calendar-month')}
+                        attr={this.props.attr.monthHeader}
+                    >
                         {`${this.monthNames[curMonth]} ${curYear}`}
-                    </div>
-                    <button
+                    </Attr.div>
+                    <ActionTriggerButton 
                         className={css('calendar-chevron')}
                         onClick={event => this.onPrevMonth(event)}
                         tabIndex={tabIndex}
-                    >
-                        <ActionTrigger icon='chevronUp' />
-                    </button>
-                    <button
+                        icon='chevronUp'
+                        attr={this.props.attr.prevMonthButton}
+                    />
+                    <ActionTriggerButton 
+                        icon='chevronDown'
                         className={css('calendar-chevron')}
                         onClick={event => this.onNextMonth(event)}
                         tabIndex={tabIndex}
-                    >
-                        <ActionTrigger icon='chevronDown' />
-                    </button>
-                </div>
-                <div className={css('calendar-days')}>
+                        attr={this.props.attr.nextMonthButton}
+                    />
+                </Attr.div>
+                <Attr.div
+                    className={css('calendar-days')}
+                    attr={this.props.attr.dateContainer}
+                >
                     {weekdays}
-                </div>
+                </Attr.div>
                 {content}
-            </div>
+            </Attr.div>
         );
     }
 }

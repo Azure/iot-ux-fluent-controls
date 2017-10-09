@@ -2,12 +2,19 @@ import { DatePickerProps } from '../../index';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, FormOption, dateIsValid, DateFormat} from '../../Common';
-import {FormField} from '../Field/FormField';
-import {TimeInput} from './TimeInput';
-import {DatePicker} from './DatePicker';
+import {FormField, FormFieldAttributes} from '../Field/FormField';
+/** This import solves an error with exports of FormFieldAttributes defaults */
+import {FormErrorAttributes} from '../Field/FormError';
+import {TimeInput, TimeInputAttributes} from './TimeInput';
+import {DatePicker, DatePickerAttributes} from './DatePicker';
 const css = classNames.bind(require('./DateTimeField.scss'));
 
 export interface DateTimeFieldType {}
+
+export interface DateTimeFieldAttributes {
+    datePicker?: DatePickerAttributes;
+    timeInput?: TimeInputAttributes;
+}
 
 export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     /** HTML form element name */
@@ -59,6 +66,8 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     className?: string;
     /** Classname to append to top level element of DatePicker and TimeInput */
     inputClassName?: string;
+
+    attr?: DateTimeFieldAttributes & FormFieldAttributes;
 }
 
 export interface DateTimeFieldState {
@@ -79,7 +88,12 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeF
         localTimezone: true,
         showAbove: false,
         showSeconds: false,
-        militaryTime: false
+        militaryTime: false,
+        attr: {
+            ...FormField.defaultProps.attr,
+            datePicker: DatePicker.defaultProps.attr,
+            timeInput: TimeInput.defaultProps.attr
+        }
     };
 
     constructor(props: DateTimeFieldProps) {
@@ -261,6 +275,12 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeF
                 required={this.props.required}
                 hideError={this.props.hideError}
                 className={css('datetime-field', this.props.className)}
+                attr={{
+                    fieldContainer: this.props.attr.fieldContainer,
+                    fieldContent: this.props.attr.fieldContent,
+                    fieldError: this.props.attr.fieldError,
+                    fieldLabel: this.props.attr.fieldLabel,
+                }}
             >
                 <DatePicker
                     name={this.props.name}
@@ -274,6 +294,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeF
                     onPaste={newDate => this.onDatePaste(newDate)}
                     onChange={newDate => this.onDateChange(newDate)}
                     className={css('date-picker', this.props.inputClassName)}
+                    attr={this.props.attr.datePicker}
                 />
                 <TimeInput
                     name={this.props.name}
@@ -287,6 +308,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeF
                     disabled={this.props.disabled}
                     onChange={newTime => this.onTimeChange(newTime)}
                     className={css('time-picker', this.props.inputClassName)}
+                    attr={this.props.attr.timeInput}
                 />
             </FormField>
         );

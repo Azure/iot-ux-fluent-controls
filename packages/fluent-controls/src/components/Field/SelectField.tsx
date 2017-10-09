@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, FormOption} from '../../Common';
-import {SelectInput} from '../Input/SelectInput';
-import {FormField} from './FormField';
+import {SelectInput, SelectInputAttributes} from '../Input/SelectInput';
+import {FormField, FormFieldAttributes} from './FormField';
 const css = classNames.bind(require('./Field.scss'));
 
 export interface SelectFieldType {}
@@ -47,6 +47,8 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
     className?: string;
     /** Classname to append to top level element of SelectInput */
     inputClassName?: string;
+
+    attr?: SelectInputAttributes & FormFieldAttributes;
 }
 
 /**
@@ -59,7 +61,7 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
  * 
  * @param props: Object fulfilling `SelectFieldProps` interface
  */
-export const SelectField = (props: SelectFieldProps) => {
+export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: SelectFieldProps) => {
     return (
         <FormField
             name={props.name}
@@ -68,6 +70,12 @@ export const SelectField = (props: SelectFieldProps) => {
             loading={props.loading}
             required={props.required}
             className={props.className}
+            attr={{
+                fieldContainer: props.attr.fieldContainer,
+                fieldContent: props.attr.fieldContent,
+                fieldError: props.attr.fieldError,
+                fieldLabel: props.attr.fieldLabel,                
+            }}
         >
             <SelectInput
                 name={props.name}
@@ -78,9 +86,22 @@ export const SelectField = (props: SelectFieldProps) => {
                 onChange={props.onChange}
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
+                attr={{
+                    container: props.attr.container,
+                    select: props.attr.select,
+                    option: props.attr.option,
+                    chevron: props.attr.chevron,
+                }}
             />
         </FormField>
     );
+};
+
+SelectField.defaultProps = {
+    attr: {
+        ...FormField.defaultProps.attr,
+        ...SelectInput.defaultProps.attr
+    }
 };
 
 export default SelectField;

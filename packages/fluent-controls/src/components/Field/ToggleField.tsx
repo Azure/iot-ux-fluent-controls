@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
-import {FormField} from './FormField';
-import {Toggle} from '../Toggle';
+import {FormField, FormFieldAttributes} from './FormField';
+import {Toggle, ToggleAttributes} from '../Toggle';
 
 export interface ToggleFieldType {}
 
@@ -40,6 +40,8 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
     className?: string;
     /** Classname to append to top level element of SelectInput */
     inputClassName?: string;
+
+    attr?: FormFieldAttributes & ToggleAttributes;
 }
 
 /**
@@ -47,7 +49,7 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
  * 
  * @param props: Object fulfilling `ToggleFieldProps` interface
  */
-export const ToggleField = (props: ToggleFieldProps) => {
+export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: ToggleFieldProps) => {
     return (
         <FormField
             name={props.name}
@@ -56,6 +58,12 @@ export const ToggleField = (props: ToggleFieldProps) => {
             loading={props.loading}
             required={props.required}
             className={props.className}
+            attr={{
+                fieldContainer: props.attr.fieldContainer,
+                fieldContent: props.attr.fieldContent,
+                fieldError: props.attr.fieldError,
+                fieldLabel: props.attr.fieldLabel,
+            }}
         >
             <div>
                 <Toggle
@@ -67,10 +75,24 @@ export const ToggleField = (props: ToggleFieldProps) => {
                     offLabel={props.offLabel}
                     className={props.inputClassName}
                     autoFocus={props.autoFocus}
+                    attr={{
+                        container: props.attr.container,
+                        button: props.attr.button,
+                        border: props.attr.border,
+                        switch: props.attr.switch,
+                        text: props.attr.text,
+                    }}
                 />
             </div>
         </FormField>
     );
+};
+
+ToggleField.defaultProps = {
+    attr: {
+        ...FormField.defaultProps.attr,
+        ...Toggle.defaultProps.attr
+    }
 };
 
 export default ToggleField;

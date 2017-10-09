@@ -36,6 +36,7 @@ const initialState = {
         onChange={newValue => setState({value: newValue})}
         options={state.options}
         placeholder='Example placeholder'
+        attr={{input: {'data-test-hook': 'combo1-input'}}}
     />
 </div>
 ```
@@ -73,6 +74,7 @@ const initialState = {
         value={state.value}
         onChange={newValue => setState({value: newValue})}
         optionMap={optionMap}
+        attr={{input: {'data-test-hook': 'combo2-input'}}}
     />
 </div>
 ```
@@ -137,6 +139,7 @@ const initialState = {
         optionMap={opt => opt.label}
         optionFilter={optionFilter}
         optionLabel={optionLabel}
+        attr={{input: {'data-test-hook': 'combo3-input'}}}
     />
 </div>
 ```
@@ -168,6 +171,7 @@ const initialState = {
         onChange={newValue => setState({value: newValue})}
         options={state.options}
         disabled
+        attr={{input: {'data-test-hook': 'combo4-input'}}}
     />
 </div>
 ```
@@ -204,6 +208,7 @@ class ComboError extends React.Component {
                 onChange={newValue => this.setState({value: newValue})}
                 options={this.options}
                 placeholder='Example placeholder'
+                attr={{input: {'data-test-hook': 'combo5-input'}}}
             />
         </div>;
     }

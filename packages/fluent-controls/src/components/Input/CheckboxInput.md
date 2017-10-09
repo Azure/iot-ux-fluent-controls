@@ -14,24 +14,28 @@ const initialState = {
         label={label}
         checked={state.check1}
         onChange={value => setState({check1: value})}
+        attr={{input: {'data-test-hook': 'checkbox1-input'}}}
     />
     <CheckboxInput
         name='checkbox2'
         label={label}
         checked={state.check2}
         onChange={value => setState({check2: value})}
+        attr={{input: {'data-test-hook': 'checkbox2-input'}}}
     />
     <CheckboxInput
         name='checkbox3'
         label={label}
         checked={state.check3}
         onChange={value => setState({check3: value})}
+        attr={{input: {'data-test-hook': 'checkbox3-input'}}}
     />
     <CheckboxInput
         name='checkbox4'
         label={label}
         checked={state.check4}
         onChange={value => setState({check4: value})}
+        attr={{input: {'data-test-hook': 'checkbox4-input'}}}
     />
     <CheckboxInput
         name='checkbox5'
@@ -39,18 +43,21 @@ const initialState = {
         checked={state.check5}
         onChange={value => setState({check5: value})}
         indeterminate
+        attr={{input: {'data-test-hook': 'checkbox5-input'}}}
     />
     <CheckboxInput
         name='checkbox6'
         label={label}
         onChange={() => {}}
         disabled
+        attr={{input: {'data-test-hook': 'checkbox6-input'}}}
     />
     <CheckboxInput
         name='checkbox7'
         label={label}
         onChange={() => {}}
         disabled checked
+        attr={{input: {'data-test-hook': 'checkbox7-input'}}}
     />
 </div>
 ```

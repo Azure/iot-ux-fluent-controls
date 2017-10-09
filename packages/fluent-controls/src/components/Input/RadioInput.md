@@ -6,6 +6,7 @@ const onChange = (value) => {
 };
 const radio = (value, state) => {
     const label = `This is radio button #${value}`;
+    radioIndex++;
     return (
         <RadioInput
             name='radio1'
@@ -13,6 +14,7 @@ const radio = (value, state) => {
             label={label}
             checked={value===state}
             onChange={onChange}
+            attr={{input: {'data-test-hook': `radio1-input-${value}`}}}
         />
     )
 };
@@ -29,6 +31,7 @@ const radio = (value, state) => {
 ```jsx
 const radio = (value, state) => {
     const label = `This is radio button #${value}`;
+    radioIndex++;
     return (
         <RadioInput
             name='radio2'
@@ -36,6 +39,7 @@ const radio = (value, state) => {
             label={label}
             checked={value===state}
             disabled
+            attr={{input: {'data-test-hook': `radio2-input-${value}`}}}
         />
     )
 };

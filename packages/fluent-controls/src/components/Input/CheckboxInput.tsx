@@ -1,13 +1,25 @@
 import * as React from 'react'; 
 import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
-import {Icon, IconSize} from '../Icon';
+import {DivProps, LabelProps, SpanProps, InputProps, Elements as Attr} from '../../Attributes';
+import {Icon, IconSize, IconAttributes} from '../Icon';
 const css = classNames.bind(require('./CheckboxInput.scss'));
 
 export interface CheckboxInputType {}
 
 export interface CheckboxInputState {
     cancelFocused: boolean;
+}
+
+export interface CheckboxInputAttributes {
+    container?: DivProps;
+    label?: LabelProps;
+    input?: InputProps;
+    text?: SpanProps;
+    checkbox?: SpanProps;
+    indeterminateFill?: SpanProps;
+    checkmarkIcon?: IconAttributes;
+    border?: SpanProps;
 }
 
 export interface CheckboxInputProps extends React.Props<CheckboxInputType> {
@@ -34,6 +46,8 @@ export interface CheckboxInputProps extends React.Props<CheckboxInputType> {
 
     /** Classname to append to top level element */
     className?: string;
+
+    attr?: CheckboxInputAttributes;
 }
 
 /**
@@ -43,7 +57,7 @@ export interface CheckboxInputProps extends React.Props<CheckboxInputType> {
  * 
  * @param props Control properties (defined in `CheckboxInputProps` interface)
  */
-export const CheckboxInput = (props: CheckboxInputProps) => {
+export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (props: CheckboxInputProps) => {
     const containerClass = css('checkbox-container', {
         'columns': props.columns,
         'disabled': props.disabled,
@@ -58,9 +72,17 @@ export const CheckboxInput = (props: CheckboxInputProps) => {
     };
 
     return (
-        <div className={containerClass} hidden={props.hidden}>
-            <label className={css('checkbox-label')} htmlFor={id}>
-                <input
+        <Attr.div
+            className={containerClass}
+            hidden={props.hidden}
+            attr={props.attr.container}
+        >
+            <Attr.label 
+                className={css('checkbox-label')}
+                htmlFor={id}
+                attr={props.attr.label}
+            >
+                <Attr.input
                     id={id}
                     type='checkbox'
                     name={props.name}
@@ -69,19 +91,48 @@ export const CheckboxInput = (props: CheckboxInputProps) => {
                     checked={props.checked}
                     onChange={onChange}
                     autoFocus={props.autoFocus}
+                    attr={props.attr.input}
                 />
-                <span className={css('checkbox-button')}></span>
-                <span className={css('checkbox-text')}>{props.label}</span>
-                <span className={css('checkbox-fill')}></span>
+                <Attr.span
+                    className={css('checkbox-button')}
+                    attr={props.attr.checkbox} 
+                />
+                <Attr.span
+                    className={css('checkbox-text')}
+                    attr={props.attr.text}
+                >
+                    {props.label}
+                </Attr.span>
+                <Attr.span
+                    className={css('checkbox-fill')}
+                    attr={props.attr.indeterminateFill}
+                />
                 <Icon 
                     icon='checkMark'
                     size={IconSize.xsmall}
                     className={css('checkbox-checkmark')}
+                    attr={props.attr.checkmarkIcon}
                 />
-                <span className={css('checkbox-border')}></span>
-            </label>
-        </div>
+                <Attr.span
+                    className={css('checkbox-border')}
+                    attr={props.attr.border}
+                />
+            </Attr.label>
+        </Attr.div>
     );
+};
+
+CheckboxInput.defaultProps = {
+    attr: {
+        container: {},
+        label: {},
+        input: {},
+        text: {},
+        checkbox: {},
+        indeterminateFill: {},
+        checkmarkIcon: {},
+        border: {},
+    }
 };
 
 export default CheckboxInput;

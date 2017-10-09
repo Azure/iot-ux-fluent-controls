@@ -1,7 +1,14 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, IconSize} from '../Icon';
+import {Icon, IconSize, IconAttributes} from '../Icon';
+import {Elements as Attr, DivProps} from '../../Attributes';
 const css = classNames.bind(require('./ActionTrigger.scss'));
+
+export interface ActionTriggerAttributes {
+    container?: DivProps;
+    icon?: IconAttributes;
+    suffix?: IconAttributes;
+}
 
 export interface ActionTriggerComponentType {}
 
@@ -18,6 +25,8 @@ export interface ActionTriggerProps extends React.Props<ActionTriggerComponentTy
 
     /** Classname to append to top level element */
     className?: string;
+
+    attr?: ActionTriggerAttributes;
 }
 
 /**
@@ -34,20 +43,25 @@ export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (prop
             icon={props.rightIcon}
             size={IconSize.xsmall}
             className={css('suffix')}
+            attr={props.attr.suffix || {}}
         />;
     }
 
     return (
-        <div className={className} ><Icon
+        <Attr.div
+            className={className}
+            attr={props.attr.container || {}}
+        ><Icon
                 icon={props.icon}
                 labelClassName={css('label')}
                 size={IconSize.xsmall}
-            >{props.label}</Icon>{suffix}</div>
+                attr={props.attr.icon || {}}
+        >{props.label}</Icon>{suffix}</Attr.div>
     );
 };
 
 ActionTrigger.defaultProps = {
-    
+    attr: {container: {}, icon: {}, suffix: {}}
 };
 
 export default ActionTrigger;

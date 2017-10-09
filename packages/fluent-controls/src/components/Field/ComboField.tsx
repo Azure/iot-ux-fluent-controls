@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, FormOption} from '../../Common';
-import {ComboInput} from '../Input/ComboInput';
-import {FormField} from './FormField';
+import {ComboInput, ComboInputAttributes} from '../Input/ComboInput';
+import {FormField, FormFieldAttributes} from './FormField';
 const css = classNames.bind(require('./Field.scss'));
 
 export interface ComboFieldType {}
@@ -81,6 +81,8 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
     className?: string;
     /** Classname to append to top level element of ComboInput */
     inputClassName?: string;
+
+    attr?: ComboInputAttributes & FormFieldAttributes;
 }
 
 /**
@@ -93,7 +95,7 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
  * 
  * @param props: Object fulfilling `ComboFieldProps` interface
  */
-export const ComboField = (props: ComboFieldProps) => {
+export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: ComboFieldProps) => {
     return (
         <FormField
             name={props.name}
@@ -102,6 +104,12 @@ export const ComboField = (props: ComboFieldProps) => {
             loading={props.loading}
             required={props.required}
             className={props.className}
+            attr={{
+                fieldContainer: props.attr.fieldContainer,
+                fieldContent: props.attr.fieldContent,
+                fieldError: props.attr.fieldError,
+                fieldLabel: props.attr.fieldLabel,
+            }}
         >
             <div>
                 <ComboInput
@@ -118,10 +126,26 @@ export const ComboField = (props: ComboFieldProps) => {
                     onChange={props.onChange}
                     className={props.inputClassName}
                     autoFocus={props.autoFocus}
+                    attr={{
+                        container: props.attr.container,
+                        textbox: props.attr.textbox,
+                        input: props.attr.input,
+                        clearButton: props.attr.clearButton,
+                        chevron: props.attr.chevron,
+                        dropdown: props.attr.dropdown,
+                        option: props.attr.option,
+                    }}
                 />
             </div>
         </FormField>
     );
+};
+
+ComboField.defaultProps = {
+    attr: {
+        ...FormField.defaultProps.attr,
+        ...ComboInput.defaultProps.attr
+    }
 };
 
 export default ComboField;

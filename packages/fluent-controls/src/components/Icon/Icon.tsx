@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {Elements as Attr, SpanProps} from '../../Attributes';
 const css = classNames.bind(require('./Icon.scss'));
 
 export enum IconSize {
@@ -18,6 +19,11 @@ export enum IconSize {
 }
 
 export interface IconType {}
+
+export interface IconAttributes {
+    container?: SpanProps;
+    label?: SpanProps;
+}
 
 export interface IconProps extends React.Props<IconType> {
     /** Icon name (from Segoe UI MDL font) */
@@ -44,10 +50,7 @@ export interface IconProps extends React.Props<IconType> {
     color?: string;
     /** Center vertically and horizontally in parent element */
     centered?: boolean;
-    
-    /** Properties to pass through to top level element */
-    props?: any;
-    
+
     /** Classname to append to top level element */
     className?: string;
     /**
@@ -57,6 +60,8 @@ export interface IconProps extends React.Props<IconType> {
      * size of the label is problematic.
      */
     labelClassName?: string;
+
+    attr?: IconAttributes;
 }
 
 /**
@@ -87,19 +92,32 @@ export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {
     let label;
     if (props.children) {
         label = (
-            <span className={props.labelClassName}>
+            <Attr.span
+                className={props.labelClassName}
+                attr={props.attr.label}
+            >
                 {props.children}
-            </span>
+            </Attr.span>
         );
     }
 
     return (
-        <span className={cls} style={style} {...props.props}>{label}</span>
+        <Attr.span
+            className={cls}
+            style={style}
+            attr={props.attr.container}
+        >
+            {label}
+        </Attr.span>
     );
 };
 
 Icon.defaultProps = {
-    size: IconSize.medium
+    size: IconSize.medium,
+    attr: {
+        container: {},
+        label: {}
+    }
 };
 
 export default Icon;
