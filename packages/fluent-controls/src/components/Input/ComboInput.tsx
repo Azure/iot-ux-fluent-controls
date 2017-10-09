@@ -131,7 +131,8 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
         showLabel: true
     };
 
-    inputElement: any;
+    inputElement: HTMLInputElement;
+    containerElement: HTMLDivElement;
     optionFilter: (newValue: string, option: FormOption) => boolean;
     optionSelect: (newValue: string, option: FormOption) => boolean;
 
@@ -149,6 +150,12 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
             : defaultFilter;
         this.optionSelect = !!props.optionSelect ? props.optionSelect
             : (newValue, option) => defaultSelect(newValue, map(option));
+
+        this.containerRef = this.containerRef.bind(this);
+    }
+
+    containerRef(container: HTMLDivElement) {
+        this.containerElement = container;
     }
 
     componentDidMount() {
@@ -174,7 +181,7 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
          * dropdown (which causes the text input to lose focus)
         */
         for (let i = 0; i < 6; i++) {
-            if (hasClassName(target, className)) {
+            if (target === this.containerElement) {
                 break;
             }
 
@@ -393,7 +400,7 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
             />;
 
         return (
-            <div className={containerClassName}>
+            <div className={containerClassName} ref={this.containerRef}>
                 <div className={css('input-container')}>
                     <input 
                         type='text'

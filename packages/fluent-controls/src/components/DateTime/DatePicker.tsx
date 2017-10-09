@@ -3,7 +3,7 @@ import * as classNames from 'classnames/bind';
 import {Calendar} from './Calendar';
 import {Icon, IconSize} from '../Icon';
 import {replaceAt, formatDate, placeholders} from './helpers';
-import {keyCode, MethodDate, dateIsValid, hasClassName, DateFormat} from '../../Common';
+import {keyCode, MethodDate, dateIsValid, DateFormat} from '../../Common';
 const css = classNames.bind(require('./DatePicker.scss'));
 
 export interface DatePickerType {}
@@ -82,7 +82,8 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         showAbove: false,
     };
 
-    private inputElement?: any;
+    private containerElement: HTMLDivElement;    
+    private inputElement?: HTMLInputElement;
     private paste: boolean | string;
     private calendar: Calendar;
 
@@ -103,6 +104,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
 
         this.inputRef = this.inputRef.bind(this);
         this.calendarRef = this.calendarRef.bind(this);
+        this.containerRef = this.containerRef.bind(this);
     }
 
     /**
@@ -588,7 +590,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
          * calendar (which causes the text input to lose focus)
         */
         for (let i = 0; i < 6; i++) {
-            if (hasClassName(target, className)) {
+            if (target === this.containerElement) {
                 break;
             }
 
@@ -652,7 +654,11 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
 
     calendarRef(element: Calendar) {
         this.calendar = element;
-    }    
+    }
+
+    containerRef(container: HTMLDivElement) {
+        this.containerElement = container;
+    }
 
     render() {
         const containerClassName = css('date-picker-container', this.props.className);
@@ -673,7 +679,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         const parsed = this.parse(this.state.value);
 
         return (
-            <div className={containerClassName}>
+            <div className={containerClassName} ref={this.containerRef}>
                 <div className={css('input-container')}>
                     <input
                         type='text'
