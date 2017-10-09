@@ -334,10 +334,6 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
             }, this.props.dropdownClassName
         );
 
-        this.props.options.forEach(option => {
-            
-        });
-
         let inputValue = '';
         const value = this.getValue();
         let result = null;
