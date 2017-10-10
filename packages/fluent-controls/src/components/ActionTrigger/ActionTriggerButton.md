@@ -1,21 +1,36 @@
-## ActionTriggerButton Attribute API
+______________________________________________________________________________
+
+### `ActionTriggerButton.props.attr`
+
+```jsx static
+attr.button = <button/>;
+attr.container = <div/>;
+attr.icon = <Icon/>;
+attr.suffix = <Icon/>;
+```
+
+
 
 ```html
 <ActionTriggerButton attr={...}>
     <button {...props.attr.button}>
-        <div {...props.attr.container}>
-            <Icon attr={props.attr.icon}>
-                {props.label}
-            </Icon>
-            <Icon attr={props.attr.suffix} />
-        </div>
+        <ActionTrigger>
+            <div {...props.attr.container}>
+                <Icon attr={props.attr.icon}>
+                    {props.label}
+                </Icon>
+                <Icon attr={props.attr.suffix} />
+            </div>
+        </ActionTrigger>
     </button>
 </ActionTriggerButton>
 ```
 
-## Examples
+______________________________________________________________________________
 
-### Action Trigger Button with Attr API Modifier
+### Examples
+
+#### Action Trigger Button with Attr API Modifier
 
 ```jsx
 <div>

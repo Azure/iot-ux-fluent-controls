@@ -2,11 +2,11 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
 import {ActionTrigger, ActionTriggerProps, ActionTriggerAttributes} from '../ActionTrigger';
-import {Elements as Attr, AnchorProps, SpanProps, DivProps} from '../../Attributes';
+import {Elements as Attr, ButtonProps} from '../../Attributes';
 const css = classNames.bind(require('./ActionTrigger.scss'));
 
 export interface ActionTriggerButtonAttributes {
-    button?: AnchorProps;    
+    button?: ButtonProps;
 }
 
 export interface ActionTriggerButtonProps {

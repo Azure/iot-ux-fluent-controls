@@ -1,4 +1,12 @@
-## ActionTrigger Attribute API
+______________________________________________________________________________
+
+### `ActionTrigger.props.attr`
+
+```jsx static
+attr.container = <div/>;
+attr.icon = <Icon/>;
+attr.suffix = <Icon/>;
+```
 
 ```html
 <ActionTrigger attr={...}>
@@ -11,9 +19,11 @@
 </ActionTrigger>
 ```
 
-## Examples
+______________________________________________________________________________
 
-### Action Trigger
+### Examples
+
+#### Action Trigger
 
 ```jsx
 <div>

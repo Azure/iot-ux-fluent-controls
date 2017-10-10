@@ -1,21 +1,34 @@
-## ActionTriggerLink Attribute API
+______________________________________________________________________________
+
+### `ActionTriggerLink.props.attr`
+
+```jsx static
+attr.anchor = <a/>;
+attr.container = <div/>;
+attr.icon = <Icon/>;
+attr.suffix = <Icon/>;
+```
 
 ```html
 <ActionTriggerLink attr={...}>
     <a {...props.attr.anchor}>
-        <div {...props.attr.container}>
-            <Icon attr={props.attr.icon}>
-                {props.label}
-            </Icon>
-            <Icon attr={props.attr.suffix} />
-        </div>
+        <ActionTrigger>
+            <div {...props.attr.container}>
+                <Icon attr={props.attr.icon}>
+                    {props.label}
+                </Icon>
+                <Icon attr={props.attr.suffix} />
+            </div>
+        </ActionTrigger>
     </a>
 </ActionTriggerLink>
 ```
 
-## Examples
+______________________________________________________________________________
 
-### Action Trigger Link with Attr API Modifier
+### Examples
+
+#### Action Trigger Link with Attr API Modifier
 
 ```jsx
 <div>
