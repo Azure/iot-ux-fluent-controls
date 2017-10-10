@@ -2,19 +2,6 @@ ______________________________________________________________________________
 
 ### `GenericManagementList.props.attr`
 
-```jsx static
-container = <div/>;
-column = <div/>;
-rowContent = <div/>;
-rowHeaderButton = <button/>;
-rowHeaderChevron = <Icon/>;
-selectAllEmpty = <div/>;
-selectAllCheckbox = <CheckboxInput/>;
-selectAllContainer = <div/>;
-selectRowContent = <div/>;
-selectRowCheckbox = <CheckboxInput/>;
-```
-
 ```html
 <GenericManagementList attr={...}>
     <div className='list-container' {...props.attr.container}>
@@ -22,7 +9,7 @@ selectRowCheckbox = <CheckboxInput/>;
             <div className='column-header' {...props.attr.selectAllContainer>
                 <div className='checkbox-empty' {...props.attr.selectAllEmpty}/>
                 or
-                <CheckboxInput attr{props.attr.selectAllCheckbox}/>
+                <CheckboxInput attr={props.attr.selectAllCheckbox}/>
             </div>
             <div className='column-content' {...props.attr.selectRowContent}>
                 <CheckboxInput attr={props.attr.selectRowCheckbox}/>

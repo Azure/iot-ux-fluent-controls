@@ -2,12 +2,6 @@ ______________________________________________________________________________
 
 ### `ActionTrigger.props.attr`
 
-```jsx static
-attr.container = <div/>;
-attr.icon = <Icon/>;
-attr.suffix = <Icon/>;
-```
-
 ```html
 <ActionTrigger attr={...}>
     <div className='action-trigger' {...props.attr.container}>

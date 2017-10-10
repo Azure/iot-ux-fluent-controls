@@ -2,13 +2,6 @@ ______________________________________________________________________________
 
 ### `ActionTriggerLink.props.attr`
 
-```jsx static
-attr.anchor = <a/>;
-attr.container = <div/>;
-attr.icon = <Icon/>;
-attr.suffix = <Icon/>;
-```
-
 ```html
 <ActionTriggerLink attr={...}>
     <a {...props.attr.anchor}>

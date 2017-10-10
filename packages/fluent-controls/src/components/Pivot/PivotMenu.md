@@ -2,12 +2,6 @@ ______________________________________________________________________________
 
 ### `PivotMenu.props.attr`
 
-```jsx static
-attr.container = <div/>;
-attr.anchor = <a/>;
-attr.pivot = <PivotMenu/>;
-```
-
 ```html
 <PivotMenu attr={...}>
     <div {...props.attr.container}>

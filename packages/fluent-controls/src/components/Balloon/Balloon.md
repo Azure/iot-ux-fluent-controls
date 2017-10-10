@@ -3,12 +3,6 @@ ______________________________________________________________________________
 
 ### `Balloon.props.attr`
 
-```jsx static
-attr.container = <span/>;
-attr.balloonContainer = <div/>;
-attr.balloon = <span/>;
-```
-
 ```html
 <Balloon attr={...}>
     <span className='balloon-container' {...props.attr.container}>

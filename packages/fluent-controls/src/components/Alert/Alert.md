@@ -2,13 +2,6 @@ ______________________________________________________________________________
 
 ### `Alert.props.attr`
 
-```jsx static
-attr.container = <div/>;
-attr.contents = <div/>;
-attr.icon = <Icon/>;
-attr.closeIcon = <Icon/>;
-```
-
 ```html
 <Alert attr={...}>
     <div className='alert' {...props.attr.container}>

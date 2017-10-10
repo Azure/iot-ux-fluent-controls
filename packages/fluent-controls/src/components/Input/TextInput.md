@@ -2,15 +2,6 @@ ______________________________________________________________________________
 
 ### `TextInput.props.attr`
 
-```jsx static
-container = <div/>;
-input = <input/>;
-inputContainer = <div/>;
-prefix = <div/>;
-postfix = <div/>;
-clearButton = <button/>;
-```
-
 ```html
 <TextInput attr={...}>
     <div className='text-input-container' {...props.attr.container}>

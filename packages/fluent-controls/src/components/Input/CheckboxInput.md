@@ -2,17 +2,6 @@ ______________________________________________________________________________
 
 ### `CheckboxInput.props.attr`
 
-```jsx static
-container = <div/>;
-label = <label/>;
-input = <input/>;
-text = <span/>;
-checkbox = <span/>;
-indeterminateFill = <span/>;
-checkmarkIcon = <Icon/>;
-border = <span/>;
-```
-
 ```html
 <CheckboxInput attr={...}>
     <div className='checkbox-container' {...props.attr.container}>

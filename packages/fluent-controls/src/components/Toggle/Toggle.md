@@ -2,14 +2,6 @@ ______________________________________________________________________________
 
 ### `Toggle.props.attr`
 
-```jsx static
-container = <div/>;
-button = <Button/>;
-border = <div/>;
-switch = <div/>;
-text = <div/>;
-```
-
 ```html
 <Toggle attr={...}>
     <div {...props.attr.container}>

@@ -2,15 +2,6 @@ ______________________________________________________________________________
 
 ### `ActionTriggerButton.props.attr`
 
-```jsx static
-attr.button = <button/>;
-attr.container = <div/>;
-attr.icon = <Icon/>;
-attr.suffix = <Icon/>;
-```
-
-
-
 ```html
 <ActionTriggerButton attr={...}>
     <button className='action-trigger-button' {...props.attr.button}>

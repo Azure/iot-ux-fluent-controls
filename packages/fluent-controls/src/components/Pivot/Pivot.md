@@ -2,15 +2,6 @@ ______________________________________________________________________________
 
 ### `Pivot.props.attr`
 
-```jsx static
-attr.container = <div/>;
-attr.bottomBorder = <div/>;
-attr.focusBorder = <div/>;
-attr.content = <span/>;
-attr.innerContent = <div/>;
-attr.icon = <Icon/>;
-```
-
 ```html
 <Pivot attr={...}>
     <div {...props.attr.container}>

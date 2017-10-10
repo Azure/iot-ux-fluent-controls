@@ -2,13 +2,6 @@ ______________________________________________________________________________
 
 ### `SelectInput.props.attr`
 
-```jsx static
-container = <div/>;
-select = <select/>;
-option = <option/>;
-chevron = <span/>;
-```
-
 ```html
 <SelectInput attr={...}>
     <div className='combo-container' {...props.attr.container}>

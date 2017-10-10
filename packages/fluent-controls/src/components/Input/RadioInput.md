@@ -2,16 +2,6 @@ ______________________________________________________________________________
 
 ### `RadioInput.props.attr`
 
-```jsx static
-container = <div/>;
-label = <label/>;
-input = <input/>;
-radio = <span/>;
-text = <span/>;
-fill = <span/>;
-border = <span/>;
-```
-
 ```html
 <RadioInput attr={...}>
     <div className='radio-container' {...props.attr.container}>

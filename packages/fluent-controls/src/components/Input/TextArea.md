@@ -2,12 +2,6 @@ ______________________________________________________________________________
 
 ### `TextArea.props.attr`
 
-```jsx static
-container = <div/>;
-textarea = <textarea/>;
-pre = <pre/>;
-```
-
 ```html
 <TextArea attr={...}>
     <div className='textarea-container' {...props.attr.container}>
