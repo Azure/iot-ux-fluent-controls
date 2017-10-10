@@ -63,12 +63,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
             loading={props.loading}
             required={props.required}
             className={props.className}
-            attr={{
-                fieldContainer: props.attr.fieldContainer,
-                fieldContent: props.attr.fieldContent,
-                fieldError: props.attr.fieldError,
-                fieldLabel: props.attr.fieldLabel,                
-            }}
+            attr={props.attr}
         >
             <TextInput
                 name={props.name}
@@ -84,14 +79,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
                 onChange={value => props.onChange(value ? parseFloat(value) : null) }
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
-                attr={{
-                    container: props.attr.container,
-                    input: props.attr.input,
-                    inputContainer: props.attr.inputContainer,
-                    prefix: props.attr.prefix,
-                    postfix: props.attr.postfix,
-                    clearButton: props.attr.clearButton,
-                }}
+                attr={props.attr}
             />
         </FormField>
     );

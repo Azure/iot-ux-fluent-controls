@@ -56,12 +56,7 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
             loading={props.loading}
             required={props.required}
             className={props.className}
-            attr={{
-                fieldContainer: props.attr.fieldContainer,
-                fieldContent: props.attr.fieldContent,
-                fieldError: props.attr.fieldError,
-                fieldLabel: props.attr.fieldLabel,                
-            }}
+            attr={props.attr}
         >
             <TextArea
                 name={props.name}
@@ -73,11 +68,7 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
                 className={props.inputClassName}
                 autogrow={props.autogrow}
                 autoFocus={props.autoFocus}
-                attr={{
-                    container: props.attr.container,
-                    textarea: props.attr.textarea,
-                    pre: props.attr.pre,
-                }}
+                attr={props.attr}
             />
         </FormField>
     );

@@ -70,12 +70,7 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
             loading={props.loading}
             required={props.required}
             className={props.className}
-            attr={{
-                fieldContainer: props.attr.fieldContainer,
-                fieldContent: props.attr.fieldContent,
-                fieldError: props.attr.fieldError,
-                fieldLabel: props.attr.fieldLabel,                
-            }}
+            attr={props.attr}
         >
             <TextInput
                 name={props.name}
@@ -91,14 +86,7 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
                 onChange={props.onChange}
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
-                attr={{
-                    container: props.attr.container,
-                    input: props.attr.input,
-                    inputContainer: props.attr.inputContainer,
-                    prefix: props.attr.prefix,
-                    postfix: props.attr.postfix,
-                    clearButton: props.attr.clearButton,
-                }}
+                attr={props.attr}
             />
         </FormField>
     );

@@ -275,12 +275,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeF
                 required={this.props.required}
                 hideError={this.props.hideError}
                 className={css('datetime-field', this.props.className)}
-                attr={{
-                    fieldContainer: this.props.attr.fieldContainer,
-                    fieldContent: this.props.attr.fieldContent,
-                    fieldError: this.props.attr.fieldError,
-                    fieldLabel: this.props.attr.fieldLabel,
-                }}
+                attr={this.props.attr}
             >
                 <DatePicker
                     name={this.props.name}

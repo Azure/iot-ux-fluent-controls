@@ -70,12 +70,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
             loading={props.loading}
             required={props.required}
             className={props.className}
-            attr={{
-                fieldContainer: props.attr.fieldContainer,
-                fieldContent: props.attr.fieldContent,
-                fieldError: props.attr.fieldError,
-                fieldLabel: props.attr.fieldLabel,
-            }}
+            attr={props.attr}
             
         >
             <DatePicker
@@ -89,15 +84,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
                 disabled={props.disabled}
                 onChange={props.onChange}
                 className={props.inputClassName}
-                attr={{
-                    container: props.attr.container,
-                    inputContainer: props.attr.inputContainer,
-                    input: props.attr.input,
-                    inputIcon: props.attr.inputIcon,
-                    dropdownContainer: props.attr.dropdownContainer,
-                    dropdownTriangle: props.attr.dropdownTriangle,
-                    calendar: props.attr.calendar,
-                }}
+                attr={props.attr}
             />
         </FormField>
     );

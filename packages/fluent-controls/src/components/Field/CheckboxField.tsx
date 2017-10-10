@@ -61,12 +61,7 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
             loading={props.loading}
             required={props.required}
             className={props.className}
-            attr={{
-                fieldContainer: props.attr.fieldContainer,
-                fieldContent: props.attr.fieldContent,
-                fieldError: props.attr.fieldError,
-                fieldLabel: props.attr.fieldLabel,                
-            }}
+            attr={props.attr}
         >
             <div>
                 <CheckboxInput
@@ -77,16 +72,7 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
                     onChange={props.onChange}
                     className={props.inputClassName}
                     autoFocus={props.autoFocus}
-                    attr={{
-                        container: props.attr.container,
-                        label: props.attr.label,
-                        input: props.attr.input,
-                        text: props.attr.text,
-                        checkbox: props.attr.checkbox,
-                        indeterminateFill: props.attr.indeterminateFill,
-                        checkmarkIcon: props.attr.checkmarkIcon,
-                        border: props.attr.border,
-                    }}
+                    attr={props.attr}
                 />
             </div>
         </FormField>

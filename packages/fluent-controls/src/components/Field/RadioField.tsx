@@ -83,15 +83,7 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
                 className={props.inputClassName}
                 key={`${props.name}-${index}`}
                 autoFocus={props.autoFocus}
-                attr={{
-                    container: props.attr.container,
-                    label: props.attr.label,
-                    input: props.attr.input,
-                    radio: props.attr.radio,
-                    text: props.attr.text,
-                    fill: props.attr.fill,
-                    border: props.attr.border,
-                }}
+                attr={props.attr}
             />
         );
     });
@@ -104,12 +96,7 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
             loading={props.loading}
             required={props.required}
             className={props.className}
-            attr={{
-                fieldContainer: props.attr.fieldContainer,
-                fieldContent: props.attr.fieldContent,
-                fieldError: props.attr.fieldError,
-                fieldLabel: props.attr.fieldLabel,                
-            }}
+            attr={props.attr}
         >
             <div>
                 {options}

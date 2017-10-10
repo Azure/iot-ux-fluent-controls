@@ -70,12 +70,7 @@ export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: S
             loading={props.loading}
             required={props.required}
             className={props.className}
-            attr={{
-                fieldContainer: props.attr.fieldContainer,
-                fieldContent: props.attr.fieldContent,
-                fieldError: props.attr.fieldError,
-                fieldLabel: props.attr.fieldLabel,                
-            }}
+            attr={props.attr}
         >
             <SelectInput
                 name={props.name}
@@ -86,12 +81,7 @@ export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: S
                 onChange={props.onChange}
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
-                attr={{
-                    container: props.attr.container,
-                    select: props.attr.select,
-                    option: props.attr.option,
-                    chevron: props.attr.chevron,
-                }}
+                attr={props.attr}
             />
         </FormField>
     );

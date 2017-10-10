@@ -64,12 +64,7 @@ export const TimeField: React.StatelessComponent<TimeFieldProps> = (props: TimeF
             loading={props.loading}
             required={props.required}
             className={props.className}
-            attr={{
-                fieldContainer: props.attr.fieldContainer,
-                fieldContent: props.attr.fieldContent,
-                fieldError: props.attr.fieldError,
-                fieldLabel: props.attr.fieldLabel,
-            }}
+            attr={props.attr}
         >
             <TimeInput
                 name={props.name}
@@ -83,17 +78,7 @@ export const TimeField: React.StatelessComponent<TimeFieldProps> = (props: TimeF
                 disabled={props.disabled}
                 onChange={props.onChange}
                 className={props.inputClassName}
-                attr={{
-                    container: this.props.attr.container,
-                    hourSelect: this.props.attr.hourSelect,
-                    hourOption: this.props.attr.hourOption,
-                    minuteSelect: this.props.attr.minuteSelect,
-                    minuteOption: this.props.attr.minuteOption,
-                    secondSelect: this.props.attr.secondSelect,
-                    secondOption: this.props.attr.secondOption,
-                    periodSelect: this.props.attr.periodSelect,
-                    periodOption: this.props.attr.periodOption,
-                }}
+                attr={props.attr}
             />
         </FormField>
     );

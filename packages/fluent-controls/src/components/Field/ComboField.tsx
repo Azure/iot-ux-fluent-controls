@@ -124,12 +124,7 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
             loading={props.loading}
             required={props.required}
             className={props.className}
-            attr={{
-                fieldContainer: props.attr.fieldContainer,
-                fieldContent: props.attr.fieldContent,
-                fieldError: props.attr.fieldError,
-                fieldLabel: props.attr.fieldLabel,
-            }}
+            attr={props.attr}
         >
             <div>
                 <ComboInput
@@ -146,15 +141,7 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
                     onChange={props.onChange}
                     className={props.inputClassName}
                     autoFocus={props.autoFocus}
-                    attr={{
-                        container: props.attr.container,
-                        textbox: props.attr.textbox,
-                        input: props.attr.input,
-                        clearButton: props.attr.clearButton,
-                        chevron: props.attr.chevron,
-                        dropdown: props.attr.dropdown,
-                        option: props.attr.option,
-                    }}
+                    attr={props.attr}
                 />
             </div>
         </FormField>

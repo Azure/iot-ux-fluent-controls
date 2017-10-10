@@ -58,12 +58,7 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
             loading={props.loading}
             required={props.required}
             className={props.className}
-            attr={{
-                fieldContainer: props.attr.fieldContainer,
-                fieldContent: props.attr.fieldContent,
-                fieldError: props.attr.fieldError,
-                fieldLabel: props.attr.fieldLabel,
-            }}
+            attr={props.attr}
         >
             <div>
                 <Toggle
@@ -75,13 +70,7 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
                     offLabel={props.offLabel}
                     className={props.inputClassName}
                     autoFocus={props.autoFocus}
-                    attr={{
-                        container: props.attr.container,
-                        button: props.attr.button,
-                        border: props.attr.border,
-                        switch: props.attr.switch,
-                        text: props.attr.text,
-                    }}
+                    attr={props.attr}
                 />
             </div>
         </FormField>
