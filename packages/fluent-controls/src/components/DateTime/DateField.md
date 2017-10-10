@@ -1,3 +1,39 @@
+______________________________________________________________________________
+
+### `DateField.props.attr`
+
+```html
+<DateField attr={...}>
+    <div className='input-container' {...props.attr.fieldContainer}>
+        <label className='label' {...props.attr.fieldLabel}>
+            {props.label}
+        </label>
+        <div className='content' {...props.attr.fieldContent}>
+            <DatePicker>
+                <div className='date-picker-container' {...props.attr.container}>
+                    <div className='input-container' {...props.attr.inputContainer}>
+                        <input className='input' {...props.attr.input} />
+                        <Icon className='calendar-icon' attr={props.attr.inputIcon} />
+                    </div>
+                    <div className='dropdown' {...props.attr.dropdownContainer}>
+                        <Calendar className='calendar' attr={props.attr.calendar} />
+                        <div className='dropdown-triangle' {...props.attr.dropdownTriangle} />
+                    </div>
+                </div>
+            </DatePicker>
+        </div>
+        <div className='field-error' attr={props.attr.fieldError}>
+            {props.error}
+        </div>
+    </div>
+</DateField>
+```
+
+______________________________________________________________________________
+
+### Examples
+
+
 ```jsx
 const initialState = {value: 'Sep 20, 2010 07:00:00 GMT'};
 

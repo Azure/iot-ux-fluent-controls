@@ -1,3 +1,29 @@
+______________________________________________________________________________
+
+### `DateTimeField.props.attr`
+
+```html
+<DateTimeField attr={...}>
+    <div className='input-container' {...props.attr.fieldContainer}>
+        <label className='label' {...props.attr.fieldLabel}>
+            {props.label}
+        </label>
+        <div className='content' {...props.attr.fieldContent}>
+            <DatePicker className='date-picker' attr={props.attr.datePicker} />
+            <TimeInput className='time-picker' attr={props.attr.timeInput} />
+        </div>
+        <div className='field-error' attr={props.attr.fieldError}>
+            {props.error}
+        </div>
+    </div>
+</DateTimeField>
+```
+
+______________________________________________________________________________
+
+### Examples
+
+
 ```jsx
 const initialState = {value: 'Sep 20, 2010 05:00:00 GMT'};
 

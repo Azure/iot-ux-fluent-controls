@@ -1,4 +1,38 @@
-### Default Example with Local Timezone
+______________________________________________________________________________
+
+### `TimeInput.props.attr`
+
+```html
+<TimeInput attr={...}>
+    <div className='time-container' {...props.attr.container}>
+        <select className='time-input' {...props.attr.hourSelect}>
+            <option {...props.attr.hourOption}>00</option>
+            ...
+            <option {...props.attr.hourOption}>11</option>
+        </select>
+        <select className='time-input' {...props.attr.minuteSelect}>
+            <option {...props.attr.minuteOption}>00</option>
+            ...
+            <option {...props.attr.minuteOption}>59</option>
+        </select>
+        <select className='time-input' {...props.attr.secondSelect}>
+            <option {...props.attr.secondOption}>00</option>
+            ...
+            <option {...props.attr.secondOption}>59</option>
+        </select>
+        <select className='time-input' {...props.attr.periodSelect}>
+            <option {...props.attr.periodOption}>AM</option>
+            <option {...props.attr.periodOption}>PM</option>
+        </select>
+    </div>
+</TimeInput>
+```
+
+______________________________________________________________________________
+
+### Examples
+
+#### Default with Local Timezone
 
 ```jsx
 const initialState = {
@@ -17,7 +51,8 @@ const initialState = {
 </div>
 ```
 
-### Default Example with GMT Timezone
+#### Default with GMT Timezone
+
 ```jsx
 const initialState = {
     value: 'Mon, 25 Sep 2017 03:07:00 GMT'
@@ -36,7 +71,8 @@ const initialState = {
 </div>
 ```
 
-### Military Time Example with Local Timezone
+#### Military Time with Local Timezone
+
 ```jsx
 const initialState = {
     value: 'Mon, 25 Sep 2017 03:07:00 GMT'
@@ -55,7 +91,8 @@ const initialState = {
 </div>
 ```
 
-### Military Time Example with GMT Timezone
+#### Military Time with GMT Timezone
+
 ```jsx
 const initialState = {
     value: 'Mon, 25 Sep 2017 03:07:00 GMT'
@@ -75,7 +112,7 @@ const initialState = {
 </div>
 ```
 
-### Example with Seconds Field
+#### with Seconds Field
 
 ```jsx
 const initialState = {
@@ -95,7 +132,7 @@ const initialState = {
 </div>
 ```
 
-### Military Time Example with Seconds Field
+#### Military Time with Seconds Field
 
 ```jsx
 const initialState = {
