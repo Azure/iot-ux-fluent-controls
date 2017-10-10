@@ -5,7 +5,7 @@ import {ActionTrigger, ActionTriggerProps, ActionTriggerAttributes} from '../Act
 import {Elements as Attr, AnchorProps, SpanProps, DivProps} from '../../Attributes';
 const css = classNames.bind(require('./ActionTrigger.scss'));
 
-export interface ActionTriggerButtonAttributes extends ActionTriggerAttributes {
+export interface ActionTriggerButtonAttributes {
     button?: AnchorProps;    
 }
 
@@ -28,7 +28,7 @@ export interface ActionTriggerButtonProps {
     /** Button onClick callback */
     onClick?: (event) => void;
 
-    attr?: ActionTriggerButtonAttributes;
+    attr?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
 }
 
 export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonProps> = (props: ActionTriggerButtonProps) => {
