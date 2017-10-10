@@ -1,3 +1,37 @@
+______________________________________________________________________________
+
+### `TextInput.props.attr`
+
+```jsx static
+container = <div/>;
+input = <input/>;
+inputContainer = <div/>;
+prefix = <div/>;
+postfix = <div/>;
+clearButton = <button/>;
+```
+
+```html
+<TextInput attr={...}>
+    <div className='text-input-container' {...props.attr.container}>
+        <div className='prefix' {...props.attr.prefix}>
+            {props.prefix}
+        </div>
+        <div className='input-container' {...props.attr.inputContainer}>
+            <input type='text' className='input' {...props.attr.input} />
+            <button className='cancel' {...props.attr.clearButton} />
+        </div>
+        <div className='postfix' {...props.attr.postfix}>
+            {props.postfix}
+        </div>
+    </div>
+</TextInput>
+```
+
+______________________________________________________________________________
+
+### Examples
+
 ```jsx
 let initialState = {value: ''};
 let onChange = (newValue) => setState({value: newValue});

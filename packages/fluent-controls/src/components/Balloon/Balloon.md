@@ -14,7 +14,7 @@ attr.balloon = <span/>;
     <span {...props.attr.container}>
         {props.children}
         <span {...props.attr.balloonContainer}>
-            <div {..props.attr.balloon}>
+            <div {...props.attr.balloon}>
                 {props.tooltip}
             </div>
         </span>

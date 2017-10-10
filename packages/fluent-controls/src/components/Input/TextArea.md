@@ -1,4 +1,29 @@
-### Default Example
+______________________________________________________________________________
+
+### `TextArea.props.attr`
+
+```jsx static
+container = <div/>;
+textarea = <textarea/>;
+pre = <pre/>;
+```
+
+```html
+<TextArea attr={...}>
+    <div className='textarea-container' {...props.attr.container}>
+        <textarea className='textarea' {...props.attr.textarea} />
+        <pre className='textarea textarea-ghost' {...props.attr.pre}>
+            {props.value}
+        </pre>
+    </div>
+</TextArea>
+```
+
+______________________________________________________________________________
+
+### Examples
+
+#### Default
 
 ```jsx
 let initialState = {value: ''};
@@ -12,7 +37,7 @@ let onChange = (newValue) => setState({value: newValue});
 />
 ```
 
-### Error Example
+#### Error
 
 ```jsx
 let initialState = {value: ''};
@@ -27,7 +52,7 @@ let onChange = (newValue) => setState({value: newValue});
 />
 ```
 
-### Default Example without Autogrow
+#### Default without Autogrow
 
 ```jsx
 let initialState = {value: ''};
@@ -42,14 +67,14 @@ let onChange = (newValue) => setState({value: newValue});
 />
 ```
 
-### Disabled Example
+#### Disabled
 
 ```jsx
 <TextArea
     name='text-area-3'
     value={''}
     onChange={() => {}}
-    disabled 
+    disabled
     attr={{textarea: {'data-test-hook': 'textarea4'}}}
 />
 ```

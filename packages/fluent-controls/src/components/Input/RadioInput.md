@@ -1,5 +1,39 @@
-### Radio button
+______________________________________________________________________________
+
+### `RadioInput.props.attr`
+
+```jsx static
+container = <div/>;
+label = <label/>;
+input = <input/>;
+radio = <span/>;
+text = <span/>;
+fill = <span/>;
+border = <span/>;
+```
+
+```html
+<RadioInput attr={...}>
+    <div className='radio-container' {...props.attr.container}>
+        <label className='radio-label' {...props.attr.label}>
+            <input type='radio' {...props.attr.input} />
+            <span className='radio-button' {...props.attr.radio} />
+            <span className='radio-text' {...props.attr.text}>
+                {props.label}
+            </span>
+            <span className='radio-fill' {...props.attr.fill} />
+            <span className='radio-border' {...props.attr.border} />
+        </label>
+    </div>
+</RadioInput>
+```
+
+______________________________________________________________________________
+
+### Examples
+
 ```jsx
+let radioIndex = 0;
 let initialState = {value: ''};
 const onChange = (value) => {
     setState({'value': value});
@@ -29,6 +63,7 @@ const radio = (value, state) => {
 
 ### Disabled radio button
 ```jsx
+let radioIndex = 0;
 const radio = (value, state) => {
     const label = `This is radio button #${value}`;
     radioIndex++;

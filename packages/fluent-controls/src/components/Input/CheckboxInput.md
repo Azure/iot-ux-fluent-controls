@@ -1,4 +1,39 @@
-### Checkbox
+______________________________________________________________________________
+
+### `CheckboxInput.props.attr`
+
+```jsx static
+container = <div/>;
+label = <label/>;
+input = <input/>;
+text = <span/>;
+checkbox = <span/>;
+indeterminateFill = <span/>;
+checkmarkIcon = <Icon/>;
+border = <span/>;
+```
+
+```html
+<CheckboxInput attr={...}>
+    <div className='checkbox-container' {...props.attr.container}>
+        <label className='checkbox-label' {...props.attr.label}>
+            <input {...props.attr.input} />
+            <span className='checkbox-button' {...props.attr.checkbox} />
+            <span className='checkbox-text' {...props.attr.text}>
+                {props.label}
+            </span>
+            <span className='checkbox-fill' {...props.attr.indeterminateFill}} />
+            <Icon className='checkbox-checkmark' {...props.attr.checkmarkIcon} />
+            <span className='checkbox-border' {...props.attr.border} />
+        </label>
+    </div>
+</CheckboxInput>
+```
+
+______________________________________________________________________________
+
+### Examples
+
 ```jsx
 const label = 'Checkbox label';
 const initialState = {

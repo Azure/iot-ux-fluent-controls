@@ -135,7 +135,27 @@ const defaultLabel = (newValue: string, option: FormOption) => option.label;
 /**
  * Low level combo input control
  * 
- * (Use the `ComboField` control instead when making a form with standard styling)
+ * `ComboInput` is a hybrid of the SelectInput and TextInput controls. It
+ * functions as a 'new or existing' text field where the user can type in a
+ * custom value or pick from a list of values provided by the control.
+ * 
+ * `ComboInput` consumes the property `options: FormOption[]` which specify
+ * each option's `value` and `label`. The former can be any object while the
+ * latter can be any React node (or a string). `ComboInput` also consumes a
+ * `value: string | FormOption` property that sets the current value of the
+ * `ComboInput` text field. If `value` is a `string`, the user is typing in a
+ * custom value and if it is an object, the user has either typed in a value
+ * equal to one of the options or has selected an option from the dropdown list.
+ * 
+ * In this example of a default `ComboInput`, `FormOption.value` must be a
+ * string, which allows you to use `ComboInput` with only the properties `name`,
+ * `value`, `onChange`, and `options`. When the user types in 'Option 1', that
+ * option will be considered selected instead of a custom object.
+ * 
+ * *Reffer to the other examples on how to use `ComboInput`'s callbacks to
+ * further modify what options display in the dropdown.*
+ * 
+ * (Use the `ComboField` control for forms with standard styling)
  */
 export class ComboInput extends React.Component<ComboInputProps, ComboInputState> {
     static defaultProps =  {
