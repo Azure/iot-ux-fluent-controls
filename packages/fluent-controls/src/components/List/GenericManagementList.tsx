@@ -12,13 +12,13 @@ export interface GenericManagementListComponentType {}
 export interface GenericManagementListAttributes {
     container?: DivProps;
     column?: DivProps;
-    rowHeader?: ButtonProps;
     rowContent?: DivProps;
+    rowHeaderButton?: ButtonProps;
     rowHeaderChevron?: IconAttributes;
-    selectAllContainer?: DivProps;
-    selectAllEmptyContainer?: DivProps;
+    selectAllEmpty?: DivProps;
     selectAllCheckbox?: CheckboxInputAttributes;
-    selectRowContainer?: DivProps;
+    selectAllContainer?: DivProps;
+    selectRowContent?: DivProps;
     selectRowCheckbox?: CheckboxInputAttributes;
 }
 
@@ -164,7 +164,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                     key={`header-${colIndex}`}
                     onClick={onClick}
                     disabled={!sortable}
-                    attr={this.props.attr.rowHeader}
+                    attr={this.props.attr.rowHeaderButton}
                 >
                     {column.label}{labelSuffix}
                 </Attr.button>
@@ -210,7 +210,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
             const selectAll = !this.props.onSelectAll
                 ? <Attr.div
                     className={css('checkbox-empty')}
-                    attr={this.props.attr.selectAllEmptyContainer}
+                    attr={this.props.attr.selectAllEmpty}
                 />
                 : <CheckboxInput
                     name={`${this.props.name}-select-all`}
@@ -256,7 +256,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                     <Attr.div
                         className={css('column-content', 'checkbox')}
                         key={`select-${index}`}
-                        attr={this.props.attr.selectRowContainer}
+                        attr={this.props.attr.selectRowContent}
                     >
                         <CheckboxInput
                             name={`${this.props.name}-select-${index}`}

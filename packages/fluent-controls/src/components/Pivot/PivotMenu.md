@@ -1,14 +1,53 @@
-Pivot Menu
+______________________________________________________________________________
 
+### `PivotMenu.props.attr`
+
+```jsx static
+attr.container = <div/>;
+attr.anchor = <a/>;
+attr.pivot = <PivotMenu/>;
+```
+
+```html
+<PivotMenu attr={...}>
+    <div {...props.attr.container}>
+        <a {...props.attr.anchor}>
+            <div {...props.attr.pivot.pivot.container}>
+                <span {...props.attr.pivot.pivot.content}>
+                    {props.links[0].label}
+                </span>
+                <div {...props.attr.pivot.pivot.bottomBorder}/>
+                <div {...props.attr.pivot.pivot.focusBorder}/>
+                <div {...props.attr.pivot.pivot.innerContent}/>
+            </div>
+        </a>
+        ...
+        <a {...props.attr.anchor}>
+            <div {...props.attr.pivot.pivot.container}>
+                <span {...props.attr.pivot.pivot.content}>
+                    {props.links[props.links.index - 1].label}
+                </span>
+                <div {...props.attr.pivot.pivot.bottomBorder}/>
+                <div {...props.attr.pivot.pivot.focusBorder}/>
+                <div {...props.attr.pivot.pivot.innerContent}/>
+            </div>
+        </a>
+    </div>
+</PivotMenu>
+```
+
+______________________________________________________________________________
+
+### Examples
 ```jsx
 const initialState = {value: '1'};
 const pivot = (num) => {
     return {
-        label: `Pivot #${num}`,
+        label: `PivotMenu #${num}`,
         key: `${num}`,
         icon: 'info',
         href: `#/!Page${num}`,
-        title: `Title for Pivot #${num}`,
+        title: `Title for PivotMenu #${num}`,
         onClick: (event) => {
             setState({value: `${num}`});
             event.preventDefault();

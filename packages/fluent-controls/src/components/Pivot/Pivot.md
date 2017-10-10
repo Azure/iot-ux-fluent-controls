@@ -1,4 +1,47 @@
-Pivot Menu
+______________________________________________________________________________
+
+### `Pivot.props.attr`
+
+```jsx static
+attr.container = <div/>;
+attr.bottomBorder = <div/>;
+attr.focusBorder = <div/>;
+attr.content = <span/>;
+attr.innerContent = <div/>;
+attr.icon = <Icon/>;
+```
+
+```html
+<Pivot attr={...}>
+    <div {...props.attr.container}>
+        <Icon attr={props.attr.icon}>
+            {props.text}
+        </Icon>
+        <div {...props.attr.bottomBorder}/>
+        <div {...props.attr.focusBorder}/>
+        <div {...props.attr.innerContent}/>
+    </div>
+</Pivot>
+```
+
+##### or
+
+```html
+<Pivot attr={...}>
+    <div {...props.attr.container}>
+        <span {...props.attr.content}>
+            {props.text}
+        </span>
+        <div {...props.attr.bottomBorder}/>
+        <div {...props.attr.focusBorder}/>
+        <div {...props.attr.innerContent}/>
+    </div>
+</Pivot>
+```
+
+______________________________________________________________________________
+
+### Examples
 
 ```jsx
 const menuClassName = require('./Pivot').menuClassName;

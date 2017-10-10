@@ -32,46 +32,57 @@ export interface PivotProps extends React.Props<PivotType> {
 }
 
 export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
-    const containerClassName = css('pivot-container', {
-        'disabled': props.disabled,
-        'selected': props.selected,
-    });
-    const focusClassName = css('focus-border');
-    const borderClassName = css('pivot-border');
-    const innerClassName = css('pivot-contents');
-    const placeholderClassName = css('pivot-placeholder');
-    const iconClassName = css('pivot-icon');
-    
+
     let contents;
     if (props.icon) {
-        const labelClassName = css('pivot-icon-label');
         contents = (
-            <Icon 
+            <Icon
                 icon={props.icon}
                 size={IconSize.xsmall}
-                className={iconClassName}
-                labelClassName={labelClassName}
+                className={css('pivot-icon')}
+                labelClassName={css('pivot-icon-label')}
                 attr={props.attr.icon}
             >
                 {props.text}
             </Icon>
         );
     } else {
-        const labelClassName = css('pivot-label');        
         contents = (
-            <Attr.span className={labelClassName} attr={props.attr.content}>
+            <Attr.span
+                className={css('pivot-label')}
+                attr={props.attr.content}
+            >
                 {props.text}
             </Attr.span>
         );
     }
-    
+
+    /**
+     * Contents are rendered twices to give the pivot height and allow the text
+     * to center vertically
+     */
     return (
-        <Attr.div className={containerClassName} attr={props.attr.container}>
+        <Attr.div
+            className={css('pivot-container', {
+                'disabled': props.disabled,
+                'selected': props.selected,
+            })}
+            attr={props.attr.container}
+        >
             {contents}
             {contents}
-            <Attr.div className={borderClassName} attr={props.attr.bottomBorder}/>
-            <Attr.div className={focusClassName} attr={props.attr.focusBorder}/>
-            <Attr.div className={innerClassName} attr={props.attr.innerContent}/>
+            <Attr.div
+                className={css('pivot-border')}
+                attr={props.attr.bottomBorder}
+            />
+            <Attr.div
+                className={css('focus-border')}
+                attr={props.attr.focusBorder}
+            />
+            <Attr.div
+                className={css('pivot-contents')}
+                attr={props.attr.innerContent}
+            />
         </Attr.div>
     );
 };
