@@ -4,13 +4,13 @@ ______________________________________________________________________________
 
 ```html
 <Pivot attr={...}>
-    <div {...props.attr.container}>
-        <Icon attr={props.attr.icon}>
+    <div className='pivot-container' {...props.attr.container}>
+        <Icon className='pivot-icon' attr={props.attr.icon}>
             {props.text}
         </Icon>
-        <div {...props.attr.bottomBorder}/>
-        <div {...props.attr.focusBorder}/>
-        <div {...props.attr.innerContent}/>
+        <div className='pivot-border' {...props.attr.bottomBorder}/>
+        <div className='focus-border' {...props.attr.focusBorder}/>
+        <div className='pivot-contents' {...props.attr.innerContent}/>
     </div>
 </Pivot>
 ```
@@ -19,13 +19,13 @@ ______________________________________________________________________________
 
 ```html
 <Pivot attr={...}>
-    <div {...props.attr.container}>
-        <span {...props.attr.content}>
+    <div className='pivot-container' {...props.attr.container}>
+        <span className='pivot-label' {...props.attr.content}>
             {props.text}
         </span>
-        <div {...props.attr.bottomBorder}/>
-        <div {...props.attr.focusBorder}/>
-        <div {...props.attr.innerContent}/>
+        <div className='pivot-border' {...props.attr.bottomBorder}/>
+        <div className='focus-border' {...props.attr.focusBorder}/>
+        <div className='pivot-contents' {...props.attr.innerContent}/>
     </div>
 </Pivot>
 ```

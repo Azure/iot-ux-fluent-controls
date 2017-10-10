@@ -1,15 +1,41 @@
-### Combo Field
+______________________________________________________________________________
 
-`ComboField` is a hybrid of the SelectField and TextField controls. It functions as a 'new or existing' text field where the user can type in a custom value or pick from a list of values provided by the control.
+### `ComboField.props.attr`
 
-`ComboField` consumes the property `options: FormOption[]` which specify each option's `value` and `label`. The former can be any object while the latter can be any React node (or a string). `ComboField` also consumes a `value: string | FormOption` property that sets the current value of the `ComboField` text field. If `value` is a `string`, the user is typing in a custom value and if it is an object, the user has either typed in a value equal to one of the options or has selected an option from the dropdown list.
+```html
+<ComboField attr={...}>
+    <div className='input-container' {...props.attr.fieldContainer}>
+        <label className='label' {...props.attr.fieldLabel}>
+            {props.label}
+        </label>
+        <div className='content' {...props.attr.fieldContent}>
+            <ComboInput>
+                <div className='combo-input-container' {...props.attr.container}>
+                    <div className='input-container' {...props.attr.textbox}>
+                        <input className='input' {...props.attr.input} />
+                        <button className='cancel' {...props.attr.clearButton} />
+                        <span className='chevron' {...props.attr.chevron} />
+                        <div className='dropdown' {...props.attr.dropdown}>
+                            <button className='option' {...props.attr.option} />
+                            ...
+                            <button className='option' {...props.attr.option} />                
+                        </div>
+                    </div>
+                </div>
+            </ComboInput>
+        </div>
+        <div className='field-error' attr={props.attr.fieldError}>
+            {props.error}
+        </div>
+    </div>
+</ComboField>
+```
 
-In this example of a default `ComboField`, `FormOption.value` must be a string, which allows you to use `ComboField` with only the properties `name`, `value`, `onChange`, and `options`. When the user types in 'Option 1', that option will be considered selected instead of a custom object.
+______________________________________________________________________________
 
-*Reffer to the other examples on how to use `ComboField`'s callbacks to further modify what options display in the dropdown.*
+### Examples
 
-
-### Default Example
+#### Default
 
 ```jsx
 const initialState = {
@@ -41,7 +67,7 @@ const initialState = {
 </div>
 ```
 
-### Using an optionMap callback
+#### Using an optionMap callback
 
 `ComboField` uses four callback properties in order to filter through this list of options and decide how to display in the dropdown. If you have a list of objects and all you need is default behavior, you just have to provide the property `optionMap`, which maps a `FormOption` to a string that is then used by the other callbacks.
 
@@ -80,7 +106,7 @@ const initialState = {
 </div>
 ```
 
-### Using optionFilter and optionLabel callbacks
+#### Using optionFilter and optionLabel callbacks
 
 By default, `optionFilter` returns true as long as `FormOption.hidden` is false so all visible options will be displayed in the dropdown with `FormOption.label` as the contents of the dropdown items (returned by the default `optionLabel` callback).
 
@@ -146,7 +172,7 @@ const initialState = {
 </div>
 ```
 
-### Error Combo Field Example
+#### Error Combo Field
 
 ```jsx
 const initialState = {
@@ -172,7 +198,7 @@ const initialState = {
 </div>
 ```
 
-### Disabled Combo Field Example
+#### Disabled Combo Field
 
 ```jsx
 const initialState = {

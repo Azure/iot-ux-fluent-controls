@@ -4,7 +4,7 @@ ______________________________________________________________________________
 
 ```html
 <Icon attr={...}>
-    <span {...props.attr.container}>
+    <span className='icon' {...props.attr.container}>
         <span {...props.attr.label}>
             {props.children}
         </span>

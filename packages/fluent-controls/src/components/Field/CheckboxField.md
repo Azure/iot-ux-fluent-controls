@@ -1,4 +1,39 @@
-### Checkbox field
+______________________________________________________________________________
+
+### `CheckboxField.props.attr`
+
+```html
+<CheckboxField attr={...}>
+    <div className='input-container' {...props.attr.fieldContainer}>
+        <label className='label' {...props.attr.fieldLabel}>
+            {props.label}
+        </label>
+        <div className='content' {...props.attr.fieldContent}>
+            <CheckboxInput>
+                <div className='checkbox-container' {...props.attr.container}>
+                    <label className='checkbox-label' {...props.attr.label}>
+                        <input {...props.attr.input} />
+                        <span className='checkbox-button' {...props.attr.checkbox} />
+                        <span className='checkbox-text' {...props.attr.text}>
+                            {props.label}
+                        </span>
+                        <span className='checkbox-fill' {...props.attr.indeterminateFill}} />
+                        <Icon className='checkbox-checkmark' attr={props.attr.checkmarkIcon} />
+                        <span className='checkbox-border' {...props.attr.border} />
+                    </label>
+                </div>
+            </CheckboxInput>
+        </div>
+        <div className='field-error' attr={props.attr.fieldError}>
+            {props.error}
+        </div>
+    </div>
+</CheckboxField>
+```
+
+______________________________________________________________________________
+
+### Examples
 
 ```jsx
 const initialState = {

@@ -1,3 +1,36 @@
+______________________________________________________________________________
+
+### `ToggleField.props.attr`
+
+```html
+<ToggleField attr={...}>
+    <div className='input-container' {...props.attr.fieldContainer}>
+        <label className='label' {...props.attr.fieldLabel}>
+            {props.label}
+        </label>
+        <div className='content' {...props.attr.fieldContent}>
+            <Toggle>
+                <div className='toggle' {...props.attr.container}>
+                    <button className='toggle-button' {...props.attr.button}/>
+                    <div className='toggle-border' {...props.attr.border}/>
+                    <div className='toggle-switch' {...props.attr.switch}/>
+                    <div className='toggle-label' {...props.attr.text}>
+                        {props.on ? props.onLabel : props.offLabel}
+                    </div>
+                </div>
+            </Toggle>
+        </div>
+        <div className='field-error' attr={props.attr.fieldError}>
+            {props.error}
+        </div>
+    </div>
+</ToggleField>
+```
+
+______________________________________________________________________________
+
+### Examples
+
 ```jsx
 const initialState = {
     field1: true,

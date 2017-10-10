@@ -74,7 +74,6 @@ export interface IconProps extends React.Props<IconType> {
 export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {
     let iconClassName = `icon-${props.icon}`;
     let cls = css({
-        // 'icon': true,
         'icon-xsmall': props.size === IconSize.xsmall,
         'icon-small': props.size === IconSize.small,
         'icon-medium': props.size === IconSize.medium,

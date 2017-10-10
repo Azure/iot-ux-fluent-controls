@@ -4,27 +4,13 @@ ______________________________________________________________________________
 
 ```html
 <PivotMenu attr={...}>
-    <div {...props.attr.container}>
-        <a {...props.attr.anchor}>
-            <div {...props.attr.pivot.pivot.container}>
-                <span {...props.attr.pivot.pivot.content}>
-                    {props.links[0].label}
-                </span>
-                <div {...props.attr.pivot.pivot.bottomBorder}/>
-                <div {...props.attr.pivot.pivot.focusBorder}/>
-                <div {...props.attr.pivot.pivot.innerContent}/>
-            </div>
+    <div className='pivot-menu' {...props.attr.container}>
+        <a className='pivot' {...props.attr.anchor}>
+            <Pivot attr={props.attr.pivot} />
         </a>
         ...
-        <a {...props.attr.anchor}>
-            <div {...props.attr.pivot.pivot.container}>
-                <span {...props.attr.pivot.pivot.content}>
-                    {props.links[props.links.index - 1].label}
-                </span>
-                <div {...props.attr.pivot.pivot.bottomBorder}/>
-                <div {...props.attr.pivot.pivot.focusBorder}/>
-                <div {...props.attr.pivot.pivot.innerContent}/>
-            </div>
+        <a className='pivot' {...props.attr.anchor}>
+            <Pivot attr={props.attr.pivot} />            
         </a>
     </div>
 </PivotMenu>

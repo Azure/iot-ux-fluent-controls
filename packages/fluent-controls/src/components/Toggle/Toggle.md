@@ -4,11 +4,11 @@ ______________________________________________________________________________
 
 ```html
 <Toggle attr={...}>
-    <div {...props.attr.container}>
-        <button {...props.attr.button}/>
-        <div {...props.attr.border}/>
-        <div {...props.attr.switch}/>
-        <div {...props.attr.text}>
+    <div className='toggle' {...props.attr.container}>
+        <button className='toggle-button' {...props.attr.button}/>
+        <div className='toggle-border' {...props.attr.border}/>
+        <div className='toggle-switch' {...props.attr.switch}/>
+        <div className='toggle-label' {...props.attr.text}>
             {props.on ? props.onLabel : props.offLabel}
         </div>
     </div>

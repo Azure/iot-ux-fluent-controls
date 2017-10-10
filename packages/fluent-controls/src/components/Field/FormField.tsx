@@ -12,7 +12,7 @@ export interface FormFieldAttributes {
     fieldContainer?: DivProps;
     fieldLabel?: LabelProps;
     fieldContent?: DivProps;
-    fieldError?: FormErrorAttributes;
+    fieldError?: DivProps;
 }
 
 export interface FormFieldProps extends React.Props<FormFieldType> {
@@ -71,7 +71,7 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
             <FormError
                 className={props.errorClassName}
                 hidden={props.hideError}
-                attr={props.attr.fieldError}
+                attr={{container: props.attr.fieldError}}
             >
                 {error}
             </FormError>

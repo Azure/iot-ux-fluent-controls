@@ -88,6 +88,26 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
 /**
  * High level form select box control
  * 
+ * `ComboField` is a hybrid of the SelectField and TextField controls. It
+ * functions as a 'new or existing' text field where the user can type in a
+ * custom value or pick from a list of values provided by the control.
+ * 
+ * `ComboField` consumes the property `options: FormOption[]` which specify each
+ * option's `value` and `label`. The former can be any object while the latter
+ * can be any React node (or a string). `ComboField` also consumes a
+ * `value: string | FormOption` property that sets the current value of the
+ * `ComboField` text field. If `value` is a `string`, the user is typing in a
+ * custom value and if it is an object, the user has either typed in a value
+ * equal to one of the options or has selected an option from the dropdown list.
+ * 
+ * In this example of a default `ComboField`, `FormOption.value` must be a string,
+ *  which allows you to use `ComboField` with only the properties `name`, `value`,
+ * `onChange`, and `options`. When the user types in 'Option 1', that option will
+ * be considered selected instead of a custom object.
+ * 
+ * *Reffer to the other examples on how to use `ComboField`'s callbacks to further
+ * modify what options display in the dropdown.*
+ * 
  * IMPORTANT: The options provided to this control must all be UNIQUE. The
  * `value` property of radio buttons is the numerical index of the option in
  * `ComboField.options` so `ComboField.value` is compared to each value in

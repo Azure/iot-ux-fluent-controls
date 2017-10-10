@@ -1,3 +1,34 @@
+______________________________________________________________________________
+
+### `TextAreaField.props.attr`
+
+```html
+<TextAreaField attr={...}>
+    <div className='input-container' {...props.attr.fieldContainer}>
+        <label className='label' {...props.attr.fieldLabel}>
+            {props.label}
+        </label>
+        <div className='content' {...props.attr.fieldContent}>
+            <TextArea>
+                <div className='textarea-container' {...props.attr.container}>
+                    <textarea className='textarea' {...props.attr.textarea} />
+                    <pre className='textarea textarea-ghost' {...props.attr.pre}>
+                        {props.value}
+                    </pre>
+                </div>
+            </TextArea>
+        </div>
+        <div className='field-error' attr={props.attr.fieldError}>
+            {props.error}
+        </div>
+    </div>
+</TextAreaField>
+```
+
+______________________________________________________________________________
+
+### Examples
+
 ```jsx
 const initialState = {
     field1: '',

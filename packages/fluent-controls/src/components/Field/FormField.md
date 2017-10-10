@@ -1,3 +1,28 @@
+______________________________________________________________________________
+
+### `FormField.props.attr`
+
+```html
+<FormField attr={...}>
+    <div className='input-container' {...props.attr.fieldContainer}>
+        <label className='label' {...props.attr.fieldLabel}>
+            {props.label}
+        </label>
+        <div className='content' {...props.attr.fieldContent}>
+            {props.children}
+        </div>
+        <div className='field-error' attr={props.attr.fieldError}>
+            {props.error}
+        </div>
+    </div>
+</FormField>
+```
+
+______________________________________________________________________________
+
+### Examples
+
+
 ```jsx
 const TextInput = require('../Input/TextInput').TextInput;
 
@@ -69,7 +94,7 @@ const initialState = {
             onChange={(newValue) => setState({field7: newValue})}
         />
     </FormField>
-    <FormField name='form-field8' error='This field is required!' hideError>
+    <FormField name='form-field8' error='This field is required!' hideField>
         <TextInput
             name='form-field8'
             value={state.field8}
@@ -77,7 +102,7 @@ const initialState = {
             onChange={(newValue) => setState({field8: newValue})}
         />
     </FormField>
-    <FormField name='form-field9' label='Label 9' required error='This field is required' hideError>
+    <FormField name='form-field9' label='Label 9' required error='This field is required' hideField>
         <TextInput
             name='form-field9'
             value={state.field9}

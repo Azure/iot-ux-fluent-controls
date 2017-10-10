@@ -1,3 +1,40 @@
+______________________________________________________________________________
+
+### `NumberField.props.attr`
+
+```html
+<NumberField attr={...}>
+    <div className='input-container' {...props.attr.fieldContainer}>
+        <label className='label' {...props.attr.fieldLabel}>
+            {props.label}
+        </label>
+        <div className='content' {...props.attr.fieldContent}>
+            <TextInput>
+                <div className='text-input-container' {...props.attr.container}>
+                    <div className='prefix' {...props.attr.prefix}>
+                        {props.prefix}
+                    </div>
+                    <div className='input-container' {...props.attr.inputContainer}>
+                        <input type='text' className='input' {...props.attr.input} />
+                        <button className='cancel' {...props.attr.clearButton} />
+                    </div>
+                    <div className='postfix' {...props.attr.postfix}>
+                        {props.postfix}
+                    </div>
+                </div>
+            </TextInput>
+        </div>
+        <div className='field-error' attr={props.attr.fieldError}>
+            {props.error}
+        </div>
+    </div>
+</NumberField>
+```
+
+______________________________________________________________________________
+
+### Examples
+
 ```jsx
 const initialState = {
     field1: 0,

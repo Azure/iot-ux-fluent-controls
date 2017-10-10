@@ -1,4 +1,39 @@
-### Select field
+______________________________________________________________________________
+
+### `SelectField.props.attr`
+
+```html
+<SelectField attr={...}>
+    <div className='input-container' {...props.attr.fieldContainer}>
+        <label className='label' {...props.attr.fieldLabel}>
+            {props.label}
+        </label>
+        <div className='content' {...props.attr.fieldContent}>
+            <SelectInput>
+                <div className='combo-container' {...props.attr.container}>
+                    <select className='combo' {...props.attr.select}>
+                        <option {...props.attr.option}>
+                            {props.options[0].label}
+                        </option>
+                        ...
+                        <option {...props.attr.option}>
+                            {props.options[n].label}
+                        </option>
+                    </div>
+                    <span className='arrow' {...props.attr.chevron} />
+                </div>
+            </SelectInput>
+        </div>
+        <div className='field-error' attr={props.attr.fieldError}>
+            {props.error}
+        </div>
+    </div>
+</SelectField>
+```
+
+______________________________________________________________________________
+
+### Examples
 
 ```jsx
 class SelectFieldDemo extends React.Component {

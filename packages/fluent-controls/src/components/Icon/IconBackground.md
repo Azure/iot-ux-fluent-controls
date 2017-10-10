@@ -4,6 +4,6 @@ ______________________________________________________________________________
 
 ```html
 <IconBackground attr={...}>
-    <span {...props.attr.container} />
+    <span className='icon-background' {...props.attr.container} />
 </IconBackground>
 ```

@@ -1,4 +1,38 @@
-### Radio field
+______________________________________________________________________________
+
+### `RadioField.props.attr`
+
+```html
+<RadioField attr={...}>
+    <div className='input-container' {...props.attr.fieldContainer}>
+        <label className='label' {...props.attr.fieldLabel}>
+            {props.label}
+        </label>
+        <div className='content' {...props.attr.fieldContent}>
+            <RadioInput>
+                <div className='radio-container' {...props.attr.container}>
+                    <label className='radio-label' {...props.attr.label}>
+                        <input type='radio' {...props.attr.input} />
+                        <span className='radio-button' {...props.attr.radio} />
+                        <span className='radio-text' {...props.attr.text}>
+                            {props.label}
+                        </span>
+                        <span className='radio-fill' {...props.attr.fill} />
+                        <span className='radio-border' {...props.attr.border} />
+                    </label>
+                </div>
+            </RadioInput>
+        </div>
+        <div className='field-error' attr={props.attr.fieldError}>
+            {props.error}
+        </div>
+    </div>
+</RadioField>
+```
+
+______________________________________________________________________________
+
+### Examples
 
 ```jsx
 const initialState = {
