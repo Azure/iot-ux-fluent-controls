@@ -1,0 +1,91 @@
+@import '../../common/overrides';
+@import '../../common/mixins';
+
+$primary-color: md-color(selected, dark);
+$primary-pressed-color: md-color(shade, f);
+
+$primary-bg-color: md-color(selected, default);
+$primary-hover-bg-color: md-color(selected, hover);
+$primary-pressed-bg-color: md-color(selected, pressed);
+
+$secondary-color: md-color(shade, 3);
+$secondary-pressed-color: md-color(shade, f);
+
+$secondary-bg-color: md-color(shade, c);
+$secondary-hover-bg-color: md-color(shade, a);
+$secondary-pressed-bg-color: md-color(shade, 8);
+
+$disabled-color: md-color(shade, 8);
+$disabled-bg-color: md-color(shade, d);
+
+$focus-border-size: 2px;
+$focus-border: $focus-border-size solid md-color(shade, 3);
+
+.button-container {
+    @include md-default-button();
+    @include md-default-font();
+    box-sizing: content-box;
+    height: 8.5*$grid;
+    margin: $focus-border-size;
+    border: none;
+
+    color: $primary-color;
+    background-color: $primary-bg-color;
+
+    &:focus:not(:disabled) {
+        margin: 0px;
+        border: $focus-border;
+    }
+
+    &:hover:not(:disabled) {
+        background-color: $primary-hover-bg-color;
+    }
+
+    &:active:not(:disabled) {
+        color: $primary-pressed-color;
+        background-color: $primary-pressed-bg-color;
+    }
+
+    &.secondary {
+        color: $secondary-color;
+        background-color: $secondary-bg-color;
+
+        &:hover:not(:disabled) {
+            background-color: $secondary-hover-bg-color;
+        }
+    
+        &:active:not(:disabled) {
+            color: $secondary-pressed-color;
+            background-color: $secondary-pressed-bg-color;
+        }
+    }
+
+    &:disabled {
+        color: $disabled-color;
+        background-color: $disabled-bg-color;
+    }
+
+    .button-icon {
+        @include md-box(inline-block);
+        margin-left: 5*$gutter;
+        vertical-align: middle;
+
+        font-size: 16px;
+        line-height: 16px;
+
+        & + .button-text {
+            margin-left: 2*$gutter;
+        }
+    }
+
+    .button-text {
+        @include md-box(inline-block);
+        margin-left: 5*$gutter;
+        margin-right: 5*$gutter;
+        margin-bottom: 2px;
+        vertical-align: middle;
+        
+        font-size: 14px;
+        line-height: 32px;
+    }
+}
