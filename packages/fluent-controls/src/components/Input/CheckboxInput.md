@@ -23,7 +23,7 @@ border = <span/>;
                 {props.label}
             </span>
             <span className='checkbox-fill' {...props.attr.indeterminateFill}} />
-            <Icon className='checkbox-checkmark' {...props.attr.checkmarkIcon} />
+            <Icon className='checkbox-checkmark' attr={props.attr.checkmarkIcon} />
             <span className='checkbox-border' {...props.attr.border} />
         </label>
     </div>

@@ -11,12 +11,12 @@ attr.closeIcon = <Icon/>;
 
 ```html
 <Alert attr={...}>
-    <div {...props.attr.container}>
-        <Icon attr={props.attr.icon}/>
-        <div {...props.attr.contents}>
+    <div className='alert' {...props.attr.container}>
+        <Icon classname='icon' attr={props.attr.icon}/>
+        <div className='text' {...props.attr.contents}>
             {props.children}
         </div>
-        <Icon attr={props.attr.closeIcon} />
+        <Icon className='close' attr={props.attr.closeIcon} />
     </div>
 </Alert>
 ```

@@ -10,11 +10,11 @@ attr.suffix = <Icon/>;
 
 ```html
 <ActionTrigger attr={...}>
-    <div {...props.attr.container}>
+    <div className='action-trigger' {...props.attr.container}>
         <Icon attr={props.attr.icon}>
             {props.label}
         </Icon>
-        <Icon attr={props.attr.suffix} />
+        <Icon className='suffix' attr={props.attr.suffix} />
     </div>
 </ActionTrigger>
 ```

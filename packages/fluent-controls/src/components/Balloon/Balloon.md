@@ -11,10 +11,10 @@ attr.balloon = <span/>;
 
 ```html
 <Balloon attr={...}>
-    <span {...props.attr.container}>
+    <span className='balloon-container' {...props.attr.container}>
         {props.children}
-        <span {...props.attr.balloonContainer}>
-            <div {...props.attr.balloon}>
+        <span className='balloon' {...props.attr.balloonContainer}>
+            <div className='inner-container' {...props.attr.balloon}>
                 {props.tooltip}
             </div>
         </span>

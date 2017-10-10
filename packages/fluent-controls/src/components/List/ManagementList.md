@@ -17,45 +17,43 @@ selectRowCheckbox = <CheckboxInput/>;
 
 ```html
 <ManagementList attr={...}>
-    <div {...props.attr.container}>
-        <div {...props.attr.column}>
-            <div {...props.attr.selectAllContainer>
-                <div {...props.attr.selectAllEmpty}/>
+    <div className='list-container' {...props.attr.container}>
+        <div className='column' {...props.attr.column}>
+            <div className='column-header' {...props.attr.selectAllContainer>
+                <div className='checkbox-empty' {...props.attr.selectAllEmpty}/>
                 or
                 <CheckboxInput attr{props.attr.selectAllCheckbox}/>
             </div>
-        </div>
-        <div {...props.attr.column}>
-            <div {...props.attr.selectRowContent}>
+            <div className='column-content' {...props.attr.selectRowContent}>
                 <CheckboxInput attr={props.attr.selectRowCheckbox}/>
             </div>
             ...
-            <div {...props.attr.selectRowContent}>
+            <div className='column-content' {...props.attr.selectRowContent}>
                 <CheckboxInput attr={props.attr.selectRowCheckbox}/>
             </div>
         </div>
-        <div {...props.attr.column}>
-            <button {...props.attr.rowHeaderButton}>
-                Column Title <span {...props.attr.rowHeaderChevron}/>
+        <div className='column' {...props.attr.column}>
+            <button className='column-header' {...props.attr.rowHeaderButton}>
+                Column Title <span className='sort-direction' {...props.attr.rowHeaderChevron}/>
             </button>
-            <div {...props.attr.rowContent}>
+            <div className='column-content' {...props.attr.rowContent}>
                 Row 1 Column 1
             </div>
             ...
-            <div {...props.attr.rowContent}>
+            <div className='column-content' {...props.attr.rowContent}>
                 Row N Column 1
             </div>
         </div>
         ...
-        <div {...props.attr.column}>
-            <button {...props.attr.rowHeaderButton}>
-                Column Title <span {...props.attr.rowHeaderChevron}/>
+        <div className='column' {...props.attr.column}>
+            <button className='column-header' {...props.attr.rowHeaderButton}>
+                Column Title <span className='sort-direction' {...props.attr.rowHeaderChevron}/>
             </button>
-            <div {...props.attr.rowContent}>
+            <div className='column-content' {...props.attr.rowContent}>
                 Row 1 Column N
             </div>
             ...
-            <div {...props.attr.rowContent}>
+            <div className='column-content' {...props.attr.rowContent}>
                 Row N Column N
             </div>
         </div>
