@@ -390,6 +390,7 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
 
             return (
                 <Attr.button
+                    type='button'
                     className={optionClassName}
                     onClick={onClick}
                     onMouseOver={onHover}
@@ -414,6 +415,7 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
 
         const clearButton = this.props.disabled ? '' :
             <Attr.button
+                type='button'
                 className={css('cancel', 'icon icon-cancel')}
                 onClick={() => {
                     this.inputElement.focus();

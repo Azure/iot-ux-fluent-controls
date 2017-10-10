@@ -159,6 +159,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
             }
             columns[colIndex].push(
                 <Attr.button
+                    type='button'
                     className={css('column-header')}
                     key={`header-${colIndex}`}
                     onClick={onClick}

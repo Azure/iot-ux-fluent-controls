@@ -370,6 +370,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                 if (colMonth !== curMonth) {
                     return (
                         <Attr.button
+                            type='button'
                             className={colClassName}
                             onClick={onClick}
                             key={key}
@@ -392,6 +393,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                     if (isSelected) {
                         return (
                             <Attr.button
+                                type='button'
                                 className={css('selected')}
                                 onClick={onClick}
                                 key={key}
@@ -409,6 +411,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                 /** Everything else */
                 return (
                     <Attr.button
+                        type='button'
                         onClick={onClick}
                         key={key}
                         tabIndex={tabIndex}

@@ -83,6 +83,7 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
 
     const clearButton = props.disabled || props.type === 'number' ? '' :
         <Attr.button
+            type='button'
             className={cancelClassName}
             onClick={() => props.onChange('')}
             tabIndex={-1}

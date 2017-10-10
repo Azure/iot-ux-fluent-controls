@@ -34,6 +34,7 @@ export interface ActionTriggerButtonProps {
 export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonProps> = (props: ActionTriggerButtonProps) => {
     return (
         <Attr.button
+            type='button'
             onClick={props.onClick}
             className={css('action-trigger-button', props.className)}
             disabled={props.disabled}

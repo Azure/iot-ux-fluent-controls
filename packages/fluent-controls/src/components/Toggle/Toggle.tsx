@@ -57,6 +57,7 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
     return (
         <Attr.div className={containerClassName} attr={props.attr.container}>
             <Attr.button
+                type='button'
                 className={css('toggle-button')}
                 onClick={onClick}
                 tabIndex={tabIndex}

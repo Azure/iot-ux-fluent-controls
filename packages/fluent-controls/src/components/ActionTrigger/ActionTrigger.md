@@ -2,9 +2,11 @@
 
 ```html
 <ActionTrigger attr={...}>
-    <div {...props.attr.container}>
-        <Icon attr={props.attr.icon} />
-        <Icon attr={props.attr.suffix} />
+    <div className={props.className} {...props.attr.container}>
+        <Icon icon={props.icon} attr={props.attr.icon}>
+            {props.label}
+        </Icon>
+        <Icon icon={props.suffix} attr={props.attr.suffix} />
     </div>
 </ActionTrigger>
 ```
