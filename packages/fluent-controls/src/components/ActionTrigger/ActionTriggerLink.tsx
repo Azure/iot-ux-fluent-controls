@@ -3,7 +3,7 @@ import {MethodNode} from '../../Common';
 import {ActionTrigger, ActionTriggerProps, ActionTriggerAttributes} from '../ActionTrigger';
 import {Elements as Attr, AnchorProps, SpanProps, DivProps} from '../../Attributes';
 
-export interface ActionTriggerLinkAttributes extends ActionTriggerAttributes {
+export interface ActionTriggerLinkAttributes {
     anchor?: AnchorProps;    
 }
 
@@ -29,7 +29,7 @@ export interface ActionTriggerLinkProps {
     /** Anchor accessibility title */
     title?: string;
 
-    attr?: ActionTriggerLinkAttributes;
+    attr?: ActionTriggerLinkAttributes & ActionTriggerAttributes;
 }
 
 export const ActionTriggerLink: React.StatelessComponent<ActionTriggerLinkProps> = (props: ActionTriggerLinkProps) => {
