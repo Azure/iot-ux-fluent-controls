@@ -74,7 +74,8 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
         militaryTime: false,
         disabled: false,
         localTimezone: true,
-        periodOptions: null,
+        amLabel: 'AM',
+        pmLabel: 'PM',
         attr: {
             container: {},
             hourSelect: {},
@@ -91,7 +92,6 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
     hours: FormOption[];
     minutes: FormOption[];
     seconds: FormOption[];
-    options: FormOption[];
 
     constructor(props: TimeInputProps) {
         super(props);
@@ -111,11 +111,6 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             this.minutes.push({label: value, value: value});
             this.seconds.push({label: value, value: value});
         }
-
-        this.options = [
-            {label: props.amLabel || 'AM', value: 'AM'},
-            {label: props.pmLabel || 'PM', value: 'PM'}
-        ];
     }
 
     handleState(props: TimeInputProps): TimeInputState {
@@ -278,13 +273,13 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                 value='AM'
                 attr={this.props.attr.periodOption}
             >
-                AM
+                {this.props.amLabel}
             </Attr.option>
             <Attr.option
                 value='PM'
                 attr={this.props.attr.periodOption}
             >
-                PM
+                {this.props.pmLabel}
             </Attr.option>
         </Attr.select>;
 
