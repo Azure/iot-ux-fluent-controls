@@ -88,14 +88,14 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     onChange={event => this.props.onChange(event.target.value)}
                     disabled={this.props.disabled}
                     placeholder={this.props.placeholder}
-                    ref={element => this.textarea = element}
+                    methodRef={element => this.textarea = element}
                     autoFocus={this.props.autoFocus}
                     attr={this.props.attr.textarea}
                 />
                 {this.props.autogrow ? 
                     <Attr.pre
                         className={css('textarea', 'textarea-ghost')}
-                        ref={element => this.ghost = element}
+                        methodRef={element => this.ghost = element}
                         attr={this.props.attr.pre}
                     >
                         {value + (value[value.length - 1] === '\n' ? '\n' : '')}

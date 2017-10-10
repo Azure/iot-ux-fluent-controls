@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, ButtonProps, Elements as Attr} from '../../Attributes';
-import {ActionTriggerButton, ActionTriggerButtonAttributes} from '../ActionTrigger';
+import {ActionTriggerButton, ActionTriggerButtonAttributes} from '../ActionTrigger/ActionTriggerButton';
 import {getLocalMonths, getLocalWeekdays} from './helpers';
 import {keyCode, MethodDate, weekLength} from '../../Common';
 const css = classNames.bind(require('./Calendar.scss'));
@@ -398,7 +398,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                                 onClick={onClick}
                                 key={key}
                                 tabIndex={tabIndex}
-                                ref={this.dayRef}
+                                methodRef={this.dayRef}
                                 onFocus={this.onFocus.bind(this, date)}
                                 attr={this.props.attr.dateButton}
                             >
@@ -415,7 +415,7 @@ export class Calendar extends React.Component<CalendarProps, CalendarState> {
                         onClick={onClick}
                         key={key}
                         tabIndex={tabIndex}
-                        ref={this.dayRef}
+                        methodRef={this.dayRef}
                         onFocus={this.onFocus.bind(this, date)}
                         attr={this.props.attr.dateButton}
                     >

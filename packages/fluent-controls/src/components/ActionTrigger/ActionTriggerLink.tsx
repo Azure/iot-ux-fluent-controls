@@ -7,7 +7,6 @@ export interface ActionTriggerLinkAttributes {
     anchor?: AnchorProps;    
 }
 
-
 export interface ActionTriggerLinkProps {
     /** Icon name (from Segoe UI MDL font) */
     icon: string;

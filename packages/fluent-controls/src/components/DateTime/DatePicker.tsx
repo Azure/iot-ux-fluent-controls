@@ -704,7 +704,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
         return (
             <Attr.div
                 className={containerClassName}
-                ref={this.containerRef}
+                methodRef={this.containerRef}
                 attr={this.props.attr.container}
             >
                 <Attr.div
@@ -730,7 +730,7 @@ export class DatePicker extends React.Component<DatePickerProps, DatePickerState
                          */
                         required
                         disabled={this.props.disabled}
-                        ref={this.inputRef}
+                        methodRef={this.inputRef}
                         attr={this.props.attr.input}
                     />
                     {icon}

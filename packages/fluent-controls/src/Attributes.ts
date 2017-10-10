@@ -24,10 +24,10 @@ export const AttrElement: (element: keyof React.ReactHTML) => (props: any) => Re
         delete attr.className;
     }
 
-    let ref = props.ref;
+    let ref = props.methodRef;
     if (attr.ref) {
-        if (props.ref) {
-            const oldRef = props.ref;
+        if (props.methodRef) {
+            const oldRef = props.methodRef;
             const newRef = attr.ref;
             ref = (element) => {
                 newRef(element);
@@ -38,8 +38,8 @@ export const AttrElement: (element: keyof React.ReactHTML) => (props: any) => Re
         }
         delete attr.ref;
     }
-    if (props.ref) {
-        delete props.ref;
+    if (props.methodRef) {
+        delete props.methodRef;
     }
 
     if (attr.key) {
@@ -98,7 +98,7 @@ export type AttrProps<T> = React.DetailedHTMLProps<React.HTMLAttributes<T>, T>;
 export type AnchorProps = AttrProps<HTMLAnchorElement> & any;
 export type ButtonProps = AttrProps<HTMLButtonElement>;
 export type DivProps = AttrProps<HTMLDivElement> & any;
-export type FotterProps = AttrProps<HTMLDivElement> & any;
+export type FooterProps = AttrProps<HTMLDivElement> & any;
 export type HeaderProps = AttrProps<HTMLDivElement> & any;
 export type InputProps = AttrProps<HTMLInputElement> & any;
 export type LabelProps = AttrProps<HTMLLabelElement> & any;

@@ -449,7 +449,7 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
             <Attr.div
                 className={containerClassName}
                 attr={this.props.attr.container}
-                ref={this.containerRef}
+                methodRef={this.containerRef}
             >
                 <Attr.div
                     className={css('input-container')}
@@ -468,7 +468,7 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
                         // (this gives us :valid css selector)
                         required
                         disabled={this.props.disabled}
-                        ref={(element) => this.inputElement = element}
+                        methodRef={(element) => this.inputElement = element}
                         autoFocus={this.props.autoFocus}
                         attr={this.props.attr.input}
                     />
