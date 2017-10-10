@@ -15,7 +15,7 @@ export interface AlertComponentType {}
 export interface AlertAttributes {
     container?: DivProps;
     icon?: IconAttributes;
-    text?: DivProps;
+    contents?: DivProps;
     closeIcon?: IconAttributes;
 }
 
@@ -89,7 +89,7 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
     const text = (
         <Attr.div
             className={textClassName}
-            attr={props.attr.text}
+            attr={props.attr.contents}
         >
             {props.children}
         </Attr.div>
@@ -126,7 +126,7 @@ Alert.defaultProps = {
     attr: {
         container: {},
         icon: {},
-        text: {},
+        contents: {},
         closeIcon: {},
     }
 };

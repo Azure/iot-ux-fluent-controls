@@ -1,7 +1,32 @@
 
-### Balloon with single line (default)
+______________________________________________________________________________
 
-Balloon above:
+### `Balloon.props.attr`
+
+```jsx static
+attr.container = <span/>;
+attr.balloonContainer = <div/>;
+attr.balloon = <span/>;
+```
+
+```html
+<Balloon attr={...}>
+    <span {...props.attr.container}>
+        {props.children}
+        <span {...props.attr.balloonContainer}>
+            <div {..props.attr.balloon}>
+                {props.tooltip}
+            </div>
+        </span>
+    </span>
+</Balloon>
+```
+
+______________________________________________________________________________
+
+### Single Line Balloon Examples
+
+#### Balloon above:
 
 ```jsx
 let tooltip = 'This is a simple balloon!';
@@ -13,7 +38,7 @@ let tooltip = 'This is a simple balloon!';
 </div>
 ```
 
-Balloon below:
+#### Balloon below:
 
 ```jsx
 let tooltip = 'This is a simple balloon!';
@@ -25,7 +50,7 @@ let tooltip = 'This is a simple balloon!';
 </div>
 ```
 
-Balloon to the left:
+#### Balloon to the left:
 
 ```jsx
 let tooltip = 'This is a simple balloon!';
@@ -37,7 +62,7 @@ let tooltip = 'This is a simple balloon!';
 </div>
 ```
 
-Balloon to the right:
+#### Balloon to the right:
 
 ```jsx
 let tooltip = 'This is a simple balloon!';
@@ -51,7 +76,7 @@ let tooltip = 'This is a simple balloon!';
 
 ### Balloon with multiple lines
 
-Balloon above:
+#### Balloon above:
 
 ```jsx
 let tooltip = 'This is a simple balloon!';
@@ -63,7 +88,7 @@ let tooltip = 'This is a simple balloon!';
 </div>
 ```
 
-Balloon below:
+#### Balloon below:
 
 ```jsx
 let tooltip = 'This is a simple balloon!';
@@ -75,7 +100,7 @@ let tooltip = 'This is a simple balloon!';
 </div>
 ```
 
-Balloon to the left:
+#### Balloon to the left:
 
 ```jsx
 let tooltip = 'This is a simple balloon!';
@@ -87,7 +112,7 @@ let tooltip = 'This is a simple balloon!';
 </div>
 ```
 
-Balloon to the right:
+#### Balloon to the right:
 
 ```jsx
 let tooltip = 'This is a simple balloon!';
@@ -99,7 +124,9 @@ let tooltip = 'This is a simple balloon!';
 </div>
 ```
 
-## Other examples
+### Other examples
+
+#### Fixed Width balloon
 
 ```jsx
 let Icon = require('../Icon').Icon;
@@ -117,6 +144,8 @@ let tooltip = (
 </Balloon>
 ```
 
+#### Single Line Fixed Width Balloon
+
 ```jsx
 let Icon = require('../Icon').Icon;
 const classnames = require('classnames/bind');
@@ -133,7 +162,7 @@ let tooltip = (
 </Balloon>
 ```
 
-### Changing Balloon Background color
+#### Changing Balloon Background color
 
 ```jsx
 let Icon = require('../Icon').Icon;
@@ -151,7 +180,7 @@ let tooltip = (
 </Balloon>
 ``` 
 
-### Show Balloon using Property
+#### Show Balloon using Property
 
 ```jsx
 let Icon = require('../Icon').Icon;
@@ -168,7 +197,7 @@ let tooltip = (
 </Balloon>
 ```
 
-### Changing Balloon Background color using Attribute Override
+#### Changing Balloon Background color using Attribute Override
 
 ```jsx
 let Icon = require('../Icon').Icon;
