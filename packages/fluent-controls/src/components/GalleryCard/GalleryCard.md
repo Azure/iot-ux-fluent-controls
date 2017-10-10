@@ -1,3 +1,25 @@
+______________________________________________________________________________
+
+### `GalleryCard.props.attr`
+
+```html
+<GalleryCard attr={...}>
+    <div className='card' {...props.attr.container}>
+        {props.background}
+        <div className='card-content' {...props.attr.content}>
+            {props.children}
+        </div>
+        <div className='banner' {...props.attr.banner}>
+            {props.banner}
+        </div>
+    </div>
+</GalleryCard>
+```
+
+______________________________________________________________________________
+
+### Examples
+
 ```jsx
 const SolidBackground = require('./SolidBackground').SolidBackground;
 <div>

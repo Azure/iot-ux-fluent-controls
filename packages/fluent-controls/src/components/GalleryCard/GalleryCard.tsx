@@ -11,7 +11,7 @@ export interface GalleryCardType {}
 export interface GalleryCardAttributes {
     container?: DivProps;
     content?: DivProps;
-    banner?: BannerAttributes;
+    banner?: DivProps;
 }
 
 export interface GalleryCardProps extends React.Props<GalleryCardType> {
@@ -72,7 +72,7 @@ export const GalleryCard: React.StatelessComponent<GalleryCardProps> = (props: G
     }
 
     const banner = props.banner ? (
-        <Banner attr={props.attr.banner}>{props.banner}</Banner>
+        <Banner attr={{container: props.attr.banner}}>{props.banner}</Banner>
     ) : null;
     
     const content = props.children ? (
