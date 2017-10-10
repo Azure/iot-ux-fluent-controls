@@ -1,3 +1,72 @@
+______________________________________________________________________________
+
+### `GenericManagementList.props.attr`
+
+```jsx static
+container = <div/>;
+column = <div/>;
+rowContent = <div/>;
+rowHeaderButton = <button/>;
+rowHeaderChevron = <Icon/>;
+selectAllEmpty = <div/>;
+selectAllCheckbox = <CheckboxInput/>;
+selectAllContainer = <div/>;
+selectRowContent = <div/>;
+selectRowCheckbox = <CheckboxInput/>;
+```
+
+```html
+<GenericManagementList attr={...}>
+    <div {...props.attr.container}>
+        <div {...props.attr.column}>
+            <div {...props.attr.selectAllContainer>
+                <div {...props.attr.selectAllEmpty}/>
+                or
+                <CheckboxInput attr{props.attr.selectAllCheckbox}/>
+            </div>
+        </div>
+        <div {...props.attr.column}>
+            <div {...props.attr.selectRowContent}>
+                <CheckboxInput attr={props.attr.selectRowCheckbox}/>
+            </div>
+            ...
+            <div {...props.attr.selectRowContent}>
+                <CheckboxInput attr={props.attr.selectRowCheckbox}/>
+            </div>
+        </div>
+        <div {...props.attr.column}>
+            <button {...props.attr.rowHeaderButton}>
+                Column Title <span {...props.attr.rowHeaderChevron}/>
+            </button>
+            <div {...props.attr.rowContent}>
+                Row 1 Column 1
+            </div>
+            ...
+            <div {...props.attr.rowContent}>
+                Row N Column 1
+            </div>
+        </div>
+        ...
+        <div {...props.attr.column}>
+            <button {...props.attr.rowHeaderButton}>
+                Column Title <span {...props.attr.rowHeaderChevron}/>
+            </button>
+            <div {...props.attr.rowContent}>
+                Row 1 Column N
+            </div>
+            ...
+            <div {...props.attr.rowContent}>
+                Row N Column N
+            </div>
+        </div>
+    </div>
+</GenericManagementList>
+```
+
+______________________________________________________________________________
+
+### Example
+
 ```jsx
 class ManagementListDemo extends React.Component {
     constructor() {

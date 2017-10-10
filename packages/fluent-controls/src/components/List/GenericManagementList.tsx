@@ -100,12 +100,12 @@ export interface GenericManagementListProps<T> extends React.Props<GenericManage
  * To use this component in TSX:
  * 
  * ```ts
- * const Grid = CreateManagementList<Type>();
+ * type CustomManagementList = GenericManagementList<Type>;
  * 
- * <Grid rows={Type[]} columns={GridColumn<Type>} />
+ * <CustomManagementList rows={Type[]} columns={GridColumn<Type>} />
  * ```
  * 
- * Unless you need type checking, you should use `ManagementList` instead.
+ * If you don't need type checking, you should use `ManagementList` instead.
  * 
  * @param props Control properties (defined in `GenericManagementListProps` interface)
  */
