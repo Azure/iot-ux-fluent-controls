@@ -12,8 +12,8 @@ export interface CalendarAttributes {
     container?: DivProps;
     header?: DivProps;
     monthHeader?: DivProps;
-    prevMonthButton?: ButtonProps;
-    nextMonthButton?: ButtonProps;
+    prevMonthButton?: ActionTriggerButtonAttributes;
+    nextMonthButton?: ActionTriggerButtonAttributes;
     weekDayHeader?: DivProps;
     dateContainer?: DivProps;
     dateButton?: ButtonProps;

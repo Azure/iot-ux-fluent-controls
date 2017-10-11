@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, PreProps, TextAreaProps, Elements as Attr} from '../../Attributes';
-import {MethodNode} from '../../Common';
+import {MethodNode, autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./TextArea.scss'));
 
 export interface TextAreaType {}
@@ -60,6 +60,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     };
 
     private textarea: HTMLTextAreaElement;
+
     private ghost: HTMLPreElement;
 
     constructor(props: TextAreaProps) {
@@ -88,14 +89,14 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     onChange={event => this.props.onChange(event.target.value)}
                     disabled={this.props.disabled}
                     placeholder={this.props.placeholder}
-                    methodRef={element => this.textarea = element}
+                    methodRef={this.bindTextArea}
                     autoFocus={this.props.autoFocus}
                     attr={this.props.attr.textarea}
                 />
                 {this.props.autogrow ? 
                     <Attr.pre
                         className={css('textarea', 'textarea-ghost')}
-                        methodRef={element => this.ghost = element}
+                        methodRef={this.bindGhost}
                         attr={this.props.attr.pre}
                     >
                         {value + (value[value.length - 1] === '\n' ? '\n' : '')}
@@ -104,6 +105,14 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
             </Attr.div>
         );
     }
+
+    private bindTextArea = element => {
+        this.textarea = element;
+        if (this.props.autoFocus) {
+            autoFocusRef(element);
+        }
+    };
+    private bindGhost = element => this.ghost = element;
 }
 
 export default TextArea;
