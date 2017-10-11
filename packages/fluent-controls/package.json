@@ -1,6 +1,6 @@
 {
     "name": "@azure-iot/ux-method",
-    "version": "0.1.0-alpha.40",
+    "version": "0.1.0-alpha.41",
     "description": "Microsoft Method React Framework",
     "main": "./static/lib/index.js",
     "types": "./static/lib/index.d.ts",
@@ -24,6 +24,7 @@
         "@types/enzyme": "^2.8.9",
         "@types/mocha": "^2.2.43",
         "@types/node": "^8.0.26",
+        "@types/react": "15.0.0",
         "@types/react-dom": "^15.5.4",
         "@types/webpack-env": "^1.13.0",
         "awesome-typescript-loader": "^3.2.3",
