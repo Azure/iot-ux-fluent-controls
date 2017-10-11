@@ -86,7 +86,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     name={this.props.name}
                     value={value}
                     className={css('textarea', {'error': this.props.error})}
-                    onChange={event => this.props.onChange(event.target.value)}
+                    onChange={event => this.props.onChange(this.textarea.value)}
                     disabled={this.props.disabled}
                     placeholder={this.props.placeholder}
                     methodRef={this.bindTextArea}
@@ -111,7 +111,8 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
         if (this.props.autoFocus) {
             autoFocusRef(element);
         }
-    };
+    }
+    
     private bindGhost = element => this.ghost = element;
 }
 

@@ -284,4 +284,4 @@ export const autoFocusRef = (e: HTMLElement) => {
     if (e) {
         e.focus();
     }
-}
+};
