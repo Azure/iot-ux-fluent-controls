@@ -279,3 +279,9 @@ export interface GridColumn<T> {
     /** Direction to sort when the column is first clicked */
     defaultDirection?: SortDirection;
 }
+
+export const autoFocusRef = (e: HTMLElement) => {
+    if (e) {
+        e.focus();
+    }
+}
