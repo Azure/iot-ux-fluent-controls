@@ -128,7 +128,6 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
     }
 
     minuteRef(element: HTMLSelectElement) {
-        console.log(element);
         this.minuteInput = element;
     }
 
