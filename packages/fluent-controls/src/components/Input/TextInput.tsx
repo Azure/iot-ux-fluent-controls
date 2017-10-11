@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, ButtonProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize} from '../Icon';
-import {MethodNode} from '../../Common';
+import {MethodNode, autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./TextInput.scss'));
 
 export const prefixClassName = css('prefix-addon');
@@ -129,6 +129,7 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
                     required
                     disabled={props.disabled}
                     autoFocus={props.autoFocus}
+                    methodRef={props.autoFocus && autoFocusRef}
                     attr={props.attr.input}
                 />
                 {clearButton}
