@@ -117,6 +117,10 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
 };
 
 SelectInput.defaultProps = {
+    name: undefined,
+    value: undefined,
+    onChange: undefined,
+    options: undefined,
     attr: {
         container: {},
         select: {},

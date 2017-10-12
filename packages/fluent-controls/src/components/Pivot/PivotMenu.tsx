@@ -58,6 +58,7 @@ export const PivotMenu: React.StatelessComponent<PivotMenuProps> = (props) => {
 };
 
 PivotMenu.defaultProps = {
+    links: undefined,
     active: '',
     tabIndex: 0,
     attr: {

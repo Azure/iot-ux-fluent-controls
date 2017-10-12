@@ -64,7 +64,7 @@ export interface CalendarState {
  *
  * @param props Control properties (defined in `CalendarProps` interface)
  */
-export class Calendar extends React.Component<CalendarProps, CalendarState> {
+export class Calendar extends React.Component<CalendarProps, Partial<CalendarState>> {
     static defaultProps = {
         localTimezone: true,
         tabIndex: -1,

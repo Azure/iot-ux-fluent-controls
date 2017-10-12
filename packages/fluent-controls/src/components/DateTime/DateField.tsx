@@ -91,6 +91,9 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
 };
 
 DateField.defaultProps = {
+    name: undefined,
+    label: undefined,
+    onChange: undefined,
     format: DateFormat.MMDDYYYY,
     tabIndex: -1,
     localTimezone: true,

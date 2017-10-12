@@ -54,6 +54,7 @@ export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonPr
 };
 
 ActionTriggerButton.defaultProps = {
+    icon: undefined,
     attr: {button: {}, ...ActionTrigger.defaultProps.attr}
 };
 

@@ -93,6 +93,10 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
 };
 
 TextField.defaultProps = {
+    name: undefined,
+    value: undefined,
+    label: undefined,
+    onChange: undefined,
     type: 'text',
     attr: {
         ...FormField.defaultProps.attr,

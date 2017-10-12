@@ -170,6 +170,7 @@ export const GalleryCardIcon: React.StatelessComponent<GalleryCardIconProps> = (
 };
 
 GalleryCardIcon.defaultProps = {
+    icon: undefined,
     attr: {
         text: {},
         ...Icon.defaultProps.attr

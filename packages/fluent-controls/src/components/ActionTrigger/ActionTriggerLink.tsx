@@ -52,6 +52,8 @@ export const ActionTriggerLink: React.StatelessComponent<ActionTriggerLinkProps>
 };
 
 ActionTriggerLink.defaultProps = {
+    icon: undefined,
+    href: undefined,
     attr: {anchor: {}, icon: {}, ...ActionTrigger.defaultProps.attr}
 };
 

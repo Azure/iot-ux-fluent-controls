@@ -109,6 +109,7 @@ export const Balloon: React.StatelessComponent<BalloonProps> = (props: BalloonPr
 };
 
 Balloon.defaultProps = {
+    tooltip: undefined,
     position: BalloonPosition.Top,
     align: BalloonAlignment.Center,
     attr: {

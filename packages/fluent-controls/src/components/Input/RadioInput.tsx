@@ -112,6 +112,10 @@ export const RadioInput: React.StatelessComponent<RadioInputProps> = (props: Rad
 };
 
 RadioInput.defaultProps = {
+    name: undefined,
+    value: undefined,
+    label: undefined,
+    onChange: undefined,
     columns: false,
     hidden: false,
     attr: {

@@ -124,6 +124,9 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
 };
 
 CheckboxInput.defaultProps = {
+    name: undefined,
+    label: undefined,
+    onChange: undefined,
     attr: {
         container: {},
         label: {},

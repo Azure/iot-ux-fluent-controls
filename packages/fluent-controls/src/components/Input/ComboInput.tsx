@@ -157,7 +157,7 @@ const defaultLabel = (newValue: string, option: FormOption) => option.label;
  * 
  * (Use the `ComboField` control for forms with standard styling)
  */
-export class ComboInput extends React.Component<ComboInputProps, ComboInputState> {
+export class ComboInput extends React.Component<ComboInputProps, Partial<ComboInputState>> {
     static defaultProps =  {
         optionMap: defaultMap,
         optionLabel: defaultLabel,

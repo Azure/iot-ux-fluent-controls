@@ -87,7 +87,7 @@ export interface DatePickerState {
  *
  * (Use the `DateField` control instead when making a form with standard styling)
  */
-export class DatePicker extends React.Component<DatePickerProps, DatePickerState> {
+export class DatePicker extends React.Component<DatePickerProps, Partial<DatePickerState>> {
     static defaultProps = {
         format: DateFormat.MMDDYYYY,
         tabIndex: -1,

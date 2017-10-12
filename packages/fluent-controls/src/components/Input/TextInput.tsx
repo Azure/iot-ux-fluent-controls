@@ -140,6 +140,9 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
 };
 
 TextInput.defaultProps = {
+    name: undefined,
+    value: undefined,
+    onChange: undefined,
     type: 'text',
     attr: {
         container: {},

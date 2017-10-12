@@ -49,6 +49,8 @@ export const IconBackground: React.StatelessComponent<IconBackgroundProps> = (pr
 };
 
 IconBackground.defaultProps = {
+    backgroundColor: undefined,
+    diameter: undefined,
     attr: {
         container: {}
     }

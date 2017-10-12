@@ -51,6 +51,7 @@ export const ImageBackground: React.StatelessComponent<ImageBackgroundProps> = (
 };
 
 ImageBackground.defaultProps = {
+    src: undefined,
     fixed: true,
     attr: {
         container: {}

@@ -81,7 +81,7 @@ export interface DateTimeFieldState {
  * 
  * @param props Control properties (defined in `DateTimeFieldProps` interface)
  */
-export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeFieldState> {
+export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<DateTimeFieldState>> {
     static defaultProps = {
         format: DateFormat.DDMMYYYY,
         tabIndex: -1,

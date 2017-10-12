@@ -112,6 +112,7 @@ export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {
 };
 
 Icon.defaultProps = {
+    icon: undefined,
     size: IconSize.medium,
     attr: {
         container: {},

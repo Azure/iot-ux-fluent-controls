@@ -88,6 +88,11 @@ export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: S
 };
 
 SelectField.defaultProps = {
+    name: undefined,
+    value: undefined,
+    label: undefined,
+    onChange: undefined,
+    options: undefined,
     attr: {
         ...FormField.defaultProps.attr,
         ...SelectInput.defaultProps.attr

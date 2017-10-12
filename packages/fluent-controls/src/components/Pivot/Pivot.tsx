@@ -88,6 +88,7 @@ export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
 };
 
 Pivot.defaultProps = {
+    text: undefined,
     attr: {
         container: {},
         bottomBorder: {},

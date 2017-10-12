@@ -76,6 +76,8 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
 };
 
 Toggle.defaultProps = {
+    name: undefined,
+    onChange: undefined,
     onLabel: 'On',
     offLabel: 'Off',
     attr: {

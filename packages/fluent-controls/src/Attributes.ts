@@ -20,15 +20,15 @@ export type TextAreaProps = AttrProps<HTMLTextAreaElement>;
 
 export type AttrWrapperProps<T extends HTMLElement> = AttrProps<T> & {
     attr?: any,
-    methodRef?: (instance: T | null) => any
+    methodRef?: React.Ref<T>
 } & {
-    ref?: (instance: T | null) => any
+    ref?: React.Ref<T>
 };
 
 export type AttrWrapper<T extends HTMLElement> = (props: AttrWrapperProps<T>) => React.DOMElement<AttrWrapperProps<T>, T>;
 
 export function AttrElementWrapper<T extends HTMLElement>(element: string): AttrWrapper<T> {
-    return (props) => {
+    return function(props: AttrWrapperProps<T>): React.DOMElement<AttrWrapperProps<T>, T> {
         props = {...props};
         let attr = {...props.attr};
         if (attr) {

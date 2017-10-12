@@ -149,6 +149,11 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
 };
 
 ComboField.defaultProps = {
+    name: undefined,
+    value: undefined,
+    label: undefined,
+    onChange: undefined,
+    options: undefined,
     attr: {
         ...FormField.defaultProps.attr,
         ...ComboInput.defaultProps.attr

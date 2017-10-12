@@ -85,6 +85,9 @@ export const TimeField: React.StatelessComponent<TimeFieldProps> = (props: TimeF
 };
 
 TimeField.defaultProps = {
+    name: undefined,
+    label: undefined,
+    onChange: undefined,
     showSeconds: false,
     militaryTime: false,
     disabled: false,

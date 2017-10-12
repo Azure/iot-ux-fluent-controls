@@ -80,6 +80,10 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
 };
 
 CheckboxField.defaultProps = {
+    name: undefined,
+    value: undefined,
+    label: undefined,
+    onChange: undefined,
     attr: {
         ...FormField.defaultProps.attr,
         ...CheckboxInput.defaultProps.attr
