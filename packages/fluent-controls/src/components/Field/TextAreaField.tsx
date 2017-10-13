@@ -80,8 +80,13 @@ TextAreaField.defaultProps = {
     label: undefined,
     onChange: undefined,
     attr: {
-        ...FormField.defaultProps.attr,
-        ...TextArea.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        textarea: {},
+        pre: {}
     }
 };
 

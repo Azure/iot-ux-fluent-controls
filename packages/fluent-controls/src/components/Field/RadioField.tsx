@@ -112,8 +112,17 @@ RadioField.defaultProps = {
     onChange: undefined,
     options: undefined,
     attr: {
-        ...FormField.defaultProps.attr,
-        ...RadioInput.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        label: {},
+        input: {},
+        radio: {},
+        text: {},
+        fill: {},
+        border: {},
     }
 };
 

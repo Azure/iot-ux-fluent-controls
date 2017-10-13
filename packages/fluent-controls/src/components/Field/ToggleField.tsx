@@ -83,8 +83,15 @@ ToggleField.defaultProps = {
     label: undefined,
     onChange: undefined,
     attr: {
-        ...FormField.defaultProps.attr,
-        ...Toggle.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        button: {},
+        border: {},
+        switch: {},
+        text: {},
     }
 };
 

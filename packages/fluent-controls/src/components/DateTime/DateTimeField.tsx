@@ -90,9 +90,30 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
         showSeconds: false,
         militaryTime: false,
         attr: {
-            ...FormField.defaultProps.attr,
-            datePicker: DatePicker.defaultProps.attr,
-            timeInput: TimeInput.defaultProps.attr
+            fieldContainer: {},
+            fieldLabel: {},
+            fieldContent: {},
+            fieldError: {},
+            datePicker: {
+                container: {},
+                inputContainer: {},
+                input: {},
+                inputIcon: {},
+                dropdownContainer: {},
+                dropdownTriangle: {},
+                calendar: {},
+            },
+            timeInput: {
+                container: {},
+                hourSelect: {},
+                hourOption: {},
+                minuteSelect: {},
+                minuteOption: {},
+                secondSelect: {},
+                secondOption: {},
+                periodSelect: {},
+                periodOption: {},
+            }
         }
     };
 

@@ -99,8 +99,17 @@ DateField.defaultProps = {
     localTimezone: true,
     showAbove: false,
     attr: {
-        ...FormField.defaultProps.attr,
-        ...DatePicker.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        inputContainer: {},
+        input: {},
+        inputIcon: {},
+        dropdownContainer: {},
+        dropdownTriangle: {},
+        calendar: {},
     }
 };
 

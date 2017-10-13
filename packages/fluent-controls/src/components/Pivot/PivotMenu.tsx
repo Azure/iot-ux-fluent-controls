@@ -64,7 +64,13 @@ PivotMenu.defaultProps = {
     attr: {
         container: {},
         anchor: {},
-        pivot: Pivot.defaultProps.attr
+        pivot: {
+            container: {},
+            bottomBorder: {},
+            focusBorder: {},
+            content: {},
+            icon: {container: {}, label: {}},
+        }
     }
 };
 

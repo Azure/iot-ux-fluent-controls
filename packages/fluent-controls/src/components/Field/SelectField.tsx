@@ -94,8 +94,14 @@ SelectField.defaultProps = {
     onChange: undefined,
     options: undefined,
     attr: {
-        ...FormField.defaultProps.attr,
-        ...SelectInput.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        select: {},
+        option: {},
+        chevron: {},
     }
 };
 

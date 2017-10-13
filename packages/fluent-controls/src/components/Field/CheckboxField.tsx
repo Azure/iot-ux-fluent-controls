@@ -85,8 +85,18 @@ CheckboxField.defaultProps = {
     label: undefined,
     onChange: undefined,
     attr: {
-        ...FormField.defaultProps.attr,
-        ...CheckboxInput.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        label: {},
+        input: {},
+        text: {},
+        checkbox: {},
+        indeterminateFill: {},
+        checkmarkIcon: {},
+        border: {},
     }
 };
 

@@ -94,7 +94,7 @@ Pivot.defaultProps = {
         bottomBorder: {},
         focusBorder: {},
         content: {},
-        icon: Icon.defaultProps.attr,
+        icon: {container: {}, label: {}},
     }
 };
 

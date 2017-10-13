@@ -99,8 +99,16 @@ TextField.defaultProps = {
     onChange: undefined,
     type: 'text',
     attr: {
-        ...FormField.defaultProps.attr,
-        ...TextInput.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        input: {},
+        inputContainer: {},
+        prefix: {},
+        postfix: {},
+        clearButton: {},
     }
 };
 

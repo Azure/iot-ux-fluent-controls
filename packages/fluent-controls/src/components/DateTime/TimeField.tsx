@@ -95,8 +95,19 @@ TimeField.defaultProps = {
     amLabel: 'AM',
     pmLabel: 'PM',
     attr: {
-        ...FormField.defaultProps.attr,
-        ...TimeInput.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        hourSelect: {},
+        hourOption: {},
+        minuteSelect: {},
+        minuteOption: {},
+        secondSelect: {},
+        secondOption: {},
+        periodSelect: {},
+        periodOption: {},
     }
 };
 

@@ -173,7 +173,8 @@ GalleryCardIcon.defaultProps = {
     icon: undefined,
     attr: {
         text: {},
-        ...Icon.defaultProps.attr
+        container: {},
+        label: {}
     }
 };
 

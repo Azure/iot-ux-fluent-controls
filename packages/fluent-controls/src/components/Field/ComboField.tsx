@@ -155,8 +155,17 @@ ComboField.defaultProps = {
     onChange: undefined,
     options: undefined,
     attr: {
-        ...FormField.defaultProps.attr,
-        ...ComboInput.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        textbox: {},
+        input: {},
+        clearButton: {},
+        chevron: {},
+        dropdown: {},
+        option: {},
     }
 };
 
