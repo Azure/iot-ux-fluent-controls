@@ -116,11 +116,6 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             this.minutes.push({label: value, value: value});
             this.seconds.push({label: value, value: value});
         }
-
-        this.hourRef = this.hourRef.bind(this);
-        this.minuteRef = this.minuteRef.bind(this);
-        this.secondRef = this.secondRef.bind(this);
-        this.periodRef = this.periodRef.bind(this);
     }
 
     handleState(props: TimeInputProps): TimeInputState {
