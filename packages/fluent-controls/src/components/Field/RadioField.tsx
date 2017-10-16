@@ -106,9 +106,23 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
 };
 
 RadioField.defaultProps = {
+    name: undefined,
+    value: undefined,
+    label: undefined,
+    onChange: undefined,
+    options: undefined,
     attr: {
-        ...FormField.defaultProps.attr,
-        ...RadioInput.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        label: {},
+        input: {},
+        radio: {},
+        text: {},
+        fill: {},
+        border: {},
     }
 };
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize} from '../Icon';
-import {MethodNode, FormOption, keyCode, hasClassName} from '../../Common';
+import {MethodNode, FormOption, keyCode, hasClassName, autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./ComboInput.scss'));
 
 export interface ComboInputType {}
@@ -157,7 +157,7 @@ const defaultLabel = (newValue: string, option: FormOption) => option.label;
  * 
  * (Use the `ComboField` control for forms with standard styling)
  */
-export class ComboInput extends React.Component<ComboInputProps, ComboInputState> {
+export class ComboInput extends React.Component<ComboInputProps, Partial<ComboInputState>> {
     static defaultProps =  {
         optionMap: defaultMap,
         optionLabel: defaultLabel,
@@ -194,10 +194,18 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
             : (newValue, option) => defaultSelect(newValue, map(option));
 
         this.containerRef = this.containerRef.bind(this);
+        this.inputRef = this.inputRef.bind(this);
     }
 
     containerRef(container: HTMLDivElement) {
         this.containerElement = container;
+    }
+
+    inputRef(input: HTMLInputElement) {
+        this.inputElement = input;
+        if (this.props.autoFocus) {
+            autoFocusRef(this.inputElement);
+        }
     }
 
     componentDidMount() {
@@ -468,7 +476,7 @@ export class ComboInput extends React.Component<ComboInputProps, ComboInputState
                         // (this gives us :valid css selector)
                         required
                         disabled={this.props.disabled}
-                        methodRef={(element) => this.inputElement = element}
+                        methodRef={this.inputRef}
                         autoFocus={this.props.autoFocus}
                         attr={this.props.attr.input}
                     />

@@ -1,6 +1,6 @@
 import * as React from 'react'; 
 import * as classNames from 'classnames/bind';
-import {MethodNode} from '../../Common';
+import {MethodNode, autoFocusRef} from '../../Common';
 import {DivProps, LabelProps, SpanProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize, IconAttributes} from '../Icon';
 const css = classNames.bind(require('./CheckboxInput.scss'));
@@ -91,6 +91,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                     checked={props.checked}
                     onChange={onChange}
                     autoFocus={props.autoFocus}
+                    methodRef={props.autoFocus && autoFocusRef}
                     attr={props.attr.input}
                 />
                 <Attr.span
@@ -123,6 +124,9 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
 };
 
 CheckboxInput.defaultProps = {
+    name: undefined,
+    label: undefined,
+    onChange: undefined,
     attr: {
         container: {},
         label: {},

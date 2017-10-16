@@ -9,7 +9,12 @@
         "sourceMap": true,
         "outDir": "static/lib",
         "declaration": true,
-        "declarationDir": "./static/lib"
+        "declarationDir": "./static/lib",
+        "types": [
+            "@types/node",
+            "@types/react",
+            "@types/react-dom"
+        ]
     },
     "files": [
         "./src/index.ts"

@@ -80,6 +80,8 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
 };
 
 FormField.defaultProps = {
+    name: undefined,
+    label: undefined,
     loading: false,
     required: false,
     hideError: false,

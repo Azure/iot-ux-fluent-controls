@@ -1,7 +1,7 @@
 import * as React from 'react'; 
 import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, SelectProps, OptionProps, Elements as Attr} from '../../Attributes';
- import {FormOption} from '../../Common';
+ import {FormOption, autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./SelectInput.scss'));
 
 export interface SelectInputType {}
@@ -106,6 +106,7 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
                 onChange={onChange}
                 disabled={props.disabled}
                 autoFocus={props.autoFocus}
+                methodRef={props.autoFocus && autoFocusRef}
                 attr={props.attr.select}
             >
                 {options}
@@ -116,6 +117,10 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
 };
 
 SelectInput.defaultProps = {
+    name: undefined,
+    value: undefined,
+    onChange: undefined,
+    options: undefined,
     attr: {
         container: {},
         select: {},

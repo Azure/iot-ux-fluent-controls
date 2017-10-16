@@ -86,9 +86,21 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
 };
 
 NumberField.defaultProps = {
+    name: undefined,
+    value: undefined,
+    label: undefined,
+    onChange: undefined,
     attr: {
-        ...FormField.defaultProps.attr,
-        ...TextInput.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        input: {},
+        inputContainer: {},
+        prefix: {},
+        postfix: {},
+        clearButton: {},
     }
 };
 

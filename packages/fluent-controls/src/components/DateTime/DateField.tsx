@@ -91,13 +91,25 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
 };
 
 DateField.defaultProps = {
+    name: undefined,
+    label: undefined,
+    onChange: undefined,
     format: DateFormat.MMDDYYYY,
     tabIndex: -1,
     localTimezone: true,
     showAbove: false,
     attr: {
-        ...FormField.defaultProps.attr,
-        ...DatePicker.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        inputContainer: {},
+        input: {},
+        inputIcon: {},
+        dropdownContainer: {},
+        dropdownTriangle: {},
+        calendar: {},
     }
 };
 

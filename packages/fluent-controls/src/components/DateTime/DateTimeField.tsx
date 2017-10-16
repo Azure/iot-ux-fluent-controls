@@ -81,7 +81,7 @@ export interface DateTimeFieldState {
  * 
  * @param props Control properties (defined in `DateTimeFieldProps` interface)
  */
-export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeFieldState> {
+export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<DateTimeFieldState>> {
     static defaultProps = {
         format: DateFormat.DDMMYYYY,
         tabIndex: -1,
@@ -90,9 +90,30 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, DateTimeF
         showSeconds: false,
         militaryTime: false,
         attr: {
-            ...FormField.defaultProps.attr,
-            datePicker: DatePicker.defaultProps.attr,
-            timeInput: TimeInput.defaultProps.attr
+            fieldContainer: {},
+            fieldLabel: {},
+            fieldContent: {},
+            fieldError: {},
+            datePicker: {
+                container: {},
+                inputContainer: {},
+                input: {},
+                inputIcon: {},
+                dropdownContainer: {},
+                dropdownTriangle: {},
+                calendar: {},
+            },
+            timeInput: {
+                container: {},
+                hourSelect: {},
+                hourOption: {},
+                minuteSelect: {},
+                minuteOption: {},
+                secondSelect: {},
+                secondOption: {},
+                periodSelect: {},
+                periodOption: {},
+            }
         }
     };
 

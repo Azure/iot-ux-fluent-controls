@@ -12,8 +12,8 @@ export interface CalendarAttributes {
     container?: DivProps;
     header?: DivProps;
     monthHeader?: DivProps;
-    prevMonthButton?: ButtonProps;
-    nextMonthButton?: ButtonProps;
+    prevMonthButton?: ActionTriggerButtonAttributes;
+    nextMonthButton?: ActionTriggerButtonAttributes;
     weekDayHeader?: DivProps;
     dateContainer?: DivProps;
     dateButton?: ButtonProps;
@@ -64,7 +64,7 @@ export interface CalendarState {
  *
  * @param props Control properties (defined in `CalendarProps` interface)
  */
-export class Calendar extends React.Component<CalendarProps, CalendarState> {
+export class Calendar extends React.Component<CalendarProps, Partial<CalendarState>> {
     static defaultProps = {
         localTimezone: true,
         tabIndex: -1,

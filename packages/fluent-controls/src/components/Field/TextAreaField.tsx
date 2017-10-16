@@ -75,9 +75,18 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
 };
 
 TextAreaField.defaultProps = {
+    name: undefined,
+    value: undefined,
+    label: undefined,
+    onChange: undefined,
     attr: {
-        ...FormField.defaultProps.attr,
-        ...TextArea.defaultProps.attr
+        fieldContainer: {},
+        fieldLabel: {},
+        fieldContent: {},
+        fieldError: {},
+        container: {},
+        textarea: {},
+        pre: {}
     }
 };
 

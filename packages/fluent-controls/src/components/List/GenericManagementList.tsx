@@ -171,7 +171,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
             );
             columns[colIndex].push(
                 this.props.rows.map((row, rowIndex) => {
-                    let content: MethodNode = '';
+                    let content;
                     if (column.mapColumn instanceof Function) {
                         content = column.mapColumn(row);
                     } else {
@@ -237,7 +237,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
             );
 
             this.props.rows.forEach((row, index) => {
-                let selectLabel: MethodNode;
+                let selectLabel;
                 if (this.props.selectLabel instanceof Function) {
                     selectLabel = this.props.selectLabel(row);
                 } else {

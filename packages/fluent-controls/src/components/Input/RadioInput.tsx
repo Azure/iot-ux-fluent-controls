@@ -1,7 +1,7 @@
 import * as React from 'react'; 
 import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, InputProps, LabelProps, Elements as Attr} from '../../Attributes';
-import {MethodNode} from '../../Common';
+import {MethodNode, autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./RadioInput.scss'));
 
 export interface RadioInputType {}
@@ -85,6 +85,7 @@ export const RadioInput: React.StatelessComponent<RadioInputProps> = (props: Rad
                     checked={props.checked}
                     onClick={onClick}
                     autoFocus={props.autoFocus}
+                    methodRef={props.autoFocus && autoFocusRef}
                     attr={props.attr.input}
                 />
                 <Attr.span
@@ -111,6 +112,10 @@ export const RadioInput: React.StatelessComponent<RadioInputProps> = (props: Rad
 };
 
 RadioInput.defaultProps = {
+    name: undefined,
+    value: undefined,
+    label: undefined,
+    onChange: undefined,
     columns: false,
     hidden: false,
     attr: {

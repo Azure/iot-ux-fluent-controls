@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, ButtonProps, Elements as Attr} from '../../Attributes';
-import {MethodNode} from '../../Common';
+import {MethodNode, autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./Toggle.scss'));
 
 export interface ToggleType {}
@@ -63,6 +63,7 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
                 tabIndex={tabIndex}
                 name={props.name}
                 autoFocus={props.autoFocus}
+                methodRef={props.autoFocus && autoFocusRef}
                 attr={props.attr.button}
             />
             <Attr.div className={css('toggle-border')} attr={props.attr.border}/>
@@ -75,6 +76,8 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
 };
 
 Toggle.defaultProps = {
+    name: undefined,
+    onChange: undefined,
     onLabel: 'On',
     offLabel: 'Off',
     attr: {
