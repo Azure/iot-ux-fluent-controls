@@ -1,1 +1,1 @@
-export * from './components/Balloon/index';
+export * from './components/Balloon';

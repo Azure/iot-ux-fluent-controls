@@ -1,1 +1,1 @@
-export * from './components/Field/index';
+export * from './components/Field';
