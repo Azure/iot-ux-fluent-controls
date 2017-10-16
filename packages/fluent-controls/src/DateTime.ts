@@ -1,1 +1,1 @@
-export * from './components/DateTime/index';
+export * from './components/DateTime';

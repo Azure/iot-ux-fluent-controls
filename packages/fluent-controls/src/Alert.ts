@@ -1,1 +1,1 @@
-export * from './components/Alert/index';
+export * from './components/Alert';
