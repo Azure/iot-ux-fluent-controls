@@ -227,7 +227,6 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             return;
         }
 
-        let className = css('dropdown');
         let target = event.target;
         /**
          * Go back several levels to check whether the user is clicking in the
