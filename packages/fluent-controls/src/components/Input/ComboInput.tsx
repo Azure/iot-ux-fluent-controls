@@ -248,7 +248,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         }
 
         if (!target) {
-            this.setState({ visible: false });
+            this.hideDropdown();
         }
     }
 
