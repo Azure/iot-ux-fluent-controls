@@ -53,5 +53,13 @@ $color-map: (
         d: #dcdcdc,
         e: #EAEAEA,
         f: #ffffff
+    ),
+
+    link: (
+        default: #3062d6,
+        hover: #1a37d3,
+        pressed: #1a37d3,
+        visited: #3062d6,
+        disabled: #a6a6a6,
     )
 );
