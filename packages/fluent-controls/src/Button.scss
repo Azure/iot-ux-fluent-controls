@@ -1,9 +1,115 @@
-@import './components/Button/Button.scss';
+@import './common/overrides';
+@import './common/mixins';
 
-.md-button {
-    @include md-button-style($default-button-colors, $default-button-bg-colors, $focus-outline);
+$primary-color: md-color(selected, dark);
+$primary-pressed-color: md-color(shade, f);
+
+$primary-bg-color: md-color(selected, default);
+$primary-hover-bg-color: md-color(selected, hover);
+$primary-pressed-bg-color: md-color(selected, pressed);
+
+$default-color: md-color(shade, 3);
+$default-pressed-color: md-color(shade, f);
+
+$default-bg-color: md-color(shade, c);
+$default-hover-bg-color: md-color(shade, a);
+$default-pressed-bg-color: md-color(shade, 8);
+
+$disabled-color: md-color(shade, 8);
+$disabled-bg-color: md-color(shade, d);
+
+$focus-outline: 2px solid md-color(shade, 3);
+
+$default-button-colors: (
+    default: $default-color,
+    pressed: $default-pressed-color,
+    disabled: $disabled-color,
+);
+
+$default-button-bg-colors: (
+    default: $default-bg-color,
+    hover: $default-hover-bg-color,
+    pressed: $default-pressed-bg-color,
+    disabled: $disabled-bg-color
+);
+
+$primary-button-colors: (
+    default: $primary-color,
+    pressed: $primary-pressed-color,
+    disabled: $disabled-color,
+);
+
+$primary-button-bg-colors: (
+    default: $primary-bg-color,
+    hover: $primary-hover-bg-color,
+    pressed: $primary-pressed-bg-color,
+    disabled: $disabled-bg-color,
+);
+
+
+@mixin md-button-style($text-colors: $default-button-colors, $bg-colors: $default-button-colors, $outline: $focus-outline) {
+    @include md-box(inline-block, relative);
+    @include md-default-font();
+    font-size: 14px;
+    line-height: 20px;
+
+    height: 8*$grid;
+    padding-left: 5*$gutter;
+    padding-right: 5*$gutter;
+
+    border: none;
+    outline: none;
+    box-shadow: none;
+    text-decoration: none;
+
+    color: map-get-default($text-colors, default, $default-color);
+    background-color: map-get-default($bg-colors, default, $default-bg-color);
+
+    &:hover:not(:disabled) {
+        background-color: map-get-default($bg-colors, hover, $default-hover-bg-color);
+        cursor: pointer;
+    }
+    
+    &:focus:not(:disabled) {
+        outline: $outline;
+    }
+
+    &:active:not(:disabled) {
+        color: map-get-default($text-colors, pressed, $default-pressed-color);
+        background-color: map-get-default($bg-colors, pressed, $default-pressed-bg-color);
+    }
+
+    &:disabled {
+        color: map-get-default($text-colors, disabled, $disabled-color);
+        background-color: map-get-default($bg-colors, disabled, $disabled-bg-color);
+    }
 }
 
-.md-button-primary {
-    @include md-button-style($primary-button-colors, $primary-button-bg-colors, $focus-outline);
+:global(.btn) {
+    @include md-button-style($default-button-colors, $default-button-bg-colors);
+
+    &:global(.btn-primary) {
+        @include md-button-style($primary-button-colors, $primary-button-bg-colors);
+    }
+
+    :global(.md-btn-icon) {
+        @include md-box(inline-block);
+        vertical-align: middle;
+
+        font-size: 16px;
+        line-height: 16px;
+
+        & + .button-text {
+            margin-left: 2*$gutter;
+        }
+    }
+
+    :global(.md-btn-text) {
+        @include md-box(inline-block);
+        margin-bottom: 2px;
+        vertical-align: middle;
+        
+        font-size: 14px;
+        line-height: 32px;
+    }
 }
