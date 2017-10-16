@@ -55,7 +55,7 @@ const classnames = require('classnames');
 </button>
 ```
 
-#### CSS Only Default Button with Icon
+#### CSS Only Default Button with CSS Only Icon
 
 ```jsx
 const Icon = require('../Icon').Icon;
@@ -64,13 +64,12 @@ const classnames = require('classnames');
 <button
     className={classnames('btn')}
 >
-    <Icon icon='info' iconSize={0}>
-        Default Button with Icon
-    </Icon>
+    <span className='icon icon-info' />
+    Default Button with Icon
 </button>
 ```
 
-#### CSS Only Primary Button with Icon
+#### CSS Only Primary Button with CSS Only Icon
 
 ```jsx
 const Icon = require('../Icon').Icon;
@@ -79,14 +78,12 @@ const classnames = require('classnames');
 <button
     className={classnames('btn-primary')}
 >
-    <Icon icon='info' iconSize={0}>
-        Default Button with Icon
-    </Icon>
+    <span className='icon icon-info' />
+    Default Button with Icon
 </button>
 ```
 
-
-#### CSS Only Disabled Button with Icon
+#### CSS Only Disabled Button with CSS Only Icon
 
 ```jsx
 const Icon = require('../Icon').Icon;
@@ -96,9 +93,8 @@ const classnames = require('classnames');
     className={classnames('btn')}
     disabled
 >
-    <Icon icon='info' iconSize={0}>
-        Default Button with Icon
-    </Icon>
+    <span className='icon icon-info' />
+    Default Button with Icon
 </button>
 ```
 
