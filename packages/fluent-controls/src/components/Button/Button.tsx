@@ -9,7 +9,6 @@ export interface ButtonComponentType {}
 export interface ButtonAttributes {
     container?: AttrButtonProps;
     icon?: SpanProps;
-    text?: SpanProps;
 }
 
 export interface ButtonProps extends React.Props<ButtonComponentType> {
@@ -39,7 +38,7 @@ export interface ButtonProps extends React.Props<ButtonComponentType> {
  */
 export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps) => {
     const icon = props.icon ? <Attr.span
-        className={css('md-btn-icon', `icon icon-${props.icon}`)}
+        className={css(`icon icon-${props.icon}`)}
         attr={props.attr.icon}
     /> : '';
 
@@ -54,12 +53,7 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
             attr={props.attr.container}
         >
             {icon}
-            <Attr.span
-                className={css('md-btn-text')}
-                attr={props.attr.text}
-            >
-                {props.children}
-            </Attr.span>
+            {props.children}
         </Attr.button>
     );
 };
@@ -68,8 +62,7 @@ Button.defaultProps = {
     onClick: undefined,
     attr: {
         container: {},
-        icon: {},
-        text: {}
+        icon: {}
     }
 };
 

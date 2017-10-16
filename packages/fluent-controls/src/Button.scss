@@ -87,30 +87,24 @@ $primary-button-bg-colors: (
 
 :global(.btn) {
     @include md-button-style($default-button-colors, $default-button-bg-colors);
-
-    :global(.md-btn-icon) {
-        @include md-box(inline-block);
-        vertical-align: middle;
-
-        font-size: 16px;
-        line-height: 16px;
-
-        & + .button-text {
-            margin-left: 2*$gutter;
-        }
-    }
-
-    :global(.md-btn-text) {
-        @include md-box(inline-block);
-        margin-left: 2*$gutter;
-        margin-bottom: 2px;
-        vertical-align: middle;
-        
-        font-size: 14px;
-        line-height: 32px;
-    }
 }
 
 :global(.btn-primary) {
     @include md-button-style($primary-button-colors, $primary-button-bg-colors);
+}
+
+:global(.btn), :global(.btn-primary) {
+    vertical-align: middle;
+    font-size: 14px;
+    line-height: 32px;
+
+    :global(.icon) {
+        @include md-box(inline-block);
+        vertical-align: middle;
+        margin-right: 2*$gutter;
+        margin-top: -2px;
+        
+        font-size: 16px;
+        line-height: 32px;
+    }
 }
