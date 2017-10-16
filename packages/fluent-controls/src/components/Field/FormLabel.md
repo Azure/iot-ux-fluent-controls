@@ -4,8 +4,13 @@ ______________________________________________________________________________
 
 ```html
 <FormLabel attr={...}>
-    <div className='field-error' {...props.attr.container}>
-        {props.children}
+    <div className='label-container' {...props.attr.container}>
+        <label className='label' {...props.attr.text}>
+            {props.children}
+        </label>
+        <Balloon tooltip={props.balloon} attr={props.attr.balloon}>
+            <Icon icon={props.icon} attr={props.attr.icon}>
+        </Ballon>
     </div>
 </FormLabel>
 ```
