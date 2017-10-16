@@ -313,7 +313,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                 this.setState({hovered: options[index], visible: true});
                 break;
             case keyCode.enter:
-                if (this.state.visible) {
+                if (this.state.visible && this.state.hovered) {
                     this.props.onChange(this.state.hovered.value);
                     this.hideDropdown();
                 } else {
