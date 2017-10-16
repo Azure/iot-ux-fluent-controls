@@ -394,42 +394,43 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         let inputValue = '';
         const value = this.getValue();
         let result = null;
-        const options = this.getVisibleOptions().map((option, index) => {
-            const checkLabel = this.props.showLabel
-                ? this.props.optionLabel(value, option).toString === this.props.value
-                : false;
-            if (option.value === this.props.value || checkLabel) {
-                result = option;
-            }
+        const options = this.props.options && this.props.options.length > 0 
+            ? this.getVisibleOptions().map((option, index) => {
+                const checkLabel = this.props.showLabel
+                    ? this.props.optionLabel(value, option).toString === this.props.value
+                    : false;
+                if (option.value === this.props.value || checkLabel) {
+                    result = option;
+                }
 
-            const optionClassName = css('option', {
-                'selected': this.optionSelect(value, option),
-                'hover': this.state.hovered === option,
-                'disabled': option.disabled
-            });
-            const onClick = option.disabled ? () => {} : (event) => {
-                this.props.onChange(option.value);
-                this.hideDropdown();
-                this.inputElement.blur();
-            };
-            const onHover = (event) => {
-                this.setState({hovered: option});
-            };
+                const optionClassName = css('option', {
+                    'selected': this.optionSelect(value, option),
+                    'hover': this.state.hovered === option,
+                    'disabled': option.disabled
+                });
+                const onClick = option.disabled ? () => {} : (event) => {
+                    this.props.onChange(option.value);
+                    this.hideDropdown();
+                    this.inputElement.blur();
+                };
+                const onHover = (event) => {
+                    this.setState({hovered: option});
+                };
 
-            return (
-                <Attr.button
-                    type='button'
-                    className={optionClassName}
-                    onClick={onClick}
-                    onMouseOver={onHover}
-                    tabIndex={-1}
-                    key={index}
-                    attr={this.props.attr.option}
-                >
-                    {this.props.optionLabel(value, option)}
-                </Attr.button>
-            );
-        });
+                return (
+                    <Attr.button
+                        type='button'
+                        className={optionClassName}
+                        onClick={onClick}
+                        onMouseOver={onHover}
+                        tabIndex={-1}
+                        key={index}
+                        attr={this.props.attr.option}
+                    >
+                        {this.props.optionLabel(value, option)}
+                    </Attr.button>
+                );
+            }) : '';
 
         if (result) {
             inputValue = this.props.showLabel 
@@ -452,6 +453,14 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                 tabIndex={-1}
                 attr={this.props.attr.clearButton}
             />;
+
+        const dropdown = this.props.options && this.props.options.length > 0
+                ? <Attr.div
+                    className={dropdownClassName}
+                    attr={this.props.attr.dropdown}
+                >
+                    {options}
+                </Attr.div> : '';
 
         return (
             <Attr.div
@@ -485,12 +494,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         className={css('chevron', 'icon icon-chevronDown')} 
                         attr={this.props.attr.chevron}
                     />
-                    <Attr.div
-                        className={dropdownClassName}
-                        attr={this.props.attr.dropdown}
-                    >
-                        {options}
-                    </Attr.div>
+                    {dropdown}
                 </Attr.div>
             </Attr.div>
         );
