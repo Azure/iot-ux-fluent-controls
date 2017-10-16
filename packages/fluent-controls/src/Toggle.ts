@@ -1,1 +1,1 @@
-export * from './components/Toggle/index';
+export * from './components/Toggle';
