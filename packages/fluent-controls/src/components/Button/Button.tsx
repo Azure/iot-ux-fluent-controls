@@ -1,8 +1,8 @@
 import * as React from 'react';
-import * as classNames from 'classnames';
+import * as classnames from 'classnames';
 import {DivProps, SpanProps, ButtonProps as AttrButtonProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize, IconAttributes} from '../Icon';
-const css = classNames.classnames;
+const css = classnames;
 
 export interface ButtonComponentType {}
 
@@ -39,7 +39,7 @@ export interface ButtonProps extends React.Props<ButtonComponentType> {
  */
 export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps) => {
     const icon = props.icon ? <Attr.span
-        className={css('btn-icon', `icon icon-${props.icon}`)}
+        className={css('md-btn-icon', `icon icon-${props.icon}`)}
         attr={props.attr.icon}
     /> : '';
 
@@ -55,7 +55,7 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
         >
             {icon}
             <Attr.span
-                className={css('btn-text')}
+                className={css('md-btn-text')}
                 attr={props.attr.text}
             >
                 {props.children}

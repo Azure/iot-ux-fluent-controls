@@ -20,11 +20,11 @@ ______________________________________________________________________________
 #### CSS Only Default Button
 
 ```jsx
-const classnames = require('classnames').classnames;
-const css = classnames.bind(require('../../Button.scss'));
+const css = require('../../Button.scss');
+const classnames = require('classnames');
 
 <button
-    className={css('btn')}
+    className={classnames('btn')}
 >
     Default Button
 </button>
@@ -33,11 +33,10 @@ const css = classnames.bind(require('../../Button.scss'));
 #### CSS Only Primary Button
 
 ```jsx
-const classnames = require('classnames').classnames;
-const css = classnames.bind(require('../../Button.scss'));
+const classnames = require('classnames');
 
 <button
-    className={css('btn-primary')}
+    className={classnames('btn-primary')}
 >
     Primary Button
 </button>
@@ -46,11 +45,10 @@ const css = classnames.bind(require('../../Button.scss'));
 #### CSS Only Disabled Button
 
 ```jsx
-const classnames = require('classnames').classnames;
-const css = classnames.bind(require('../../Button.scss'));
+const classnames = require('classnames');
 
 <button
-    className={css('btn')}
+    className={classnames('btn')}
     disabled
 >
     Disabled Button
@@ -61,11 +59,10 @@ const css = classnames.bind(require('../../Button.scss'));
 
 ```jsx
 const Icon = require('../Icon').Icon;
-const classnames = require('classnames').classnames;
-const css = classnames.bind(require('../../Button.scss'));
+const classnames = require('classnames');
 
 <button
-    className={css('btn')}
+    className={classnames('btn')}
 >
     <Icon icon='info' iconSize={0}>
         Default Button with Icon
@@ -77,11 +74,10 @@ const css = classnames.bind(require('../../Button.scss'));
 
 ```jsx
 const Icon = require('../Icon').Icon;
-const classnames = require('classnames').classnames;
-const css = classnames.bind(require('../../Button.scss'));
+const classnames = require('classnames');
 
 <button
-    className={css('btn-primary')}
+    className={classnames('btn-primary')}
 >
     <Icon icon='info' iconSize={0}>
         Default Button with Icon
@@ -94,11 +90,10 @@ const css = classnames.bind(require('../../Button.scss'));
 
 ```jsx
 const Icon = require('../Icon').Icon;
-const classnames = require('classnames').classnames;
-const css = classnames.bind(require('../../Button.scss'));
+const classnames = require('classnames');
 
 <button
-    className={css('btn')}
+    className={classnames('btn')}
     disabled
 >
     <Icon icon='info' iconSize={0}>
