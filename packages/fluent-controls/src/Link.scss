@@ -1,5 +1,5 @@
 @import './components/Link/Link.scss';
 
-.md-link {
+:global(.md-link) {
     @include md-link-style($default-link-colors, $default-link-outline);
 }

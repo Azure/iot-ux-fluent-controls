@@ -1,9 +1,9 @@
 @import './components/Button/Button.scss';
 
-.md-button {
+:global(.md-button) {
     @include md-button-style($default-button-colors, $default-button-bg-colors, $focus-outline);
 }
 
-.md-button-primary {
+:global(.md-button-primary) {
     @include md-button-style($primary-button-colors, $primary-button-bg-colors, $focus-outline);
 }
