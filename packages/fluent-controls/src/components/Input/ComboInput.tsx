@@ -394,8 +394,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         let inputValue = '';
         const value = this.getValue();
         let result = null;
-        const options = this.props.options && this.props.options.length > 0 
-            ? this.getVisibleOptions().map((option, index) => {
+        const options = this.getVisibleOptions().map((option, index) => {
                 const checkLabel = this.props.showLabel
                     ? this.props.optionLabel(value, option).toString === this.props.value
                     : false;
@@ -430,7 +429,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         {this.props.optionLabel(value, option)}
                     </Attr.button>
                 );
-            }) : '';
+            });
 
         if (result) {
             inputValue = this.props.showLabel 
