@@ -20,6 +20,7 @@ ______________________________________________________________________________
 #### CSS Only Default Button
 
 ```jsx
+const css = require('../../Button.scss');
 const classnames = require('classnames');
 
 <button
@@ -90,7 +91,6 @@ const classnames = require('classnames');
 ```jsx
 const Icon = require('../Icon').Icon;
 const classnames = require('classnames');
-const css = classnames.bind(require('../../Button.scss'));
 
 <button
     className={classnames('btn')}

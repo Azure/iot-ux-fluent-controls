@@ -90,6 +90,7 @@ $primary-button-bg-colors: (
 
     :global(.md-btn-icon) {
         @include md-box(inline-block);
+        margin-right: 2*$gutter;
         vertical-align: middle;
 
         font-size: 16px;
@@ -102,7 +103,6 @@ $primary-button-bg-colors: (
 
     :global(.md-btn-text) {
         @include md-box(inline-block);
-        margin-left: 2*$gutter;
         margin-bottom: 2px;
         vertical-align: middle;
         
