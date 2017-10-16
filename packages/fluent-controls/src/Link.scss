@@ -1,5 +1,50 @@
-@import './components/Link/Link.scss';
+@import './common/overrides';
+@import './common/mixins';
 
-:global(.md-link) {
+$default-link-colors: (
+    default: md-color(link, default),
+    hover: md-color(link, hover),
+    pressed: md-color(link, pressed),
+    visited: md-color(link, visited),
+    disabled: md-color(link, disabled),
+);
+
+$default-link-outline: 1px dashed md-color(shade, 3);
+
+@mixin md-link-style($text-colors: $default-link-colors, $outline: $default-link-outline) {
+    @include md-box(inline-block, relative);
+    @include md-default-font();
+
+    border: none;
+    outline: none;
+    box-shadow: none;
+    text-decoration: none;
+
+    color: map-get-default($text-colors, default, md-color(link, default));
+
+    &:hover:not(:global(.disabled)) {
+        color: map-get-default($text-colors, hover, md-color(link, hover));
+        cursor: pointer;
+    }
+    
+    &:focus:not(:global(.disabled)) {
+        outline: $outline;
+    }
+
+    &:active:not(:global(.disabled)) {
+        color: map-get-default($text-colors, pressed, md-color(link, pressed));
+    }
+
+    &:visited:not(:global(.disabled)) {
+        color: map-get-default($text-colors, visited, md-color(link, visited));
+    }
+
+    &:global(.disabled) {
+        pointer-events: none;
+        color: map-get-default($text-colors, disabled, md-color(link, disabled));
+    }
+}
+
+:global(.link) {
     @include md-link-style($default-link-colors, $default-link-outline);
 }

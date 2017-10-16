@@ -20,12 +20,12 @@ ______________________________________________________________________________
 #### CSS Only Link
 
 ```jsx
-const classnames = require('classnames/bind');
-const css = classnames.bind(require('../../Link.scss'));
+const css = require('../../Link.scss');
+const classnames = require('classnames');
 
 <a
     href='#!/Link'
-    className={css('md-link')}
+    className={classnames('link')}
 >
     Default Link
 </a>
@@ -35,12 +35,11 @@ const css = classnames.bind(require('../../Link.scss'));
 #### CSS Only Disabled Link
 
 ```jsx
-const classnames = require('classnames/bind');
-const css = classnames.bind(require('../../Link.scss'));
+const classnames = require('classnames');
 
 <a
     href='#!/Link'
-    className={css('md-link', 'disabled')}
+    className={classnames('link', 'disabled')}
 >
     Disabled Link
 </a>

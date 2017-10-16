@@ -1,8 +1,8 @@
 import * as React from 'react';
-import * as classNames from 'classnames/bind';
+import * as classnames from 'classnames';
 import {AnchorProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize, IconAttributes} from '../Icon';
-const css = classNames.bind(require('./Link.scss'));
+const css = classnames;
 
 export interface LinkComponentType {}
 
@@ -37,7 +37,7 @@ export const Link: React.StatelessComponent<LinkProps> = (props: LinkProps) => {
     return (
         <Attr.a
             href={props.href}
-            className={css('link-container', {'disabled': props.disabled})}
+            className={css('link', {'disabled': props.disabled})}
             onClick={props.onClick}
             attr={props.attr.container}
         >
