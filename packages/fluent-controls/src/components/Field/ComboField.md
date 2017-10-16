@@ -164,9 +164,10 @@ const initialState = {
         options={state.options}
         value={state.value}
         onChange={newValue => setState({value: newValue})}
-        optionMap={opt => opt.label}
+        optionMap={opt => opt.label.toString()}
         optionFilter={optionFilter}
         optionLabel={optionLabel}
+        showLabel={false}
         loading
     />
 </div>
