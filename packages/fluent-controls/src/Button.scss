@@ -88,10 +88,6 @@ $primary-button-bg-colors: (
 :global(.btn) {
     @include md-button-style($default-button-colors, $default-button-bg-colors);
 
-    &:global(.btn-primary) {
-        @include md-button-style($primary-button-colors, $primary-button-bg-colors);
-    }
-
     :global(.md-btn-icon) {
         @include md-box(inline-block);
         vertical-align: middle;
@@ -106,10 +102,15 @@ $primary-button-bg-colors: (
 
     :global(.md-btn-text) {
         @include md-box(inline-block);
+        margin-left: 2*$gutter;
         margin-bottom: 2px;
         vertical-align: middle;
         
         font-size: 14px;
         line-height: 32px;
     }
+}
+
+:global(.btn-primary) {
+    @include md-button-style($primary-button-colors, $primary-button-bg-colors);
 }
