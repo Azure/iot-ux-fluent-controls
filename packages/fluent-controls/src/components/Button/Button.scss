@@ -8,66 +8,92 @@ $primary-bg-color: md-color(selected, default);
 $primary-hover-bg-color: md-color(selected, hover);
 $primary-pressed-bg-color: md-color(selected, pressed);
 
-$secondary-color: md-color(shade, 3);
-$secondary-pressed-color: md-color(shade, f);
+$default-color: md-color(shade, 3);
+$default-pressed-color: md-color(shade, f);
 
-$secondary-bg-color: md-color(shade, c);
-$secondary-hover-bg-color: md-color(shade, a);
-$secondary-pressed-bg-color: md-color(shade, 8);
+$default-bg-color: md-color(shade, c);
+$default-hover-bg-color: md-color(shade, a);
+$default-pressed-bg-color: md-color(shade, 8);
 
 $disabled-color: md-color(shade, 8);
 $disabled-bg-color: md-color(shade, d);
 
-$focus-border-size: 2px;
-$focus-border: $focus-border-size solid md-color(shade, 3);
+$focus-outline: 2px solid md-color(shade, 3);
 
-.button-container {
-    @include md-default-button();
+$default-button-colors: (
+    default: $default-color,
+    pressed: $default-pressed-color,
+    disabled: $disabled-color,
+);
+
+$default-button-bg-colors: (
+    default: $default-bg-color,
+    hover: $default-hover-bg-color,
+    pressed: $default-pressed-bg-color,
+    disabled: $disabled-bg-color
+);
+
+$primary-button-colors: (
+    default: $primary-color,
+    pressed: $primary-pressed-color,
+    disabled: $disabled-color,
+);
+
+$primary-button-bg-colors: (
+    default: $primary-bg-color,
+    hover: $primary-hover-bg-color,
+    pressed: $primary-pressed-bg-color,
+    disabled: $disabled-bg-color,
+);
+
+
+@mixin md-button-style($text-colors: $default-button-colors, $bg-colors: $default-button-colors, $outline: $focus-outline) {
+    @include md-box(inline-block, relative);
     @include md-default-font();
-    box-sizing: content-box;
-    height: 8.5*$grid;
-    margin: $focus-border-size;
+    font-size: 14px;
+    line-height: 20px;
+
+    height: 8*$grid;
+    padding-left: 5*$gutter;
+    padding-right: 5*$gutter;
+
     border: none;
+    outline: none;
+    box-shadow: none;
+    text-decoration: none;
 
-    color: $primary-color;
-    background-color: $primary-bg-color;
-
-    &:focus:not(:disabled) {
-        margin: 0px;
-        border: $focus-border;
-    }
+    color: map-get-default($text-colors, default, $default-color);
+    background-color: map-get-default($bg-colors, default, $default-bg-color);
 
     &:hover:not(:disabled) {
-        background-color: $primary-hover-bg-color;
+        background-color: map-get-default($bg-colors, hover, $default-hover-bg-color);
+        cursor: pointer;
+    }
+    
+    &:focus:not(:disabled) {
+        outline: $outline;
     }
 
     &:active:not(:disabled) {
-        color: $primary-pressed-color;
-        background-color: $primary-pressed-bg-color;
-    }
-
-    &.secondary {
-        color: $secondary-color;
-        background-color: $secondary-bg-color;
-
-        &:hover:not(:disabled) {
-            background-color: $secondary-hover-bg-color;
-        }
-    
-        &:active:not(:disabled) {
-            color: $secondary-pressed-color;
-            background-color: $secondary-pressed-bg-color;
-        }
+        color: map-get-default($text-colors, pressed, $default-pressed-color);
+        background-color: map-get-default($bg-colors, pressed, $default-pressed-bg-color);
     }
 
     &:disabled {
-        color: $disabled-color;
-        background-color: $disabled-bg-color;
+        color: map-get-default($text-colors, disabled, $disabled-color);
+        background-color: map-get-default($bg-colors, disabled, $disabled-bg-color);
+    }
+}
+
+.button-container {
+    @include md-button-style($default-button-colors, $default-button-bg-colors);
+
+    &.primary {
+        @include md-button-style($primary-button-colors, $primary-button-bg-colors);
     }
 
     .button-icon {
         @include md-box(inline-block);
-        margin-left: 5*$gutter;
         vertical-align: middle;
 
         font-size: 16px;
@@ -80,8 +106,6 @@ $focus-border: $focus-border-size solid md-color(shade, 3);
 
     .button-text {
         @include md-box(inline-block);
-        margin-left: 5*$gutter;
-        margin-right: 5*$gutter;
         margin-bottom: 2px;
         vertical-align: middle;
         

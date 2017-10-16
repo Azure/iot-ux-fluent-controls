@@ -62,5 +62,5 @@ $focus-border: 1px dashed md-color(shade, 3);
 }
 
 .action-trigger-button {
-    @include md-default-button();
+    @include md-button-reset();
 }

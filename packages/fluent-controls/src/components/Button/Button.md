@@ -17,70 +17,159 @@ ______________________________________________________________________________
 
 ### Examples
 
-#### Default Button (Primary)
+#### CSS Only Default Button
 
 ```jsx
-<Button
-    attr={{container: {'data-test-hook': 'button1'}}}
+const classnames = require('classnames/bind');
+const css = classnames.bind(require('../../Button.scss'));
+
+<button
+    className={css('md-button')}
 >
-    Default Primary Button
-</Button>
+    Default Button
+</button>
 ```
 
-#### Default Button (Secondary)
+#### CSS Only Primary Button
 
 ```jsx
-<Button
-    style='secondary'
-    attr={{container: {'data-test-hook': 'button1'}}}
+const classnames = require('classnames/bind');
+const css = classnames.bind(require('../../Button.scss'));
+
+<button
+    className={css('md-button-primary')}
 >
-    Default Secondary Button
-</Button>
+    Primary Button
+</button>
 ```
 
-#### Disabled Button
+#### CSS Only Disabled Button
 
 ```jsx
-<Button
-    style='secondary'
-    attr={{container: {'data-test-hook': 'button1'}}}
+const classnames = require('classnames/bind');
+const css = classnames.bind(require('../../Button.scss'));
+
+<button
+    className={css('md-button-primary')}
     disabled
+>
+    Disabled Button
+</button>
+```
+
+#### CSS Only Default Button with Icon
+
+```jsx
+const Icon = require('../Icon').Icon;
+const classnames = require('classnames/bind');
+const css = classnames.bind(require('../../Button.scss'));
+
+<button
+    className={css('md-button')}
+>
+    <Icon icon='info' iconSize={0}>
+        Default Button with Icon
+    </Icon>
+</button>
+```
+
+#### CSS Only Primary Button with Icon
+
+```jsx
+const Icon = require('../Icon').Icon;
+const classnames = require('classnames/bind');
+const css = classnames.bind(require('../../Button.scss'));
+
+<button
+    className={css('md-button-primary')}
+>
+    <Icon icon='info' iconSize={0}>
+        Default Button with Icon
+    </Icon>
+</button>
+```
+
+
+#### CSS Only Disabled Button with Icon
+
+```jsx
+const Icon = require('../Icon').Icon;
+const classnames = require('classnames/bind');
+const css = classnames.bind(require('../../Button.scss'));
+
+<button
+    className={css('md-button-primary')}
+    disabled
+>
+    <Icon icon='info' iconSize={0}>
+        Default Button with Icon
+    </Icon>
+</button>
+```
+
+#### React Default Button
+
+```jsx
+<Button
+    attr={{container: {'data-test-hook': 'button1'}}}
+>
+    Default Button
+</Button>
+```
+
+#### React Primary Button
+
+```jsx
+<Button
+    primary
+    attr={{container: {'data-test-hook': 'button1'}}}
+>
+    Primary Button
+</Button>
+```
+
+#### React Disabled Button
+
+```jsx
+<Button
+    disabled
+    attr={{container: {'data-test-hook': 'button1'}}}
 >
     Disabled Button
 </Button>
 ```
 
-#### Default Button with Icon (Primary)
+#### React Default Button with Icon
 
 ```jsx
 <Button
     icon='info'
     attr={{container: {'data-test-hook': 'button1'}}}
 >
-    Default Primary Button
+    Default Button
 </Button>
 ```
 
-#### Default Button with Icon (Secondary)
+#### React Primary Button with Icon
 
 ```jsx
 <Button
     icon='info'
-    style='secondary'
+    primary
     attr={{container: {'data-test-hook': 'button1'}}}
 >
-    Default Secondary Button
+    Primary Button
 </Button>
 ```
 
-#### Disabled Button with Icon
+#### React Disabled Button with Icon
 
 ```jsx
 <Button
     icon='info'
-    style='secondary'
-    attr={{container: {'data-test-hook': 'button1'}}}
+    primary
     disabled
+    attr={{container: {'data-test-hook': 'button1'}}}
 >
     Disabled Button
 </Button>

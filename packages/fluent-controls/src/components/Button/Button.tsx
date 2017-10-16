@@ -15,8 +15,8 @@ export interface ButtonAttributes {
 export interface ButtonProps extends React.Props<ButtonComponentType> {
     /** Icon name (from Segoe UI MDL font) */
     icon?: string;
-    /** Primary or secondary style */
-    style?: 'primary' | 'secondary';
+    /** Use primary style */
+    primary?: boolean;
     
     /** Disable button */
     disabled?: boolean;
@@ -47,7 +47,7 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
         <Attr.button
             type='button'
             className={css('button-container', {
-                'secondary': props.style === 'secondary'
+                'primary': props.primary
             }, props.className)}
             onClick={props.onClick}
             disabled={props.disabled}
@@ -65,6 +65,7 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
 };
 
 Button.defaultProps = {
+    onClick: undefined,
     attr: {
         container: {},
         icon: {},
