@@ -1,6 +1,5 @@
 @import 'common';
 
-$chevron-color: md-color(shade, a);
 $cancel-color: md-color(shade, 6);
 
 $dropdown-border: 1px solid md-color(shade, c);
@@ -115,18 +114,6 @@ $arrow-default-color: md-color(shade, 4);
     }
 
     .chevron {
-        // @include md-box(inline-block, absolute);
-        // color: $chevron-color;
-        // font-size: $font-size-small;
-        // line-height: 4*$grid;
-        // padding: $gutter;
-        // top: $gutter;
-        // right: 2*$gutter;
-        // border: none;
-        // background-color: transparent;
-        // outline: none;
-        // pointer-events: none;
-
         @include md-box(absolute, block);
         font-size: $font-size-small;
         color: $arrow-default-color;
