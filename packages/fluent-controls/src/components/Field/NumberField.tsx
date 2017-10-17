@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
-import {TextInput, TextInputAttributes} from '../Input/TextInput';
+import {NumberInput, NumberInputAttributes} from '../Input/NumberInput';
 import {FormField, FormFieldAttributes} from './FormField';
 const css = classNames.bind(require('./Field.scss'));
 
@@ -11,9 +11,19 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     /** HTML form element name */
     name: string;
     /** Current value of HTML input element */
-    value: number;
+    initialValue?: string;
     /** HTML input element placeholder */
     placeholder?: string;
+    /** Only positive inputs allows */
+    positive?: boolean;
+    /** Input is integer only */
+    integer?: boolean;
+    /**
+     * Use commas instead of periods for the decimal separator
+     * 
+     * TODO: Use locale string
+     */
+    europeanFormat?: boolean;
     
     /** Label to display above input element */
     label: MethodNode;
@@ -39,14 +49,14 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     autoFocus?: boolean;
 
     /** Callback for HTML input element `onChange` events */
-    onChange: (newValue: number) => void;
+    onChange: (newValue: number | 'invalid' | '') => void;
 
     /** Classname to append to top level element */
     className?: string;
     /** Classname to append to top level element of TextInput */
     inputClassName?: string;
 
-    attr?: TextInputAttributes & FormFieldAttributes;
+    attr?: NumberInputAttributes & FormFieldAttributes;
 }
 
 /**
@@ -65,20 +75,22 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
             className={props.className}
             attr={props.attr}
         >
-            <TextInput
+            <NumberInput
                 name={props.name}
-                value={props.value ? props.value.toString() : '0'}
+                initialValue={props.initialValue}
                 placeholder={props.placeholder}
-                type={'number'}
                 prefix={props.prefix}
                 prefixClassName={props.prefixClassName}
                 postfix={props.postfix}
                 postfixClassName={props.postfixClassName}
                 error={!!props.error}
                 disabled={props.disabled}
-                onChange={value => props.onChange(value ? parseFloat(value) : null) }
+                onChange={props.onChange}
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
+                positive={props.positive}
+                integer={props.integer}
+                europeanFormat={props.europeanFormat}
                 attr={props.attr}
             />
         </FormField>
@@ -87,7 +99,6 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
 
 NumberField.defaultProps = {
     name: undefined,
-    value: undefined,
     label: undefined,
     onChange: undefined,
     attr: {
@@ -100,7 +111,6 @@ NumberField.defaultProps = {
         inputContainer: {},
         prefix: {},
         postfix: {},
-        clearButton: {},
     }
 };
 

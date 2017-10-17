@@ -26,8 +26,15 @@ export interface NumberInputProps extends React.Props<NumberInputType> {
     initialValue?: string;
     /** HTML input element placeholder */
     placeholder?: string;
+    /** Only positive inputs allows */
     positive?: boolean;
+    /** Input is integer only */
     integer?: boolean;
+    /**
+     * Use commas instead of periods for the decimal separator
+     * 
+     * TODO: Use locale string
+     */
     europeanFormat?: boolean;
 
     /** Node to draw to the left of the input box */
@@ -47,7 +54,7 @@ export interface NumberInputProps extends React.Props<NumberInputType> {
     autoFocus?: boolean;
 
     /** Callback for HTML input element `onChange` events */
-    onChange: (newValue: number | 'invalid') => void;
+    onChange: (newValue: number | 'invalid' | '') => void;
 
     /** Class to append to top level element */
     className?: string;
@@ -124,6 +131,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
     onInput(event) {
         if (this.inputElement.value === '') {
             this.setState({value: '', paste: false});
+            this.props.onChange('');
             return;
         }
         const parsedValue = this.getValue(this.inputElement.value);
