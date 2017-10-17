@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {MethodNode} from '../../Common';
+import {MethodNode, KeyCode, keyCode} from '../../Common';
 import { mount, ReactWrapper } from 'enzyme';
 
 const testHook = (name: string) => `test-wrapper-${name}`;
@@ -20,8 +20,7 @@ export class TestHookElement<T extends HTMLElement> {
     }
 
     simulate(event: string, obj: any = null) {
-        obj = obj || {target: this.htmlNode};
-        this.hook.simulate(event, obj);
+        this.hook.simulate(event, {...obj, target: this.htmlNode});
     }
 
     click() {
@@ -30,6 +29,37 @@ export class TestHookElement<T extends HTMLElement> {
 
     focus() {
         this.simulate('focus');
+    }
+
+    blur() {
+        this.simulate('blur');
+    }
+
+    keyDown(key: keyof KeyCode | number) {
+        let char: number = typeof(key) === 'number' ? key : keyCode[key];
+        this.simulate('keydown', {keyCode: char});
+    }
+
+    keyUp(key: keyof KeyCode | number) {
+        let char: number = typeof(key) === 'number' ? key : keyCode[key];
+        this.simulate('keyUp', {keyCode: char});
+    }
+
+    keyPress(key: keyof KeyCode | number) {
+        let char: number = typeof(key) === 'number' ? key : keyCode[key];
+        this.simulate('keypress', {charCode: char});
+    }
+
+    change(newValue: string) {
+        const node: any = this.htmlNode;
+        node.value = newValue;
+        this.simulate('change');
+    }
+
+    append(newValue: string) {
+        const node: any = this.htmlNode;
+        node.value = node.value + newValue;
+        this.simulate('change');
     }
 
     hasClass(className: string): boolean {

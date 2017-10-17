@@ -44,3 +44,35 @@ describe('<ComboInput />', () => {
         expect(dropdown.hasClass('visible')).to.equal(false);
     });
 });
+
+describe('<ComboInput />', () => {
+    it('does not throw an error when the user hits enter without selecting an option (bug 1608338)', () => {
+        const onChange = sinon.spy();
+        const wrapper = new TestHookWrapper<ComboInputAttributes>(
+            <ComboInput
+                name='combo-input'
+                value=''
+                options={
+                    [
+                        {label: 'Label 1', value: 'Option 1'},
+                        {label: 'Label 2', value: 'Option 2'},
+                        {label: 'Label 3', value: 'Option 3'},
+                        {label: 'Label 4', value: 'Option 4', hidden: true},
+                        {label: 'Label 5', value: 'Option 5', disabled: true},
+                    ]
+                }
+                onChange={onChange}
+            />,
+            ['container', 'input', 'dropdown']
+        );
+
+        const input = wrapper.ref('input');
+        const dropdown = wrapper.ref('dropdown');
+
+        expect(wrapper.state.visible).to.equal(false);
+        input.focus();
+        expect(dropdown.hasClass('visible')).to.equal(true);
+
+        input.keyDown('enter');
+    });
+});
