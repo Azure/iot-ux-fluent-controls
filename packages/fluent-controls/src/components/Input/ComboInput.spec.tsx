@@ -74,5 +74,9 @@ describe('<ComboInput />', () => {
         expect(dropdown.hasClass('visible')).to.equal(true);
 
         input.keyDown('enter');
+        /**
+         * We don't actually have to test anything here, test will throw an
+         * error there is a regression 
+         */
     });
 });
