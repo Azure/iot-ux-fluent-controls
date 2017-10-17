@@ -225,9 +225,36 @@ class ComboError extends React.Component {
                 placeholder='Example placeholder'
                 error
                 attr={{input: {'data-test-hook': 'combo5-input'}}}
+                error
             />
         </div>;
     }
 }
 <ComboError />
+```
+
+#### No FormOptions
+
+```jsx
+const initialState = {
+    value: '',
+    options: []
+};
+
+<div>
+    <div style={{marginBottom: '20px'}}>
+        Current value:  {
+            typeof(state.value) === 'string' ? `'${state.value}'`
+                : <pre>{JSON.stringify(state.value, null, 2)}</pre>
+        }
+    </div>
+    <ComboInput
+        name='combo-input'
+        value={state.value}
+        onChange={newValue => setState({value: newValue})}
+        options={state.options}
+        placeholder='Example placeholder'
+        attr={{input: {'data-test-hook': 'combo1-input'}}}
+    />
+</div>
 ```

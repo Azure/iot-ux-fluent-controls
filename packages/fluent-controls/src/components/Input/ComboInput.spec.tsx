@@ -80,3 +80,27 @@ describe('<ComboInput />', () => {
          */
     });
 });
+
+describe('<ComboInput />', () => {
+    it('does not show a dropdown when props.options is empty (bug 1619044)', () => {
+        const onChange = sinon.spy();
+        const wrapper = new TestHookWrapper<ComboInputAttributes>(
+            <ComboInput
+                name='combo-input'
+                value=''
+                options={
+                    []
+                }
+                onChange={onChange}
+            />,
+            ['container', 'input', 'dropdown']
+        );
+
+        const input = wrapper.ref('input');
+        const dropdown = wrapper.ref('dropdown');
+
+        expect(wrapper.state.visible).to.equal(false);
+        input.focus();
+        expect(dropdown).to.equal(null);
+    });
+});

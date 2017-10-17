@@ -37,6 +37,7 @@ module.exports = function(config) {
                     {
                         test: /\.tsx?$/,
                         loader: 'awesome-typescript-loader',
+                        options: {configFileName: 'tsconfig.tests.json'},
                         exclude: path.resolve(__dirname, 'node_modules'),
                         include: path.resolve(__dirname, 'src/'),
                     },
@@ -54,7 +55,6 @@ module.exports = function(config) {
                 'react/lib/ExecutionEnvironment': true,
                 'react/lib/ReactContext': true,
                 'react/addons': true,
-                'react-addons-test-utils': true
             }
         },
 
