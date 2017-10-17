@@ -72,7 +72,30 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
     loading?: boolean;
     /** Autofocus */
     autoFocus?: boolean;
-
+    /**
+     * Show label instead of FormOption value in ComboInput text box when a 
+     * value from the FormOptions is selected
+     * 
+     * Since the ComboInput has a text input, it cannot draw an arbitrary 
+     * MethodNode as the textbox value. If props.optionLabel returns a string,
+     * then you can show the label text in the textbox instead of the option
+     * value itself.
+     * 
+     * Note: If the label and value are different and showLabel is true,
+     * when the user starts typing after making a selection in the dropdown,
+     * it will not reselect the option unless optionSelect checks the label
+     * string as well as the value.
+     * 
+     * For example:
+     * ```js
+     * optionSelect = (newValue, option) => {
+     *     return newValue === option.value || newValue === option.label.toString();
+     * }
+     * ```
+     * 
+     * Default: true
+     */
+    showLabel?: boolean;
 
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string | FormOption) => void;
@@ -141,6 +164,7 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
                     onChange={props.onChange}
                     className={props.inputClassName}
                     autoFocus={props.autoFocus}
+                    showLabel={props.showLabel}
                     attr={props.attr}
                 />
             </div>

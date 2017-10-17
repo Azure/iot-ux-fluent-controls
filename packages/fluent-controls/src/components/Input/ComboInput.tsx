@@ -195,6 +195,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
 
         this.containerRef = this.containerRef.bind(this);
         this.inputRef = this.inputRef.bind(this);
+        this.handleDropdown = this.handleDropdown.bind(this);
     }
 
     containerRef(container: HTMLDivElement) {
@@ -209,10 +210,12 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
     }
 
     componentDidMount() {
-        window.addEventListener('click', this.handleDropdown.bind(this));
+        window.addEventListener('focusin', this.handleDropdown);
+        window.addEventListener('click', this.handleDropdown);
     }
 
     componentWillUnmount() {
+        window.removeEventListener('focusin', this.handleDropdown);
         window.removeEventListener('click', this.handleDropdown);
     }
 
@@ -220,15 +223,14 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         if (event.target === this.inputElement) {
             return;
         }
-        if (!this.state.visible && !hasClassName(event.target, css('cancel'))) {
+        if (!this.state.visible) {
             return;
         }
 
-        const className = css('combo-input-container');
         let target = event.target;
         /**
          * Go back several levels to check whether the user is clicking in the
-         * dropdown (which causes the text input to lose focus)
+         * calendar (which causes the text input to lose focus)
         */
         for (let i = 0; i < 6; i++) {
             if (target === this.containerElement) {
