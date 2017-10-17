@@ -133,6 +133,8 @@ $dropdown-z-index: $z-index-medium-step;
         width: 100%;
         padding: $gutter 0px;
         z-index: $dropdown-z-index;
+        max-height: 300px;
+        overflow-y: auto;
     
         &.visible {
             display: inline-block;
