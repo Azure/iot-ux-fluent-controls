@@ -9,14 +9,17 @@
   font-family: $font-family-base;
   
   &:before {
+    @include md-box(inline-block, relative);
     font-family: "icons";
     text-decoration: none;
-    vertical-align: text-bottom;
+    vertical-align: middle;
   }
 
-  .label {
-    vertical-align: text-bottom;
+  & > span {
+    @include md-box(inline-block, relative);
+    vertical-align: middle;
     margin-left: 8px;
+    margin-bottom: 2px;
   }
 }
 

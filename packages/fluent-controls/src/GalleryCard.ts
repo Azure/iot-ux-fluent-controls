@@ -1,1 +1,1 @@
-export * from './components/GalleryCard/index';
+export * from './components/GalleryCard';

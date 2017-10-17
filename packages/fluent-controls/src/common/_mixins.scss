@@ -1,13 +1,21 @@
 @import 'overrides';
 @import 'colormap';
 
+@function map-get-default($map, $key, $default) {
+    @if map-has-key($map, $key) {
+        @return map-get($map, $key);
+    } @else {
+        @return $defaut;
+    }
+}
+
 @mixin md-default-font {
     font-family: $font-family-base;
     font-size: $font-size-text;
     line-height: 20px;
 }
 
-@mixin md-default-button {
+@mixin md-button-reset {
     @include md-box();
     border: none;
     outline: none;
