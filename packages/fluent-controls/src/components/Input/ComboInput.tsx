@@ -456,12 +456,12 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             />;
 
         const dropdown = this.props.options && this.props.options.length > 0
-                ? <Attr.div
-                    className={dropdownClassName}
-                    attr={this.props.attr.dropdown}
-                >
-                    {options}
-                </Attr.div> : '';
+            && <Attr.div
+                className={dropdownClassName}
+                attr={this.props.attr.dropdown}
+            >
+                {options}
+            </Attr.div>;
 
         return (
             <Attr.div
