@@ -24,8 +24,8 @@ $arrow-default-color: md-color(shade, 4);
         @include md-box(absolute, block);
         font-size: $font-size-small;
         color: $arrow-default-color;
-        right: 8px;
-        top: 8px;
+        right: 2*$gutter;
+        top: 2*$gutter;
         pointer-events: none;
     }
 
