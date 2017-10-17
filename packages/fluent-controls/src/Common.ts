@@ -38,7 +38,7 @@ export interface PivotOption extends LinkOption {
     key: string;
 }
 
-export const keyCode = {
+export const keyCode: KeyCode = {
     backspace: 8,
     tab: 9,
     enter: 13,
@@ -59,6 +59,28 @@ export const keyCode = {
     9: 57,
     slash: 47
 };
+
+export interface KeyCode {
+    backspace: number;
+    tab: number;
+    enter: number;
+    shift: number;
+    ctrl: number;
+    alt: number;
+    escape: number;
+    space: number;
+    left: number;
+    up: number;
+    right: number;
+    down: number;
+    pageup: number;
+    pagedown: number;
+    end: number;
+    home: number;
+    0: number;
+    9: number;
+    slash: number;
+}
 
 export const weekLength: number = 7;
 

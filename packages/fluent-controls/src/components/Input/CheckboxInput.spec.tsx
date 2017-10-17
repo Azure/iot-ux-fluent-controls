@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import { CheckboxInput } from './CheckboxInput';
 import {TestHookWrapper} from '../Tests';
 
-describe('CheckboxInput', () => {
+xdescribe('CheckboxInput', () => {
     
 
     it('should support data test hooks through the Attribute API', () => {

@@ -1,1 +1,1 @@
-export * from './components/ActionTrigger/index';
+export * from './components/ActionTrigger';

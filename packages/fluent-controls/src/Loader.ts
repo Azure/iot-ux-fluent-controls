@@ -1,1 +1,1 @@
-export * from './components/Loader/index';
+export * from './components/Loader';

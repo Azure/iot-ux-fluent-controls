@@ -150,9 +150,10 @@ const initialState = {
         options={state.options}
         value={state.value}
         onChange={newValue => setState({value: newValue})}
-        optionMap={opt => opt.label}
+        optionMap={opt => opt.label.toString()}
         optionFilter={optionFilter}
         optionLabel={optionLabel}
+        showLabel={false}
         attr={{input: {'data-test-hook': 'combo3-input'}}}
     />
 </div>
@@ -222,6 +223,7 @@ class ComboError extends React.Component {
                 onChange={newValue => this.setState({value: newValue})}
                 options={this.options}
                 placeholder='Example placeholder'
+                error
                 attr={{input: {'data-test-hook': 'combo5-input'}}}
                 error
             />
