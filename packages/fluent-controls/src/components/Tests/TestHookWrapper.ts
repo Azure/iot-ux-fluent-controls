@@ -72,7 +72,6 @@ export class TestHookWrapper<T> {
     }
 
     addEventListener(event: string, callback: (event) => void) {
-        console.log(`event callback registered for ${event}`);
         this.eventMap[event] = callback;
     }
 
