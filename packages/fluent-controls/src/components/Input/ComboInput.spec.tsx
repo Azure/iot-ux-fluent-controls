@@ -34,11 +34,11 @@ describe('<ComboInput />', () => {
         input.focus();
         expect(dropdown.hasClass('visible')).to.equal(true);
 
-        wrapper.dispatchEvent('focusin', {target: input});
-        expect(dropdown.hasClass('visible')).to.equal(false);
+        wrapper.dispatchEvent('focusin', {target: input.node});
+        expect(dropdown.hasClass('visible')).to.equal(true);
 
-        wrapper.dispatchEvent('focusin', {target: dropdown});
-        expect(dropdown.hasClass('visible')).to.equal(false);
+        wrapper.dispatchEvent('focusin', {target: dropdown.node});
+        expect(dropdown.hasClass('visible')).to.equal(true);
         
         wrapper.dispatchEvent('focusin', {target: document.body});
         expect(dropdown.hasClass('visible')).to.equal(false);

@@ -77,7 +77,11 @@ export class TestHookWrapper<T> {
 
     dispatchEvent(event: string, eventObj: any) {
         if (this.eventMap[event]) {
-            this.eventMap[event](eventObj);
+            this.eventMap[event]({
+                ...eventObj,
+                stopPropagation: () => {},
+                preventDefault: () => {}
+            });
         }
     }
 
