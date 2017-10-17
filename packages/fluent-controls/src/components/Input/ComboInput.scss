@@ -1,6 +1,5 @@
 @import 'common';
 
-$chevron-color: md-color(shade, a);
 $cancel-color: md-color(shade, 6);
 
 $dropdown-border: 1px solid md-color(shade, c);
@@ -17,6 +16,8 @@ $option-hover-selected-bg-color: md-color(selected, hover);
 $option-hover-bg-color: md-color(shade, d);
 
 $dropdown-z-index: $z-index-medium-step;
+
+$arrow-default-color: md-color(shade, 4);
 
 .combo-input-container {
     @include md-box(flex, relative);
@@ -113,16 +114,11 @@ $dropdown-z-index: $z-index-medium-step;
     }
 
     .chevron {
-        @include md-box(inline-block, absolute);
-        color: $chevron-color;
+        @include md-box(absolute, block);
         font-size: $font-size-small;
-        line-height: 4*$grid;
-        padding: $gutter;
-        top: $gutter;
+        color: $arrow-default-color;
         right: 2*$gutter;
-        border: none;
-        background-color: transparent;
-        outline: none;
+        top: 2*$gutter;
         pointer-events: none;
     }
 
