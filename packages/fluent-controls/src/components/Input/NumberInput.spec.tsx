@@ -33,8 +33,8 @@ describe('<NumberInput />', () => {
         expect(input.value).to.equal('1');
         expect(value).to.equal(1);
 
-        input.input('1-');
-        expect(input.value).to.equal('1');
-        expect(value).to.equal(1);
+        input.input('2');
+        expect(input.value).to.equal('2');
+        expect(value).to.equal(2);
     });
 });

@@ -129,12 +129,6 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
                 this.setState({value: newValue, paste: true});
                 return;
             } else {
-                const maxDashPos = this.props.positive ? -1 : 0;
-                if (newValue.indexOf('-') <= maxDashPos) {
-                    event.preventDefault();
-                    return;
-                }
-
                 this.setState({value: newValue});
                 return;
             }
