@@ -102,7 +102,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             return;
         }
 
-        if (event.keyCode >= keyCode['0'] && event.keyCode <= keyCode['9']) {
+        if (event.keyCode >= keyCode.num0 && event.keyCode <= keyCode.num9) {
             return;
         }
 
