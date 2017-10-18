@@ -164,7 +164,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         };
     }
 
-    getValue(value: string): number | string {
+    getValue(value: string): number | 'invalid' {
         if (value === '') {
             return invalidNumber;
         }
