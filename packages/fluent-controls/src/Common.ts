@@ -55,9 +55,12 @@ export const keyCode: KeyCode = {
     pagedown: 34,
     end: 35,
     home: 36,
-    0: 48,
-    9: 57,
-    slash: 47
+    num0: 48,
+    num9: 57,
+    slash: 47,
+    comma: 188,
+    period: 190,
+    dash: 189,
 };
 
 export interface KeyCode {
@@ -77,9 +80,12 @@ export interface KeyCode {
     pagedown: number;
     end: number;
     home: number;
-    0: number;
-    9: number;
+    num0: number;
+    num9: number;
     slash: number;
+    period: number;
+    comma: number;
+    dash: number;
 }
 
 export const weekLength: number = 7;

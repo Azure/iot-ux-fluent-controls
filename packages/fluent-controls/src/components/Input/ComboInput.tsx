@@ -296,6 +296,10 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
     }
 
     onKeyDown(event) {
+        /** So that we don't block any browser shortcuts */
+        if (event.ctrlKey || event.altKey) {
+            return;
+        }
         
         let index, options;
         const setState = index => this.setState({
@@ -325,6 +329,11 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             default:
                 this.setState({visible: true});
                 return;
+        }
+        
+        /** These are all keys that don't have characters */
+        if (event.keyCode <= keyCode.slash) {
+            return;
         }
         event.preventDefault();
     }

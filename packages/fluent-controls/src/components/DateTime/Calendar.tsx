@@ -198,6 +198,10 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         if (!this.state.accessibility) {
             return;
         }
+        /** So that we don't block any browser shortcuts */
+        if (event.ctrlKey || event.altKey) {
+            return;
+        }
         if (document.activeElement === this.focusedButton) {
             const date = this.state.currentDate.copy();
             let detached = this.state.detached;
