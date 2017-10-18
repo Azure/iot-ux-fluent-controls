@@ -45,7 +45,9 @@ export function mergeAttributeObjects<T, K extends keyof T>(leftInput: T, rightI
     return output;
 }
 
-export function mergeAttributes<T extends HTMLElement>(oldAttr: HTMLElementAttr<T>, newAttr: HTMLElementAttr<T>): HTMLElementAttr<T> {
+export function mergeAttributes<T extends HTMLElement>(leftAttr: HTMLElementAttr<T>, rightAttr: HTMLElementAttr<T>): HTMLElementAttr<T> {
+    const oldAttr = leftAttr || {};
+    const newAttr = rightAttr || {};
     const className = classNames(oldAttr.className, newAttr.className);
     if (oldAttr.className) {
         delete oldAttr.className;

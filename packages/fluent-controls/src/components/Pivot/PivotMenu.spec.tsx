@@ -7,7 +7,7 @@ import { keyCode } from '../../Common';
 import { TestHookWrapper } from '../Tests';
 
 describe('<PivotMenu />', () => {
-    it('closes dropdown when the text input field loses focus (bug 1608336)', () => {
+    it('properly passes through props.links attributes', () => {
         const onChange = sinon.spy();
         const createPivotOption = (num): any => {
             return {
