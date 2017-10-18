@@ -95,7 +95,11 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             return;
         }
 
-        if (this.isPositive() && event.keyCode === keyCode.dash) {
+        if (!this.isPositive() && event.keyCode === keyCode.dash) {
+            return;
+        }
+        
+        if (!this.isInteger()  && event.keyCode === keyCode.period) {
             return;
         }
         
@@ -213,10 +217,10 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             ...(this.props.attr || {}),
             input: {
                 ...inputAttr,
+                className: css('no-cancel'),
                 step: this.props.step,
                 min: this.props.min,
                 max: this.props.max,
-                lang: 'en-150',
                 onKeyDown: this.onKeyDown,
                 onPaste: this.onPaste,
             }

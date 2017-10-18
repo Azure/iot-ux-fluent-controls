@@ -64,9 +64,7 @@ export function AttrElementWrapper<T extends HTMLElement>(element: string): Attr
             }
             delete attr.ref;
         }
-        if (props.methodRef) {
-            delete props.methodRef;
-        }
+        delete props.methodRef;
 
         if (attr.key) {
             console.error('Method Attribute API does not allow keys to be set on elements.');
@@ -85,7 +83,7 @@ export function AttrElementWrapper<T extends HTMLElement>(element: string): Attr
         }
 
         props = {...props, ...attr, className, ref};
-        
+
         return React.createElement(
             element,
             props, 

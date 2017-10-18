@@ -51,7 +51,7 @@ let onChange = (newValue) => setState({value: newValue});
         name='textinput'
         initialValue=''
         onChange={onChange}
-        positive
+        min={0}
         attr={{input: {'data-test-hook': 'text-input-1'}}}
     />
 </div>
@@ -69,7 +69,7 @@ let onChange = (newValue) => setState({value: newValue});
         name='textinput'
         initialValue=''
         onChange={onChange}
-        integer
+        step={1}
         attr={{input: {'data-test-hook': 'text-input-1'}}}
     />
 </div>
@@ -88,7 +88,7 @@ let onChange = (newValue) => setState({value: newValue});
         initialValue=''
         error={state.value === 'invalid' ? true : ((state.value > 0) ? false : true)}
         onChange={onChange}
-        positive
+        min={0}
         attr={{input: {'data-test-hook': 'text-input-1'}}}
     />
 </div>
