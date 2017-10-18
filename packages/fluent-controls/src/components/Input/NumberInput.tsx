@@ -10,6 +10,7 @@ export const postfixClassName = css('postfix-addon');
 
 export interface NumberInputType {}
 
+const invalidNumber = 'invalid';
 
 export interface NumberInputAttributes {
     container?: DivProps;
@@ -30,21 +31,11 @@ export interface NumberInputProps extends React.Props<NumberInputType> {
     positive?: boolean;
     /** Input is integer only */
     integer?: boolean;
-    /**
-     * Use commas instead of periods for the decimal separator
-     * 
-     * TODO: Use locale string
-     */
-    europeanFormat?: boolean;
 
     /** Node to draw to the left of the input box */
     prefix?: MethodNode;
-    /** Class to append to prefix container */
-    prefixClassName?: string;
     /** Node to draw to the right of the input box */
     postfix?: MethodNode;
-    /** Class to append to postfix container */
-    postfixClassName?: string;
     
     /** Apply error styling to input element */
     error?: boolean;
@@ -54,7 +45,7 @@ export interface NumberInputProps extends React.Props<NumberInputType> {
     autoFocus?: boolean;
 
     /** Callback for HTML input element `onChange` events */
-    onChange: (newValue: number | 'invalid' | '') => void;
+    onChange: (newValue: number | string) => void;
 
     /** Class to append to top level element */
     className?: string;
@@ -79,7 +70,6 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         onChange: undefined,
         integer: false,
         positive: false,
-        europeanFormat: false,
 
         attr: {
             container: {},
@@ -116,11 +106,6 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             return;
         }
 
-        const decimalSeparator = this.props.europeanFormat ? 'comma' : 'period';
-        if (!this.props.integer && event.keyCode === keyCode[decimalSeparator]) {
-            return;
-        }
-
         if (!this.props.positive && event.keyCode === keyCode.dash) {
             return;
         }
@@ -129,16 +114,16 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
     }
 
     onInput(event) {
+        /** Reset our state machine */
         if (this.inputElement.value === '') {
             this.setState({value: '', paste: false});
-            this.props.onChange('');
             return;
         }
         const parsedValue = this.getValue(this.inputElement.value);
         let newValue = this.inputElement.value;
         let paste = this.state.paste;
 
-        if (parsedValue === 'invalid') {
+        if (parsedValue === invalidNumber) {
             if (this.paste) {
                 this.paste = false;
                 this.setState({value: newValue, paste: true});
@@ -188,26 +173,26 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         };
     }
 
-    getValue(value: string): number | 'invalid' {
+    getValue(value: string): number | string {
         if (value === '') {
-            return 'invalid';
+            return invalidNumber;
         }
         
-        const decimalSeparator = this.props.europeanFormat ? ',' : '.';
+        const decimalSeparator = '.';
         const decimalSplit = value.split(decimalSeparator);
         if (this.props.integer && decimalSplit.length > 1) {
-            return 'invalid';
+            return invalidNumber;
         }
 
-        value = value.replace(this.props.europeanFormat ? '.' : ',', '');
+        value = value.replace(',', '');
 
         let outValue = this.props.integer ? parseInt(value) : parseFloat(value);
         if (this.props.positive && outValue < 0) {
-            return 'invalid';
+            return invalidNumber;
         }
 
         if (isNaN(outValue)) {
-            return 'invalid';
+            return invalidNumber;
         }
 
         return outValue;
@@ -218,7 +203,11 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             return;
         }
 
-        this.props.onChange(this.getValue(this.state.value));
+        if (this.state.value === '') {
+            this.props.onChange('');
+        } else {
+            this.props.onChange(this.getValue(this.state.value));
+        }
     }
 
     componentWillReceiveProps(newProps: NumberInputProps) {
@@ -242,13 +231,11 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             'error': this.props.error,
             'no-cancel': true
         });
-        const cancelClassName = css('cancel', 'icon icon-cancelLegacy');
 
         let prefix = null;
         if (this.props.prefix) {
-            const className = css('prefix', this.props.prefixClassName);
             prefix = (
-                <Attr.div className={className} attr={this.props.attr.prefix}>
+                <Attr.div className={css('prefix')} attr={this.props.attr.prefix}>
                     {this.props.prefix}
                 </Attr.div>
             );
@@ -256,9 +243,8 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
 
         let postfix = null;
         if (this.props.postfix) {
-            const className = css('postfix', this.props.postfixClassName);
             postfix = (
-                <Attr.div className={className} attr={this.props.attr.postfix}>
+                <Attr.div className={css('postfix')} attr={this.props.attr.postfix}>
                     {this.props.postfix}
                 </Attr.div>
             );

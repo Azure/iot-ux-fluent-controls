@@ -7,8 +7,9 @@ import { keyCode } from '../../Common';
 import { TestHookWrapper } from '../Tests';
 
 describe('<NumberInput />', () => {
-    it('closes dropdown when the text input field loses focus (bug 1608336)', () => {
-        const onChange = sinon.spy();
+    it('handles null case', () => {
+        let value = '';
+        const onChange = (newValue) => value = newValue;
         const wrapper = new TestHookWrapper<NumberInputAttributes>(
             <NumberInput
                 name='combo-input'
@@ -20,6 +21,20 @@ describe('<NumberInput />', () => {
 
         const input = wrapper.ref('input');
 
-        
+        input.input('1');
+        expect(input.value).to.equal('1');
+        expect(value).to.equal(1);
+
+        input.input('');
+        expect(input.value).to.equal('');
+        expect(value).to.equal('');
+
+        input.input('1');
+        expect(input.value).to.equal('1');
+        expect(value).to.equal(1);
+
+        input.input('1-');
+        expect(input.value).to.equal('1');
+        expect(value).to.equal(1);
     });
 });
