@@ -27,7 +27,7 @@ describe('<NumberInput />', () => {
 
         input.input('');
         expect(input.value).to.equal('');
-        expect(value).to.equal('');
+        expect(value).to.equal(null);
 
         input.input('1');
         expect(input.value).to.equal('1');

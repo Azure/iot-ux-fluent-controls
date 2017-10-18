@@ -24,7 +24,7 @@ export interface NumberInputProps extends React.Props<NumberInputType> {
     /** HTML form element name */
     name: string;
     /** Current value of HTML input element */
-    initialValue?: string;
+    initialValue?: string | number;
     /** HTML input element placeholder */
     placeholder?: string;
     /** Only positive inputs allows */
@@ -198,7 +198,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         }
 
         if (this.state.value === '') {
-            this.props.onChange('');
+            this.props.onChange(null);
         } else {
             this.props.onChange(this.getValue(this.state.value));
         }
