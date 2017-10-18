@@ -56,6 +56,12 @@ export class TestHookElement<T extends HTMLElement> {
         this.simulate('change');
     }
 
+    input(newValue: string) {
+        const node: any = this.htmlNode;
+        node.value = newValue;
+        this.simulate('input');
+    }
+
     append(newValue: string) {
         const node: any = this.htmlNode;
         node.value = node.value + newValue;
@@ -68,6 +74,11 @@ export class TestHookElement<T extends HTMLElement> {
 
     get node(): T {
         return this.htmlNode;
+    }
+
+    get value(): string {
+        const node: any = this.htmlNode;
+        return node.value;
     }
 }
 
