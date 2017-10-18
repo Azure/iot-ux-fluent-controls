@@ -12,7 +12,7 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     /** HTML form element name */
     name: string;
     /** Current value of HTML input element */
-    initialValue?: string;
+    initialValue?: string | number;
     /** HTML input element placeholder */
     placeholder?: string;
     /** Step to give the number input */
