@@ -33,6 +33,7 @@ let onChange = (newValue) => setState({value: newValue});
     <NumberInput
         name='textinput'
         onChange={onChange}
+        step='any'
         attr={{input: {'data-test-hook': 'text-input-1'}}}
     />
 </div>

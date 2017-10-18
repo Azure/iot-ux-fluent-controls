@@ -122,7 +122,7 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
                     name={props.name}
                     value={props.value}
                     className={inputClassName}
-                    onInput={onChange}
+                    onChange={onChange}
                     placeholder={props.placeholder}
                     // This is not the same as props.required
                     // (this gives us :valid css selector)

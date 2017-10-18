@@ -1,7 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
-import {NumberInput, NumberInputAttributes} from '../Input/NumberInput';
+import {NumberInput} from '../Input/NumberInput';
+import {TextInputAttributes} from '../Input/TextInput';
 import {FormField, FormFieldAttributes} from './FormField';
 const css = classNames.bind(require('./Field.scss'));
 
@@ -14,10 +15,12 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     initialValue?: string;
     /** HTML input element placeholder */
     placeholder?: string;
-    /** Only positive inputs allows */
-    positive?: boolean;
-    /** Input is integer only */
-    integer?: boolean;
+    /** Step to give the number input */
+    step?: number | 'any';
+    /** Minimum value of HTML Input element */
+    min?: number;
+    /** Maximum value of HTML Input element */
+    max?: number;
     
     /** Label to display above input element */
     label: MethodNode;
@@ -46,7 +49,7 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     /** Classname to append to top level element of TextInput */
     inputClassName?: string;
 
-    attr?: NumberInputAttributes & FormFieldAttributes;
+    attr?: TextInputAttributes & FormFieldAttributes;
 }
 
 /**
@@ -76,8 +79,9 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
                 onChange={props.onChange}
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
-                positive={props.positive}
-                integer={props.integer}
+                step={props.step}
+                min={props.min}
+                max={props.max}
                 attr={props.attr}
             />
         </FormField>

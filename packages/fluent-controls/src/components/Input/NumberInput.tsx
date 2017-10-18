@@ -2,20 +2,13 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, ButtonProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize} from '../Icon';
+import {TextInput, TextInputAttributes} from './TextInput';
 import {MethodNode, keyCode} from '../../Common';
 const css = classNames.bind(require('./TextInput.scss'));
 
 export interface NumberInputType {}
 
 const invalidNumber = 'invalid';
-
-export interface NumberInputAttributes {
-    container?: DivProps;
-    input?: InputProps;
-    inputContainer?: DivProps;
-    prefix?: DivProps;
-    postfix?: DivProps;
-}
 
 export interface NumberInputProps extends React.Props<NumberInputType> {
     /** HTML form element name */
@@ -24,10 +17,12 @@ export interface NumberInputProps extends React.Props<NumberInputType> {
     initialValue?: string | number;
     /** HTML input element placeholder */
     placeholder?: string;
-    /** Only positive inputs allows */
-    positive?: boolean;
-    /** Input is integer only */
-    integer?: boolean;
+    /** Step to give the number input */
+    step?: number | 'any';
+    /** Minimum value of HTML Input element */
+    min?: number;
+    /** Maximum value of HTML Input element */
+    max?: number;
 
     /** Node to draw to the left of the input box */
     prefix?: MethodNode;
@@ -47,7 +42,7 @@ export interface NumberInputProps extends React.Props<NumberInputType> {
     /** Class to append to top level element */
     className?: string;
 
-    attr?: NumberInputAttributes;
+    attr?: TextInputAttributes;
 }
 
 export interface NumberInputState {
@@ -67,7 +62,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         onChange: undefined,
         integer: false,
         positive: false,
-
+        step: 'any',
         attr: {
             container: {},
             input: {},
@@ -77,7 +72,6 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         }
     };
 
-    private inputElement: HTMLInputElement;
     private paste: boolean;
 
     constructor(props: NumberInputProps) {
@@ -85,11 +79,9 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         
         this.paste = false;
         this.state = this.getInitialState(this.props.initialValue);
-
-        this.inputRef = this.inputRef.bind(this);
     }
 
-    onKeyDown(event) {
+    onKeyDown = (event) => {
         /** So that we don't block any browser shortcuts */
         if (event.ctrlKey || event.altKey) {
             return;
@@ -103,23 +95,31 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             return;
         }
 
-        if (!this.props.positive && event.keyCode === keyCode.dash) {
+        if (this.isPositive() && event.keyCode === keyCode.dash) {
             return;
         }
         
         event.preventDefault();
     }
 
-    onInput(event) {
-        /** Reset our state machine */
-        if (this.inputElement.value === '') {
+    isPositive(): boolean {
+        return typeof(this.props.min) === 'number' && this.props.min >= 0;
+    }
+
+    isInteger(): boolean {
+        return typeof(this.props.step) === 'number' && this.props.step % 1 === 0;
+    }
+
+    onChange = (newValue: string) => {
+        if (newValue === '') {
             this.setState({value: '', paste: false});
             return;
         }
-        const parsedValue = this.getValue(this.inputElement.value);
-        let newValue = this.inputElement.value;
+        /** Reset our state machine */
+        console.log(`entry: ${newValue}`);
+        const parsedValue = this.getValue(newValue);
         let paste = this.state.paste;
-
+        console.log(`onInput: ${newValue} - ${parsedValue}`);
         if (parsedValue === invalidNumber) {
             if (this.paste) {
                 this.paste = false;
@@ -137,14 +137,14 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             paste = false;
         }
 
-        if (this.props.positive && parsedValue < 0) {
+        if (this.isPositive() && parsedValue < 0) {
             return;
         }
 
         this.setState({value: newValue, paste: paste});
     }
 
-    onPaste(event) {
+    onPaste = (event) => {
         this.paste = true;
     }
 
@@ -168,17 +168,16 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         if (value === '') {
             return invalidNumber;
         }
-        
         const decimalSeparator = '.';
         const decimalSplit = value.split(decimalSeparator);
-        if (this.props.integer && decimalSplit.length > 1) {
+        if (this.isInteger() && decimalSplit.length > 1) {
             return invalidNumber;
         }
 
         value = value.replace(',', '');
 
-        let outValue = this.props.integer ? parseInt(value) : parseFloat(value);
-        if (this.props.positive && outValue < 0) {
+        let outValue = this.isInteger() ? parseInt(value) : parseFloat(value);
+        if (this.isPositive() && outValue < 0) {
             return invalidNumber;
         }
 
@@ -207,67 +206,36 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         }
     }
 
-    inputRef(element: HTMLInputElement) {
-        if (this.props.autoFocus) {
-            element.focus();
-        }
-        this.inputElement = element;
-    }
-
     render() {
-        const containerClassName = css('text-input-container', this.props.className);
-        const inputContainerClassName = css('input-container');
-        const inputClassName = css({
-            'input': true,
-            'error': this.props.error,
-            'no-cancel': true
-        });
-
-        let prefix = null;
-        if (this.props.prefix) {
-            prefix = (
-                <Attr.div className={css('prefix')} attr={this.props.attr.prefix}>
-                    {this.props.prefix}
-                </Attr.div>
-            );
-        }
-
-        let postfix = null;
-        if (this.props.postfix) {
-            postfix = (
-                <Attr.div className={css('postfix')} attr={this.props.attr.postfix}>
-                    {this.props.postfix}
-                </Attr.div>
-            );
-        }
+        const inputAttr = this.props.attr && this.props.attr.input
+            ? this.props.attr.input : {};
+        const attr = {
+            ...(this.props.attr || {}),
+            input: {
+                ...inputAttr,
+                step: this.props.step,
+                min: this.props.min,
+                max: this.props.max,
+                lang: 'en-150',
+                onKeyDown: this.onKeyDown,
+                onPaste: this.onPaste,
+            }
+        };
 
         return (
-            <Attr.div className={containerClassName} attr={this.props.attr.container}>
-                {prefix}
-                <Attr.div
-                    className={inputContainerClassName}
-                    attr={this.props.attr.inputContainer}
-                >
-                    <Attr.input 
-                        type='number'
-                        name={this.props.name}
-                        value={this.state.value}
-                        className={inputClassName}
-                        onInput={event => this.onInput(event)}
-                        onKeyDown={event => this.onKeyDown(event)}
-                        onPaste={event => this.onPaste(event)}
-                        placeholder={this.props.placeholder}
-                        // This is not the same as this.props.required
-                        // (this gives us :valid css selector)
-                        required
-                        disabled={this.props.disabled}
-                        autoFocus={this.props.autoFocus}
-                        methodRef={this.inputRef}
-                        attr={this.props.attr.input}
-                    />
-                </Attr.div>
-                {postfix}
-            </Attr.div>
+            <TextInput
+                name={this.props.name}
+                value={this.state.value}
+                placeholder={this.props.placeholder}
+                type='number'
+                prefix={this.props.prefix}
+                postfix={this.props.postfix}
+                error={this.props.error}
+                disabled={this.props.disabled}
+                autoFocus={this.props.autoFocus}
+                onChange={this.onChange}
+                attr={attr}
+            />
         );
     }
 }
