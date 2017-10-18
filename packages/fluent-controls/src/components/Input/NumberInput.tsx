@@ -42,7 +42,7 @@ export interface NumberInputProps extends React.Props<NumberInputType> {
     autoFocus?: boolean;
 
     /** Callback for HTML input element `onChange` events */
-    onChange: (newValue: number | string) => void;
+    onChange: (newValue: number | 'invalid') => void;
 
     /** Class to append to top level element */
     className?: string;

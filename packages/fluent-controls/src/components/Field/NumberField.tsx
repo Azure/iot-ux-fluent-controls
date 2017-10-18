@@ -39,7 +39,7 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     autoFocus?: boolean;
 
     /** Callback for HTML input element `onChange` events */
-    onChange: (newValue: number | 'invalid' | '') => void;
+    onChange: (newValue: number | 'invalid') => void;
 
     /** Classname to append to top level element */
     className?: string;
