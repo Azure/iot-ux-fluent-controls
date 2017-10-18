@@ -5,9 +5,6 @@ import {Icon, IconSize} from '../Icon';
 import {MethodNode, keyCode} from '../../Common';
 const css = classNames.bind(require('./TextInput.scss'));
 
-export const prefixClassName = css('prefix-addon');
-export const postfixClassName = css('postfix-addon');
-
 export interface NumberInputType {}
 
 const invalidNumber = 'invalid';

@@ -18,12 +18,6 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     positive?: boolean;
     /** Input is integer only */
     integer?: boolean;
-    /**
-     * Use commas instead of periods for the decimal separator
-     * 
-     * TODO: Use locale string
-     */
-    europeanFormat?: boolean;
     
     /** Label to display above input element */
     label: MethodNode;
@@ -32,12 +26,8 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
 
     /** Node to draw to the left of the input box */
     prefix?: MethodNode;
-    /** Class to append to prefix container */
-    prefixClassName?: string;
     /** Node to draw to the right of the input box */
     postfix?: MethodNode;
-    /** Class to append to postfix container */
-    postfixClassName?: string;
     
     /** Disable HTML input element */
     disabled?: boolean;
@@ -80,9 +70,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
                 initialValue={props.initialValue}
                 placeholder={props.placeholder}
                 prefix={props.prefix}
-                prefixClassName={props.prefixClassName}
                 postfix={props.postfix}
-                postfixClassName={props.postfixClassName}
                 error={!!props.error}
                 disabled={props.disabled}
                 onChange={props.onChange}
@@ -90,7 +78,6 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
                 autoFocus={props.autoFocus}
                 positive={props.positive}
                 integer={props.integer}
-                europeanFormat={props.europeanFormat}
                 attr={props.attr}
             />
         </FormField>
