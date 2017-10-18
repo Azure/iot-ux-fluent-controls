@@ -120,10 +120,8 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             return;
         }
         /** Reset our state machine */
-        console.log(`entry: ${newValue}`);
         const parsedValue = this.getValue(newValue);
         let paste = this.state.paste;
-        console.log(`onInput: ${newValue} - ${parsedValue}`);
         if (parsedValue === invalidNumber) {
             if (this.paste) {
                 this.paste = false;
