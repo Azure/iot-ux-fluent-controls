@@ -126,8 +126,7 @@ $balloon-z-index: $z-index-medium-step;
 }
 
 .balloon {
-    display: none;
-    position: absolute;
+    @include md-box(display-none, absolute);
     z-index: $balloon-z-index;
     font-family: $font-family-base;
     padding: 3*$gutter 4*$gutter 4*$gutter 4*$gutter;
@@ -136,6 +135,7 @@ $balloon-z-index: $z-index-medium-step;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     background-color: $background-default-color;
     color: $text-default-color;
+    width: 65*$grid;
     
     .inner-container {
         overflow: hidden;
