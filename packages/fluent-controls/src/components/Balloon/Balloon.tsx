@@ -109,16 +109,6 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         }
     };
 
-    private balloonRef: HTMLSpanElement;
-    private containerRef: HTMLSpanElement;
-    private fixedBalloon: HTMLSpanElement;
-
-    private balloonRect: {top: number, left: number, width: number, height: number};
-    private previousPosition: ClientRect;
-
-    private needsUpdate: boolean;
-    private eventsConnected: boolean;
-
     constructor(props: BalloonProps) {
         super(props);
 
@@ -128,22 +118,14 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
             position: this.props.position,
             align: this.props.align
         };
-
-        this.fixedBalloon = null;
-        this.needsUpdate = false;
-        this.eventsConnected = false;
     }
 
     componentWillReceiveProps(newProps: BalloonProps) {
-        const posUpdated = this.props.position !== newProps.position;
-        const alignUpdated = this.props.align !== newProps.align;
-        if (this.props.expanded !== newProps.expanded || posUpdated || alignUpdated) {
-            this.setState({
-                visible: this.state.hovered || newProps.expanded,
-                position: posUpdated ? newProps.position : this.state.position,
-                align: alignUpdated ? newProps.align : this.state.align
-            });
-        }
+        this.setState({
+            visible: this.state.hovered || newProps.expanded,
+            position: newProps.position,
+            align: newProps.align
+        });
     }
 
     shouldComponentUpdate(newProps: BalloonProps, newState: BalloonState): boolean {
@@ -203,13 +185,21 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
             default:
                 align = 'center';
         }
-        const balloonClassName = css(
+
+        let {
+            balloonClassName,
+            autoPosition,
+            multiline,
+            className
+        } = this.props;
+
+        balloonClassName = css(
             'balloon',
-            !this.props.autoPosition ? `${position}-${align}` : '',
-            this.props.balloonClassName
+            autoPosition && `${position}-${align}`,
+            balloonClassName
         );
-        const innerClassName = css('inner-container', {'multiline': this.props.multiline});
-        const containerClassName = css('balloon-container', this.props.className);
+        className = css('balloon-container', className);
+        const innerClassName = css('inner-container', { multiline });
         const positions = [css(`${position}-${align}`), css(`${backupPosition}-${align}`)];
         return (
             <Dropdown
@@ -219,14 +209,12 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
                     </span>
                 }
                 visible={this.state.visible}
-                className={containerClassName}
+                className={className}
                 positionClassNames={this.props.autoPosition ? positions : []}
+                onMouseEnter={this.onMouseEnter}
+                onMouseLeave={this.onMouseLeave}
                 attr={{
-                    container: {
-                        onMouseEnter: this.onMouseEnter,
-                        onMouseLeave: this.onMouseLeave
-                    },
-                    dropdownContainer: {className: containerClassName},
+                    dropdownContainer: {className: className},
                     dropdown: {className: balloonClassName}
                 }}
             >

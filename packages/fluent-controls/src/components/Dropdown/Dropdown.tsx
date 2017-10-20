@@ -28,18 +28,16 @@ export interface DropdownAttributes {
 export interface DropdownProps extends React.Props<DropdownType> {
     /** Contents of dropdown */
     dropdown: MethodNode;
+    /** Shows the dropdown */
+    visible?: boolean;
 
-    /**
-     * Keeps dropdown open if the user hovers over it
-     */
-    interactive?: boolean;
+    onMouseEnter?: (event) => void;
+    onMouseLeave?: (event) => void;
 
     positionClassNames?: string[];
 
     /** Classname to append to top level element */
     className?: string;
-    /** Shows the dropdown */
-    visible?: boolean;
 
     attr?: DropdownAttributes;
 }
@@ -264,7 +262,6 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     }
 
     render() {
-        const isInteractive = this.props.interactive && this.props.visible;
         const positionClassName = this.props.positionClassNames.length > 0
             ? (this.props.positionClassNames[
                 this.positionFailed ? 0 : this.state.positionIndex
@@ -272,14 +269,17 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         return (
             <Attr.span
                 className={css('dropdown-container', this.props.className)}
-                attr={this.props.attr.container}
                 methodRef={this.containerRef}
+                onMouseEnter={this.props.onMouseEnter}
+                onMouseLeave={this.props.onMouseLeave}
+                attr={this.props.attr.container}
             >
                 {this.props.children}
                 <Attr.span
-                    className={css('md-dropdown', positionClassName, {'interactive': isInteractive})}
-                    onMouseEnter={isInteractive ? this.onMouseEnter : null}
-                    onMouseLeave={isInteractive ? this.onMouseLeave : null}
+                    className={css('md-dropdown', positionClassName, {
+                        'interactive': this.props.visible
+                            && (this.props.onMouseEnter || this.props.onMouseLeave)
+                    })}
                     attr={this.props.attr.dropdown}
                     methodRef={this.dropdownRef}
                 >
