@@ -13,49 +13,26 @@ $dropdown-z-index: $z-index-medium-step;
 $fixed-dropdown-z-index: $z-index-large-step;
 
 .dropdown-container {
-    @include md-box(inline-block);
+    @include md-box(inline-block, relative);
     
-    text-decoration: none;
-    position: relative;
-}
-
-.dropdown {
-    display: inline-block;
-    position: absolute;
-    box-sizing: border-box;
-    visibility: hidden;
-
-    .inner-container {
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-
-        &.multiline {
-            white-space: normal;
-        }
-    }
-    
-    header + section {
-        margin-top: 4*$gutter;
-    }
-    
-    section + section {
-        margin-top: 4*$gutter;
-    }
-
-    section + footer {
-        margin-top: 4*$gutter;
+    :global(.md-dropdown) {
+        @include md-box(inline-block, absolute);
+        visibility: hidden;
     }
 }
 
-.fixed-dropdown {
+:global(.md-dropdown-container) {
     visibility: visible;
     position: fixed;
     z-index: $fixed-dropdown-z-index;
-
-    .dropdown {
+    pointer-events: none;
+    
+    :global(.md-dropdown) {
         visibility: visible;
+        pointer-events: none;
+
+        &.interactive {
+            pointer-events: auto;
+        }
     }
 }
-
-    

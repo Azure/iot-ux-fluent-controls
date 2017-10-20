@@ -93,6 +93,7 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         attr: {
             container: {},
             balloonContainer: {},
+            hitbox: {},
             balloon: {},
         }
     };
@@ -162,19 +163,23 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
     }
 
     render() {
-        let position;
+        let position, backupPosition;
         switch (this.props.position) {
             case BalloonPosition.Bottom:
                 position = 'bottom';
+                backupPosition = 'top';
                 break;
             case BalloonPosition.Left:
                 position = 'left';
+                backupPosition = 'right';
                 break;
             case BalloonPosition.Right:
                 position = 'right';
+                backupPosition = 'left';
                 break;
             default:
                 position = 'top';
+                backupPosition = 'bottom';
         }
         let align;
         switch (this.props.align) {
@@ -187,50 +192,32 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
             default:
                 align = 'center';
         }
-        const balloonClassName = css('balloon', `${position}-${align}`, this.props.balloonClassName);
+        const balloonClassName = css('balloon', this.props.balloonClassName);
         const innerClassName = css('inner-container', {'multiline': this.props.multiline});
         const containerClassName = css('balloon-container', this.props.className);
-
+        const positions = [css(`${position}-${align}`), css(`${backupPosition}-${align}`)];
         return (
             <Dropdown
-                dropdown={<span className={innerClassName}>{this.props.tooltip}</span>}
+                dropdown={
+                    <span className={innerClassName}>
+                        {this.props.tooltip}
+                    </span>
+                }
                 visible={this.state.visible}
+                className={containerClassName}
+                positionClassNames={positions}
                 attr={{
+                    container: {
+                        onMouseEnter: this.onMouseEnter,
+                        onMouseLeave: this.onMouseLeave
+                    },
                     dropdownContainer: {className: containerClassName},
                     dropdown: {className: balloonClassName}
                 }}
             >
-                <Attr.span
-                    onClick={e => this.setState({visible: !this.state.visible})}
-                >
-                    {this.props.children}
-                </Attr.span>
+                {this.props.children}
             </Dropdown>
         );
-    
-        // return (
-        //     <Attr.span
-        //         className={containerClassName}
-        //         attr={this.props.attr.container}
-        //         onMouseEnter={this.onMouseEnter}
-        //         onMouseLeave={this.onMouseLeave}
-        //         methodRef={(element) => this.containerRef = element}
-        //     >
-        //         {this.props.children}
-        //         <Attr.span
-        //             className={balloonClassName}
-        //             attr={this.props.attr.balloonContainer}
-        //             methodRef={(element) => this.balloonRef = element}
-        //         >
-        //             <Attr.div
-        //                 className={innerClassName}
-        //                 attr={this.props.attr.balloon}
-        //             >
-        //                 {this.props.tooltip}
-        //             </Attr.div>
-        //         </Attr.span>
-        //     </Attr.span>
-        // );
     }
 }
 
