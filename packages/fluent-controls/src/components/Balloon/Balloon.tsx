@@ -46,8 +46,18 @@ export interface BalloonProps extends React.Props<BalloonType> {
      * Default: BalloonAllignment.Center
      */
     align?: BalloonAlignment;
-    /** Allow Balloon to be multiple lines */
+    /**
+     * Allow Balloon contents to span multiple lines
+     * 
+     * default: true
+     */
     multiline?: boolean;
+    /**
+     * Allow balloon to reposition itself if it isn't completely visible
+     * 
+     * default: true
+     */
+    autoPosition?: boolean;
 
     /** Classname to append to top level element */
     className?: string;
@@ -90,6 +100,7 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         align: BalloonAlignment.Center,
         expanded: false,
         multiline: true,
+        autoPosition: true,
         attr: {
             container: {},
             balloonContainer: {},
@@ -192,7 +203,11 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
             default:
                 align = 'center';
         }
-        const balloonClassName = css('balloon', this.props.balloonClassName);
+        const balloonClassName = css(
+            'balloon',
+            !this.props.autoPosition ? `${position}-${align}` : '',
+            this.props.balloonClassName
+        );
         const innerClassName = css('inner-container', {'multiline': this.props.multiline});
         const containerClassName = css('balloon-container', this.props.className);
         const positions = [css(`${position}-${align}`), css(`${backupPosition}-${align}`)];
@@ -205,7 +220,7 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
                 }
                 visible={this.state.visible}
                 className={containerClassName}
-                positionClassNames={positions}
+                positionClassNames={this.props.autoPosition ? positions : []}
                 attr={{
                     container: {
                         onMouseEnter: this.onMouseEnter,

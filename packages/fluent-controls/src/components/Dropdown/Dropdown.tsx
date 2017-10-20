@@ -265,11 +265,9 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
     render() {
         const isInteractive = this.props.interactive && this.props.visible;
-        const positionClassName = typeof(this.state.positionIndex) === 'number'
+        const positionClassName = this.props.positionClassNames.length > 0
             ? (this.props.positionClassNames[
-                this.positionFailed
-                    ? 0
-                    : this.state.positionIndex
+                this.positionFailed ? 0 : this.state.positionIndex
             ]) : '';
         return (
             <Attr.span
