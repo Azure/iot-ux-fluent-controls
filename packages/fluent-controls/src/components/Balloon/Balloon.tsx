@@ -195,7 +195,7 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
 
         balloonClassName = css(
             'balloon',
-            autoPosition && `${position}-${align}`,
+            !autoPosition && `${position}-${align}`,
             balloonClassName
         );
         className = css('balloon-container', className);
