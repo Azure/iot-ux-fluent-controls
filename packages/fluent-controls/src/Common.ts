@@ -306,6 +306,14 @@ export interface GridColumn<T> {
     onDescending?: () => void;
     /** Direction to sort when the column is first clicked */
     defaultDirection?: SortDirection;
+    /**
+     * Width style to set on column div
+     * 
+     * If a number is provided, it is used as a pixel value for 'flex-basis'
+     * 
+     * If a string is provided, it is used as the value for 'flex'
+     */
+    width?: number;
 }
 
 export const autoFocusRef = (e: HTMLElement) => {

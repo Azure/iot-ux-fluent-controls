@@ -1,7 +1,7 @@
 import { DatePickerProps } from '../../index';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {MethodNode, FormOption, dateIsValid, DateFormat} from '../../Common';
+import {MethodNode, dateIsValid, DateFormat} from '../../Common';
 import {FormField, FormFieldAttributes} from '../Field/FormField';
 /** This import solves an error with exports of FormFieldAttributes defaults */
 import {FormErrorAttributes} from '../Field/FormError';

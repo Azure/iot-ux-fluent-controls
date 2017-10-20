@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {OptionAttr, OptionProps} from '../../Attributes';
 import {MethodNode, FormOption} from '../../Common';
 import {SelectInput, SelectInputAttributes} from '../Input/SelectInput';
 import {FormField, FormFieldAttributes} from './FormField';
@@ -24,7 +25,7 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
      *     value: any
      * }`
      */
-    options: FormOption[];
+    options: (FormOption & OptionAttr<OptionProps>)[];
     
     /** Label to display above input element */
     label: MethodNode;

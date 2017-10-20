@@ -103,26 +103,29 @@ class ManagementListDemo extends React.Component {
                 mapColumn: (row) => row.name,
                 onAscending: onAscending(0),
                 onDescending: onDescending(0),
-                hidden: false
+                hidden: false,
+                width: 100
             },
             {
                 label: 'OWNER',
                 mapColumn: (row) => row.owner,
                 onAscending: onAscending(1),
                 onDescending: onDescending(1),
-                hidden: false
+                hidden: false,
+                width: 100
             },
             {
                 label: 'LAST UPDATED',
                 mapColumn: (row) => row.lastUpdated.toUTCString(),
                 onAscending: onAscending(2),
                 onDescending: onDescending(2),
-                hidden: false
+                hidden: false,
+                width: 200
             },
             {
                 label: 'CLASSIFICATION',
                 mapColumn: (row) => row.classification.join(' - '),
-                hidden: false
+                hidden: false,
             }
         ];
 
@@ -173,14 +176,14 @@ class ManagementListDemo extends React.Component {
             if (this.state.sortDirection === 'descending') {
                 rows = this.rows.sort((first, second) =>
                     (col.mapColumn(first) > col.mapColumn(second)
-                        ? -1 
+                        ? -1
                         : (col.mapColumn(second) > col.mapColumn(first) ? 1 : 0)
                     )
                 );
             } else {
                 rows = this.rows.sort((first, second) =>
                     (col.mapColumn(first) > col.mapColumn(second)
-                        ? 1 
+                        ? 1
                         : (col.mapColumn(second) > col.mapColumn(first) ? -1 : 0)
                     )
                 );
@@ -197,7 +200,7 @@ class ManagementListDemo extends React.Component {
             isSelected={this.isSelected.bind(this)}
 
             selectLabel={row => row.label}
-            
+
             sortedColumn={this.state.sortedColumn}
             sortDirection={this.state.sortDirection}
         />
