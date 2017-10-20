@@ -284,18 +284,35 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                 className={css('list-container')}
                 attr={this.props.attr.container}
             >
-                {columns.map((col, index) => (
-                    <Attr.div
-                        className={css('column', {
-                            'checkbox': index === 0 
-                                && this.props.isSelected && this.props.onSelect
-                        })}
-                        key={index}
-                        attr={mergeAttributes(this.props.attr.column, this.props.columns[index].attr)}
-                    >
-                        {col}
-                    </Attr.div>
-                ))}
+                {columns.map((col, index) => {
+                    const style: any = {};
+                    const offset = columns.length - this.props.columns.length;
+                    let column: any = this.props.columns[index - offset];
+                    if (index >= offset) {
+                        const width = column.width;
+                        if (typeof(width) === 'number') {
+                            style.flexBasis = `${width}px`;
+                        } else if (typeof(width) === 'string') {
+                            style.flex = width;
+                        }
+                    } else { 
+                        column = {attr: {}};
+                    }
+                    return (
+                        <Attr.div
+                            className={css('column', {
+                                'checkbox': index === 0 
+                                    && this.props.isSelected && this.props.onSelect
+                            })}
+                            key={index}
+                            style={style}
+                            attr={mergeAttributes(this.props.attr.column, column.attr)}
+                        >
+                            {col}
+                        </Attr.div>
+                    );
+                }
+            )}
             </Attr.div>
         );
     }
