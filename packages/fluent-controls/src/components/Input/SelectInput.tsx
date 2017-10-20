@@ -1,6 +1,6 @@
 import * as React from 'react'; 
 import * as classNames from 'classnames/bind';
-import {DivProps, SpanProps, SelectProps, OptionProps, Elements as Attr} from '../../Attributes';
+import {DivProps, SpanProps, SelectProps, OptionProps, Elements as Attr, OptionAttr, mergeAttributes} from '../../Attributes';
  import {FormOption, autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./SelectInput.scss'));
 
@@ -34,7 +34,7 @@ export interface SelectInputProps extends React.Props<SelectInputType> {
      *     value: any
      * }`
      */
-    options: FormOption[];
+    options: (FormOption & OptionAttr<OptionProps>)[];
     
     /** Apply error styling to input element */
     error?: boolean;
@@ -84,7 +84,7 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
                 key={index}
                 disabled={opt.disabled}
                 hidden={opt.hidden}
-                attr={props.attr.option}
+                attr={mergeAttributes(props.attr.option, opt.attr)}
             >
                 {opt.label}
             </Attr.option>
@@ -127,6 +127,6 @@ SelectInput.defaultProps = {
         option: {},
         chevron: {},
     }
-}
+};
 
 export default SelectInput;

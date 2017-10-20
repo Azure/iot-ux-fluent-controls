@@ -1,7 +1,7 @@
 import { DEFAULT_ENCODING } from 'crypto';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, ButtonProps, Elements as Attr} from '../../Attributes';
+import {DivProps, ButtonProps, Elements as Attr, OptionAttr, mergeAttributes} from '../../Attributes';
 import {Icon, IconAttributes} from '../Icon';
 import {MethodNode, GridColumn, SortDirection} from '../../Common';
 import {CheckboxInput, CheckboxInputAttributes} from '../Input/CheckboxInput';
@@ -29,14 +29,14 @@ export interface GenericManagementListProps<T> extends React.Props<GenericManage
      * 
      * See documentation for GridColumn<T> for more information
      */
-    columns: Array<GridColumn<T>>;
+    columns: Array<GridColumn<T> & OptionAttr<DivProps>>;
     /**
      * List of row objects
      * 
      * This can be a list of anything that satisfies the GridColumn callbacks
      * provided in props.columns
      */
-    rows: Array<T>;
+    rows: Array<T & OptionAttr<DivProps>>;
     /**
      * HTML input element name prefix to use for checkboxes
      * 
@@ -175,7 +175,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                     if (column.mapColumn instanceof Function) {
                         content = column.mapColumn(row);
                     } else {
-                        const colValue = row[column.mapColumn];
+                        const colValue: any = row[column.mapColumn];
                         if (
                             typeof(colValue) === 'string' ||
                             colValue instanceof React.Component ||
@@ -190,7 +190,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         <Attr.div
                             className={css('column-content')}
                             key={rowIndex}
-                            attr={this.props.attr.rowContent}
+                            attr={mergeAttributes(this.props.attr.rowContent, row.attr)}
                         >
                             {content}
                         </Attr.div>
@@ -241,7 +241,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                 if (this.props.selectLabel instanceof Function) {
                     selectLabel = this.props.selectLabel(row);
                 } else {
-                    const colValue = row[this.props.selectLabel];
+                    const colValue: any = row[this.props.selectLabel];
                     if (
                         typeof(colValue) === 'string' ||
                         colValue instanceof React.Component ||
@@ -256,7 +256,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                     <Attr.div
                         className={css('column-content', 'checkbox')}
                         key={`select-${index}`}
-                        attr={this.props.attr.selectRowContent}
+                        attr={mergeAttributes(this.props.attr.selectRowContent, row.attr)}
                     >
                         <CheckboxInput
                             name={`${this.props.name}-select-${index}`}
@@ -284,18 +284,34 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                 className={css('list-container')}
                 attr={this.props.attr.container}
             >
-                {columns.map((col, index) => (
-                    <Attr.div
-                        className={css('column', {
-                            'checkbox': index === 0 
-                                && this.props.isSelected && this.props.onSelect
-                        })}
-                        key={index}
-                        attr={this.props.attr.column}
-                    >
-                        {col}
-                    </Attr.div>
-                ))}
+                {columns.map((col, index) => {
+                    const style: any = {};
+                    const offset = columns.length - this.props.columns.length;
+                    let column: any = this.props.columns[index - offset];
+                    if (index >= offset) {
+                        if (column.width) {
+                            style.flexBasis = `${column.width}px`;
+                        }
+                    } else { 
+                        column = {attr: {}};
+                    }
+                    return (
+                        <Attr.div
+                            className={css('column', {
+                                'checkbox': index === 0
+                                    && this.props.isSelected
+                                    && this.props.onSelect,
+                                'auto-width': index >= offset ? !!column.width : false
+                            })}
+                            key={index}
+                            style={style}
+                            attr={mergeAttributes(this.props.attr.column, column.attr)}
+                        >
+                            {col}
+                        </Attr.div>
+                    );
+                }
+            )}
             </Attr.div>
         );
     }

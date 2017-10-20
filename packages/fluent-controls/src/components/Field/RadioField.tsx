@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {OptionAttr, mergeAttributeObjects} from '../../Attributes';
 import {MethodNode, FormOption} from '../../Common';
 import {RadioInput, RadioInputAttributes} from '../Input/RadioInput';
 import {FormField, FormFieldAttributes} from './FormField';
@@ -24,7 +25,7 @@ export interface RadioFieldProps extends React.Props<RadioFieldType> {
      *     value: any
      * }`
      */
-    options: FormOption[];
+    options: (FormOption & OptionAttr<RadioInputAttributes>)[];
     
     /** Label to display above input element */
     label: MethodNode;
@@ -83,7 +84,15 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
                 className={props.inputClassName}
                 key={`${props.name}-${index}`}
                 autoFocus={props.autoFocus}
-                attr={props.attr}
+                attr={mergeAttributeObjects(props.attr, option.attr, [
+                    'container',
+                    'label',
+                    'input',
+                    'radio',
+                    'text',
+                    'fill',
+                    'border',
+                ])}
             />
         );
     });
