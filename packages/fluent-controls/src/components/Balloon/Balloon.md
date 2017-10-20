@@ -33,6 +33,6 @@ let tooltip = 'This is a simple balloon!';
     width: '400px'
 }}>
 
-    <Balloon tooltip={tooltip} position={1} align={3}>End</Balloon>
+    <div><Balloon tooltip={tooltip} position={1} align={3}>End</Balloon></div>
 </div>
 ```

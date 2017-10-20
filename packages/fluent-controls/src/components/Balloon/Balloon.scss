@@ -117,16 +117,8 @@ $balloon-z-index: $z-index-medium-step;
     }
 }
 
-.balloon-container {
-    @include md-box(inline-block);
-    
-    text-decoration: none;
-    position: relative;
-
-}
-
 .balloon {
-    @include md-box(display-none, absolute);
+    @include md-box(inline-block, absolute);
     z-index: $balloon-z-index;
     font-family: $font-family-base;
     padding: 3*$gutter 4*$gutter 4*$gutter 4*$gutter;
@@ -160,10 +152,8 @@ $balloon-z-index: $z-index-medium-step;
     }
 }
 
-.balloon-container:hover, .balloon-container.is-expanded {
-    .balloon {
-        display: inline;
-    }
+.balloon-container {
+    @include md-box(inline-block, relative);
 
     .top-start {
         @include position('top', 'start');

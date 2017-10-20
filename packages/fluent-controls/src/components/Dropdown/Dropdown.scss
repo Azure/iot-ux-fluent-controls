@@ -1,0 +1,61 @@
+@import '../../common/overrides';
+@import '../../common/mixins';
+
+// Spec says 8px but setting to 8.5px to deal with browser rounding errors
+$dropdown-border: 8.5px solid md-color(shade, 3);
+$transparent-border: 8.5px solid md-color(inherit);
+
+$background-default-color: md-color(shade, 3);
+
+$text-default-color: md-color(shade, f);
+
+$dropdown-z-index: $z-index-medium-step;
+$fixed-dropdown-z-index: $z-index-large-step;
+
+.dropdown-container {
+    @include md-box(inline-block);
+    
+    text-decoration: none;
+    position: relative;
+}
+
+.dropdown {
+    display: inline-block;
+    position: absolute;
+    box-sizing: border-box;
+    visibility: hidden;
+
+    .inner-container {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &.multiline {
+            white-space: normal;
+        }
+    }
+    
+    header + section {
+        margin-top: 4*$gutter;
+    }
+    
+    section + section {
+        margin-top: 4*$gutter;
+    }
+
+    section + footer {
+        margin-top: 4*$gutter;
+    }
+}
+
+.fixed-dropdown {
+    visibility: visible;
+    position: fixed;
+    z-index: $fixed-dropdown-z-index;
+
+    .dropdown {
+        visibility: visible;
+    }
+}
+
+    
