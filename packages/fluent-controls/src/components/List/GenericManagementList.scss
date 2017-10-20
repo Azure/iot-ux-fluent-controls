@@ -15,7 +15,13 @@ $header-line-height: 4*$grid;
 
     .column {
         @include md-box(block, relative);
-
+        flex-basis: 100px;
+        
+        &.auto-width {
+            flex-grow: 1;
+            flex-shrink: 0;
+        }
+        
         &.checkbox {
             flex: 0 0 32px;
         }

@@ -104,7 +104,7 @@ class ManagementListDemo extends React.Component {
                 onAscending: onAscending(0),
                 onDescending: onDescending(0),
                 hidden: false,
-                width: '1 0 100px'
+                width: 100
             },
             {
                 label: 'OWNER',
@@ -112,7 +112,7 @@ class ManagementListDemo extends React.Component {
                 onAscending: onAscending(1),
                 onDescending: onDescending(1),
                 hidden: false,
-                width: '1 0 100px'
+                width: 100
             },
             {
                 label: 'LAST UPDATED',
@@ -120,13 +120,12 @@ class ManagementListDemo extends React.Component {
                 onAscending: onAscending(2),
                 onDescending: onDescending(2),
                 hidden: false,
-                width: '3 0 100px'
+                width: 200
             },
             {
                 label: 'CLASSIFICATION',
                 mapColumn: (row) => row.classification.join(' - '),
                 hidden: false,
-                width: '0 0 150px'
             }
         ];
 

@@ -313,7 +313,7 @@ export interface GridColumn<T> {
      * 
      * If a string is provided, it is used as the value for 'flex'
      */
-    width?: number | string;
+    width?: number;
 }
 
 export const autoFocusRef = (e: HTMLElement) => {
