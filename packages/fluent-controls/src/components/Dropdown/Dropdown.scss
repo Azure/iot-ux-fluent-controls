@@ -35,4 +35,8 @@ $fixed-dropdown-z-index: $z-index-large-step;
             pointer-events: auto;
         }
     }
+
+    &.interactive {
+        pointer-events: auto;
+    }
 }

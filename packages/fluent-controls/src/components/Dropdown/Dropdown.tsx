@@ -47,6 +47,29 @@ export interface DropdownState {
     positionIndex?: number;
 }
 
+export const interactsWithDropdown = (event, dropdown: HTMLElement, depth: number = 6): boolean => {
+    let target = event.target;
+    /**
+     * Go back several levels to check whether the user is clicking in the
+     * dropdown
+    */
+    for (let i = 0; i < depth; i++) {
+        if (target === dropdown) {
+            break;
+        }
+
+        if (target.parentElement) {
+            target = i < (depth - 1) ? target.parentElement : null;
+            continue;
+        } else {
+            target = null;
+            break;
+        }
+    }
+
+    return !!target;
+};
+
 const compareClientRect = (first: ClientRect, second: ClientRect): boolean => {
     return (
         first && second &&
@@ -59,10 +82,10 @@ const compareClientRect = (first: ClientRect, second: ClientRect): boolean => {
 
 /**
  * SimpleDropdown shows tooltip (with HTML) on hover over child
- * 
+ *
  * NOTE: If a parent element of this control is `overflow: hidden` then the
  * balloon may not show up.
- * 
+ *
  * @param props Control properties (defined in `SimpleDropdownProps` interface)
  */
 export class Dropdown extends React.Component<DropdownProps, DropdownState> {
@@ -90,6 +113,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     private eventsConnected: boolean;
     private hoverClose: boolean;
     private positionFailed: boolean;
+    private positionReset: boolean;
 
     private mouseX: number;
     private mouseY: number;
@@ -100,6 +124,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         this.animationRequest = null;
         this.eventsConnected = false;
         this.hoverClose = false;
+        this.positionReset = false;
 
         this.state = {
             hovered: false,
@@ -116,7 +141,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     componentWillReceiveProps() {
         const autoPosition = this.props.positionClassNames
             && this.props.positionClassNames.length > 0;
-        
+
         this.setState({
             positionIndex: autoPosition ? 0 : null
         });
@@ -137,6 +162,15 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     componentDidUpdate(oldProps: DropdownProps, oldState: DropdownState) {
         this.hoverClose = false;
         this.repositionDropdown();
+        if (this.props.visible || this.state.hovered) {
+            if (this.props.onMouseEnter || this.props.onMouseLeave) {
+                this.fixedContainer.className = css('md-dropdown-container', 'interactive');
+            }
+        } else {
+            if (this.props.onMouseEnter || this.props.onMouseLeave) {
+                this.fixedContainer.className = css('md-dropdown-container');
+            }
+        }
     }
 
     componentWillUnmount() {
@@ -147,6 +181,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         if (!this.animationRequest) {
             this.animationRequest = requestAnimationFrame(() => {
                this.animationRequest = null;
+               this.repositionDropdown();
             });
          }
     }
@@ -154,7 +189,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     onMouseEnter = () => {
         this.setState({hovered: true});
     }
-    
+
     onMouseLeave = () => {
         this.setState({hovered: false});
     }
@@ -168,7 +203,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
      * Get the dimensions and position of the dropdown element while it is
      * still in the DOM rendered by this component. This information is used
      * to position the dropdown when it is moved to the `display: fixed` element.
-     * 
+     *
      * The position is relative to the top-left corner of the container element,
      * calculated based on both elements' position relative to the user's window.
      */
@@ -210,15 +245,17 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
         if (!this.positionFailed && this.props.positionClassNames && this.props.positionClassNames.length > 0) {
             const dropdown = this.dropdown.getBoundingClientRect();
-            const body = document.body.getBoundingClientRect();
             if (
                 dropdown.top < 0 ||
-                dropdown.bottom > body.bottom ||
+                dropdown.bottom > window.innerHeight ||
                 dropdown.left < 0 ||
-                dropdown.right > body.right
+                dropdown.right > window.innerWidth
             ) {
                 if (typeof(this.state.positionIndex) === 'number') {
-                    if (this.state.positionIndex < this.props.positionClassNames.length) {
+                    if (this.positionReset) {
+                        this.setState({positionIndex: 0});
+                        this.positionReset = false;
+                    } else if (this.state.positionIndex < this.props.positionClassNames.length) {
                         this.setState({positionIndex: this.state.positionIndex + 1});
                     } else {
                         this.positionFailed = true;
@@ -239,7 +276,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         const positioned = this.dropdown.parentElement === this.fixedContainer;
         if (!positioned && !this.hoverClose) {
             this.dropdownOffset = this.getDropdownOffset();
-            
+
             this.fixedContainer.appendChild(this.dropdown);
         }
         if (!compareClientRect(container, this.previousPosition)) {
@@ -248,6 +285,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             this.fixedContainer.style.width = `${this.dropdownOffset.width}px`;
             this.fixedContainer.style.height = `${this.dropdownOffset.height}px`;
             this.previousPosition = container;
+            this.positionReset = true;
         }
         if (this.state.hovered) {
             const dropdown = this.fixedContainer.getBoundingClientRect();
@@ -271,7 +309,10 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             ]) : '';
         return (
             <Attr.span
-                className={css('dropdown-container', this.props.className)}
+                className={css('dropdown-container', this.props.className, {
+                    'interactive': this.props.visible
+                    && (this.props.onMouseEnter || this.props.onMouseLeave)
+                })}
                 methodRef={this.containerRef}
                 onMouseEnter={this.props.onMouseEnter}
                 onMouseLeave={this.props.onMouseLeave}
