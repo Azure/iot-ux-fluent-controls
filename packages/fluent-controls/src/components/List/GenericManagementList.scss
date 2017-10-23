@@ -12,6 +12,7 @@ $header-line-height: 4*$grid;
 
 .list-container {
     @include md-box(flex, relative);
+    width: 100%;
 
     .column {
         @include md-box(block, relative);
