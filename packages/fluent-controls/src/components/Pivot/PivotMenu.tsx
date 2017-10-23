@@ -41,7 +41,7 @@ export const PivotMenu: React.StatelessComponent<PivotMenuProps> = (props) => {
                     className={css('pivot', {'disabled': link.disabled}, props.anchorClassName)}
                     hidden={link.hidden}
                     key={link.key}
-                    attr={mergeAttributes(props.attr.anchor, link.attr.anchor)}
+                    attr={mergeAttributes(props.attr.anchor, (link.attr || {anchor: {}}).anchor)}
                 >
                     <Pivot
                         icon={link.icon}

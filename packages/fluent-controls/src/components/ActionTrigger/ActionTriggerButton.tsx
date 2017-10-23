@@ -46,7 +46,6 @@ export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonPr
                 rightIcon={props.rightIcon}
                 label={props.label}
                 disabled={props.disabled}
-                className={props.className}
                 attr={props.attr}
             />
         </Attr.button>

@@ -88,5 +88,7 @@ describe('<GenericManagementList />', () => {
         expect(wrapper.find('test-col-6').first().hasClass('test-col-6')).to.equal(true);
         expect(wrapper.find('test-col-6').first().hasClass('test-col-1')).to.equal(false);
         expect(wrapper.find('test-col-6').first().hasClass(css('column'))).to.equal(true);
+
+        expect(wrapper.selector('div[data-test-hook="test-col-6"]').find('[data-test-hook="test-row-3"]').first().text()).to.equal('Col 6 Row 3');
     });
 });
