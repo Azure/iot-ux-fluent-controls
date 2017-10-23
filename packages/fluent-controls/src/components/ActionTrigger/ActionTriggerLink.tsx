@@ -44,7 +44,6 @@ export const ActionTriggerLink: React.StatelessComponent<ActionTriggerLinkProps>
                 rightIcon={props.rightIcon}
                 label={props.label}
                 disabled={props.disabled}
-                className={props.className}
                 attr={props.attr}
             />
         </Attr.a>
