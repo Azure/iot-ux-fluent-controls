@@ -645,7 +645,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
 
     onKeyPress(event) {
         if (this.state.value.length < 10) {
-            if (event.charCode >= keyCode['0'] && event.charCode <= keyCode['9']) {
+            if (event.charCode >= keyCode.num0 && event.charCode <= keyCode.num9) {
                 return;
             }
     

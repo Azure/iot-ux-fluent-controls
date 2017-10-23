@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, AnchorProps, Elements as Attr} from '../../Attributes';
+import {DivProps, AnchorProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects} from '../../Attributes';
 import {PivotOption} from '../../Common';
 import {Pivot, PivotAttributes} from '../../Pivot';
 const css = classNames.bind(require('./Pivot.scss'));
@@ -14,7 +14,7 @@ export interface PivotMenuAttributes {
 }
 
 export interface PivotMenuProps extends React.Props<PivotMenuType> {
-    links: PivotOption[];
+    links: (PivotOption & OptionAttr<{anchor?: AnchorProps} & PivotAttributes>)[];
 
     active?: string;
     tabIndex?: number;
@@ -41,7 +41,7 @@ export const PivotMenu: React.StatelessComponent<PivotMenuProps> = (props) => {
                     className={css('pivot', {'disabled': link.disabled}, props.anchorClassName)}
                     hidden={link.hidden}
                     key={link.key}
-                    attr={props.attr.anchor}
+                    attr={mergeAttributes(props.attr.anchor, link.attr.anchor)}
                 >
                     <Pivot
                         icon={link.icon}
@@ -49,7 +49,14 @@ export const PivotMenu: React.StatelessComponent<PivotMenuProps> = (props) => {
                         selected={link.key === props.active}
                         disabled={link.disabled}
                         className={props.pivotClassName}
-                        attr={props.attr.pivot}
+                        attr={mergeAttributeObjects(props.attr.pivot, link.attr, [
+                            'container',
+                            'bottomBorder',
+                            'focusBorder',
+                            'content',
+                            'innerContent',
+                            'icon',
+                        ])}
                     />
                 </Attr.a>;
             })}

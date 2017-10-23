@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr} from '../../Attributes';
+import {DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr, OptionAttr, mergeAttributes} from '../../Attributes';
 import {Icon, IconSize} from '../Icon';
 import {MethodNode, FormOption, keyCode, hasClassName, autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./ComboInput.scss'));
@@ -35,7 +35,7 @@ export interface ComboInputProps extends React.Props<ComboInputType> {
      *     hidden: boolean
      * }`
      */
-    options: FormOption[];
+    options: (FormOption & OptionAttr<ButtonProps>)[];
 
     /**
      * Callback used to map FormOption to strings to be used by default 
@@ -296,6 +296,10 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
     }
 
     onKeyDown(event) {
+        /** So that we don't block any browser shortcuts */
+        if (event.ctrlKey || event.altKey) {
+            return;
+        }
         
         let index, options;
         const setState = index => this.setState({
@@ -326,6 +330,11 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                 this.setState({visible: true});
                 return;
         }
+        
+        /** These are all keys that don't have characters */
+        if (event.keyCode <= keyCode.slash) {
+            return;
+        }
         event.preventDefault();
     }
 
@@ -347,7 +356,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         return '';
     }
 
-    getVisibleOptions(getDisabled: boolean = true): FormOption[] {
+    getVisibleOptions(getDisabled: boolean = true): (FormOption & OptionAttr<ButtonProps>)[] {
         let filter = option => !option.hidden;
         if (typeof(this.props.value) === 'string') {
             filter = option => {
@@ -426,7 +435,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         onMouseOver={onHover}
                         tabIndex={-1}
                         key={index}
-                        attr={this.props.attr.option}
+                        attr={mergeAttributes(this.props.attr.option, option.attr)}
                     >
                         {this.props.optionLabel(value, option)}
                     </Attr.button>

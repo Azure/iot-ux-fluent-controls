@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import {OptionAttr, ButtonProps} from '../../Attributes';
 import {MethodNode, FormOption} from '../../Common';
 import {ComboInput, ComboInputAttributes} from '../Input/ComboInput';
 import {FormField, FormFieldAttributes} from './FormField';
@@ -25,7 +26,7 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
      *     hidden: boolean
      * }`
      */
-    options: FormOption[];
+    options: (FormOption & OptionAttr<ButtonProps>)[];
 
     /**
      * Callback used to map FormOption to strings to be used by default 

@@ -18,14 +18,86 @@ export type SelectProps = AttrProps<HTMLSelectElement>;
 export type SpanProps = AttrProps<HTMLSpanElement>;
 export type TextAreaProps = AttrProps<HTMLTextAreaElement>;
 
-export type AttrWrapperProps<T extends HTMLElement> = AttrProps<T> & {
-    attr?: any,
-    methodRef?: React.Ref<T>
-} & {
+export type HTMLElementAttr<T extends HTMLElement> = AttrProps<T> & {
     ref?: React.Ref<T>
 };
 
+export type AttrWrapperProps<T extends HTMLElement> = HTMLElementAttr<T> & {
+    attr?: any,
+    methodRef?: React.Ref<T>
+};
+
 export type AttrWrapper<T extends HTMLElement> = (props: AttrWrapperProps<T>) => React.DOMElement<AttrWrapperProps<T>, T>;
+
+export interface OptionAttr<T> {
+    attr?: T;
+}
+
+export function mergeAttributeObjects<T, K extends keyof T>(leftInput: T, rightInput: T, names: K[]): T {
+    const output: any = {};
+    let left: any = leftInput || {};
+    let right: any = rightInput || {};
+    for (let name of names) {
+        const oldAttr: any = left[name] || {};
+        const newAttr: any = right[name] || {};
+        output[name] = mergeAttributes(oldAttr, newAttr);
+    }
+    return output;
+}
+
+export function mergeAttributes<T extends HTMLElement>(leftAttr: HTMLElementAttr<T>, rightAttr: HTMLElementAttr<T>): HTMLElementAttr<T> {
+    const oldAttr = leftAttr || {};
+    const newAttr = rightAttr || {};
+    const className = classNames(oldAttr.className, newAttr.className);
+    if (oldAttr.className) {
+        delete oldAttr.className;
+    }
+    if (newAttr.className) {
+        delete newAttr.className;
+    }
+
+    const fnCombiner = {};
+    for (let key in oldAttr) {
+        if (newAttr[key]) {
+            const oldFn = oldAttr[key];
+            const newFn = newAttr[key];
+            if (oldFn instanceof Function && newFn instanceof Function) {
+                fnCombiner[key] = (...args) => {
+                    oldFn(...args);
+                    newFn(...args);
+                };
+                delete oldAttr[key];
+                delete newAttr[key];
+            }
+        }
+    }
+
+    let ref = newAttr.ref;
+    if (oldAttr.ref) {
+        if (newAttr.ref) {
+            const oldRef = oldAttr.ref;
+            const newRef = newAttr.ref;
+            ref = (element) => {
+                oldRef(element);
+                newRef(element);
+            };
+            delete oldAttr.ref;
+        } else {
+            ref = oldAttr.ref;
+        }
+    }
+    if (newAttr.ref) {
+        delete newAttr.ref;
+    }
+
+    return {
+        ...oldAttr,
+        ...newAttr,
+        ...fnCombiner,
+        className,
+        ref
+    };
+}
 
 export function AttrElementWrapper<T extends HTMLElement>(element: string): AttrWrapper<T> {
     return function(props: AttrWrapperProps<T>): React.DOMElement<AttrWrapperProps<T>, T> {
@@ -64,9 +136,7 @@ export function AttrElementWrapper<T extends HTMLElement>(element: string): Attr
             }
             delete attr.ref;
         }
-        if (props.methodRef) {
-            delete props.methodRef;
-        }
+        delete props.methodRef;
 
         if (attr.key) {
             console.error('Method Attribute API does not allow keys to be set on elements.');
@@ -85,7 +155,7 @@ export function AttrElementWrapper<T extends HTMLElement>(element: string): Attr
         }
 
         props = {...props, ...attr, className, ref};
-        
+
         return React.createElement(
             element,
             props, 
