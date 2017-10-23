@@ -181,17 +181,13 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     onChange = (event) => {
         if (!this.animationRequest) {
             this.animationRequest = requestAnimationFrame(() => {
-               this.animationRequest = null;
-               this.repositionDropdown();
+                this.animationRequest = null;
+                this.positionReset = true;
+                this.positionFailed = false;
+                this.repositionDropdown();
             });
          }
     }
-
-    onMouseMove = (event) => {
-        this.mouseX = event.clientX;
-        this.mouseY = event.clientY;
-    }
-
     /**
      * Get the dimensions and position of the dropdown element while it is
      * still in the DOM rendered by this component. This information is used
@@ -215,13 +211,11 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         if ((this.props.visible) && !this.eventsConnected) {
             window.addEventListener('resize', this.onChange);
             window.addEventListener('scroll', this.onChange);
-            window.addEventListener('mousemove', this.onMouseMove);
             this.eventsConnected = true;
             this.animationRequest = null;
         } else if (!this.props.visible && this.eventsConnected) {
             window.removeEventListener('resize', this.onChange);
             window.removeEventListener('scroll', this.onChange);
-            window.removeEventListener('mousemove', this.onMouseMove);
             this.animationRequest = 1;
             this.eventsConnected = false;
         }
@@ -282,7 +276,6 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             this.fixedContainer.style.width = `${this.dropdownOffset.width}px`;
             this.fixedContainer.style.height = `${this.dropdownOffset.height}px`;
             this.previousPosition = container;
-            this.positionReset = true;
         }
     }
 
