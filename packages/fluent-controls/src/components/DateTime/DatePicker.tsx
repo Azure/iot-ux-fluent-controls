@@ -105,7 +105,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     };
 
     private dropdown: HTMLElement;
-    private containerElement: HTMLDivElement;
+    private container: HTMLDivElement;
     private inputElement?: HTMLInputElement;
     private paste: boolean | string;
     private calendar: Calendar;
@@ -607,8 +607,13 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         if (!this.state.visible) {
             return;
         }
-
-        if (!interactsWithDropdown(event, this.dropdown)) {
+        console.log(event);
+        console.log(interactsWithDropdown(event, this.container, 9), interactsWithDropdown(event, this.dropdown, 9));
+        if (
+            !interactsWithDropdown(event, this.container, 6)
+            && !interactsWithDropdown(event, this.dropdown, 6)
+        ) {
+            console.log('setting visible: false');
             this.setState({ visible: false });
         }
     }
@@ -662,7 +667,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     }
 
     containerRef(container: HTMLDivElement) {
-        this.containerElement = container;
+        this.container = container;
     }
 
     render() {
@@ -726,7 +731,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         dropdown: {
                             className: css('dropdown'),
                             ref: this.dropdownRef
-                        }
+                        },
                     },
                     ['container', 'dropdownContainer', 'dropdown']
                 )}

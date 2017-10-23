@@ -10,6 +10,8 @@ $calendar-bg-color: md-color(shade, f);
 
 $calendar-z-index: $z-index-medium-step;
 
+$calc-margin: 5px;
+
 .date-picker-container {
     @include md-box(flex, relative);
     width: 100%;
@@ -27,8 +29,8 @@ $calendar-z-index: $z-index-medium-step;
     .input {
         @include md-box(block, relative);
         width: 100%;
-        height: 32px;
-        padding: 8px 32px 8px 12px;
+        height: 8*$grid;
+        padding: 2*$gutter 8*$gutter 2*$gutter 3*$gutter;
         border: $inactive-border;
         outline: none;
 
@@ -80,9 +82,9 @@ $calendar-z-index: $z-index-medium-step;
         @include md-box(absolute, float-right);
         font-size: $font-size-small;
         line-height: 16px;
-        padding: 4px;
-        top: 4px;
-        right: 8px;
+        padding: $gutter;
+        top: $gutter;
+        right: 2*$gutter;
         border: none;
         background-color: transparent;
         outline: none;
@@ -90,20 +92,23 @@ $calendar-z-index: $z-index-medium-step;
         cursor: pointer;
     }
 
-    &:not(.above) .dropdown {
+    .dropdown:not(.above) {
         top: calc(100% + 5px);
     }
 
-    &.above .dropdown {
+    .dropdown.above {
         bottom: calc(100% + 5px);
-        
+
+        .calendar {
+            margin-bottom: 1.5*$gutter;
+        }
     }
 }
 
 .dropdown {
-    padding-bottom: 8px;
+    padding-bottom: 2*$gutter;
     left: 0px;
-    width: 320px;
+    width: 80*$grid;
     visibility: hidden;
     
     :global(.md-dropdown-container) & {
@@ -114,13 +119,13 @@ $calendar-z-index: $z-index-medium-step;
 
     .dropdown-triangle {
         @include md-box(block, absolute);
-        width: 8px;
-        height: 8px;
-        left: 16px;
+        width: 2*$grid;
+        height: 2*$grid;
+        left: 4*$gutter;
     }
 
     &:not(.above) .dropdown-triangle {
-        top: calc(100% + 1px);
+        bottom: calc(100% - 4px);
 
         background-color: $calendar-bg-color;
         border-left: $default-border;
@@ -129,8 +134,8 @@ $calendar-z-index: $z-index-medium-step;
     }
 
     &.above .dropdown-triangle {
-        bottom: calc(100% + 1px);
-
+        top: calc(100% - 4px);
+        
         background-color: $calendar-bg-color;
         border-right: $default-border;
         border-bottom: $default-border;

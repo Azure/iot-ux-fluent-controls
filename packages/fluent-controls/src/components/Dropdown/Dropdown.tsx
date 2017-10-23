@@ -43,30 +43,30 @@ export interface DropdownProps extends React.Props<DropdownType> {
 }
 
 export interface DropdownState {
-    hovered?: boolean;
     positionIndex?: number;
 }
 
-export const interactsWithDropdown = (event, dropdown: HTMLElement, depth: number = 6): boolean => {
+export const interactsWithDropdown = (event, dropdown: HTMLElement, depth?: number): boolean => {
     let target = event.target;
     /**
      * Go back several levels to check whether the user is clicking in the
      * dropdown
     */
+    depth = depth || 6;
     for (let i = 0; i < depth; i++) {
         if (target === dropdown) {
             break;
         }
-
+        
         if (target.parentElement) {
             target = i < (depth - 1) ? target.parentElement : null;
+        
             continue;
         } else {
             target = null;
             break;
         }
     }
-
     return !!target;
 };
 
@@ -111,7 +111,6 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
     private animationRequest: number;
     private eventsConnected: boolean;
-    private hoverClose: boolean;
     private positionFailed: boolean;
     private positionReset: boolean;
 
@@ -123,11 +122,9 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
         this.animationRequest = null;
         this.eventsConnected = false;
-        this.hoverClose = false;
         this.positionReset = false;
 
         this.state = {
-            hovered: false,
             positionIndex: (
                 this.props.positionClassNames
                 && this.props.positionClassNames.length > 0
@@ -160,9 +157,11 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     }
 
     componentDidUpdate(oldProps: DropdownProps, oldState: DropdownState) {
-        this.hoverClose = false;
         this.repositionDropdown();
-        if (this.props.visible || this.state.hovered) {
+        if (!this.fixedContainer) {
+            return;
+        }
+        if (this.props.visible) {
             if (this.props.onMouseEnter || this.props.onMouseLeave) {
                 this.fixedContainer.className = css('md-dropdown-container', 'interactive');
             }
@@ -174,7 +173,9 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     }
 
     componentWillUnmount() {
-        this.fixedContainer.parentElement.removeChild(this.fixedContainer);
+        if (this.fixedContainer) {
+            this.fixedContainer.parentElement.removeChild(this.fixedContainer);
+        }
     }
 
     onChange = (event) => {
@@ -184,14 +185,6 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
                this.repositionDropdown();
             });
          }
-    }
-
-    onMouseEnter = () => {
-        this.setState({hovered: true});
-    }
-
-    onMouseLeave = () => {
-        this.setState({hovered: false});
     }
 
     onMouseMove = (event) => {
@@ -219,13 +212,13 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     }
 
     updateEventHandlers() {
-        if ((this.state.hovered || this.props.visible) && !this.eventsConnected) {
+        if ((this.props.visible) && !this.eventsConnected) {
             window.addEventListener('resize', this.onChange);
             window.addEventListener('scroll', this.onChange);
             window.addEventListener('mousemove', this.onMouseMove);
             this.eventsConnected = true;
             this.animationRequest = null;
-        } else if (!this.state.hovered && !this.props.visible && this.eventsConnected) {
+        } else if (!this.props.visible && this.eventsConnected) {
             window.removeEventListener('resize', this.onChange);
             window.removeEventListener('scroll', this.onChange);
             window.removeEventListener('mousemove', this.onMouseMove);
@@ -236,11 +229,16 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
     repositionDropdown() {
         this.updateEventHandlers();
-        if (!this.state.hovered && !this.props.visible) {
+        if (!this.props.visible) {
             return;
         }
         if (!this.container || !this.dropdown) {
             return;
+        }
+
+        if (!this.fixedContainer) {
+            this.fixedContainer = document.body.appendChild(document.createElement('div'));
+            this.fixedContainer.className = css('md-dropdown-container');
         }
 
         if (!this.positionFailed && this.props.positionClassNames && this.props.positionClassNames.length > 0) {
@@ -267,14 +265,13 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             }
         }
 
-        if (!this.fixedContainer) {
-            this.fixedContainer = document.body.appendChild(document.createElement('div'));
-            this.fixedContainer.className = css('md-dropdown-container');
-        }
+        this.fixedContainer.className = css('md-dropdown-container', {
+            'interactive': this.props.onMouseEnter || this.props.onMouseLeave,
+        }, (this.props.attr.dropdownContainer || {className: ''}).className);
 
         const container = this.container.getBoundingClientRect();
         const positioned = this.dropdown.parentElement === this.fixedContainer;
-        if (!positioned && !this.hoverClose) {
+        if (!positioned) {
             this.dropdownOffset = this.getDropdownOffset();
 
             this.fixedContainer.appendChild(this.dropdown);
@@ -286,19 +283,6 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             this.fixedContainer.style.height = `${this.dropdownOffset.height}px`;
             this.previousPosition = container;
             this.positionReset = true;
-        }
-        if (this.state.hovered) {
-            const dropdown = this.fixedContainer.getBoundingClientRect();
-            if (!(
-                this.mouseX >= dropdown.left &&
-                this.mouseX <= dropdown.right &&
-                this.mouseY >= dropdown.top &&
-                this.mouseY <= dropdown.bottom
-            )) {
-                this.container.appendChild(this.dropdown);
-                this.hoverClose = true;
-                this.setState({hovered: false});
-            }
         }
     }
 
