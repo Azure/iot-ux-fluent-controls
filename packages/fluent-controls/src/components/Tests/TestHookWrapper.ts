@@ -112,6 +112,10 @@ export class TestHookWrapper<T> {
         return this.wrapper.find(`[data-test-hook="${testHook}"]`);
     }
 
+    selector(selector) {
+        return this.wrapper.find(selector);
+    }
+
     addEventListener(event: string, callback: (event) => void) {
         this.eventMap[event] = callback;
     }

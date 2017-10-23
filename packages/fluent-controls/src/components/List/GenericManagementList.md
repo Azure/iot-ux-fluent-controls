@@ -63,7 +63,10 @@ class ManagementListDemo extends React.Component {
                 owner: 'Owner Name1',
                 lastUpdated: new Date(),
                 classification: ['owner'],
-                actions: []
+                actions: [],
+                attr: {
+                    'data-test-hook': 'row-1'
+                }
             },
             {
                 name: 'Row Name2',
