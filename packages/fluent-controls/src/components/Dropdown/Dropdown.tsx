@@ -104,10 +104,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         this.positionReset = false;
 
         this.state = {
-            positionIndex: (
-                this.props.positionClassNames
-                && this.props.positionClassNames.length > 0
-            ) ? 0 : null
+            positionIndex: this.getPositionIndex()
         };
     }
 
@@ -115,12 +112,16 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     containerRef = (element) => this.container = element ? element : this.container;
     fixedRef = (element) => this.fixedContainer = element ? element : this.fixedContainer;
 
-    componentWillReceiveProps() {
-        const autoPosition = this.props.positionClassNames
-            && this.props.positionClassNames.length > 0;
+    getPositionIndex(): number {
+        return (
+            this.props.positionClassNames
+            && this.props.positionClassNames.length > 0
+        ) ? 0 : null;
+    }
 
+    componentWillReceiveProps() {
         this.setState({
-            positionIndex: autoPosition ? 0 : null
+            positionIndex: this.getPositionIndex()
         });
         this.positionFailed = false;
     }
