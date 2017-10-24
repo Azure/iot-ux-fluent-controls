@@ -301,7 +301,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                                 'checkbox': index === 0
                                     && this.props.isSelected
                                     && this.props.onSelect,
-                                'auto-width': index >= offset ? !!column.width : false
+                                'auto-width': index >= offset ? !column.width : false
                             })}
                             key={index}
                             style={style}
