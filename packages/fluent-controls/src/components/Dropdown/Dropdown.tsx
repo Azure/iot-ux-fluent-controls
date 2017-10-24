@@ -149,15 +149,16 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
     componentDidUpdate(oldProps: DropdownProps, oldState: DropdownState) {
         this.repositionDropdown();
-        this.loadScrollOffset();        
         if (!this.fixedContainer) {
             return;
         }
         if (this.props.visible) {
+            this.loadScrollOffset();
             if (this.props.onMouseEnter || this.props.onMouseLeave) {
                 this.fixedContainer.className = css('md-dropdown-container', 'interactive');
             }
         } else {
+            this.scrollOffset = null;
             if (this.props.onMouseEnter || this.props.onMouseLeave) {
                 this.fixedContainer.className = css('md-dropdown-container');
             }
