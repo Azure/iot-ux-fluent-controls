@@ -134,6 +134,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
     dropdownRef = (element) => this.dropdown = element ? element : this.dropdown;
     containerRef = (element) => this.container = element ? element : this.container;
+    fixedRef = (element) => this.fixedContainer = element ? element : this.fixedContainer;
 
     componentWillReceiveProps() {
         const autoPosition = this.props.positionClassNames
@@ -149,6 +150,10 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         if (this.dropdown.parentElement === this.fixedContainer) {
             this.container.appendChild(this.dropdown);
             this.dropdownOffset = this.getDropdownOffset();
+        }
+
+        if (this.fixedContainer.parentElement === document.body) {
+            this.container.appendChild(this.fixedContainer);
         }
     }
 
@@ -226,13 +231,12 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         if (!this.props.visible) {
             return;
         }
-        if (!this.container || !this.dropdown) {
+        if (!this.container || !this.dropdown || !this.fixedContainer) {
             return;
         }
 
-        if (!this.fixedContainer) {
-            this.fixedContainer = document.body.appendChild(document.createElement('div'));
-            this.fixedContainer.className = css('md-dropdown-container');
+        if (this.fixedContainer && this.fixedContainer.parentElement !== document.body) {
+            document.body.appendChild(this.fixedContainer);
         }
 
         if (!this.positionFailed && this.props.positionClassNames && this.props.positionClassNames.length > 0) {
@@ -251,11 +255,15 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
                         this.setState({positionIndex: this.state.positionIndex + 1});
                     } else {
                         this.positionFailed = true;
+                        this.setState({positionIndex: 0});
                     }
                 } else {
                     this.setState({positionIndex: 0});
                 }
-                return;
+                /** If all possible positions fail, show it anyway */
+                if (!this.positionFailed) {
+                    return;
+                }
             }
         }
 
@@ -306,6 +314,11 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
                 >
                     {this.props.dropdown}
                 </Attr.span>
+                <Attr.div
+                    className={css('md-dropdown-container')}
+                    methodRef={this.fixedRef}
+                    attr={this.props.attr.dropdownContainer}
+                />
             </Attr.span>
         );
     }

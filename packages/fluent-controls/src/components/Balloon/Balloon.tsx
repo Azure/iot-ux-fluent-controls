@@ -155,7 +155,7 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         });
     }
 
-    getPosition(reverse: boolean = false): string {
+    getClassName(reverse: boolean): string {
         let position, reversePosition;
         switch (this.props.position) {
             case BalloonPosition.Bottom:
@@ -174,10 +174,7 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
                 position = 'top';
                 reversePosition = 'bottom';
         }
-        return !reverse ? position : reversePosition;
-    }
 
-    getAlign(): string {
         let align;
         switch (this.props.align) {
             case BalloonAlignment.Start:
@@ -189,11 +186,8 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
             default:
                 align = 'center';
         }
-        return align;
-    }
 
-    getClassName(reverse: boolean = false): string {
-        return css(`${this.getPosition(reverse)}-${this.getAlign()}`);
+        return css(`${reverse ? reversePosition : position}-${align}`);
     }
 
     render() {
@@ -206,7 +200,7 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
 
         balloonClassName = css(
             'balloon',
-            !autoPosition && this.getClassName(false),
+            this.getClassName(false),
             balloonClassName
         );
         className = css('balloon-container', className);
@@ -225,7 +219,6 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
                 onMouseEnter={this.onMouseEnter}
                 onMouseLeave={this.onMouseLeave}
                 attr={{
-                    dropdownContainer: {className: className},
                     dropdown: {className: balloonClassName}
                 }}
             >
