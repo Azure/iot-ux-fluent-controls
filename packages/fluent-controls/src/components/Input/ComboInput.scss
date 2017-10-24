@@ -122,67 +122,72 @@ $arrow-default-color: md-color(shade, 4);
         pointer-events: none;
     }
 
-    .dropdown {
-        @include md-box(display-none, absolute);
+    .dropdown:not(.above) {
+        @include md-box(inline-block, absolute);
         left: 0px;
         top: 100%;
-        width: 100%;
-        padding: $gutter 0px;
-        z-index: $dropdown-z-index;
-        max-height: 300px;
-        overflow-y: auto;
-    
-        &.visible {
-            display: inline-block;
-            background-color: $dropdown-bg-color;
-            border: $dropdown-border;
-        }
     }
 
-    .option {
-        @include md-box(block);
-        width: 100%;
-        height: 8*$grid;
-        line-height: 4*$grid;
-        padding: 0px 3*$gutter;
+    .dropdown.above {
+        @include md-box(inline-block, absolute);
+        left: 0px;
+        top: -2*$gutter;
+        transform: translateY(-100%);
+    }
+}
 
-        border: none;
-        box-shadow: none;
-        outline: none;
-        border-radius: 0px;
-        text-align: left;
-        
-        background-color: $option-bg-color;
-        
-        color: $option-color;
+.dropdown {
+    @include md-box(inline-block, relative);
+    width: 100%;
+    padding: $gutter 0px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: $dropdown-bg-color;
+    border: $dropdown-border;
+}
 
-        &:not(.disabled) {
-            cursor: pointer;
+.option {
+    @include md-box(block);
+    width: 100%;
+    height: 8*$grid;
+    line-height: 4*$grid;
+    padding: 0px 3*$gutter;
+
+    border: none;
+    box-shadow: none;
+    outline: none;
+    border-radius: 0px;
+    text-align: left;
+    
+    background-color: $option-bg-color;
+    
+    color: $option-color;
+
+    &:not(.disabled) {
+        cursor: pointer;
+    }
+
+    &.selected {
+        color: $option-selected-color;
+        background-color: $option-selected-bg-color;
+    }
+
+    &.hover:not(.disabled) {
+        &:not(.selected) {
+            background-color: $option-hover-bg-color;
         }
 
         &.selected {
-            color: $option-selected-color;
-            background-color: $option-selected-bg-color;
+            background-color: $option-hover-selected-bg-color;
         }
 
-        &.hover:not(.disabled) {
-            &:not(.selected) {
-                background-color: $option-hover-bg-color;
-            }
-
-            &.selected {
-                background-color: $option-hover-selected-bg-color;
-            }
-
-            &:active {
-                color: $option-active-color;
-                background-color: $option-active-bg-color;
-            }
-        }
-        
-        &.disabled {
-            color: $option-disabled-color;
+        &:active {
+            color: $option-active-color;
+            background-color: $option-active-bg-color;
         }
     }
-
+    
+    &.disabled {
+        color: $option-disabled-color;
+    }
 }

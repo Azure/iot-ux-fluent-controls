@@ -1,19 +1,18 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr, OptionAttr, mergeAttributes} from '../../Attributes';
+import {DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects} from '../../Attributes';
 import {Icon, IconSize} from '../Icon';
+import {Dropdown, DropdownAttributes} from '../Dropdown';
 import {MethodNode, FormOption, keyCode, hasClassName, autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./ComboInput.scss'));
 
 export interface ComboInputType {}
 
-export interface ComboInputAttributes {
-    container?: DivProps;
+export interface ComboInputAttributes extends DropdownAttributes {
     textbox?: DivProps;
     input?: InputProps;
     clearButton?: ButtonProps;
     chevron?: SpanProps;
-    dropdown?: DivProps;
     option?: ButtonProps;
 }
 
@@ -174,7 +173,6 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
     };
 
     inputElement: HTMLInputElement;
-    containerElement: HTMLDivElement;
     optionFilter: (newValue: string, option: FormOption) => boolean;
     optionSelect: (newValue: string, option: FormOption) => boolean;
 
@@ -192,65 +190,12 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             : defaultFilter;
         this.optionSelect = !!props.optionSelect ? props.optionSelect
             : (newValue, option) => defaultSelect(newValue, map(option));
-
-        this.containerRef = this.containerRef.bind(this);
-        this.inputRef = this.inputRef.bind(this);
-        this.handleDropdown = this.handleDropdown.bind(this);
     }
 
-    containerRef(container: HTMLDivElement) {
-        this.containerElement = container;
-    }
-
-    inputRef(input: HTMLInputElement) {
+    inputRef = (input: HTMLInputElement) => {
         this.inputElement = input;
         if (this.props.autoFocus) {
             autoFocusRef(this.inputElement);
-        }
-    }
-
-    componentDidMount() {
-        window.addEventListener('focusin', this.handleDropdown);
-        window.addEventListener('click', this.handleDropdown);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('focusin', this.handleDropdown);
-        window.removeEventListener('click', this.handleDropdown);
-    }
-
-    handleDropdown(event) {
-        if (event.target === this.inputElement) {
-            return;
-        }
-        if (!this.state.visible) {
-            return;
-        }
-
-        let target = event.target;
-        /**
-         * Go back several levels to check whether the user is clicking in the
-         * calendar (which causes the text input to lose focus)
-        */
-        for (let i = 0; i < 6; i++) {
-            if (target === this.containerElement) {
-                break;
-            }
-
-            if (target.parentElement) {
-                target = i < 5 ? target.parentElement : null;
-                continue;
-            } else {
-                target = null;
-                break;
-            }
-        }
-
-        if (!target) {
-            this.hideDropdown();
-        } else {
-            event.stopPropagation();
-            event.preventDefault();
         }
     }
 
@@ -396,11 +341,6 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             'error': this.props.error,
             'visible': this.state.visible
         }, this.props.inputClassName);
-        const dropdownClassName = css(
-            'dropdown', {
-                'visible': this.state.visible
-            }, this.props.dropdownClassName
-        );
 
         let inputValue = '';
         const value = this.getValue();
@@ -466,17 +406,35 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
 
         const dropdown = this.props.options && this.props.options.length > 0
             && <Attr.div
-                className={dropdownClassName}
+                className={this.props.dropdownClassName}
                 attr={this.props.attr.dropdown}
             >
                 {options}
             </Attr.div>;
 
         return (
-            <Attr.div
+            <Dropdown
+                dropdown={dropdown}
+                visible={this.state.visible}
                 className={containerClassName}
-                attr={this.props.attr.container}
-                methodRef={this.containerRef}
+                positionClassNames={[css('dropdown'), css('dropdown', 'above')]}
+                /**
+                * This is empty on purpose. When onMouseEnter/Leave is set,
+                * the dropdown starts to accept pointer events needed for
+                * interactive dropdowns
+                */
+                onMouseEnter={() => {}}
+                outerEvents={['click', 'focusin']}
+                onOuterEvent={(event) => this.setState({visible: false})}
+                attr={mergeAttributeObjects(
+                    this.props.attr,
+                    {
+                        container: {
+                            className: containerClassName
+                        },
+                    },
+                    ['container', 'dropdownContainer', 'dropdown']
+                )}
             >
                 <Attr.div
                     className={css('input-container')}
@@ -504,9 +462,8 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         className={css('chevron', 'icon icon-chevronDown')} 
                         attr={this.props.attr.chevron}
                     />
-                    {dropdown}
                 </Attr.div>
-            </Attr.div>
+            </Dropdown>
         );
     }
 }
