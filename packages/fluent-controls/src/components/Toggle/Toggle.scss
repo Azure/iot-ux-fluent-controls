@@ -54,11 +54,11 @@ $switch-border-radius: 5px;
             border: $off-hover-border;
             cursor: pointer;
         }
+    }
 
-        &:focus {
-            outline: $focus-outline;
-            outline-offset: 1px;
-        }
+    &:not(.disabled) .toggle-button:focus {
+        outline: $focus-outline;
+        outline-offset: 1px;
     }
 
     .toggle-switch {
@@ -119,10 +119,6 @@ $switch-border-radius: 5px;
         .toggle-button {
             border: $off-disabled-border;
             cursor: default;
-
-            &:focus ~ .toggle-border {
-                display: none;
-            }
         }
 
         .toggle-switch {
