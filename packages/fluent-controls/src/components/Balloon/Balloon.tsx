@@ -155,25 +155,29 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         });
     }
 
-    render() {
-        let position, backupPosition;
+    getPosition(reverse: boolean = false): string {
+        let position, reversePosition;
         switch (this.props.position) {
             case BalloonPosition.Bottom:
                 position = 'bottom';
-                backupPosition = 'top';
+                reversePosition = 'top';
                 break;
             case BalloonPosition.Left:
                 position = 'left';
-                backupPosition = 'right';
+                reversePosition = 'right';
                 break;
             case BalloonPosition.Right:
                 position = 'right';
-                backupPosition = 'left';
+                reversePosition = 'left';
                 break;
             default:
                 position = 'top';
-                backupPosition = 'bottom';
+                reversePosition = 'bottom';
         }
+        return !reverse ? position : reversePosition;
+    }
+
+    getAlign(): string {
         let align;
         switch (this.props.align) {
             case BalloonAlignment.Start:
@@ -185,6 +189,13 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
             default:
                 align = 'center';
         }
+        return align;
+    }
+
+    render() {
+        const position = this.getPosition();
+        const backupPosition = this.getPosition(true);
+        const align = this.getAlign();
 
         let {
             balloonClassName,
