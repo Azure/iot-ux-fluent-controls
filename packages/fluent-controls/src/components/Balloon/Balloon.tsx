@@ -192,11 +192,11 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         return align;
     }
 
-    render() {
-        const position = this.getPosition();
-        const backupPosition = this.getPosition(true);
-        const align = this.getAlign();
+    getClassName(reverse: boolean = false): string {
+        return css(`${this.getPosition(reverse)}-${this.getAlign()}`);
+    }
 
+    render() {
         let {
             balloonClassName,
             autoPosition,
@@ -206,12 +206,12 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
 
         balloonClassName = css(
             'balloon',
-            !autoPosition && `${position}-${align}`,
+            !autoPosition && this.getClassName(false),
             balloonClassName
         );
         className = css('balloon-container', className);
         const innerClassName = css('inner-container', { multiline });
-        const positions = [css(`${position}-${align}`), css(`${backupPosition}-${align}`)];
+        const positions = [this.getClassName(false), this.getClassName(true)];
         return (
             <Dropdown
                 dropdown={
