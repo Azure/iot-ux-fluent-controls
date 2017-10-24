@@ -102,10 +102,6 @@ export const RadioInput: React.StatelessComponent<RadioInputProps> = (props: Rad
                     className={css('radio-fill', classes)}
                     attr={props.attr.fill}
                 />
-                <Attr.span
-                    className={css('radio-border', classes)}
-                    attr={props.attr.border}
-                />
             </Attr.label>
         </Attr.div>
     );
