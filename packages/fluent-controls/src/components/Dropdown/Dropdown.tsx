@@ -36,6 +36,9 @@ export interface DropdownProps extends React.Props<DropdownType> {
 
     positionClassNames?: string[];
 
+    outerEvents?: string[];
+    onOuterEvent?: (event) => void;
+
     /** Classname to append to top level element */
     className?: string;
 
@@ -45,30 +48,6 @@ export interface DropdownProps extends React.Props<DropdownType> {
 export interface DropdownState {
     positionIndex?: number;
 }
-
-export const interactsWithDropdown = (event, dropdown: HTMLElement, depth?: number): boolean => {
-    let target = event.target;
-    /**
-     * Go back several levels to check whether the user is clicking in the
-     * dropdown
-    */
-    depth = depth || 6;
-    for (let i = 0; i < depth; i++) {
-        if (target === dropdown) {
-            break;
-        }
-        
-        if (target.parentElement) {
-            target = i < (depth - 1) ? target.parentElement : null;
-        
-            continue;
-        } else {
-            target = null;
-            break;
-        }
-    }
-    return !!target;
-};
 
 const compareClientRect = (first: ClientRect, second: ClientRect): boolean => {
     return (
@@ -193,6 +172,44 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             });
          }
     }
+
+    interactsWithDropdown(event, depth?: number): boolean {
+        let target = event.target;
+        /**
+         * Go back several levels to check whether the user is clicking in the
+         * dropdown
+        */
+        depth = depth || 6;
+        for (let i = 0; i < depth; i++) {
+            if (target === this.fixedContainer || target === this.container) {
+                break;
+            }
+            
+            if (target.parentElement) {
+                target = i < (depth - 1) ? target.parentElement : null;
+            
+                continue;
+            } else {
+                target = null;
+                break;
+            }
+        }
+        return !!target;
+    }
+
+    handleOuterEvent = (event) => {
+        if (event.target === this.fixedContainer || event.target === this.container) {
+            return;
+        }
+        if (!this.props.visible) {
+            return;
+        }
+
+        if (this.props.onOuterEvent && !this.interactsWithDropdown(event, 9)) {
+            this.props.onOuterEvent(event);
+        }
+    }
+
     /**
      * Get the dimensions and position of the dropdown element while it is
      * still in the DOM rendered by this component. This information is used
@@ -216,11 +233,21 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         if ((this.props.visible) && !this.eventsConnected) {
             window.addEventListener('resize', this.onChange);
             window.addEventListener('scroll', this.onChange);
+            if (this.props.outerEvents) {
+                this.props.outerEvents.forEach(
+                    event => window.addEventListener(event, this.handleOuterEvent)
+                );
+            }
             this.eventsConnected = true;
             this.animationRequest = null;
         } else if (!this.props.visible && this.eventsConnected) {
             window.removeEventListener('resize', this.onChange);
             window.removeEventListener('scroll', this.onChange);
+            if (this.props.outerEvents) {
+                this.props.outerEvents.forEach(
+                    event => window.removeEventListener(event, this.handleOuterEvent)
+                );
+            }
             this.animationRequest = 1;
             this.eventsConnected = false;
         }

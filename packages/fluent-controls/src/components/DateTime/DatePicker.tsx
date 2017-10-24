@@ -3,7 +3,7 @@ import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, InputProps, Elements as Attr, mergeAttributeObjects} from '../../Attributes';
 import {Calendar, CalendarAttributes} from './Calendar';
 import {Icon, IconSize, IconAttributes} from '../Icon';
-import {Dropdown, DropdownAttributes, interactsWithDropdown} from '../Dropdown';
+import {Dropdown, DropdownAttributes} from '../Dropdown';
 import {replaceAt, formatDate, placeholders} from './helpers';
 import {keyCode, MethodDate, dateIsValid, DateFormat} from '../../Common';
 const css = classNames.bind(require('./DatePicker.scss'));
@@ -204,24 +204,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 error: newState.invalid
             });
         }
-    }
-
-    /**
-     * Register event handlers on click and focusin for window
-     *
-     * Used to handle visibility of calendar dropdown
-     */
-    componentDidMount() {
-        window.addEventListener('click', this.handleDropdown.bind(this));
-        window.addEventListener('focusin', this.handleDropdown.bind(this));
-    }
-
-    /**
-     * Clean up event handlers used to handle visibility of calendar dropdown
-     */
-    componentWillUnmount() {
-        window.removeEventListener('click', this.handleDropdown);
-        window.removeEventListener('focusin', this.handleDropdown);
     }
 
     /**
@@ -591,33 +573,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         });
     }
 
-    /**
-     * Whenever focus changes or user clicks something, decide if the
-     * calendar should stay open or close
-     *
-     * This handler needs to be added to the 'focus' and 'click' events for
-     * the whole window
-     *
-     * @param event Focus or Click event
-     */
-    handleDropdown(event) {
-        if (event.target === this.inputElement) {
-            return;
-        }
-        if (!this.state.visible) {
-            return;
-        }
-        console.log(event);
-        console.log(interactsWithDropdown(event, this.container, 9), interactsWithDropdown(event, this.dropdown, 9));
-        if (
-            !interactsWithDropdown(event, this.container, 6)
-            && !interactsWithDropdown(event, this.dropdown, 6)
-        ) {
-            console.log('setting visible: false');
-            this.setState({ visible: false });
-        }
-    }
-
     onFocus() {
         this.setState({visible: true});
     }
@@ -724,6 +679,8 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                  * interactive dropdowns
                  */
                 onMouseEnter={() => {}}
+                outerEvents={['click', 'focusin']}
+                onOuterEvent={(event) => this.setState({visible: false})}
                 attr={mergeAttributeObjects(
                     this.props.attr,
                     {
