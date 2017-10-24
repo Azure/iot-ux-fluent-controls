@@ -66,7 +66,6 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
                 methodRef={props.autoFocus && autoFocusRef}
                 attr={props.attr.button}
             />
-            <Attr.div className={css('toggle-border')} attr={props.attr.border}/>
             <Attr.div className={css('toggle-switch')} attr={props.attr.switch}/>
             <Attr.div className={css('toggle-label')} attr={props.attr.text}>
                 {label}
