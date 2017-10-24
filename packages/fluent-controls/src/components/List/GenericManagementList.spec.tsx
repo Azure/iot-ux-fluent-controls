@@ -129,7 +129,7 @@ describe('<GenericManagementList />', () => {
             <ManagementList
                 columns={[
                     createCol(1),
-                    createCol(2),
+                    {...createCol(2), width: 200},
                     createCol(3),
                     createCol(4),
                     createCol(5),
@@ -148,6 +148,7 @@ describe('<GenericManagementList />', () => {
         );
 
         expect(wrapper.find('test-col-1').first().hasClass(css('auto-width'))).to.equal(true);
+        expect(wrapper.find('test-col-2').first().hasClass(css('auto-width'))).to.equal(false);
         expect(wrapper.find('test-col-6').first().hasClass(css('auto-width'))).to.equal(true);
     });
 });
