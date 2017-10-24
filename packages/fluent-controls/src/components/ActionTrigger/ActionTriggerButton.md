@@ -25,7 +25,10 @@ ______________________________________________________________________________
 
 ```jsx
 <div>
-    <ActionTriggerButton onClick={() => alert('clicked!')} icon='warning' attr={{
+    <ActionTriggerButton onClick={() => alert('clicked!')} icon='info'/>
+    <ActionTriggerButton onClick={() => alert('clicked!')} icon='warning' label='This is a label!'/>
+    <ActionTriggerButton onClick={() => alert('clicked!')} icon='error' disabled label='This is a label!'/>
+    <ActionTriggerButton onClick={() => alert('clicked!')} icon='info' attr={{
         container: {style: {backgroundColor: 'red'}}
     }}/>
 </div>
