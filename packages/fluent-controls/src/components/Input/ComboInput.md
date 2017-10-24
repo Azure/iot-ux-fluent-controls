@@ -34,6 +34,10 @@ const initialState = {
         {label: 'Label 3', value: 'Option 3'},
         {label: 'Label 4', value: 'Option 4', hidden: true},
         {label: 'Label 5', value: 'Option 5', disabled: true},
+        {label: 'Label 6', value: 'Option 6'},
+        {label: 'Label 7', value: 'Option 7'},
+        {label: 'Label 8', value: 'Option 8'},
+        {label: 'Label 9', value: 'Option 9'},
     ]
 };
 

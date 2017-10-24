@@ -139,11 +139,16 @@ $arrow-default-color: md-color(shade, 4);
 .dropdown {
     @include md-box(inline-block, relative);
     width: 100%;
-    padding: $gutter 0px;
     max-height: 200px;
     overflow-y: auto;
     background-color: $dropdown-bg-color;
     border: $dropdown-border;
+}
+
+.dropdown > div {
+    @include md-box(inline-block, relative);
+    width: 100%;
+    padding: $gutter 0px;
 }
 
 .option {

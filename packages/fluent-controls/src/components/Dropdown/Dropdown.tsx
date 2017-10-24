@@ -93,6 +93,11 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     private positionFailed: boolean;
     private positionReset: boolean;
 
+    private scrollOffset: {
+        top: number,
+        left: number
+    };
+
     private mouseX: number;
     private mouseY: number;
 
@@ -127,6 +132,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     }
 
     componentWillUpdate() {
+        this.saveScrollOffset();
         if (this.dropdown.parentElement === this.fixedContainer) {
             this.container.appendChild(this.dropdown);
             this.dropdownOffset = this.getDropdownOffset();
@@ -143,6 +149,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
     componentDidUpdate(oldProps: DropdownProps, oldState: DropdownState) {
         this.repositionDropdown();
+        this.loadScrollOffset();        
         if (!this.fixedContainer) {
             return;
         }
@@ -172,6 +179,22 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
                 this.repositionDropdown();
             });
          }
+    }
+
+    saveScrollOffset() {
+        if (this.dropdown) {
+            this.scrollOffset = {
+                top: this.dropdown.scrollTop,
+                left: this.dropdown.scrollLeft,
+            };
+        }
+    }
+
+    loadScrollOffset() {
+        if (this.dropdown && this.scrollOffset) {
+            this.dropdown.scrollTop = this.scrollOffset.top;
+            this.dropdown.scrollLeft = this.scrollOffset.left;
+        }
     }
 
     interactsWithDropdown(event, depth?: number): boolean {
