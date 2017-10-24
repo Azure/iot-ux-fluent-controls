@@ -106,6 +106,18 @@ let tooltip = 'This is a simple balloon!';
 </div>
 ```
 
+#### Balloon to the left (autoPosition: false)
+
+```jsx
+let tooltip = 'This is a simple balloon!';
+
+<div>
+    <Balloon tooltip={tooltip} position={3} align={1} multiline autoPosition={false}>Start</Balloon> - 
+    <Balloon tooltip={tooltip} position={3} align={2} multiline autoPosition={false}>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={3} align={3} multiline autoPosition={false}>End</Balloon>
+</div>
+```
+
 #### Balloon to the right:
 
 ```jsx

@@ -1,22 +1,21 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, SpanProps, InputProps, Elements as Attr} from '../../Attributes';
+import {DivProps, SpanProps, InputProps, Elements as Attr, mergeAttributeObjects} from '../../Attributes';
 import {Calendar, CalendarAttributes} from './Calendar';
 import {Icon, IconSize, IconAttributes} from '../Icon';
+import {Dropdown, DropdownAttributes} from '../Dropdown';
 import {replaceAt, formatDate, placeholders} from './helpers';
 import {keyCode, MethodDate, dateIsValid, DateFormat} from '../../Common';
 const css = classNames.bind(require('./DatePicker.scss'));
 
 export interface DatePickerType {}
 
-export interface DatePickerAttributes {
-    container: DivProps;
-    inputContainer: DivProps;
-    input: InputProps;
-    inputIcon: IconAttributes;
-    dropdownContainer: DivProps;
-    dropdownTriangle: DivProps;
-    calendar: CalendarAttributes;
+export interface DatePickerAttributes extends DropdownAttributes {
+    inputContainer?: DivProps;
+    input?: InputProps;
+    inputIcon?: IconAttributes;
+    dropdownTriangle?: DivProps;
+    calendar?: CalendarAttributes;
 }
 
 export interface DatePickerProps extends React.Props<DatePickerType> {
@@ -24,7 +23,7 @@ export interface DatePickerProps extends React.Props<DatePickerType> {
     name: string;
     /**
      * Initial value of date picker
-     * 
+     *
      * The onChange callback API does not receives invalid Date UTC ISO strings
      * so we can only provide an initialValue to the DatePicker
      */
@@ -52,16 +51,16 @@ export interface DatePickerProps extends React.Props<DatePickerType> {
 
     /**
      * Callback for HTML input element `onChange` events
-     * 
+     *
      * When the user enters a valid date, onChange receives a UTC ISO string.
-     * 
+     *
      * When the string value in the text input is not a valid date, onChange
      * receives the string "invalid"
      */
     onChange: (newValue: string) => void;
     /**
      * Callback for paste events
-     * 
+     *
      * When the user pastes a valid date, onPaste receives a UTC ISO string.
      */
     onPaste?: (newValue: string) => void;
@@ -99,17 +98,21 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             input: {},
             inputIcon: {},
             dropdownContainer: {},
+            dropdown: {},
             dropdownTriangle: {},
             calendar: {},
         }
     };
 
-    private containerElement: HTMLDivElement;    
+    private dropdown: HTMLElement;
+    private container: HTMLDivElement;
     private inputElement?: HTMLInputElement;
     private paste: boolean | string;
     private calendar: Calendar;
 
     oldSetState: any;
+
+    dropdownRef = (element) => this.dropdown = element;
 
     constructor(props: DatePickerProps) {
         super(props);
@@ -131,9 +134,9 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
 
     /**
      * Use props.initialValue to generate a new state
-     * 
+     *
      * props.initialValue is used to set the hours/minutes/seconds on internal Date
-     * 
+     *
      * @param props DatePickerProps
      */
     getInitialState(props: DatePickerProps): DatePickerState {
@@ -172,13 +175,13 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 }
             }
         }
-        
+
         if (!initialValue || initialValue.dateObject.toUTCString() === 'Invalid Date') {
             const today = new MethodDate(local);
             initialValue = today;
             dateValue = null;
         }
-        
+
         return {
             value: value,
             invalid: invalid,
@@ -189,7 +192,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
 
     /**
      * Update the Date/Time object used internally with a new initialValue
-     * 
+     *
      * @param newProps new DatePickerProps
      */
     componentWillReceiveProps(newProps: DatePickerProps) {
@@ -204,26 +207,8 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     }
 
     /**
-     * Register event handlers on click and focusin for window
-     * 
-     * Used to handle visibility of calendar dropdown
-     */
-    componentDidMount() {
-        window.addEventListener('click', this.handleDropdown.bind(this));
-        window.addEventListener('focusin', this.handleDropdown.bind(this));
-    }
-
-    /**
-     * Clean up event handlers used to handle visibility of calendar dropdown
-     */
-    componentWillUnmount() {
-        window.removeEventListener('click', this.handleDropdown);
-        window.removeEventListener('focusin', this.handleDropdown);
-    }
-
-    /**
      * Fire props.onChange handler when state.value changes
-     * 
+     *
      * Fires props.onChange('invalid') if input is invalid
      */
     componentDidUpdate(oldProps: DatePickerProps, oldState: DatePickerState) {
@@ -252,10 +237,10 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     /**
      * Handles string formatting and input behavior when the user is typing
      * in a month (the user must be appending to the string value)
-     * 
-     * Argument position is 1 for the Date format is MM/DD/YYYY, 
+     *
+     * Argument position is 1 for the Date format is MM/DD/YYYY,
      * 2 for DD/MM/YYYY, and 2 for YYYY\MM\DD (used to append whack symbol)
-     * 
+     *
      * @param newValue New value of the input element
      * @param position Position of month in date format
      */
@@ -296,10 +281,10 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     /**
      * Handles string formatting and input behavior when the user is typing
      * in a date (the user must be appending to the string value)
-     * 
-     * Argument position is 1 for the Date format is DD/MM/YYYY, 
+     *
+     * Argument position is 1 for the Date format is DD/MM/YYYY,
      * 2 for MM/DD/YYYY, and 3 for YYYY\MM\DD (used to append whack symbol)
-     * 
+     *
      * @param newValue New value of the input element
      * @param position Position of month in date format
      */
@@ -331,7 +316,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 } else {
                     /**
                      * Don't allow the user to type in an invalid date
-                     * 
+                     *
                      * NOTE: This code DOES NOT check date with the month so
                      * here, day 30 in February is considered valid.
                      */
@@ -345,7 +330,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     /**
      * Handles string formatting and input behavior when the user is appending
      * to the input value
-     * 
+     *
      * @param newValue New value of the input element
      */
     handleTyping(newValue: string) {
@@ -394,7 +379,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     /**
      * Handles string formatting and input behavior when the user is using
      * backspace to delete from the end of the input value
-     * 
+     *
      * @param newValue New value of the input element
      */
     handleDeletion(newValue: string) {
@@ -556,7 +541,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 error = false;
                 dateValue = new MethodDate(
                     this.props.localTimezone,
-                    result.year, 
+                    result.year,
                     result.month - 1,
                     result.date,
                     initialValue.hours,
@@ -564,7 +549,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                     initialValue.seconds
                 );
                 /**
-                 * Using the MethodDate/Date constructor forces years to be 
+                 * Using the MethodDate/Date constructor forces years to be
                  * at least 100 but we have to support any year > 0
                  */
                 if (result.year < 100) {
@@ -588,48 +573,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         });
     }
 
-    /**
-     * Whenever focus changes or user clicks something, decide if the
-     * calendar should stay open or close
-     *
-     * This handler needs to be added to the 'focus' and 'click' events for
-     * the whole window
-     *
-     * @param event Focus or Click event
-     */
-    handleDropdown(event) {
-        if (event.target === this.inputElement) {
-            return;
-        }
-        if (!this.state.visible) {
-            return;
-        }
-
-        let className = css('dropdown');
-        let target = event.target;
-        /**
-         * Go back several levels to check whether the user is clicking in the
-         * calendar (which causes the text input to lose focus)
-        */
-        for (let i = 0; i < 6; i++) {
-            if (target === this.containerElement) {
-                break;
-            }
-
-            if (target.parentElement) {
-                target = i < 5 ? target.parentElement : null;
-                continue;
-            } else {
-                target = null;
-                break;
-            }
-        }
-
-        if (!target) {
-            this.setState({ visible: false });
-        }
-    }
-
     onFocus() {
         this.setState({visible: true});
     }
@@ -648,7 +591,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             if (event.charCode >= keyCode.num0 && event.charCode <= keyCode.num9) {
                 return;
             }
-    
+
             if (event.charCode === keyCode.slash) {
                 if (this.state.value.split('/').length < 3) {
                     return;
@@ -679,7 +622,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     }
 
     containerRef(container: HTMLDivElement) {
-        this.containerElement = container;
+        this.container = container;
     }
 
     render() {
@@ -701,11 +644,54 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
 
         const parsed = this.parse(this.state.value);
 
-        return (
+        const calendar = [
+            <Calendar
+                value={
+                    this.state.dateValue
+                        ? this.state.dateValue.toDate()
+                        : null
+                }
+                onChange={newValue => this.onSelect(newValue)}
+                className={css('calendar')}
+                year={parsed.year || null}
+                month={parsed.month - 1 || null}
+                tabIndex={this.props.tabIndex}
+                ref={this.calendarRef}
+                key='1'
+                attr={this.props.attr.calendar}
+            />,
             <Attr.div
+                className={css('dropdown-triangle')}
+                key='2'
+                attr={this.props.attr.dropdownTriangle}
+            />
+        ];
+
+        return (
+            <Dropdown
+                dropdown={calendar}
+                visible={this.state.visible}
                 className={containerClassName}
-                methodRef={this.containerRef}
-                attr={this.props.attr.container}
+                positionClassNames={[css('dropdown'), css('dropdown', 'above')]}
+                /**
+                 * This is empty on purpose. When onMouseEnter/Leave is set,
+                 * the dropdown starts to accept pointer events needed for
+                 * interactive dropdowns
+                 */
+                onMouseEnter={() => {}}
+                outerEvents={['click', 'focusin']}
+                onOuterEvent={(event) => this.setState({visible: false})}
+                attr={mergeAttributeObjects(
+                    this.props.attr,
+                    {
+                        container: {ref: this.containerRef},
+                        dropdown: {
+                            className: css('dropdown'),
+                            ref: this.dropdownRef
+                        },
+                    },
+                    ['container', 'dropdownContainer', 'dropdown']
+                )}
             >
                 <Attr.div
                     className={css('input-container')}
@@ -735,30 +721,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                     />
                     {icon}
                 </Attr.div>
-                <Attr.div
-                    className={dropdownClassName}
-                    attr={this.props.attr.dropdownContainer}
-                >
-                    <Calendar
-                        value={
-                            this.state.dateValue
-                                ? this.state.dateValue.toDate()
-                                : null
-                        }
-                        onChange={newValue => this.onSelect(newValue)}
-                        className={css('calendar')}
-                        year={parsed.year || null}
-                        month={parsed.month - 1 || null}
-                        tabIndex={this.props.tabIndex}
-                        ref={this.calendarRef}
-                        attr={this.props.attr.calendar}
-                    />
-                    <Attr.div
-                        className={css('dropdown-triangle')} 
-                        attr={this.props.attr.dropdownTriangle}
-                    />
-                </Attr.div>
-            </Attr.div>
+            </Dropdown>
         );
     }
 }

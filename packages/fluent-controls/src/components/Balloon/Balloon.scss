@@ -9,8 +9,6 @@ $background-default-color: md-color(shade, 3);
 
 $text-default-color: md-color(shade, f);
 
-$balloon-z-index: $z-index-medium-step;
-
 @mixin arrow($location, $offset: 'center') {
     &:before {
         content:'';
@@ -117,27 +115,19 @@ $balloon-z-index: $z-index-medium-step;
     }
 }
 
-.balloon-container {
-    @include md-box(inline-block);
-    
-    text-decoration: none;
-    position: relative;
-
-}
-
 .balloon {
-    display: none;
-    position: absolute;
-    z-index: $balloon-z-index;
+    @include md-box(inline-block, absolute);
     font-family: $font-family-base;
-    padding: 3*$gutter 4*$gutter 4*$gutter 4*$gutter;
-    color: inherit;
-    background-color: inherit;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     background-color: $background-default-color;
     color: $text-default-color;
-    
+    width: 65*$grid;
+
     .inner-container {
+        @include md-box(inline-block, relative);
+        padding: 3*$gutter 4*$gutter 4*$gutter 4*$gutter;
+        color: inherit;
+        background-color: inherit;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -158,70 +148,100 @@ $balloon-z-index: $z-index-medium-step;
     section + footer {
         margin-top: 4*$gutter;
     }
-}
 
-.balloon-container:hover, .balloon-container.is-expanded {
-    .balloon {
-        display: inline;
-    }
-
-    .top-start {
-        @include position('top', 'start');
+    &.top-start {
         @include arrow('bottom', 'start');
+        
+        .balloon-container & {
+            @include position('top', 'start');
+        }
     }
 
-    .top-center {
-        @include position('top', 'center');
+    &.top-center {
         @include arrow('bottom', 'center');
+        
+        .balloon-container & {
+            @include position('top', 'center');
+        }
     }
     
-    .top-end {
-        @include position('top', 'end');
+    &.top-end {
         @include arrow('bottom', 'end');
+        
+        .balloon-container & {
+            @include position('top', 'end');
+        }
     }
 
-    .bottom-start {
-        @include position('bottom', 'start');
+    &.bottom-start {
         @include arrow('top', 'start');
+        
+        .balloon-container & {
+            @include position('bottom', 'start');
+        }
     }
 
-    .bottom-center {
-        @include position('bottom', 'center');
+    &.bottom-center {
         @include arrow('top', 'center');
+        
+        .balloon-container & {
+            @include position('bottom', 'center');
+        }
     }
     
-    .bottom-end {
-        @include position('bottom', 'end');
+    &.bottom-end {
         @include arrow('top', 'end');
+        
+        .balloon-container & {
+            @include position('bottom', 'end');
+        }
     }
 
-    .left-start {
-        @include position('left', 'start');
+    &.left-start {
         @include arrow('right', 'start');
+        
+        .balloon-container & {
+            @include position('left', 'start');
+        }
     }
 
-    .left-center {
-        @include position('left', 'center');
+    &.left-center {
         @include arrow('right', 'center');
+        
+        .balloon-container & {
+            @include position('left', 'center');
+        }
     }
     
-    .left-end {
-        @include position('left', 'end');
+    &.left-end {
         @include arrow('right', 'end');
+        
+        .balloon-container & {
+            @include position('left', 'end');
+        }
     }
 
-    .right-start {
-        @include position('right', 'start');
+    &.right-start {
         @include arrow('left', 'start');
+        
+        .balloon-container & {
+            @include position('right', 'start');
+        }
     }
 
-    .right-center {
-        @include position('right', 'center');
+    &.right-center {
         @include arrow('left', 'center');
+        
+        .balloon-container & {
+            @include position('right', 'center');
+        }
     }
     
-    .right-end {
-        @include position('right', 'end');
+    &.right-end {
         @include arrow('left', 'end');
+        
+        .balloon-container & {
+            @include position('right', 'end');
+        }
     }
 }
