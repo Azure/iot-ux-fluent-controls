@@ -114,10 +114,6 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                     className={css('checkbox-checkmark')}
                     attr={props.attr.checkmarkIcon}
                 />
-                <Attr.span
-                    className={css('checkbox-border')}
-                    attr={props.attr.border}
-                />
             </Attr.label>
         </Attr.div>
     );

@@ -2,7 +2,6 @@
 
 $default-border: 1px solid md-color(shade, 6);
 $hover-border: 1px solid md-color(shade, 3);
-$focused-border: 1px dashed md-color(shade, 3);
 $disabled-border: 1px solid md-color(shade, a);
 $indeterminate-border: 1px solid md-color(selected, default);
 $indeterminate-hover-border: 1px solid md-color(selected, hover);
@@ -27,8 +26,9 @@ $fill-disabled: md-color(shade, a);
 .checkbox-container {
     color: $text-default-color;
 
-    & input:focus ~ .checkbox-border {
-        border: $focused-border;
+    &:not(.disabled) input:focus + .checkbox-button {
+        outline: $focus-outline;
+        outline-offset: 1px;
     }
 
     .checkbox-button {
@@ -148,14 +148,6 @@ $fill-disabled: md-color(shade, a);
         top: 1.5*$gutter;
         width: $grid;
         height: $grid;
-    }
-
-    .checkbox-border {
-        @include md-box(inline-block, absolute);
-        left: -2px;
-        top: -2px;
-        width: 5*$grid;
-        height: 5*$grid;
     }
 
     .checkbox-button {
