@@ -298,38 +298,40 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                 className={css('datetime-field', this.props.className)}
                 attr={this.props.attr}
             >
-                <span className={css('field-col')}>
-                    <DatePicker
-                        name={this.props.name}
-                        initialValue={this.state.initialDate}
-                        tabIndex={this.props.tabIndex}
-                        error={!!this.props.error}
-                        disabled={this.props.disabled}
-                        localTimezone={this.props.localTimezone}
-                        showAbove={this.props.showAbove}
-                        format={this.props.format}
-                        onPaste={newDate => this.onDatePaste(newDate)}
-                        onChange={newDate => this.onDateChange(newDate)}
-                        className={css('date-picker', this.props.inputClassName)}
-                        attr={this.props.attr.datePicker}
-                    />
-                </span>
-                <span className={css('field-col')}>
-                    <TimeInput
-                        name={this.props.name}
-                        value={this.state.lastTime}
-                        amLabel={this.props.amLabel}
-                        pmLabel={this.props.pmLabel}
-                        localTimezone={this.props.localTimezone}
-                        showSeconds={this.props.showSeconds}
-                        militaryTime={this.props.militaryTime}
-                        error={!!this.props.error}
-                        disabled={this.props.disabled}
-                        onChange={newTime => this.onTimeChange(newTime)}
-                        className={css('time-picker', this.props.inputClassName)}
-                        attr={this.props.attr.timeInput}
-                    />
-                </span>
+                <div className={css('field-content')}>
+                    <span className={css('field-date')}>
+                        <DatePicker
+                            name={this.props.name}
+                            initialValue={this.state.initialDate}
+                            tabIndex={this.props.tabIndex}
+                            error={!!this.props.error}
+                            disabled={this.props.disabled}
+                            localTimezone={this.props.localTimezone}
+                            showAbove={this.props.showAbove}
+                            format={this.props.format}
+                            onPaste={newDate => this.onDatePaste(newDate)}
+                            onChange={newDate => this.onDateChange(newDate)}
+                            className={css('date-picker', this.props.inputClassName)}
+                            attr={this.props.attr.datePicker}
+                        />
+                    </span>
+                    <span className={css('field-time')}>
+                        <TimeInput
+                            name={this.props.name}
+                            value={this.state.lastTime}
+                            amLabel={this.props.amLabel}
+                            pmLabel={this.props.pmLabel}
+                            localTimezone={this.props.localTimezone}
+                            showSeconds={this.props.showSeconds}
+                            militaryTime={this.props.militaryTime}
+                            error={!!this.props.error}
+                            disabled={this.props.disabled}
+                            onChange={newTime => this.onTimeChange(newTime)}
+                            className={css('time-picker', this.props.inputClassName)}
+                            attr={this.props.attr.timeInput}
+                        />
+                    </span>
+                </div>
             </FormField>
         );
     }
