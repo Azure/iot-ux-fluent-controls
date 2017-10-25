@@ -7,6 +7,7 @@ $text-checked-color: md-color(combo, selected-text);
 $text-disabled-color: md-color(shade, 8);
 $text-selection-color: md-color(text, white);
 
+$background-color: md-color(shade, f);
 $background-checked-color: md-color(form, selected);
 $background-disabled-color: md-color(shade, d);
 $background-selection-color: md-color(combo, hover);
@@ -42,7 +43,7 @@ $z-index-focus: 2*$z-index-small-step;
         appearance: none;
         border-radius: 0px;
         padding: 0px 0px 0px 4*$gutter;
-        background: transparent;
+        background: $background-color;
         margin-left: -1px;
 
         option {
