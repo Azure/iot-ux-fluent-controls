@@ -84,6 +84,7 @@ a:focus .card:not(.disabled) {
   @include md-box(relative, hidden, flex-column);
   padding: $card-content-margin;
   font-family: $font-family-base;
+  overflow: hidden;
 
   header {
     font-size: 16px;
@@ -94,11 +95,11 @@ a:focus .card:not(.disabled) {
   }
 
   section {
-    @include md-box(ellipsis);
+    @include md-box();
     font-size: 13px;
     line-height: 16px;
     color: $text-section-color;
-    margin-bottom: 4*$gutter;
+    overflow: hidden;
   }
   
   footer {
@@ -108,7 +109,6 @@ a:focus .card:not(.disabled) {
   }
   
   .fixed & {
-    text-overflow: ellipsis;
     height: $card-fixed-content-height;
   }
 }
