@@ -90,7 +90,7 @@ $postfix-background: md-color(shade, c);
         }
 
         &:invalid {
-            -moz-mox-shadow: none;
+            box-shadow: none;
         }
     }
 
