@@ -21,6 +21,12 @@ ______________________________________________________________________________
 ```
 
 ```jsx
+<FormError>
+    This field error is much too long! This field error is much too long! This field error is much too long! This field error is much too long! This field error is much too long! This field error is much too long! This field error is much too long! This field error is much too long! This field error is much too long! This field error is much too long!
+</FormError>
+```
+
+```jsx
 <FormError hidden>
     This field is required but the error is hidden!
 </FormError>
