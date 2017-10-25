@@ -26,6 +26,8 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     label: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
+    /** Error HTML title in case of overflow */
+    errorTitle?: string;
 
     /** Node to draw to the left of the input box */
     prefix?: MethodNode;
@@ -63,6 +65,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
             name={props.name}
             label={props.label}
             error={props.error}
+            errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
             className={props.className}

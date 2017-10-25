@@ -22,6 +22,8 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     label?: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
+    /** Error HTML title in case of overflow */
+    errorTitle?: string;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
@@ -71,6 +73,7 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
             <FormError
                 className={props.errorClassName}
                 hidden={props.hideError}
+                title={props.errorTitle}
                 attr={{container: props.attr.fieldError}}
             >
                 {error}

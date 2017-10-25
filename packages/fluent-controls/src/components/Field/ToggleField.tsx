@@ -20,6 +20,8 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
     label: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
+    /** Error HTML title in case of overflow */
+    errorTitle?: string;
 
     onLabel?: MethodNode;
     offLabel?: MethodNode;
@@ -55,6 +57,7 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
             name={props.name}
             label={props.label}
             error={props.error}
+            errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
             className={props.className}

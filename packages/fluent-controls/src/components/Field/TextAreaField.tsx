@@ -19,6 +19,8 @@ export interface TextAreaFieldProps extends React.Props<TextAreaFieldType> {
     label: MethodNode;
     /** Error to display below textarea element */
     error?: MethodNode;
+    /** Error HTML title in case of overflow */
+    errorTitle?: string;
 
     /** Grow text area to fit user text */
     autogrow?: boolean;
@@ -53,6 +55,7 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
             name={props.name}
             label={props.label}
             error={props.error}
+            errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
             className={props.className}

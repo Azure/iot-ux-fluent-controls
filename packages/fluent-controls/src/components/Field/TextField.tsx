@@ -26,6 +26,8 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     label: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
+    /** Error HTML title in case of overflow */
+    errorTitle?: string;
 
     /** Node to draw to the left of the input box */
     prefix?: MethodNode;
@@ -67,6 +69,7 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
             name={props.name}
             label={props.label}
             error={props.error}
+            errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
             className={props.className}

@@ -21,6 +21,8 @@ export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
     label: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
+    /** Error HTML title in case of overflow */
+    errorTitle?: string;
     
     /** Disable HTML input element */
     disabled?: boolean;
@@ -58,6 +60,7 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
             name={props.name}
             label={props.label}
             error={props.error}
+            errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
             className={props.className}

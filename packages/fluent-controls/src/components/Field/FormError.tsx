@@ -10,6 +10,8 @@ export interface FormErrorAttributes {
 }
 
 export interface FormErrorProps extends React.Props<FormErrorType> {
+    /** Title tag for error in case of overflow */
+    title?: string;
     /** Hide error */
     hidden?: boolean;
 
@@ -30,7 +32,7 @@ export const FormError: React.StatelessComponent<FormErrorProps> = (props: FormE
             className={css('field-error', {
                 'hidden': props.hidden
             }, props.className)}
-            title={props.children.toString()}
+            title={props.title}
             attr={props.attr.container}
         >
             {props.children}

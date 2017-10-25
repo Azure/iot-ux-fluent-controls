@@ -31,6 +31,8 @@ export interface RadioFieldProps extends React.Props<RadioFieldType> {
     label: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
+    /** Error HTML title in case of overflow */
+    errorTitle?: string;
     
     /** Allow radio buttons to show up in columns */
     columns?: boolean;
@@ -102,6 +104,7 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
             name={props.name}
             label={props.label}
             error={props.error}
+            errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
             className={props.className}
