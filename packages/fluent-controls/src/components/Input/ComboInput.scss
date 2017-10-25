@@ -89,7 +89,7 @@ $arrow-default-color: md-color(shade, 4);
         }
 
         &:invalid {
-            -moz-mox-shadow: none;
+            box-shadow: none;
         }
     }
 
