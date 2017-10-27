@@ -5,8 +5,12 @@ $column-font-family: join('DIN-Regular', $font-family-base);
 
 $header-color: md-color(shade, 3);
 $content-color: md-color(shade, 4);
+$checkmark-color: md-color(shade, dark);
 
-$content-bg-color: md-color(shade, e);
+$content-bg-color: md-color(shade, f);
+$checkbox-bg-color: md-color(shade, f);
+
+$checkbox-border: 1px solid md-color(shade, 6);
 
 $header-line-height: 4*$grid;
 
@@ -37,14 +41,6 @@ $header-line-height: 4*$grid;
             }
         }
         
-        &:last-child {
-            text-align: right;
-
-            .column-header {
-                float: right;
-            }
-        }
-        
         .column-header {
             @include md-box(block, relative);
             @include md-button-reset();
@@ -54,7 +50,6 @@ $header-line-height: 4*$grid;
             line-height: $header-line-height;
             color: $header-color;
             
-            margin-top: 6*$gutter;
             padding-top: 2*$gutter;
             padding-right: 5*$gutter;
 
@@ -106,6 +101,28 @@ $header-line-height: 4*$grid;
 
         .select-all-label {
             display: none;
+        }
+    }
+
+    .list-checkbox-container {
+        .list-checkbox-button {
+            border: $checkbox-border;
+            background-color: $checkbox-bg-color;
+        }
+        
+        .list-checkbox-checkmark {
+            color: $checkmark-color;
+        }
+    }
+
+    .list-checkbox-container:hover {
+        .list-checkbox-button {
+            border: $checkbox-border;
+            background-color: $checkbox-bg-color;
+        }
+        
+        .list-checkbox-checkmark {
+            color: $checkmark-color;
         }
     }
 }

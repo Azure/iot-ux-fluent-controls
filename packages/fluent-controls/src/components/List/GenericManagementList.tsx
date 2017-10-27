@@ -1,7 +1,7 @@
 import { DEFAULT_ENCODING } from 'crypto';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, ButtonProps, Elements as Attr, OptionAttr, mergeAttributes} from '../../Attributes';
+import {DivProps, ButtonProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects} from '../../Attributes';
 import {Icon, IconAttributes} from '../Icon';
 import {MethodNode, GridColumn, SortDirection} from '../../Common';
 import {CheckboxInput, CheckboxInputAttributes} from '../Input/CheckboxInput';
@@ -186,14 +186,16 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                             console.error('Method Error: Management List Column property mapColumn must return a valid React Node');
                         }
                     }
+                    console.log(`${this.props.name}-select-${rowIndex}_checkbox`);
                     return (
-                        <Attr.div
+                        <Attr.label
                             className={css('column-content')}
                             key={rowIndex}
+                            htmlFor={`${this.props.name}-select-${rowIndex}_checkbox`}
                             attr={mergeAttributes(this.props.attr.rowContent, row.attr)}
                         >
                             {content}
-                        </Attr.div>
+                        </Attr.label>
                     );
                 }
             ));
@@ -219,9 +221,22 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                             {this.props.selectAllLabel}
                         </Attr.div>
                     }
+                    className={css({
+                        'list-checkbox-container': allSelected
+                    })}
                     checked={allSelected}
                     onChange={newValue => this.props.onSelectAll(newValue)}
-                    attr={this.props.attr.selectAllCheckbox}
+                    attr={mergeAttributeObjects(
+                        this.props.attr.selectAllCheckbox, {
+                            checkbox: {
+                                className: css('list-checkbox-button')
+                            },
+                            checkmarkIcon: {
+                                container: {className: css('list-checkbox-checkmark')}
+                            },
+                        },
+                        ['container', 'label', 'input', 'text', 'checkbox', 'indeterminateFill', 'checkmarkIcon', 'border']
+                    )}
                 />;
 
             checkboxCol.push(
@@ -252,6 +267,9 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         console.error('Method Error: Management List Column property selectLabel must return a valid React Node');
                     }
                 }
+                const isSelected = this.props.isSelected instanceof Function
+                    ? this.props.isSelected(row)
+                    : !!row[this.props.isSelected];
                 checkboxCol.push(
                     <Attr.div
                         className={css('column-content', 'checkbox')}
@@ -265,13 +283,22 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                                     {selectLabel}
                                 </Attr.div>
                             }
-                            checked={
-                                this.props.isSelected instanceof Function
-                                    ? this.props.isSelected(row)
-                                    : !!row[this.props.isSelected]
-                            }
+                            className={css({
+                                'list-checkbox-container': isSelected
+                            })}
+                            checked={isSelected}
                             onChange={newValue => this.props.onSelect(row, newValue)}
-                            attr={this.props.attr.selectRowCheckbox}
+                            attr={mergeAttributeObjects(
+                                this.props.attr.selectRowCheckbox, {
+                                    checkbox: {
+                                        className: css('list-checkbox-button')
+                                    },
+                                    checkmarkIcon: {
+                                        container: {className: css('list-checkbox-checkmark')}
+                                    },
+                                },
+                                ['container', 'label', 'input', 'text', 'checkbox', 'indeterminateFill', 'checkmarkIcon', 'border']
+                            )}
                         />
                     </Attr.div>
                 );

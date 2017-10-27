@@ -210,5 +210,7 @@ class ManagementListDemo extends React.Component {
     }
 }
 
-<ManagementListDemo />
+<div style={{backgroundColor: '#F4F4F4', padding: '8px'}}>
+    <ManagementListDemo />
+</div>
 ```
