@@ -68,7 +68,8 @@ $header-line-height: 4*$grid;
                 cursor: initial;
             }
 
-            .sort-direction {
+            .sort-direction::before {
+                line-height: 3*$grid;
                 margin-left: 2*$gutter;
             }
         }
