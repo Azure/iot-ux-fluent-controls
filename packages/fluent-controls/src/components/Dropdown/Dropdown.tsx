@@ -101,6 +101,8 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     private mouseX: number;
     private mouseY: number;
 
+    private unmounting: boolean;
+
     constructor(props: DropdownProps) {
         super(props);
 
@@ -166,6 +168,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     }
 
     componentWillUnmount() {
+        this.unmounting = true;
         if (this.fixedContainer) {
             this.fixedContainer.parentElement.removeChild(this.fixedContainer);
         }
@@ -280,7 +283,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
     repositionDropdown() {
         this.updateEventHandlers();
-        if (!this.props.visible) {
+        if (!this.props.visible || this.unmounting) {
             return;
         }
         if (!this.container || !this.dropdown || !this.fixedContainer) {

@@ -345,7 +345,8 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         let inputValue = '';
         const value = this.getValue();
         let result = null;
-        const options = this.getVisibleOptions().map((option, index) => {
+        const visibleOptions = this.getVisibleOptions();
+        const options = visibleOptions.map((option, index) => {
                 const checkLabel = this.props.showLabel
                     ? this.props.optionLabel(value, option).toString === this.props.value
                     : false;
@@ -412,10 +413,12 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                 {options}
             </Attr.div>;
 
+        const validOptions = visibleOptions.filter(option => !option.disabled);
+
         return (
             <Dropdown
                 dropdown={dropdown}
-                visible={this.state.visible}
+                visible={validOptions.length > 0 && this.state.visible}
                 className={containerClassName}
                 /**
                 * This is empty on purpose. When onMouseEnter/Leave is set,
