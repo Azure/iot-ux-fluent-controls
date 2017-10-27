@@ -417,7 +417,6 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                 dropdown={dropdown}
                 visible={this.state.visible}
                 className={containerClassName}
-                positionClassNames={[css('dropdown'), css('dropdown', 'above')]}
                 /**
                 * This is empty on purpose. When onMouseEnter/Leave is set,
                 * the dropdown starts to accept pointer events needed for
@@ -429,8 +428,8 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                 attr={mergeAttributeObjects(
                     this.props.attr,
                     {
-                        container: {
-                            className: containerClassName
+                        dropdown: {
+                            className: css('dropdown')
                         },
                     },
                     ['container', 'dropdownContainer', 'dropdown']
