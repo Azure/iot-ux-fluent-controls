@@ -186,7 +186,6 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                             console.error('Method Error: Management List Column property mapColumn must return a valid React Node');
                         }
                     }
-                    console.log(`${this.props.name}-select-${rowIndex}_checkbox`);
                     return (
                         <Attr.label
                             className={css('column-content')}
