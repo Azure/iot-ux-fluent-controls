@@ -146,6 +146,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
     }
 
     componentDidMount() {
+        this.unmounting = false;
         this.repositionDropdown();
     }
 
