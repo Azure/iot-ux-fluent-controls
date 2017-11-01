@@ -104,10 +104,11 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
 
         const numHours = props.militaryTime ? 24 : 12;
         this.hours = [];
-        for (let index = 0; index < numHours; index++) {
+        for (let index = 1; index < numHours; index++) {
             const value = index < 10 ? `0${index}` : `${index}`;
             this.hours.push({label: value, value: value});
         }
+        this.hours.push({label: '12', value: '00'});
 
         this.minutes = [];
         this.seconds = [];
