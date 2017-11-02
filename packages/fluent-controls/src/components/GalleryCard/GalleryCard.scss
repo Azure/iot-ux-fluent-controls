@@ -70,9 +70,15 @@ a:focus .card:not(.disabled) {
   }
 }
 
-.background-image {
+.background-image-container {
     @extend %card-background;
-    background-size: cover;
+
+    .background-image {
+      @include md-box(inline-block, absolute);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
 }
 
 .background-color {

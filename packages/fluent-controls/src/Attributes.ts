@@ -10,6 +10,7 @@ export type DivProps = AttrProps<HTMLDivElement>;
 export type FooterProps = AttrProps<HTMLDivElement>;
 export type HeaderProps = AttrProps<HTMLDivElement>;
 export type InputProps = AttrProps<HTMLInputElement>;
+export type ImageProps = AttrProps<HTMLImageElement>;
 export type LabelProps = AttrProps<HTMLLabelElement>;
 export type OptionProps = AttrProps<HTMLOptionElement>;
 export type PreProps = AttrProps<HTMLPreElement>;
@@ -171,6 +172,7 @@ const div = AttrElementWrapper<HTMLDivElement>('div');
 const footer = AttrElementWrapper<HTMLDivElement>('footer');
 const header = AttrElementWrapper<HTMLDivElement>('header');
 const input = AttrElementWrapper<HTMLInputElement>('input');
+const image = AttrElementWrapper<HTMLInputElement>('img');
 const label = AttrElementWrapper<HTMLLabelElement>('label');
 const option = AttrElementWrapper<HTMLOptionElement>('option');
 const pre = AttrElementWrapper<HTMLPreElement>('pre');
@@ -186,6 +188,7 @@ export const Elements = {
     footer: footer,
     header: header,
     input: input,
+    image: image,
     label: label,
     option: option,
     pre: pre,

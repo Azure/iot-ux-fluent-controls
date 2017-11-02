@@ -1,17 +1,20 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, Elements as Attr} from '../../Attributes';
+import {DivProps, ImageProps, Elements as Attr} from '../../Attributes';
 const css = classNames.bind(require('./GalleryCard.scss'));
 
 export interface ImageBackgroundType {}
 
 export interface ImageBackgroundAttributes {
     container?: DivProps;
+    image?: ImageProps;
 }
 
 export interface ImageBackgroundProps extends React.Props<ImageBackgroundType> {
     /** Background image url */
     src: string;
+    alt?: string;
+    title?: string;
 
     /**
      * Fixed width and height (284 x ?? pixels)
@@ -35,17 +38,12 @@ export interface ImageBackgroundProps extends React.Props<ImageBackgroundType> {
  */
 export const ImageBackground: React.StatelessComponent<ImageBackgroundProps> = (props: ImageBackgroundProps) => {
     let cls = css({
-        'background-image': true,
+        'background-image-container': true,
         'fixed': !!props.fixed
     }, props.className);
-
-    let style = {
-        backgroundImage: `url(${props.src})`
-    };
-
     return (
-        <Attr.div className={cls} style={style} attr={props.attr.container}>
-            {props.children}
+        <Attr.div className={cls} attr={props.attr.container}>
+            <Attr.image className={css('background-image')} src={props.src} title={props.title} alt={props.alt} attr={props.attr.image}/>
         </Attr.div>
     );
 };
