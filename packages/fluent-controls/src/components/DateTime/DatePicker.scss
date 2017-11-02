@@ -8,7 +8,7 @@ $postfix-background: md-color(shade, c);
 
 $calendar-bg-color: md-color(shade, f);
 
-$calendar-z-index: $z-index-medium-step;
+$calendar-z-index: 9 * $z-index-large-step + 5 * $z-index-medium-step;
 
 $calc-margin: 5px;
 
@@ -115,6 +115,7 @@ $calc-margin: 5px;
         background-color: $calendar-bg-color;
         border: $default-border;
         display: inline-block;
+        z-index: $calendar-z-index;
     }
 
     .dropdown-triangle {

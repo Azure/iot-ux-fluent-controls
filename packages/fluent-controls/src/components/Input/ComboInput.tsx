@@ -444,7 +444,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                 >
                     <Attr.input 
                         type='text'
-                        autocomplete='off'
+                        autoComplete='off'
                         name={this.props.name}
                         value={inputValue}
                         className={inputClassName}

@@ -260,8 +260,8 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
     updateEventHandlers() {
         if ((this.props.visible) && !this.eventsConnected) {
-            window.addEventListener('resize', this.onChange);
-            window.addEventListener('scroll', this.onChange);
+            document.addEventListener('resize', this.onChange, true);
+            document.addEventListener('scroll', this.onChange, true);
             if (this.props.outerEvents) {
                 this.props.outerEvents.forEach(
                     event => window.addEventListener(event, this.handleOuterEvent)
@@ -270,8 +270,8 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             this.eventsConnected = true;
             this.animationRequest = null;
         } else if (!this.props.visible && this.eventsConnected) {
-            window.removeEventListener('resize', this.onChange);
-            window.removeEventListener('scroll', this.onChange);
+            document.removeEventListener('resize', this.onChange, true);
+            document.removeEventListener('scroll', this.onChange, true);
             if (this.props.outerEvents) {
                 this.props.outerEvents.forEach(
                     event => window.removeEventListener(event, this.handleOuterEvent)
