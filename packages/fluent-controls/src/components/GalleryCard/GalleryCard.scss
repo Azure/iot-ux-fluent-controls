@@ -72,6 +72,7 @@ a:focus .card:not(.disabled) {
 
 .background-image-container {
     @extend %card-background;
+    overflow: hidden;
 
     .background-image {
       @include md-box(inline-block, absolute);
