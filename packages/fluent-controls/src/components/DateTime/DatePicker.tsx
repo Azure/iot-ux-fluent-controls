@@ -423,6 +423,10 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             date = parseInt(split[2]);
         }
 
+        /**
+         * If you set Date.year to a number below 100, it assumes that you're
+         * supplying a 2 digit year instead of 4 digits, turning 20 into 2020 etc
+         */
         if (isNaN(year) || year < 100) {
             valid = false;
         }
