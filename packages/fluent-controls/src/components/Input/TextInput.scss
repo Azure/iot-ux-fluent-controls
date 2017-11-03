@@ -1,5 +1,7 @@
 @import 'common';
 
+$bg-color: md-color(shade, f);
+
 $prefix-color: md-color(shade, 6);
 $prefix-background: md-color(shade, c);
 
@@ -27,6 +29,9 @@ $postfix-background: md-color(shade, c);
         padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
         border: $inactive-border;
         outline: none;
+
+        background-color: $bg-color;
+        max-width: 100%;
 
         &:valid {
             padding: 2*$gutter 3*$gutter 2*$gutter 3*$gutter;
