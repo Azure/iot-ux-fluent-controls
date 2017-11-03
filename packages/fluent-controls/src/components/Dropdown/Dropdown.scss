@@ -10,7 +10,7 @@ $background-default-color: md-color(shade, 3);
 $text-default-color: md-color(shade, f);
 
 $dropdown-z-index: $z-index-medium-step;
-$fixed-dropdown-z-index: $z-index-large-step;
+$fixed-dropdown-z-index: 9 * $z-index-large-step + 5 * $z-index-medium-step;
 
 .dropdown-container {
     @include md-box(inline-block, relative);
