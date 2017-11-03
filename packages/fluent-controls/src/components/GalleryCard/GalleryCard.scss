@@ -1,0 +1,148 @@
+@import '../../common/overrides';
+@import '../../common/mixins';
+
+$card-fixed-width: 284px;
+$card-fixed-height: 284px;
+$card-fixed-background-height: 160px;
+$card-fixed-content-height: $card-fixed-height - $card-fixed-background-height;
+
+$card-content-margin: 20px 20px 16px 20px;
+
+$card-icon-width: 96px;
+$card-icon-height: 96px;
+$card-icon-top: ($card-fixed-background-height - $card-icon-height);
+$card-icon-left: ($card-fixed-width - $card-icon-width);
+
+$card-default-border: 1px solid md-color(shade, a);
+$card-hover-border: 1px solid md-color(shade, 3);
+
+$background-default-color: md-color(shade, e);
+$background-solid-color: md-color(shade, e);
+$background-banner-color: md-color(shade, 3);
+
+$text-header-color: md-color(shade, 2);
+$text-section-color: md-color(shade, 6);
+$text-banner-color: md-color(shade, e);
+
+a:focus .card:not(.disabled) {
+  border: $card-hover-border;
+}
+
+.card {
+  @include md-box(inline-block, relative, hidden);
+  background-color: $background-default-color;
+  border: $card-default-border;
+  margin: 2.5*$gutter;
+
+  &:hover:not(.disabled) {
+    border: $card-hover-border;
+  }
+
+  &.fixed {
+    height: $card-fixed-width;
+    width: $card-fixed-height;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+%card-background {
+  @include md-box(inline-block, relative);
+  width: 100%;
+  background-color: transparent;
+  transition: background-color 0.2s ease-in-out;
+
+  &.fixed {
+    width: $card-fixed-width;
+    height: $card-fixed-background-height;
+  }
+
+  .fullbg & {
+    height: 100%;
+  }
+}
+
+.background-image-container {
+    @extend %card-background;
+    overflow: hidden;
+
+    .background-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+}
+
+.background-color {
+    @extend %card-background;
+    background-color: $background-solid-color;
+}
+
+.card-content {
+  @include md-box(relative, hidden, flex-column);
+  padding: $card-content-margin;
+  font-family: $font-family-base;
+  overflow: hidden;
+
+  header {
+    font-size: 16px;
+    line-height: 20px;
+    color: $text-header-color;
+    margin-bottom: $gutter;
+    flex: 0 0 5*$grid;
+  }
+
+  section {
+    @include md-box();
+    font-size: 13px;
+    line-height: 16px;
+    color: $text-section-color;
+    overflow: hidden;
+  }
+  
+  footer {
+    font-size: $font-size-text;
+    line-height: 20px;
+    flex: 0 0 4*$grid;
+  }
+  
+  .fixed & {
+    height: $card-fixed-content-height;
+  }
+}
+
+.banner {
+  @include md-box(block, absolute);
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding: $gutter;
+  background-color: $background-banner-color;
+  color: $text-banner-color;
+  font-family: $font-family-base;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.gallery-card-icon {
+  background-color: transparent;
+  color: white;
+  text-align: center;
+
+  .icon-title {
+    @include md-box(block);
+    font-family: $font-family-base;
+    font-size: $font-size-text;
+  }
+}
