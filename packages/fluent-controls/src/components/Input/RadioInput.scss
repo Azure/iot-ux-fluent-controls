@@ -40,6 +40,8 @@ $radio-bg-color: md-color(shade, f);
         border: none;
         outline: none;
 
+        background-color: $input-bg-color;
+
         &:focus ~ .radio-button:not(.disabled) {
             outline: $focus-outline;
             outline-offset: 1px;

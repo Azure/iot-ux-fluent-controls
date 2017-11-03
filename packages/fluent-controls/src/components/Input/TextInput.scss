@@ -33,6 +33,8 @@ $postfix-background: md-color(shade, c);
         background-color: $bg-color;
         max-width: 100%;
 
+        background-color: $input-bg-color;
+
         &:valid {
             padding: 2*$gutter 3*$gutter 2*$gutter 3*$gutter;
         }

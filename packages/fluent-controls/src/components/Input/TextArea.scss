@@ -26,6 +26,8 @@
     border: $inactive-border;
     outline: none;
 
+    background-color: $input-bg-color;
+
     &:hover {
         border: $default-border;
     }
