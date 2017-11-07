@@ -144,24 +144,29 @@ export function AttrElementWrapper<T extends HTMLElement>(element: string): Attr
             delete attr.key;
         }
         
-        let propChildren;
+        let hasChildren = false;
+        let propChildren = [];
         if (props.children) {
+            hasChildren = true;
             propChildren = props.children;
             delete props.children;
         }
-        let attrChildren;
+        let attrChildren = [];
         if (attr.children) {
+            hasChildren = true;
             attrChildren = attr.children;
             delete attr.children;
         }
-
+        
         props = {...props, ...attr, className, ref};
 
+        if (hasChildren) {
+            props.children = [propChildren].concat([attrChildren]);
+        }
+        
         return React.createElement(
             element,
-            props, 
-            ...(propChildren ? propChildren : []),
-            ...(attrChildren ? attrChildren : [])
+            props
         );
     };
 }
