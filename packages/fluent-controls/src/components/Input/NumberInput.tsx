@@ -144,7 +144,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         }
 
         if (this.isPositive() && parsedValue < 0) {
-            return;
+            return; 
         }
 
         this.setState({value: newValue, paste: paste});
@@ -162,7 +162,9 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             value = initialValue;
         }
 
-        if (this.state && typeof(this.state.value) === 'string') {
+        if (value === '' || value === null) {
+            value = '';
+        } else if (this.state && typeof(this.state.value) === 'string') {
             if (
                 parseFloat(this.state.value) === parseFloat(value)
                 && this.state.value[-1] === '.'
@@ -206,7 +208,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             return;
         }
 
-        if (this.state.value === '') {
+        if (this.state.value === '' || this.state.value === null) {
             this.props.onChange(null);
         } else {
             this.props.onChange(this.getValue(this.state.value));
@@ -214,6 +216,9 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
     }
 
     componentWillReceiveProps(newProps: NumberInputProps) {
+        console.log('new props-------------------------------------------------');
+        console.log(this.props);
+        console.log(newProps);
         if (this.props.initialValue !== newProps.initialValue) {
             this.setState(this.getInitialState(newProps.initialValue));
         }
