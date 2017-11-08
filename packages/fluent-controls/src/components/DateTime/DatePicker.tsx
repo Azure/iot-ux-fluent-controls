@@ -150,7 +150,10 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 value = '';
                 invalid = true;
                 if (this.state && this.state.initialValue) {
-                    initialValue = this.state.initialValue;
+                    initialValue = MethodDate.fromString(
+                        props.localTimezone,
+                        this.state.initialValue.dateObject.toUTCString()
+                    );
                 }
             } else if (typeof(props.initialValue) === 'string') {
                 const date = MethodDate.fromString(local, props.initialValue);
@@ -202,7 +205,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
      * @param newProps new DatePickerProps
      */
     componentWillReceiveProps(newProps: DatePickerProps) {
-        if (this.props.initialValue !== newProps.initialValue && newProps.initialValue !== 'invalid') {
+        if ((this.props.initialValue !== newProps.initialValue || this.props.localTimezone !== newProps.localTimezone) && newProps.initialValue !== 'invalid') {
             const newState = this.getInitialState(newProps);
             this.setState({
                 ...newState,

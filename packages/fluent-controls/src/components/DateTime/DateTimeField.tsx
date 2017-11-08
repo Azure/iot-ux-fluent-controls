@@ -204,7 +204,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
     }
 
     componentWillReceiveProps(newProps: DateTimeFieldProps) {
-        if (this.props.initialValue !== newProps.initialValue) {
+        if (this.props.initialValue !== newProps.initialValue || this.props.localTimezone !== newProps.localTimezone) {
             this.setState(this.getInitialState(newProps));
         }
     }

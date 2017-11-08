@@ -183,7 +183,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         if (update && !this.state.detached && date.isValid()) {
             this.setState({currentDate: date});
         }
-        if (this.props.value !== newProps.value) {
+        if (this.props.value !== newProps.value || this.props.localTimezone !== newProps.localTimezone) {
             if (typeof(newProps.value) === 'string') {
                 this.value = MethodDate.fromString(newProps.localTimezone, newProps.value);
             } else if (newProps.value) {

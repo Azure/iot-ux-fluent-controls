@@ -122,17 +122,17 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
     handleState(props: TimeInputProps): TimeInputState {
         const time = this.handleTimezone(props.value);
         
-        const hoursTz = this.props.localTimezone ? time.getHours() : time.getUTCHours();
+        const hoursTz = props.localTimezone ? time.getHours() : time.getUTCHours();
         const hours = !isNaN(hoursTz) ? hoursTz : 0;
-        const minutesTz = this.props.localTimezone ? time.getMinutes() : time.getUTCMinutes();
+        const minutesTz = props.localTimezone ? time.getMinutes() : time.getUTCMinutes();
         const minutes = !isNaN(minutesTz) ? minutesTz : 0;
-        const secondsTz = this.props.localTimezone ? time.getSeconds() : time.getUTCSeconds();
+        const secondsTz = props.localTimezone ? time.getSeconds() : time.getUTCSeconds();
         const seconds = !isNaN(secondsTz) ? secondsTz : 0;
         return {
-            hours: !this.props.militaryTime && hours > 11 ? hours - 12 : hours,
+            hours: !props.militaryTime && hours > 11 ? hours - 12 : hours,
             minutes: !isNaN(minutes) ? minutes : 0,
             seconds: !isNaN(seconds) ? seconds : 0,
-            period: this.props.militaryTime ? '24H' : (hours < 12 ? 'AM' : 'PM')
+            period: props.militaryTime ? '24H' : (hours < 12 ? 'AM' : 'PM')
         };
     }
 
@@ -175,7 +175,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
         let newState: any = {};
         let update = false;
         let newHours = this.state.hours;
-        if (newProps.value !== this.props.value) {
+        if (newProps.value !== this.props.value || this.props.localTimezone !== newProps.localTimezone) {
             newState = this.handleState(newProps);
             newHours = newState.hours;
             update = true;
