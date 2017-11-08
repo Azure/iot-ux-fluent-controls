@@ -162,7 +162,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             value = initialValue;
         }
 
-        if (value === '' || value === null) {
+        if (value === '' || value == null) {
             value = '';
         } else if (this.state && typeof(this.state.value) === 'string') {
             if (
@@ -208,7 +208,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             return;
         }
 
-        if (this.state.value === '' || this.state.value === null) {
+        if (this.state.value === '' || this.state.value == null) {
             this.props.onChange(null);
         } else {
             this.props.onChange(this.getValue(this.state.value));
