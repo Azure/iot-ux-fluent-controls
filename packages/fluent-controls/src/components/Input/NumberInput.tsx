@@ -97,7 +97,8 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
 
         if (
             !this.isPositive()
-            && event.keyCode === keyCode.dash
+            /** Firefox uses a different keycode for dashes (-) than other browsers... */
+            && (event.keyCode === keyCode.dash || event.keyCode === keyCode.firefoxDash)
             && this.state.value.indexOf('-') === -1
         ) {
             return;

@@ -61,6 +61,8 @@ export const keyCode: KeyCode = {
     comma: 188,
     period: 190,
     dash: 189,
+    /** Firefox uses a different keycode for dashes (-) than other browsers... */
+    firefoxDash: 173
 };
 
 export interface KeyCode {
@@ -86,6 +88,7 @@ export interface KeyCode {
     period: number;
     comma: number;
     dash: number;
+    firefoxDash: number;
 }
 
 export const weekLength: number = 7;
