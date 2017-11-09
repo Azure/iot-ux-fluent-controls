@@ -95,7 +95,11 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             return;
         }
 
-        if (!this.isPositive() && event.keyCode === keyCode.dash) {
+        if (
+            !this.isPositive()
+            && event.keyCode === keyCode.dash
+            && this.state.value.indexOf('-') === -1
+        ) {
             return;
         }
         
@@ -106,7 +110,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         ) {
             return;
         }
-        
+
         event.preventDefault();
     }
 
@@ -119,7 +123,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
     }
 
     onChange = (newValue: string) => {
-        if (newValue === '') {
+        if (newValue === '' && this.state.value !== '') {
             this.setState({value: '', paste: false});
             return;
         }
@@ -165,10 +169,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         if (value === '' || value == null) {
             value = '';
         } else if (this.state && typeof(this.state.value) === 'string') {
-            if (
-                parseFloat(this.state.value) === parseFloat(value)
-                && this.state.value[-1] === '.'
-            ) {
+            if (parseFloat(this.state.value) === parseFloat(value)) {
                 value = this.state.value;
             }
         }
