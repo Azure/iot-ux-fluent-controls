@@ -15,7 +15,7 @@ $component: md-component('action-trigger', (
             icon: (icon, size, xsmall),
             label: (font, size, normal),
         ),
-        line-height: 18px,
+        line-height: 4.5*$grid,
     ),
 ));
 

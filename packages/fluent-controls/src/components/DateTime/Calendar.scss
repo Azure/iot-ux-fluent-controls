@@ -38,7 +38,7 @@ $component: md-component('calendar', (
     @include md-box(block, relative);
     font-family: font(default);
     font-size: font(size, default);
-    padding-bottom: 8px;
+    padding-bottom: 2*$gutter;
     color: color(header);
 
     .calendar-header {
