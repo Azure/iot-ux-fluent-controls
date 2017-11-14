@@ -1,6 +1,17 @@
 @import '../../theme/constants.v2';
-@import 'default';
 @import 'mixins';
+
+$gutter: 4px;
+$grid: 4px;
+
+$method-theme-override: (
+    
+) !default;
+
+$method-component-override: (
+
+) !default;
+
 
 $method-theme: (
     color: (
