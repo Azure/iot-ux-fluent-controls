@@ -1,18 +1,31 @@
-@import '../../common/overrides';
-@import '../../common/mixins';
+@import '../../theme/index';
 
-$font-family: join('Segoe UI Semilight', $font-family-base);
-
-$background-info-color: md-color(alert, info);
-$background-warning-color: md-color(alert, warning);
-$background-error-color: md-color(alert, error);
-
-$text-default-color: md-color(shade, 3);
-$text-error-color: md-color(shade, f);
+$component: md-component('alert', (
+    color: (
+        default: (color, neutral, primary),
+        error: (color, white),
+    ),
+    bg-color: (
+        info: (color, alert, info),
+        warning: (color, alert, warning),
+        error: (color, alert, error),
+    ),
+    font: (
+        default: (font, light),
+        size: (
+            text: (font, size, normal),
+            icon: (icon, size, xsmall),
+        ),
+        line-height: (
+            close: 4*$grid,
+            text: 5*$grid
+        )
+    ),
+));
 
 $icon-margin-top: 3px;
 
-.alert {
+.alert-container {
     position: relative;
     display: flex;
     flex-direction: row;
@@ -21,26 +34,26 @@ $icon-margin-top: 3px;
     width: 100%;
     height: 8*$grid;
     
-    background-color: $background-info-color;
-    color: $text-default-color;
+    background-color: bg-color(info);
+    color: color(default);
 
-    .icon {
+    .alert-icon {
         @include md-box(inline-block, relative);
         margin-left: 2*$gutter;
         margin-top: $icon-margin-top;
         flex: 0 0 4*$grid;
     }
 
-    .text {
+    .alert-text {
         margin-left: 2*$gutter;
         margin-top: 1.25*$gutter;
         margin-right: 3*$gutter;
         padding-bottom: 2*$gutter;
 
-        font-family: $font-family;
-        font-size: $font-size-text;
-        line-height: 5*$grid;
-        color: $text-default-color;
+        font-family: font(default);
+        font-size: font(size, text);
+        line-height: font(line-height, text);
+        color: color(default);
 
         width: 100%;
         display: block;
@@ -53,44 +66,44 @@ $icon-margin-top: 3px;
         }
     }
 
-    .close {
+    .alert-close {
         flex: 0 0 4*$grid;
         margin-top: 1.5*$gutter;
         margin-left: auto;
         margin-right: 2*$gutter;
-        line-height: 4*$grid;
+        line-height: font(line-height, close);
         cursor: pointer;
     }
 
-    &.fixed {
+    &.alert-fixed {
         width: 71*$grid;
     }
 
-    &.info {
-        background-color: $background-info-color;
-        color: $text-default-color;
+    &.alert-info {
+        background-color: bg-color(info);
+        color: color(default);
     }
 
-    &.warning {
-        background-color: $background-warning-color;
-        color: $text-default-color;
+    &.alert-warning {
+        background-color: bg-color(warning);
+        color: color(default);
     }
 
-    &.error {
-        background-color: $background-error-color;
-        color: $text-error-color;
+    &.alert-error {
+        background-color: bg-color(error);
+        color: color(error);
 
-        .text {
-            color: $text-error-color;
+        .alert-text {
+            color: color(error);
         }
     }
 
-    &.multiline {
+    &.alert-multiline {
         height: auto;
 
-        .text {
+        .alert-text {
             text-overflow: none;
-            line-height: 5*$grid;
+            line-height: font(line-height, text);
             white-space: normal;
         }
     }

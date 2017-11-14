@@ -1,25 +1,37 @@
-@import '../../common/overrides';
-@import '../../common/mixins';
+@import '../../theme/index';
 
-$text-default-color: md-color(shade, 6);
-$text-disabled-color: md-color(shade, a);
-$text-hover-color: md-color(shade, 3);
+$component: md-component('action-trigger', (
+    color: (
+        default: (color, neutral, secondary, alt),
+        disabled: (color, neutral, tertiary),
+        hover: (color, neutral, secondary)
+    ),
+    outline: (
+        focus: (outline, focus),
+    ),
+    font: (
+        default: (font, default),
+        size: (
+            icon: (icon, size, xsmall),
+            label: (font, size, normal),
+        ),
+        line-height: 18px,
+    ),
+));
 
-$icon-size: 16px;
-
-.action-trigger {
+.action-trigger-container {
     @include md-box(inline-block, relative, ellipsis);
-    font-family: $font-family-base;
-    font-size: $icon-size;
-    line-height: 18px;
+    font-family: font(default);
+    font-size: font(size, icon);
+    line-height: font(line-height);
     padding: $gutter 2*$gutter;
 
-    color: $text-default-color;
+    color: color(default);
 
     text-decoration: none;
     outline: none;
 
-    &.label-empty {
+    &.action-trigger-label-empty {
         padding: $gutter 1.5*$gutter;
         
         .label {
@@ -28,22 +40,22 @@ $icon-size: 16px;
     }
 
     a:focus > & {
-        outline: $focus-outline;
+        outline: outline(focus);
         outline-offset: 1px;
-        color: $text-hover-color;
+        color: color(hover);
         
         &.disabled {
             outline: none;
-            color: $text-disabled-color;
+            color: color(disabled);
         }
     }
     
     &:hover {
-        color: $text-hover-color;
+        color: color(hover);
     }
     
     &.disabled {
-        color: $text-disabled-color;
+        color: color(disabled);
     }
     
     .suffix {        
@@ -54,11 +66,11 @@ $icon-size: 16px;
         }
     }
 
-    .label {    
+    .action-trigger-label {    
         @include md-box(inline-block);
-        line-height: 18px;
+        line-height: font(line-height);
         vertical-align: top;
-        font-size: $font-size-text;
+        font-size: font(size, label);
         margin-left: 2*$gutter;
         margin-top: 1px;
 
@@ -78,7 +90,7 @@ $icon-size: 16px;
     line-height: 0px;
 
     &:focus {
-        outline: $focus-outline;
+        outline: outline(focus);
         outline-offset: 1px;
     }
 }
