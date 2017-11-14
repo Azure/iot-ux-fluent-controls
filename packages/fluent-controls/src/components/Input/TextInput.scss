@@ -12,6 +12,7 @@ $component: md-component('text-input', (
     ),
     bg-color: (
         default: (bg-color, input, default),
+        addon: (bg-color, input, default),
         selection: (bg-color, input, selection),
         disabled: (bg-color, input, disabled),
     ),

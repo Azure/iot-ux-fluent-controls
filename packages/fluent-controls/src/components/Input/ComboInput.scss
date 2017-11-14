@@ -18,6 +18,7 @@ $component: md-component('combo-input', (
     ),
     bg-color: (
         input: (bg-color, input, default),
+        dropdown: (bg-color, input, default),
         selection: (bg-color, input, selection),
         disabled: (bg-color, input, disabled),
         option: (
