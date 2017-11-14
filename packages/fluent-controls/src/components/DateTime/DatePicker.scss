@@ -11,6 +11,7 @@ $component: md-component('date-picker', (
         input: (bg-color, input, default),
         disabled: (bg-color, input, disabled),
         calendar: (color, white),
+        selection: (bg-color, input, selection),
     ),
     border: (
         default: (border, input, default),

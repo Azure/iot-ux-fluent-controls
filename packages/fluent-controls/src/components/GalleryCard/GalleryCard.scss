@@ -36,7 +36,7 @@ $component: md-component('gallery-card', (
         icon: (icon, size, xxlarge),
     ),
     transition: (
-        background: (transition, gallery-card, background)
+        background: (transition, gallery-card, background-color)
     )
 ));
 
