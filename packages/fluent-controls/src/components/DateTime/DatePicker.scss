@@ -17,6 +17,7 @@ $component: md-component('date-picker', (
         default: (border, input, default),
         focus: (border, input, focus),
         disabled: (border, input, disabled),
+        error: (border, input, error),        
     ),
     font: (
         default: (font, default),

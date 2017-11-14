@@ -8,6 +8,7 @@ $component: md-component('combo-input', (
         selection: (color, input, selection),
         error: (color, input, error),
         cancel: (color, input, cancel),
+        arrow: (color, input, arrow),        
         option: (
             default: (color, neutral, primary, alt, 2),
             disabled: (color, neutral, secondary, alt, 5),

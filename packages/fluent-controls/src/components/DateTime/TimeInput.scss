@@ -15,7 +15,9 @@ $component: md-component('time-input', (
     ),
     border: (
         default: (border, input, default),
+        disabled: (border, input, disabled),
         focus: (border, input, focus),
+        error: (border, input, error),        
     ),
     font: (
         default: (font, default),
