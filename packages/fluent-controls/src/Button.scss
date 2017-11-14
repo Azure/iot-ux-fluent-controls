@@ -1,24 +1,59 @@
-@import './common/overrides';
-@import './common/mixins';
+@import './theme/index';
 
-$primary-color: md-color(selected, dark);
-$primary-pressed-color: md-color(shade, f);
+$component: md-component('button', (
+    color: (
+        disabled: (color, neutral, secondary, alt, 5),
+        primary: (
+            default: (color, interactive, dark),
+            pressed: (color, white),
+        ),
+        secondary: (
+            default: (color, neutral, primary),
+            pressed: (color, white),
+        ),
+    ),
+    bg-color: (
+        disabled: (color, neutral, tertiary, alt, 2),
+        primary: (
+            default: (color, interactive, default),
+            hover: (color, interactive, hover),
+            pressed: (color, interactive, pressed),
+        ),
+        secondary: (
+            default: (color, neutral, tertiary, alt),
+            hover: (color, neutral, tertiary),
+            pressed: (color, neutral, secondary, alt, 5 ),
+        ),
+    ),
+    font: (
+        default: (font, default),
+        size: (font, size, default),
+        line-height: 8*$grid,
+    ),
+    icon: (
+        size: (icon, size, xsmall),
+    ),
+    outline: (
+        focus: (outline, focus),
+    ),
+));
 
-$primary-bg-color: md-color(selected, default);
-$primary-hover-bg-color: md-color(selected, hover);
-$primary-pressed-bg-color: md-color(selected, pressed);
+$primary-color: color(primary, default);
+$primary-pressed-color: color(primary, pressed);
 
-$default-color: md-color(shade, 3);
-$default-pressed-color: md-color(shade, f);
+$primary-bg-color: bg-color(primary, default);
+$primary-hover-bg-color: bg-color(primary, hover);
+$primary-pressed-bg-color: bg-color(primary, pressed);
 
-$default-bg-color: md-color(shade, c);
-$default-hover-bg-color: md-color(shade, a);
-$default-pressed-bg-color: md-color(shade, 8);
+$default-color: color(secondary, default);
+$default-pressed-color: color(secondary, pressed);
 
-$disabled-color: md-color(shade, 8);
-$disabled-bg-color: md-color(shade, d);
+$default-bg-color: bg-color(secondary, default);
+$default-hover-bg-color: bg-color(secondary, hover);
+$default-pressed-bg-color: bg-color(secondary, pressed);
 
-$focus-outline: 2px solid md-color(shade, 3);
+$disabled-color: color(disabled);
+$disabled-bg-color: bg-color(disabled);
 
 $default-button-colors: (
     default: $default-color,
@@ -47,11 +82,11 @@ $primary-button-bg-colors: (
 );
 
 
-@mixin md-button-style($text-colors: $default-button-colors, $bg-colors: $default-button-colors, $outline: $focus-outline) {
+@mixin md-button-style($text-colors: $default-button-colors, $bg-colors: $default-button-colors, $outline: outline(focus)) {
     @include md-box(inline-block, relative);
-    @include md-default-font();
-    font-size: 14px;
-    line-height: 20px;
+    font-family: font(default);
+    font-size: font(size);
+    line-height: font(line-height);
 
     height: 8*$grid;
     padding-left: 5*$gutter;
@@ -95,16 +130,16 @@ $primary-button-bg-colors: (
 
 :global(.btn), :global(.btn-primary) {
     vertical-align: middle;
-    font-size: 14px;
-    line-height: 32px;
+    font-size: font(size);
+    line-height: font(line-height);
 
     :global(.icon) {
         @include md-box(inline-block);
         vertical-align: middle;
         margin-right: 2*$gutter;
-        margin-top: -2px;
+        margin-top: -0.5*$gutter;
         
-        font-size: 16px;
-        line-height: 32px;
+        font-size: icon(size);
+        line-height: font(line-height);
     }
 }

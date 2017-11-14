@@ -1,0 +1,248 @@
+@function map-get-default($map, $key, $default) {
+    @if map-has-key($map, $key) {
+        @return map-get($map, $key);
+    } @else {
+        @return $default;
+    }
+}
+
+@mixin md-button-reset {
+    @include md-box();
+    border: none;
+    outline: none;
+    background: none;
+    box-shadow: none;
+    text-decoration: none;
+
+    &:focus {
+        border: none;
+        outline: none;
+    }
+
+    &:not(:disabled) {
+        cursor: pointer;
+    }
+}
+
+@mixin md-default-anchor {
+    outline: none;
+    text-decoration: none;
+}
+
+@mixin circle($width) {
+    width: $width;
+    height: $width;
+    border-radius: $width/2;
+}
+
+@function md-color($color-keys...) {
+    $result: $color-map;
+    @each $key in $color-keys {
+        $result: map-get($result, $key);
+    }
+    @return $result;
+}
+
+@mixin md-box-position($option) {
+    @if $option == 'absolute' {
+        position: absolute;
+    } @else if $option == 'relative' {
+        position: relative;
+    } @else if $option == 'fixed' {
+        position: fixed;
+    }
+}
+
+@mixin md-box-display($option) {
+    @if $option == 'inline' {
+        display: inline;
+    } @else if $option == 'block' {
+        display: block;
+    } @else if $option == 'inline-block' {
+        display: inline-block;
+    } @else if $option == 'table-cell' {
+        display: table-cell;
+    } @else if $option == 'flex' {
+        display: flex;
+    } @else if $option == 'flex-column' {
+        display: flex;
+        flex-direction: column;
+    } @else if $option == 'flex-row' {
+        display: flex;
+        flex-direction: row;
+    } @else if $option == 'display-none' {
+        display: none;
+    }
+}
+
+@mixin md-box-overflow($option) {
+    @if $option == 'hidden' {
+        overflow: hidden;
+    } @else if $option == 'scroll' {
+        overflow: scroll;
+    } @else if $option == 'visible' {
+        overflow: visible;
+    } @else if $option == 'auto' {
+        overflow: auto;
+    } @else if $option == 'x-hidden' {
+        overflow-x: hidden;
+    } @else if $option == 'x-scroll' {
+        overflow-x: scroll;
+    } @else if $option == 'x-visible' {
+        overflow-x: visible;
+    } @else if $option == 'x-auto' {
+        overflow-x: auto;
+    } @else if $option == 'y-hidden' {
+        overflow-y: hidden;
+    } @else if $option == 'y-scroll' {
+        overflow-y: scroll;
+    } @else if $option == 'y-visible' {
+        overflow-y: visible;
+    } @else if $option == 'y-auto' {
+        overflow-y: auto;
+    } @else if $option == 'ellipsis' {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    } @else if $option == 'y-ellipsis' {
+        overflow-y: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
+
+@mixin md-box-float($option) {
+    @if $option == 'float-left' {
+        float: left;
+    } @else if $option == 'float-right' {
+        float: right;
+    } @else if $option == 'float-none' {
+        float: none;
+    } @else if $option == 'clear-left' {
+        clear: left;
+    } @else if $option == 'clear-right' {
+        clear: right;
+    } @else if $option == 'clear-both' {
+        clear: both;
+    }
+}
+
+@mixin md-box-size($option) {
+    @if $option == 'fill-parent' {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@mixin md-box($options...) {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+    @each $option in $options {
+        @include md-box-display($option);
+        @include md-box-position($option);
+        @include md-box-overflow($option);
+        @include md-box-float($option);
+        @include md-box-size($option);
+    }
+}
+
+@function md-get($map, $keys...) {
+    $result: $map;
+    @each $key in $keys {
+        @if type-of($result) != 'map' {
+            @error 'Intermediate value is not a map (with keys: [#{$keys}])';
+        } @else if mas-has-key($result, $key) {
+            $result: map-get($result, $key);
+        } @else {
+            @error 'Could not find key "#{$key}" in map (with keys: [#{$keys}])';
+        }
+    }
+    @if type-of($result) == 'map' {
+        @if map-has-key($result, default) {
+            @return map-get($result, default);
+        } @else {
+            @error 'Result of md-get on #{$map} returned another map without a default key for #{$keys}';
+        }
+    }
+    @return $result;
+}
+
+@function md-merge($left, $right: null) {
+    @if $right == null {
+        @return $left;
+    }
+
+    $out: $right;
+    @if type-of($right) == 'map' {
+        @if type-of($left) == 'map' {
+            $out: $left;
+            @each $key in map-keys($right) {
+                @if map-has-key($left, $key) {
+                    $out: map-merge($out, (
+                        $key: md-merge(
+                            map-get($left, $key),
+                            map-get($right, $key)
+                        )
+                    ))
+                } @else {
+                    $out: map-merge($out, ($key: map-get($right, $key)));
+                }
+            }
+        }
+    } @else {
+        @if type-of($left) == 'map' {
+            $out: map-merge($left, (default: $right));
+        }
+    }
+
+    @return $out;
+}
+
+@function md-init-component($component) {
+    $result: ();
+    $type: type-of($component);
+    @if $type == 'map' {
+        @each $key in map-keys($component) {
+            $val: map-get($component, $key);
+            $result: map-merge($result, (
+                $key: md-init-component($val)
+            ));
+        }
+    } @else if $type == 'list' {
+        $sep: list-separator($component);
+        @if $sep == 'comma' {
+            $result: md-get($method-constants, $component...);
+        } @else {
+            $result: $component;
+        }
+    } @else {
+        $result: $component;
+    }
+    @return $result;
+}
+
+@function md-component($name, $component) {
+    $constants: md-init-component($component);
+    $overrides: ();
+    @if map-has-key($method-component-override, $name) {
+        $overrides: md-init-component(
+            map-get(
+                $method-component-override, $name
+            )
+        );
+        $constants: md-merge($constants, $overrides);
+    }
+    @return $constants;
+}
+
+@function color($keys...) { @return md-get($component, color, $keys...); }
+@function bg-color($keys...) { @return md-get($component, bg-color, $keys...); }
+@function border($keys...) { @return md-get($component, border, $keys...); }
+@function outline($keys...) { @return md-get($component, outline, $keys...); }
+@function font($keys...) { @return md-get($component, font, $keys...); }
+@function icon($keys...) { @return md-get($component, icon, $keys...); }
+@function shadow($keys...) { @return md-get($component, shadow, $keys...); }
+@function size($keys...) { @return md-get($component, size, $keys...); }
+@function transition($keys...) { @return md-get($component, transition, $keys...); }
