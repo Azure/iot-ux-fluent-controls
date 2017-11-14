@@ -1,61 +1,90 @@
-@import '../../common/overrides';
-@import '../../common/mixins';
+@import '../../theme/index';
 
-$text-default-color: md-color(shade, 6);
-$text-disabled-color: md-color(shade, a);
-$text-hover-color: md-color(shade, 3);
-
-$off-border: 1px solid md-color(shade, 6);
-$off-hover-border: 1px solid md-color(shade, 3);
-$off-disabled-border: 1px solid md-color(shade, a);
-
-$on-border: 1px solid md-color(form, selected);
-$on-hover-border: 1px solid md-color(form, hover);
-$on-disabled-border: 1px solid md-color(shade, c);
-
-$off-background-color: md-color(shade, f);
-$off-disabled-color: md-color(shade, f);
-
-$on-background-color: md-color(form, selected);
-$on-hover-color: md-color(form, hover);
-$on-disabled-color: md-color(shade, c);
-
-$switch-off-color: md-color(shade, 3);
-$switch-off-disabled-color: md-color(shade, a);
-$switch-on-color: md-color(form, switch);
-$switch-on-disabled-color: md-color(shade, 7);
-
-$label-color: md-color(shade, 2);
-$label-disabled-color: md-color(shade, a);
-
-$switch-transition: 75ms ease-in-out;
-
-$border-radius: 10px;
-$switch-border-radius: 5px;
+$component: md-component('toggle', (
+    color: (
+        label: (
+            default: (color, neutral, primary, alt, 2),
+            disabled: (color, neutral, tertiary),
+        ),
+        switch: (
+            on: (
+                default: (color, interactive, dark),
+                disabled: (color, neutral, secondary, alt, 4),
+            ),
+            off: (
+                default: (color, neutral, primary),
+                disabled: (color, neutral, tertiary),
+            ),
+        )
+    ),
+    bg-color: (
+        off: (color, white),
+        on: (
+            default: (color, interactive, default),
+            hover: (color, interactive, hover),
+            disabled: (color, neutral, tertiary, alt),
+        )
+    ),
+    border: (
+        on: (
+            default: (border, toggle, on, default),
+            hover: (border, toggle, on, hover),
+            disabled: (border, toggle, on, disabled),
+        ),
+        off: (
+            default: (border, toggle, off, default),
+            hover: (border, toggle, off, hover),
+            disabled: (border, toggle, off, disabled),
+        ),
+    ),
+    outline: (
+        focus: (outline, focus)
+    ),
+    transition: (
+        switch: (transition, toggle, switch),
+    ),
+    font: (
+        default: (font, default),
+        size: (
+            default: (font, size, default),
+        ),
+        line-height: (
+            default: 14px
+        ),
+    ),
+    size: (
+        width: (size, toggle, width),
+        height: (size, toggle, height),
+        border-radius: (size, toggle, border-radius),
+        switch: (
+            border-radius: (size, toggle, switch, border-radius),
+        ),
+    )
+));
 
 .toggle {
     @include md-box(inline-block, relative);
-    line-height: 14px;
+    line-height: font(line-height, default);
 
     .toggle-button {
         @include md-box(inline-block, relative, fill-parent);
         vertical-align: middle;
         outline: none;
-        border: $off-border;
-        background-color: $off-background-color;
-        border-radius: $border-radius;
+        border: border(off, default);
+        background-color: bg-color(off);
+        border-radius: size(border-radius);
 
-        width: 10*$grid;
-        height: 5*$grid;
+        width: size(width);
+        height: size(height);
         
         &:hover {
-            border: $off-hover-border;
+            border: border(off, hover);
             cursor: pointer;
         }
     }
 
     &:not(.disabled) .toggle-button:focus {
-        outline: $focus-outline;
+        outline: outline(focus);
         outline-offset: 1px;
     }
 
@@ -66,10 +95,10 @@ $switch-border-radius: 5px;
 
         width: 2.5*$grid;
         height: 2.5*$grid;
-        border-radius: $switch-border-radius;
+        border-radius: size(switch, border-radius);
 
-        background-color: $switch-on-color;
-        transition: $switch-transition;
+        background-color: color(switch, on, default);
+        transition: transition(switch);
 
         pointer-events: none;
     }
@@ -78,53 +107,53 @@ $switch-border-radius: 5px;
         @include md-box(inline-block, relative);
         margin-left: 2*$gutter;
 
-        font-family: $font-family-base;
-        font-size: $font-size-text;
-        color: $label-color;
+        font-family: font(default);
+        font-size: font(size, default);
+        color: color(label, default);
 
         vertical-align: middle;
     }
 
     &.toggle-on {
         .toggle-button {
-            border: $on-border;
-            background-color: $on-background-color;
+            border: border(on, default);
+            background-color: bg-color(on, default);
 
             &:hover {
-                border: $on-hover-border;
-                background-color: $on-hover-color;
+                border: border(on, hover);
+                background-color: bg-color(on, hover);
             }
         }
 
         .toggle-switch {
             left: 25px;
-            background-color: $switch-on-color;
+            background-color: color(switch, on, default);
         }
 
         &.disabled {
             .toggle-button {
-                border: $on-disabled-border;
-                background-color: $on-disabled-color;
+                border: border(on, disabled);
+                background-color: bg-color(on, disabled);
             }
     
             .toggle-switch {
-                background-color: $switch-on-disabled-color;
+                background-color: color(switch, on, disabled);
             }
         }
     }
 
     &.disabled {
         .toggle-button {
-            border: $off-disabled-border;
+            border: border(off, disabled);
             cursor: default;
         }
 
         .toggle-switch {
-            background-color: $switch-off-disabled-color;
+            background-color: color(switch, off, disabled);
         }
 
         .toggle-label {
-            color: $label-disabled-color;
+            color: color(label, disabled);
         }
     }
 }
