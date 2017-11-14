@@ -1,12 +1,12 @@
 @import 'default';
 @import 'mixins';
 
-$gutter: 4px;
-$grid: 4px;
+$gutter: 4px !default;
+$grid: 4px !default;
 
-$z-index-small-step: 10;
-$z-index-medium-step: 100;
-$z-index-large-step: 1000;
+$z-index-small-step: 10 !default;
+$z-index-medium-step: 100 !default;
+$z-index-large-step: 1000 !default;
 
 $method-theme: (
     color: (
