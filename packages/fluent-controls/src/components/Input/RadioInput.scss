@@ -1,33 +1,55 @@
-@import 'common';
+@import '../../theme/index';
 
-$default-border: 1px solid md-color(shade, 6);
-$checked-border: 1px solid md-color(form, selected);
-$hover-border: 1px solid md-color(shade, 3);
-$disabled-border: 1px solid md-color(shade, a);
-
-$background-checked-color: md-color(shade, 3);
-$background-disabled-color: md-color(shade, a);
-
-$text-default-color: md-color(shade, 2);
-$text-disabled-color: md-color(shade, a);
-
-$radio-bg-color: md-color(shade, f);
+$component: md-component('radio-input', (
+    color: (
+        default: (color, input, default),
+        disabled: (color, neutral, tertiary),
+    ),
+    bg-color: (
+        default: (color, white),
+        checked: (color, neutral, primary),
+        disabled: (color, neutral, tertiary),
+    ),
+    border: (
+        default: (border, radio-input, default),
+        hover: (border, radio-input, hover),
+        disabled: (border, radio-input, disabled),
+        checked: (border, radio-input, checked)
+    ),
+    outline: (
+        focus: (outline, focus),
+    ),
+    font: (
+        default: (font, default),
+        size: (
+            default: (font, size, default),
+            small: (font, size, small)
+        ),
+        line-height: (
+            default: 5*$grid,
+            small: 4*$grid
+        ),
+    ),
+    size: (
+        default: (size, radio-input, default),
+    )
+));
 
 .radio-container {
     @include md-box(block, relative);
-    font-family: $font-family-base;
-    color: $text-default-color;
-    font-size: $font-size-text;
-    line-height: 16px;
+    font-family: font(default);
+    color: color(default);
+    font-size: font(size, default);
+    line-height: font(line-height, small);
 
     & + &:not(.columns) {
-        margin-top: 12px;
+        margin-top: 3*$gutter;
     }
 
     &.columns {
         display: inline-block;
 
-        margin-right: 8px;
+        margin-right: 2*$gutter;
     }
 
     input {
@@ -40,69 +62,61 @@ $radio-bg-color: md-color(shade, f);
         border: none;
         outline: none;
 
-        background-color: $input-bg-color;
+        background-color: bg-color(default);
 
         &:focus ~ .radio-button:not(.disabled) {
-            outline: $focus-outline;
+            outline: outline(focus);
             outline-offset: 1px;
         }
 
         &:hover:not(:checked) ~ .radio-button:not(.disabled) {
-            border: $hover-border;
+            border: border(hover);
         }
 
         &:focus:not(:checked) ~ .radio-button {
-            border: $hover-border;
+            border: border(hover);
         }
     }
 
     .radio-text {
         @include md-box(inline-block, relative);
         vertical-align: top;
-        padding-left: 8px;
+        padding-left: 2*$gutter;
     }
 
     .radio-fill {
         @include md-box(inline-block, absolute);
-        left: 4px;
-        top: 4px;
-        width: 8px;
-        height: 8px;
-        border-radius: 4px;
+        left: $gutter;
+        top: $gutter;
+        width: 2*$gutter;
+        height: 2*$gutter;
+        border-radius: $grid;
 
         &.selected {
-            background-color: $background-checked-color;
+            background-color: bg-color(checked);
 
             &.disabled {
-                background-color: $background-disabled-color;
+                background-color: bg-color(disabled);
             }
         }
     }
 
-    .radio-border {
-        @include md-box(inline-block, absolute);
-        left: -2px;
-        top: -2px;
-        width: 20px;
-        height: 20px;
-    }
-
     .radio-button {
         @include md-box(inline-block, relative);
-        width: 16px;
-        height: 16px;
-        background-color: $radio-bg-color;
-        border-radius: 8px;
-        border: $default-border;
+        width: size(default);
+        height: size(default);
+        background-color: bg-color(default);
+        border-radius: size(default) / 2;
+        border: border(default) ;
         outline: none;
         vertical-align: top;
 
         &.selected {
-            border: $checked-border;
+            border: border(checked);
         }
 
         &.disabled {
-            border: $disabled-border;
+            border: border(disabled);
         }
     }
 
@@ -110,7 +124,7 @@ $radio-bg-color: md-color(shade, f);
         @include md-box(inline-block, relative);
 
         &.disabled {
-            color: $text-disabled-color;
+            color: color(disabled);
         }
     }
 

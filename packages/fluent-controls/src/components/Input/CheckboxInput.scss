@@ -1,118 +1,143 @@
-@import 'common';
+@import '../../theme/index';
 
-$default-border: 1px solid md-color(shade, 6);
-$hover-border: 1px solid md-color(shade, 3);
-$disabled-border: 1px solid md-color(shade, a);
-$indeterminate-border: 1px solid md-color(selected, default);
-$indeterminate-hover-border: 1px solid md-color(selected, hover);
-$selected-border: none;
-
-$checkmark-color: md-color(selected, dark);
-$checkmark-disabled-color: md-color(shade, 7);
-
-$bg-color: md-color(shade, f);
-$selected-bg-color: md-color(selected, default);
-$hover-bg-color: md-color(selected, hover);
-$disabled-bg-color: md-color(shade, a);
-$selected-disabled-bg-color: md-color(shade, c);
-
-$text-default-color: md-color(shade, 2);
-$text-disabled-color: md-color(shade, a);
-
-$fill-default: md-color(selected, dark);
-$fill-disabled: md-color(shade, a);
-
+$component: md-component('checkbox-input', (
+    color: (
+        default: (color, input, default),
+        disabled: (color, neutral, tertiary),
+        checkmark: (
+            default: (color, interactive, dark),
+            disabled: (color, neutral, secondary, alt, 4),
+        ),
+    ),
+    bg-color: (
+        default: (bg-color, checkbox-input, default),
+        selected: (
+            default: (bg-color, checkbox-input, selected, default),
+            disabled: (bg-color, checkbox-input, selected, disabled),
+        ),
+        hover: (bg-color, checkbox-input, hover),
+        disabled: (bg-color, checkbox-input, disabled),
+        fill: (
+            default: (bg-color, checkbox-input, fill, default),
+            disabled: (bg-color, checkbox-input, fill, disabled),
+        ),
+    ),
+    border: (
+        default: (border, checkbox-input, default),
+        hover: (border, checkbox-input, hover),
+        disabled: (border, checkbox-input, disabled),
+        indeterminate: (
+            default: (border, checkbox-input, indeterminate, default),
+            hover: (border, checkbox-input, indeterminate, hover),
+        ),
+        selected: (border, checkbox-input, selected)
+    ),
+    font: (
+        default: (font, default),
+        size: (
+            default: (font, size, default),
+            small: (font, size, small)
+        ),
+        line-height: (
+            default: 4*$grid,
+            small: 3*$grid
+        ),
+    ),
+    outline: (
+        focus: (outline, focus),
+    ),
+));
 
 .checkbox-container {
-    color: $text-default-color;
+    color: color(default);
 
     &:not(.disabled) input:focus + .checkbox-button {
-        outline: $focus-outline;
+        outline: outline(focus);
         outline-offset: 1px;
     }
 
     .checkbox-button {
-        border: $default-border;
-        background-color: $bg-color;
+        border: border(default);
+        background-color: bg-color(default);
     }
 
     &.disabled {
-        color: $text-disabled-color;
+        color: color(disabled);
     
         .checkbox-button {
-            border: $disabled-border;
-            background-color: $bg-color;
+            border: border(disabled);
+            background-color: bg-color(default);
         }
     }
 
     .checkbox-fill {
-        background-color: $fill-default;
+        background-color: bg-color(fill, default);
     }
 }
 
 .checkbox-container:hover {
     .checkbox-button {
-        border: $hover-border;
+        border: border(hover);
     }
 
     &.selected .checkbox-button {
-        background-color: $hover-bg-color;
+        background-color: bg-color(hover);
     }
 
     &.disabled .checkbox-button {
-        border: $disabled-border;
+        border: border(disabled);
     }
 
     &.indeterminate .checkbox-button {
-        border: $indeterminate-hover-border;
-        background-color: $bg-color;
+        border: border(indeterminate, hover);
+        background-color: bg-color(default);
     }
 }
 
 .checkbox-container.selected {
     .checkbox-button {
-        border: $selected-border;
-        background-color: $selected-bg-color;
+        border: border(selected);
+        background-color: bg-color(selected);
     }
 
     .checkbox-checkmark {
-        color: $checkmark-color;
+        color: color(checkmark, default);
     }
 
     &.disabled {
         .checkbox-button {
-            background-color: $selected-disabled-bg-color;
+            background-color: bg-color(selected, disabled);
             border: none;
         }
 
         .checkbox-checkmark {
-            color: $checkmark-disabled-color;
+            color: color(checkmark, disabled);
         }   
     }
 }
 
 .checkbox-container.indeterminate {
     .checkbox-button {
-        border: $indeterminate-border;
-        background-color: $bg-color;
+        border: border(indeterminate);
+        background-color: bg-color(default);
     }
 
     &.disabled {
         .checkbox-button {
-            border: $disabled-border;
+            border: border(disabled);
         }
 
         .checkbox-fill {
-            background-color: $fill-disabled;
+            background-color: bg-color(fill, disabled);
         }
     }
 }
 
 .checkbox-container {
     @include md-box(block, relative);
-    font-family: $font-family-base;
-    font-size: $font-size-text;
-    line-height: 4*$grid;
+    font-family: font(default);
+    font-size: font(size, default);
+    line-height: font(line-height, default);
 
     & + &:not(.columns) {
         margin-top: 3*$gutter;
@@ -154,7 +179,7 @@ $fill-disabled: md-color(shade, a);
         @include md-box(inline-block, relative);
         width: 4*$grid;
         height: 4*$grid;
-        background-color: $bg-color;
+        background-color: bg-color(default);
         outline: none;
         vertical-align: top;
     }
@@ -165,8 +190,8 @@ $fill-disabled: md-color(shade, a);
 
     .checkbox-checkmark {
         @include md-box(display-none, absolute);
-        font-size: 3*$grid;
-        line-height: 3*$grid;
+        font-size: font(size, small);
+        line-height: font(line-height, small);
         left: 2px;
     }
 

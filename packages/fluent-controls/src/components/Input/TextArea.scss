@@ -1,4 +1,39 @@
-@import 'common';
+@import '../../theme/index';
+
+$component: md-component('text-area', (
+    color: (
+        default: (color, input, default),
+        disabled: (color, input, disabled),
+        placeholder: (color, input, placeholder),
+        selection: (color, input, selection),
+        error: (color, input, error),
+        cancel: (color, input, cancel),
+    ),
+    bg-color: (
+        input: (bg-color, input, default),
+        selection: (bg-color, input, selection),
+        disabled: (bg-color, input, disabled),
+    ),
+    border: (
+        default: (border, input, default),
+        disabled: (border, input, disabled),
+        focus: (border, input, focus),
+        error: (border, input, error),
+    ),
+    font: (
+        default: (font, default),
+        size: (
+            default: (font, size, default),
+            small: (font, size, small)
+        ),
+        line-height: (
+            default: 5*$grid,
+        )
+    ),
+    size: (
+        min-height: (size, text-area, min-height),
+    ),
+));
 
 .textarea-container {
     @include md-box(block, relative);
@@ -15,52 +50,52 @@
 .textarea {
     @include md-box(block, relative);
     width: 100%;
-    min-height: 13*$grid;
+    min-height: size(min-height);
     padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
     
-    font-family: $font-family-base;
-    color: $default-text-color;
-    font-size: $font-size-text;
-    line-height: 20px;
+    font-family: font(default);
+    color: color(default);
+    font-size: font(size, default);
+    line-height: font(line-height, default);
     
-    border: $inactive-border;
+    border: border(default);
     outline: none;
 
-    background-color: $input-bg-color;
+    background-color: bg-color(default);
 
     &:hover {
-        border: $default-border;
+        border: border(focus);
     }
 
     &:focus {
-        border: $default-border;
+        border: border(focus);
     }
 
     &:active {
-        border: $default-border;
+        border: border(focus);
     }
     
     &:disabled {
-        color: $disabled-text-color;
-        border: $disabled-border;
-        background-color: $disabled-background-color;
+        color: color(disabled);
+        border: border(disabled);
+        background-color: bg-color(disabled);
 
         &::placeholder {
-            color: $disabled-text-color;
+            color: color(disabled);
         }
     }
 
     &::placeholder {
-        color: $placeholder-text-color;
+        color: color(placeholder);
     }
 
     &::selection {
-        color: $selection-text-color;
-        background-color: $selection-background-color;
+        color: color(selection);
+        background-color: bg-color(selection);
     }
 
     &.error:not(:disabled) {
-        border: $error-border;
+        border: border(error);
     }
 
     &::-ms-clear {

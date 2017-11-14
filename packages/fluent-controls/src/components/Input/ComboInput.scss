@@ -1,32 +1,75 @@
-@import 'common';
+@import '../../theme/index';
 
-$cancel-color: md-color(shade, 6);
-
-$dropdown-border: 1px solid md-color(shade, c);
-$dropdown-bg-color: md-color(shade, f);
-
-$option-color: md-color(shade, 2);
-$option-disabled-color: md-color(shade, 8);
-$option-active-color: md-color(shade, f);
-$option-selected-color: md-color(selected, dark);
-$option-bg-color: md-color(shade, f);
-$option-active-bg-color: md-color(shade, 0);
-$option-selected-bg-color: md-color(selected, default);
-$option-hover-selected-bg-color: md-color(selected, hover);
-$option-hover-bg-color: md-color(shade, d);
+$component: md-component('combo-input', (
+    color: (
+        default: (color, input, default),
+        disabled: (color, input, disabled),
+        placeholder: (color, input, placeholder),
+        selection: (color, input, selection),
+        error: (color, input, error),
+        cancel: (color, input, cancel),
+        option: (
+            default: (color, neutral, primary, alt, 2),
+            disabled: (color, neutral, secondary, alt, 5),
+            active: (color, white),
+            selected: (color, interactive, dark),
+        ),
+    ),
+    bg-color: (
+        input: (bg-color, input, default),
+        selection: (bg-color, input, selection),
+        disabled: (bg-color, input, disabled),
+        option: (
+            default: (color, white),
+            active: (color, black),
+            hover: (color, neutral, tertiary, alt, 2),
+            selected: (
+                default: (color, interactive, default),
+                hover: (color, interactive, hover),
+            ),
+        )
+    ),
+    border: (
+        default: (border, input, default),
+        disabled: (border, input, disabled),
+        focus: (border, input, focus),
+        error: (border, input, error),
+        dropdown: (border, combo-input, dropdown)
+    ),
+    font: (
+        default: (font, default),
+        size: (
+            default: (font, size, default), 
+            small: (font, size, small),
+        ),
+        line-height: (
+            default: 5*$grid,
+            small: 4*$grid,
+        ),
+    ),
+    size: (
+        input: (
+            height: (size, input, height)
+        ),
+        option: (
+            height: (size, input, option, height),
+        ),
+        dropdown: (
+            max-height: (size, input, dropdown, max-height),
+        ),
+    )
+));
 
 $dropdown-z-index: $z-index-medium-step;
-
-$arrow-default-color: md-color(shade, 4);
 
 .combo-input-container {
     @include md-box(flex, relative);
     width: 100%;
-    font-family: $font-family-base;
+    font-family: font(default);
 
-    color: $default-text-color;
-    font-size: $font-size-text;
-    line-height: 5*$grid;
+    color: color(default);
+    font-size: font(size);
+    line-height: font(line-height);
 
     .input-container {
         @include md-box(block, relative);
@@ -36,19 +79,19 @@ $arrow-default-color: md-color(shade, 4);
     .input {
         @include md-box(block, relative);
         width: 100%;
-        height: 8*$grid;
+        height: size(input, height);
         padding: 2*$gutter 8*$gutter 2*$gutter 3*$gutter;
-        border: $inactive-border;
+        border: border(default);
         outline: none;
 
-        background-color: $input-bg-color;
+        background-color: bg-color(input);
 
         &:hover {
-            border: $default-border;
+            border: border(focus);
         }
 
         &:focus, &:active, &.visible {
-            border: $default-border;
+            border: border(focus);
 
             &:not(.disabled) {
                 padding-right: 16*$gutter;
@@ -57,33 +100,33 @@ $arrow-default-color: md-color(shade, 4);
             &:valid:not(.disabled) {
                 + .cancel {
                     display: inline-block;
-                    color: $cancel-default-color;
+                    color: color(cancel);
                     pointer-events: auto;
                 }
             }
         }
         
         &:disabled {
-            color: $disabled-text-color;
-            border: $disabled-border;
-            background-color: $disabled-background-color;
+            color: color(disabled);
+            border: border(disabled);
+            background-color: bg-color(disabled);
     
             &::placeholder {
-                color: $disabled-text-color;
+                color: color(disabled);
             }
         }
     
         &::placeholder {
-            color: $placeholder-text-color;
+            color: color(placeholder);
         }
     
         &::selection {
-            color: $selection-text-color;
-            background-color: $selection-background-color;
+            color: color(selection);
+            background-color: bg-color(selection);
         }
 
         &.error:not(:disabled) {
-            border: $error-border;
+            border: border(error);
         }
 
         &::-ms-clear {
@@ -97,9 +140,9 @@ $arrow-default-color: md-color(shade, 4);
 
     .cancel {
         @include md-box(display-none, absolute);
-        color: $cancel-color;
-        font-size: $font-size-text;
-        line-height: 4*$grid;
+        color: color(cancel);
+        font-size: font(size, default);
+        line-height: font(line-height, small);
         padding: $gutter;
         top: $gutter;
         right: 8*$gutter;
@@ -110,15 +153,15 @@ $arrow-default-color: md-color(shade, 4);
         cursor: pointer;
 
         &:active, &:focus {
-            color: $cancel-default-color;
+            color: color(cancel);
             pointer-events: auto;
         }
     }
 
     .chevron {
         @include md-box(absolute, block);
-        font-size: $font-size-small;
-        color: $arrow-default-color;
+        font-size: font(size, small);
+        color: color(arrow);
         right: 2*$gutter;
         top: 2*$gutter;
         pointer-events: none;
@@ -141,10 +184,10 @@ $arrow-default-color: md-color(shade, 4);
 .dropdown {
     @include md-box(inline-block, relative);
     width: 100%;
-    max-height: 200px;
+    max-height: size(dropdown, max-height);
     overflow-y: auto;
-    background-color: $dropdown-bg-color;
-    border: $dropdown-border;
+    background-color: bg-color(dropdown);
+    border: border(dropdown);
 }
 
 .dropdown > div {
@@ -156,8 +199,8 @@ $arrow-default-color: md-color(shade, 4);
 .option {
     @include md-box(block);
     width: 100%;
-    height: 8*$grid;
-    line-height: 4*$grid;
+    height: size(option, height);
+    line-height: font(line-height, small);
     padding: 0px 3*$gutter;
 
     border: none;
@@ -166,35 +209,35 @@ $arrow-default-color: md-color(shade, 4);
     border-radius: 0px;
     text-align: left;
     
-    background-color: $option-bg-color;
+    background-color: bg-color(option, default);
     
-    color: $option-color;
+    color: color(option, default);
 
     &:not(.disabled) {
         cursor: pointer;
     }
 
     &.selected {
-        color: $option-selected-color;
-        background-color: $option-selected-bg-color;
+        color: color(option, selected);
+        background-color: bg-color(option, selected);
     }
 
     &.hover:not(.disabled) {
         &:not(.selected) {
-            background-color: $option-hover-bg-color;
+            background-color: bg-color(option, hover);
         }
 
         &.selected {
-            background-color: $option-hover-selected-bg-color;
+            background-color: bg-color(option, selected, hover);
         }
 
         &:active {
-            color: $option-active-color;
-            background-color: $option-active-bg-color;
+            color: color(option, active);
+            background-color: bg-color(option, active);
         }
     }
     
     &.disabled {
-        color: $option-disabled-color;
+        color: color(option, disabled);
     }
 }
