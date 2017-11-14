@@ -1,12 +1,6 @@
+@import '../../theme/constants.v2';
 @import 'default';
 @import 'mixins';
-
-$gutter: 4px !default;
-$grid: 4px !default;
-
-$z-index-small-step: 10 !default;
-$z-index-medium-step: 100 !default;
-$z-index-large-step: 1000 !default;
 
 $method-theme: (
     color: (
@@ -20,7 +14,6 @@ $method-theme: (
         teal: $color-teal,
         purple: $color-purple,
         neutral: (
-            default: $color-neutral-primary,
             primary: (
                 default: $color-neutral-primary,
                 alt: (

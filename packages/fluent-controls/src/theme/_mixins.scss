@@ -1,3 +1,11 @@
+
+/// Behaves like map-get except with a default value when $key doesn't
+/// exist in $map
+/// 
+/// @param $map map possibly containing $key
+/// @param $key key to look up in $map
+/// @param $default default value to return when $key doesn't exist in $map
+/// @returns value in $map at $key or $default if not found
 @function map-get-default($map, $key, $default) {
     @if map-has-key($map, $key) {
         @return map-get($map, $key);
@@ -6,6 +14,10 @@
     }
 }
 
+/// Reset button styles
+/// 
+/// Touches border, outline, background, box-shadow, text-decoration,
+/// and cursor CSS properties
 @mixin md-button-reset {
     @include md-box();
     border: none;
@@ -24,25 +36,22 @@
     }
 }
 
-@mixin md-default-anchor {
-    outline: none;
-    text-decoration: none;
-}
-
+/// Styles for a circle element
+/// 
+/// Touches width, height, and border-radius CSS properties
+/// 
+/// @param $width circle diameter
 @mixin circle($width) {
     width: $width;
     height: $width;
     border-radius: $width/2;
 }
 
-@function md-color($color-keys...) {
-    $result: $color-map;
-    @each $key in $color-keys {
-        $result: map-get($result, $key);
-    }
-    @return $result;
-}
-
+/// Pattern matching mixin for position style (used internally by md-box)
+/// 
+/// Touches position CSS property
+/// 
+/// @param $option One of: 'absolute', 'relative', 'fixed'
 @mixin md-box-position($option) {
     @if $option == 'absolute' {
         position: absolute;
@@ -53,6 +62,12 @@
     }
 }
 
+/// Pattern matching mixin for display style (used internally by md-box)
+/// 
+/// Touches display CSS property
+/// 
+/// @param $option One of: 'inline', 'block', 'inline-block', 'table-cell',
+///     'flex', 'flex-column', 'flex-row', or 'display-none'
 @mixin md-box-display($option) {
     @if $option == 'inline' {
         display: inline;
@@ -75,6 +90,13 @@
     }
 }
 
+/// Pattern matching mixin for overflow style (used internally by md-box)
+/// 
+/// Touches overflow, white-space, and text-overflow CSS properties
+/// 
+/// @param $option One of: 'hidden', 'scroll', 'visible', 'auto', 'x-hidden',
+/// 'x-scroll', 'x-visible', 'x-auto', 'y-hidden', 'y-scroll', 'y-visible',
+/// 'y-auto', 'ellipsis', or 'y-ellipsis'
 @mixin md-box-overflow($option) {
     @if $option == 'hidden' {
         overflow: hidden;
@@ -111,6 +133,12 @@
     }
 }
 
+/// Pattern matching mixin for float style (used internally by md-box)
+/// 
+/// Touches float and clear CSS properties
+/// 
+/// @param $option One of: 'float-left', 'float-right', 'float-none',
+/// 'clear-left', 'clear-right', or 'clear-both'
 @mixin md-box-float($option) {
     @if $option == 'float-left' {
         float: left;
@@ -127,6 +155,11 @@
     }
 }
 
+/// Pattern matching mixin for size style (used internally by md-box)
+/// 
+/// Touches width and height CSS properties
+/// 
+/// @param $option Only option: 'fill-parent'
 @mixin md-box-size($option) {
     @if $option == 'fill-parent' {
         width: 100%;
@@ -134,6 +167,11 @@
     }
 }
 
+/// Base styling mixin to remove boilerplate
+///
+/// See above patern matching mixins for options
+/// 
+/// @param $options... List of string options found in above md-box-* mixins
 @mixin md-box($options...) {
     box-sizing: border-box;
     padding: 0;
@@ -148,12 +186,32 @@
     }
 }
 
+/// map-get equivalent that traverses nested maps for a value
+/// 
+/// @param $map Map to traverse for value
+/// @param $keys... List of keys
+/// 
+/// @example
+///     $map: (
+///         key1: (
+///             key2: (
+///                 key3: red,
+///                 key4: black,
+///                 key5: (
+///                     key6: green,
+///                     key7: yellow
+///                 ),
+///             ),
+///         ),
+///     );
+/// 
+///     md-get($map, key1, key2, key5, key7) == yellow
 @function md-get($map, $keys...) {
     $result: $map;
     @each $key in $keys {
         @if type-of($result) != 'map' {
             @error 'Intermediate value is not a map (with keys: [#{$keys}])';
-        } @else if mas-has-key($result, $key) {
+        } @else if map-has-key($result, $key) {
             $result: map-get($result, $key);
         } @else {
             @error 'Could not find key "#{$key}" in map (with keys: [#{$keys}])';
@@ -169,6 +227,11 @@
     @return $result;
 }
 
+/// Merges nested maps
+/// 
+/// @param $left Base map to use for the merge
+/// @param $right Overriding map to use for the merge
+/// @returns A new map combined from $left and $right
 @function md-merge($left, $right: null) {
     @if $right == null {
         @return $left;
@@ -200,6 +263,11 @@
     @return $out;
 }
 
+/// Resolves component map from method theme
+/// 
+/// Used recursively by md-component() below
+/// 
+/// @param $component Component map or value to resolve
 @function md-init-component($component) {
     $result: ();
     $type: type-of($component);

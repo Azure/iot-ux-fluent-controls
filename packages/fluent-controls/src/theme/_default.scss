@@ -1,13 +1,12 @@
 /*
 The basis for larger building blocks
 */
-$grid-size: 4px !default;
+$gutter: 4px !default;
+$grid: 4px !default;
 
-$gutter-xsmall: 12px !default;
-$gutter-small: 16px !default;
-$gutter-normal: 20px !default;
-$gutter-big: 32px !default;
-$gutter-bigger: 40px !default;
+$z-index-small-step: 10 !default;
+$z-index-medium-step: 100 !default;
+$z-index-large-step: 1000 !default;
 
 // primary - grayscale
 $color-black: #000 !default;
