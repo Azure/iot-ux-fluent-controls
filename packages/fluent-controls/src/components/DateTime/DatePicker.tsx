@@ -640,16 +640,15 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
 
     render() {
         const containerClassName = css('date-picker-container', this.props.className);
-        const inputClassName = css('input', {'error': this.state.error || this.props.error});
-        const dropdownClassName = css('dropdown', {
-            'visible': this.state.visible,
-            'above': this.props.showAbove
+        const inputClassName = css('date-picker-input', {'error': this.state.error || this.props.error});
+        const dropdownClassName = css('date-picker-dropdown', {
+            'date-picker-above': this.props.showAbove
         });
 
         const icon = <Icon
             icon='calendar'
             size={IconSize.xsmall}
-            className={css('calendar-icon')}
+            className={css('date-picker-calendar-icon')}
             attr={this.props.attr.inputIcon}
         />;
 
@@ -665,7 +664,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         : null
                 }
                 onChange={newValue => this.onSelect(newValue)}
-                className={css('calendar')}
+                className={css('date-picker-calendar')}
                 year={parsed.year || null}
                 month={parsed.month - 1 || null}
                 tabIndex={this.props.tabIndex}
@@ -674,7 +673,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 attr={this.props.attr.calendar}
             />,
             <Attr.div
-                className={css('dropdown-triangle')}
+                className={css('date-picker-dropdown-triangle')}
                 key='2'
                 attr={this.props.attr.dropdownTriangle}
             />
@@ -685,7 +684,10 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 dropdown={calendar}
                 visible={this.state.visible}
                 className={containerClassName}
-                positionClassNames={[css('dropdown'), css('dropdown', 'above')]}
+                positionClassNames={[
+                    css('date-picker-dropdown'),
+                    css('date-picker-dropdown', 'date-picker-above')
+                ]}
                 /**
                  * This is empty on purpose. When onMouseEnter/Leave is set,
                  * the dropdown starts to accept pointer events needed for
@@ -699,7 +701,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                     {
                         container: {ref: this.containerRef},
                         dropdown: {
-                            className: css('dropdown'),
+                            className: css('date-picker-dropdown'),
                             ref: this.dropdownRef
                         },
                     },
@@ -707,7 +709,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 )}
             >
                 <Attr.div
-                    className={css('input-container')}
+                    className={css('date-picker-input-container')}
                     attr={this.props.attr.inputContainer}
                 >
                     <Attr.input
