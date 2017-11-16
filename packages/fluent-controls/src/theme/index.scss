@@ -1,4 +1,4 @@
-@import 'constants.v2';
+@import '../../theme/constants.v2';
 @import 'mixins';
 
 $gutter: 4px;
@@ -66,7 +66,7 @@ $border-disabled: 1px solid #dcdcdc;
 $border-error: 1px solid $color-theme-error;
 
 $border-selected: 1px solid $color-theme-primary;
-$border-selected-hover: 1px solid $color-theme-primary-dark;
+$border-selected-hover: 1px solid $color-theme-dark;
 $border-selected-disabled: 1px solid #888;
 
 $border-gallery-card-default: 1px solid #eaeaea;
