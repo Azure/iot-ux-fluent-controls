@@ -23,12 +23,12 @@ $line-height: 5*$grid;
 
     .required &::after {
         content: ' *';
-        color: $color-text-bright;
+        color: $color-theme-error;
     }
 
     &.required::after {
         content: ' *';
-        color: $color-text-bright;
+        color: $color-theme-error;
     }
 
     & + .content {
@@ -58,7 +58,7 @@ $line-height: 5*$grid;
     height: $form-error-height;
     width: 100%;
     
-    color: $color-text-bright;
+    color: $color-theme-error;
     
     font-family: $font-family-default;
     font-size: $font-size-small;
