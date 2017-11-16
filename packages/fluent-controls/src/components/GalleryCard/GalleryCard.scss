@@ -1,7 +1,7 @@
 @import '../../common/overrides';
 @import '../../common/mixins';
 
-$card-fixed-width: 284px;
+$card-fixed-width: 268px;
 $card-fixed-height: 284px;
 $card-fixed-background-height: 160px;
 $card-fixed-content-height: $card-fixed-height - $card-fixed-background-height;
@@ -39,8 +39,8 @@ a:focus .card:not(.disabled) {
   }
 
   &.fixed {
-    height: $card-fixed-width;
-    width: $card-fixed-height;
+    height: $card-fixed-height;
+    width: $card-fixed-width;
   }
 
   * {
