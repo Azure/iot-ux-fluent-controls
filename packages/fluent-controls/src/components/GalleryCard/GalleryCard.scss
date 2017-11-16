@@ -30,8 +30,8 @@ a:focus .card:not(.disabled) {
     }
 
     &.fixed {
-        height: $gallery-card-width;
-        width: $gallery-card-height;
+        height: $gallery-card-height;
+        width: $gallery-card-width;
     }
 
     * {
