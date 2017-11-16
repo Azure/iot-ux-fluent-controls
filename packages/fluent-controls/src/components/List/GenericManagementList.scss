@@ -1,43 +1,11 @@
 @import '../../theme/index';
 
-$component: md-component('management-list', (
-    color: (
-        header: (color, neutral, primary),
-        content: (color, neutral, primary, alt),
-        checkmark: (color, black),
-    ),
-    bg-color: (
-        content: (color, white),
-        checkbox: (color, white),
-    ),
-    border: (
-        checkbox: (border, checkbox-input, default),
-    ),
-    font: (
-        default: (font, default),
-        column: (font, din-regular),
-        size: (
-            default: (font, size, default),
-            small: (font, size, small),
-        ),
-        line-height: (
-            default: 5*$grid,
-            small: 4*$grid,
-            sort: 3*$grid,
-        )
-    ),
-    size: (
-        column: (
-            basis: (size, management-list, column, basis),
-        ),
-        row: (
-            height: (size, management-list, row, height),
-        ),
-        select-all: (
-            width: (size, management-list, select-all, width),
-        ),
-    ),
-));
+$management-list-column-basis: 25*$grid;
+$management-list-row-height: 12*$grid;
+$management-list-select-all-width: 8*$grid;
+
+$line-height-small: 4*$grid;
+$line-height-sort: 3*$grid;
 
 .list-container {
     @include md-box(flex, relative);
@@ -45,7 +13,7 @@ $component: md-component('management-list', (
 
     .column {
         @include md-box(block, relative);
-        flex-basis: size(column, basis);
+        flex-basis: $management-list-column-basis;
         
         &.auto-width {
             flex-grow: 1;
@@ -53,7 +21,7 @@ $component: md-component('management-list', (
         }
         
         &.checkbox {
-            flex: 0 0 size(select-all, width);
+            flex: 0 0 $management-list-select-all-width;
         }
         
         &:first-child {
@@ -70,9 +38,9 @@ $component: md-component('management-list', (
             @include md-box(block, relative);
             @include md-button-reset();
             
-            font-family: font(column);
-            font-size: font(size, small);
-            line-height: font(line-height, small);
+            font-family: $font-family-din-regular;
+            font-size: $font-size-small;
+            line-height: $line-height-small;
             color: $color-text-default;
             
             padding-top: 2*$gutter;
@@ -86,7 +54,7 @@ $component: md-component('management-list', (
             }
 
             .checkbox-empty {
-                height: font(line-height, small);
+                height: $line-height-small;
             }
 
             &.checkbox-empty {
@@ -94,7 +62,7 @@ $component: md-component('management-list', (
             }
 
             .sort-direction::before {
-                line-height: font(line-height, sort);
+                line-height: $line-height-sort;
                 margin-left: 2*$gutter;
             }
         }
@@ -102,15 +70,15 @@ $component: md-component('management-list', (
         .column-content {
             @include md-box(inline-block, relative);
             font-family: $font-family-default;
-            font-size: font(size, default);
-            line-height: font(line-height, small);
+            font-size: $font-size-text;
+            line-height: $line-height-small;
             color: $color-text-default;
             background-color: $color-bg-management-list;
 
             vertical-align: bottom;
 
             width: 100%;
-            height: size(row, height);
+            height: $management-list-row-height;
             padding-top: 4*$gutter;
             padding-right: 5*$gutter;
             margin-top: 2*$gutter;

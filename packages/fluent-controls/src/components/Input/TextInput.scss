@@ -1,50 +1,15 @@
 @import '../../theme/index';
 
-$component: md-component('text-input', (
-    color: (
-        default: (color, input, default),
-        disabled: (color, input, disabled),
-        placeholder: (color, input, placeholder),
-        selection: (color, input, selection),
-        error: (color, input, error),
-        cancel: (color, input, cancel),
-        addon: (color, neutral, secondary, alt),
-    ),
-    bg-color: (
-        default: (bg-color, input, default),
-        addon: (bg-color, input, default),
-        selection: (bg-color, input, selection),
-        disabled: (bg-color, input, disabled),
-    ),
-    border: (
-        default: (border, input, default),
-        disabled: (border, input, disabled),
-        focus: (border, input, focus),
-        error: (border, input, error),
-    ),
-    font: (
-        default: (font, default),
-        size: (
-            default: (font, size, default),
-            small: (font, size, small)
-        ),
-        line-height: (
-            default: 5*$grid,
-            small: 4*$grid,
-        )
-    ),
-    size: (
-        height: (size, input, height),
-    ),
-));
+$line-height: 5*$grid;
+$line-height-small: 4*$grid;
 
 .text-input-container {
     @include md-box(flex, relative);
     width: 100%;
     font-family: $font-family-default;
 
-    font-size: font(size, default);
-    line-height: font(line-height, default);
+    font-size: $font-size-text;
+    line-height: $line-height;
 
     .input-container {
         @include md-box(block, relative);
@@ -54,7 +19,7 @@ $component: md-component('text-input', (
     .input {
         @include md-box(block, relative);
         width: 100%;
-        height: size(height);
+        height: $input-height;
         padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
         border: $border-default;
         outline: none;
@@ -132,8 +97,8 @@ $component: md-component('text-input', (
     .cancel {
         @include md-box(absolute, float-right);
         color: transparent;
-        font-size: font(size, small);
-        line-height: font(line-height, small);
+        font-size: $font-size-small;
+        line-height: $line-height-small;
         padding: $gutter;
         top: $gutter;
         right: 2*$gutter;
@@ -158,8 +123,8 @@ $component: md-component('text-input', (
         color: $color-text-default;
         padding-right: 2*$gutter;
         
-        height: size(height);
-        line-height: size(height);
+        height: $input-height;
+        line-height: $input-height;
 
         white-space: nowrap;
         
@@ -171,8 +136,8 @@ $component: md-component('text-input', (
         color: $color-text-default;
         padding-left: 2*$gutter;
         
-        height: size(height);
-        line-height: size(height);
+        height: $input-height;
+        line-height: $input-height;
 
         white-space: nowrap;
         

@@ -1,30 +1,6 @@
 @import '../../theme/index';
 
-$component: md-component('time-input', (
-    color: (
-        default: (color, input, default),
-        checked: (color, interactive, dark),
-        disabled: (color, input, disabled),
-        selection: (color, white),
-    ),
-    bg-color: (
-        default: (bg-color, input, default),
-        checked: (color, interactive, default),
-        disabled: (bg-color, input, disabled),
-        selection: (bg-color, option, selected),
-    ),
-    border: (
-        default: (border, input, default),
-        disabled: (border, input, disabled),
-        focus: (border, input, focus),
-        error: (border, input, error),        
-    ),
-    font: (
-        default: (font, default),
-        size: (font, size, default),
-        line-height: 4*$grid,
-    )
-));    
+$line-height: 4*$grid;
 
 $z-index-hover: $z-index-small-step;
 $z-index-focus: 2*$z-index-small-step;
@@ -39,8 +15,8 @@ $z-index-focus: 2*$z-index-small-step;
     font-family: $font-family-default;
 
     color: $color-text-default;
-    font-size: font(size);
-    line-height: font(line-height);
+    font-size: $font-size-text;
+    line-height: $line-height;
 
     .time-input {
         @include md-box();

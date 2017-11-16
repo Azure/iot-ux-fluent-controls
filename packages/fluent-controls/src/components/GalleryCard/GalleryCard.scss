@@ -1,67 +1,37 @@
 @import '../../theme/index';
 
-$component: md-component('gallery-card', (
-    color: (
-        header: (color, neutral, primary, alt, 2),
-        section: (color, neutral, secondary, alt),
-        banner: (color, neutral, light),
-    ),
-    bg-color: (
-        default: (color, neutral, light),
-        solid: (color, neutral, light),
-        banner: (color, neutral, primary),
-    ),
-    border: (
-        default: (border, gallery-card, default),
-        hover: (border, gallery-card, hover),
-    ),
-    font: (
-        default: (font, default),
-        size: (
-            default: (font, size, default),
-            header: (font, size, h4),
-            section: 13px,
-        ),
-        line-height: (
-            default: 5*$grid,
-            section: 4*$grid,
-        ),
-    ),
-    size: (
-        width: (size, gallery-card, width),
-        height: (size, gallery-card, height),
-        background: (
-            height: (size, gallery-card, background, height),
-        ),
-        icon: (icon, size, xxlarge),
-    ),
-    transition: (
-        background: (transition, gallery-card, background-color)
-    )
-));
+$gallery-card-icon-size: $icon-size-xxlarge;
+$gallery-card-width: 71*$grid;
+$gallery-card-height: 71*$grid;
+$gallery-card-background-height: 40*$grid;
+
+$gallery-card-bg-color-transition: background-color 0.2s ease-in-out;
+
+$line-height-default: 5*$grid;
+$line-height-section: 4*$grid;
 
 $card-content-margin: 20px 20px 16px 20px;
-$card-fixed-content-height: size(height) - size(background, height);
-$card-icon-top: (size(background, height) - size(icon));
-$card-icon-left: (size(width) - size(icon));
+$card-fixed-content-height: $gallery-card-height - $gallery-card-background-height;
+$card-icon-top: ($gallery-card-background-height - $gallery-card-icon-size);
+$card-icon-left: ($gallery-card-width - $gallery-card-icon-size);
 
 a:focus .card:not(.disabled) {
-    border: border(hover);
+    border: $border-gallery-card-hover;
 }
 
 .card {
     @include md-box(inline-block, relative, hidden);
     background-color: $color-bg-gallery-card;
-    border: border(default);
+    border: $border-gallery-card-default;
     margin: 2.5*$gutter;
 
     &:hover:not(.disabled) {
-        border: border(hover);
+        border: $border-gallery-card-hover;
     }
 
     &.fixed {
-        height: size(width);
-        width: size(height);
+        height: $gallery-card-width;
+        width: $gallery-card-height;
     }
 
     * {
@@ -79,11 +49,11 @@ a:focus .card:not(.disabled) {
     @include md-box(inline-block, relative);
     width: 100%;
     background-color: transparent;
-    transition: transition(background);
+    transition: $gallery-card-bg-color-transition;
 
     &.fixed {
-        width: size(width);
-        height: size(background, height);
+        width: $gallery-card-width;
+        height: $gallery-card-background-height;
     }
 
     .fullbg & {
@@ -115,8 +85,8 @@ a:focus .card:not(.disabled) {
     overflow: hidden;
 
     header {
-        font-size: font(size, header);
-        line-height: font(line-height);
+        font-size: $font-size-h4;
+        line-height: $line-height-default;
         color: $color-text-gallery-card-header;
         margin-bottom: $gutter;
         flex: 0 0 5*$grid;
@@ -124,15 +94,15 @@ a:focus .card:not(.disabled) {
 
     section {
         @include md-box();
-        font-size: font(size, section);
-        line-height: font(line-height, section);
+        font-size: $font-size-small;
+        line-height: $line-height-section;
         color: $color-text-gallery-card-content;
         overflow: hidden;
     }
     
     footer {
-        font-size: font(size, default);
-        line-height: font(line-height);
+        font-size: $font-size-text;
+        line-height: $line-height-default;
         flex: 0 0 4*$grid;
     }
     
@@ -164,6 +134,6 @@ a:focus .card:not(.disabled) {
     .icon-title {
         @include md-box(block);
         font-family: $font-family-default;
-        font-size: font(size, default);
+        font-size: $font-size-text;
     }
 }

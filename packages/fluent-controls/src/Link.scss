@@ -1,24 +1,6 @@
 @import './theme/index';
 
-$component: md-component('link', (
-    color: (
-        default: (color, link, default),
-        hover: (color, link, hover),
-        pressed: (color, link, pressed),
-        visited: (color, link, visited),
-        disabled: (color, link, disabled),
-    ),
-    font: (
-        default: (font, default),
-        size: (font, size, default),
-        line-height: 5*$grid,
-    ),
-    outline: (
-        focus: (outline, focus),
-    ),
-));
-
-$default-link-outline: outline(focus);
+$default-link-outline: $outline-focus;
 
 @mixin md-link-style($text-colors: (), $outline: $default-link-outline) {
     @include md-box(inline-block, relative);

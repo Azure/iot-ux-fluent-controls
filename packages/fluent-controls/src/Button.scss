@@ -1,56 +1,20 @@
 @import './theme/index';
 
-$component: md-component('button', (
-    color: (
-        disabled: (color, neutral, secondary, alt, 5),
-        primary: (
-            default: (color, interactive, dark),
-            pressed: (color, white),
-        ),
-        secondary: (
-            default: (color, neutral, primary),
-            pressed: (color, white),
-        ),
-    ),
-    bg-color: (
-        disabled: (color, neutral, tertiary, alt, 2),
-        primary: (
-            default: (color, interactive, default),
-            hover: (color, interactive, hover),
-            pressed: (color, interactive, pressed),
-        ),
-        secondary: (
-            default: (color, neutral, tertiary, alt),
-            hover: (color, neutral, tertiary),
-            pressed: (color, neutral, secondary, alt, 5 ),
-        ),
-    ),
-    font: (
-        default: (font, default),
-        size: (font, size, default),
-        line-height: 8*$grid,
-    ),
-    icon: (
-        size: (icon, size, xsmall),
-    ),
-    outline: (
-        focus: (outline, focus),
-    ),
-));
+$line-height: 8*$grid;
 
 $primary-color: $color-text-default;
 $primary-pressed-color: $color-text-bright;
 
-$primary-bg-color: bg-color(primary, default);
-$primary-hover-bg-color: bg-color(primary, hover);
-$primary-pressed-bg-color: bg-color(primary, pressed);
+$primary-bg-color: $color-bg-primary-default;
+$primary-hover-bg-color: $color-bg-primary-hover;
+$primary-pressed-bg-color: $color-bg-primary-pressed;
 
 $default-color: $color-text-default;
 $default-pressed-color: $color-text-bright;
 
-$default-bg-color: bg-color(secondary, default);
-$default-hover-bg-color: bg-color(secondary, hover);
-$default-pressed-bg-color: bg-color(secondary, pressed);
+$default-bg-color: $color-bg-secondary-default;
+$default-hover-bg-color: $color-bg-secondary-hover;
+$default-pressed-bg-color: $color-bg-secondary-pressed;
 
 $disabled-color: $color-text-disabled;
 $disabled-bg-color: $color-bg-disabled;
@@ -82,11 +46,11 @@ $primary-button-bg-colors: (
 );
 
 
-@mixin md-button-style($text-colors: $default-button-colors, $bg-colors: $default-button-colors, $outline: outline(focus)) {
+@mixin md-button-style($text-colors: $default-button-colors, $bg-colors: $default-button-colors, $outline: $outline-focus) {
     @include md-box(inline-block, relative);
     font-family: $font-family-default;
-    font-size: font(size);
-    line-height: font(line-height);
+    font-size: $font-size-text;
+    line-height: $line-height;
 
     height: 8*$grid;
     padding-left: 5*$gutter;
@@ -130,8 +94,8 @@ $primary-button-bg-colors: (
 
 :global(.btn), :global(.btn-primary) {
     vertical-align: middle;
-    font-size: font(size);
-    line-height: font(line-height);
+    font-size: $font-size-text;
+    line-height: $line-height;
 
     :global(.icon) {
         @include md-box(inline-block);
@@ -139,7 +103,7 @@ $primary-button-bg-colors: (
         margin-right: 2*$gutter;
         margin-top: -0.5*$gutter;
         
-        font-size: icon(size);
-        line-height: font(line-height);
+        font-size: $icon-size-xsmall;
+        line-height: $line-height;
     }
 }

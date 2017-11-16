@@ -1,43 +1,16 @@
 @import '../../theme/index';
 
-$component: md-component('calendar', (
-    color: (
-        header: (color, neutral, primary, alt, 2),
-        weekday: (color, neutral, secondary, alt, 2),
-        selected: (color, interactive, dark),
-        different-month: (color, neutral, secondary, alt, 5),
-    ),
-    bg-color: (
-        default: (color, transparent),
-        hover: (color, neutral, tertiary, alt, 2),
-        selected: (color, interactive, default),
-    ),
-    border: (
-        weekday: (border, calendar, weekday),
-    ),
-    font: (
-        default: (font, default),
-        light: (font, light),
-        size: (
-            default: (font, size, small),
-            month: (font, size, h4),
-        ),
-        line-height: (
-            month: 4*$grid,
-            chevron: 4*$grid,
-            row: (size, calendar, column),
-        )
-    ),
-    size: (
-        width: (size, calendar, width),
-        column: (size, calendar, column),
-    )
-));
+$calendar-column-width: 10*$grid;
+$calendar-width: 52*$grid;
+
+$line-height-chevron: 4*$grid;
+$line-height-header: 4*$grid;
+$line-height-row: $calendar-column-width;
 
 .calendar {
     @include md-box(block, relative);
     font-family: $font-family-default;
-    font-size: font(size, default);
+    font-size: $font-size-text;
     padding-bottom: 2*$gutter;
     color: $color-text-default;
 
@@ -64,10 +37,10 @@ $component: md-component('calendar', (
             @include md-box(inline-block, relative);
             margin-top: 4*$gutter;
             color: $color-text-default;
-            font-size: font(size, month);
-            line-height: font(line-height, month);
+            font-size: $font-size-h4;
+            line-height: $line-height-header;
             text-align: left;
-            width: size(width);
+            width: $calendar-width;
             vertical-align: top;
         }
 
@@ -75,10 +48,10 @@ $component: md-component('calendar', (
             @include md-box(inline-block, relative);
             text-align: center;
             vertical-align: bottom;
-            line-height: font(line-height, chevron);
+            line-height: $line-height-chevron;
             margin-left: $gutter;
             padding-top: 2*$gutter;
-            width: size(column);
+            width: $calendar-column-width;
             text-decoration: none;
 
             &:visited {
@@ -102,7 +75,7 @@ $component: md-component('calendar', (
         
         & > div  {
             @include md-box(inline-block, relative);
-            width: size(column);
+            width: $calendar-column-width;
             text-align: center;
         }
 
@@ -121,10 +94,10 @@ $component: md-component('calendar', (
 
         & > button {
             @include md-box(inline-block, relative);
-            width: size(column);
-            height: size(column);
+            width: $calendar-column-width;
+            height: $calendar-column-width;
 
-            line-height: font(line-height, row);
+            line-height: $line-height-row;
             text-align: center;
             vertical-align: middle;
 

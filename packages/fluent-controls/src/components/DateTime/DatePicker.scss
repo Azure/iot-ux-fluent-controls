@@ -1,41 +1,9 @@
 @import '../../theme/index';
 
-$component: md-component('date-picker', (
-    color: (
-        default: (color, input, default),
-        disabled: (color, input, disabled),
-        placeholder: (color, input, placeholder),
-        selection: (color, input, selection),
-    ),
-    bg-color: (
-        input: (bg-color, input, default),
-        disabled: (bg-color, input, disabled),
-        calendar: (color, white),
-        selection: (bg-color, input, selection),
-    ),
-    border: (
-        default: (border, input, default),
-        focus: (border, input, focus),
-        disabled: (border, input, disabled),
-        error: (border, input, error),        
-    ),
-    font: (
-        default: (font, default),
-        size: (
-            default: (font, size, default),
-            icon: (font, size, small)
-        ),
-        line-height: (
-            default: 20px,
-            icon: 16px
-        ),
-    ),
-    size: (
-        dropdown: (
-            width: (size, date-picker, dropdown, width),
-        ),
-    ),
-));
+$date-picker-dropdown-width: 80*$grid;
+
+$line-height-text: 5*$grid;
+$line-height-icon: 4*$grid;
 
 $calendar-z-index: 9 * $z-index-large-step + 5 * $z-index-medium-step;
 
@@ -48,7 +16,7 @@ $calc-margin: 5px;
 
     color: $color-text-default;
     font-size: $font-family-default;
-    line-height: font(line-height);
+    line-height: $line-height-text;
 
     .date-picker-input-container {
         @include md-box(block, relative);
@@ -111,8 +79,8 @@ $calc-margin: 5px;
 
     .date-picker-calendar-icon {
         @include md-box(absolute, float-right);
-        font-size: font(size, icon);
-        line-height: font(line-height, icon);
+        font-size: $font-size-small;
+        line-height: $line-height-icon;
         padding: $gutter;
         top: $gutter;
         right: 2*$gutter;
@@ -139,7 +107,7 @@ $calc-margin: 5px;
 .date-picker-dropdown {
     padding-bottom: 2*$gutter;
     left: 0px;
-    width: size(dropdown, width);
+    width: $date-picker-dropdown-width;
     visibility: hidden;
     
     :global(.md-dropdown-container) & {

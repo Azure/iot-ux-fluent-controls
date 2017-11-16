@@ -1,30 +1,14 @@
 @import '../../theme/index';
 
-$component: md-component('balloon', (
-    color: (
-        default: (color, white),
-    ),
-    bg-color: (
-        default: (color, neutral, primary),
-    ),
-    font: (
-        default: (font, default),
-    ),
-    shadow: (
-        default: (shadow, balloon, box-shadow)
-    ),
-    size: (
-        width: (size, balloon, width),
-        arrow: (size, balloon, arrow)
-    )
-));
+$balloon-arrow-size: 2*$grid;
+$balloon-width: 65*$grid;
 
 @mixin arrow($location, $offset: 'center') {
     &:before {
         content:'';
         display:block;
-        width: size(arrow);
-        height: size(arrow);
+        width: $balloon-arrow-size;
+        height: $balloon-arrow-size;
         background-color: inherit;
         position: absolute;
         transform: rotateZ(45deg);
@@ -128,10 +112,10 @@ $component: md-component('balloon', (
 .balloon-dropdown {
     @include md-box(inline-block, absolute);
     font-family: $font-family-default;
-    box-shadow: shadow(default);
+    box-shadow: $balloon-shadow;
     background-color: $color-bg-balloon;
     color: $color-text-bright;
-    width: size(width);
+    width: $balloon-width;
 
     .balloon-inner-container {
         @include md-box(inline-block, relative);

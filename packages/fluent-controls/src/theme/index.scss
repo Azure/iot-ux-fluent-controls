@@ -1,16 +1,8 @@
-@import '../../theme/constants.v2';
+@import 'constants.v2';
 @import 'mixins';
 
 $gutter: 4px;
 $grid: 4px;
-
-$method-theme-override: (
-    
-) !default;
-
-$method-component-override: (
-
-) !default;
 
 $font-family-default: $typography-regular-font-stack;
 $font-family-light: $typography-light-font-stack;
@@ -30,13 +22,14 @@ $color-text-gallery-card-banner: #fff;
 $color-bg-alert-info: #dcdcdc;
 $color-bg-alert-warning: #f9e385;
 $color-bg-alert-error: #d02e00;
+$color-bg-addon: transparent;
 $color-bg-balloon: #333;
 $color-bg-gallery-card: #aeaeae;
 $color-bg-gallery-card-banner: #333;
 $color-bg-management-list: #fff;
 
-$border-gallery-card-default: #eaeaea;
-$border-gallery-card-hover: #333;
+$border-gallery-card-default: 1px solid #eaeaea;
+$border-gallery-card-hover: 1px solid #333;
 
 /// ----------------------------------------------------
 
@@ -60,6 +53,13 @@ $color-bg-selected: #005a9e;
 $color-bg-selected-hover: #4ba0e4;
 $color-bg-selected-disabled: #a6a6a6;
 
+$color-bg-btn-primary-default: #4ba0e4;
+$color-bg-btn-primary-hover: #005a9e;
+$color-bg-btn-primary-pressed: #000;
+$color-bg-btn-secondary-default: #4ba0e4;
+$color-bg-btn-secondary-hover: #005a9e;
+$color-bg-btn-secondary-pressed: #000;
+
 $border-default: 1px solid #c8c8c8;
 $border-active: 1px solid #333;
 $border-disabled: 1px solid #dcdcdc;
@@ -69,278 +69,16 @@ $border-selected: 1px solid $color-theme-dark;
 $border-selected-hover: 1px solid $color-bg-selected-hover;
 $border-selected-disabled: 1px solid $color-bg-selected-disabled;
 
-$method-theme: (
-    color: (
-        default: transparent,
-        transparent: transparent,
-        black: $color-black,
-        white: $color-white,
-        neutral: (
-            primary: (
-                default: $color-neutral-primary,
-                alt: (
-                    default: $color-neutral-primary-alt,
-                    1: $color-neutral-primary-alt,
-                    2: $color-neutral-primary-alt-2,
-                )
-            ),
-            secondary: (
-                default: $color-neutral-secondary,
-                alt: (
-                    default: $color-neutral-secondary-alt,
-                    1: $color-neutral-secondary-alt,
-                    2: $color-neutral-secondary-alt-2,
-                    3: $color-neutral-secondary-alt-3,
-                    4: $color-neutral-secondary-alt-4,
-                    5: $color-neutral-secondary-alt-5,
-                )
-            ),
-            tertiary: (
-                default: $color-neutral-tertiary,
-                1: $color-neutral-tertiary,
-                2: $color-neutral-tertiary-2,
-                alt: (
-                    default: $color-neutral-tertiary-alt,
-                    1: $color-neutral-tertiary-alt,
-                    2: $color-neutral-tertiary-alt-2,
-                )
-            ),
-            light: $color-neutral-light,
-            lighter: (
-                default: $color-neutral-lighter,
-                alt: $color-neutral-lighter-alt
-            )
-        ),
-        alert: (
-            default: $color-neutral-tertiary-alt-2,
-            info: $color-neutral-tertiary-alt-2,
-            warning: $color-alert-warning,
-            error: $color-alert-error,
-        ),
-        interactive: (
-            default: $color-interactive-default,
-            hover: $color-interactive-hover,
-            pressed: $color-interactive-pressed,
-            dark: $color-interactive-dark,
-            alt: $color-interactive-alt,
-        ),
-        input: (
-            default: $color-neutral-primary-alt-2,
-            disabled: $color-neutral-secondary-alt-5,
-            placeholder: $color-neutral-secondary-alt-4,
-            selection: $color-white,
-            error: $color-input-error,
-            cancel: $color-neutral-secondary-alt,
-            arrow: $color-neutral-secondary-alt-3,
-        ),
-        option: (
-            default: $color-neutral-primary-alt-2,
-            pressed: $color-white,
-            selected: $color-interactive-dark,
-        ),
-        link: (
-            default: $color-link-default,
-            hover: $color-link-hover,
-            pressed: $color-link-pressed,
-            visited: $color-link-visited,
-            disabled: $color-link-disabled,
-        )
-    ),
-    bg-color: (
-        input: (
-            default: $color-white,
-            selection: $color-input-selection,
-            disabled: $color-neutral-tertiary-alt-2,
-        ),
-        option: (
-            default: $color-white,
-            selected: $color-interactive-default,
-            pressed: $color-neutral-primary-alt-2,
-        ),
-        checkbox-input: (
-            default: $color-white,
-            hover: $color-interactive-hover,
-            disabled: $color-neutral-tertiary,
-            selected: (
-                default: $color-interactive-default,
-                disabled: $color-neutral-tertiary-alt,
-            ),
-            fill: (
-                default: $color-interactive-dark,
-                disabled: $color-neutral-tertiary,
-            ),
-        ),
-    ),
-    font: (
-        default: $typography-regular-font-stack,
-        light: $typography-light-font-stack,
-        din-regular: join('DIN-Regular', $typography-regular-font-stack),
-        size: (
-            default: $font-size-text,
-            normal: $font-size-text,
-            small: $font-size-small,
-            h1: $font-size-h1,
-            h2: $font-size-h2,
-            h3: $font-size-h3,
-            h4: $font-size-h4,
-        ),
-        line-height: (
-            default: $typography-default-line-height
-        )
-    ),
-    border: (
-        calendar: (
-            weekday: 1px solid $color-neutral-tertiary-alt,
-        ),
-        input: (
-            default: 1px solid $color-neutral-tertiary-alt,
-            focus: 1px solid $color-neutral-primary,
-            disabled: 1px solid $color-neutral-tertiary-alt-2,
-            error: 1px solid $color-input-error,
-        ),
-        gallery-card: (
-            default: 1px solid $color-neutral-tertiary,
-            hover: 1px solid $color-neutral-primary,
-        ),
-        checkbox-input: (
-            default: 1px solid $color-neutral-secondary-alt,
-            hover: 1px solid $color-neutral-primary,
-            disabled: 1px solid $color-neutral-tertiary,
-            indeterminate: (
-                default: 1px solid $color-interactive-default,
-                hover: 1px solid $color-interactive-hover,
-            ),
-            selected: none
-        ),
-        combo-input: (
-            dropdown: 1px solid $color-neutral-tertiary-alt
-        ),
-        radio-input: (
-            default: 1px solid $color-neutral-secondary-alt,
-            hover: 1px solid $color-neutral-primary,
-            disabled: 1px solid $color-neutral-tertiary,
-            checked: 1px solid $color-interactive-default,
-        ),
-        pivot: (
-            selected: 2px solid $color-interactive-default,
-            disabled: 2px solid $color-neutral-tertiary,
-            menu: 1px solid $color-neutral-tertiary-alt-2,
-        ),
-        toggle: (
-            on: (
-                default: 1px solid $color-interactive-default,
-                hover: 1px solid $color-interactive-hover,
-                disabled: 1px solid $color-neutral-tertiary-alt,
-            ),
-            off: (
-                default: 1px solid $color-neutral-secondary-alt,
-                hover: 1px solid $color-neutral-primary,
-                disabled: 1px solid $color-neutral-tertiary-alt,
-            ),
-        ),
-    ),
-    outline: (
-        default: $outline-default,
-        focus: $outline-focus,
-    ),
-    icon: (
-        default: $icon-font-family,
-        font-family: $icon-font-family,        
-        size: (
-            default: $icon-size-base,
-            xsmall: $icon-size-xsmall,
-            small: $icon-size-small,
-            medium: $icon-size-medium,
-            large: $icon-size-large,
-            xlarge: $icon-size-xlarge,
-            xxlarge: $icon-size-xxlarge,
-        )
-    ),
-    shadow: (
-        balloon: (
-            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1),
-        )
-    ),
-    size: (
-        balloon: (
-            width: 65*$grid,
-            arrow: 2*$grid,
-        ),
-        calendar: (
-            width: 52*$grid,
-            column: 10*$grid,
-        ),
-        date-picker: (
-            dropdown: (
-                width: 80*$grid,
-            ),
-        ),
-        form-error: (
-            height: 5*$grid,
-        ),
-        form-label: (
-            balloon: (
-                width: 75*$grid,
-            ),
-        ),
-        gallery-card: (
-            width: 71*$grid,
-            height: 71*$grid,
-            background: (
-                height: 40*$grid,
-            ),
-        ),
-        input: (
-            height: 8*$grid,
-            option: (
-                height: 8*$grid,
-            ),
-            dropdown: (
-                max-height: 50*$grid,
-            )
-        ),
-        radio-input: (
-            default: 4*$grid
-        ),
-        text-area: (
-            min-height: 13*$grid,
-        ),
-        management-list: (
-            column: (
-                basis: 25*$grid,
-            ),
-            row: (
-                height: 12*$grid,
-            ),
-            select-all: (
-                width: 8*$grid,
-            ),
-        ),
-        pivot: (
-            max-width: 50*$grid,
-            min-height: 7*$grid,
-            max-height: 12*$grid,
-        ), 
-        toggle: (
-            width: 10*$grid,
-            height: 5*$grid,
-            border-radius: 10px,
-            switch: (
-                border-radius: 5px,
-            ),
-        ),
-        button: (
-            height: 8*$grid,
-        )
-    ),
-    transition: (
-        gallery-card: (
-            background-color: background-color 0.2s ease-in-out
-        ),
-        toggle: (
-            switch: 75ms ease-in-out,
-        ),
-    )
-);
+$outline-focus: 1px dashed #333;
 
-$method-constants: md-merge($method-theme, $method-theme-override);
+$font-size-text: 14px;
+$font-size-small: 12px;
+$font-size-h4: 16px;
+
+$font-family-din-regular: join('DIN-Regular', $typography-regular-font-stack);
+
+$input-height: 8*$grid;
+$option-height: 8*$grid;
+$dropdown-max-height: 50*$grid;
+
+$balloon-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);

@@ -1,27 +1,7 @@
 @import '../../theme/index';
 
-$component: md-component('alert', (
-    color: (
-        default: (color, neutral, primary),
-        error: (color, white),
-    ),
-    bg-color: (
-        info: (color, alert, info),
-        warning: (color, alert, warning),
-        error: (color, alert, error),
-    ),
-    font: (
-        default: (font, light),
-        size: (
-            text: (font, size, normal),
-            icon: (icon, size, xsmall),
-        ),
-        line-height: (
-            close: 4*$grid,
-            text: 5*$grid
-        )
-    ),
-));
+$line-height-text: 5*$grid;
+$line-height-close: 4*$grid;
 
 $icon-margin-top: 3px;
 
@@ -51,8 +31,8 @@ $icon-margin-top: 3px;
         padding-bottom: 2*$gutter;
 
         font-family: $font-family-light;
-        font-size: font(size, text);
-        line-height: font(line-height, text);
+        font-size: $font-size-text;
+        line-height: $line-height-text;
         color: $color-text-default;
 
         width: 100%;
@@ -71,7 +51,7 @@ $icon-margin-top: 3px;
         margin-top: 1.5*$gutter;
         margin-left: auto;
         margin-right: 2*$gutter;
-        line-height: font(line-height, close);
+        line-height: $line-height-close;
         cursor: pointer;
     }
 
@@ -103,7 +83,7 @@ $icon-margin-top: 3px;
 
         .alert-text {
             text-overflow: none;
-            line-height: font(line-height, text);
+            line-height: $line-height-text;
             white-space: normal;
         }
     }

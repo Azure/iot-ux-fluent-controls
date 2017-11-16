@@ -1,46 +1,15 @@
 @import '../../theme/index';
 
-$component: md-component('radio-input', (
-    color: (
-        default: (color, input, default),
-        disabled: (color, neutral, tertiary),
-    ),
-    bg-color: (
-        default: (color, white),
-        checked: (color, neutral, primary),
-        disabled: (color, neutral, tertiary),
-    ),
-    border: (
-        default: (border, radio-input, default),
-        hover: (border, radio-input, hover),
-        disabled: (border, radio-input, disabled),
-        checked: (border, radio-input, checked)
-    ),
-    outline: (
-        focus: (outline, focus),
-    ),
-    font: (
-        default: (font, default),
-        size: (
-            default: (font, size, default),
-            small: (font, size, small)
-        ),
-        line-height: (
-            default: 5*$grid,
-            small: 4*$grid
-        ),
-    ),
-    size: (
-        default: (size, radio-input, default),
-    )
-));
+$radio-input-size: 4*$grid;
+
+$line-height: 4*$grid;
 
 .radio-container {
     @include md-box(block, relative);
     font-family: $font-family-default;
     color: $color-text-default;
-    font-size: font(size, default);
-    line-height: font(line-height, small);
+    font-size: $font-size-text;
+    line-height: $line-height;
 
     & + &:not(.columns) {
         margin-top: 3*$gutter;
@@ -65,7 +34,7 @@ $component: md-component('radio-input', (
         background-color: $color-bg-default;
 
         &:focus ~ .radio-button:not(.disabled) {
-            outline: outline(focus);
+            outline: $outline-focus;
             outline-offset: 1px;
         }
 
@@ -103,10 +72,10 @@ $component: md-component('radio-input', (
 
     .radio-button {
         @include md-box(inline-block, relative);
-        width: size(default);
-        height: size(default);
+        width: $radio-input-size;
+        height: $radio-input-size;
         background-color: $color-bg-default;
-        border-radius: size(default) / 2;
+        border-radius: $radio-input-size / 2;
         border: $border-default ;
         outline: none;
         vertical-align: top;

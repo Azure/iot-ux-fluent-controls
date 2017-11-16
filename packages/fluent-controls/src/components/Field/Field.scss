@@ -1,30 +1,9 @@
 @import '../../theme/index';
 
-$component: md-component('form-field', (
-    color: (
-        default: (color, neutral, primary, alt, 2),
-        disabled: (color, neutral, tertiary),
-        error: (color, input, error)
-    ),
-    font: (
-        default: (font, default),
-        size: (
-            label: (font, size, default),
-            error: (font, size, small),
-        ),
-        line-height: 5*$grid,
-    ),
-    size: (
-        form-error: (
-            height: (size, form-error, height)
-        ),
-        form-label: (
-            balloon: (
-                width: (size, form-label, balloon, width)
-            )
-        )
-    )
-));
+$form-error-height: 5*$grid;
+$form-label-balloon-width: 75*$grid;
+
+$line-height: 5*$grid;
 
 .form-field {
     font-family: $font-family-default;
@@ -35,8 +14,8 @@ $component: md-component('form-field', (
     @include md-box(inline-block);
     color: $color-text-default;
     font-family: $font-family-default;
-    font-size: font(size, label);
-    line-height: font(line-height);
+    font-size: $font-size-text;
+    line-height: $line-height;
 
     &.disabled {
         color: $color-text-disabled;
@@ -70,20 +49,20 @@ $component: md-component('form-field', (
     }
     
     .label-balloon {
-        width: size(form-label, balloon, width);
+        width: $form-label-balloon-width;
     }
 }
 
 .field-error {
     @include md-box(inline-block, ellipsis);
-    height: size(form-error, height);
+    height: $form-error-height;
     width: 100%;
     
     color: $color-text-bright;
     
     font-family: $font-family-default;
-    font-size: font(size, error);
-    line-height: font(line-height);
+    font-size: $font-size-small;
+    line-height: $line-height;
 
     &.hidden {
         display: none;

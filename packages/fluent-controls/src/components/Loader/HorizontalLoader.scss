@@ -1,9 +1,5 @@
 @import '../../theme/index';
 
-$component: md-component('horizontal-loader', (
-
-));
-
 @mixin horizontal-loader-keyframes($name, $num-dots: 6, $diameter: 6px, $gap: 12px) {
     $pixels: ($num-dots / 2) * ($diameter + $gap);
     @keyframes #{$name} {

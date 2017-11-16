@@ -1,66 +1,7 @@
 @import '../../theme/index';
 
-$component: md-component('combo-input', (
-    color: (
-        default: (color, input, default),
-        disabled: (color, input, disabled),
-        placeholder: (color, input, placeholder),
-        selection: (color, input, selection),
-        error: (color, input, error),
-        cancel: (color, input, cancel),
-        arrow: (color, input, arrow),        
-        option: (
-            default: (color, neutral, primary, alt, 2),
-            disabled: (color, neutral, secondary, alt, 5),
-            active: (color, white),
-            selected: (color, interactive, dark),
-        ),
-    ),
-    bg-color: (
-        input: (bg-color, input, default),
-        dropdown: (bg-color, input, default),
-        selection: (bg-color, input, selection),
-        disabled: (bg-color, input, disabled),
-        option: (
-            default: (color, white),
-            active: (color, black),
-            hover: (color, neutral, tertiary, alt, 2),
-            selected: (
-                default: (color, interactive, default),
-                hover: (color, interactive, hover),
-            ),
-        )
-    ),
-    border: (
-        default: (border, input, default),
-        disabled: (border, input, disabled),
-        focus: (border, input, focus),
-        error: (border, input, error),
-        dropdown: (border, combo-input, dropdown)
-    ),
-    font: (
-        default: (font, default),
-        size: (
-            default: (font, size, default), 
-            small: (font, size, small),
-        ),
-        line-height: (
-            default: 5*$grid,
-            small: 4*$grid,
-        ),
-    ),
-    size: (
-        input: (
-            height: (size, input, height)
-        ),
-        option: (
-            height: (size, input, option, height),
-        ),
-        dropdown: (
-            max-height: (size, input, dropdown, max-height),
-        ),
-    )
-));
+$line-height: 5*$grid;
+$line-height-small: 4*$grid;
 
 $dropdown-z-index: $z-index-medium-step;
 
@@ -70,8 +11,8 @@ $dropdown-z-index: $z-index-medium-step;
     font-family: $font-family-default;
 
     color: $color-text-default;
-    font-size: font(size);
-    line-height: font(line-height);
+    font-size: $font-size-text;
+    line-height: $line-height;
 
     .input-container {
         @include md-box(block, relative);
@@ -81,7 +22,7 @@ $dropdown-z-index: $z-index-medium-step;
     .input {
         @include md-box(block, relative);
         width: 100%;
-        height: size(input, height);
+        height: $input-height;
         padding: 2*$gutter 8*$gutter 2*$gutter 3*$gutter;
         border: $border-default;
         outline: none;
@@ -143,8 +84,8 @@ $dropdown-z-index: $z-index-medium-step;
     .cancel {
         @include md-box(display-none, absolute);
         color: $color-text-cancel;
-        font-size: font(size, default);
-        line-height: font(line-height, small);
+        font-size: $font-size-text;
+        line-height: $line-height-small;
         padding: $gutter;
         top: $gutter;
         right: 8*$gutter;
@@ -162,7 +103,7 @@ $dropdown-z-index: $z-index-medium-step;
 
     .chevron {
         @include md-box(absolute, block);
-        font-size: font(size, small);
+        font-size: $font-size-small;
         color: $color-text-chevron;
         right: 2*$gutter;
         top: 2*$gutter;
@@ -186,7 +127,7 @@ $dropdown-z-index: $z-index-medium-step;
 .dropdown {
     @include md-box(inline-block, relative);
     width: 100%;
-    max-height: size(dropdown, max-height);
+    max-height: $dropdown-max-height;
     overflow-y: auto;
     background-color: $color-bg-default;
     border: $border-default;
@@ -201,8 +142,8 @@ $dropdown-z-index: $z-index-medium-step;
 .option {
     @include md-box(block);
     width: 100%;
-    height: size(option, height);
-    line-height: font(line-height, small);
+    height: $option-height;
+    line-height: $line-height-small;
     padding: 0px 3*$gutter;
 
     border: none;

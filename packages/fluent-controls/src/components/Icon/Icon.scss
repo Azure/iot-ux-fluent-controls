@@ -3,24 +3,6 @@
 // sass-lint:disable class-name-format
 @import '../../theme/index';
 
-$component: md-component('icon', (
-    font: (
-        default: (font, default)
-    ),
-    icon: (
-        font-family: (icon, font-family),
-        size: (
-            base: (icon, size, default),
-            xsmall: (icon, size, xsmall),
-            small: (icon, size, small),
-            medium: (icon, size, medium),
-            large: (icon, size, large),
-            xlarge: (icon, size, xlarge),
-            xxlarge: (icon, size, xxlarge),
-        )
-    )
-));
-
 %icon {
     font-style: normal;
     font-weight: normal;
@@ -28,7 +10,7 @@ $component: md-component('icon', (
     
     &:before {
         @include md-box(inline-block, relative);
-        font-family: icon(font-family);
+        font-family: $icon-font-family;
         text-decoration: none;
         vertical-align: middle;
     }
@@ -51,7 +33,7 @@ $component: md-component('icon', (
 .icon-xsmall {
     @extend %icon;
     .icon-xsmall:before {
-        font-size: icon(size, xsmall);
+        font-size: $icon-size-xsmall;
     }
 
     &.centered {
@@ -62,7 +44,7 @@ $component: md-component('icon', (
 .icon-small {
     @extend %icon;
     .icon-small:before {
-        font-size: icon(size, small);
+        font-size: $icon-size-small;
     }
 
     &.centered {
@@ -73,7 +55,7 @@ $component: md-component('icon', (
 .icon-medium {
     @extend %icon;
     .icon-medium:before {
-        font-size: icon(size, medium);
+        font-size: $icon-size-medium;
     }
 
     &.centered {
@@ -84,7 +66,7 @@ $component: md-component('icon', (
 .icon-large {
     @extend %icon;
     .icon-large:before {
-        font-size: icon(size, large);
+        font-size: $icon-size-large;
     }
 
     &.centered {
@@ -95,7 +77,7 @@ $component: md-component('icon', (
 .icon-xlarge {
     @extend %icon;
     .icon-xlarge:before {
-        font-size: icon(size, xlarge);
+        font-size: $icon-size-xlarge;
     }
 
     &.centered {
@@ -106,7 +88,7 @@ $component: md-component('icon', (
 .icon-xxlarge {
     @extend %icon;
     .icon-xxlarge:before {
-        font-size: icon(size, xxlarge);
+        font-size: $icon-size-xxlarge;
     }
 
     &.centered {
@@ -115,30 +97,30 @@ $component: md-component('icon', (
 }
 
 .icon-background {
-    @include circle(icon(size, medium));
+    @include circle($icon-size-medium);
 
     &.icon-xsmall {
-        @include circle(icon(size, xsmall));
+        @include circle($icon-size-xsmall);
     }
 
     &.icon-small {
-        @include circle(icon(size, small));
+        @include circle($icon-size-small);
     }
 
     &.icon-medium {
-        @include circle(icon(size, medium));
+        @include circle($icon-size-medium);
     }
 
     &.icon-large {
-        @include circle(icon(size, large));
+        @include circle($icon-size-large);
     }
 
     &.icon-xlarge {
-        @include circle(icon(size, xlarge));
+        @include circle($icon-size-xlarge);
     }
 
     &.icon-xxlarge {
-        @include circle(icon(size, xxlarge));
+        @include circle($icon-size-xxlarge);
     }
 
     &.centered {

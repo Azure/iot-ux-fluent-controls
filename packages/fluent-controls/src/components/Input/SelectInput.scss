@@ -1,44 +1,6 @@
 @import '../../theme/index';
 
-$component: md-component('select-input', (
-    color: (
-        default: (color, input, default),
-        disabled: (color, input, disabled),
-        selection: (color, input, selection),
-        checked: (color, interactive, dark),
-        arrow: (color, input, arrow),
-    ),
-    bg-color: (
-        default: (bg-color, input, default),
-        checked: (color, interactive, default),
-        selection: (bg-color, input, selection),
-        disabled: (bg-color, input, disabled),
-    ),
-    border: (
-        default: (border, input, default),
-        disabled: (border, input, disabled),
-        focus: (border, input, focus),
-        error: (border, input, error),
-    ),
-    font: (
-        default: (font, default),
-        size: (
-            default: (font, size, default),
-            small: (font, size, small)
-        ),
-        line-height: (
-            default: 4*$grid,
-        )
-    ),
-    size: (
-        input: (
-            height: (size, input, height)
-        ),
-        option: (
-            height: (size, input, option, height),
-        ),
-    ),
-));
+$line-height: 4*$grid;
 
 .combo-container {
     @include md-box(relative, block);
@@ -46,12 +8,12 @@ $component: md-component('select-input', (
     font-family: $font-family-default;
 
     color: $color-text-default;
-    font-size: font(size, default);
-    line-height: font(line-height, default);
+    font-size: $font-size-text;
+    line-height: $line-height;
 
     .arrow {
         @include md-box(absolute, block);
-        font-size: font(size, small);
+        font-size: $font-size-small;
         color: $color-text-chevron;
         right: 2*$gutter;
         top: 2*$gutter;
@@ -61,7 +23,7 @@ $component: md-component('select-input', (
     .combo {
         @include md-box();
         width: 100%;
-        height: size(input, height);
+        height: $input-height;
         padding: 0px 3*$gutter;
         border: $border-default;
         outline: none;
@@ -73,7 +35,7 @@ $component: md-component('select-input', (
         background-color: $color-bg-default;
 
         option {
-            height: size(option, height);
+            height: $option-height;
 
             &:first {
                 display: none;

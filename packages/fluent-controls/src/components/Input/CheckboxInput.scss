@@ -1,58 +1,13 @@
 @import '../../theme/index';
 
-$component: md-component('checkbox-input', (
-    color: (
-        default: (color, input, default),
-        disabled: (color, neutral, tertiary),
-        checkmark: (
-            default: (color, interactive, dark),
-            disabled: (color, neutral, secondary, alt, 4),
-        ),
-    ),
-    bg-color: (
-        default: (bg-color, checkbox-input, default),
-        selected: (
-            default: (bg-color, checkbox-input, selected, default),
-            disabled: (bg-color, checkbox-input, selected, disabled),
-        ),
-        hover: (bg-color, checkbox-input, hover),
-        disabled: (bg-color, checkbox-input, disabled),
-        fill: (
-            default: (bg-color, checkbox-input, fill, default),
-            disabled: (bg-color, checkbox-input, fill, disabled),
-        ),
-    ),
-    border: (
-        default: (border, checkbox-input, default),
-        hover: (border, checkbox-input, hover),
-        disabled: (border, checkbox-input, disabled),
-        indeterminate: (
-            default: (border, checkbox-input, indeterminate, default),
-            hover: (border, checkbox-input, indeterminate, hover),
-        ),
-        selected: (border, checkbox-input, selected)
-    ),
-    font: (
-        default: (font, default),
-        size: (
-            default: (font, size, default),
-            small: (font, size, small)
-        ),
-        line-height: (
-            default: 4*$grid,
-            small: 3*$grid
-        ),
-    ),
-    outline: (
-        focus: (outline, focus),
-    ),
-));
+$line-height: 4*$grid;
+$line-height-small: 3*$grid;
 
 .checkbox-container {
     color: $color-text-default;
 
     &:not(.disabled) input:focus + .checkbox-button {
-        outline: outline(focus);
+        outline: $outline-focus;
         outline-offset: 1px;
     }
 
@@ -89,7 +44,7 @@ $component: md-component('checkbox-input', (
     }
 
     &.indeterminate .checkbox-button {
-        border: $border-hover;
+        border: $border-active;
         background-color: $color-bg-default;
     }
 }
@@ -136,8 +91,8 @@ $component: md-component('checkbox-input', (
 .checkbox-container {
     @include md-box(block, relative);
     font-family: $font-family-default;
-    font-size: font(size, default);
-    line-height: font(line-height, default);
+    font-size: $font-size-text;
+    line-height: $line-height;
 
     & + &:not(.columns) {
         margin-top: 3*$gutter;
@@ -190,8 +145,8 @@ $component: md-component('checkbox-input', (
 
     .checkbox-checkmark {
         @include md-box(display-none, absolute);
-        font-size: font(size, small);
-        line-height: font(line-height, small);
+        font-size: $font-size-small;
+        line-height: $line-height-small;
         left: 2px;
     }
 

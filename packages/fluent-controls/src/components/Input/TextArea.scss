@@ -1,39 +1,8 @@
 @import '../../theme/index';
 
-$component: md-component('text-area', (
-    color: (
-        default: (color, input, default),
-        disabled: (color, input, disabled),
-        placeholder: (color, input, placeholder),
-        selection: (color, input, selection),
-        error: (color, input, error),
-        cancel: (color, input, cancel),
-    ),
-    bg-color: (
-        default: (bg-color, input, default),
-        selection: (bg-color, input, selection),
-        disabled: (bg-color, input, disabled),
-    ),
-    border: (
-        default: (border, input, default),
-        disabled: (border, input, disabled),
-        focus: (border, input, focus),
-        error: (border, input, error),
-    ),
-    font: (
-        default: (font, default),
-        size: (
-            default: (font, size, default),
-            small: (font, size, small)
-        ),
-        line-height: (
-            default: 5*$grid,
-        )
-    ),
-    size: (
-        min-height: (size, text-area, min-height),
-    ),
-));
+$text-area-min-height: 13*$grid;
+
+$line-height: 5*$grid;
 
 .textarea-container {
     @include md-box(block, relative);
@@ -50,13 +19,13 @@ $component: md-component('text-area', (
 .textarea {
     @include md-box(block, relative);
     width: 100%;
-    min-height: size(min-height);
+    min-height: $text-area-min-height;
     padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
     
     font-family: $font-family-default;
     color: $color-text-default;
-    font-size: font(size, default);
-    line-height: font(line-height, default);
+    font-size: $font-size-text;
+    line-height: $line-height;
     
     border: $border-default;
     outline: none;

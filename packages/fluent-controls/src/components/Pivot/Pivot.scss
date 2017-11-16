@@ -1,32 +1,10 @@
 @import '../../theme/index';
 
-$component: md-component('pivot', (
-    color: (
-        default: (color, neutral, secondary, alt),
-        selected: (color, neutral, primary, alt, 2),
-        disabled: (color, neutral, tertiary),
-        hover: (color, neutral, primary, alt, 2),
-    ),
-    border: (
-        selected: (border, pivot, selected),
-        disabled: (border, pivot, disabled),
-        menu: (border, pivot, menu),
-    ),
-    size: (
-        max-width: (size, pivot, max-width),
-        min-height: (size, pivot, min-height),
-        max-height: (size, pivot, max-height),
-    ),
-    font: (
-        default: (font, default),
-        size: (
-            default: (font, size, default),
-        ),
-        line-height: (
-            default: 4*$grid
-        )
-    )
-));
+$pivot-max-width: 50*$grid;
+$pivot-min-height: 7*$grid;
+$pivot-max-height: 12*$grid;
+
+$line-height: 4*$grid;
 
 .pivot {
     @include md-box(inline-block);
@@ -55,14 +33,14 @@ $component: md-component('pivot', (
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: size(max-width);
+        max-width: $pivot-max-width;
     }
 
     .pivot-icon-label {
         margin-left: 2*$gutter;
         font-family: $font-family-default;
-        font-size: font(size, default);
-        line-height: font(line-height, default);
+        font-size: $font-size-text;
+        line-height: $line-height;
 
         color: $color-text-default;
     }
@@ -103,8 +81,8 @@ $component: md-component('pivot', (
         @extend .pivot-icon-label;
         visibility: hidden;
         white-space: nowrap;
-        min-height: size(min-height);
-        max-height: size(max-height);
+        min-height: $pivot-min-height;
+        max-height: $pivot-max-height;
     }
 
     .pivot-icon + .pivot-icon {
@@ -119,8 +97,8 @@ $component: md-component('pivot', (
         @extend .pivot-icon-label;
         visibility: hidden;
         white-space: nowrap;
-        min-height: size(min-height);
-        max-height: size(max-height);
+        min-height: $pivot-min-height;
+        max-height: $pivot-max-height;
     }
 
     .pivot-label + .pivot-label {

@@ -1,90 +1,45 @@
 @import '../../theme/index';
 
-$component: md-component('toggle', (
-    color: (
-        label: (
-            default: (color, neutral, primary, alt, 2),
-            disabled: (color, neutral, tertiary),
-        ),
-        switch: (
-            on: (
-                default: (color, interactive, dark),
-                disabled: (color, neutral, secondary, alt, 4),
-            ),
-            off: (
-                default: (color, neutral, primary),
-                disabled: (color, neutral, tertiary),
-            ),
-        )
-    ),
-    bg-color: (
-        off: (color, white),
-        on: (
-            default: (color, interactive, default),
-            hover: (color, interactive, hover),
-            disabled: (color, neutral, tertiary, alt),
-        )
-    ),
-    border: (
-        on: (
-            default: (border, toggle, on, default),
-            hover: (border, toggle, on, hover),
-            disabled: (border, toggle, on, disabled),
-        ),
-        off: (
-            default: (border, toggle, off, default),
-            hover: (border, toggle, off, hover),
-            disabled: (border, toggle, off, disabled),
-        ),
-    ),
-    outline: (
-        focus: (outline, focus)
-    ),
-    transition: (
-        switch: (transition, toggle, switch),
-    ),
-    font: (
-        default: (font, default),
-        size: (
-            default: (font, size, default),
-        ),
-        line-height: (
-            default: 14px
-        ),
-    ),
-    size: (
-        width: (size, toggle, width),
-        height: (size, toggle, height),
-        border-radius: (size, toggle, border-radius),
-        switch: (
-            border-radius: (size, toggle, switch, border-radius),
-        ),
-    )
-));
+$toggle-border-on: 1px solid $color-interactive-default;
+$toggle-border-on-hover: 1px solid $color-interactive-hover;
+$toggle-border-on-disabled: 1px solid $color-neutral-tertiary-alt;
+
+$toggle-border-off: 1px solid $color-neutral-secondary-alt;
+$toggle-border-off-hover: 1px solid $color-neutral-primary;
+$toggle-border-off-disabled: 1px solid $color-neutral-tertiary-alt;
+
+$toggle-switch-transition: 75ms ease-in-out;
+
+$toggle-width: 10*$grid;
+$toggle-height: 5*$grid;
+$toggle-border-radius: $toggle-height / 2;
+$toggle-switch-border-radius: 5px;
+
+$line-height: 3.5*$grid;
 
 .toggle {
     @include md-box(inline-block, relative);
-    line-height: font(line-height, default);
+    line-height: $line-height;
 
     .toggle-button {
         @include md-box(inline-block, relative, fill-parent);
         vertical-align: middle;
         outline: none;
-        border: border(off, default);
+        border: $toggle-border-off;
         background-color: $color-bg-default;
-        border-radius: size(border-radius);
+        border-radius: $toggle-border-radius;
 
-        width: size(width);
-        height: size(height);
+        width: $toggle-width;
+        height: $toggle-height;
         
         &:hover {
-            border: border(off, hover);
+            border: $toggle-border-off-hover;
             cursor: pointer;
         }
     }
 
     &:not(.disabled) .toggle-button:focus {
-        outline: outline(focus);
+        outline: $outline-focus;
         outline-offset: 1px;
     }
 
@@ -95,10 +50,10 @@ $component: md-component('toggle', (
 
         width: 2.5*$grid;
         height: 2.5*$grid;
-        border-radius: size(switch, border-radius);
+        border-radius: $toggle-switch-border-radius;
 
         background-color: $color-text-default;
-        transition: transition(switch);
+        transition: $toggle-switch-transition;
 
         pointer-events: none;
     }
@@ -108,7 +63,7 @@ $component: md-component('toggle', (
         margin-left: 2*$gutter;
 
         font-family: $font-family-default;
-        font-size: font(size, default);
+        font-size: $font-size-text;
         color: $color-text-default;
 
         vertical-align: middle;
@@ -116,11 +71,11 @@ $component: md-component('toggle', (
 
     &.toggle-on {
         .toggle-button {
-            border: border(on, default);
+            border: $toggle-border-on;
             background-color: $color-bg-selected;
 
             &:hover {
-                border: border(on, hover);
+                border: $toggle-border-on-hover;
                 background-color: $color-bg-selected-hover;
             }
         }
@@ -132,7 +87,7 @@ $component: md-component('toggle', (
 
         &.disabled {
             .toggle-button {
-                border: border(on, disabled);
+                border: $toggle-border-on-disabled;
                 background-color: $color-bg-selected-disabled;
             }
     
@@ -144,7 +99,7 @@ $component: md-component('toggle', (
 
     &.disabled {
         .toggle-button {
-            border: border(off, disabled);
+            border: $toggle-border-off-disabled;
             cursor: default;
         }
 
