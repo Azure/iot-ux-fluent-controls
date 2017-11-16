@@ -36,7 +36,7 @@ $component: md-component('pivot', (
 
 .pivot-menu {
     @include md-box(block, relative);
-    border-bottom: border(menu);
+    border-bottom: $border-default;
     white-space: nowrap;
     overflow: hidden;
 
@@ -60,41 +60,41 @@ $component: md-component('pivot', (
 
     .pivot-icon-label {
         margin-left: 2*$gutter;
-        font-family: font(default);
+        font-family: $font-family-default;
         font-size: font(size, default);
         line-height: font(line-height, default);
 
-        color: color(default);
+        color: $color-text-default;
     }
 
     &:hover {
-        color: color(hover);
+        color: $color-text-default;
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            color: color(hover);
+            color: $color-text-default;
         }
     }
 
     &.selected {
-        color: color(selected);
+        color: $color-text-default;
 
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            color: color(selected);
+            color: $color-text-default;
         }
 
         .pivot-border {
-            border-bottom: border(selected);
+            border-bottom: $border-selected;
         }
     }
 
     &.disabled {
-        color: color(disabled);
+        color: $color-text-disabled;
 
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            color: color(disabled);
+            color: $color-text-disabled;
         }
 
         &.selected .pivot-border {
-            border-bottom: border(disabled);
+            border-bottom: $border-disabled;
         }
     }
 

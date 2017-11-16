@@ -24,7 +24,7 @@ $component: md-component('icon', (
 %icon {
     font-style: normal;
     font-weight: normal;
-    font-family: font(default);
+    font-family: $font-family-default;
     
     &:before {
         @include md-box(inline-block, relative);

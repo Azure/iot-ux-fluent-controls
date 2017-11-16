@@ -37,8 +37,8 @@ $component: md-component('radio-input', (
 
 .radio-container {
     @include md-box(block, relative);
-    font-family: font(default);
-    color: color(default);
+    font-family: $font-family-default;
+    color: $color-text-default;
     font-size: font(size, default);
     line-height: font(line-height, small);
 
@@ -62,7 +62,7 @@ $component: md-component('radio-input', (
         border: none;
         outline: none;
 
-        background-color: bg-color(default);
+        background-color: $color-bg-default;
 
         &:focus ~ .radio-button:not(.disabled) {
             outline: outline(focus);
@@ -70,11 +70,11 @@ $component: md-component('radio-input', (
         }
 
         &:hover:not(:checked) ~ .radio-button:not(.disabled) {
-            border: border(hover);
+            border: $border-active;
         }
 
         &:focus:not(:checked) ~ .radio-button {
-            border: border(hover);
+            border: $border-active;
         }
     }
 
@@ -93,10 +93,10 @@ $component: md-component('radio-input', (
         border-radius: $grid;
 
         &.selected {
-            background-color: bg-color(checked);
+            background-color: $color-bg-selected;
 
             &.disabled {
-                background-color: bg-color(disabled);
+                background-color: $color-bg-disabled;
             }
         }
     }
@@ -105,18 +105,18 @@ $component: md-component('radio-input', (
         @include md-box(inline-block, relative);
         width: size(default);
         height: size(default);
-        background-color: bg-color(default);
+        background-color: $color-bg-default;
         border-radius: size(default) / 2;
-        border: border(default) ;
+        border: $border-default ;
         outline: none;
         vertical-align: top;
 
         &.selected {
-            border: border(checked);
+            border: $border-selected;
         }
 
         &.disabled {
-            border: border(disabled);
+            border: $border-disabled;
         }
     }
 
@@ -124,7 +124,7 @@ $component: md-component('radio-input', (
         @include md-box(inline-block, relative);
 
         &.disabled {
-            color: color(disabled);
+            color: $color-text-disabled;
         }
     }
 

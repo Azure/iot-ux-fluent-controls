@@ -12,6 +12,62 @@ $method-component-override: (
 
 ) !default;
 
+$font-family-default: $typography-regular-font-stack;
+$font-family-light: $typography-light-font-stack;
+
+/// ----------------------------------------------------
+
+$color-link-default: #3062d6;
+$color-link-hover: #1a37d3;
+$color-link-pressed: #1a37d3;
+$color-link-visited: #3062d6;
+$color-link-disabled: #a6a6a6;
+
+$color-text-gallery-card-header: #333;
+$color-text-gallery-card-content: #515151;
+$color-text-gallery-card-banner: #fff;
+
+$color-bg-alert-info: #dcdcdc;
+$color-bg-alert-warning: #f9e385;
+$color-bg-alert-error: #d02e00;
+$color-bg-balloon: #333;
+$color-bg-gallery-card: #aeaeae;
+$color-bg-gallery-card-banner: #333;
+$color-bg-management-list: #fff;
+
+$border-gallery-card-default: #eaeaea;
+$border-gallery-card-hover: #333;
+
+/// ----------------------------------------------------
+
+$color-theme-dark: #005a9e;
+$color-theme-primary: #0078d6;
+$color-theme-primary-alt: #4ba0e4;
+$color-theme-error: #d02e00;
+
+$color-text-default: #333;
+$color-text-disabled: #888;
+$color-text-bright: #fff;
+$color-text-placeholder: #a6a6a6;
+$color-text-cancel: #666; 
+$color-text-chevron: #a6a6a6;
+
+$color-bg-default: #fff;
+$color-bg-hover: #4ba0e4;
+$color-bg-pressed: #000;
+$color-bg-disabled: #dcdcdc;
+$color-bg-selected: #005a9e;
+$color-bg-selected-hover: #4ba0e4;
+$color-bg-selected-disabled: #a6a6a6;
+
+$border-default: 1px solid #c8c8c8;
+$border-active: 1px solid #333;
+$border-disabled: 1px solid #dcdcdc;
+$border-error: 1px solid $color-theme-error;
+
+$border-selected: 1px solid $color-theme-dark;
+$border-selected-hover: 1px solid $color-bg-selected-hover;
+$border-selected-disabled: 1px solid $color-bg-selected-disabled;
 
 $method-theme: (
     color: (
@@ -19,11 +75,6 @@ $method-theme: (
         transparent: transparent,
         black: $color-black,
         white: $color-white,
-        red: $color-red,
-        green: $color-green,
-        orange: $color-orange,
-        teal: $color-teal,
-        purple: $color-purple,
         neutral: (
             primary: (
                 default: $color-neutral-primary,
@@ -59,38 +110,6 @@ $method-theme: (
                 default: $color-neutral-lighter,
                 alt: $color-neutral-lighter-alt
             )
-        ),
-        cool-grey: (
-            default: $color-cool-grey-1,
-            1: $color-cool-grey-1,
-            2: $color-cool-grey-2,
-            3: $color-cool-grey-3,
-            4: $color-cool-grey-4,
-            5: $color-cool-grey-5,
-        ),
-        theme: (
-            default: $color-theme-primary,
-            primary: (
-                default: $color-theme-primary,
-                alt: $color-theme-primary-alt
-            ),
-            light: $color-theme-light,
-            lighter: $color-theme-lighter
-        ),
-        data: (
-            1: $color-data-1,
-            2: $color-data-2,
-            3: $color-data-3,
-            4: $color-data-4,
-            5: $color-data-5,
-            6: $color-data-6,
-            7: $color-data-7,
-            8: $color-data-8,
-            9: $color-data-9,
-            10: $color-data-10,
-            11: $color-data-11,
-            12: $color-data-12,
-            13: $color-data-13,
         ),
         alert: (
             default: $color-neutral-tertiary-alt-2,

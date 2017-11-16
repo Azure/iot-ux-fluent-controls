@@ -53,49 +53,49 @@ $component: md-component('text-area', (
     min-height: size(min-height);
     padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
     
-    font-family: font(default);
-    color: color(default);
+    font-family: $font-family-default;
+    color: $color-text-default;
     font-size: font(size, default);
     line-height: font(line-height, default);
     
-    border: border(default);
+    border: $border-default;
     outline: none;
 
-    background-color: bg-color(default);
+    background-color: $color-bg-default;
 
     &:hover {
-        border: border(focus);
+        border: $border-active;
     }
 
     &:focus {
-        border: border(focus);
+        border: $border-active;
     }
 
     &:active {
-        border: border(focus);
+        border: $border-active;
     }
     
     &:disabled {
-        color: color(disabled);
-        border: border(disabled);
-        background-color: bg-color(disabled);
+        color: $color-text-disabled;
+        border: $border-disabled;
+        background-color: $color-bg-disabled;
 
         &::placeholder {
-            color: color(disabled);
+            color: $color-text-disabled;
         }
     }
 
     &::placeholder {
-        color: color(placeholder);
+        color: $color-text-placeholder;
     }
 
     &::selection {
-        color: color(selection);
-        background-color: bg-color(selection);
+        color: $color-text-bright;
+        background-color: $color-bg-selected;
     }
 
     &.error:not(:disabled) {
-        border: border(error);
+        border: $border-error;
     }
 
     &::-ms-clear {

@@ -73,7 +73,7 @@ $component: md-component('management-list', (
             font-family: font(column);
             font-size: font(size, small);
             line-height: font(line-height, small);
-            color: color(header);
+            color: $color-text-default;
             
             padding-top: 2*$gutter;
             padding-right: 5*$gutter;
@@ -101,11 +101,11 @@ $component: md-component('management-list', (
 
         .column-content {
             @include md-box(inline-block, relative);
-            font-family: font(default);
+            font-family: $font-family-default;
             font-size: font(size, default);
             line-height: font(line-height, small);
-            color: color(content);
-            background-color: bg-color(content);
+            color: $color-text-default;
+            background-color: $color-bg-management-list;
 
             vertical-align: bottom;
 
@@ -128,28 +128,6 @@ $component: md-component('management-list', (
 
         .select-all-label {
             display: none;
-        }
-    }
-
-    .list-checkbox-container {
-        .list-checkbox-button {
-            border: border(checkbox);
-            background-color: bg-color(checkbox);
-        }
-        
-        .list-checkbox-checkmark {
-            color: color(checkmark);
-        }
-    }
-
-    .list-checkbox-container:hover {
-        .list-checkbox-button {
-            border: border(checkbox);
-            background-color: bg-color(checkbox);
-        }
-        
-        .list-checkbox-checkmark {
-            color: color(checkmark);
         }
     }
 }

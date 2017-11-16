@@ -43,16 +43,16 @@ $component: md-component('select-input', (
 .combo-container {
     @include md-box(relative, block);
     width: 100%;
-    font-family: font(default);
+    font-family: $font-family-default;
 
-    color: color(default);
+    color: $color-text-default;
     font-size: font(size, default);
     line-height: font(line-height, default);
 
     .arrow {
         @include md-box(absolute, block);
         font-size: font(size, small);
-        color: color(arrow);
+        color: $color-text-chevron;
         right: 2*$gutter;
         top: 2*$gutter;
         pointer-events: none;
@@ -63,14 +63,14 @@ $component: md-component('select-input', (
         width: 100%;
         height: size(input, height);
         padding: 0px 3*$gutter;
-        border: border(default);
+        border: $border-default;
         outline: none;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
         border-radius: 0px;
 
-        background-color: bg-color(default);
+        background-color: $color-bg-default;
 
         option {
             height: size(option, height);
@@ -80,36 +80,36 @@ $component: md-component('select-input', (
             }
             
             &:checked {
-                background-color: bg-color(checked);
-                color: color(checked);
+                background-color: $color-bg-selected;
+                color: $color-text-bright;
             }
         }
 
         &:hover {
-            border: border(focus);
+            border: $border-active;
         }
     
         &:focus {
-            border: border(focus);
+            border: $border-active;
         }
 
         &:active {
-            border: border(focus);
+            border: $border-active;
         }
         
         &:disabled {
-            color: color(disabled);
-            border: border(disabled);
-            background-color: bg-color(disabled);
+            color: $color-text-disabled;
+            border: $border-disabled;
+            background-color: $color-bg-disabled;
         }
 
         &::selection {
-            color: color(selection);
-            background-color: bg-color(selection);
+            color: $color-text-bright;
+            background-color: $color-bg-selected;
         }
 
         &.error:not(:disabled) {
-            border: border(error);
+            border: $border-error;
         }
     }
 }

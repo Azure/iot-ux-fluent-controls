@@ -38,22 +38,22 @@ $component: md-component('button', (
     ),
 ));
 
-$primary-color: color(primary, default);
-$primary-pressed-color: color(primary, pressed);
+$primary-color: $color-text-default;
+$primary-pressed-color: $color-text-bright;
 
 $primary-bg-color: bg-color(primary, default);
 $primary-hover-bg-color: bg-color(primary, hover);
 $primary-pressed-bg-color: bg-color(primary, pressed);
 
-$default-color: color(secondary, default);
-$default-pressed-color: color(secondary, pressed);
+$default-color: $color-text-default;
+$default-pressed-color: $color-text-bright;
 
 $default-bg-color: bg-color(secondary, default);
 $default-hover-bg-color: bg-color(secondary, hover);
 $default-pressed-bg-color: bg-color(secondary, pressed);
 
-$disabled-color: color(disabled);
-$disabled-bg-color: bg-color(disabled);
+$disabled-color: $color-text-disabled;
+$disabled-bg-color: $color-bg-disabled;
 
 $default-button-colors: (
     default: $default-color,
@@ -84,7 +84,7 @@ $primary-button-bg-colors: (
 
 @mixin md-button-style($text-colors: $default-button-colors, $bg-colors: $default-button-colors, $outline: outline(focus)) {
     @include md-box(inline-block, relative);
-    font-family: font(default);
+    font-family: $font-family-default;
     font-size: font(size);
     line-height: font(line-height);
 

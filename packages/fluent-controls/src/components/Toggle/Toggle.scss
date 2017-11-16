@@ -71,7 +71,7 @@ $component: md-component('toggle', (
         vertical-align: middle;
         outline: none;
         border: border(off, default);
-        background-color: bg-color(off);
+        background-color: $color-bg-default;
         border-radius: size(border-radius);
 
         width: size(width);
@@ -97,7 +97,7 @@ $component: md-component('toggle', (
         height: 2.5*$grid;
         border-radius: size(switch, border-radius);
 
-        background-color: color(switch, on, default);
+        background-color: $color-text-default;
         transition: transition(switch);
 
         pointer-events: none;
@@ -107,9 +107,9 @@ $component: md-component('toggle', (
         @include md-box(inline-block, relative);
         margin-left: 2*$gutter;
 
-        font-family: font(default);
+        font-family: $font-family-default;
         font-size: font(size, default);
-        color: color(label, default);
+        color: $color-text-default;
 
         vertical-align: middle;
     }
@@ -117,27 +117,27 @@ $component: md-component('toggle', (
     &.toggle-on {
         .toggle-button {
             border: border(on, default);
-            background-color: bg-color(on, default);
+            background-color: $color-bg-selected;
 
             &:hover {
                 border: border(on, hover);
-                background-color: bg-color(on, hover);
+                background-color: $color-bg-selected-hover;
             }
         }
 
         .toggle-switch {
             left: 25px;
-            background-color: color(switch, on, default);
+            background-color: $color-text-default
         }
 
         &.disabled {
             .toggle-button {
                 border: border(on, disabled);
-                background-color: bg-color(on, disabled);
+                background-color: $color-bg-selected-disabled;
             }
     
             .toggle-switch {
-                background-color: color(switch, on, disabled);
+                background-color: $color-text-disabled;
             }
         }
     }
@@ -149,11 +149,11 @@ $component: md-component('toggle', (
         }
 
         .toggle-switch {
-            background-color: color(switch, off, disabled);
+            background-color: $color-text-disabled;
         }
 
         .toggle-label {
-            color: color(label, disabled);
+            color: $color-text-disabled;
         }
     }
 }

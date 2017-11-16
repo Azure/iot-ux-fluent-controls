@@ -36,9 +36,9 @@ $z-index-focus: 2*$z-index-small-step;
 
 .time-input-container {
     @include md-box(relative, inline-block);
-    font-family: font(default);
+    font-family: $font-family-default;
 
-    color: color(default);
+    color: $color-text-default;
     font-size: font(size);
     line-height: font(line-height);
 
@@ -46,14 +46,14 @@ $z-index-focus: 2*$z-index-small-step;
         @include md-box();
         width: 12*$grid;
         height: 8*$grid;
-        border: border(default);
+        border: $border-default;
         outline: none;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
         border-radius: 0px;
         padding: 0px 0px 0px 4*$gutter;
-        background-color: bg-color(default);
+        background-color: $color-bg-default;
         margin-left: -1px;
 
         option {
@@ -65,38 +65,38 @@ $z-index-focus: 2*$z-index-small-step;
             }
             
             &:checked {
-                background-color: bg-color(checked);
-                color: color(checked);
+                background-color: $color-bg-selected;
+                color: $color-text-bright;
             }
         }
 
         &:hover {
-            border: border(focus);
+            border: $border-active;
             z-index: $z-index-hover;
         }
     
         &:focus {
-            border: border(focus);
+            border: $border-active;
             z-index: $z-index-focus;
         }
 
         &:active {
-            border: border(focus);
+            border: $border-active;
         }
         
         &:disabled {
-            color: color(disabled);
-            border: border(disabled);
-            background-color: bg-color(disabled);
+            color: $color-text-disabled;
+            border: $border-disabled;
+            background-color: $color-bg-disabled;
         }
 
         &::selection {
-            color: color(selection);
-            background-color: bg-color(selection);
+            color: $color-text-bright;
+            background-color: $color-bg-selected;
         }
 
         &.error:not(:disabled) {
-            border: border(error);
+            border: $border-error;
         }
     }
 

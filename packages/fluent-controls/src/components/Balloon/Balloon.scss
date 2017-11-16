@@ -127,10 +127,10 @@ $component: md-component('balloon', (
 
 .balloon-dropdown {
     @include md-box(inline-block, absolute);
-    font-family: font(default);
+    font-family: $font-family-default;
     box-shadow: shadow(default);
-    background-color: bg-color(default);
-    color: color(default);
+    background-color: $color-bg-balloon;
+    color: $color-text-bright;
     width: size(width);
 
     .balloon-inner-container {

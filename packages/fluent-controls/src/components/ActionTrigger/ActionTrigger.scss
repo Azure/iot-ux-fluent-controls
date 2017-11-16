@@ -21,12 +21,12 @@ $component: md-component('action-trigger', (
 
 .action-trigger-container {
     @include md-box(inline-block, relative, ellipsis);
-    font-family: font(default);
+    font-family: $font-family-default;
     font-size: font(size, icon);
     line-height: font(line-height);
     padding: $gutter 2*$gutter;
 
-    color: color(default);
+    color: $color-text-default;
 
     text-decoration: none;
     outline: none;
@@ -42,20 +42,20 @@ $component: md-component('action-trigger', (
     a:focus > & {
         outline: outline(focus);
         outline-offset: 1px;
-        color: color(hover);
+        color: $color-text-default;
         
         &.disabled {
             outline: none;
-            color: color(disabled);
+            color: $color-text-disabled;
         }
     }
     
     &:hover {
-        color: color(hover);
+        color: $color-text-default;
     }
     
     &.disabled {
-        color: color(disabled);
+        color: $color-text-disabled;
     }
     
     .suffix {        

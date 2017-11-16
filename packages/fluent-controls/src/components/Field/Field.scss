@@ -27,29 +27,29 @@ $component: md-component('form-field', (
 ));
 
 .form-field {
-    font-family: font(default);
+    font-family: $font-family-default;
     display: block;
 }
 
 .label {
     @include md-box(inline-block);
-    color: color(default);
-    font-family: font(default);
+    color: $color-text-default;
+    font-family: $font-family-default;
     font-size: font(size, label);
     line-height: font(line-height);
 
     &.disabled {
-        color: color(disabled);
+        color: $color-text-disabled;
     }
 
     .required &::after {
         content: ' *';
-        color: color(error);
+        color: $color-text-bright;
     }
 
     &.required::after {
         content: ' *';
-        color: color(error);
+        color: $color-text-bright;
     }
 
     & + .content {
@@ -79,9 +79,9 @@ $component: md-component('form-field', (
     height: size(form-error, height);
     width: 100%;
     
-    color: color(error);
+    color: $color-text-bright;
     
-    font-family: font(default);
+    font-family: $font-family-default;
     font-size: font(size, error);
     line-height: font(line-height);
 

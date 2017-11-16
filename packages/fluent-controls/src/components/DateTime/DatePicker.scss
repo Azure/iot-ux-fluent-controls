@@ -44,10 +44,10 @@ $calc-margin: 5px;
 .date-picker-container {
     @include md-box(flex, relative);
     width: 100%;
-    font-family: font(default);
+    font-family: $font-family-default;
 
-    color: color(default);
-    font-size: font(default);
+    color: $color-text-default;
+    font-size: $font-family-default;
     line-height: font(line-height);
 
     .date-picker-input-container {
@@ -60,44 +60,44 @@ $calc-margin: 5px;
         width: 100%;
         height: 8*$grid;
         padding: 2*$gutter 8*$gutter 2*$gutter 3*$gutter;
-        border: border(default);
+        border: $border-default;
         outline: none;
 
-        background-color: bg-color(input);
+        background-color: $color-bg-default;
 
         &:hover {
-            border: border(focus);
+            border: $border-active;
         }
     
         &:focus {
-            border: border(focus);
+            border: $border-active;
         }
 
         &:active {
-            border: border(focus);
+            border: $border-active;
         }
         
         &:disabled {
-            color: color(disabled);
-            border: border(disabled);
-            background-color: bg-color(disabled);
+            color: $color-text-disabled;
+            border: $border-disabled;
+            background-color: $color-bg-disabled;
     
             &::placeholder {
-                color: color(disabled);
+                color: $color-text-disabled;
             }
         }
     
         &::placeholder {
-            color: color(placeholder);
+            color: $color-text-placeholder;
         }
     
         &::selection {
-            color: color(selection);
-            background-color: bg-color(selection);
+            color: $color-text-bright;
+            background-color: $color-bg-selected;
         }
 
         &.error:not(:disabled) {
-            border: border(error);
+            border: $border-error;
         }
 
         &::-ms-clear {
@@ -143,8 +143,8 @@ $calc-margin: 5px;
     visibility: hidden;
     
     :global(.md-dropdown-container) & {
-        background-color: bg-color(calendar);
-        border: border(focus);
+        background-color: $color-bg-default;
+        border: $border-active;
         display: inline-block;
         z-index: $calendar-z-index;
     }
@@ -159,18 +159,18 @@ $calc-margin: 5px;
     &:not(.above) .date-picker-dropdown-triangle {
         bottom: calc(100% - 4px);
 
-        background-color: bg-color(calendar);
-        border-left: border(focus);
-        border-top: border(focus);
+        background-color: $color-bg-default;
+        border-left: $border-active;
+        border-top: $border-active;
         transform: rotateZ(45deg);
     }
 
     &.date-picker-above .date-picker-dropdown-triangle {
         top: calc(100% - 4px);
         
-        background-color: bg-color(calendar);
-        border-right: border(focus);
-        border-bottom: border(focus);
+        background-color: $color-bg-default;
+        border-right: $border-active;
+        border-bottom: $border-active;
         transform: rotateZ(45deg);
     }
 }

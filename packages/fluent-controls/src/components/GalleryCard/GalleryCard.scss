@@ -51,7 +51,7 @@ a:focus .card:not(.disabled) {
 
 .card {
     @include md-box(inline-block, relative, hidden);
-    background-color: bg-color(default);
+    background-color: $color-bg-gallery-card;
     border: border(default);
     margin: 2.5*$gutter;
 
@@ -105,19 +105,19 @@ a:focus .card:not(.disabled) {
 
 .background-color {
         @extend %card-background;
-        background-color: bg-color(solid);
+        background-color: $color-bg-gallery-card;
 }
 
 .card-content {
     @include md-box(relative, hidden, flex-column);
     padding: $card-content-margin;
-    font-family: font(default);
+    font-family: $font-family-default;
     overflow: hidden;
 
     header {
         font-size: font(size, header);
         line-height: font(line-height);
-        color: color(header);
+        color: $color-text-gallery-card-header;
         margin-bottom: $gutter;
         flex: 0 0 5*$grid;
     }
@@ -126,7 +126,7 @@ a:focus .card:not(.disabled) {
         @include md-box();
         font-size: font(size, section);
         line-height: font(line-height, section);
-        color: color(section);
+        color: $color-text-gallery-card-content;
         overflow: hidden;
     }
     
@@ -147,9 +147,9 @@ a:focus .card:not(.disabled) {
     left: 0px;
     right: 0px;
     padding: $gutter;
-    background-color: bg-color(banner);
-    color: color(banner);
-    font-family: font(default);
+    background-color: $color-bg-gallery-card-banner;
+    color: $color-text-gallery-card-banner;
+    font-family: $font-family-default;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -163,7 +163,7 @@ a:focus .card:not(.disabled) {
 
     .icon-title {
         @include md-box(block);
-        font-family: font(default);
+        font-family: $font-family-default;
         font-size: font(size, default);
     }
 }

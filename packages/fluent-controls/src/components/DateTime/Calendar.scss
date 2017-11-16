@@ -36,19 +36,19 @@ $component: md-component('calendar', (
 
 .calendar {
     @include md-box(block, relative);
-    font-family: font(default);
+    font-family: $font-family-default;
     font-size: font(size, default);
     padding-bottom: 2*$gutter;
-    color: color(header);
+    color: $color-text-default;
 
     .calendar-header {
         @include md-box(block, relative);
         margin-left: 4*$gutter;
-        font-family: font(light);
+        font-family: $font-family-light;
 
         & button {
             text-decoration: none;
-            background-color: bg-color(default);
+            background-color: transparent;
             border: none;
 
             &:hover {
@@ -63,7 +63,7 @@ $component: md-component('calendar', (
         .calendar-month {
             @include md-box(inline-block, relative);
             margin-top: 4*$gutter;
-            color: color(header);
+            color: $color-text-default;
             font-size: font(size, month);
             line-height: font(line-height, month);
             text-align: left;
@@ -97,8 +97,8 @@ $component: md-component('calendar', (
         margin: 2*$gutter 0px;
         padding-left: 2*$gutter;
         padding-bottom: 1.5*$gutter;
-        border-bottom: border(weekday);
-        color: color(weekday);
+        border-bottom: $border-default;
+        color: $color-text-default;
         
         & > div  {
             @include md-box(inline-block, relative);
@@ -115,8 +115,8 @@ $component: md-component('calendar', (
         margin-left: 2*$gutter;
 
         & > button.selected {
-            color: color(selected);
-            background-color: bg-color(selected);
+            color: $color-text-bright;
+            background-color: $color-bg-selected;
         }
 
         & > button {
@@ -129,11 +129,11 @@ $component: md-component('calendar', (
             vertical-align: middle;
 
             text-decoration: none;
-            background-color: bg-color(default);
+            background-color: transparent;
             border: none;
 
             &:hover:not(.selected), &:focus:not(.selected)  {
-                background-color: bg-color(hover);
+                background-color: $color-bg-hover;
                 cursor: pointer;
             }
 
@@ -151,7 +151,7 @@ $component: md-component('calendar', (
         }
 
         button.disabled {
-            color: color(different-month);
+            color: $color-text-disabled;
         }
     }
 
