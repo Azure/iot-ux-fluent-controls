@@ -26,6 +26,7 @@ $line-height: 4.5*$grid;
         outline: $outline-focus;
         outline-offset: 1px;
         color: $color-text-default;
+        background-color: $color-bg-hover;
         
         &.disabled {
             outline: none;
@@ -35,6 +36,7 @@ $line-height: 4.5*$grid;
     
     &:hover {
         color: $color-text-default;
+        background-color: $color-bg-hover;
     }
     
     &.disabled {
@@ -75,5 +77,6 @@ $line-height: 4.5*$grid;
     &:focus {
         outline: $outline-focus;
         outline-offset: 1px;
+        background-color: $color-bg-hover;        
     }
 }

@@ -75,7 +75,7 @@ $line-height: 3.5*$grid;
             background-color: $color-bg-selected;
 
             &:hover {
-                border: $toggle-border-on-hover;
+                border: $toggle-border-on-selected-hover;
                 background-color: $color-bg-selected-hover;
             }
         }
