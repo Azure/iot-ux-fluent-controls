@@ -1,18 +1,10 @@
 @import '../../theme/index';
 
-$toggle-border-on: 1px solid $color-interactive-default;
-$toggle-border-on-hover: 1px solid $color-interactive-hover;
-$toggle-border-on-disabled: 1px solid $color-neutral-tertiary-alt;
-
-$toggle-border-off: 1px solid $color-neutral-secondary-alt;
-$toggle-border-off-hover: 1px solid $color-neutral-primary;
-$toggle-border-off-disabled: 1px solid $color-neutral-tertiary-alt;
-
 $toggle-switch-transition: 75ms ease-in-out;
 
 $toggle-width: 10*$grid;
 $toggle-height: 5*$grid;
-$toggle-border-radius: $toggle-height / 2;
+$border-toggle-radius: $toggle-height / 2;
 $toggle-switch-border-radius: 5px;
 
 $line-height: 3.5*$grid;
@@ -25,15 +17,15 @@ $line-height: 3.5*$grid;
         @include md-box(inline-block, relative, fill-parent);
         vertical-align: middle;
         outline: none;
-        border: $toggle-border-off;
+        border: $border-toggle-off;
         background-color: $color-bg-default;
-        border-radius: $toggle-border-radius;
+        border-radius: $border-toggle-radius;
 
         width: $toggle-width;
         height: $toggle-height;
         
         &:hover {
-            border: $toggle-border-off-hover;
+            border: $border-toggle-off-hover;
             cursor: pointer;
         }
     }
@@ -71,11 +63,11 @@ $line-height: 3.5*$grid;
 
     &.toggle-on {
         .toggle-button {
-            border: $toggle-border-on;
+            border: $border-toggle-on;
             background-color: $color-bg-selected;
 
             &:hover {
-                border: $toggle-border-on-selected-hover;
+                border: $border-toggle-on-selected-hover;
                 background-color: $color-bg-selected-hover;
             }
         }
@@ -87,7 +79,7 @@ $line-height: 3.5*$grid;
 
         &.disabled {
             .toggle-button {
-                border: $toggle-border-on-disabled;
+                border: $border-toggle-on-disabled;
                 background-color: $color-bg-selected-disabled;
             }
     
@@ -99,7 +91,7 @@ $line-height: 3.5*$grid;
 
     &.disabled {
         .toggle-button {
-            border: $toggle-border-off-disabled;
+            border: $border-toggle-off-disabled;
             cursor: default;
         }
 

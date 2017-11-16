@@ -72,6 +72,14 @@ $border-selected-disabled: 1px solid #888;
 $border-gallery-card-default: 1px solid #a6a6a6;
 $border-gallery-card-hover: 1px solid #333;
 
+$border-toggle-on: 1px solid $color-bg-selected;
+$border-toggle-on-hover: 1px solid $color-bg-selected-hover;
+$border-toggle-on-disabled: 1px solid $color-bg-selected-disabled;
+
+$border-toggle-off: $border-default;
+$border-toggle-off-hover: $border-active;
+$border-toggle-off-disabled: $border-disabled;
+
 /// ----------------------------------------------------
 
 $outline-focus: 1px dashed #333;
@@ -87,5 +95,15 @@ $font-family-din-regular: join('DIN-Regular', $typography-regular-font-stack);
 $input-height: 8*$grid;
 $option-height: 8*$grid;
 $dropdown-max-height: 50*$grid;
+
+// Icon
+$icon-font-family: "icons";
+$icon-size-base: $typography-normal-icon-size;
+$icon-size-xsmall: $icon-size-base;
+$icon-size-small: 1 * $icon-size-base;
+$icon-size-medium: 2 * $icon-size-base;
+$icon-size-large: 3 * $icon-size-base;
+$icon-size-xlarge: 4 * $icon-size-base;
+$icon-size-xxlarge: 5 * $icon-size-base;
 
 $balloon-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
