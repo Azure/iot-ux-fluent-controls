@@ -36,7 +36,7 @@ $line-height-small: 3*$grid;
     }
 
     &.selected .checkbox-button {
-        background-color: $color-bg-hover;
+        background-color: $color-bg-selected-hover;
     }
 
     &.disabled .checkbox-button {
