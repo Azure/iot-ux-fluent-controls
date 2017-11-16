@@ -59,6 +59,7 @@ a:focus .card:not(.disabled) {
   width: 100%;
   background-color: transparent;
   transition: background-color 0.2s ease-in-out;
+  border-bottom: $card-default-border;
 
   &.fixed {
     width: $card-fixed-width;
