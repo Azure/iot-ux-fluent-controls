@@ -9,41 +9,29 @@ $font-family-light: $typography-light-font-stack;
 
 /// ----------------------------------------------------
 
-$color-link-default: #3062d6;
-$color-link-hover: #1a37d3;
-$color-link-pressed: #1a37d3;
-$color-link-visited: #3062d6;
-$color-link-disabled: #a6a6a6;
-
-$color-text-gallery-card-header: #333;
-$color-text-gallery-card-content: #515151;
-$color-text-gallery-card-banner: #fff;
-
-$color-bg-alert-info: #dcdcdc;
-$color-bg-alert-warning: #f9e385;
-$color-bg-alert-error: #d02e00;
-$color-bg-addon: transparent;
-$color-bg-balloon: #333;
-$color-bg-gallery-card: #aeaeae;
-$color-bg-gallery-card-banner: #333;
-$color-bg-management-list: #fff;
-
-$border-gallery-card-default: 1px solid #eaeaea;
-$border-gallery-card-hover: 1px solid #333;
-
-/// ----------------------------------------------------
-
-$color-theme-dark: #005a9e;
-$color-theme-primary: #0078d6;
-$color-theme-primary-alt: #4ba0e4;
-$color-theme-error: #d02e00;
-
 $color-text-default: #333;
 $color-text-disabled: #888;
 $color-text-bright: #fff;
 $color-text-placeholder: #a6a6a6;
 $color-text-cancel: #666; 
 $color-text-chevron: #a6a6a6;
+
+$color-link-default: #3062d6;
+$color-link-hover: #1a37d3;
+$color-link-pressed: #1a37d3;
+$color-link-visited: #3062d6;
+$color-link-disabled: #a6a6a6;
+
+$color-theme-dark: #005a9e;
+$color-theme-primary: #0078d6;
+$color-theme-primary-alt: #4ba0e4;
+$color-theme-error: #d02e00;
+
+$color-text-gallery-card-header: #333;
+$color-text-gallery-card-content: #515151;
+$color-text-gallery-card-banner: #fff;
+
+/// ----------------------------------------------------
 
 $color-bg-default: #fff;
 $color-bg-hover: #4ba0e4;
@@ -56,18 +44,35 @@ $color-bg-selected-disabled: #a6a6a6;
 $color-bg-btn-primary-default: #4ba0e4;
 $color-bg-btn-primary-hover: #005a9e;
 $color-bg-btn-primary-pressed: #000;
+
 $color-bg-btn-secondary-default: #4ba0e4;
 $color-bg-btn-secondary-hover: #005a9e;
 $color-bg-btn-secondary-pressed: #000;
+
+$color-bg-alert-info: #dcdcdc;
+$color-bg-alert-warning: #f9e385;
+$color-bg-alert-error: #d02e00;
+$color-bg-addon: transparent;
+$color-bg-balloon: #333;
+$color-bg-gallery-card: #aeaeae;
+$color-bg-gallery-card-banner: #333;
+$color-bg-management-list: #fff;
+
+/// ----------------------------------------------------
 
 $border-default: 1px solid #c8c8c8;
 $border-active: 1px solid #333;
 $border-disabled: 1px solid #dcdcdc;
 $border-error: 1px solid $color-theme-error;
 
-$border-selected: 1px solid $color-theme-dark;
-$border-selected-hover: 1px solid $color-bg-selected-hover;
-$border-selected-disabled: 1px solid $color-bg-selected-disabled;
+$border-selected: 1px solid $color-theme-primary;
+$border-selected-hover: 1px solid $color-theme-primary-dark;
+$border-selected-disabled: 1px solid #888;
+
+$border-gallery-card-default: 1px solid #eaeaea;
+$border-gallery-card-hover: 1px solid #333;
+
+/// ----------------------------------------------------
 
 $outline-focus: 1px dashed #333;
 
@@ -76,6 +81,8 @@ $font-size-small: 12px;
 $font-size-h4: 16px;
 
 $font-family-din-regular: join('DIN-Regular', $typography-regular-font-stack);
+
+/// ----------------------------------------------------
 
 $input-height: 8*$grid;
 $option-height: 8*$grid;
