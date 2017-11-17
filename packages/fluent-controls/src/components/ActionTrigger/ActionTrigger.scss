@@ -74,6 +74,10 @@ $line-height: 4.5*$grid;
     @include md-button-reset();
     line-height: 0px;
 
+    &.disabled:hover {
+        cursor: default;        
+    }
+
     &:focus:not(.disabled) {
         outline: $outline-focus;
         outline-offset: 1px;
