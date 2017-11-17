@@ -194,7 +194,7 @@ export class MethodDate {
     }
 
     isValid() {
-        dateIsValid(this.dateObject, this.localTimezone);
+        return dateIsValid(this.dateObject, this.localTimezone);
     }
 
     get year(): number {
