@@ -1,4 +1,8 @@
-@import 'common';
+@import '../../theme/index';
+
+$text-area-min-height: 13*$grid;
+
+$line-height: 5*$grid;
 
 .textarea-container {
     @include md-box(block, relative);
@@ -15,52 +19,52 @@
 .textarea {
     @include md-box(block, relative);
     width: 100%;
-    min-height: 13*$grid;
+    min-height: $text-area-min-height;
     padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
     
-    font-family: $font-family-base;
-    color: $default-text-color;
+    font-family: $font-family-default;
+    color: $color-text-default;
     font-size: $font-size-text;
-    line-height: 20px;
+    line-height: $line-height;
     
-    border: $inactive-border;
+    border: $border-default;
     outline: none;
 
-    background-color: $input-bg-color;
+    background-color: $color-bg-default;
 
     &:hover {
-        border: $default-border;
+        border: $border-active;
     }
 
     &:focus {
-        border: $default-border;
+        border: $border-active;
     }
 
     &:active {
-        border: $default-border;
+        border: $border-active;
     }
     
     &:disabled {
-        color: $disabled-text-color;
-        border: $disabled-border;
-        background-color: $disabled-background-color;
+        color: $color-text-disabled;
+        border: $border-disabled;
+        background-color: $color-bg-disabled;
 
         &::placeholder {
-            color: $disabled-text-color;
+            color: $color-text-disabled;
         }
     }
 
     &::placeholder {
-        color: $placeholder-text-color;
+        color: $color-text-placeholder;
     }
 
     &::selection {
-        color: $selection-text-color;
-        background-color: $selection-background-color;
+        color: $color-text-bright;
+        background-color: $color-bg-selected;
     }
 
     &.error:not(:disabled) {
-        border: $error-border;
+        border: $border-error;
     }
 
     &::-ms-clear {

@@ -1,20 +1,14 @@
-@import '../../common/overrides';
-@import '../../common/mixins';
+@import '../../theme/index';
 
-// Spec says 8px but setting to 8.5px to deal with browser rounding errors
-$balloon-border: 8.5px solid md-color(shade, 3);
-$transparent-border: 8.5px solid md-color(inherit);
-
-$background-default-color: md-color(shade, 3);
-
-$text-default-color: md-color(shade, f);
+$balloon-arrow-size: 2*$grid;
+$balloon-width: 65*$grid;
 
 @mixin arrow($location, $offset: 'center') {
     &:before {
         content:'';
         display:block;
-        width: 2*$grid;
-        height: 2*$grid;
+        width: $balloon-arrow-size;
+        height: $balloon-arrow-size;
         background-color: inherit;
         position: absolute;
         transform: rotateZ(45deg);
@@ -115,15 +109,15 @@ $text-default-color: md-color(shade, f);
     }
 }
 
-.balloon {
+.balloon-dropdown {
     @include md-box(inline-block, absolute);
-    font-family: $font-family-base;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
-    background-color: $background-default-color;
-    color: $text-default-color;
-    width: 65*$grid;
+    font-family: $font-family-default;
+    box-shadow: $balloon-shadow;
+    background-color: $color-bg-balloon;
+    color: $color-text-bright;
+    width: $balloon-width;
 
-    .inner-container {
+    .balloon-inner-container {
         @include md-box(inline-block, relative);
         padding: 3*$gutter 4*$gutter 4*$gutter 4*$gutter;
         color: inherit;

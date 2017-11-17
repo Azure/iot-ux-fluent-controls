@@ -35,9 +35,9 @@ export interface ActionTriggerProps extends React.Props<ActionTriggerComponentTy
  * @param props Control properties (defined in `ActionTriggerProps` interface)
  */
 export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (props: ActionTriggerProps) => {
-    const className = css('action-trigger', {
+    const className = css('action-trigger-container', {
         'disabled': props.disabled,
-        'label-empty': !props.label
+        'action-trigger-label-empty': !props.label
     }, props.className);
 
     let suffix;
@@ -56,7 +56,7 @@ export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (prop
             attr={props.attr.container || {}}
         ><Icon
                 icon={props.icon}
-                labelClassName={css('label')}
+                labelClassName={css('action-trigger-label')}
                 size={IconSize.xsmall}
                 attr={props.attr.icon || {}}
         >{props.label}</Icon>{suffix}</Attr.div>

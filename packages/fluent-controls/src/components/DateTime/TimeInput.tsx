@@ -273,7 +273,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             disabled={this.props.disabled}
             onChange={event => this.update('period', this.periodInput.value)}
             methodRef={element => this.periodInput = element}
-            className={css(inputClassName, 'time-period')}
+            className={css(inputClassName, 'time-input-period')}
             attr={this.props.attr.periodSelect}
         >
             <Attr.option
@@ -306,7 +306,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
 
         return (
             <Attr.div
-                className={css('time-container', this.props.className)} 
+                className={css('time-input-container', this.props.className)} 
                 attr={this.props.attr.container}
             >
                 <Attr.select 

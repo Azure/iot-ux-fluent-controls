@@ -1,17 +1,6 @@
-@import '../Input/common';
+@import '../../theme/index';
 
-$text-default-color: md-color(shade, 2);
-$text-checked-color: md-color(combo, selected-text);
-$text-disabled-color: md-color(shade, 8);
-$text-selection-color: md-color(text, white);
-
-$background-checked-color: md-color(form, selected);
-$background-disabled-color: md-color(shade, d);
-$background-selection-color: md-color(combo, hover);
-
-$arrow-default-color: md-color(shade, 4);
-
-$bg-color: md-color(shade, f);
+$line-height: 4*$grid;
 
 $z-index-hover: $z-index-small-step;
 $z-index-focus: 2*$z-index-small-step;
@@ -21,26 +10,26 @@ $z-index-focus: 2*$z-index-small-step;
     text-align: center;
 }
 
-.time-container {
+.time-input-container {
     @include md-box(relative, inline-block);
-    font-family: $font-family-base;
+    font-family: $font-family-default;
 
-    color: $text-default-color;
+    color: $color-text-default;
     font-size: $font-size-text;
-    line-height: 4*$grid;
+    line-height: $line-height;
 
     .time-input {
         @include md-box();
         width: 12*$grid;
         height: 8*$grid;
-        border: $inactive-border;
+        border: $border-default;
         outline: none;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
         border-radius: 0px;
         padding: 0px 0px 0px 4*$gutter;
-        background-color: $input-bg-color;
+        background-color: $color-bg-default;
         margin-left: -1px;
 
         option {
@@ -52,42 +41,42 @@ $z-index-focus: 2*$z-index-small-step;
             }
             
             &:checked {
-                background-color: $background-checked-color;
-                color: $text-checked-color;
+                background-color: $color-bg-selected;
+                color: $color-text-bright;
             }
         }
 
         &:hover {
-            border: $default-border;
+            border: $border-active;
             z-index: $z-index-hover;
         }
     
         &:focus {
-            border: $default-border;
+            border: $border-active;
             z-index: $z-index-focus;
         }
 
         &:active {
-            border: $default-border;
+            border: $border-active;
         }
         
         &:disabled {
-            color: $text-disabled-color;
-            border: $disabled-border;
-            background-color: $background-disabled-color;
+            color: $color-text-disabled;
+            border: $border-disabled;
+            background-color: $color-bg-disabled;
         }
 
         &::selection {
-            color: $text-selection-color;
-            background-color: $background-selection-color;
+            color: $color-text-bright;
+            background-color: $color-bg-selected;
         }
 
         &.error:not(:disabled) {
-            border: $error-border;
+            border: $border-error;
         }
     }
 
-    .time-period {
+    .time-input-period {
         padding: 0px 0px 0px 3*$gutter;        
     }
 }

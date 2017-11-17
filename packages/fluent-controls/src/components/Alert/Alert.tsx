@@ -58,12 +58,12 @@ export interface AlertProps extends React.Props<AlertComponentType> {
  */
 export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) => {
     const className = css({
-        'alert': true,
-        'info': props.type === AlertType.Information,
-        'warning': props.type === AlertType.Warning,
-        'error': props.type === AlertType.Error,
-        'multiline': props.multiline,
-        'fixed': !!props.fixed
+        'alert-container': true,
+        'alert-info': props.type === AlertType.Information,
+        'alert-warning': props.type === AlertType.Warning,
+        'alert-error': props.type === AlertType.Error,
+        'alert-multiline': props.multiline,
+        'alert-fixed': !!props.fixed
     }, props.className);
 
     let iconName = props.icon;
@@ -77,7 +77,7 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
         }
     }
 
-    const iconClassName = css('icon');
+    const iconClassName = css('alert-icon');
     const icon = <Icon
         className={iconClassName} 
         size={IconSize.xsmall}
@@ -85,7 +85,7 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
         attr={props.attr.icon}
     />;
 
-    const textClassName = css('text');
+    const textClassName = css('alert-text');
     const text = (
         <Attr.div
             className={textClassName}
@@ -97,7 +97,7 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
 
     let close;
     if (props.onClose) {
-        const closeClassName = css('close');
+        const closeClassName = css('alert-close');
         const closeProps = {
             ...props.attr.closeIcon,
             container: {onClick: props.onClose}

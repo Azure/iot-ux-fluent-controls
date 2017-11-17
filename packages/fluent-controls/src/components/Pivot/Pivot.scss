@@ -1,17 +1,10 @@
-@import '../../common/overrides';
-@import '../../common/mixins';
+@import '../../theme/index';
 
-$text-selected-color: md-color(shade, 2);
-$text-unselected-color: md-color(shade, 6);
-$text-disabled-color: md-color(shade, a);
-$text-hover-color: md-color(shade, 2);
+$pivot-max-width: 50*$grid;
+$pivot-min-height: 7*$grid;
+$pivot-max-height: 12*$grid;
 
-$focus-border: 1px dashed md-color(shade, 3);
-
-$selected-border: 2px solid md-color(form, selected);
-$disabled-border: 2px solid md-color(shade, a);
-
-$menu-border: 1px solid md-color(shade, d);
+$line-height: 4*$grid;
 
 .pivot {
     @include md-box(inline-block);
@@ -21,7 +14,7 @@ $menu-border: 1px solid md-color(shade, d);
 
 .pivot-menu {
     @include md-box(block, relative);
-    border-bottom: $menu-border;
+    border-bottom: $border-default;
     white-space: nowrap;
     overflow: hidden;
 
@@ -40,46 +33,46 @@ $menu-border: 1px solid md-color(shade, d);
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: 50*$grid;
+        max-width: $pivot-max-width;
     }
 
     .pivot-icon-label {
         margin-left: 2*$gutter;
-        font-family: $font-family-base;
-        font-size: 14px;
-        line-height: 16px;
+        font-family: $font-family-default;
+        font-size: $font-size-text;
+        line-height: $line-height;
 
-        color: $text-unselected-color;
+        color: $color-text-default;
     }
 
     &:hover {
-        color: $text-hover-color;
+        color: $color-text-default;
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            color: $text-hover-color;
+            color: $color-text-default;
         }
     }
 
     &.selected {
-        color: $text-selected-color;
+        color: $color-text-default;
 
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            color: $text-selected-color;
+            color: $color-text-default;
         }
 
         .pivot-border {
-            border-bottom: $selected-border;
+            border-bottom: $border-selected;
         }
     }
 
     &.disabled {
-        color: $text-disabled-color;
+        color: $color-text-disabled;
 
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            color: $text-disabled-color;
+            color: $color-text-disabled;
         }
 
         &.selected .pivot-border {
-            border-bottom: $disabled-border;
+            border-bottom: $border-disabled;
         }
     }
 
@@ -88,8 +81,8 @@ $menu-border: 1px solid md-color(shade, d);
         @extend .pivot-icon-label;
         visibility: hidden;
         white-space: nowrap;
-        min-height: 7*$grid;
-        max-height: 12*$grid;
+        min-height: $pivot-min-height;
+        max-height: $pivot-max-height;
     }
 
     .pivot-icon + .pivot-icon {
@@ -104,8 +97,8 @@ $menu-border: 1px solid md-color(shade, d);
         @extend .pivot-icon-label;
         visibility: hidden;
         white-space: nowrap;
-        min-height: 7*$grid;
-        max-height: 12*$grid;
+        min-height: $pivot-min-height;
+        max-height: $pivot-max-height;
     }
 
     .pivot-label + .pivot-label {

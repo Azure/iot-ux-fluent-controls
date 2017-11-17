@@ -199,12 +199,12 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         } = this.props;
 
         balloonClassName = css(
-            'balloon',
+            'balloon-dropdown',
             this.getClassName(false),
             balloonClassName
         );
         className = css('balloon-container', className);
-        const innerClassName = css('inner-container', { multiline });
+        const innerClassName = css('balloon-inner-container', { multiline });
         const positions = [this.getClassName(false), this.getClassName(true)];
         return (
             <Dropdown
