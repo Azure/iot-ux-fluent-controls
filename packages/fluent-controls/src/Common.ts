@@ -130,6 +130,7 @@ export class MethodDate {
             } else {
                 this.dateObject = new Date(year);
             }
+            this.dateObject.setFullYear(year); // Force 2 digit year to be set correctly
         } else {
             this.dateObject = new Date();
         }
@@ -173,7 +174,7 @@ export class MethodDate {
     copy(): MethodDate {
         return MethodDate.fromString(
             this.localTimezone,
-            this.dateObject.toUTCString()
+            this.dateObject.toJSON()
         );
     }
 

@@ -197,9 +197,9 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
         }
 
         return { 
-            initialDate: invalid ? props.initialValue : initialValue.toUTCString(),
-            lastTime: invalid ? defaultTime.toUTCString() : initialValue.toUTCString(),
-            lastDate: invalid ? 'invalid' : initialValue.toUTCString()
+            initialDate: invalid ? props.initialValue : initialValue.toJSON(),
+            lastTime: invalid ? defaultTime.toJSON() : initialValue.toJSON(),
+            lastDate: invalid ? 'invalid' : initialValue.toJSON()
          };
     }
 
@@ -212,7 +212,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
     onDatePaste(newDate: string): boolean {
         const date = new Date(newDate);
         if (dateIsValid(date, this.props.localTimezone)) {
-            const utcDate = date.toUTCString();
+            const utcDate = date.toJSON();
             this.setState({
                 initialDate: date,
                 lastDate: utcDate,
@@ -252,7 +252,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                 time.getUTCMinutes(),
                 time.getUTCSeconds()
             ));
-        const utcValue = newValue.toUTCString();
+        const utcValue = newValue.toJSON();
         if (utcValue === 'Invalid Date') {
             this.props.onChange('invalid');
         } else {
@@ -264,7 +264,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
     onDateChange(newDate: string) {
         const newValue = this.onChange(newDate, this.state.lastTime);
         if (newValue) {
-            const utcValue = newValue.toUTCString();
+            const utcValue = newValue.toJSON();
             this.setState({
                 lastTime: utcValue,
                 lastDate: utcValue
@@ -279,7 +279,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
     onTimeChange(newTime: string) {
         const newValue = this.onChange(this.state.lastDate, newTime);
         if (newValue) {
-            const utcValue = newValue.toUTCString();
+            const utcValue = newValue.toJSON();
             this.setState({
                 initialDate: newValue,
                 lastTime: utcValue,

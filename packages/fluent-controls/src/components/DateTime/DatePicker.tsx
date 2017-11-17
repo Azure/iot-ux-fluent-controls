@@ -152,7 +152,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 if (this.state && this.state.initialValue) {
                     initialValue = MethodDate.fromString(
                         props.localTimezone,
-                        this.state.initialValue.dateObject.toUTCString()
+                        this.state.initialValue.dateObject.toJSON()
                     );
                 }
             } else if (typeof(props.initialValue) === 'string') {
@@ -185,7 +185,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             }
         }
 
-        if (!initialValue || initialValue.dateObject.toUTCString() === 'Invalid Date') {
+        if (!initialValue || initialValue.dateObject.toString() === 'Invalid Date') {
             const today = new MethodDate(local);
             initialValue = today;
             dateValue = null;
@@ -231,7 +231,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 if (typeof(this.paste) === 'string' && this.props.onPaste) {
                     this.props.onPaste(this.paste);
                 } else {
-                    this.props.onChange(this.state.dateValue.dateObject.toUTCString());
+                    this.props.onChange(this.state.dateValue.dateObject.toJSON());
                 }
                 this.paste = false;
             } else {
@@ -468,7 +468,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 newValue = formatDate(date.dateObject, this.props.format, this.props.localTimezone);
                 initialValue = date;
                 dateValue = date.copy();
-                this.paste = date.dateObject.toUTCString();
+                this.paste = date.dateObject.toJSON();
             } else {
                 invalid = true;
                 dateValue = null;

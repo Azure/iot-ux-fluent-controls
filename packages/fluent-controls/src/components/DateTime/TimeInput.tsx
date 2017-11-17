@@ -231,7 +231,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                 date.getHours(),
                 date.getMinutes(),
                 date.getSeconds()
-            ).toUTCString());
+            ).toJSON());
         } else {
             /** This is required incase the component consumer wants to track the date */
             date.setUTCHours(hours);
@@ -244,7 +244,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                 date.getUTCHours(),
                 date.getUTCMinutes(),
                 date.getUTCSeconds()
-            )).toUTCString());
+            )).toJSON());
         }
         this.setState(newState);
     }
