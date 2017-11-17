@@ -63,6 +63,9 @@ $color-border-active: #333;
 $color-border-disabled: #dcdcdc;
 $color-border-selected-disabled: #888;
 
+$color-border-gallery-card-default: #a6a6a6;
+$color-border-gallery-card-hover: #333;
+
 $color-outline-focus: #333;
 
 /// ----------------------------------------------------
@@ -76,8 +79,8 @@ $border-selected: 1px solid $color-theme-primary;
 $border-selected-hover: 1px solid $color-theme-dark;
 $border-selected-disabled: 1px solid $color-border-selected-disabled;
 
-$border-gallery-card-default: 1px solid #a6a6a6;
-$border-gallery-card-hover: 1px solid #333;
+$border-gallery-card-default: 1px solid $color-border-gallery-card-default;
+$border-gallery-card-hover: 1px solid $color-border-gallery-card-hover;
 
 $border-toggle-on: 1px solid $color-bg-selected;
 $border-toggle-on-hover: 1px solid $color-bg-selected-hover;
