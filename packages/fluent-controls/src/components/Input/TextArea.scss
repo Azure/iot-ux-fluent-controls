@@ -1,8 +1,8 @@
 @import '../../theme/index';
 
-$text-area-min-height: 13*$grid;
+$text-area-min-height: 13*$grid-size;
 
-$line-height: 5*$grid;
+$line-height: 5*$grid-size;
 
 .textarea-container {
     @include md-box(block, relative);
@@ -20,11 +20,11 @@ $line-height: 5*$grid;
     @include md-box(block, relative);
     width: 100%;
     min-height: $text-area-min-height;
-    padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
+    padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
     
     font-family: $font-family-default;
     color: $color-text-default;
-    font-size: $font-size-text;
+    font-size: $font-size-default;
     line-height: $line-height;
     
     border: $border-default;

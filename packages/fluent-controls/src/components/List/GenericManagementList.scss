@@ -1,11 +1,11 @@
 @import '../../theme/index';
 
-$management-list-column-basis: 25*$grid;
-$management-list-row-height: 12*$grid;
-$management-list-select-all-width: 8*$grid;
+$management-list-column-basis: 25*$grid-size;
+$management-list-row-height: 12*$grid-size;
+$management-list-select-all-width: 8*$grid-size;
 
-$line-height-small: 4*$grid;
-$line-height-sort: 3*$grid;
+$line-height-small: 4*$grid-size;
+$line-height-sort: 3*$grid-size;
 
 .list-container {
     @include md-box(flex, relative);
@@ -26,11 +26,11 @@ $line-height-sort: 3*$grid;
         
         &:first-child {
             .column-header {
-                padding-left: 5*$gutter;
+                padding-left: 5*$grid-size;
             }
 
             .column-content {
-                padding-left: 5*$gutter;
+                padding-left: 5*$grid-size;
             }
         }
         
@@ -43,14 +43,14 @@ $line-height-sort: 3*$grid;
             line-height: $line-height-small;
             color: $color-text-default;
             
-            padding-top: 2*$gutter;
-            padding-right: 5*$gutter;
+            padding-top: 2*$grid-size;
+            padding-right: 5*$grid-size;
             vertical-align: bottom;            
 
             white-space: nowrap;
             
             &.checkbox {
-                padding-right: 3*$gutter;            
+                padding-right: 3*$grid-size;            
             }
 
             .checkbox-empty {
@@ -63,14 +63,14 @@ $line-height-sort: 3*$grid;
 
             .sort-direction::before {
                 line-height: $line-height-sort;
-                margin-left: 2*$gutter;
+                margin-left: 2*$grid-size;
             }
         }
 
         .column-content {
             @include md-box(inline-block, relative);
             font-family: $font-family-default;
-            font-size: $font-size-text;
+            font-size: $font-size-default;
             line-height: $line-height-small;
             color: $color-text-default;
             background-color: $color-bg-management-list;
@@ -79,18 +79,18 @@ $line-height-sort: 3*$grid;
 
             width: 100%;
             height: $management-list-row-height;
-            padding-top: 4*$gutter;
-            padding-right: 5*$gutter;
-            margin-top: 2*$gutter;
+            padding-top: 4*$grid-size;
+            padding-right: 5*$grid-size;
+            margin-top: 2*$grid-size;
             
             white-space: nowrap;
 
             &:first-child {
-                padding-left: 5*$gutter;
+                padding-left: 5*$grid-size;
             }
 
             &.checkbox {
-                padding-right: 3*$gutter;
+                padding-right: 3*$grid-size;
             }
         }
 

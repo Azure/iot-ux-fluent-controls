@@ -1,24 +1,24 @@
 @import '../../theme/index';
 
-$radio-input-size: 4*$grid;
+$radio-input-size: 4*$grid-size;
 
-$line-height: 4*$grid;
+$line-height: 4*$grid-size;
 
 .radio-container {
     @include md-box(block, relative);
     font-family: $font-family-default;
     color: $color-text-default;
-    font-size: $font-size-text;
+    font-size: $font-size-default;
     line-height: $line-height;
 
     & + &:not(.columns) {
-        margin-top: 3*$gutter;
+        margin-top: 3*$grid-size;
     }
 
     &.columns {
         display: inline-block;
 
-        margin-right: 2*$gutter;
+        margin-right: 2*$grid-size;
     }
 
     input {
@@ -50,16 +50,16 @@ $line-height: 4*$grid;
     .radio-text {
         @include md-box(inline-block, relative);
         vertical-align: top;
-        padding-left: 2*$gutter;
+        padding-left: 2*$grid-size;
     }
 
     .radio-fill {
         @include md-box(inline-block, absolute);
-        left: $gutter;
-        top: $gutter;
-        width: 2*$gutter;
-        height: 2*$gutter;
-        border-radius: $grid;
+        left: $grid-size;
+        top: $grid-size;
+        width: 2*$grid-size;
+        height: 2*$grid-size;
+        border-radius: $grid-size;
 
         &.selected {
             background-color: $color-bg-selected;

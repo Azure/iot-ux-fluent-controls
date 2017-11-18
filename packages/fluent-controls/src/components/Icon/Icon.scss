@@ -18,8 +18,8 @@
     & > span {
         @include md-box(inline-block, relative);
         vertical-align: middle;
-        margin-left: 2*$gutter;
-        margin-bottom: .5*$gutter;
+        margin-left: 2*$grid-size;
+        margin-bottom: .5*$grid-size;
     }
 }
 

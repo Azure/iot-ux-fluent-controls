@@ -1,6 +1,6 @@
 @import './theme/index';
 
-$line-height: 8*$grid;
+$line-height: 8*$grid-size;
 
 $primary-color: $color-text-default;
 $primary-pressed-color: $color-text-bright;
@@ -49,12 +49,12 @@ $primary-button-bg-colors: (
 @mixin md-button-style($text-colors: $default-button-colors, $bg-colors: $default-button-colors, $outline: $outline-focus) {
     @include md-box(inline-block, relative);
     font-family: $font-family-default;
-    font-size: $font-size-text;
+    font-size: $font-size-default;
     line-height: $line-height;
 
-    height: 8*$grid;
-    padding-left: 5*$gutter;
-    padding-right: 5*$gutter;
+    height: 8*$grid-size;
+    padding-left: 5*$grid-size;
+    padding-right: 5*$grid-size;
 
     border: none;
     outline: none;
@@ -94,14 +94,14 @@ $primary-button-bg-colors: (
 
 :global(.btn), :global(.btn-primary) {
     vertical-align: middle;
-    font-size: $font-size-text;
+    font-size: $font-size-default;
     line-height: $line-height;
 
     :global(.icon) {
         @include md-box(inline-block);
         vertical-align: middle;
-        margin-right: 2*$gutter;
-        margin-top: -0.5*$gutter;
+        margin-right: 2*$grid-size;
+        margin-top: -0.5*$grid-size;
         
         font-size: $icon-size-xsmall;
         line-height: $line-height;

@@ -1,9 +1,9 @@
 @import '../../theme/index';
 
-$form-error-height: 5*$grid;
-$form-label-balloon-width: 75*$grid;
+$form-error-height: 5*$grid-size;
+$form-label-balloon-width: 75*$grid-size;
 
-$line-height: 5*$grid;
+$line-height: 5*$grid-size;
 
 .form-field {
     font-family: $font-family-default;
@@ -14,7 +14,7 @@ $line-height: 5*$grid;
     @include md-box(inline-block);
     color: $color-text-default;
     font-family: $font-family-default;
-    font-size: $font-size-text;
+    font-size: $font-size-default;
     line-height: $line-height;
 
     &.disabled {
@@ -32,11 +32,11 @@ $line-height: 5*$grid;
     }
 
     & + .content {
-        margin-top: $gutter;    
+        margin-top: $grid-size;    
     }
 
     & + .field-error {
-        margin-top: $gutter;    
+        margin-top: $grid-size;    
     }
 }
 
@@ -45,7 +45,7 @@ $line-height: 5*$grid;
     
     .label-icon {
         @include md-box(inline-block);
-        margin-left: 2*$gutter;
+        margin-left: 2*$grid-size;
     }
     
     .label-balloon {

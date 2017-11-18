@@ -1,7 +1,7 @@
 @import '../../theme/index';
 
-$line-height: 4*$grid;
-$line-height-small: 3*$grid;
+$line-height: 4*$grid-size;
+$line-height-small: 3*$grid-size;
 
 .checkbox-container {
     color: $color-text-default;
@@ -92,17 +92,17 @@ $line-height-small: 3*$grid;
 .checkbox-container {
     @include md-box(block, relative);
     font-family: $font-family-default;
-    font-size: $font-size-text;
+    font-size: $font-size-default;
     line-height: $line-height;
 
     & + &:not(.columns) {
-        margin-top: 3*$gutter;
+        margin-top: 3*$grid-size;
     }
 
     &.columns {
         display: inline-block;
             
-        margin-right: 2*$gutter;
+        margin-right: 2*$grid-size;
     }
 
     input {
@@ -120,21 +120,21 @@ $line-height-small: 3*$grid;
     .checkbox-text {
         @include md-box(inline-block, relative);
         vertical-align: top;
-        padding-left: 2*$gutter;
+        padding-left: 2*$grid-size;
     }
 
     .checkbox-fill {
         @include md-box(display-none, absolute);
-        left: 1.5*$gutter;
-        top: 1.5*$gutter;
-        width: $grid;
-        height: $grid;
+        left: 1.5*$grid-size;
+        top: 1.5*$grid-size;
+        width: $grid-size;
+        height: $grid-size;
     }
 
     .checkbox-button {
         @include md-box(inline-block, relative);
-        width: 4*$grid;
-        height: 4*$grid;
+        width: 4*$grid-size;
+        height: 4*$grid-size;
         background-color: $color-bg-default;
         outline: none;
         vertical-align: top;

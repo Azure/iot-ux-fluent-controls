@@ -2,12 +2,12 @@
 
 $toggle-switch-transition: 75ms ease-in-out;
 
-$toggle-width: 10*$grid;
-$toggle-height: 5*$grid;
+$toggle-width: 10*$grid-size;
+$toggle-height: 5*$grid-size;
 $border-toggle-radius: $toggle-height / 2;
 $toggle-switch-border-radius: 5px;
 
-$line-height: 3.5*$grid;
+$line-height: 3.5*$grid-size;
 
 .toggle {
     @include md-box(inline-block, relative);
@@ -37,11 +37,11 @@ $line-height: 3.5*$grid;
 
     .toggle-switch {
         @include md-box(block, absolute);
-        left: 1.25*$gutter;
-        top: 1.25*$gutter;
+        left: 1.25*$grid-size;
+        top: 1.25*$grid-size;
 
-        width: 2.5*$grid;
-        height: 2.5*$grid;
+        width: 2.5*$grid-size;
+        height: 2.5*$grid-size;
         border-radius: $toggle-switch-border-radius;
 
         background-color: $color-text-default;
@@ -52,10 +52,10 @@ $line-height: 3.5*$grid;
 
     .toggle-label { 
         @include md-box(inline-block, relative);
-        margin-left: 2*$gutter;
+        margin-left: 2*$grid-size;
 
         font-family: $font-family-default;
-        font-size: $font-size-text;
+        font-size: $font-size-default;
         color: $color-text-default;
 
         vertical-align: middle;

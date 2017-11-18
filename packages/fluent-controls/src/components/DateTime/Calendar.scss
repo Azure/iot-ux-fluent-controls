@@ -1,22 +1,22 @@
 @import '../../theme/index';
 
-$calendar-column-width: 10*$grid;
-$calendar-width: 52*$grid;
+$calendar-column-width: 10*$grid-size;
+$calendar-width: 52*$grid-size;
 
-$line-height-chevron: 4*$grid;
-$line-height-header: 4*$grid;
+$line-height-chevron: 4*$grid-size;
+$line-height-header: 4*$grid-size;
 $line-height-row: $calendar-column-width;
 
 .calendar {
     @include md-box(block, relative);
     font-family: $font-family-default;
-    font-size: $font-size-text;
-    padding-bottom: 2*$gutter;
+    font-size: $font-size-default;
+    padding-bottom: 2*$grid-size;
     color: $color-text-default;
 
     .calendar-header {
         @include md-box(block, relative);
-        margin-left: 4*$gutter;
+        margin-left: 4*$grid-size;
         font-family: $font-family-light;
 
         & button {
@@ -35,9 +35,9 @@ $line-height-row: $calendar-column-width;
 
         .calendar-month {
             @include md-box(inline-block, relative);
-            margin-top: 4*$gutter;
+            margin-top: 4*$grid-size;
             color: $color-text-default;
-            font-size: $font-size-h4;
+            font-size: $font-size-h5;
             line-height: $line-height-header;
             text-align: left;
             width: $calendar-width;
@@ -49,8 +49,8 @@ $line-height-row: $calendar-column-width;
             text-align: center;
             vertical-align: bottom;
             line-height: $line-height-chevron;
-            margin-left: $gutter;
-            padding-top: 2*$gutter;
+            margin-left: $grid-size;
+            padding-top: 2*$grid-size;
             width: $calendar-column-width;
             text-decoration: none;
 
@@ -67,9 +67,9 @@ $line-height-row: $calendar-column-width;
     .calendar-days {
         @include md-box(block, relative);
         width: 100%;
-        margin: 2*$gutter 0px;
-        padding-left: 2*$gutter;
-        padding-bottom: 1.5*$gutter;
+        margin: 2*$grid-size 0px;
+        padding-left: 2*$grid-size;
+        padding-bottom: 1.5*$grid-size;
         border-bottom: $border-default;
         color: $color-text-default;
         
@@ -80,12 +80,12 @@ $line-height-row: $calendar-column-width;
         }
 
         div + div {
-            margin-left: $gutter;
+            margin-left: $grid-size;
         }
     }
 
     .calendar-row {
-        margin-left: 2*$gutter;
+        margin-left: 2*$grid-size;
 
         & > button.selected {
             color: $color-text-bright;
@@ -120,7 +120,7 @@ $line-height-row: $calendar-column-width;
         }
 
         & > button + button {
-            margin-left: $gutter;
+            margin-left: $grid-size;
         }
 
         button.disabled {
@@ -129,6 +129,6 @@ $line-height-row: $calendar-column-width;
     }
 
     .calendar-row + .calendar-row {
-        margin-top: $gutter;
+        margin-top: $grid-size;
     }
 }

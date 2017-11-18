@@ -1,13 +1,13 @@
 @import '../../theme/index';
 
-$line-height: 4.5*$grid;
+$line-height: 4.5*$grid-size;
 
 .action-trigger-container {
     @include md-box(inline-block, relative, ellipsis);
     font-family: $font-family-default;
     font-size: $icon-size-xsmall;
     line-height: $line-height;
-    padding: $gutter 2*$gutter;
+    padding: $grid-size 2*$grid-size;
 
     color: $color-text-default;
 
@@ -15,7 +15,7 @@ $line-height: 4.5*$grid;
     outline: none;
 
     &.action-trigger-label-empty {
-        padding: $gutter 1.5*$gutter;
+        padding: $grid-size 1.5*$grid-size;
         
         .label {
             margin: 0;
@@ -44,7 +44,7 @@ $line-height: 4.5*$grid;
     }
     
     .suffix {        
-        margin-left: 2*$gutter;
+        margin-left: 2*$grid-size;
         
         &::before {
             margin: 0;
@@ -55,11 +55,11 @@ $line-height: 4.5*$grid;
         @include md-box(inline-block);
         line-height: $line-height;
         vertical-align: top;
-        font-size: $font-size-text;
-        margin-left: 2*$gutter;
+        font-size: $font-size-default;
+        margin-left: 2*$grid-size;
         margin-top: 1px;
 
-        max-width: 50*$grid;
+        max-width: 50*$grid-size;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;

@@ -1,6 +1,6 @@
 @import '../../theme/index';
 
-$line-height: 4*$grid;
+$line-height: 4*$grid-size;
 
 .combo-container {
     @include md-box(relative, block);
@@ -8,15 +8,15 @@ $line-height: 4*$grid;
     font-family: $font-family-default;
 
     color: $color-text-default;
-    font-size: $font-size-text;
+    font-size: $font-size-default;
     line-height: $line-height;
 
     .arrow {
         @include md-box(absolute, block);
         font-size: $font-size-small;
         color: $color-text-chevron;
-        right: 2*$gutter;
-        top: 2*$gutter;
+        right: 2*$grid-size;
+        top: 2*$grid-size;
         pointer-events: none;
     }
 
@@ -24,7 +24,7 @@ $line-height: 4*$grid;
         @include md-box();
         width: 100%;
         height: $input-height;
-        padding: 0px 3*$gutter;
+        padding: 0px 3*$grid-size;
         border: $border-default;
         outline: none;
         -webkit-appearance: none;

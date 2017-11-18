@@ -1,7 +1,7 @@
 @import '../../theme/index';
 
-$line-height: 5*$grid;
-$line-height-small: 4*$grid;
+$line-height: 5*$grid-size;
+$line-height-small: 4*$grid-size;
 
 $dropdown-z-index: $z-index-medium-step;
 
@@ -11,7 +11,7 @@ $dropdown-z-index: $z-index-medium-step;
     font-family: $font-family-default;
 
     color: $color-text-default;
-    font-size: $font-size-text;
+    font-size: $font-size-default;
     line-height: $line-height;
 
     .input-container {
@@ -23,7 +23,7 @@ $dropdown-z-index: $z-index-medium-step;
         @include md-box(block, relative);
         width: 100%;
         height: $input-height;
-        padding: 2*$gutter 8*$gutter 2*$gutter 3*$gutter;
+        padding: 2*$grid-size 8*$grid-size 2*$grid-size 3*$grid-size;
         border: $border-default;
         outline: none;
 
@@ -37,7 +37,7 @@ $dropdown-z-index: $z-index-medium-step;
             border: $border-active;
 
             &:not(.disabled) {
-                padding-right: 16*$gutter;
+                padding-right: 16*$grid-size;
             }
 
             &:valid:not(.disabled) {
@@ -84,11 +84,11 @@ $dropdown-z-index: $z-index-medium-step;
     .cancel {
         @include md-box(display-none, absolute);
         color: $color-text-cancel;
-        font-size: $font-size-text;
+        font-size: $font-size-default;
         line-height: $line-height-small;
-        padding: $gutter;
-        top: $gutter;
-        right: 8*$gutter;
+        padding: $grid-size;
+        top: $grid-size;
+        right: 8*$grid-size;
         border: none;
         background-color: transparent;
         outline: none;
@@ -105,8 +105,8 @@ $dropdown-z-index: $z-index-medium-step;
         @include md-box(absolute, block);
         font-size: $font-size-small;
         color: $color-text-chevron;
-        right: 2*$gutter;
-        top: 2*$gutter;
+        right: 2*$grid-size;
+        top: 2*$grid-size;
         pointer-events: none;
     }
 
@@ -119,7 +119,7 @@ $dropdown-z-index: $z-index-medium-step;
     .dropdown.above {
         @include md-box(inline-block, absolute);
         left: 0px;
-        top: -2*$gutter;
+        top: -2*$grid-size;
         transform: translateY(-100%);
     }
 }
@@ -136,7 +136,7 @@ $dropdown-z-index: $z-index-medium-step;
 .dropdown > div {
     @include md-box(inline-block, relative);
     width: 100%;
-    padding: $gutter 0px;
+    padding: $grid-size 0px;
 }
 
 .option {
@@ -144,7 +144,7 @@ $dropdown-z-index: $z-index-medium-step;
     width: 100%;
     height: $option-height;
     line-height: $line-height-small;
-    padding: 0px 3*$gutter;
+    padding: 0px 3*$grid-size;
 
     border: none;
     box-shadow: none;

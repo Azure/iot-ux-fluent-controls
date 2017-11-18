@@ -1,14 +1,14 @@
 @import '../../theme/index';
 
-$line-height: 5*$grid;
-$line-height-small: 4*$grid;
+$line-height: 5*$grid-size;
+$line-height-small: 4*$grid-size;
 
 .text-input-container {
     @include md-box(flex, relative);
     width: 100%;
     font-family: $font-family-default;
 
-    font-size: $font-size-text;
+    font-size: $font-size-default;
     line-height: $line-height;
 
     .input-container {
@@ -20,7 +20,7 @@ $line-height-small: 4*$grid;
         @include md-box(block, relative);
         width: 100%;
         height: $input-height;
-        padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
+        padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
         border: $border-default;
         outline: none;
 
@@ -29,7 +29,7 @@ $line-height-small: 4*$grid;
         max-width: 100%;
 
         &:valid {
-            padding: 2*$gutter 3*$gutter 2*$gutter 3*$gutter;
+            padding: 2*$grid-size 3*$grid-size 2*$grid-size 3*$grid-size;
         }
 
         &:hover {
@@ -40,7 +40,7 @@ $line-height-small: 4*$grid;
             border: $border-active;
 
             &:valid:not(.no-cancel) {
-                padding-right: 8*$gutter;
+                padding-right: 8*$grid-size;
 
                 + .cancel {
                     color: $color-text-cancel;
@@ -53,7 +53,7 @@ $line-height-small: 4*$grid;
             border: $border-active;
 
             &:valid:not(.no-cancel) {
-                padding-right: 8*$gutter;
+                padding-right: 8*$grid-size;
 
                 + .cancel {
                     color: $color-text-cancel;
@@ -99,9 +99,9 @@ $line-height-small: 4*$grid;
         color: transparent;
         font-size: $font-size-small;
         line-height: $line-height-small;
-        padding: $gutter;
-        top: $gutter;
-        right: 2*$gutter;
+        padding: $grid-size;
+        top: $grid-size;
+        right: 2*$grid-size;
         border: none;
         background-color: transparent;
         outline: none;
@@ -121,7 +121,7 @@ $line-height-small: 4*$grid;
     .prefix {
         @include md-box(table-cell, relative);
         color: $color-text-default;
-        padding-right: 2*$gutter;
+        padding-right: 2*$grid-size;
         
         height: $input-height;
         line-height: $input-height;
@@ -134,7 +134,7 @@ $line-height-small: 4*$grid;
     .postfix {
         @include md-box(inline-block, relative);
         color: $color-text-default;
-        padding-left: 2*$gutter;
+        padding-left: 2*$grid-size;
         
         height: $input-height;
         line-height: $input-height;
@@ -153,7 +153,7 @@ $line-height-small: 4*$grid;
     background-color: $color-bg-addon;
     color: $color-text-default;
 
-    padding-right: 2*$gutter;
+    padding-right: 2*$grid-size;
 }
 
 .postfix-addon {
@@ -161,7 +161,7 @@ $line-height-small: 4*$grid;
     border-top: $border-default;
     border-bottom: $border-default;
     
-    padding-left: 2*$gutter;
+    padding-left: 2*$grid-size;
     
     background-color: $color-bg-addon;
     color: $color-text-default;
