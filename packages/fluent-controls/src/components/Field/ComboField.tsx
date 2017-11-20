@@ -169,6 +169,7 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
                     className={props.inputClassName}
                     autoFocus={props.autoFocus}
                     showLabel={props.showLabel}
+                    required={props.required}
                     attr={props.attr}
                 />
             </div>

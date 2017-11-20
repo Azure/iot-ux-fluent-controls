@@ -45,6 +45,8 @@ export interface TextInputProps extends React.Props<TextInputType> {
     
     /** Apply error styling to input element */
     error?: boolean;
+    /** Add required attribute to HTML input element */
+    required?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
     /** Autofocus */
@@ -70,7 +72,7 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
     const inputClassName = css({
         'input': true,
         'error': props.error,
-        'no-cancel': props.type === 'number'
+        'show-cancel': !!props.value
     });
     const cancelClassName = css('cancel', 'icon icon-cancelLegacy');
 
@@ -124,9 +126,7 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
                     className={inputClassName}
                     onChange={onChange}
                     placeholder={props.placeholder}
-                    // This is not the same as props.required
-                    // (this gives us :valid css selector)
-                    required
+                    required={props.required}
                     disabled={props.disabled}
                     autoFocus={props.autoFocus}
                     methodRef={props.autoFocus && autoFocusRef}

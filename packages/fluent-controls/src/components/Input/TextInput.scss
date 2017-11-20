@@ -39,7 +39,7 @@ $line-height-small: 4*$grid-size;
         &:focus {
             border: $border-active;
 
-            &:valid:not(.no-cancel) {
+            &.show-cancel:not(:disabled) {
                 padding-right: 8*$grid-size;
 
                 + .cancel {
@@ -52,7 +52,7 @@ $line-height-small: 4*$grid-size;
         &:active {
             border: $border-active;
 
-            &:valid:not(.no-cancel) {
+            &.show-cancel:not(:disabled) {
                 padding-right: 8*$grid-size;
 
                 + .cancel {

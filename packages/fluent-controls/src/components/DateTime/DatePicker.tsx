@@ -33,6 +33,8 @@ export interface DatePickerProps extends React.Props<DatePickerType> {
     tabIndex?: number;
     /** Apply error styling to input element */
     error?: boolean;
+    /** Add required attribute to HTML input element */
+    required?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
     /**
@@ -725,11 +727,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         onKeyPress={event => this.onKeyPress(event)}
                         /** React warns about Input without onChange handler */
                         onChange={() => {}}
-                        /**
-                         * This is not the same as props.required
-                         * (this gives us :valid css selector)
-                         */
-                        required
+                        required={this.props.required}
                         disabled={this.props.disabled}
                         methodRef={this.inputRef}
                         attr={this.props.attr.input}

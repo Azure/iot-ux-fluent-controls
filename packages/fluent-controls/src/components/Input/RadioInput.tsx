@@ -32,6 +32,8 @@ export interface RadioInputProps extends React.Props<RadioInputType> {
     columns?: boolean;
     /** Checked */
     checked?: boolean;
+    /** Add required attribute to HTML input element */
+    required?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
     /** Hide HTML input element */
@@ -86,6 +88,7 @@ export const RadioInput: React.StatelessComponent<RadioInputProps> = (props: Rad
                     onClick={onClick}
                     autoFocus={props.autoFocus}
                     methodRef={props.autoFocus && autoFocusRef}
+                    required={props.required}
                     attr={props.attr.input}
                 />
                 <Attr.span

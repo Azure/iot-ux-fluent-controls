@@ -70,6 +70,8 @@ export interface ComboInputProps extends React.Props<ComboInputType> {
 
     /** Apply error styling to input element */
     error?: boolean;
+    /** Add required attribute to HTML input element */
+    required?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
     /** Autofocus */
@@ -339,7 +341,8 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         const inputClassName = css({
             'input': true,
             'error': this.props.error,
-            'visible': this.state.visible
+            'visible': this.state.visible,
+            'show-cancel': this.state.visible && this.props.value
         }, this.props.inputClassName);
 
         let inputValue = '';
@@ -452,9 +455,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         placeholder={this.props.placeholder}
                         onFocus={event => this.onFocus(event)}
                         onKeyDown={event => this.onKeyDown(event)}
-                        // This is not the same as this.props.required
-                        // (this gives us :valid css selector)
-                        required
+                        required={this.props.required}
                         disabled={this.props.disabled}
                         methodRef={this.inputRef}
                         autoFocus={this.props.autoFocus}

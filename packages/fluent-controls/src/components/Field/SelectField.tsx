@@ -85,6 +85,7 @@ export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: S
                 onChange={props.onChange}
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
+                required={props.required}
                 attr={props.attr}
             />
         </FormField>

@@ -85,6 +85,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
                 step={props.step}
                 min={props.min}
                 max={props.max}
+                required={props.required}
                 attr={props.attr}
             />
         </FormField>

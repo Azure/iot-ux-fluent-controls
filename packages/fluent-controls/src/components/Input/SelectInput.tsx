@@ -38,6 +38,8 @@ export interface SelectInputProps extends React.Props<SelectInputType> {
     
     /** Apply error styling to input element */
     error?: boolean;
+    /** Add required attribute to HTML input element */
+    required?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
     /** Autofocus */
@@ -107,6 +109,7 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
                 disabled={props.disabled}
                 autoFocus={props.autoFocus}
                 methodRef={props.autoFocus && autoFocusRef}
+                required={props.required}
                 attr={props.attr.select}
             >
                 {options}
