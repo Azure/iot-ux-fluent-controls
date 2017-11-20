@@ -71,6 +71,7 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
                 className={props.inputClassName}
                 autogrow={props.autogrow}
                 autoFocus={props.autoFocus}
+                required={props.required}
                 attr={props.attr}
             />
         </FormField>

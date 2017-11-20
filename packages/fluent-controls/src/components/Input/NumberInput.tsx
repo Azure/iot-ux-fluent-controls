@@ -31,6 +31,8 @@ export interface NumberInputProps extends React.Props<NumberInputType> {
     
     /** Apply error styling to input element */
     error?: boolean;
+    /** Add required attribute to HTML input element */
+    required?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
     /** Autofocus */
@@ -251,6 +253,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
                 disabled={this.props.disabled}
                 autoFocus={this.props.autoFocus}
                 onChange={this.onChange}
+                required={this.props.required}
                 attr={attr}
             />
         );

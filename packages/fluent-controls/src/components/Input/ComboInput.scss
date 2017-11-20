@@ -40,7 +40,7 @@ $dropdown-z-index: $z-index-medium-step;
                 padding-right: 16*$grid-size;
             }
 
-            &:valid:not(.disabled) {
+            &.show-cancel:not(.disabled) {
                 + .cancel {
                     display: inline-block;
                     color: $color-text-cancel;

@@ -312,6 +312,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                             localTimezone={this.props.localTimezone}
                             showAbove={this.props.showAbove}
                             format={this.props.format}
+                            required={this.props.required}
                             onPaste={newDate => this.onDatePaste(newDate)}
                             onChange={newDate => this.onDateChange(newDate)}
                             className={css('date-picker', this.props.inputClassName)}

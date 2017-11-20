@@ -75,6 +75,7 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
                     onChange={props.onChange}
                     className={props.inputClassName}
                     autoFocus={props.autoFocus}
+                    required={props.required}
                     attr={props.attr}
                 />
             </div>

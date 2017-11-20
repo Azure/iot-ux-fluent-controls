@@ -34,6 +34,8 @@ export interface CheckboxInputProps extends React.Props<CheckboxInputType> {
     checked?: boolean;
     /** Apply hidden attribute to checkbox */
     hidden?: boolean;
+    /** Add required attribute to HTML input element */
+    required?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
     /** Shows the checkbox in indeterminate state */
@@ -89,6 +91,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                     disabled={props.disabled}
                     hidden={props.hidden}
                     checked={props.checked}
+                    required={props.required}
                     onChange={onChange}
                     autoFocus={props.autoFocus}
                     methodRef={props.autoFocus && autoFocusRef}

@@ -86,6 +86,7 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
                 className={props.inputClassName}
                 key={`${props.name}-${index}`}
                 autoFocus={props.autoFocus}
+                required={props.required}
                 attr={mergeAttributeObjects(props.attr, option.attr, [
                     'container',
                     'label',
