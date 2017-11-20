@@ -93,7 +93,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     placeholder={this.props.placeholder}
                     methodRef={this.bindTextArea}
                     autoFocus={this.props.autoFocus}
-                    required={props.required}
+                    required={this.props.required}
                     attr={this.props.attr.textarea}
                 />
                 {this.props.autogrow ? 
