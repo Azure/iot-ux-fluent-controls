@@ -5,11 +5,11 @@ $fixed-dropdown-z-index: 9 * $z-index-large-step + 5 * $z-index-medium-step;
 
 .dropdown-container {
     @include md-box(inline-block, relative);
-    overflow: hidden;
     
     :global(.md-dropdown) {
         @include md-box(inline-block, absolute);
         visibility: hidden;
+        
     }
 
     :global(.md-dropdown-container) {
