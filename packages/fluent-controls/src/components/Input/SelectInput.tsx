@@ -86,6 +86,7 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
                 key={index}
                 disabled={opt.disabled}
                 hidden={opt.hidden}
+                className={css({'option-hidden': !!opt.hidden})}
                 attr={mergeAttributes(props.attr.option, opt.attr)}
             >
                 {opt.label}

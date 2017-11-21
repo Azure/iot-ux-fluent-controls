@@ -37,6 +37,10 @@ $line-height: 4*$grid-size;
         option {
             height: $option-height;
 
+            &.option-hidden {
+                display: none;
+            }
+
             &:first {
                 display: none;
             }
@@ -47,9 +51,13 @@ $line-height: 4*$grid-size;
             }
 
             &:disabled {
-                color: $color-text-select-input-disabled;
+                color: $color-text-select-option-disabled;
                 border: $border-disabled;
                 background-color: $color-bg-disabled;
+            }
+
+            &:hidden {
+                display: none;
             }
         }
 
