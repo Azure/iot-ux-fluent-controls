@@ -45,6 +45,12 @@ $line-height: 4*$grid-size;
                 background-color: $color-bg-selected;
                 color: $color-text-bright;
             }
+
+            &:disabled {
+                color: $color-text-select-input-disabled;
+                border: $border-disabled;
+                background-color: $color-bg-disabled;
+            }
         }
 
         &:hover {
