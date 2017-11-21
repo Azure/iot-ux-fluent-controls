@@ -24,9 +24,9 @@ export interface ComboInputProps extends React.Props<ComboInputType> {
     /** HTML input element placeholder */
     placeholder?: string;
 
-    /** 
+    /**
      * List of HTML select element options in the format:
-     * 
+     *
      * `{
      *     label: string,
      *     value: any,
@@ -37,33 +37,33 @@ export interface ComboInputProps extends React.Props<ComboInputType> {
     options: (FormOption & OptionAttr<ButtonProps>)[];
 
     /**
-     * Callback used to map FormOption to strings to be used by default 
+     * Callback used to map FormOption to strings to be used by default
      * optionFilter and optionSelect callbacks
-     * 
+     *
      * See examples for how to use these callbacks
      */
     optionMap?: (option: FormOption) => string;
     /**
      * Callback used to filter list of FormOptions for display in the dropdown
-     * 
+     *
      * This function can, for example, implement autocomplete by hiding
      * any option that does not contain the value in the text input
-     * 
+     *
      * See examples for how to use these callbacks
      */
     optionFilter?: (newValue: string, option: FormOption) => boolean;
     /**
      * Callback used to decide whether a FormOption is selected or not
-     * 
+     *
      * See examples for how to use these callbacks
      */
     optionSelect?: (newValue: string, option: FormOption) => boolean;
     /**
      * Callback used to generate a React node to use as the label in dropdown
-     * 
+     *
      * This function can, for example, bold any relevant fragments of text for
      * highlighting in autocomplete
-     * 
+     *
      * See examples for how to use these callbacks
      */
     optionLabel?: (newValue: string, option: FormOption) => MethodNode;
@@ -77,26 +77,26 @@ export interface ComboInputProps extends React.Props<ComboInputType> {
     /** Autofocus */
     autoFocus?: boolean;
     /**
-     * Show label instead of FormOption value in ComboInput text box when a 
+     * Show label instead of FormOption value in ComboInput text box when a
      * value from the FormOptions is selected
-     * 
-     * Since the ComboInput has a text input, it cannot draw an arbitrary 
+     *
+     * Since the ComboInput has a text input, it cannot draw an arbitrary
      * MethodNode as the textbox value. If props.optionLabel returns a string,
      * then you can show the label text in the textbox instead of the option
      * value itself.
-     * 
+     *
      * Note: If the label and value are different and showLabel is true,
      * when the user starts typing after making a selection in the dropdown,
      * it will not reselect the option unless optionSelect checks the label
      * string as well as the value.
-     * 
+     *
      * For example:
      * ```js
      * optionSelect = (newValue, option) => {
      *     return newValue === option.value || newValue === option.label.toString();
      * }
      * ```
-     * 
+     *
      * Default: true
      */
     showLabel?: boolean;
@@ -135,11 +135,11 @@ const defaultLabel = (newValue: string, option: FormOption) => option.label;
 
 /**
  * Low level combo input control
- * 
+ *
  * `ComboInput` is a hybrid of the SelectInput and TextInput controls. It
  * functions as a 'new or existing' text field where the user can type in a
  * custom value or pick from a list of values provided by the control.
- * 
+ *
  * `ComboInput` consumes the property `options: FormOption[]` which specify
  * each option's `value` and `label`. The former can be any object while the
  * latter can be any React node (or a string). `ComboInput` also consumes a
@@ -147,15 +147,15 @@ const defaultLabel = (newValue: string, option: FormOption) => option.label;
  * `ComboInput` text field. If `value` is a `string`, the user is typing in a
  * custom value and if it is an object, the user has either typed in a value
  * equal to one of the options or has selected an option from the dropdown list.
- * 
+ *
  * In this example of a default `ComboInput`, `FormOption.value` must be a
  * string, which allows you to use `ComboInput` with only the properties `name`,
  * `value`, `onChange`, and `options`. When the user types in 'Option 1', that
  * option will be considered selected instead of a custom object.
- * 
+ *
  * *Reffer to the other examples on how to use `ComboInput`'s callbacks to
  * further modify what options display in the dropdown.*
- * 
+ *
  * (Use the `ComboField` control for forms with standard styling)
  */
 export class ComboInput extends React.Component<ComboInputProps, Partial<ComboInputState>> {
@@ -178,20 +178,26 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
     optionFilter: (newValue: string, option: FormOption) => boolean;
     optionSelect: (newValue: string, option: FormOption) => boolean;
 
+    private optionElements: {[value: string]: HTMLSpanElement};
+    private currentOption: string;
+
     constructor(props: ComboInputProps) {
         super(props);
-        
+
         this.state = {
             visible: false,
             hovered: null
         };
-        
+
         const map = props.optionMap;
         this.inputElement = null;
-        this.optionFilter = !!props.optionFilter ? props.optionFilter 
+        this.optionFilter = !!props.optionFilter ? props.optionFilter
             : defaultFilter;
         this.optionSelect = !!props.optionSelect ? props.optionSelect
             : (newValue, option) => defaultSelect(newValue, map(option));
+
+        this.optionElements = {};
+        this.currentOption = null;
     }
 
     inputRef = (input: HTMLInputElement) => {
@@ -205,83 +211,56 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         this.showDropdown();
     }
 
-    getDropdownIndex(options: FormOption[]): number {
-        if (this.state.hovered) {
-            return options.indexOf(this.state.hovered);
-        }
-        if (!this.props.value) {
-            return -1;
-        }
-        return options.map(option => option.value).indexOf(this.props.value);
-    }
-
-    getNextIndex(options: FormOption[], index, increment: number = 1): number {
-        let option;
-        let curIndex = index;
-
-        if (!(increment > 0 || increment < 0)) {
-            return index;
-        }
-
-        if (index < 0) {
-            curIndex = increment < 0 ? options.length : -1;
-        }
-
-        do {
-            curIndex += increment;
-            if (index === curIndex) {
-                return index;
-            } else if (curIndex >= options.length && increment > 0) {
-                curIndex = 0;
-            } else if (curIndex <= -1 && increment < 0) {
-                curIndex = options.length - 1;
-            }
-            option = options[curIndex];
-        } while (option.disabled || option.hidden);
-
-        return curIndex;
-    }
-
     onKeyDown(event) {
         /** So that we don't block any browser shortcuts */
         if (event.ctrlKey || event.altKey) {
             return;
         }
-        
-        let index, options;
-        const setState = index => this.setState({
-            visible: true,
-            hovered: options[index]
-        });
 
-        switch (event.keyCode) {
-            case keyCode.down:
-                options = this.getVisibleOptions();
-                index = this.getNextIndex(options, this.getDropdownIndex(options), 1);
-                this.setState({hovered: options[index], visible: true});
-                break;
-            case keyCode.up:
-                options = this.getVisibleOptions();
-                index = this.getNextIndex(options, this.getDropdownIndex(options), -1);                
-                this.setState({hovered: options[index], visible: true});
-                break;
-            case keyCode.enter:
-                if (this.state.visible && this.state.hovered) {
-                    this.props.onChange(this.state.hovered.value);
-                    this.hideDropdown();
-                } else {
-                    this.showDropdown();
-                }
-                break;
-            default:
-                this.setState({visible: true});
-                return;
-        }
-        
-        /** These are all keys that don't have characters */
-        if (event.keyCode <= keyCode.slash) {
+        const options = this.getVisibleOptions().filter(
+            option => !option.hidden && !option.disabled
+        ).map(option => option.value);
+        if (options.length > 0) {
+            switch (event.keyCode) {
+                case keyCode.down:
+                    if (this.currentOption) {
+                        const currentOption = options.indexOf(this.currentOption);
+                        const index = currentOption > -1 ? currentOption : options.length - 1;
+                        const newValue = index === options.length - 1
+                            ? options[0]
+                            : options[index + 1];
+                        this.setSelection(newValue);
+                    } else {
+                        this.setSelection(options[0]);
+                    }
+                    break;
+                case keyCode.up:
+                    if (this.currentOption) {
+                        const currentOption = options.indexOf(this.currentOption);
+                        const index = currentOption > -1 ? currentOption : 0;
+                        const newValue = index === 0
+                            ? options[options.length - 1]
+                            : options[index - 1];
+                        this.setSelection(newValue);
+                    } else {
+                        this.setSelection(options[0]);
+                    }
+                    break;
+                case keyCode.enter:
+                    if (this.state.visible && this.currentOption) {
+                        this.props.onChange(this.currentOption);
+                        this.hideDropdown();
+                    } else {
+                        this.showDropdown();
+                    }
+                    break;
+                default:
+                    return;
+            }
+        } else {
             return;
         }
+       
         event.preventDefault();
     }
 
@@ -336,6 +315,24 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         this.setState({visible: false, hovered: null});
     }
 
+    clearSelection(option: string) {
+        if (option && this.optionElements[option]) {
+            const element = this.optionElements[option];
+
+            element.className = element.className.replace(css('hover'), '');
+        }
+    }
+
+    setSelection(option: string) {
+        this.clearSelection(this.currentOption);
+        if (option && this.optionElements[option]) {
+            const element = this.optionElements[option];
+
+            element.className = element.className + ' ' + css('hover');
+        }
+        this.currentOption = option;
+    }
+
     render () {
         const containerClassName = css('combo-input-container', this.props.className);
         const inputClassName = css({
@@ -359,26 +356,31 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
 
                 const optionClassName = css('option', {
                     'selected': this.optionSelect(value, option),
-                    'hover': this.state.hovered === option,
                     'disabled': option.disabled
                 });
-                const onClick = option.disabled ? () => {} : (event) => {
-                    this.props.onChange(option.value);
-                    this.hideDropdown();
-                    this.inputElement.blur();
-                };
-                const onHover = (event) => {
-                    this.setState({hovered: option});
-                };
 
                 return (
                     <Attr.button
                         type='button'
                         className={optionClassName}
-                        onClick={onClick}
-                        onMouseOver={onHover}
+                        onClick={option.disabled ? () => {} : (event) => {
+                            this.props.onChange(option.value);
+                            this.hideDropdown();
+                            this.inputElement.blur();
+                        }}
+                        onMouseEnter={(event) => {
+                            this.setSelection(option.value);
+                        }}
+                        onMouseLeave={(event) => {
+                            this.setSelection(null);
+                        }}
                         tabIndex={-1}
                         key={index}
+                        methodRef={(element) => {
+                            if (element) {
+                                this.optionElements[option.value] = element;
+                            }
+                        }}
                         attr={mergeAttributes(this.props.attr.option, option.attr)}
                     >
                         {this.props.optionLabel(value, option)}
@@ -387,7 +389,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             });
 
         if (result) {
-            inputValue = this.props.showLabel 
+            inputValue = this.props.showLabel
                 ? this.props.optionLabel(value, result).toString()
                 : value;
         } else {
@@ -445,7 +447,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                     className={css('input-container')}
                     attr={this.props.attr.textbox}
                 >
-                    <Attr.input 
+                    <Attr.input
                         type='text'
                         autoComplete='off'
                         name={this.props.name}
@@ -463,7 +465,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                     />
                     {clearButton}
                     <Attr.span
-                        className={css('chevron', 'icon icon-chevronDown')} 
+                        className={css('chevron', 'icon icon-chevronDown')}
                         attr={this.props.attr.chevron}
                     />
                 </Attr.div>
