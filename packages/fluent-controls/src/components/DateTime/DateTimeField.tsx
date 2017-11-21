@@ -7,6 +7,7 @@ import {FormField, FormFieldAttributes} from '../Field/FormField';
 import {FormErrorAttributes} from '../Field/FormError';
 import {TimeInput, TimeInputAttributes} from './TimeInput';
 import {DatePicker, DatePickerAttributes} from './DatePicker';
+import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
 const css = classNames.bind(require('./DateTimeField.scss'));
 
 export interface DateTimeFieldType {}
@@ -14,6 +15,9 @@ export interface DateTimeFieldType {}
 export interface DateTimeFieldAttributes {
     datePicker?: DatePickerAttributes;
     timeInput?: TimeInputAttributes;
+    flexContainer?: DivProps;
+    dateColumn?: SpanProps;
+    timeColumn?: SpanProps;
 }
 
 export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
@@ -96,6 +100,9 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
             fieldLabel: {},
             fieldContent: {},
             fieldError: {},
+            flexContainer: {},
+            dateColumn: {},
+            timeColumn: {},
             datePicker: {
                 container: {},
                 inputContainer: {},
@@ -301,8 +308,14 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                 className={css('datetime-field', this.props.className)}
                 attr={this.props.attr}
             >
-                <div className={css('field-content')}>
-                    <span className={css('field-date')}>
+                <Attr.div
+                    className={css('field-content')}
+                    attr={this.props.attr.flexContainer}
+                >
+                    <Attr.span
+                        className={css('field-date')}
+                        attr={this.props.attr.dateColumn}
+                    >
                         <DatePicker
                             name={this.props.name}
                             initialValue={this.state.initialDate}
@@ -318,8 +331,11 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                             className={css('date-picker', this.props.inputClassName)}
                             attr={this.props.attr.datePicker}
                         />
-                    </span>
-                    <span className={css('field-time')}>
+                    </Attr.span>
+                    <Attr.span
+                        className={css('field-time')}
+                        attr={this.props.attr.dateColumn}
+                    >
                         <TimeInput
                             name={this.props.name}
                             value={this.state.lastTime}
@@ -334,8 +350,8 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                             className={css('time-picker', this.props.inputClassName)}
                             attr={this.props.attr.timeInput}
                         />
-                    </span>
-                </div>
+                    </Attr.span>
+                </Attr.div>
             </FormField>
         );
     }
