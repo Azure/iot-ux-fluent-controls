@@ -316,19 +316,59 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
     }
 
     clearSelection(option: string) {
+        /**
+         * See setSelection(option) below for an explanation of why this is done
+         * instead of using render() and state
+         */
         if (option && this.optionElements[option]) {
             const element = this.optionElements[option];
-
-            element.className = element.className.replace(css('hover'), '');
+            const options = this.getVisibleOptions();
+            const index = options.map(option => option.value).indexOf(option);
+            const className = this.props.attr.option && this.props.attr.option.className
+                ? this.props.attr.option.className : '';
+            
+            if (index > -1) {
+                element.className = css('option', className,
+                    options[index].attr && options[index].attr.className
+                        ? options[index].attr.className : ''
+                );
+            } else {
+                element.className = css('option', className);
+            }
         }
     }
 
     setSelection(option: string) {
+        /**
+         * This sets the background and text color for options in the dropdown
+         * when the user hovers over the option or presses up/down in the input
+         * 
+         * Since the ComboInput dropdown DOM is moved around to draw on top of
+         * all other elements, rerendering each time the user hovers over an option
+         * or changes which option is selected with the arrow keys causes the dropdown
+         * to be moved back into its regular DOM position, rerendered, and moved back
+         * on top of all other elements. This creates a huge performance problem in
+         * Edge that prevents the ComboInput from registering clicks and resets scroll
+         * position in every other browser. Setting the hover class directly on the DOM
+         * as we do here allows us to render only when the value changes or the dropdown
+         * is opened/closed.
+         */
         this.clearSelection(this.currentOption);
         if (option && this.optionElements[option]) {
             const element = this.optionElements[option];
-
-            element.className = element.className + ' ' + css('hover');
+            const options = this.getVisibleOptions();
+            const index = options.map(option => option.value).indexOf(option);
+            const className = this.props.attr.option && this.props.attr.option.className
+                ? this.props.attr.option.className : '';
+            
+            if (index > -1) {
+                element.className = css('option', 'hover', className,
+                    options[index].attr && options[index].attr.className
+                        ? options[index].attr.className : ''
+                );
+            } else {
+                element.className = css('option', 'hover', className);
+            }
         }
         this.currentOption = option;
     }
@@ -363,7 +403,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                     <Attr.button
                         type='button'
                         className={optionClassName}
-                        onClick={option.disabled ? () => {} : (event) => {
+                        onClick={option.disabled ? undefined : (event) => {
                             this.props.onChange(option.value);
                             this.hideDropdown();
                             this.inputElement.blur();
