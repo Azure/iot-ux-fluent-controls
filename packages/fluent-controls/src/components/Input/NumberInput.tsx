@@ -247,6 +247,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
                 value={this.state.value}
                 placeholder={this.props.placeholder}
                 type='number'
+                className={this.props.className}
                 prefix={this.props.prefix}
                 postfix={this.props.postfix}
                 error={this.props.error}
