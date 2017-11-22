@@ -44,6 +44,8 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
     disabled?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
+    /** Appends a red asterisk to the label */
+    requiredLabel?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
     
@@ -71,7 +73,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
             error={props.error}
             errorTitle={props.errorTitle}
             loading={props.loading}
-            required={props.required}
+            requiredLabel={props.requiredLabel}
             className={props.className}
             attr={props.attr}
             
@@ -85,6 +87,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
                 format={props.format}
                 error={!!props.error}
                 disabled={props.disabled}
+                required={props.required}
                 onChange={props.onChange}
                 className={props.inputClassName}
                 attr={props.attr}

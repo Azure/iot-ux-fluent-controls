@@ -1,26 +1,26 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
-import {Icon, IconSize, IconBackground} from '../Icon';
-import {TextInput, TextInputAttributes} from '../Input/TextInput';
+import {NumberInput} from '../Input/NumberInput';
+import {TextInputAttributes} from '../Input/TextInput';
 import {FormField, FormFieldAttributes} from './FormField';
 const css = classNames.bind(require('./Field.scss'));
 
-export interface TextFieldType {}
+export interface NumberFieldType {}
 
-export interface TextFieldProps extends React.Props<TextFieldType> {
+export interface NumberFieldProps extends React.Props<NumberFieldType> {
     /** HTML form element name */
     name: string;
     /** Current value of HTML input element */
-    value: string;
+    initialValue?: string | number;
     /** HTML input element placeholder */
     placeholder?: string;
-    /**
-     * HTML input element type 
-     * 
-     * Default: text
-     */
-    type?: string;
+    /** Step to give the number input */
+    step?: number | 'any';
+    /** Minimum value of HTML Input element */
+    min?: number;
+    /** Maximum value of HTML Input element */
+    max?: number;
     
     /** Label to display above input element */
     label: MethodNode;
@@ -31,24 +31,22 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
 
     /** Node to draw to the left of the input box */
     prefix?: MethodNode;
-    /** Class to append to prefix container */
-    prefixClassName?: string;
     /** Node to draw to the right of the input box */
     postfix?: MethodNode;
-    /** Class to append to postfix container */
-    postfixClassName?: string;
     
     /** Disable HTML input element */
     disabled?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
+    /** Appends a red asterisk to the label */
+    requiredLabel?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
     /** Autofocus */
     autoFocus?: boolean;
-    
+
     /** Callback for HTML input element `onChange` events */
-    onChange: (newValue: string) => void;
+    onChange: (newValue: number | 'invalid') => void;
 
     /** Classname to append to top level element */
     className?: string;
@@ -61,9 +59,9 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
 /**
  * High level form text field
  * 
- * @param props Control properties (defined in `TextFieldProps` interface)
+ * @param props Control properties (defined in `NumberFieldProps` interface)
  */
-export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextFieldProps) => {
+export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: NumberFieldProps) => {
     return (
         <FormField
             name={props.name}
@@ -71,24 +69,24 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
             error={props.error}
             errorTitle={props.errorTitle}
             loading={props.loading}
-            required={props.required}
+            requiredLabel={props.requiredLabel}
             className={props.className}
             attr={props.attr}
         >
-            <TextInput
+            <NumberInput
                 name={props.name}
-                value={props.value}
+                initialValue={props.initialValue}
                 placeholder={props.placeholder}
-                type={props.type}
                 prefix={props.prefix}
-                prefixClassName={props.prefixClassName}
                 postfix={props.postfix}
-                postfixClassName={props.postfixClassName}
                 error={!!props.error}
                 disabled={props.disabled}
                 onChange={props.onChange}
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
+                step={props.step}
+                min={props.min}
+                max={props.max}
                 required={props.required}
                 attr={props.attr}
             />
@@ -96,12 +94,10 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
     );
 };
 
-TextField.defaultProps = {
+NumberField.defaultProps = {
     name: undefined,
-    value: undefined,
     label: undefined,
     onChange: undefined,
-    type: 'text',
     attr: {
         fieldContainer: {},
         fieldLabel: {},
@@ -112,8 +108,7 @@ TextField.defaultProps = {
         inputContainer: {},
         prefix: {},
         postfix: {},
-        clearButton: {},
     }
 };
 
-export default TextField;
+export default NumberField;

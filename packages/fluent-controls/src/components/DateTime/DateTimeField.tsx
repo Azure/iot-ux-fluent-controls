@@ -56,6 +56,8 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     disabled?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
+    /** Appends a red asterisk to the label */
+    requiredLabel?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
     /** Set error field to display: none */
@@ -296,7 +298,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                 error={this.props.error}
                 errorTitle={this.props.errorTitle}
                 loading={this.props.loading}
-                required={this.props.required}
+                requiredLabel={this.props.requiredLabel}
                 hideError={this.props.hideError}
                 className={css('datetime-field', this.props.className)}
                 attr={this.props.attr}

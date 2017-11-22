@@ -1,18 +1,19 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
+import {CheckboxInput, CheckboxInputAttributes} from '../Input/CheckboxInput';
 import {FormField, FormFieldAttributes} from './FormField';
-import {Toggle, ToggleAttributes} from '../Toggle';
+const css = classNames.bind(require('./Field.scss'));
 
-export interface ToggleFieldType {}
+export interface CheckboxFieldType {}
 
-export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
+export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
     /** HTML form element name */
     name: string;
     /** 
-     * Current value of HTML select element
+     * Current value of HTML checkbox element
      * 
-     * This must be an `Object` that is in `SelectInputProps.options`
+     * This must be an `Object` that is in `CheckboxFieldProps.options`
      */
     value: boolean;
     
@@ -22,36 +23,40 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
     error?: MethodNode;
     /** Error HTML title in case of overflow */
     errorTitle?: string;
-
-    onLabel?: MethodNode;
-    offLabel?: MethodNode;
     
     /** Disable HTML input element */
     disabled?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
+    /** Appends a red asterisk to the label */
+    requiredLabel?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
-    /** Auto Focus */
+    /** Autofocus */
     autoFocus?: boolean;
 
-    /** Callback for `onChange` events */
-    onChange: (newValue: any) => void;
+    /** Callback for HTML checkbox element `onChange` events */
+    onChange: (newValue: boolean) => void;
 
     /** Classname to append to top level element */
     className?: string;
-    /** Classname to append to top level element of SelectInput */
+    /** Classname to append to top level element of CheckboxInput */
     inputClassName?: string;
 
-    attr?: FormFieldAttributes & ToggleAttributes;
+    attr?: FormFieldAttributes & CheckboxInputAttributes;
 }
 
 /**
- * High level form toggle switch control
+ * High level form checkbox control
  * 
- * @param props: Object fulfilling `ToggleFieldProps` interface
+ * IMPORTANT: The options provided to this control must all be UNIQUE. The
+ * `value` property of checkboxes is the numerical index of the option in
+ * `CheckboxField.options` so `CheckboxField.value` is compared to each value in
+ * `options` (===) to decide which option is the one currently selected.
+ * 
+ * @param props: Object fulfilling `CheckboxFieldProps` interface
  */
-export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: ToggleFieldProps) => {
+export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (props: CheckboxFieldProps) => {
     return (
         <FormField
             name={props.name}
@@ -59,20 +64,20 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
             error={props.error}
             errorTitle={props.errorTitle}
             loading={props.loading}
-            required={props.required}
+            requiredLabel={props.requiredLabel}
             className={props.className}
             attr={props.attr}
         >
             <div>
-                <Toggle
-                    on={props.value}
+                <CheckboxInput
                     name={props.name}
+                    checked={props.value}
+                    label={props.label}
                     disabled={props.disabled}
                     onChange={props.onChange}
-                    onLabel={props.onLabel}
-                    offLabel={props.offLabel}
                     className={props.inputClassName}
                     autoFocus={props.autoFocus}
+                    required={props.required}
                     attr={props.attr}
                 />
             </div>
@@ -80,7 +85,7 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
     );
 };
 
-ToggleField.defaultProps = {
+CheckboxField.defaultProps = {
     name: undefined,
     value: undefined,
     label: undefined,
@@ -91,11 +96,15 @@ ToggleField.defaultProps = {
         fieldContent: {},
         fieldError: {},
         container: {},
-        button: {},
-        border: {},
-        switch: {},
+        label: {},
+        input: {},
         text: {},
+        checkbox: {},
+        indeterminateFill: {},
+        checkmarkIcon: {},
+        border: {},
     }
 };
 
-export default ToggleField;
+
+export default CheckboxField;

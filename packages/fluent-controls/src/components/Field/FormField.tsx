@@ -1,4 +1,4 @@
-import * as React from 'react';
+ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, LabelProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
@@ -26,8 +26,8 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     errorTitle?: string;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
-    /** Form field is required (appends a red asterisk to the label) */
-    required?: boolean;
+    /** Appends a red asterisk to the label */
+    requiredLabel?: boolean;
     /** Set error field to display: none */
     hideError?: boolean;
 
@@ -47,7 +47,7 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
 export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormFieldProps) => {
     const containerClass = css('input-container', {
         'input-error': props.error,
-        'required': props.required,        
+        'required': props.requiredLabel,        
     }, props.className);
 
     let error = props.error;
@@ -86,7 +86,7 @@ FormField.defaultProps = {
     name: undefined,
     label: undefined,
     loading: false,
-    required: false,
+    requiredLabel: false,
     hideError: false,
     attr: {
         fieldContainer: {},
