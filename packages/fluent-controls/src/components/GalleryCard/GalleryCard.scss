@@ -45,6 +45,18 @@ a:focus .card:not(.disabled) {
     }
 }
 
+.blue {
+    background-color: $color-bg-gallery-card-blue !important;
+}
+
+.yellow {
+    background-color: $color-bg-gallery-card-yellow !important;
+}
+
+.red {
+    background-color: $color-bg-gallery-card-red !important;
+}
+
 %card-background {
     @include md-box(inline-block, relative);
     width: 100%;
