@@ -39,14 +39,19 @@ export interface SolidBackgroundProps extends React.Props<SolidBackgroundType> {
  */
 export const SolidBackground: React.StatelessComponent<SolidBackgroundProps> = (props: SolidBackgroundProps) => {
     let bgColor = props.backgroundColor;
+    let isClass = bgColor ? bgColor.substr(0, 1) !== '#' : false;
 
-    let cls = css({
-        'background-color': true,
-        'fixed': !!props.fixed
-    }, props.className);
+    let cls = css(
+        {
+            'background-color': true,
+            'fixed': !!props.fixed,
+        },
+        isClass ? bgColor : '',
+        props.className
+    );
 
     let style = {
-        backgroundColor: bgColor
+        backgroundColor: isClass ? null : bgColor
     };
 
     return (

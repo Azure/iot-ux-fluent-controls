@@ -609,7 +609,17 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
 
             if (event.charCode === keyCode.slash) {
                 if (this.state.value.split('/').length < 3) {
-                    return;
+                    const start = this.inputElement.selectionStart;
+                    const end = this.inputElement.selectionEnd;
+                    if (start !== end) {
+                        /** The user selected text and pressed '/' */
+                        return;
+                    } else if (start < this.state.value.length) {
+                        /** The user is typing in the middle of the input */
+                        return;
+                    } else if (this.state.value.substr(-1, 1) !== '/') {
+                        return;
+                    }
                 }
             }
 

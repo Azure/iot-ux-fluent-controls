@@ -72,7 +72,7 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
     const inputClassName = css({
         'input': true,
         'error': props.error,
-        'show-cancel': !!props.value
+        'show-cancel': !!props.value && props.type !== 'number'
     });
     const cancelClassName = css('cancel', 'icon icon-cancelLegacy');
 
