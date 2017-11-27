@@ -89,7 +89,7 @@ export interface DateTimeFieldState {
  */
 export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<DateTimeFieldState>> {
     static defaultProps = {
-        format: DateFormat.DDMMYYYY,
+        format: DateFormat.MMDDYYYY,
         tabIndex: -1,
         localTimezone: true,
         showAbove: false,
