@@ -122,7 +122,7 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
                 <Attr.input 
                     type={props.type}
                     name={props.name}
-                    value={props.value}
+                    value={props.value == null ? '' : props.value}
                     className={inputClassName}
                     onChange={onChange}
                     placeholder={props.placeholder}
