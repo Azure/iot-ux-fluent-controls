@@ -38,8 +38,6 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
     disabled?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
-    /** Appends a red asterisk to the label */
-    requiredLabel?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
     /** Autofocus */
@@ -74,7 +72,7 @@ export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: S
             error={props.error}
             errorTitle={props.errorTitle}
             loading={props.loading}
-            requiredLabel={props.requiredLabel}
+            required={props.required}
             className={props.className}
             attr={props.attr}
         >

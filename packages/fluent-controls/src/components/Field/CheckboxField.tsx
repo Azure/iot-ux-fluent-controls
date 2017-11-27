@@ -28,8 +28,6 @@ export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
     disabled?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
-    /** Appends a red asterisk to the label */
-    requiredLabel?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
     /** Autofocus */
@@ -64,7 +62,7 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
             error={props.error}
             errorTitle={props.errorTitle}
             loading={props.loading}
-            requiredLabel={props.requiredLabel}
+            required={props.required}
             className={props.className}
             attr={props.attr}
         >
