@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, LabelProps, Elements as Attr} from '../../Attributes';
+import {DivProps, LabelProps, mergeAttributeObjects, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconAttributes} from '../Icon';
 import {Balloon, BalloonAlignment, BalloonPosition, BalloonAttributes} from '../Balloon';
@@ -56,6 +56,8 @@ export interface FormLabelProps extends React.Props<FormLabelType> {
     attr?: FormLabelAttributes;
 }
 
+export const requiredClassName = css('label', 'required');
+
 /**
  * High level generic form field
  * 
@@ -68,10 +70,11 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
             align={props.balloonAlignment}
             position={props.balloonPosition}
             className={css('label-icon')}
-            attr={{
-                ...props.attr.balloon,
-                ...{balloon: {className: css('label-balloon')}}
-            }}
+            attr={mergeAttributeObjects(
+                props.attr.balloon,
+                {balloon: {className: css('label-balloon')}},
+                ['container', 'balloonContainer', 'balloon']
+            )}
         >
             <Icon
                 icon={props.icon}

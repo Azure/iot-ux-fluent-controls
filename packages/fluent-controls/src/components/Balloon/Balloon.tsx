@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
+import {DivProps, SpanProps, mergeAttributes, Elements as Attr} from '../../Attributes';
 import {Dropdown} from '../Dropdown';
 import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./Balloon.scss'));
@@ -104,7 +104,6 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         attr: {
             container: {},
             balloonContainer: {},
-            hitbox: {},
             balloon: {},
         }
     };
@@ -219,7 +218,12 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
                 onMouseEnter={this.onMouseEnter}
                 onMouseLeave={this.onMouseLeave}
                 attr={{
-                    dropdown: {className: balloonClassName}
+                    container: this.props.attr.container,
+                    dropdownContainer: this.props.attr.balloonContainer,
+                    dropdown: mergeAttributes(
+                        this.props.attr.balloon,
+                        {className: balloonClassName}
+                    )
                 }}
             >
                 {this.props.children}

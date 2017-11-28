@@ -59,49 +59,49 @@ $balloon-width: 65*$grid-size;
 
 @mixin position($location, $offset: 'center') {
     @if $location == 'top' {
-        top: -3*$grid-size;
+        top: -1*$grid-size;
         @if $offset == 'start' {
             left: 0px;
-            transform: translate(0, -100%);
+            transform: translate(-2*$grid-size, -100%);
         } @else if $offset == 'end' {
             right: 0px;
-            transform: translate(0, -100%);
+            transform: translate(2*$grid-size, -100%);
         } @else {
             left: 50%;
             transform: translate(-50%, -100%);
         }
     } @else if $location == 'left' {
-        left: -3*$grid-size;
+        left: -1*$grid-size;
         @if $offset == 'start' {
             top: -1.5*$grid-size;
-            transform: translate(-100%);
+            transform: translate(-100%, -2*$grid-size);
         } @else if $offset == 'end' {
             bottom: -1.5*$grid-size;
-            transform: translate(-100%);
+            transform: translate(-100%, 2*$grid-size);
         } @else {
             top: 50%;
             transform: translate(-100%, -50%);
         }
     } @else if $location == 'right' {
-        right: -3*$grid-size;
+        right: -1*$grid-size;
         @if $offset == 'start' {
             top: -1.5*$grid-size;
-            transform: translate(100%);
+            transform: translate(100%, -2*$grid-size);
         } @else if $offset == 'end' {
             bottom: -1.5*$grid-size;
-            transform: translate(100%);
+            transform: translate(100%, 2*$grid-size);
         } @else {
             top: 50%;
             transform: translate(100%, -50%);
         }
     } @else {
-        bottom: -3*$grid-size;
+        bottom: -1*$grid-size;
         @if $offset == 'start' {
             left: 0px;
-            transform: translate(0, 100%);
+            transform: translate(-2*$grid-size, 100%);
         } @else if $offset == 'end' {
             right: 0px;
-            transform: translate(0, 100%);
+            transform: translate(2*$grid-size, 100%);
         } @else {
             left: 50%;
             transform: translate(-50%, 100%);

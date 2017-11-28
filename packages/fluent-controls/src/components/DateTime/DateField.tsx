@@ -85,6 +85,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
                 format={props.format}
                 error={!!props.error}
                 disabled={props.disabled}
+                required={props.required}
                 onChange={props.onChange}
                 className={props.inputClassName}
                 attr={props.attr}
