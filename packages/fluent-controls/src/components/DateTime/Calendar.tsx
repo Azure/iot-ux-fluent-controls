@@ -174,6 +174,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             update = true;
         }
         if (
+            typeof(newProps.month) === 'number' &&
             newProps.month !== this.props.month &&
             (newProps.month === 0 || newProps.month > 0)
         ) {

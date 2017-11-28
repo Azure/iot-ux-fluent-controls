@@ -678,7 +678,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 onChange={newValue => this.onSelect(newValue)}
                 className={css('date-picker-calendar')}
                 year={parsed.year || null}
-                month={parsed.month - 1 || null}
+                month={parsed.month - 1}
                 tabIndex={this.props.tabIndex}
                 ref={this.calendarRef}
                 key='1'
