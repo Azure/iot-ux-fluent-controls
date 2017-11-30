@@ -27,7 +27,7 @@ export interface ButtonProps extends React.Props<ButtonComponentType> {
     /** 
      * Callback for button onClick
      */    
-    onClick: () => void;
+    onClick: (event) => void;
 
     /** Classname to append to top level element */
     className?: string;
