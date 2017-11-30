@@ -64,7 +64,7 @@ $primary-button-bg-colors: (
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;    
-    max-width: 228px;
+    max-width: $button-max-width;
 
     color: map-get-default($text-colors, default, $default-color);
     background-color: map-get-default($bg-colors, default, $default-bg-color);
