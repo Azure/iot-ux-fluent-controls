@@ -12,6 +12,8 @@ export interface ButtonAttributes {
 }
 
 export interface ButtonProps extends React.Props<ButtonComponentType> {
+    /** Button title attribute */
+    title?: string;
     /** Icon name (from Segoe UI MDL font) */
     icon?: string;
     /** Use primary style */
@@ -45,8 +47,9 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
     return (
         <Attr.button
             type='button'
-            className={css('btn', {
-                'btn-primary': props.primary
+            title={props.title}
+            className={css('method-btn', {
+                'method-btn-primary': props.primary
             }, props.className)}
             onClick={props.onClick}
             disabled={props.disabled}

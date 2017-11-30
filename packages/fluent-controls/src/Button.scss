@@ -84,15 +84,15 @@ $primary-button-bg-colors: (
     }
 }
 
-:global(.btn) {
+:global(.btn), .method-btn {
     @include md-button-style($default-button-colors, $default-button-bg-colors);
 }
 
-:global(.btn-primary) {
+:global(.btn-primary), .method-btn-primary {
     @include md-button-style($primary-button-colors, $primary-button-bg-colors);
 }
 
-:global(.btn), :global(.btn-primary) {
+:global(.btn), :global(.btn-primary), .method-btn, .method-btn-primary {
     vertical-align: middle;
     font-size: $font-size-default;
     line-height: $line-height;
