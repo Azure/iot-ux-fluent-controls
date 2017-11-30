@@ -256,7 +256,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 valid = false;
             }
         }
-        return { year: year, month: month, date: date, valid: valid };
+        return { year, month, date, valid };
     }
 
     onChange = (event) => {
