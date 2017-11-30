@@ -103,7 +103,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         }
     };
 
-    private paste: boolean | string;
+    private paste: boolean;
     private calendar: Calendar;
 
     oldSetState: any;
@@ -335,7 +335,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         this.calendar = element;
     }
 
-    render() {
+    render() { 
         const containerClassName = css('date-picker-container', this.props.className);
         const inputClassName = css('date-picker-input', {'error': this.props.error});
         const dropdownClassName = css('date-picker-dropdown', {
