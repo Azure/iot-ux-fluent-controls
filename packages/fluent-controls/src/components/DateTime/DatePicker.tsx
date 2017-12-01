@@ -105,13 +105,14 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
 
     private paste: boolean;
     private calendar: Calendar;
+    private input: HTMLInputElement;
 
     oldSetState: any;
 
     constructor(props: DatePickerProps) {
         super(props);
 
-        const newState = this.getInitialState(props);
+        const newState = this.getInitialState(props, '');
         this.state = {
             ...newState,
             visible: false,
@@ -127,13 +128,12 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
      *
      * @param props DatePickerProps
      */
-    getInitialState(props: DatePickerProps): DatePickerState {
+    getInitialState(props: DatePickerProps, currentValue: string): DatePickerState {
         const local = props.localTimezone;
-        let value = '';
+        let value = currentValue;
         let initialValue: MethodDate = null;
         if (props.initialValue) {
             if (props.initialValue === 'invalid') {
-                value = '';
                 if (this.state && this.state.initialValue) {
                     initialValue = MethodDate.fromString(
                         props.localTimezone,
@@ -144,11 +144,11 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 const date = MethodDate.fromString(local, props.initialValue);
                 if (date && dateIsValid(date.dateObject, local)) {
                     initialValue = date;
-                    const parsed = this.parse(value);
+                    const parsed = this.parse(currentValue);
                     if (
                         parsed.valid && (
                             date.year !== parsed.year ||
-                            date.month !== parsed.month ||
+                            date.month !== (parsed.month - 1) ||
                             date.date !== parsed.date
                         )
                     ) {
@@ -191,7 +191,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
      */
     componentWillReceiveProps(newProps: DatePickerProps) {
         if ((this.props.initialValue !== newProps.initialValue || this.props.localTimezone !== newProps.localTimezone) && newProps.initialValue !== 'invalid') {
-            const newState = this.getInitialState(newProps);
+            const newState = this.getInitialState(newProps, this.input.value);
             this.setState({
                 ...newState,
                 visible: this.state.visible,
@@ -267,6 +267,8 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         }
         return { year, month, date, valid };
     }
+
+    inputRef = (element: HTMLInputElement) => this.input = element;
 
     onChange = (event) => {
         let newValue: string = event.target.value;
@@ -346,21 +348,25 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
 
     render() { 
         const containerClassName = css('date-picker-container', this.props.className);
-        const inputClassName = css('date-picker-input', {'error': this.props.error});
         const dropdownClassName = css('date-picker-dropdown', {
             'date-picker-above': this.props.showAbove
         });
-
+        
         const icon = <Icon
-            icon='calendar'
-            size={IconSize.xsmall}
-            className={css('date-picker-calendar-icon')}
-            attr={this.props.attr.inputIcon}
+        icon='calendar'
+        size={IconSize.xsmall}
+        className={css('date-picker-calendar-icon')}
+        attr={this.props.attr.inputIcon}
         />;
-
+        
         const placeholder = placeholders[this.props.format];
-
+        
         const parsed = this.parse(this.state.value);
+        const inputClassName = css('date-picker-input', {
+            'error': this.props.error || (
+                !parsed.valid && this.props.initialValue
+            )
+        });
 
         const calendar = [
             <Calendar
@@ -432,6 +438,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         onKeyUp={this.onKeyUp}
                         required={this.props.required}
                         disabled={this.props.disabled}
+                        methodRef={this.inputRef}
                         attr={this.props.attr.input}
                     />
                     {icon}
