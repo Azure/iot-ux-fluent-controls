@@ -146,11 +146,10 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                     initialValue = date;
                     const parsed = this.parse(currentValue);
                     if (
-                        parsed.valid && (
-                            date.year !== parsed.year ||
-                            date.month !== (parsed.month - 1) ||
-                            date.date !== parsed.date
-                        )
+                        date.year !== parsed.year ||
+                        date.month !== (parsed.month - 1) ||
+                        date.date !== parsed.date ||
+                        !parsed.valid
                     ) {
                         value = formatDate(date.dateObject, props.format, local);
                     }
@@ -276,7 +275,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             const date = MethodDate.fromString(this.props.localTimezone, newValue);
             if (date) {
                 newValue = formatDate(date.dateObject, this.props.format, this.props.localTimezone);
-                this.paste = null;
+                this.paste = false;
                 if (this.props.onPaste) {
                     this.props.onPaste(date.dateObject.toJSON());
                 } else {
