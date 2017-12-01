@@ -10,7 +10,7 @@ $gallery-card-bg-color-transition: background-color 0.2s ease-in-out;
 $line-height-default: 5*$grid-size;
 $line-height-section: 4*$grid-size;
 
-$card-content-margin: 20px 20px 16px 20px;
+$card-content-margin: 4*$grid-size;
 $card-fixed-content-height: $gallery-card-height - $gallery-card-background-height;
 $card-icon-top: ($gallery-card-background-height - $gallery-card-icon-size);
 $card-icon-left: ($gallery-card-width - $gallery-card-icon-size);
