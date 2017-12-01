@@ -26,6 +26,8 @@ export interface TextAreaProps extends React.Props<TextAreaType> {
     required?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
+    /** Read only HTML input element */
+    readOnly?: boolean;
     /** Grow text area to fit user text */
     autogrow?: boolean;
     /** Autofocus */
@@ -90,6 +92,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     className={css('textarea', {'error': this.props.error})}
                     onChange={event => this.props.onChange(this.textarea.value)}
                     disabled={this.props.disabled}
+                    readOnly={this.props.readOnly}
                     placeholder={this.props.placeholder}
                     methodRef={this.bindTextArea}
                     autoFocus={this.props.autoFocus}
