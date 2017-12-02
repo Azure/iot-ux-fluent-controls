@@ -40,6 +40,8 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     
     /** Disable HTML input element */
     disabled?: boolean;
+    /** Read only HTML input element */
+    readOnly?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
     /** Display horizontal loading animation instead of error */
@@ -86,6 +88,7 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
                 postfixClassName={props.postfixClassName}
                 error={!!props.error}
                 disabled={props.disabled}
+                readOnly={props.readOnly}
                 onChange={props.onChange}
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
