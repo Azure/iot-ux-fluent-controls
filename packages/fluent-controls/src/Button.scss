@@ -92,6 +92,7 @@ $danger-button-bg-colors: (
     background-color: map-get-default($bg-colors, default, $default-bg-color);
 
     &:hover:not(:disabled) {
+        color: map-get-default($text-colors, hover, $default-hover-color);
         background-color: map-get-default($bg-colors, hover, $default-hover-bg-color);
         cursor: pointer;
     }
