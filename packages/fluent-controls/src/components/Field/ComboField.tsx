@@ -69,6 +69,8 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
 
     /** Disable HTML input element */
     disabled?: boolean;
+    /** Read only HTML input element */
+    readOnly?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
     /** Display horizontal loading animation instead of error */
@@ -165,6 +167,7 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
                     optionLabel={props.optionLabel}
                     error={!!props.error}
                     disabled={props.disabled}
+                    readOnly={props.readOnly}
                     onChange={props.onChange}
                     className={props.inputClassName}
                     autoFocus={props.autoFocus}

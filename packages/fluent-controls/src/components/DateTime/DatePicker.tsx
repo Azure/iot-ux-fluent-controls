@@ -103,6 +103,13 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         }
     };
 
+    /**
+     * This variable tracks whether the user has copy pasted a value into the
+     * text input. If a value is pasted into the DatePicker half of a DateTimeField,
+     * tracking whether something was pasted allows the DateTimeField to set the
+     * TimeInput to the pasted value. This also allows turning off regular parsing
+     * if the pasted string is malformed to give the user a chance to correct it
+     */
     private paste: boolean;
     private calendar: Calendar;
     private input: HTMLInputElement;
@@ -146,12 +153,18 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                     initialValue = date;
                     const parsed = this.parse(currentValue);
                     if (
-                        parsed.valid && (
-                            date.year !== parsed.year ||
-                            date.month !== (parsed.month - 1) ||
-                            date.date !== parsed.date
-                        )
+                        date.year !== parsed.year ||
+                        date.month !== (parsed.month - 1) ||
+                        date.date !== parsed.date ||
+                        !parsed.valid
                     ) {
+                        /**
+                         * Here we use props.initialValue to set the value of the text box
+                         * 
+                         * This happens if state.value is different from the new initialValue
+                         * or if the text input (state.value) is in an invalid state such as
+                         * empty values or invalid dates like febuary 30th (2/30/2017)
+                         */
                         value = formatDate(date.dateObject, props.format, local);
                     }
                 } else {
@@ -272,11 +285,14 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
 
     onChange = (event) => {
         let newValue: string = event.target.value;
+        if (newValue === '') {
+            this.paste = false;
+        }
         if (this.paste) {
             const date = MethodDate.fromString(this.props.localTimezone, newValue);
             if (date) {
                 newValue = formatDate(date.dateObject, this.props.format, this.props.localTimezone);
-                this.paste = null;
+                this.paste = false;
                 if (this.props.onPaste) {
                     this.props.onPaste(date.dateObject.toJSON());
                 } else {

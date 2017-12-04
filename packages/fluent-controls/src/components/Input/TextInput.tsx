@@ -49,6 +49,8 @@ export interface TextInputProps extends React.Props<TextInputType> {
     required?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
+    /** Read only HTML input element */
+    readOnly?: boolean;
     /** Autofocus */
     autoFocus?: boolean;
 
@@ -128,6 +130,7 @@ export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextI
                     placeholder={props.placeholder}
                     required={props.required}
                     disabled={props.disabled}
+                    readOnly={props.readOnly}                    
                     autoFocus={props.autoFocus}
                     methodRef={props.autoFocus && autoFocusRef}
                     attr={props.attr.input}

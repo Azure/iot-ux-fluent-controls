@@ -36,6 +36,8 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     
     /** Disable HTML input element */
     disabled?: boolean;
+    /** Read only HTML input element */
+    readOnly?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
     /** Display horizontal loading animation instead of error */
@@ -79,6 +81,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
                 postfix={props.postfix}
                 error={!!props.error}
                 disabled={props.disabled}
+                readOnly={props.readOnly}
                 onChange={props.onChange}
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}

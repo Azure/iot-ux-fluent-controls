@@ -74,6 +74,8 @@ export interface ComboInputProps extends React.Props<ComboInputType> {
     required?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
+    /** Read only HTML input element */
+    readOnly?: boolean;
     /** Autofocus */
     autoFocus?: boolean;
     /**
@@ -499,6 +501,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         onKeyDown={event => this.onKeyDown(event)}
                         required={this.props.required}
                         disabled={this.props.disabled}
+                        readOnly={this.props.readOnly}
                         methodRef={this.inputRef}
                         autoFocus={this.props.autoFocus}
                         attr={this.props.attr.input}

@@ -35,6 +35,8 @@ export interface NumberInputProps extends React.Props<NumberInputType> {
     required?: boolean;
     /** Disable HTML input element and apply disabled styling */
     disabled?: boolean;
+    /** Read only HTML input element */
+    readOnly?: boolean;
     /** Autofocus */
     autoFocus?: boolean;
 
@@ -252,6 +254,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
                 postfix={this.props.postfix}
                 error={this.props.error}
                 disabled={this.props.disabled}
+                readOnly={this.props.readOnly}
                 autoFocus={this.props.autoFocus}
                 onChange={this.onChange}
                 required={this.props.required}
