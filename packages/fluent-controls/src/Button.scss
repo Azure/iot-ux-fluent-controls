@@ -97,6 +97,8 @@ $danger-button-bg-colors: (
     }
     
     &:focus:not(:disabled) {
+        color: map-get-default($text-colors, pressed, $default-pressed-color);
+        background-color: map-get-default($bg-colors, pressed, $default-pressed-bg-color);
         outline: $outline;
     }
 
