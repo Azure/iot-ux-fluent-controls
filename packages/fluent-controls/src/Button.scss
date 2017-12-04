@@ -9,15 +9,25 @@ $primary-bg-color: $color-bg-btn-primary-default;
 $primary-hover-bg-color: $color-bg-btn-primary-hover;
 $primary-pressed-bg-color: $color-bg-btn-primary-pressed;
 
-$default-color: $color-text-default;
+$default-color: $color-text-bright;
 $default-pressed-color: $color-text-bright;
 
 $default-bg-color: $color-bg-btn-secondary-default;
 $default-hover-bg-color: $color-bg-btn-secondary-hover;
 $default-pressed-bg-color: $color-bg-btn-secondary-pressed;
 
-$disabled-color: $color-text-disabled;
+$disabled-color: $color-text-bright;
 $disabled-bg-color: $color-bg-disabled;
+
+$primary-disabled-bg-color: #0078d6;
+
+$danger-color: $color-text-bright;
+$danger-pressed-color: $color-text-bright;
+
+$danger-bg-color: $color-bg-btn-danger-default;
+$danger-hover-bg-color: $color-bg-btn-danger-hover;
+$danger-pressed-bg-color: $color-bg-btn-danger-pressed;
+
 
 $default-button-colors: (
     default: $default-color,
@@ -42,9 +52,21 @@ $primary-button-bg-colors: (
     default: $primary-bg-color,
     hover: $primary-hover-bg-color,
     pressed: $primary-pressed-bg-color,
-    disabled: $disabled-bg-color,
+    disabled: $primary-disabled-bg-color,
 );
 
+$danger-button-colors: (
+    default: $danger-color,
+    pressed: $danger-pressed-color,
+    disabled: $disabled-color,
+);
+
+$danger-button-bg-colors: (
+    default: $danger-bg-color,
+    hover: $danger-hover-bg-color,
+    pressed: $danger-pressed-bg-color,
+    disabled: $disabled-bg-color,
+);
 
 @mixin md-button-style($text-colors: $default-button-colors, $bg-colors: $default-button-colors, $outline: $outline-focus) {
     @include md-box(inline-block, relative);
@@ -95,6 +117,10 @@ $primary-button-bg-colors: (
 
 :global(.btn-primary), .method-btn-primary {
     @include md-button-style($primary-button-colors, $primary-button-bg-colors);
+}
+
+:global(.btn-danger), .method-btn-danger {
+    @include md-button-style($danger-button-colors, $danger-button-bg-colors);
 }
 
 :global(.btn), :global(.btn-primary), .method-btn, .method-btn-primary {
