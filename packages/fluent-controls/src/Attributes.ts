@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import {MethodNode} from './Common';
+import { MethodNode } from './Common';
 
 export type AttrProps<T extends HTMLElement> = React.HTMLProps<T> & React.ClassAttributes<T> & any;
 
@@ -101,9 +101,9 @@ export function mergeAttributes<T extends HTMLElement>(leftAttr: HTMLElementAttr
 }
 
 export function AttrElementWrapper<T extends HTMLElement>(element: string): AttrWrapper<T> {
-    return function(props: AttrWrapperProps<T>): React.DOMElement<AttrWrapperProps<T>, T> {
-        props = {...props};
-        let attr = {...props.attr};
+    return function (props: AttrWrapperProps<T>): React.DOMElement<AttrWrapperProps<T>, T> {
+        props = { ...props };
+        let attr = { ...props.attr };
         if (attr) {
             delete props.attr;
         } else {
@@ -114,7 +114,7 @@ export function AttrElementWrapper<T extends HTMLElement>(element: string): Attr
             }
             return React.createElement(element, props, ...children);
         }
-        
+
         const className = classNames(props.className, attr.className);
         if (props.className) {
             delete props.className;
@@ -140,10 +140,12 @@ export function AttrElementWrapper<T extends HTMLElement>(element: string): Attr
         delete props.methodRef;
 
         if (attr.key) {
-            console.error('Method Attribute API does not allow keys to be set on elements.');
+            if (DEBUG) {
+                console.error('Method Attribute API does not allow keys to be set on elements.');
+            }
             delete attr.key;
         }
-        
+
         let hasChildren = false;
         let propChildren = [];
         if (props.children) {
@@ -157,13 +159,13 @@ export function AttrElementWrapper<T extends HTMLElement>(element: string): Attr
             attrChildren = attr.children;
             delete attr.children;
         }
-        
-        props = {...props, ...attr, className, ref};
+
+        props = { ...props, ...attr, className, ref };
 
         if (hasChildren) {
             props.children = [propChildren].concat([attrChildren]);
         }
-        
+
         return React.createElement(
             element,
             props
