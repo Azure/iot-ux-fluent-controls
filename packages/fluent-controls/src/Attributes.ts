@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
 import { MethodNode } from './Common';
+import framework from '../framework';
 
 export type AttrProps<T extends HTMLElement> = React.HTMLProps<T> & React.ClassAttributes<T> & any;
 
@@ -140,9 +141,7 @@ export function AttrElementWrapper<T extends HTMLElement>(element: string): Attr
         delete props.methodRef;
 
         if (attr.key) {
-            if (DEBUG) {
-                console.error('Method Attribute API does not allow keys to be set on elements.');
-            }
+            framework.consoleError('Method Attribute API does not allow keys to be set on elements.');
             delete attr.key;
         }
 

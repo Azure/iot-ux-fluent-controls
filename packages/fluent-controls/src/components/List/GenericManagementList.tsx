@@ -1,4 +1,5 @@
 import { DEFAULT_ENCODING } from 'crypto';
+import framework from '../../../framework';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import { DivProps, ButtonProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects } from '../../Attributes';
@@ -182,8 +183,8 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                             colValue instanceof React.PureComponent
                         ) {
                             content = colValue;
-                        } else if (DEBUG) {
-                            console.error('Method Error: Management List Column property mapColumn must return a valid React Node');
+                        } else {
+                            framework.consoleError('Method Error: Management List Column property mapColumn must return a valid React Node');
                         }
                     }
                     return (
@@ -262,8 +263,8 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         colValue instanceof React.PureComponent
                     ) {
                         selectLabel = colValue;
-                    } else if (DEBUG) {
-                        console.error('Method Error: Management List Column property selectLabel must return a valid React Node');
+                    } else {
+                        framework.consoleError('Method Error: Management List Column property selectLabel must return a valid React Node');
                     }
                 }
                 const isSelected = this.props.isSelected instanceof Function
