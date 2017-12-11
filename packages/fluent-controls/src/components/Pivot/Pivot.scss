@@ -60,7 +60,7 @@ $line-height: 4*$grid-size;
         }
 
         .pivot-border {
-            border-bottom: $border-selected;
+            border-bottom: $border-pivot-selected;
         }
     }
 
@@ -72,7 +72,7 @@ $line-height: 4*$grid-size;
         }
 
         &.selected .pivot-border {
-            border-bottom: $border-disabled;
+            border-bottom: $border-pivot-disabled;
         }
     }
 
@@ -116,7 +116,12 @@ $line-height: 4*$grid-size;
         top: 50%;
         transform: translate(0, -50%);
 
-        height: 4.5*$grid-size;
+        height: 5.5*$grid-size;
+
+        a:focus & {
+            outline: $outline-focus;
+            outline-offset: 0;
+        }
     }
 
     .pivot-border {
