@@ -207,7 +207,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             const newState = this.getInitialState(newProps, this.input.value);
             this.setState({
                 ...newState,
-                visible: this.state.visible,
             });
         }
     }
