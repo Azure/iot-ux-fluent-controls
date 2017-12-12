@@ -122,6 +122,9 @@ export class MethodDate {
         
         if (typeof(year) === 'number') {
             if (typeof(month) === 'number') {
+                hours = hours || 0;
+                minutes = minutes || 0;
+                seconds = seconds || 0;
                 if (localTimezone) {
                     this.dateObject = new Date(year, month, date, hours, minutes, seconds);
                 } else {
