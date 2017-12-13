@@ -1,13 +1,12 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import framework from '../../../framework';
-import { DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects } from '../../Attributes';
-import { Icon, IconSize } from '../Icon';
-import { Dropdown, DropdownAttributes } from '../Dropdown';
-import { MethodNode, FormOption, keyCode, hasClassName, autoFocusRef } from '../../Common';
+import {DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects} from '../../Attributes';
+import {Icon, IconSize} from '../Icon';
+import {Dropdown, DropdownAttributes} from '../Dropdown';
+import {MethodNode, FormOption, keyCode, hasClassName, autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./ComboInput.scss'));
 
-export interface ComboInputType { }
+export interface ComboInputType {}
 
 export interface ComboInputAttributes extends DropdownAttributes {
     textbox?: DivProps;
@@ -123,11 +122,10 @@ export interface ComboInputState {
 }
 
 const defaultMap = (option: FormOption) => {
-    if (typeof (option.value) === 'string') {
+    if (typeof(option.value) === 'string') {
         return option.value;
     }
-    framework.consoleError('METHOD ERROR: The default ComboInput map function expects FormOption.value to be a string');
-
+    console.error('METHOD ERROR: The default ComboInput map function expects FormOption.value to be a string');
     return '';
 };
 
@@ -163,7 +161,7 @@ const defaultLabel = (newValue: string, option: FormOption) => option.label;
  * (Use the `ComboField` control for forms with standard styling)
  */
 export class ComboInput extends React.Component<ComboInputProps, Partial<ComboInputState>> {
-    static defaultProps = {
+    static defaultProps =  {
         optionMap: defaultMap,
         optionLabel: defaultLabel,
         showLabel: true,
@@ -182,7 +180,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
     optionFilter: (newValue: string, option: FormOption) => boolean;
     optionSelect: (newValue: string, option: FormOption) => boolean;
 
-    private optionElements: { [value: string]: HTMLSpanElement };
+    private optionElements: {[value: string]: HTMLSpanElement};
     private currentOption: string;
 
     constructor(props: ComboInputProps) {
@@ -264,12 +262,12 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         } else {
             return;
         }
-
+       
         event.preventDefault();
     }
 
     getValue(): string {
-        if (typeof (this.props.value) === 'string') {
+        if (typeof(this.props.value) === 'string') {
             return this.props.value;
         } else {
             let result = null;
@@ -288,7 +286,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
 
     getVisibleOptions(getDisabled: boolean = true): (FormOption & OptionAttr<ButtonProps>)[] {
         let filter = option => !option.hidden;
-        if (typeof (this.props.value) === 'string') {
+        if (typeof(this.props.value) === 'string') {
             filter = option => {
                 return this.optionFilter(
                     this.getValue(),
@@ -312,11 +310,11 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
     }
 
     showDropdown() {
-        this.setState({ visible: true });
+        this.setState({visible: true});
     }
 
     hideDropdown() {
-        this.setState({ visible: false, hovered: null });
+        this.setState({visible: false, hovered: null});
     }
 
     clearSelection(option: string) {
@@ -330,7 +328,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             const index = options.map(option => option.value).indexOf(option);
             const className = this.props.attr.option && this.props.attr.option.className
                 ? this.props.attr.option.className : '';
-
+            
             if (index > -1) {
                 element.className = css('option', className,
                     options[index].attr && options[index].attr.className
@@ -364,7 +362,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             const index = options.map(option => option.value).indexOf(option);
             const className = this.props.attr.option && this.props.attr.option.className
                 ? this.props.attr.option.className : '';
-
+            
             if (index > -1) {
                 element.className = css('option', 'hover', className,
                     options[index].attr && options[index].attr.className
@@ -377,7 +375,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         this.currentOption = option;
     }
 
-    render() {
+    render () {
         const containerClassName = css('combo-input-container', this.props.className);
         const inputClassName = css({
             'input': true,
@@ -391,53 +389,53 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         let result = null;
         const visibleOptions = this.getVisibleOptions();
         const options = visibleOptions.map((option, index) => {
-            const checkLabel = this.props.showLabel
-                ? this.props.optionLabel(value, option).toString === this.props.value
-                : false;
-            if (option.value === this.props.value || checkLabel) {
-                result = option;
-            }
+                const checkLabel = this.props.showLabel
+                    ? this.props.optionLabel(value, option).toString === this.props.value
+                    : false;
+                if (option.value === this.props.value || checkLabel) {
+                    result = option;
+                }
 
-            const optionClassName = css('option', {
-                'selected': this.optionSelect(value, option),
-                'disabled': option.disabled
+                const optionClassName = css('option', {
+                    'selected': this.optionSelect(value, option),
+                    'disabled': option.disabled
+                });
+
+                return (
+                    <Attr.button
+                        type='button'
+                        className={optionClassName}
+                        onClick={option.disabled ? undefined : (event) => {
+                            this.props.onChange(option.value);
+                            this.hideDropdown();
+                            this.inputElement.blur();
+                        }}
+                        onMouseEnter={(event) => {
+                            this.setSelection(option.value);
+                        }}
+                        onMouseLeave={(event) => {
+                            this.setSelection(null);
+                        }}
+                        tabIndex={-1}
+                        key={index}
+                        methodRef={(element) => {
+                            if (element) {
+                                this.optionElements[option.value] = element;
+                            }
+                        }}
+                        attr={mergeAttributes(this.props.attr.option, option.attr)}
+                    >
+                        {this.props.optionLabel(value, option)}
+                    </Attr.button>
+                );
             });
-
-            return (
-                <Attr.button
-                    type='button'
-                    className={optionClassName}
-                    onClick={option.disabled ? undefined : (event) => {
-                        this.props.onChange(option.value);
-                        this.hideDropdown();
-                        this.inputElement.blur();
-                    }}
-                    onMouseEnter={(event) => {
-                        this.setSelection(option.value);
-                    }}
-                    onMouseLeave={(event) => {
-                        this.setSelection(null);
-                    }}
-                    tabIndex={-1}
-                    key={index}
-                    methodRef={(element) => {
-                        if (element) {
-                            this.optionElements[option.value] = element;
-                        }
-                    }}
-                    attr={mergeAttributes(this.props.attr.option, option.attr)}
-                >
-                    {this.props.optionLabel(value, option)}
-                </Attr.button>
-            );
-        });
 
         if (result) {
             inputValue = this.props.showLabel
                 ? this.props.optionLabel(value, result).toString()
                 : value;
         } else {
-            if (typeof (this.props.value) === 'string') {
+            if (typeof(this.props.value) === 'string') {
                 inputValue = this.props.value;
             }
         }
@@ -474,9 +472,9 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                 * the dropdown starts to accept pointer events needed for
                 * interactive dropdowns
                 */
-                onMouseEnter={() => { }}
+                onMouseEnter={() => {}}
                 outerEvents={['click', 'focusin']}
-                onOuterEvent={(event) => this.setState({ visible: false })}
+                onOuterEvent={(event) => this.setState({visible: false})}
                 attr={mergeAttributeObjects(
                     this.props.attr,
                     {

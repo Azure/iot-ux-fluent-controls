@@ -42,7 +42,7 @@ $line-height: 4*$grid-size;
         font-size: $font-size-default;
         line-height: $line-height;
 
-        color: $color-text-pivot-inactive;
+        color: $color-text-default;
     }
 
     &:hover {
@@ -60,7 +60,7 @@ $line-height: 4*$grid-size;
         }
 
         .pivot-border {
-            border-bottom: $border-pivot-selected;
+            border-bottom: $border-selected;
         }
     }
 
@@ -72,7 +72,7 @@ $line-height: 4*$grid-size;
         }
 
         &.selected .pivot-border {
-            border-bottom: $border-pivot-disabled;
+            border-bottom: $border-disabled;
         }
     }
 
@@ -116,12 +116,7 @@ $line-height: 4*$grid-size;
         top: 50%;
         transform: translate(0, -50%);
 
-        height: 5.5*$grid-size;
-
-        a:focus & {
-            outline: $outline-focus;
-            outline-offset: 0;
-        }
+        height: 4.5*$grid-size;
     }
 
     .pivot-border {
