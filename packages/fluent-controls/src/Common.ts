@@ -115,16 +115,13 @@ export class MethodDate {
     public localTimezone: boolean;
     public dateObject: Date;
 
-    constructor(localTimezone: boolean, year?: number, month?: number, date?: number, hours?: number, minutes?: number, seconds?: number) {
+    constructor(localTimezone: boolean, year?: number, month?: number, date?: number, hours: number = 0, minutes: number = 0, seconds: number = 0) {
         /** If localTimezone is null, new defaults to new Date()'s value with local timezone */
         localTimezone = localTimezone === null || typeof(localTimezone) === 'undefined'
             ? true : localTimezone;
         
         if (typeof(year) === 'number') {
             if (typeof(month) === 'number') {
-                hours = hours || 0;
-                minutes = minutes || 0;
-                seconds = seconds || 0;
                 if (localTimezone) {
                     this.dateObject = new Date(year, month, date, hours, minutes, seconds);
                 } else {
