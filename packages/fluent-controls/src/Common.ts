@@ -57,6 +57,8 @@ export const keyCode: KeyCode = {
     home: 36,
     num0: 48,
     num9: 57,
+    numpad0: 96,
+    numpad9: 105,
     slash: 47,
     comma: 188,
     period: 190,
@@ -84,6 +86,8 @@ export interface KeyCode {
     home: number;
     num0: number;
     num9: number;
+    numpad0: number;
+    numpad9: number;
     slash: number;
     period: number;
     comma: number;
