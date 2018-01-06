@@ -111,13 +111,13 @@ a:focus .card:not(.disabled) {
         color: $color-text-gallery-card-content;
         overflow: hidden;
     }
-    
+
     footer {
         font-size: $font-size-default;
         line-height: $line-height-default;
         flex: 0 0 4*$grid-size;
     }
-    
+
     .fixed & {
         height: $card-fixed-content-height;
     }
@@ -140,7 +140,7 @@ a:focus .card:not(.disabled) {
 
 .gallery-card-icon {
     background-color: transparent;
-    color: white;
+    color: $color-text-bright;
     text-align: center;
 
     .icon-title {
