@@ -57,6 +57,8 @@ export const keyCode: KeyCode = {
     home: 36,
     num0: 48,
     num9: 57,
+    numpad0: 96,
+    numpad9: 105,
     slash: 47,
     comma: 188,
     period: 190,
@@ -84,6 +86,8 @@ export interface KeyCode {
     home: number;
     num0: number;
     num9: number;
+    numpad0: number;
+    numpad9: number;
     slash: number;
     period: number;
     comma: number;
@@ -115,7 +119,7 @@ export class MethodDate {
     public localTimezone: boolean;
     public dateObject: Date;
 
-    constructor(localTimezone: boolean, year?: number, month?: number, date?: number, hours?: number, minutes?: number, seconds?: number) {
+    constructor(localTimezone: boolean, year?: number, month?: number, date?: number, hours: number = 0, minutes: number = 0, seconds: number = 0) {
         /** If localTimezone is null, new defaults to new Date()'s value with local timezone */
         localTimezone = localTimezone === null || typeof(localTimezone) === 'undefined'
             ? true : localTimezone;

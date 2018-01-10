@@ -23,31 +23,31 @@ $line-height: 5*$grid-size;
 
     .required &::after {
         content: ' *';
-        color: $color-theme-error;
+        color: $color-text-required;
     }
 
     &.required::after {
         content: ' *';
-        color: $color-theme-error;
+        color: $color-text-required;
     }
 
     & + .content {
-        margin-top: $grid-size;    
+        margin-top: $grid-size;
     }
 
     & + .field-error {
-        margin-top: $grid-size;    
+        margin-top: $grid-size;
     }
 }
 
 .label-container {
     @include md-box(inline-block);
-    
+
     .label-icon {
         @include md-box(inline-block);
         margin-left: 2*$grid-size;
     }
-    
+
     .label-balloon {
         width: $form-label-balloon-width;
     }
@@ -57,9 +57,9 @@ $line-height: 5*$grid-size;
     @include md-box(inline-block, ellipsis);
     height: $form-error-height;
     width: 100%;
-    
-    color: $color-theme-error;
-    
+
+    color: $color-text-error;
+
     font-family: $font-family-default;
     font-size: $font-size-small;
     line-height: $line-height;

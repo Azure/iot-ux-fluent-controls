@@ -207,7 +207,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             const newState = this.getInitialState(newProps, this.input.value);
             this.setState({
                 ...newState,
-                visible: this.state.visible,
             });
         }
     }
@@ -344,6 +343,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     }
 
     onSelect = (newValue: Date) => {
+        this.setState({visible: false});
         this.props.onChange(newValue.toJSON());
     }
 
@@ -369,10 +369,10 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         });
         
         const icon = <Icon
-        icon='calendar'
-        size={IconSize.xsmall}
-        className={css('date-picker-calendar-icon')}
-        attr={this.props.attr.inputIcon}
+            icon='calendar'
+            size={IconSize.xsmall}
+            className={css('date-picker-calendar-icon')}
+            attr={this.props.attr.inputIcon}
         />;
         
         const placeholder = placeholders[this.props.format];
@@ -383,18 +383,17 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 !parsed.valid && this.props.initialValue
             )
         });
+        const value = parsed.valid
+            ? new MethodDate(
+                this.props.localTimezone,
+                parsed.year,
+                parsed.month - 1,
+                parsed.date
+            ).dateObject.toJSON() : null;
 
         const calendar = [
             <Calendar
-                value={
-                    parsed.valid
-                        ? new MethodDate(
-                            this.props.localTimezone,
-                            parsed.year,
-                            parsed.month,
-                            parsed.date
-                        ).dateObject.toJSON() : null
-                }
+                value={value}
                 onChange={newValue => this.onSelect(newValue)}
                 className={css('date-picker-calendar')}
                 year={parsed.year || null}

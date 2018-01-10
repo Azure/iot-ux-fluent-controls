@@ -1,5 +1,7 @@
 @import './theme/index';
 
+$button-max-width: 140px;
+
 $line-height: 8*$grid-size;
 
 $primary-color: $color-text-bright;
@@ -19,7 +21,7 @@ $default-pressed-bg-color: $color-bg-btn-secondary-pressed;
 $disabled-color: $color-text-bright;
 $disabled-bg-color: $color-bg-disabled;
 
-$primary-disabled-bg-color: #0078d6;
+$primary-disabled-bg-color: $color-bg-btn-primary-disabled;
 
 $danger-color: $color-text-bright;
 $danger-pressed-color: $color-text-bright;
@@ -85,7 +87,7 @@ $danger-button-bg-colors: (
 
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;    
+    white-space: nowrap;
     max-width: $button-max-width;
 
     color: map-get-default($text-colors, default, $default-color);
@@ -96,11 +98,12 @@ $danger-button-bg-colors: (
         background-color: map-get-default($bg-colors, hover, $default-hover-bg-color);
         cursor: pointer;
     }
-    
+
     &:focus:not(:disabled) {
         color: map-get-default($text-colors, pressed, $default-pressed-color);
         background-color: map-get-default($bg-colors, pressed, $default-pressed-bg-color);
         outline: $outline;
+        outline-offset: -$outline-focus-border-width;
     }
 
     &:active:not(:disabled) {
@@ -136,7 +139,7 @@ $danger-button-bg-colors: (
         vertical-align: middle;
         margin-right: 2*$grid-size;
         margin-top: -0.5*$grid-size;
-        
+
         font-size: $icon-size-xsmall;
         line-height: $line-height;
     }

@@ -95,7 +95,13 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             return;
         }
 
+        // Allow numbers
         if (event.keyCode >= keyCode.num0 && event.keyCode <= keyCode.num9) {
+            return;
+        }
+
+        // Allow numpad numbers
+        if (event.keyCode >= keyCode.numpad0 && event.keyCode <= keyCode.numpad9) {
             return;
         }
 
