@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import framework from '../../../framework';
 import { DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects } from '../../Attributes';
 import { Icon, IconSize } from '../Icon';
 import { Dropdown, DropdownAttributes } from '../Dropdown';
@@ -126,7 +125,9 @@ const defaultMap = (option: FormOption) => {
     if (typeof (option.value) === 'string') {
         return option.value;
     }
-    framework.consoleError('METHOD ERROR: The default ComboInput map function expects FormOption.value to be a string');
+    if (DEBUG) {
+        console.error('METHOD ERROR: The default ComboInput map function expects FormOption.value to be a string');
+    }
 
     return '';
 };
@@ -346,7 +347,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         /**
          * This sets the background and text color for options in the dropdown
          * when the user hovers over the option or presses up/down in the input
-         * 
+         *
          * Since the ComboInput dropdown DOM is moved around to draw on top of
          * all other elements, rerendering each time the user hovers over an option
          * or changes which option is selected with the arrow keys causes the dropdown

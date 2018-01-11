@@ -1,5 +1,4 @@
 import { DEFAULT_ENCODING } from 'crypto';
-import framework from '../../../framework';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import { DivProps, ButtonProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects } from '../../Attributes';
@@ -26,40 +25,40 @@ export interface GenericManagementListAttributes {
 export interface GenericManagementListProps<T> extends React.Props<GenericManagementListComponentType> {
     /**
      * List of `GridColumn` objects that provide mappings from row type T to
-     * column values and sorting 
-     * 
+     * column values and sorting
+     *
      * See documentation for GridColumn<T> for more information
      */
     columns: Array<GridColumn<T> & OptionAttr<DivProps>>;
     /**
      * List of row objects
-     * 
+     *
      * This can be a list of anything that satisfies the GridColumn callbacks
      * provided in props.columns
      */
     rows: Array<T & OptionAttr<DivProps>>;
     /**
      * HTML input element name prefix to use for checkboxes
-     * 
+     *
      * default: management-list
      */
     name?: string;
 
     /**
      * Callback for checkbox value changes
-     * 
+     *
      * If this callback is not provided, row selection checkboxes will not be shown
      */
     onSelect?: (row: T, newValue: boolean) => void;
     /**
      * Callback for select all checkbox value changes
-     * 
+     *
      * If this callback is not provided, select all checkbox will not be shown
      */
     onSelectAll?: (allSelected: boolean) => void;
     /**
      * A key of row type `T` or callback that returns whether a row is selected.
-     * 
+     *
      * If this is not provided, row selection checkboxes will not be shown
      */
     isSelected?: ((row: T) => boolean) | keyof T;
@@ -67,7 +66,7 @@ export interface GenericManagementListProps<T> extends React.Props<GenericManage
     /**
      * A key of row type `T` or callback that returns the label for the select checkbox
      * for accessibility.
-     * 
+     *
      * If this is not provided, no label will be rendered.
      */
     selectLabel?: ((row: T) => MethodNode) | keyof T;
@@ -76,15 +75,15 @@ export interface GenericManagementListProps<T> extends React.Props<GenericManage
      */
     selectAllLabel?: MethodNode;
 
-    /** 
+    /**
      * Currently sorted column
      */
     sortedColumn?: GridColumn<T>;
     /**
      * Direction of current sort
-     * 
+     *
      * 'ascending' | 'descending'
-     * 
+     *
      * Default: 'ascending'
      */
     sortDirection?: SortDirection;
@@ -97,17 +96,17 @@ export interface GenericManagementListProps<T> extends React.Props<GenericManage
 
 /**
  * Generic Management List
- * 
+ *
  * To use this component in TSX:
- * 
+ *
  * ```ts
  * type CustomManagementList = GenericManagementList<Type>;
- * 
+ *
  * <CustomManagementList rows={Type[]} columns={GridColumn<Type>} />
  * ```
- * 
+ *
  * If you don't need type checking, you should use `ManagementList` instead.
- * 
+ *
  * @param props Control properties (defined in `GenericManagementListProps` interface)
  */
 export class GenericManagementList<T> extends React.PureComponent<GenericManagementListProps<T>, {}> {
@@ -184,7 +183,9 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         ) {
                             content = colValue;
                         } else {
-                            framework.consoleError('Method Error: Management List Column property mapColumn must return a valid React Node');
+                            if (DEBUG) {
+                                console.error('Method Error: Management List Column property mapColumn must return a valid React Node');
+                            }
                         }
                     }
                     return (
@@ -264,7 +265,9 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                     ) {
                         selectLabel = colValue;
                     } else {
-                        framework.consoleError('Method Error: Management List Column property selectLabel must return a valid React Node');
+                        if (DEBUG) {
+                            console.error('Method Error: Management List Column property selectLabel must return a valid React Node');
+                        }
                     }
                 }
                 const isSelected = this.props.isSelected instanceof Function
