@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/method/Icon.ts"],"names":[],"mappings":";;;;;AAAA,uCAAkC","file":"Icon.js","sourcesContent":["export * from './components/Icon';\r\n"]}

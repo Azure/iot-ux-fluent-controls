@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/method/Link.ts"],"names":[],"mappings":";;;;;AAAA,uCAAkC","file":"Link.js","sourcesContent":["export * from './components/Link';\r\n"]}

@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/method/Alert.ts"],"names":[],"mappings":";;;;;AAAA,wCAAmC","file":"Alert.js","sourcesContent":["export * from './components/Alert';\r\n"]}
