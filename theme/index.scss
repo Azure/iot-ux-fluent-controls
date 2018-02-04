@@ -1,0 +1,11 @@
+@import '../../theme/constants';
+@import '../../theme/colors';
+@import '../../theme/typography';
+@import 'mixins';
+
+/// ----------------------------------------------------
+
+$input-height: 8*$grid-size;
+$option-height: 8*$grid-size;
+$dropdown-max-height: 50*$grid-size;
+
