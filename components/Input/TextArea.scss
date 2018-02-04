@@ -1,0 +1,77 @@
+@import '../../theme/index';
+
+$text-area-min-height: 13*$grid-size;
+
+$line-height: 5*$grid-size;
+
+.textarea-container {
+    @include md-box(block, relative);
+
+    .textarea-ghost {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        visibility: hidden;
+    }
+}
+
+.textarea {
+    @include md-box(block, relative);
+    width: 100%;
+    min-height: $text-area-min-height;
+    padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
+    
+    font-family: $font-family-default;
+    color: $color-text-default;
+    font-size: $font-size-default;
+    line-height: $line-height;
+    
+    border: $border-default;
+    outline: none;
+
+    background-color: $color-bg-default;
+
+    &:hover {
+        border: $border-active;
+    }
+
+    &:focus {
+        border: $border-active;
+    }
+
+    &:active {
+        border: $border-active;
+    }
+    
+    &:disabled {
+        color: $color-text-disabled;
+        border: $border-disabled;
+        background-color: $color-bg-disabled;
+
+        &::placeholder {
+            color: $color-text-disabled;
+        }
+    }
+
+    &::placeholder {
+        color: $color-text-placeholder;
+    }
+
+    &::selection {
+        color: $color-text-bright;
+        background-color: $color-bg-selected;
+    }
+
+    &.error:not(:disabled) {
+        border: $border-error;
+    }
+
+    &::-ms-clear {
+        display: none;
+    }
+
+    &:invalid {
+        box-shadow: none;
+    }
+}

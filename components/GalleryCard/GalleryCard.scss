@@ -1,0 +1,151 @@
+@import '../../theme/index';
+
+$gallery-card-icon-size: $icon-size-xxlarge;
+$gallery-card-width: 67*$grid-size;
+$gallery-card-height: 71*$grid-size;
+$gallery-card-background-height: 40*$grid-size;
+
+$gallery-card-bg-color-transition: background-color 0.2s ease-in-out;
+
+$line-height-default: 5*$grid-size;
+$line-height-section: 4*$grid-size;
+
+$card-content-margin: 4*$grid-size 5*$grid-size;
+$card-fixed-content-height: $gallery-card-height - $gallery-card-background-height;
+$card-icon-top: ($gallery-card-background-height - $gallery-card-icon-size);
+$card-icon-left: ($gallery-card-width - $gallery-card-icon-size);
+
+a:focus .card:not(.disabled) {
+    border: $border-gallery-card-hover;
+}
+
+.card {
+    @include md-box(inline-block, relative, hidden);
+    background-color: $color-bg-gallery-card;
+    border: $border-gallery-card-default;
+    margin: 2.5*$grid-size;
+
+    &:hover:not(.disabled) {
+        border: $border-gallery-card-hover;
+    }
+
+    &.fixed {
+        height: $gallery-card-height;
+        width: $gallery-card-width;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.blue {
+    background-color: $color-bg-gallery-card-blue !important;
+}
+
+.yellow {
+    background-color: $color-bg-gallery-card-yellow !important;
+}
+
+.red {
+    background-color: $color-bg-gallery-card-red !important;
+}
+
+%card-background {
+    @include md-box(inline-block, relative);
+    width: 100%;
+    background-color: transparent;
+    transition: $gallery-card-bg-color-transition;
+
+    &.fixed {
+        width: $gallery-card-width;
+        height: $gallery-card-background-height;
+    }
+
+    .fullbg & {
+        height: 100%;
+    }
+}
+
+.background-image-container {
+        @extend %card-background;
+        overflow: hidden;
+
+        .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+}
+
+.background-color {
+        @extend %card-background;
+        background-color: $color-bg-gallery-card-solid;
+}
+
+.card-content {
+    @include md-box(relative, hidden, flex-column);
+    padding: $card-content-margin;
+    font-family: $font-family-default;
+    overflow: hidden;
+
+    header {
+        font-size: $font-size-h5;
+        line-height: $line-height-default;
+        color: $color-text-gallery-card-header;
+        margin-bottom: $grid-size;
+        flex: 0 0 5*$grid-size;
+    }
+
+    section {
+        @include md-box();
+        font-size: $font-size-small;
+        line-height: $line-height-section;
+        color: $color-text-gallery-card-content;
+        overflow: hidden;
+    }
+
+    footer {
+        font-size: $font-size-default;
+        line-height: $line-height-default;
+        flex: 0 0 4*$grid-size;
+    }
+
+    .fixed & {
+        height: $card-fixed-content-height;
+    }
+}
+
+.banner {
+    @include md-box(block, absolute);
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    padding: $grid-size;
+    background-color: $color-bg-gallery-card-banner;
+    color: $color-text-gallery-card-banner;
+    font-family: $font-family-default;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.gallery-card-icon {
+    background-color: transparent;
+    color: $color-text-bright;
+    text-align: center;
+
+    .icon-title {
+        @include md-box(block);
+        font-family: $font-family-default;
+        font-size: $font-size-default;
+    }
+}
