@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/method/components/Loader/index.ts"],"names":[],"mappings":";;;;;AAAA,wCAAmC","file":"index.js","sourcesContent":["export * from './HorizontalLoader';\r\n"]}
