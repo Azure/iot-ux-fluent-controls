@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/method/Pivot.ts"],"names":[],"mappings":";;;;;AAAA,wCAAmC","file":"Pivot.js","sourcesContent":["export * from './components/Pivot';\r\n"]}
