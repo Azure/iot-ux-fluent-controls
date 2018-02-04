@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/method/components/Button/index.ts"],"names":[],"mappings":";;;;;AAAA,8BAAyB","file":"index.js","sourcesContent":["export * from './Button';\r\n"]}

@@ -1,1 +1,0 @@
-{"version":3,"sources":["src/method/components/Pivot/index.ts"],"names":[],"mappings":";;;;;AAAA,6BAAwB;AACxB,iCAA4B","file":"index.js","sourcesContent":["export * from './Pivot';\r\nexport * from './PivotMenu';"]}
