@@ -12,3 +12,10 @@ provided by the bot. You will only need to do this once across all repos using o
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+
+# Future
+- Tslint.json file is empty.  The default react-scripts-ts has many
+linter rules that break with the current code.  We should add back
+some or all rules to make the code more consistent (and some might
+help prevent bugs)
