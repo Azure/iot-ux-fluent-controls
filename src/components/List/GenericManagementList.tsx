@@ -183,9 +183,9 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         ) {
                             content = colValue;
                         } else {
-                            if (DEBUG) {
-                                console.error('Method Error: Management List Column property mapColumn must return a valid React Node');
-                            }
+                            // if (DEBUG) {
+                            //     console.error('Method Error: Management List Column property mapColumn must return a valid React Node');
+                            // }
                         }
                     }
                     return (
@@ -265,9 +265,9 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                     ) {
                         selectLabel = colValue;
                     } else {
-                        if (DEBUG) {
-                            console.error('Method Error: Management List Column property selectLabel must return a valid React Node');
-                        }
+                        // if (DEBUG) {
+                        //     console.error('Method Error: Management List Column property selectLabel must return a valid React Node');
+                        // }
                     }
                 }
                 const isSelected = this.props.isSelected instanceof Function

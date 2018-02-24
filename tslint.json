@@ -1,0 +1,5 @@
+{
+// TODO: The default react-scripts-ts  has many rules here that break with
+// the current code.  We should add back some or all rules to make the code
+// more consistent (and some might help prevent bugs)
+}

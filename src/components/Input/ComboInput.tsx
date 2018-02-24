@@ -125,9 +125,9 @@ const defaultMap = (option: FormOption) => {
     if (typeof (option.value) === 'string') {
         return option.value;
     }
-    if (DEBUG) {
-        console.error('METHOD ERROR: The default ComboInput map function expects FormOption.value to be a string');
-    }
+    // if (DEBUG) {
+    //     console.error('METHOD ERROR: The default ComboInput map function expects FormOption.value to be a string');
+    // }
 
     return '';
 };
