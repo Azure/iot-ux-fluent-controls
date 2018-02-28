@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "outDir": "build/dist",
+    "outDir": "static/dist",
     "module": "commonjs",
     "target": "es6",
     "sourceMap": true,
-    "allowJs": true,
+    "allowJs": false,
     "jsx": "react",
     "moduleResolution": "node",
     "rootDir": "src",
