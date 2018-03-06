@@ -1,4 +1,9 @@
 
+# Build
+- git clone https://github.com/Azure/iot-react-controls.git
+- npm install
+- npm start
+
 # Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
