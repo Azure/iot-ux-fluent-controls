@@ -140,10 +140,6 @@ export function AttrElementWrapper<T extends HTMLElement>(element: string): Attr
         delete props.methodRef;
 
         if (attr.key) {
-            // if (DEBUG) {
-            //     console.error('Method Attribute API does not allow keys to be set on elements.');
-            // }
-
             delete attr.key;
         }
 
