@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "outDir": "static/dist",
+    "module": "commonjs",
+    "target": "es6",
+    "sourceMap": true,
+    "allowJs": false,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "rootDir": "src",
+    "declaration": false,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "suppressImplicitAnyIndexErrors": true,
+    // TODO: react-scripts has these on by default but this code currently
+    // doesn't work with them.  Should we enable and fixup code?
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "noUnusedLocals": false
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "scripts",
+    "acceptance-tests",
+    "webpack",
+    "jest",
+    "src/setupTests.ts"
+  ]
+}
