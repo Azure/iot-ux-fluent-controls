@@ -306,8 +306,8 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
 
         return (
             <Attr.div
-                className={css('time-input-container', this.props.className)} 
-                attr={this.props.attr.container}
+            className={css('time-input-container', this.props.className)} 
+            attr={this.props.attr.container}
             >
                 <Attr.select 
                     name={this.props.name}

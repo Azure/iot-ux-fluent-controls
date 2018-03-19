@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, SpanProps, ButtonProps, Elements as Attr} from '../../Attributes';
-import {ActionTriggerButton, ActionTriggerButtonAttributes} from '../ActionTrigger/ActionTriggerButton';
-import {getLocalMonths, getLocalWeekdays} from './helpers';
-import {keyCode, MethodDate, weekLength} from '../../Common';
+import { DivProps, SpanProps, ButtonProps, Elements as Attr } from '../../Attributes';
+import { ActionTriggerButton, ActionTriggerButtonAttributes } from '../ActionTrigger/ActionTriggerButton';
+import { getLocalMonths, getLocalWeekdays } from './helpers';
+import { keyCode, MethodDate, weekLength } from '../../Common';
 const css = classNames.bind(require('./Calendar.scss'));
 
-export interface CalendarComponentType {}
+export interface CalendarComponentType { }
 
 export interface CalendarAttributes {
     container?: DivProps;
@@ -80,25 +80,25 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             dateRow: {},
         }
     };
-    
+
     private value: MethodDate;
     private monthNames: string[];
     private dayNames: string[];
-    private buttons: {[date: string]: HTMLButtonElement};
+    private buttons: { [date: string]: HTMLButtonElement };
     private buttonIndex: number;
 
     constructor(props: CalendarProps) {
         const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
         super(props);
-        
-        if (typeof(this.props.value) === 'string') {
+
+        if (typeof (this.props.value) === 'string') {
             this.value = MethodDate.fromString(this.props.localTimezone, this.props.value);
         } else if (this.props.value) {
             this.value = MethodDate.fromDate(this.props.localTimezone, this.props.value);
         } else {
             this.value = new MethodDate(this.props.localTimezone);
         }
-        
+
         let currentDate = this.value.copy();
         if (props.year > 0) {
             currentDate.year = props.year;
@@ -163,7 +163,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         if (this.state.accessibility && this.state.currentDate !== oldState.currentDate) {
             this.focusedButton.focus();
         }
-        this.buttonIndex = 0;        
+        this.buttonIndex = 0;
     }
 
     componentWillReceiveProps(newProps: CalendarProps) {
@@ -174,7 +174,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             update = true;
         }
         if (
-            typeof(newProps.month) === 'number' &&
+            typeof (newProps.month) === 'number' &&
             newProps.month !== this.props.month &&
             (newProps.month === 0 || newProps.month > 0)
         ) {
@@ -182,10 +182,10 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             update = true;
         }
         if (update && !this.state.detached && date.isValid()) {
-            this.setState({currentDate: date});
+            this.setState({ currentDate: date });
         }
         if (this.props.value !== newProps.value || this.props.localTimezone !== newProps.localTimezone) {
-            if (typeof(newProps.value) === 'string') {
+            if (typeof (newProps.value) === 'string') {
                 this.value = MethodDate.fromString(newProps.localTimezone, newProps.value);
             } else if (newProps.value) {
                 this.value = MethodDate.fromDate(newProps.localTimezone, newProps.value);
@@ -257,7 +257,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                 date.month += 1;
                 date.date = 0;
             }
-            
+
             event.stopPropagation();
             event.preventDefault();
             this.setState({
@@ -282,7 +282,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         if (!this.state.accessibility) {
             const newDate = this.state.currentDate.copy();
             newDate.date = date;
-            this.setState({currentDate: newDate, accessibility: true});
+            this.setState({ currentDate: newDate, accessibility: true });
         }
     }
 
@@ -300,7 +300,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             newDate.month = targetMonth + 1;
             newDate.date = 0;
         }
-        this.setState({currentDate: newDate, detached: true});
+        this.setState({ currentDate: newDate, detached: true });
     }
 
     onNextMonth(event) {
@@ -316,7 +316,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             newDate.date = 1;
             newDate.month = targetMonth + 1;
         }
-        this.setState({currentDate: newDate, detached: true});
+        this.setState({ currentDate: newDate, detached: true });
     }
 
     render() {
@@ -339,7 +339,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         // First day of `month`
         let start = this.state.currentDate.copy();
         start.date = 1;
-        
+
         // Last day of `month`
         let end = this.state.currentDate.copy();
         end.date = 1;
@@ -360,7 +360,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             }
             start.date += 1;
         }
-        
+
         const content = rows.map((row, rowIndex) => {
             let inner = row.map((col, colIndex) => {
                 const onClick = (event) => {
@@ -454,14 +454,14 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                     >
                         {`${this.monthNames[curMonth]} ${curYear}`}
                     </Attr.div>
-                    <ActionTriggerButton 
+                    <ActionTriggerButton
                         className={css('calendar-chevron')}
                         onClick={event => this.onPrevMonth(event)}
                         tabIndex={tabIndex}
                         icon='chevronUp'
                         attr={this.props.attr.prevMonthButton}
                     />
-                    <ActionTriggerButton 
+                    <ActionTriggerButton
                         icon='chevronDown'
                         className={css('calendar-chevron')}
                         onClick={event => this.onNextMonth(event)}

@@ -1,8 +1,4 @@
-@import '../../theme/index';
-
-$text-area-min-height: 13*$grid-size;
-
-$line-height: 5*$grid-size;
+@import 'common';
 
 .textarea-container {
     @include md-box(block, relative);
@@ -19,52 +15,52 @@ $line-height: 5*$grid-size;
 .textarea {
     @include md-box(block, relative);
     width: 100%;
-    min-height: $text-area-min-height;
-    padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
+    min-height: 13*$grid;
+    padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
     
-    font-family: $font-family-default;
-    color: $color-text-default;
-    font-size: $font-size-default;
-    line-height: $line-height;
+    font-family: $font-family-base;
+    color: $default-text-color;
+    font-size: $font-size-text;
+    line-height: 20px;
     
-    border: $border-default;
+    border: $inactive-border;
     outline: none;
 
-    background-color: $color-bg-default;
+    background-color: $input-bg-color;
 
     &:hover {
-        border: $border-active;
+        border: $default-border;
     }
 
     &:focus {
-        border: $border-active;
+        border: $default-border;
     }
 
     &:active {
-        border: $border-active;
+        border: $default-border;
     }
     
     &:disabled {
-        color: $color-text-disabled;
-        border: $border-disabled;
-        background-color: $color-bg-disabled;
+        color: $disabled-text-color;
+        border: $disabled-border;
+        background-color: $disabled-background-color;
 
         &::placeholder {
-            color: $color-text-disabled;
+            color: $disabled-text-color;
         }
     }
 
     &::placeholder {
-        color: $color-text-placeholder;
+        color: $placeholder-text-color;
     }
 
     &::selection {
-        color: $color-text-bright;
-        background-color: $color-bg-selected;
+        color: $selection-text-color;
+        background-color: $selection-background-color;
     }
 
     &.error:not(:disabled) {
-        border: $border-error;
+        border: $error-border;
     }
 
     &::-ms-clear {

@@ -1,151 +1,160 @@
-@import '../../theme/index';
+@import '../../common/overrides';
+@import '../../common/mixins';
 
-$gallery-card-icon-size: $icon-size-xxlarge;
-$gallery-card-width: 67*$grid-size;
-$gallery-card-height: 71*$grid-size;
-$gallery-card-background-height: 40*$grid-size;
+$card-fixed-width: 284px;
+$card-fixed-height: 284px;
+$card-fixed-background-height: 160px;
+$card-fixed-content-height: $card-fixed-height - $card-fixed-background-height;
 
-$gallery-card-bg-color-transition: background-color 0.2s ease-in-out;
+$card-content-margin: 20px 20px 16px 20px;
 
-$line-height-default: 5*$grid-size;
-$line-height-section: 4*$grid-size;
+$card-icon-width: 96px;
+$card-icon-height: 96px;
+$card-icon-top: ($card-fixed-background-height - $card-icon-height);
+$card-icon-left: ($card-fixed-width - $card-icon-width);
 
-$card-content-margin: 4*$grid-size 5*$grid-size;
-$card-fixed-content-height: $gallery-card-height - $gallery-card-background-height;
-$card-icon-top: ($gallery-card-background-height - $gallery-card-icon-size);
-$card-icon-left: ($gallery-card-width - $gallery-card-icon-size);
+$card-default-border: 1px solid md-color(shade, a);
+$card-hover-border: 1px solid md-color(shade, 3);
+
+$background-default-color: md-color(shade, e);
+$background-solid-color: md-color(shade, e);
+$background-banner-color: md-color(shade, 3);
+
+$text-header-color: md-color(shade, 2);
+$text-section-color: md-color(shade, 6);
+$text-banner-color: md-color(shade, e);
 
 a:focus .card:not(.disabled) {
-    border: $border-gallery-card-hover;
+  border: $card-hover-border;
 }
 
 .card {
-    @include md-box(inline-block, relative, hidden);
-    background-color: $color-bg-gallery-card;
-    border: $border-gallery-card-default;
-    margin: 2.5*$grid-size;
+  @include md-box(inline-block, relative, hidden);
+  background-color: $background-default-color;
+  border: $card-default-border;
+  margin: 2.5*$gutter;
 
-    &:hover:not(.disabled) {
-        border: $border-gallery-card-hover;
-    }
+  &:hover:not(.disabled) {
+    border: $card-hover-border;
+  }
 
-    &.fixed {
-        height: $gallery-card-height;
-        width: $gallery-card-width;
-    }
+  &.fixed {
+    height: $card-fixed-width;
+    width: $card-fixed-height;
+  }
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    a {
-        text-decoration: none;
-    }
+  a {
+    text-decoration: none;
+  }
 }
 
 .blue {
-    background-color: $color-bg-gallery-card-blue !important;
+  background-color: $color-bg-gallery-card-blue !important;
 }
 
 .yellow {
-    background-color: $color-bg-gallery-card-yellow !important;
+  background-color: $color-bg-gallery-card-yellow !important;
 }
 
 .red {
-    background-color: $color-bg-gallery-card-red !important;
+  background-color: $color-bg-gallery-card-red !important;
 }
 
 %card-background {
-    @include md-box(inline-block, relative);
-    width: 100%;
-    background-color: transparent;
-    transition: $gallery-card-bg-color-transition;
+  @include md-box(inline-block, relative);
+  width: 100%;
+  background-color: transparent;
+  transition: background-color 0.2s ease-in-out;
 
-    &.fixed {
-        width: $gallery-card-width;
-        height: $gallery-card-background-height;
-    }
+  &.fixed {
+    width: $card-fixed-width;
+    height: $card-fixed-background-height;
+  }
 
-    .fullbg & {
-        height: 100%;
-    }
+  .fullbg & {
+    height: 100%;
+  }
 }
 
 .background-image-container {
-        @extend %card-background;
-        overflow: hidden;
+    @extend %card-background;
+    overflow: hidden;
 
-        .background-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
+    .background-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
 }
 
 .background-color {
-        @extend %card-background;
-        background-color: $color-bg-gallery-card-solid;
+    @extend %card-background;
+    background-color: $background-solid-color;
 }
 
 .card-content {
-    @include md-box(relative, hidden, flex-column);
-    padding: $card-content-margin;
-    font-family: $font-family-default;
+  @include md-box(relative, hidden, flex-column);
+  padding: $card-content-margin;
+  font-family: $font-family-base;
+  overflow: hidden;
+
+  header {
+    font-size: 16px;
+    line-height: 20px;
+    color: $text-header-color;
+    margin-bottom: $gutter;
+    flex: 0 0 5*$grid;
+  }
+
+  section {
+    @include md-box();
+    font-size: 13px;
+    line-height: 16px;
+    color: $text-section-color;
     overflow: hidden;
-
-    header {
-        font-size: $font-size-h5;
-        line-height: $line-height-default;
-        color: $color-text-gallery-card-header;
-        margin-bottom: $grid-size;
-        flex: 0 0 5*$grid-size;
-    }
-
-    section {
-        @include md-box();
-        font-size: $font-size-small;
-        line-height: $line-height-section;
-        color: $color-text-gallery-card-content;
-        overflow: hidden;
-    }
-
-    footer {
-        font-size: $font-size-default;
-        line-height: $line-height-default;
-        flex: 0 0 4*$grid-size;
-    }
-
-    .fixed & {
-        height: $card-fixed-content-height;
-    }
+  }
+  
+  footer {
+    font-size: $font-size-text;
+    line-height: 20px;
+    flex: 0 0 4*$grid;
+  }
+  
+  .fixed & {
+    height: $card-fixed-content-height;
+  }
 }
 
 .banner {
-    @include md-box(block, absolute);
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    padding: $grid-size;
-    background-color: $color-bg-gallery-card-banner;
-    color: $color-text-gallery-card-banner;
-    font-family: $font-family-default;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    text-align: center;
+  @include md-box(block, absolute);
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  padding: $gutter;
+  background-color: $background-banner-color;
+  color: $text-banner-color;
+  font-family: $font-family-base;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 .gallery-card-icon {
-    background-color: transparent;
-    color: $color-text-bright;
-    text-align: center;
+  background-color: transparent;
+  color: white;
+  text-align: center;
 
-    .icon-title {
-        @include md-box(block);
-        font-family: $font-family-default;
-        font-size: $font-size-default;
-    }
+  .icon-title {
+    @include md-box(block);
+    font-family: $font-family-base;
+    font-size: $font-size-text;
+  }
 }

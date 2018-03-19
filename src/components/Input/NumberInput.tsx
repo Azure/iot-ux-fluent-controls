@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, ButtonProps, InputProps, Elements as Attr} from '../../Attributes';
-import {Icon, IconSize} from '../Icon';
-import {TextInput, TextInputAttributes} from './TextInput';
-import {MethodNode, keyCode} from '../../Common';
+import { DivProps, ButtonProps, InputProps, Elements as Attr } from '../../Attributes';
+import { Icon, IconSize } from '../Icon';
+import { TextInput, TextInputAttributes } from './TextInput';
+import { MethodNode, keyCode } from '../../Common';
 const css = classNames.bind(require('./TextInput.scss'));
 
-export interface NumberInputType {}
+export interface NumberInputType { }
 
 const invalidNumber = 'invalid';
 
@@ -28,7 +28,7 @@ export interface NumberInputProps extends React.Props<NumberInputType> {
     prefix?: MethodNode;
     /** Node to draw to the right of the input box */
     postfix?: MethodNode;
-    
+
     /** Apply error styling to input element */
     error?: boolean;
     /** Add required attribute to HTML input element */
@@ -80,7 +80,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
 
     constructor(props: NumberInputProps) {
         super(props);
-        
+
         this.paste = false;
         this.state = this.getInitialState(this.props.initialValue);
     }
@@ -113,7 +113,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         ) {
             return;
         }
-        
+
         if (
             !this.isInteger()
             && event.keyCode === keyCode.period
@@ -126,16 +126,16 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
     }
 
     isPositive(): boolean {
-        return typeof(this.props.min) === 'number' && this.props.min >= 0;
+        return typeof (this.props.min) === 'number' && this.props.min >= 0;
     }
 
     isInteger(): boolean {
-        return typeof(this.props.step) === 'number' && this.props.step % 1 === 0;
+        return typeof (this.props.step) === 'number' && this.props.step % 1 === 0;
     }
 
     onChange = (newValue: string) => {
         if (newValue === '' && this.state.value !== '') {
-            this.setState({value: '', paste: false});
+            this.setState({ value: '', paste: false });
             return;
         }
         /** Reset our state machine */
@@ -144,10 +144,10 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         if (parsedValue === invalidNumber) {
             if (this.paste) {
                 this.paste = false;
-                this.setState({value: newValue, paste: true});
+                this.setState({ value: newValue, paste: true });
                 return;
             } else {
-                this.setState({value: newValue});
+                this.setState({ value: newValue });
                 return;
             }
         } else {
@@ -159,10 +159,10 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         }
 
         if (this.isPositive() && parsedValue < 0) {
-            return; 
+            return;
         }
 
-        this.setState({value: newValue, paste: paste});
+        this.setState({ value: newValue, paste: paste });
     }
 
     onPaste = (event) => {
@@ -171,7 +171,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
 
     getInitialState(initialValue: number | string): NumberInputState {
         let value = '';
-        if (typeof(initialValue) === 'number') {
+        if (typeof (initialValue) === 'number') {
             value = initialValue.toString();
         } else {
             value = initialValue;
@@ -179,7 +179,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
 
         if (value === '' || value == null) {
             value = '';
-        } else if (this.state && typeof(this.state.value) === 'string') {
+        } else if (this.state && typeof (this.state.value) === 'string') {
             if (parseFloat(this.state.value) === parseFloat(value)) {
                 value = this.state.value;
             }

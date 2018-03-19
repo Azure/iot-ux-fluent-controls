@@ -1,108 +1,127 @@
-@import '../../theme/index';
+@import 'common';
 
-$line-height: 4*$grid-size;
-$line-height-small: 3*$grid-size;
+$default-border: 1px solid md-color(shade, 6);
+$hover-border: 1px solid md-color(shade, 3);
+$disabled-border: 1px solid md-color(shade, a);
+$indeterminate-border: 1px solid md-color(selected, default);
+$indeterminate-hover-border: 1px solid md-color(selected, hover);
+$selected-border: none;
+
+$checkmark-color: md-color(selected, dark);
+$checkmark-disabled-color: md-color(shade, 7);
+
+$bg-color: md-color(shade, f);
+$selected-bg-color: md-color(selected, default);
+$hover-bg-color: md-color(selected, hover);
+$disabled-bg-color: md-color(shade, a);
+$selected-disabled-bg-color: md-color(shade, c);
+
+$text-default-color: md-color(shade, 2);
+$text-disabled-color: md-color(shade, a);
+
+$fill-default: md-color(selected, dark);
+$fill-disabled: md-color(shade, a);
+
 
 .checkbox-container {
-    color: $color-text-default;
+    color: $text-default-color;
 
     &:not(.disabled) input:focus + .checkbox-button {
-        outline: $outline-focus;
+        outline: $focus-outline;
         outline-offset: 1px;
     }
 
     .checkbox-button {
-        border: $border-default;
-        background-color: $color-bg-default;
+        border: $default-border;
+        background-color: $bg-color;
     }
 
     &.disabled {
-        color: $color-text-disabled;
+        color: $text-disabled-color;
     
         .checkbox-button {
-            border: $border-disabled;
-            background-color: $color-bg-default;
+            border: $disabled-border;
+            background-color: $bg-color;
         }
     }
 
     .checkbox-fill {
-        background-color: $color-text-default;
+        background-color: $fill-default;
     }
 }
 
 .checkbox-container:hover {
     .checkbox-button {
-        border: $border-active;
+        border: $hover-border;
     }
 
     &.selected .checkbox-button {
-        background-color: $color-bg-selected;
-        border: $border-selected-hover;
+        background-color: $hover-bg-color;
     }
 
     &.disabled .checkbox-button {
-        border: $border-disabled;
+        border: $disabled-border;
     }
 
     &.indeterminate .checkbox-button {
-        border: $border-active;
-        background-color: $color-bg-default;
+        border: $indeterminate-hover-border;
+        background-color: $bg-color;
     }
 }
 
 .checkbox-container.selected {
     .checkbox-button {
-        border: $border-selected;
-        background-color: $color-bg-selected;
+        border: $selected-border;
+        background-color: $selected-bg-color;
     }
 
     .checkbox-checkmark {
-        color: $color-text-bright;
+        color: $checkmark-color;
     }
 
     &.disabled {
         .checkbox-button {
-            background-color: $color-bg-selected-disabled;
+            background-color: $selected-disabled-bg-color;
             border: none;
         }
 
         .checkbox-checkmark {
-            color: $color-text-disabled;
+            color: $checkmark-disabled-color;
         }   
     }
 }
 
 .checkbox-container.indeterminate {
     .checkbox-button {
-        border: $border-selected;
-        background-color: $color-bg-default;
+        border: $indeterminate-border;
+        background-color: $bg-color;
     }
 
     &.disabled {
         .checkbox-button {
-            border: $border-disabled;
+            border: $disabled-border;
         }
 
         .checkbox-fill {
-            background-color: $color-text-disabled;
+            background-color: $fill-disabled;
         }
     }
 }
 
 .checkbox-container {
     @include md-box(block, relative);
-    font-family: $font-family-default;
-    font-size: $font-size-default;
-    line-height: $line-height;
+    font-family: $font-family-base;
+    font-size: $font-size-text;
+    line-height: 4*$grid;
 
     & + &:not(.columns) {
-        margin-top: 3*$grid-size;
+        margin-top: 3*$gutter;
     }
 
     &.columns {
         display: inline-block;
             
-        margin-right: 2*$grid-size;
+        margin-right: 2*$gutter;
     }
 
     input {
@@ -120,22 +139,22 @@ $line-height-small: 3*$grid-size;
     .checkbox-text {
         @include md-box(inline-block, relative);
         vertical-align: top;
-        padding-left: 2*$grid-size;
+        padding-left: 2*$gutter;
     }
 
     .checkbox-fill {
         @include md-box(display-none, absolute);
-        left: 1.5*$grid-size;
-        top: 1.5*$grid-size;
-        width: $grid-size;
-        height: $grid-size;
+        left: 1.5*$gutter;
+        top: 1.5*$gutter;
+        width: $grid;
+        height: $grid;
     }
 
     .checkbox-button {
         @include md-box(inline-block, relative);
-        width: 4*$grid-size;
-        height: 4*$grid-size;
-        background-color: $color-bg-default;
+        width: 4*$grid;
+        height: 4*$grid;
+        background-color: $bg-color;
         outline: none;
         vertical-align: top;
     }
@@ -146,8 +165,8 @@ $line-height-small: 3*$grid-size;
 
     .checkbox-checkmark {
         @include md-box(display-none, absolute);
-        font-size: $font-size-small;
-        line-height: $line-height-small;
+        font-size: 3*$grid;
+        line-height: 3*$grid;
         left: 2px;
     }
 

@@ -21,7 +21,7 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     min?: number;
     /** Maximum value of HTML Input element */
     max?: number;
-    
+
     /** Label to display above input element */
     label: MethodNode;
     /** Error to display below input element */
@@ -33,7 +33,7 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     prefix?: MethodNode;
     /** Node to draw to the right of the input box */
     postfix?: MethodNode;
-    
+
     /** Disable HTML input element */
     disabled?: boolean;
     /** Read only HTML input element */

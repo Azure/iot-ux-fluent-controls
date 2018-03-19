@@ -1,45 +1,55 @@
-@import '../../theme/index';
+@import 'common';
 
-$line-height: 4*$grid-size;
+$text-default-color: md-color(shade, 2);
+$text-checked-color: md-color(combo, selected-text);
+$text-disabled-color: md-color(shade, 8);
+$text-selection-color: md-color(text, white);
+
+$background-checked-color: md-color(form, selected);
+$background-disabled-color: md-color(shade, d);
+$background-selection-color: md-color(combo, hover);
+
+$arrow-default-color: md-color(shade, 4);
 
 .combo-container {
     @include md-box(relative, block);
     width: 100%;
-    font-family: $font-family-default;
+    font-family: $font-family-base;
 
-    color: $color-text-default;
-    font-size: $font-size-default;
-    line-height: $line-height;
+    color: $text-default-color;
+    font-size: $font-size-text;
+    line-height: 16px;
 
     .arrow {
         @include md-box(absolute, block);
         font-size: $font-size-small;
-        color: $color-text-chevron;
-        right: 2*$grid-size;
-        top: 2*$grid-size;
+        color: $arrow-default-color;
+        right: 2*$gutter;
+        top: 2*$gutter;
         pointer-events: none;
     }
 
     .combo {
         @include md-box();
         width: 100%;
-        height: $input-height;
-        padding: 0px 3*$grid-size;
-        border: $border-default;
+        height: 32px;
+        padding: 0px 12px 0px 12px;
+        border: $inactive-border;
         outline: none;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
         border-radius: 0px;
 
-        background-color: $color-bg-default;
+        background-color: $input-bg-color;
 
         option {
-            height: $option-height;
+            height: 32px;
 
             &.option-hidden {
                 display: none;
             }
+
 
             &:first {
                 display: none;
@@ -62,30 +72,30 @@ $line-height: 4*$grid-size;
         }
 
         &:hover {
-            border: $border-active;
+            border: $default-border;
         }
     
         &:focus {
-            border: $border-active;
+            border: $default-border;
         }
 
         &:active {
-            border: $border-active;
+            border: $default-border;
         }
         
         &:disabled {
-            color: $color-text-disabled;
-            border: $border-disabled;
-            background-color: $color-bg-disabled;
+            color: $text-disabled-color;
+            border: $disabled-border;
+            background-color: $background-disabled-color;
         }
 
         &::selection {
-            color: $color-text-bright;
-            background-color: $color-bg-selected;
+            color: $text-selection-color;
+            background-color: $background-selection-color;
         }
 
         &.error:not(:disabled) {
-            border: $border-error;
+            border: $error-border;
         }
     }
 }

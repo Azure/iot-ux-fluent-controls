@@ -1,20 +1,27 @@
-@import '../../theme/index';
+@import '../../common/overrides';
+@import '../../common/mixins';
 
-$pivot-max-width: 50*$grid-size;
-$pivot-min-height: 7*$grid-size;
-$pivot-max-height: 12*$grid-size;
+$text-selected-color: md-color(shade, 2);
+$text-unselected-color: md-color(shade, 6);
+$text-disabled-color: md-color(shade, a);
+$text-hover-color: md-color(shade, 2);
 
-$line-height: 4*$grid-size;
+$focus-border: 1px dashed md-color(shade, 3);
+
+$selected-border: 2px solid md-color(form, selected);
+$disabled-border: 2px solid md-color(shade, a);
+
+$menu-border: 1px solid md-color(shade, d);
 
 .pivot {
     @include md-box(inline-block);
     outline: none;
-    margin-left: 5*$grid-size;
+    margin-left: 5*$gutter;
 }
 
 .pivot-menu {
     @include md-box(block, relative);
-    border-bottom: $border-default;
+    border-bottom: $menu-border;
     white-space: nowrap;
     overflow: hidden;
 
@@ -33,46 +40,46 @@ $line-height: 4*$grid-size;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        max-width: $pivot-max-width;
+        max-width: 50*$grid;
     }
 
     .pivot-icon-label {
-        margin-left: 2*$grid-size;
-        font-family: $font-family-default;
-        font-size: $font-size-default;
-        line-height: $line-height;
+        margin-left: 2*$gutter;
+        font-family: $font-family-base;
+        font-size: 14px;
+        line-height: 16px;
 
-        color: $color-text-inactive;
+        color: $text-unselected-color;
     }
 
     &:hover {
-        color: $color-text-default;
+        color: $text-hover-color;
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            color: $color-text-default;
+            color: $text-hover-color;
         }
     }
 
     &.selected {
-        color: $color-text-default;
+        color: $text-selected-color;
 
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            color: $color-text-default;
+            color: $text-selected-color;
         }
 
         .pivot-border {
-            border-bottom: $border-pivot-selected;
+            border-bottom: $selected-border;
         }
     }
 
     &.disabled {
-        color: $color-text-disabled;
+        color: $text-disabled-color;
 
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            color: $color-text-disabled;
+            color: $text-disabled-color;
         }
 
         &.selected .pivot-border {
-            border-bottom: $border-pivot-disabled;
+            border-bottom: $disabled-border;
         }
     }
 
@@ -81,8 +88,8 @@ $line-height: 4*$grid-size;
         @extend .pivot-icon-label;
         visibility: hidden;
         white-space: nowrap;
-        min-height: $pivot-min-height;
-        max-height: $pivot-max-height;
+        min-height: 7*$grid;
+        max-height: 12*$grid;
     }
 
     .pivot-icon + .pivot-icon {
@@ -97,8 +104,8 @@ $line-height: 4*$grid-size;
         @extend .pivot-icon-label;
         visibility: hidden;
         white-space: nowrap;
-        min-height: $pivot-min-height;
-        max-height: $pivot-max-height;
+        min-height: 7*$grid;
+        max-height: 12*$grid;
     }
 
     .pivot-label + .pivot-label {
@@ -110,13 +117,13 @@ $line-height: 4*$grid-size;
 
     .focus-border {
         @include md-box(block, absolute);
-        left: -1*$grid-size;
-        right: -1*$grid-size;
+        left: -1*$gutter;
+        right: -1*$gutter;
 
         top: 50%;
         transform: translate(0, -50%);
 
-        height: 5.5*$grid-size;
+        height: 4.5*$grid;
 
         a:focus & {
             outline: $outline-focus;
@@ -129,6 +136,6 @@ $line-height: 4*$grid-size;
         left: 0px;
         width: 100%;
         bottom: 0px;
-        height: 2.5*$grid-size;
+        height: 2.5*$grid;
     }
 }
