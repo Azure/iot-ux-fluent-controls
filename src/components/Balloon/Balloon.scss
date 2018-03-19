@@ -1,54 +1,62 @@
-@import '../../theme/index';
+@import '../../common/overrides';
+@import '../../common/mixins';
 
+// Spec says 8px but setting to 8.5px to deal with browser rounding errors
+$balloon-border: 8.5px solid md-color(shade, 3);
+$transparent-border: 8.5px solid md-color(inherit);
 $balloon-arrow-size: 2*$grid-size;
 $balloon-width: 65*$grid-size;
+
+$background-default-color: md-color(shade, 3);
+
+$text-default-color: md-color(shade, f);
 
 @mixin arrow($location, $offset: 'center') {
     &:before {
         content:'';
         display:block;
-        width: $balloon-arrow-size;
-        height: $balloon-arrow-size;
+        width: 2*$grid;
+        height: 2*$grid;
         background-color: inherit;
         position: absolute;
         transform: rotateZ(45deg);
         
         @if $location == 'top' {
-            top: -1*$grid-size;
+            top: -1*$gutter;
             @if $offset == 'start' {
-                left: 3*$grid-size;
+                left: 3*$gutter;
             } @else if $offset == 'end' {
-                right: 3*$grid-size;
+                right: 3*$gutter;
             } @else {
                 left: 50%;
                 transform: translateX(-50%) rotateZ(45deg);
             }
         } @else if $location == 'left' {
-            left: -1*$grid-size;
+            left: -1*$gutter;
             @if $offset == 'start' {
-                top: 3*$grid-size;
+                top: 3*$gutter;
             } @else if $offset == 'end' {
-                bottom: 3*$grid-size;
+                bottom: 3*$gutter;
             } @else {
                 top: 50%;
                 transform: translateY(-50%) rotateZ(45deg);
             }
         } @else if $location == 'right' {
-            right: -1*$grid-size;
+            right: -1*$gutter;
             @if $offset == 'start' {
-                top: 3*$grid-size;
+                top: 3*$gutter;
             } @else if $offset == 'end' {
-                bottom: 3*$grid-size;
+                bottom: 3*$gutter;
             } @else {
                 top: 50%;
                 transform: translateY(-50%) rotateZ(45deg);
             }
         } @else {
-            bottom: -1*$grid-size;
+            bottom: -1*$gutter;
             @if $offset == 'start' {
-                left: 3*$grid-size;
+                left: 3*$gutter;
             } @else if $offset == 'end' {
-                right: 3*$grid-size;
+                right: 3*$gutter;
             } @else {
                 left: 50%;
                 transform: translateX(-50%) rotateZ(45deg);
@@ -59,49 +67,49 @@ $balloon-width: 65*$grid-size;
 
 @mixin position($location, $offset: 'center') {
     @if $location == 'top' {
-        top: -1*$grid-size;
+        top: -3*$gutter;
         @if $offset == 'start' {
             left: 0px;
-            transform: translate(-2*$grid-size, -100%);
+            transform: translate(0, -100%);
         } @else if $offset == 'end' {
             right: 0px;
-            transform: translate(2*$grid-size, -100%);
+            transform: translate(0, -100%);
         } @else {
             left: 50%;
             transform: translate(-50%, -100%);
         }
     } @else if $location == 'left' {
-        left: -1*$grid-size;
+        left: -3*$gutter;
         @if $offset == 'start' {
-            top: -1.5*$grid-size;
-            transform: translate(-100%, -2*$grid-size);
+            top: -1.5*$gutter;
+            transform: translate(-100%);
         } @else if $offset == 'end' {
-            bottom: -1.5*$grid-size;
-            transform: translate(-100%, 2*$grid-size);
+            bottom: -1.5*$gutter;
+            transform: translate(-100%);
         } @else {
             top: 50%;
             transform: translate(-100%, -50%);
         }
     } @else if $location == 'right' {
-        right: -1*$grid-size;
+        right: -3*$gutter;
         @if $offset == 'start' {
-            top: -1.5*$grid-size;
-            transform: translate(100%, -2*$grid-size);
+            top: -1.5*$gutter;
+            transform: translate(100%);
         } @else if $offset == 'end' {
-            bottom: -1.5*$grid-size;
-            transform: translate(100%, 2*$grid-size);
+            bottom: -1.5*$gutter;
+            transform: translate(100%);
         } @else {
             top: 50%;
             transform: translate(100%, -50%);
         }
     } @else {
-        bottom: -1*$grid-size;
+        bottom: -3*$gutter;
         @if $offset == 'start' {
             left: 0px;
-            transform: translate(-2*$grid-size, 100%);
+            transform: translate(0, 100%);
         } @else if $offset == 'end' {
             right: 0px;
-            transform: translate(2*$grid-size, 100%);
+            transform: translate(0, 100%);
         } @else {
             left: 50%;
             transform: translate(-50%, 100%);
@@ -111,15 +119,15 @@ $balloon-width: 65*$grid-size;
 
 .balloon-dropdown {
     @include md-box(inline-block, absolute);
-    font-family: $font-family-default;
-    box-shadow: $balloon-shadow;
-    background-color: $color-bg-balloon;
-    color: $color-text-bright;
-    width: $balloon-width;
+    font-family: $font-family-base;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+    background-color: $background-default-color;
+    color: $text-default-color;
+    width: 65*$grid;
 
     .balloon-inner-container {
         @include md-box(inline-block, relative);
-        padding: 3*$grid-size 4*$grid-size 4*$grid-size 4*$grid-size;
+        padding: 3*$gutter 4*$gutter 4*$gutter 4*$gutter;
         color: inherit;
         background-color: inherit;
         overflow: hidden;
@@ -132,15 +140,15 @@ $balloon-width: 65*$grid-size;
     }
     
     header + section {
-        margin-top: 4*$grid-size;
+        margin-top: 4*$gutter;
     }
     
     section + section {
-        margin-top: 4*$grid-size;
+        margin-top: 4*$gutter;
     }
 
     section + footer {
-        margin-top: 4*$grid-size;
+        margin-top: 4*$gutter;
     }
 
     &.top-start {

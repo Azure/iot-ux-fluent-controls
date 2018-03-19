@@ -1,4 +1,4 @@
- import * as React from 'react';
+import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, LabelProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
@@ -86,6 +86,7 @@ FormField.defaultProps = {
     name: undefined,
     label: undefined,
     loading: false,
+    required: false,
     hideError: false,
     attr: {
         fieldContainer: {},

@@ -1,21 +1,26 @@
-@import '../../theme/index';
+@import '../../common/overrides';
+@import '../../common/mixins';
 
+$text-default-color: md-color(shade, 6);
+$text-disabled-color: md-color(shade, a);
+$text-hover-color: md-color(shade, 3);
 $line-height: 4.5*$grid-size;
+$icon-size: 16px;
 
 .action-trigger-container {
     @include md-box(inline-block, relative, ellipsis);
-    font-family: $font-family-default;
-    font-size: $icon-size-xsmall;
-    line-height: $line-height;
-    padding: $grid-size 2*$grid-size;
+    font-family: $font-family-base;
+    font-size: $icon-size;
+    line-height: 18px;
+    padding: $gutter 2*$gutter;
 
-    color: $color-text-default;
+    color: $text-default-color;
 
     text-decoration: none;
     outline: none;
 
     &.action-trigger-label-empty {
-        padding: $grid-size 1.5*$grid-size;
+        padding: $gutter 1.5*$gutter;
         
         .label {
             margin: 0;
@@ -23,28 +28,28 @@ $line-height: 4.5*$grid-size;
     }
 
     a:focus > & {
-        outline: $outline-focus;
+        outline: $focus-outline;
         outline-offset: 1px;
-        color: $color-text-default;
+        color: $text-hover-color;
         background-color: $color-bg-hover;
         
         &.disabled {
             outline: none;
-            color: $color-text-disabled;
+            color: $text-disabled-color;
         }
     }
     
     &:hover:not(.disabled) {
-        color: $color-text-default;
+        color: $text-hover-color;
         background-color: $color-bg-hover;
     }
     
     &.disabled {
-        color: $color-text-disabled;
+        color: $text-disabled-color;
     }
     
     .suffix {        
-        margin-left: 2*$grid-size;
+        margin-left: 2*$gutter;
         
         &::before {
             margin: 0;
@@ -53,13 +58,13 @@ $line-height: 4.5*$grid-size;
 
     .action-trigger-label {    
         @include md-box(inline-block);
-        line-height: $line-height;
+        line-height: 18px;
         vertical-align: top;
-        font-size: $font-size-default;
-        margin-left: 2*$grid-size;
+        font-size: $font-size-text;
+        margin-left: 2*$gutter;
         margin-top: 1px;
 
-        max-width: 50*$grid-size;
+        max-width: 50*$grid;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;

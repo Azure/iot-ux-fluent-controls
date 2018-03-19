@@ -1,11 +1,18 @@
-@import '../../theme/index';
+@import '../../common/overrides';
+@import '../../common/mixins';
 
-$management-list-column-basis: 25*$grid-size;
-$management-list-row-height: 12*$grid-size;
-$management-list-select-all-width: 8*$grid-size;
+$column-font-family: join('DIN-Regular', $font-family-base);
 
-$line-height-small: 4*$grid-size;
-$line-height-sort: 3*$grid-size;
+$header-color: md-color(shade, 3);
+$content-color: md-color(shade, 4);
+$checkmark-color: md-color(shade, dark);
+
+$content-bg-color: md-color(shade, f);
+$checkbox-bg-color: md-color(shade, f);
+
+$checkbox-border: 1px solid md-color(shade, 6);
+
+$header-line-height: 4*$grid;
 
 .list-container {
     @include md-box(flex, relative);
@@ -13,7 +20,7 @@ $line-height-sort: 3*$grid-size;
 
     .column {
         @include md-box(block, relative);
-        flex-basis: $management-list-column-basis;
+        flex-basis: 100px;
         
         &.auto-width {
             flex-grow: 1;
@@ -21,16 +28,16 @@ $line-height-sort: 3*$grid-size;
         }
         
         &.checkbox {
-            flex: 0 0 $management-list-select-all-width;
+            flex: 0 0 32px;
         }
         
         &:first-child {
             .column-header {
-                padding-left: 5*$grid-size;
+                padding-left: 5*$gutter;
             }
 
             .column-content {
-                padding-left: 5*$grid-size;
+                padding-left: 5*$gutter;
             }
         }
         
@@ -38,23 +45,23 @@ $line-height-sort: 3*$grid-size;
             @include md-box(block, relative);
             @include md-button-reset();
             
-            font-family: $font-family-din-regular;
-            font-size: $font-size-small;
-            line-height: $line-height-small;
-            color: $color-text-default;
+            font-family: $column-font-family;
+            font-size: 12px;
+            line-height: $header-line-height;
+            color: $header-color;
             
-            padding-top: 2*$grid-size;
-            padding-right: 5*$grid-size;
+            padding-top: 2*$gutter;
+            padding-right: 5*$gutter;
             vertical-align: bottom;            
 
             white-space: nowrap;
             
             &.checkbox {
-                padding-right: 3*$grid-size;            
+                padding-right: 3*$gutter;            
             }
 
             .checkbox-empty {
-                height: $line-height-small;
+                height: $header-line-height;
             }
 
             &.checkbox-empty {
@@ -62,40 +69,62 @@ $line-height-sort: 3*$grid-size;
             }
 
             .sort-direction::before {
-                line-height: $line-height-sort;
-                margin-left: 2*$grid-size;
+                line-height: 3*$grid;
+                margin-left: 2*$gutter;
             }
         }
 
         .column-content {
             @include md-box(inline-block, relative);
-            font-family: $font-family-default;
-            font-size: $font-size-default;
-            line-height: $line-height-small;
-            color: $color-text-default;
-            background-color: $color-bg-management-list;
+            font-family: $font-family-base;
+            font-size: 14px;
+            line-height: 16px;
+            color: $content-color;
+            background-color: $content-bg-color;
 
             vertical-align: bottom;
 
             width: 100%;
-            height: $management-list-row-height;
-            padding-top: 4*$grid-size;
-            padding-right: 5*$grid-size;
-            margin-top: 2*$grid-size;
+            height: 12*$grid;
+            padding-top: 4*$gutter;
+            padding-right: 5*$gutter;
+            margin-top: 2*$gutter;
             
             white-space: nowrap;
 
             &:first-child {
-                padding-left: 5*$grid-size;
+                padding-left: 5*$gutter;
             }
 
             &.checkbox {
-                padding-right: 3*$grid-size;
+                padding-right: 3*$gutter;
             }
         }
 
         .select-all-label {
             display: none;
+        }
+    }
+
+    .list-checkbox-container {
+        .list-checkbox-button {
+            border: $checkbox-border;
+            background-color: $checkbox-bg-color;
+        }
+        
+        .list-checkbox-checkmark {
+            color: $checkmark-color;
+        }
+    }
+
+    .list-checkbox-container:hover {
+        .list-checkbox-button {
+            border: $checkbox-border;
+            background-color: $checkbox-bg-color;
+        }
+        
+        .list-checkbox-checkmark {
+            color: $checkmark-color;
         }
     }
 }

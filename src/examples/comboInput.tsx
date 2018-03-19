@@ -4,8 +4,8 @@ import { FormOption } from '../Common';
 import ComboInput from '../components/Input/ComboInput';
 
 const comboInputOptions = [
-  {label: 'Label 1', value: 'Option 1'} as FormOption,
-  {label: 'Label 2', value: 'Option 2'} as FormOption
+  { label: 'Label 1', value: 'Option 1' } as FormOption,
+  { label: 'Label 2', value: 'Option 2' } as FormOption
 ];
 
 const makeComboOptions = labels => labels.map(label => ({
@@ -14,10 +14,10 @@ const makeComboOptions = labels => labels.map(label => ({
 }) as FormOption);
 
 const ComboInputExample = () => (
-    <ComboInput
-      name='combo-input'
-      value='value'
-      onChange={()=>{}}
-      options={comboInputOptions}/>);
+  <ComboInput
+    name='combo-input'
+    value='value'
+    onChange={() => { }}
+    options={comboInputOptions} />);
 
 export default ComboInputExample;

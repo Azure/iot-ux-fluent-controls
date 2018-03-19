@@ -1,35 +1,24 @@
-@import './theme/index';
+@import './common/overrides';
+@import './common/mixins';
 
-$button-max-width: 140px;
+$primary-color: md-color(selected, dark);
+$primary-pressed-color: md-color(shade, f);
 
-$line-height: 8*$grid-size;
+$primary-bg-color: md-color(selected, default);
+$primary-hover-bg-color: md-color(selected, hover);
+$primary-pressed-bg-color: md-color(selected, pressed);
 
-$primary-color: $color-text-bright;
-$primary-pressed-color: $color-text-bright;
+$default-color: md-color(shade, 3);
+$default-pressed-color: md-color(shade, f);
 
-$primary-bg-color: $color-bg-btn-primary-default;
-$primary-hover-bg-color: $color-bg-btn-primary-hover;
-$primary-pressed-bg-color: $color-bg-btn-primary-pressed;
+$default-bg-color: md-color(shade, c);
+$default-hover-bg-color: md-color(shade, a);
+$default-pressed-bg-color: md-color(shade, 8);
 
-$default-color: $color-text-bright;
-$default-pressed-color: $color-text-bright;
+$disabled-color: md-color(shade, 8);
+$disabled-bg-color: md-color(shade, d);
 
-$default-bg-color: $color-bg-btn-secondary-default;
-$default-hover-bg-color: $color-bg-btn-secondary-hover;
-$default-pressed-bg-color: $color-bg-btn-secondary-pressed;
-
-$disabled-color: $color-text-bright;
-$disabled-bg-color: $color-bg-disabled;
-
-$primary-disabled-bg-color: $color-bg-btn-primary-disabled;
-
-$danger-color: $color-text-bright;
-$danger-pressed-color: $color-text-bright;
-
-$danger-bg-color: $color-bg-btn-danger-default;
-$danger-hover-bg-color: $color-bg-btn-danger-hover;
-$danger-pressed-bg-color: $color-bg-btn-danger-pressed;
-
+$focus-outline: 2px solid md-color(shade, 3);
 
 $default-button-colors: (
     default: $default-color,
@@ -54,56 +43,35 @@ $primary-button-bg-colors: (
     default: $primary-bg-color,
     hover: $primary-hover-bg-color,
     pressed: $primary-pressed-bg-color,
-    disabled: $primary-disabled-bg-color,
-);
-
-$danger-button-colors: (
-    default: $danger-color,
-    pressed: $danger-pressed-color,
-    disabled: $disabled-color,
-);
-
-$danger-button-bg-colors: (
-    default: $danger-bg-color,
-    hover: $danger-hover-bg-color,
-    pressed: $danger-pressed-bg-color,
     disabled: $disabled-bg-color,
 );
 
-@mixin md-button-style($text-colors: $default-button-colors, $bg-colors: $default-button-colors, $outline: $outline-focus) {
-    @include md-box(inline-block, relative);
-    font-family: $font-family-default;
-    font-size: $font-size-default;
-    line-height: $line-height;
 
-    height: 8*$grid-size;
-    padding-left: 5*$grid-size;
-    padding-right: 5*$grid-size;
+@mixin md-button-style($text-colors: $default-button-colors, $bg-colors: $default-button-colors, $outline: $focus-outline) {
+    @include md-box(inline-block, relative);
+    @include md-default-font();
+    font-size: 14px;
+    line-height: 20px;
+
+    height: 8*$grid;
+    padding-left: 5*$gutter;
+    padding-right: 5*$gutter;
 
     border: none;
     outline: none;
     box-shadow: none;
     text-decoration: none;
 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: $button-max-width;
-
     color: map-get-default($text-colors, default, $default-color);
     background-color: map-get-default($bg-colors, default, $default-bg-color);
 
     &:hover:not(:disabled) {
-        color: map-get-default($text-colors, hover, $default-color);
         background-color: map-get-default($bg-colors, hover, $default-hover-bg-color);
         cursor: pointer;
     }
-
+    
     &:focus:not(:disabled) {
-        color: map-get-default($text-colors, pressed, $default-pressed-color);
-        background-color: map-get-default($bg-colors, pressed, $default-pressed-bg-color);
         outline: $outline;
-        outline-offset: -$outline-focus-border-width;
     }
 
     &:active:not(:disabled) {
@@ -117,30 +85,26 @@ $danger-button-bg-colors: (
     }
 }
 
-:global(.btn), .method-btn {
+:global(.btn) {
     @include md-button-style($default-button-colors, $default-button-bg-colors);
 }
 
-:global(.btn-primary), .method-btn-primary {
+:global(.btn-primary) {
     @include md-button-style($primary-button-colors, $primary-button-bg-colors);
 }
 
-:global(.btn-danger), .method-btn-danger {
-    @include md-button-style($danger-button-colors, $danger-button-bg-colors);
-}
-
-:global(.btn), :global(.btn-primary), .method-btn, .method-btn-primary {
+:global(.btn), :global(.btn-primary) {
     vertical-align: middle;
-    font-size: $font-size-default;
-    line-height: $line-height;
+    font-size: 14px;
+    line-height: 32px;
 
     :global(.icon) {
         @include md-box(inline-block);
         vertical-align: middle;
-        margin-right: 2*$grid-size;
-        margin-top: -0.5*$grid-size;
-
-        font-size: $icon-size-xsmall;
-        line-height: $line-height;
+        margin-right: 2*$gutter;
+        margin-top: -2px;
+        
+        font-size: 16px;
+        line-height: 32px;
     }
 }

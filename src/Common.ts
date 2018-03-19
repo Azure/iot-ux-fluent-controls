@@ -105,9 +105,9 @@ export const dateIsValid = (date: Date, localTimezone: boolean) => {
     if (!date || date.toUTCString() === 'Invalid Date') {
         return false;
     }
-    const year =  localTimezone ? date.getFullYear() : date.getUTCFullYear();
-    const month = localTimezone ? date.getMonth()    : date.getUTCMonth();
-    const day =   localTimezone ? date.getDate()     : date.getUTCDate();
+    const year = localTimezone ? date.getFullYear() : date.getUTCFullYear();
+    const month = localTimezone ? date.getMonth() : date.getUTCMonth();
+    const day = localTimezone ? date.getDate() : date.getUTCDate();
     return (
         !isNaN(year) && !isNaN(month) && !isNaN(day) &&
         year > 0 && month >= 0 && month < 12 &&
@@ -121,11 +121,11 @@ export class MethodDate {
 
     constructor(localTimezone: boolean, year?: number, month?: number, date?: number, hours: number = 0, minutes: number = 0, seconds: number = 0) {
         /** If localTimezone is null, new defaults to new Date()'s value with local timezone */
-        localTimezone = localTimezone === null || typeof(localTimezone) === 'undefined'
+        localTimezone = localTimezone === null || typeof (localTimezone) === 'undefined'
             ? true : localTimezone;
-        
-        if (typeof(year) === 'number') {
-            if (typeof(month) === 'number') {
+
+        if (typeof (year) === 'number') {
+            if (typeof (month) === 'number') {
                 if (localTimezone) {
                     this.dateObject = new Date(year, month, date, hours, minutes, seconds);
                 } else {
@@ -147,11 +147,11 @@ export class MethodDate {
         return new MethodDate(
             localTimezone,
             localTimezone ? date.getFullYear() : date.getUTCFullYear(),
-            localTimezone ? date.getMonth()    : date.getUTCMonth(),
-            localTimezone ? date.getDate()     : date.getUTCDate(),
-            localTimezone ? date.getHours()    : date.getUTCHours(),
-            localTimezone ? date.getMinutes()  : date.getUTCMinutes(),
-            localTimezone ? date.getSeconds()  : date.getUTCSeconds(),
+            localTimezone ? date.getMonth() : date.getUTCMonth(),
+            localTimezone ? date.getDate() : date.getUTCDate(),
+            localTimezone ? date.getHours() : date.getUTCHours(),
+            localTimezone ? date.getMinutes() : date.getUTCMinutes(),
+            localTimezone ? date.getSeconds() : date.getUTCSeconds(),
         );
     }
 
@@ -163,11 +163,11 @@ export class MethodDate {
         return new MethodDate(
             localTimezone,
             localTimezone ? date.getFullYear() : date.getUTCFullYear(),
-            localTimezone ? date.getMonth()    : date.getUTCMonth(),
-            localTimezone ? date.getDate()     : date.getUTCDate(),
-            localTimezone ? date.getHours()    : date.getUTCHours(),
-            localTimezone ? date.getMinutes()  : date.getUTCMinutes(),
-            localTimezone ? date.getSeconds()  : date.getUTCSeconds(),
+            localTimezone ? date.getMonth() : date.getUTCMonth(),
+            localTimezone ? date.getDate() : date.getUTCDate(),
+            localTimezone ? date.getHours() : date.getUTCHours(),
+            localTimezone ? date.getMinutes() : date.getUTCMinutes(),
+            localTimezone ? date.getSeconds() : date.getUTCSeconds(),
         );
     }
 
@@ -184,7 +184,7 @@ export class MethodDate {
 
     toDate(localTimezone: boolean = null): Date {
         if (localTimezone === null) {
-            localTimezone = true;   
+            localTimezone = true;
         }
 
         if (localTimezone) {

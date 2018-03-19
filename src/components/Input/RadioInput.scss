@@ -1,24 +1,33 @@
-@import '../../theme/index';
+@import 'common';
 
-$radio-input-size: 4*$grid-size;
+$default-border: 1px solid md-color(shade, 6);
+$checked-border: 1px solid md-color(form, selected);
+$hover-border: 1px solid md-color(shade, 3);
+$disabled-border: 1px solid md-color(shade, a);
 
-$line-height: 4*$grid-size;
+$background-checked-color: md-color(shade, 3);
+$background-disabled-color: md-color(shade, a);
+
+$text-default-color: md-color(shade, 2);
+$text-disabled-color: md-color(shade, a);
+
+$radio-bg-color: md-color(shade, f);
 
 .radio-container {
     @include md-box(block, relative);
-    font-family: $font-family-default;
-    color: $color-text-default;
-    font-size: $font-size-default;
-    line-height: $line-height;
+    font-family: $font-family-base;
+    color: $text-default-color;
+    font-size: $font-size-text;
+    line-height: 16px;
 
     & + &:not(.columns) {
-        margin-top: 3*$grid-size;
+        margin-top: 12px;
     }
 
     &.columns {
         display: inline-block;
 
-        margin-right: 2*$grid-size;
+        margin-right: 8px;
     }
 
     input {
@@ -31,61 +40,69 @@ $line-height: 4*$grid-size;
         border: none;
         outline: none;
 
-        background-color: $color-bg-default;
+        background-color: $input-bg-color;
 
         &:focus ~ .radio-button:not(.disabled) {
-            outline: $outline-focus;
+            outline: $focus-outline;
             outline-offset: 1px;
         }
 
         &:hover:not(:checked) ~ .radio-button:not(.disabled) {
-            border: $border-active;
+            border: $hover-border;
         }
 
         &:focus:not(:checked) ~ .radio-button {
-            border: $border-active;
+            border: $hover-border;
         }
     }
 
     .radio-text {
         @include md-box(inline-block, relative);
         vertical-align: top;
-        padding-left: 2*$grid-size;
+        padding-left: 8px;
     }
 
     .radio-fill {
         @include md-box(inline-block, absolute);
-        left: $grid-size;
-        top: $grid-size;
-        width: 2*$grid-size;
-        height: 2*$grid-size;
-        border-radius: $grid-size;
+        left: 4px;
+        top: 4px;
+        width: 8px;
+        height: 8px;
+        border-radius: 4px;
 
         &.selected {
-            background-color: $color-bg-selected;
+            background-color: $background-checked-color;
 
             &.disabled {
-                background-color: $color-bg-disabled;
+                background-color: $background-disabled-color;
             }
         }
     }
 
+    .radio-border {
+        @include md-box(inline-block, absolute);
+        left: -2px;
+        top: -2px;
+        width: 20px;
+        height: 20px;
+    }
+
     .radio-button {
         @include md-box(inline-block, relative);
-        width: $radio-input-size;
-        height: $radio-input-size;
-        background-color: $color-bg-default;
-        border-radius: $radio-input-size / 2;
-        border: $border-default ;
+        width: 16px;
+        height: 16px;
+        background-color: $radio-bg-color;
+        border-radius: 8px;
+        border: $default-border;
         outline: none;
         vertical-align: top;
 
         &.selected {
-            border: $border-selected;
+            border: $checked-border;
         }
 
         &.disabled {
-            border: $border-disabled;
+            border: $disabled-border;
         }
     }
 
@@ -93,7 +110,7 @@ $line-height: 4*$grid-size;
         @include md-box(inline-block, relative);
 
         &.disabled {
-            color: $color-text-disabled;
+            color: $text-disabled-color;
         }
     }
 

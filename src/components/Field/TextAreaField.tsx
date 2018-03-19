@@ -26,8 +26,8 @@ export interface TextAreaFieldProps extends React.Props<TextAreaFieldType> {
     autogrow?: boolean;
     /** Disable HTML textarea element */
     disabled?: boolean;
-    /** Read only HTML input element */
-    readOnly?: boolean;
+        /** Read only HTML input element */
+        readOnly?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
     /** Display horizontal loading animation instead of error */

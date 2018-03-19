@@ -1,12 +1,13 @@
-@import '../../theme/index';
+@import '../../common/overrides';
+@import '../../common/mixins';
 
 .datetime-field {
     .date-picker {
-        padding-right: $grid-size;        
+        padding-right: $gutter;        
     }
 
     .time-picker {
-        padding-left: $grid-size;
+        padding-left: $gutter;
     }
 
     .field-content {

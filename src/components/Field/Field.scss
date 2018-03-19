@@ -1,68 +1,67 @@
-@import '../../theme/index';
+@import '../Input/common';
 
-$form-error-height: 5*$grid-size;
-$form-label-balloon-width: 75*$grid-size;
-
-$line-height: 5*$grid-size;
+$text-default-color: md-color(shade, 2);
+$text-disabled-color: md-color(shade, a);
+$text-error-color: md-color(text, error);
 
 .form-field {
-    font-family: $font-family-default;
+    font-family: $font-family-base;
     display: block;
 }
 
 .label {
     @include md-box(inline-block);
-    color: $color-text-default;
-    font-family: $font-family-default;
-    font-size: $font-size-default;
-    line-height: $line-height;
+    color: $text-default-color;
+    font-family: $font-family-base;
+    font-size: $font-size-text;
+    line-height: 20px;
 
     &.disabled {
-        color: $color-text-disabled;
+        color: $text-disabled-color;
     }
 
     .required &::after {
         content: ' *';
-        color: $color-text-required;
+        color: $text-error-color;
     }
 
     &.required::after {
         content: ' *';
-        color: $color-text-required;
+        color: $text-error-color;
     }
 
     & + .content {
-        margin-top: $grid-size;
+        margin-top: $gutter;    
     }
 
     & + .field-error {
-        margin-top: $grid-size;
+        margin-top: $gutter;    
     }
 }
 
 .label-container {
     @include md-box(inline-block);
-
+    
     .label-icon {
         @include md-box(inline-block);
-        margin-left: 2*$grid-size;
+        margin-left: 2*$gutter;
     }
-
+    
     .label-balloon {
-        width: $form-label-balloon-width;
+        width: 75*$grid;
     }
 }
 
 .field-error {
     @include md-box(inline-block, ellipsis);
-    height: $form-error-height;
+    height: 5*$grid;
     width: 100%;
-
-    color: $color-text-error;
-
-    font-family: $font-family-default;
+    
+    color: $text-error-color;
+    
+    font-family: $font-family-base;
     font-size: $font-size-small;
-    line-height: $line-height;
+    line-height: 20px;
 
     &.hidden {
         display: none;

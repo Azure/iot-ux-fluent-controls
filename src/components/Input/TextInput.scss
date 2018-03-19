@@ -1,15 +1,21 @@
-@import '../../theme/index';
+@import 'common';
 
-$line-height: 5*$grid-size;
-$line-height-small: 4*$grid-size;
+$bg-color: md-color(shade, f);
+
+$prefix-color: md-color(shade, 6);
+$prefix-background: md-color(shade, c);
+
+$postfix-color: md-color(shade, 6);
+$postfix-background: md-color(shade, c);
 
 .text-input-container {
     @include md-box(flex, relative);
     width: 100%;
-    font-family: $font-family-default;
+    font-family: $font-family-base;
 
-    font-size: $font-size-default;
-    line-height: $line-height;
+    color: $default-text-color;
+    font-size: $font-size-text;
+    line-height: 20px;
 
     .input-container {
         @include md-box(block, relative);
@@ -19,70 +25,71 @@ $line-height-small: 4*$grid-size;
     .input {
         @include md-box(block, relative);
         width: 100%;
-        height: $input-height;
-        padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
-        border: $border-default;
+        height: 8*$grid;
+        padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
+        border: $inactive-border;
         outline: none;
 
-        color: $color-text-default;
-        background-color: $color-bg-default;
+        background-color: $bg-color;
         max-width: 100%;
 
+        background-color: $input-bg-color;
+
         &:valid {
-            padding: 2*$grid-size 3*$grid-size 2*$grid-size 3*$grid-size;
+            padding: 2*$gutter 3*$gutter 2*$gutter 3*$gutter;
         }
 
         &:hover {
-            border: $border-active;
+            border: $default-border;
         }
     
         &:focus {
-            border: $border-active;
+            border: $default-border;
 
             &.show-cancel:not(:disabled) {
-                padding-right: 8*$grid-size;
+                padding-right: 8*$gutter;
 
                 + .cancel {
-                    color: $color-text-cancel;
+                    color: $cancel-default-color;
                     pointer-events: auto;
                 }
             }
         }
 
         &:active {
-            border: $border-active;
+            border: $default-border;
 
             &.show-cancel:not(:disabled) {
-                padding-right: 8*$grid-size;
+                padding-right: 8*$gutter;
 
                 + .cancel {
-                    color: $color-text-cancel;
+                    color: $cancel-default-color;
                     pointer-events: auto;
                 }
             }
         }
         
         &:disabled {
-            color: $color-text-disabled;
-            border: $border-disabled;
-            background-color: $color-bg-disabled;
+            color: $disabled-text-color;
+            border: $disabled-border;
+            background-color: $disabled-background-color;
     
             &::placeholder {
-                color: $color-text-disabled;
+                color: $disabled-text-color;
             }
         }
     
         &::placeholder {
-            color: $color-text-placeholder;
+            color: $placeholder-text-color;
         }
     
         &::selection {
-            color: $color-text-bright;
-            background-color: $color-bg-selected;
+            color: $selection-text-color;
+            background-color: $selection-background-color;
         }
 
         &.error:not(:disabled) {
-            border: $border-error;
+            border: $error-border;
         }
 
         &::-ms-clear {
@@ -98,10 +105,10 @@ $line-height-small: 4*$grid-size;
         @include md-box(absolute, float-right);
         color: transparent;
         font-size: $font-size-small;
-        line-height: $line-height-small;
-        padding: $grid-size;
-        top: $grid-size;
-        right: 2*$grid-size;
+        line-height: 16px;
+        padding: $gutter;
+        top: $gutter;
+        right: 2*$gutter;
         border: none;
         background-color: transparent;
         outline: none;
@@ -109,7 +116,7 @@ $line-height-small: 4*$grid-size;
         cursor: pointer;
 
         &:active {
-            color: $color-text-cancel;
+            color: $cancel-default-color;
             pointer-events: auto;
         }
 
@@ -120,11 +127,11 @@ $line-height-small: 4*$grid-size;
 
     .prefix {
         @include md-box(table-cell, relative);
-        color: $color-text-default;
-        padding-right: 2*$grid-size;
+        color: $prefix-color;
+        padding-right: 2*$gutter;
         
-        height: $input-height;
-        line-height: $input-height;
+        height: 8*$grid;
+        line-height: 8*$grid;
 
         white-space: nowrap;
         
@@ -133,11 +140,11 @@ $line-height-small: 4*$grid-size;
 
     .postfix {
         @include md-box(inline-block, relative);
-        color: $color-text-default;
-        padding-left: 2*$grid-size;
+        color: $prefix-color;
+        padding-left: 2*$gutter;
         
-        height: $input-height;
-        line-height: $input-height;
+        height: 8*$grid;
+        line-height: 8*$grid;
 
         white-space: nowrap;
         
@@ -146,23 +153,23 @@ $line-height-small: 4*$grid-size;
 }
 
 .prefix-addon {
-    border-left: $border-default;
-    border-top: $border-default;
-    border-bottom: $border-default;
+    border-left: $inactive-border;
+    border-top: $inactive-border;
+    border-bottom: $inactive-border;
 
-    background-color: $color-bg-addon;
-    color: $color-text-default;
+    background-color: $prefix-background;
+    color: $prefix-color;
 
-    padding-right: 2*$grid-size;
+    padding-right: 2*$gutter;
 }
 
 .postfix-addon {
-    border-right: $border-default;
-    border-top: $border-default;
-    border-bottom: $border-default;
+    border-right: $inactive-border;
+    border-top: $inactive-border;
+    border-bottom: $inactive-border;
     
-    padding-left: 2*$grid-size;
+    padding-left: 2*$gutter;
     
-    background-color: $color-bg-addon;
-    color: $color-text-default;
+    background-color: $prefix-background;
+    color: $prefix-color;
 }

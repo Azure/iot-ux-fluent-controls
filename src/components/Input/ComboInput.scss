@@ -1,18 +1,32 @@
-@import '../../theme/index';
+@import 'common';
 
-$line-height: 5*$grid-size;
-$line-height-small: 4*$grid-size;
+$cancel-color: md-color(shade, 6);
+
+$dropdown-border: 1px solid md-color(shade, c);
+$dropdown-bg-color: md-color(shade, f);
+
+$option-color: md-color(shade, 2);
+$option-disabled-color: md-color(shade, 8);
+$option-active-color: md-color(shade, f);
+$option-selected-color: md-color(selected, dark);
+$option-bg-color: md-color(shade, f);
+$option-active-bg-color: md-color(shade, 0);
+$option-selected-bg-color: md-color(selected, default);
+$option-hover-selected-bg-color: md-color(selected, hover);
+$option-hover-bg-color: md-color(shade, d);
 
 $dropdown-z-index: $z-index-medium-step;
+
+$arrow-default-color: md-color(shade, 4);
 
 .combo-input-container {
     @include md-box(flex, relative);
     width: 100%;
-    font-family: $font-family-default;
+    font-family: $font-family-base;
 
-    color: $color-text-default;
-    font-size: $font-size-default;
-    line-height: $line-height;
+    color: $default-text-color;
+    font-size: $font-size-text;
+    line-height: 5*$grid;
 
     .input-container {
         @include md-box(block, relative);
@@ -22,54 +36,54 @@ $dropdown-z-index: $z-index-medium-step;
     .input {
         @include md-box(block, relative);
         width: 100%;
-        height: $input-height;
-        padding: 2*$grid-size 8*$grid-size 2*$grid-size 3*$grid-size;
-        border: $border-default;
+        height: 8*$grid;
+        padding: 2*$gutter 8*$gutter 2*$gutter 3*$gutter;
+        border: $inactive-border;
         outline: none;
 
-        background-color: $color-bg-default;
+        background-color: $input-bg-color;
 
         &:hover {
-            border: $border-active;
+            border: $default-border;
         }
 
         &:focus, &:active, &.visible {
-            border: $border-active;
+            border: $default-border;
 
             &:not(.disabled) {
-                padding-right: 16*$grid-size;
+                padding-right: 16*$gutter;
             }
 
             &.show-cancel:not(.disabled) {
                 + .cancel {
                     display: inline-block;
-                    color: $color-text-cancel;
+                    color: $cancel-default-color;
                     pointer-events: auto;
                 }
             }
         }
         
         &:disabled {
-            color: $color-text-disabled;
-            border: $border-disabled;
-            background-color: $color-bg-disabled;
+            color: $disabled-text-color;
+            border: $disabled-border;
+            background-color: $disabled-background-color;
     
             &::placeholder {
-                color: $color-text-disabled;
+                color: $disabled-text-color;
             }
         }
     
         &::placeholder {
-            color: $color-text-placeholder;
+            color: $placeholder-text-color;
         }
     
         &::selection {
-            color: $color-text-bright;
-            background-color: $color-bg-selected;
+            color: $selection-text-color;
+            background-color: $selection-background-color;
         }
 
         &.error:not(:disabled) {
-            border: $border-error;
+            border: $error-border;
         }
 
         &::-ms-clear {
@@ -83,12 +97,12 @@ $dropdown-z-index: $z-index-medium-step;
 
     .cancel {
         @include md-box(display-none, absolute);
-        color: $color-text-cancel;
-        font-size: $font-size-default;
-        line-height: $line-height-small;
-        padding: $grid-size;
-        top: $grid-size;
-        right: 8*$grid-size;
+        color: $cancel-color;
+        font-size: $font-size-text;
+        line-height: 4*$grid;
+        padding: $gutter;
+        top: $gutter;
+        right: 8*$gutter;
         border: none;
         background-color: transparent;
         outline: none;
@@ -96,7 +110,7 @@ $dropdown-z-index: $z-index-medium-step;
         cursor: pointer;
 
         &:active, &:focus {
-            color: $color-text-cancel;
+            color: $cancel-default-color;
             pointer-events: auto;
         }
     }
@@ -104,9 +118,9 @@ $dropdown-z-index: $z-index-medium-step;
     .chevron {
         @include md-box(absolute, block);
         font-size: $font-size-small;
-        color: $color-text-chevron;
-        right: 2*$grid-size;
-        top: 2*$grid-size;
+        color: $arrow-default-color;
+        right: 2*$gutter;
+        top: 2*$gutter;
         pointer-events: none;
     }
 
@@ -119,7 +133,7 @@ $dropdown-z-index: $z-index-medium-step;
     .dropdown.above {
         @include md-box(inline-block, absolute);
         left: 0px;
-        top: -2*$grid-size;
+        top: -2*$gutter;
         transform: translateY(-100%);
     }
 }
@@ -127,24 +141,24 @@ $dropdown-z-index: $z-index-medium-step;
 .dropdown {
     @include md-box(inline-block, relative);
     width: 100%;
-    max-height: $dropdown-max-height;
+    max-height: 200px;
     overflow-y: auto;
-    background-color: $color-bg-default;
-    border: $border-default;
+    background-color: $dropdown-bg-color;
+    border: $dropdown-border;
 }
 
 .dropdown > div {
     @include md-box(inline-block, relative);
     width: 100%;
-    padding: $grid-size 0px;
+    padding: $gutter 0px;
 }
 
 .option {
     @include md-box(block);
     width: 100%;
-    height: $option-height;
-    line-height: $line-height-small;
-    padding: 0px 3*$grid-size;
+    height: 8*$grid;
+    line-height: 4*$grid;
+    padding: 0px 3*$gutter;
 
     border: none;
     box-shadow: none;
@@ -152,35 +166,35 @@ $dropdown-z-index: $z-index-medium-step;
     border-radius: 0px;
     text-align: left;
     
-    background-color: $color-bg-default;
+    background-color: $option-bg-color;
     
-    color: $color-text-default;
+    color: $option-color;
 
     &:not(.disabled) {
         cursor: pointer;
     }
 
     &.selected {
-        color: $color-text-bright;
-        background-color: $color-bg-selected;
+        color: $option-selected-color;
+        background-color: $option-selected-bg-color;
     }
 
     &.hover:not(.disabled) {
         &:not(.selected) {
-            background-color: $color-bg-hover;
+            background-color: $option-hover-bg-color;
         }
 
         &.selected {
-            background-color: $color-bg-selected-hover;
+            background-color: $option-hover-selected-bg-color;
         }
 
         &:active {
-            color: $color-text-bright;
-            background-color: $color-bg-pressed;
+            color: $option-active-color;
+            background-color: $option-active-bg-color;
         }
     }
     
     &.disabled {
-        color: $color-text-disabled;
+        color: $option-disabled-color;
     }
 }

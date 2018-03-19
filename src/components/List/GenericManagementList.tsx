@@ -1,13 +1,13 @@
 import { DEFAULT_ENCODING } from 'crypto';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import { DivProps, ButtonProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects } from '../../Attributes';
-import { Icon, IconAttributes } from '../Icon';
-import { MethodNode, GridColumn, SortDirection } from '../../Common';
-import { CheckboxInput, CheckboxInputAttributes } from '../Input/CheckboxInput';
+import {DivProps, ButtonProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects} from '../../Attributes';
+import {Icon, IconAttributes} from '../Icon';
+import {MethodNode, GridColumn, SortDirection} from '../../Common';
+import {CheckboxInput, CheckboxInputAttributes} from '../Input/CheckboxInput';
 const css = classNames.bind(require('./GenericManagementList.scss'));
 
-export interface GenericManagementListComponentType { }
+export interface GenericManagementListComponentType {}
 
 export interface GenericManagementListAttributes {
     container?: DivProps;
@@ -25,48 +25,48 @@ export interface GenericManagementListAttributes {
 export interface GenericManagementListProps<T> extends React.Props<GenericManagementListComponentType> {
     /**
      * List of `GridColumn` objects that provide mappings from row type T to
-     * column values and sorting
-     *
+     * column values and sorting 
+     * 
      * See documentation for GridColumn<T> for more information
      */
     columns: Array<GridColumn<T> & OptionAttr<DivProps>>;
     /**
      * List of row objects
-     *
+     * 
      * This can be a list of anything that satisfies the GridColumn callbacks
      * provided in props.columns
      */
     rows: Array<T & OptionAttr<DivProps>>;
     /**
      * HTML input element name prefix to use for checkboxes
-     *
+     * 
      * default: management-list
      */
     name?: string;
-
+    
     /**
      * Callback for checkbox value changes
-     *
+     * 
      * If this callback is not provided, row selection checkboxes will not be shown
      */
     onSelect?: (row: T, newValue: boolean) => void;
     /**
      * Callback for select all checkbox value changes
-     *
+     * 
      * If this callback is not provided, select all checkbox will not be shown
      */
     onSelectAll?: (allSelected: boolean) => void;
     /**
      * A key of row type `T` or callback that returns whether a row is selected.
-     *
+     * 
      * If this is not provided, row selection checkboxes will not be shown
      */
     isSelected?: ((row: T) => boolean) | keyof T;
-
+    
     /**
      * A key of row type `T` or callback that returns the label for the select checkbox
      * for accessibility.
-     *
+     * 
      * If this is not provided, no label will be rendered.
      */
     selectLabel?: ((row: T) => MethodNode) | keyof T;
@@ -74,16 +74,16 @@ export interface GenericManagementListProps<T> extends React.Props<GenericManage
      * A label for the select all checkbox for accessibility
      */
     selectAllLabel?: MethodNode;
-
-    /**
+    
+    /** 
      * Currently sorted column
      */
     sortedColumn?: GridColumn<T>;
     /**
      * Direction of current sort
-     *
+     * 
      * 'ascending' | 'descending'
-     *
+     * 
      * Default: 'ascending'
      */
     sortDirection?: SortDirection;
@@ -96,17 +96,17 @@ export interface GenericManagementListProps<T> extends React.Props<GenericManage
 
 /**
  * Generic Management List
- *
+ * 
  * To use this component in TSX:
- *
+ * 
  * ```ts
  * type CustomManagementList = GenericManagementList<Type>;
- *
+ * 
  * <CustomManagementList rows={Type[]} columns={GridColumn<Type>} />
  * ```
- *
+ * 
  * If you don't need type checking, you should use `ManagementList` instead.
- *
+ * 
  * @param props Control properties (defined in `GenericManagementListProps` interface)
  */
 export class GenericManagementList<T> extends React.PureComponent<GenericManagementListProps<T>, {}> {
@@ -145,7 +145,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         icon = 'chevronUp';
                         onClick = event => column.onDescending();
                     }
-                    labelSuffix = <Icon
+                    labelSuffix = <Icon 
                         icon={icon}
                         fontSize={12}
                         className={css('sort-direction')}
@@ -177,11 +177,13 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                     } else {
                         const colValue: any = row[column.mapColumn];
                         if (
-                            typeof (colValue) === 'string' ||
+                            typeof(colValue) === 'string' ||
                             colValue instanceof React.Component ||
                             colValue instanceof React.PureComponent
                         ) {
                             content = colValue;
+                        } else {
+                            console.error('Method Error: Management List Column property mapColumn must return a valid React Node');
                         }
                     }
                     return (
@@ -195,12 +197,12 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         </Attr.label>
                     );
                 }
-                ));
+            ));
         });
 
         if (this.props.onSelect && this.props.isSelected) {
-            const selected = this.props.rows.map(row =>
-                this.props.isSelected instanceof Function
+            const selected = this.props.rows.map(row => 
+                this.props.isSelected instanceof Function 
                     ? this.props.isSelected(row)
                     : row[this.props.isSelected]
             );
@@ -229,7 +231,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                                 className: css('list-checkbox-button')
                             },
                             checkmarkIcon: {
-                                container: { className: css('list-checkbox-checkmark') }
+                                container: {className: css('list-checkbox-checkmark')}
                             },
                         },
                         ['container', 'label', 'input', 'text', 'checkbox', 'indeterminateFill', 'checkmarkIcon', 'border']
@@ -255,11 +257,13 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                 } else {
                     const colValue: any = row[this.props.selectLabel];
                     if (
-                        typeof (colValue) === 'string' ||
+                        typeof(colValue) === 'string' ||
                         colValue instanceof React.Component ||
                         colValue instanceof React.PureComponent
                     ) {
                         selectLabel = colValue;
+                    } else {
+                        console.error('Method Error: Management List Column property selectLabel must return a valid React Node');
                     }
                 }
                 const isSelected = this.props.isSelected instanceof Function
@@ -289,7 +293,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                                         className: css('list-checkbox-button')
                                     },
                                     checkmarkIcon: {
-                                        container: { className: css('list-checkbox-checkmark') }
+                                        container: {className: css('list-checkbox-checkmark')}
                                     },
                                 },
                                 ['container', 'label', 'input', 'text', 'checkbox', 'indeterminateFill', 'checkmarkIcon', 'border']
@@ -314,8 +318,8 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         if (column.width) {
                             style.flexBasis = `${column.width}px`;
                         }
-                    } else {
-                        column = { attr: {} };
+                    } else { 
+                        column = {attr: {}};
                     }
                     return (
                         <Attr.div
@@ -333,7 +337,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         </Attr.div>
                     );
                 }
-                )}
+            )}
             </Attr.div>
         );
     }
