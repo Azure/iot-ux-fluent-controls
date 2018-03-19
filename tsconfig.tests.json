@@ -11,12 +11,18 @@
         "declaration": true,
         "declarationDir": "./static/lib",
         "types": [
-            "@types/node",
-            "@types/react",
-            "@types/react-dom"
-        ]
+            "node",
+            "chai",
+            "enzyme",
+            "mocha",
+            "react",
+            "react-dom",
+            "webpack-env"
+        ],
+        "typeRoots": [ "./node_modules/@types" ],
+        "skipLibCheck": true
     },
     "files": [
-        "./src/index.ts"
+        "./tests.bundle.js"
     ]
 }
