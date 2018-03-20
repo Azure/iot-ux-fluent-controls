@@ -1,4 +1,5 @@
-@import '../Input/common';
+@import '../../common/overrides';
+@import '../../common/mixins';
 
 $text-default-color: md-color(shade, 2);
 $text-disabled-color: md-color(shade, a);

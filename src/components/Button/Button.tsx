@@ -50,8 +50,8 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
         <Attr.button
             type={props.type}
             title={props.title}
-            className={css('method-btn', {
-                'method-btn-primary': props.primary
+            className={css('btn', {
+                'btn-primary': props.primary
             }, props.className)}
             onClick={props.onClick}
             disabled={props.disabled}

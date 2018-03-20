@@ -2,6 +2,7 @@
 // sass-lint:disable force-pseudo-nesting 
 // sass-lint:disable class-name-format
 @import '../../common/mixins';
+@import '../../common/overrides';
 
 %icon {
   font-style: normal;
