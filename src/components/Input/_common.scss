@@ -1,18 +1,19 @@
 @import '../../common/overrides';
 @import '../../common/mixins';
+@import '../../common/colors';
 
 $default-text-color: #212121;
-$disabled-text-color: #a6a6a6;
+$disabled-text-color: $neutral-tertiary;
 $placeholder-text-color: #767676;
-$selection-text-color: #ffffff;
+$selection-text-color: $white;
 $disabled-text-color: #888888;
 $error-text-color: #d02e00;
 $error-color: #d02e00;
-$cancel-default-color: #666666;
-$cancel-default-color: #666666;
+$cancel-default-color: $neutral-secondary-alt;
+$cancel-default-color: $neutral-secondary-alt;
 
-$default-border-color: #666666;
-$inactive-border-color: #c8c8c8;
+$default-border-color: $neutral-secondary-alt;
+$inactive-border-color: $neutral-tertiary-alt;
 $disabled-border-color: #dcdcdc;
 $default-border: 1px solid $default-border-color;
 $inactive-border: 1px solid $inactive-border-color;
@@ -27,8 +28,17 @@ $select-option-selected:  #00b7c3;
 $select-option-pressed: #212121;
 
 $select-text-default: #212121;
-$select-text-pressed: #ffffff;
+$select-text-pressed: $white;
 $select-text-selected: #002050;
 $select-arrow-color: #4a4a4a;
+
+$color-bg-selected-disabled: $neutral-tertiary;
+$color-bg-selected: #4ba0e4;
+$color-bg-hover: #1b1e22;
+$color-outline-focus: $white;
+$color-bg-gallery-card-blue: #0e447a;
+
+$outline-focus-border-width: 1px;
+$outline-focus: $outline-focus-border-width dashed $color-outline-focus;
 
 $input-bg-color: md-color(shade, f);

@@ -410,10 +410,10 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         this.hideDropdown();
                         this.inputElement.blur();
                     }}
-                    onMouseEnter={(event) => {
+                    onMouseEnter={option.disabled ? undefined : (event) => {
                         this.setSelection(option.value);
                     }}
-                    onMouseLeave={(event) => {
+                    onMouseLeave={option.disabled ? undefined : (event) => {
                         this.setSelection(null);
                     }}
                     tabIndex={-1}

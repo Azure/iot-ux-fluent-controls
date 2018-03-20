@@ -1,5 +1,6 @@
 @import '../../common/overrides';
 @import '../../common/mixins';
+@import '../../common/colors';
 
 $text-default-color: md-color(shade, 6);
 $text-disabled-color: md-color(shade, a);
@@ -31,7 +32,6 @@ $icon-size: 16px;
         outline: $focus-outline;
         outline-offset: 1px;
         color: $text-hover-color;
-        background-color: $color-bg-hover;
         
         &.disabled {
             outline: none;
@@ -41,7 +41,6 @@ $icon-size: 16px;
     
     &:hover:not(.disabled) {
         color: $text-hover-color;
-        background-color: $color-bg-hover;
     }
     
     &.disabled {
@@ -86,6 +85,5 @@ $icon-size: 16px;
     &:focus:not(.disabled) {
         outline: $outline-focus;
         outline-offset: 1px;
-        background-color: $color-bg-hover;        
     }
 }
