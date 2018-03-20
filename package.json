@@ -2,8 +2,8 @@
     "name": "@azure-iot/iot-react-controls",
     "version": "0.1.0",
     "description": "Microsoft Method React Framework",
-    "main": "./public/lib/index.js",
-    "types": "./public/lib/index.d.ts",
+    "main": "./static/lib/index.js",
+    "types": "./static/lib/index.d.ts",
     "scripts": {
         "build": "tsc && copyfiles -e src/components/Examples/**/*.scss src/**/*.scss static/lib -u 1",
         "bundle": "webpack --config webpack.config.js",
@@ -71,7 +71,7 @@
         "style-loader": "^0.18.2",
         "tslint": "^5.7.0",
         "tslint-react": "^3.2.0",
-        "typescript": "2.3.4",
+        "typescript": "^2.6.2",
         "webpack": "^3.5.5",
         "webpack-dev-server": "^2.7.1"
     },

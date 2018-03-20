@@ -51,5 +51,5 @@ module.exports = {
                 loaders: ['style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[path]_[name]_[local]', 'sass-loader'] 
             }
         ]
-    },
+    }
 };
