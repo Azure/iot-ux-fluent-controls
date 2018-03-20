@@ -1,10 +1,6 @@
+# Azure IoT React Controls
 
-# Build
-- git clone https://github.com/Azure/iot-react-controls.git
-- npm install
-- npm start
-
-# Contributing
+## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
@@ -19,8 +15,20 @@ For more information see the [Code of Conduct FAQ](https://opensource.microsoft.
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 
-# Future
-- Tslint.json file is empty.  The default react-scripts-ts has many
-linter rules that break with the current code.  We should add back
-some or all rules to make the code more consistent (and some might
-help prevent bugs)
+## Build
+1. git clone https://github.com/Azure/iot-react-controls.git
+2. npm install
+3. npm run build
+
+## Docs
+1. npm run docs:build
+2. npm run docs
+3. You can now view style guide in the browser: 
+   
+    - `On Local:`         http://localhost:6060/
+   
+    - `On your network:`  http://10.0.75.1:6060/
+
+## Bug/ Issue
+
+https://github.com/Azure/iot-react-controls/issues

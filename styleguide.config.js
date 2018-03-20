@@ -2,7 +2,7 @@ const path = require('path');
 const glob = require('glob');
 
 module.exports = {
-  title: 'Microsoft Method UI Framework Documentation',
+  title: 'Azure Iot React Controls Documentation',
   components: function () {
     return glob.sync(path.resolve(__dirname, 'src/components/**/*.tsx'))
       .filter(function (module) {
