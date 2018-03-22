@@ -1,16 +1,16 @@
 import { DatePickerProps } from '../../index';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {MethodNode, dateIsValid, DateFormat} from '../../Common';
-import {FormField, FormFieldAttributes} from '../Field/FormField';
+import { MethodNode, dateIsValid, DateFormat } from '../../Common';
+import { FormField, FormFieldAttributes } from '../Field/FormField';
 /** This import solves an error with exports of FormFieldAttributes defaults */
-import {FormErrorAttributes} from '../Field/FormError';
-import {TimeInput, TimeInputAttributes} from './TimeInput';
-import {DatePicker, DatePickerAttributes} from './DatePicker';
-import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
+import { FormErrorAttributes } from '../Field/FormError';
+import { TimeInput, TimeInputAttributes } from './TimeInput';
+import { DatePicker, DatePickerAttributes } from './DatePicker';
+import { DivProps, SpanProps, Elements as Attr } from '../../Attributes';
 const css = classNames.bind(require('./DateTimeField.scss'));
 
-export interface DateTimeFieldType {}
+export interface DateTimeFieldType { }
 
 export interface DateTimeFieldAttributes {
     datePicker?: DatePickerAttributes;
@@ -25,7 +25,7 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     name: string;
     /** Current value of HTML input element */
     initialValue: string | Date;
-    
+
     /** Label to display above input element */
     label: MethodNode;
     /** Error to display below input element */
@@ -64,7 +64,7 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     loading?: boolean;
     /** Set error field to display: none */
     hideError?: boolean;
-    
+
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
 
@@ -176,7 +176,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                      * represents a time in GMT
                      */
                     initialValue = local
-                        ? new Date(props.initialValue)
+                        ? new Date(props.initialValue as any)
                         : new Date(Date.UTC(
                             props.initialValue.getUTCFullYear(),
                             props.initialValue.getUTCMonth(),
@@ -203,11 +203,11 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                 ));
         }
 
-        return { 
+        return {
             initialDate: invalid ? props.initialValue : initialValue.toJSON(),
             lastTime: invalid ? defaultTime.toJSON() : initialValue.toJSON(),
             lastDate: invalid ? 'invalid' : initialValue.toJSON()
-         };
+        };
     }
 
     componentWillReceiveProps(newProps: DateTimeFieldProps) {
@@ -241,8 +241,8 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
             return null;
         }
 
-        const date = typeof(newDate) === 'string' ? new Date(newDate) : newDate;
-        const time = typeof(newTime) === 'string' ? new Date(newTime) : newTime;
+        const date = typeof (newDate) === 'string' ? new Date(newDate) : newDate;
+        const time = typeof (newTime) === 'string' ? new Date(newTime) : newTime;
         const newValue = this.props.localTimezone
             ? new Date(
                 date.getFullYear(),
@@ -282,7 +282,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
             });
         }
     }
-    
+
     onTimeChange(newTime: string) {
         const newValue = this.onChange(this.state.lastDate, newTime);
         if (newValue) {
