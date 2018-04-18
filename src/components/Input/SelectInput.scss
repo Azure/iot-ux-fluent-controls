@@ -1,0 +1,101 @@
+@import 'common';
+
+$text-default-color: md-color(shade, 2);
+$text-checked-color: md-color(combo, selected-text);
+$text-disabled-color: md-color(shade, 8);
+$text-selection-color: md-color(text, white);
+
+$background-checked-color: md-color(form, selected);
+$background-disabled-color: md-color(shade, d);
+$background-selection-color: md-color(combo, hover);
+
+$arrow-default-color: md-color(shade, 4);
+
+.combo-container {
+    @include md-box(relative, block);
+    width: 100%;
+    font-family: $font-family-base;
+
+    color: $text-default-color;
+    font-size: $font-size-text;
+    line-height: 16px;
+
+    .arrow {
+        @include md-box(absolute, block);
+        font-size: $font-size-small;
+        color: $arrow-default-color;
+        right: 2*$gutter;
+        top: 2*$gutter;
+        pointer-events: none;
+    }
+
+    .combo {
+        @include md-box();
+        width: 100%;
+        height: 32px;
+        padding: 0px 12px 0px 12px;
+        border: $inactive-border;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0px;
+
+        background-color: $input-bg-color;
+
+        option {
+            height: 32px;
+
+            &.option-hidden {
+                display: none;
+            }
+
+
+            &:first {
+                display: none;
+            }
+            
+            &:checked {
+                background-color: $color-bg-selected;
+                color: $color-text-bright;
+            }
+
+            &:disabled {
+                color: $color-text-select-option-disabled;
+                border: $disabled-border;
+                background-color: $disabled-background-color;
+            }
+
+            &:hidden {
+                display: none;
+            }
+        }
+
+        &:hover {
+            border: $default-border;
+        }
+    
+        &:focus {
+            border: $default-border;
+        }
+
+        &:active {
+            border: $default-border;
+        }
+        
+        &:disabled {
+            color: $text-disabled-color;
+            border: $disabled-border;
+            background-color: $background-disabled-color;
+        }
+
+        &::selection {
+            color: $text-selection-color;
+            background-color: $background-selection-color;
+        }
+
+        &.error:not(:disabled) {
+            border: $error-border;
+        }
+    }
+}

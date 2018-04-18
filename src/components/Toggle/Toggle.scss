@@ -1,0 +1,130 @@
+@import '../../common/overrides';
+@import '../../common/mixins';
+
+$text-default-color: md-color(shade, 6);
+$text-disabled-color: md-color(shade, a);
+$text-hover-color: md-color(shade, 3);
+
+$off-border: 1px solid md-color(shade, 6);
+$off-hover-border: 1px solid md-color(shade, 3);
+$off-disabled-border: 1px solid md-color(shade, a);
+
+$on-border: 1px solid md-color(form, selected);
+$on-hover-border: 1px solid md-color(form, hover);
+$on-disabled-border: 1px solid md-color(shade, c);
+
+$off-background-color: md-color(shade, f);
+$off-disabled-color: md-color(shade, f);
+
+$on-background-color: md-color(form, selected);
+$on-hover-color: md-color(form, hover);
+$on-disabled-color: md-color(shade, c);
+
+$switch-off-color: md-color(shade, 3);
+$switch-off-disabled-color: md-color(shade, a);
+$switch-on-color: md-color(form, switch);
+$switch-on-disabled-color: md-color(shade, 7);
+
+$label-color: md-color(shade, 2);
+$label-disabled-color: md-color(shade, a);
+
+$switch-transition: 75ms ease-in-out;
+
+$border-radius: 10px;
+$switch-border-radius: 5px;
+
+.toggle {
+    @include md-box(inline-block, relative);
+    line-height: 14px;
+
+    .toggle-button {
+        @include md-box(inline-block, relative, fill-parent);
+        vertical-align: middle;
+        outline: none;
+        border: $off-border;
+        background-color: $off-background-color;
+        border-radius: $border-radius;
+
+        width: 10*$grid;
+        height: 5*$grid;
+        
+        &:hover {
+            border: $off-hover-border;
+            cursor: pointer;
+        }
+    }
+
+    &:not(.disabled) .toggle-button:focus {
+        outline: $focus-outline;
+        outline-offset: 1px;
+    }
+
+    .toggle-switch {
+        @include md-box(block, absolute);
+        left: 1.25*$gutter;
+        top: 1.25*$gutter;
+
+        width: 2.5*$grid;
+        height: 2.5*$grid;
+        border-radius: $switch-border-radius;
+
+        background-color: $switch-on-color;
+        transition: $switch-transition;
+
+        pointer-events: none;
+    }
+
+    .toggle-label { 
+        @include md-box(inline-block, relative);
+        margin-left: 2*$gutter;
+
+        font-family: $font-family-base;
+        font-size: $font-size-text;
+        color: $label-color;
+
+        vertical-align: middle;
+    }
+
+    &.toggle-on {
+        .toggle-button {
+            border: $on-border;
+            background-color: $on-background-color;
+
+            &:hover {
+                border: $on-hover-border;
+                background-color: $on-hover-color;
+            }
+        }
+
+        .toggle-switch {
+            left: 25px;
+            background-color: $switch-on-color;
+        }
+
+        &.disabled {
+            .toggle-button {
+                border: $on-disabled-border;
+                background-color: $on-disabled-color;
+            }
+    
+            .toggle-switch {
+                background-color: $switch-on-disabled-color;
+            }
+        }
+    }
+
+    &.disabled {
+        .toggle-button {
+            border: $off-disabled-border;
+            cursor: default;
+        }
+
+        .toggle-switch {
+            background-color: $switch-off-disabled-color;
+        }
+
+        .toggle-label {
+            color: $label-disabled-color;
+        }
+    }
+}

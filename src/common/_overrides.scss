@@ -1,0 +1,36 @@
+$z-index-small-step: 10;
+$z-index-medium-step: 100;
+$z-index-large-step: 1000;
+
+
+// overrides to the bootstrap variables
+$common-font-stack: "Segoe UI Regular", "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif;
+$font-family-base: $common-font-stack;
+
+// header font
+$headings-font-family: $font-family-base;
+$headings-font-weight: normal;
+$headings-line-height: 1.5;
+$font-size-h1: 36px;
+$font-size-h2: 20px;
+$font-size-h3: 18px;
+$font-size-h4: 16px;
+
+// general text font
+$font-size-text: 14px;
+$font-size-base: $font-size-text;
+$font-size-small: 12px;
+
+$focus-outline: 1px dashed #333333;
+
+// standard gutter size - use this for interior gutters between components inside a container
+$gutter: 4px;
+
+$grid: 4px;
+
+$grid-size: $grid;
+
+$input-height: 8*$grid-size;
+$option-height: 8*$grid-size;
+$dropdown-max-height: 50*$grid-size;
+

@@ -1,0 +1,70 @@
+@import '../../common/overrides';
+@import '../../common/mixins';
+
+$text-default-color: md-color(shade, 2);
+$text-disabled-color: md-color(shade, a);
+$text-error-color: md-color(text, error);
+
+.form-field {
+    font-family: $font-family-base;
+    display: block;
+}
+
+.label {
+    @include md-box(inline-block);
+    color: $text-default-color;
+    font-family: $font-family-base;
+    font-size: $font-size-text;
+    line-height: 20px;
+
+    &.disabled {
+        color: $text-disabled-color;
+    }
+
+    .required &::after {
+        content: ' *';
+        color: $text-error-color;
+    }
+
+    &.required::after {
+        content: ' *';
+        color: $text-error-color;
+    }
+
+    & + .content {
+        margin-top: $gutter;    
+    }
+
+    & + .field-error {
+        margin-top: $gutter;    
+    }
+}
+
+.label-container {
+    @include md-box(inline-block);
+    
+    .label-icon {
+        @include md-box(inline-block);
+        margin-left: 2*$gutter;
+    }
+    
+    .label-balloon {
+        width: 75*$grid;
+    }
+}
+
+.field-error {
+    @include md-box(inline-block, ellipsis);
+    height: 5*$grid;
+    width: 100%;
+    
+    color: $text-error-color;
+    
+    font-family: $font-family-base;
+    font-size: $font-size-small;
+    line-height: 20px;
+
+    &.hidden {
+        display: none;
+    }
+}

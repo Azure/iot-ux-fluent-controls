@@ -1,8 +1,0 @@
-.sass-lint.yml
-tsconfig.json
-tslint.json
-webpack.config.js
-webpack.dev.js
-index.html
-src/
-node_modules

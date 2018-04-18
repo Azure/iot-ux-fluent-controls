@@ -1,0 +1,89 @@
+@import '../../common/overrides';
+@import '../../common/mixins';
+@import '../../common/colors';
+
+$text-default-color: md-color(shade, 6);
+$text-disabled-color: md-color(shade, a);
+$text-hover-color: md-color(shade, 3);
+$line-height: 4.5*$grid-size;
+$icon-size: 16px;
+
+.action-trigger-container {
+    @include md-box(inline-block, relative, ellipsis);
+    font-family: $font-family-base;
+    font-size: $icon-size;
+    line-height: 18px;
+    padding: $gutter 2*$gutter;
+
+    color: $text-default-color;
+
+    text-decoration: none;
+    outline: none;
+
+    &.action-trigger-label-empty {
+        padding: $gutter 1.5*$gutter;
+        
+        .label {
+            margin: 0;
+        }
+    }
+
+    a:focus > & {
+        outline: $focus-outline;
+        outline-offset: 1px;
+        color: $text-hover-color;
+        
+        &.disabled {
+            outline: none;
+            color: $text-disabled-color;
+        }
+    }
+    
+    &:hover:not(.disabled) {
+        color: $text-hover-color;
+    }
+    
+    &.disabled {
+        color: $text-disabled-color;
+    }
+    
+    .suffix {        
+        margin-left: 2*$gutter;
+        
+        &::before {
+            margin: 0;
+        }
+    }
+
+    .action-trigger-label {    
+        @include md-box(inline-block);
+        line-height: 18px;
+        vertical-align: top;
+        font-size: $font-size-text;
+        margin-left: 2*$gutter;
+        margin-top: 1px;
+
+        max-width: 50*$grid;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &::before {
+            vertical-align: top;
+        }
+    }
+}
+
+.action-trigger-button {
+    @include md-button-reset();
+    line-height: 0px;
+
+    &.disabled:hover {
+        cursor: default;        
+    }
+
+    &:focus:not(.disabled) {
+        outline: $outline-focus;
+        outline-offset: 1px;
+    }
+}

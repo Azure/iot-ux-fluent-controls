@@ -1,0 +1,98 @@
+@import '../../common/overrides';
+@import '../../common/mixins';
+
+$font-family: join('Segoe UI Semilight', $font-family-base);
+$line-height-text: 5*$grid-size;
+$line-height-close: 4*$grid-size;
+$background-info-color: md-color(alert, info);
+$background-warning-color: md-color(alert, warning);
+$background-error-color: md-color(alert, error);
+
+$text-default-color: md-color(shade, 3);
+$text-error-color: md-color(shade, f);
+
+$icon-margin-top: 3px;
+
+.alert-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+
+    width: 100%;
+    height: 8*$grid;
+    
+    background-color: $background-info-color;
+    color: $text-default-color;
+
+    .alert-icon {
+        @include md-box(inline-block, relative);
+        margin-left: 2*$gutter;
+        margin-top: $icon-margin-top;
+        flex: 0 0 4*$grid;
+    }
+
+    .alert-text {
+        margin-left: 2*$gutter;
+        margin-top: 1.25*$gutter;
+        margin-right: 3*$gutter;
+        padding-bottom: 2*$gutter;
+
+        font-family: $font-family;
+        font-size: $font-size-text;
+        line-height: 5*$grid;
+        color: $text-default-color;
+
+        width: 100%;
+        display: block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        
+        & + .close {
+            margin-left: 2*$gutter;
+        }
+    }
+
+    .alert-close {
+        flex: 0 0 4*$grid;
+        margin-top: 1.5*$gutter;
+        margin-left: auto;
+        margin-right: 2*$gutter;
+        line-height: 4*$grid;
+        cursor: pointer;
+    }
+
+    &.alert-fixed {
+        width: 71*$grid;
+    }
+
+    &.alert-info {
+        background-color: $background-info-color;
+        color: $text-default-color;
+    }
+
+    &.alert-warning {
+        background-color: $background-warning-color;
+        color: $text-default-color;
+    }
+
+    &.alert-error {
+        background-color: $background-error-color;
+        color: $text-error-color;
+
+        .alert-text {
+            color: $text-error-color;
+        }
+    }
+
+    &.alert-multiline {
+        height: auto;
+
+        .alert-text {
+            text-overflow: none;
+            line-height: 5*$grid;
+            white-space: normal;
+        }
+    }
+}
