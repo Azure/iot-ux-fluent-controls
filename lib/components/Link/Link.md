@@ -20,7 +20,7 @@ ______________________________________________________________________________
 #### CSS Only Link
 
 ```jsx
-const css = require('../../Link.scss');
+const css = require('./Link.scss');
 const classnames = require('classnames');
 
 <a

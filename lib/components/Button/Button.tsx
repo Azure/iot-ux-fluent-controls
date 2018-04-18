@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classnames from 'classnames/bind';
 import {DivProps, SpanProps, ButtonProps as AttrButtonProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize, IconAttributes} from '../Icon';
-const css = classnames.bind(require('../../Button.scss'));
+const css = classnames.bind(require('./Button.scss'));
 
 export interface ButtonComponentType {}
 
@@ -20,13 +20,13 @@ export interface ButtonProps extends React.Props<ButtonComponentType> {
     icon?: string;
     /** Use primary style */
     primary?: boolean;
-    
+
     /** Disable button */
     disabled?: boolean;
 
-    /** 
+    /**
      * Callback for button onClick
-     */    
+     */
     onClick: (event) => void;
 
     /** Classname to append to top level element */
@@ -37,7 +37,7 @@ export interface ButtonProps extends React.Props<ButtonComponentType> {
 
 /**
  * Button showing Information, Warning, or Error with text, icon, and optional close button
- * 
+ *
  * @param props Control properties (defined in `ButtonProps` interface)
  */
 export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps) => {

@@ -26,8 +26,8 @@ ______________________________________________________________________________
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position={1} align={1}>Start</Balloon> - 
-    <Balloon tooltip={tooltip} position={1} align={2}>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={1} align={1}>Start</Balloon> -
+    <Balloon tooltip={tooltip} position={1} align={2}>Center</Balloon> -
     <Balloon tooltip={tooltip} position={1} align={3}>End</Balloon>
 </div>
 ```
@@ -38,8 +38,8 @@ let tooltip = 'This is a simple balloon!';
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position={2} align={1}>Start</Balloon> - 
-    <Balloon tooltip={tooltip} position={2} align={2}>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={2} align={1}>Start</Balloon> -
+    <Balloon tooltip={tooltip} position={2} align={2}>Center</Balloon> -
     <Balloon tooltip={tooltip} position={2} align={3}>End</Balloon>
 </div>
 ```
@@ -50,8 +50,8 @@ let tooltip = 'This is a simple balloon!';
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position={3} align={1}>Start</Balloon> - 
-    <Balloon tooltip={tooltip} position={3} align={2}>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={3} align={1}>Start</Balloon> -
+    <Balloon tooltip={tooltip} position={3} align={2}>Center</Balloon> -
     <Balloon tooltip={tooltip} position={3} align={3}>End</Balloon>
 </div>
 ```
@@ -62,8 +62,8 @@ let tooltip = 'This is a simple balloon!';
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position={4} align={1}>Start</Balloon> - 
-    <Balloon tooltip={tooltip} position={4} align={2}>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={4} align={1}>Start</Balloon> -
+    <Balloon tooltip={tooltip} position={4} align={2}>Center</Balloon> -
     <Balloon tooltip={tooltip} position={4} align={3}>End</Balloon>
 </div>
 ```
@@ -76,8 +76,8 @@ let tooltip = 'This is a simple balloon!';
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position={1} align={1} multiline><span>Start</span></Balloon> - 
-    <Balloon tooltip={tooltip} position={1} align={2} multiline>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={1} align={1} multiline><span>Start</span></Balloon> -
+    <Balloon tooltip={tooltip} position={1} align={2} multiline>Center</Balloon> -
     <Balloon tooltip={tooltip} position={1} align={3} multiline>End</Balloon>
 </div>
 ```
@@ -88,8 +88,8 @@ let tooltip = 'This is a simple balloon!';
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position={2} align={1} multiline>Start</Balloon> - 
-    <Balloon tooltip={tooltip} position={2} align={2} multiline>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={2} align={1} multiline>Start</Balloon> -
+    <Balloon tooltip={tooltip} position={2} align={2} multiline>Center</Balloon> -
     <Balloon tooltip={tooltip} position={2} align={3} multiline>End</Balloon>
 </div>
 ```
@@ -100,8 +100,8 @@ let tooltip = 'This is a simple balloon!';
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position={3} align={1} multiline>Start</Balloon> - 
-    <Balloon tooltip={tooltip} position={3} align={2} multiline>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={3} align={1} multiline>Start</Balloon> -
+    <Balloon tooltip={tooltip} position={3} align={2} multiline>Center</Balloon> -
     <Balloon tooltip={tooltip} position={3} align={3} multiline>End</Balloon>
 </div>
 ```
@@ -112,8 +112,8 @@ let tooltip = 'This is a simple balloon!';
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position={3} align={1} multiline autoPosition={false}>Start</Balloon> - 
-    <Balloon tooltip={tooltip} position={3} align={2} multiline autoPosition={false}>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={3} align={1} multiline autoPosition={false}>Start</Balloon> -
+    <Balloon tooltip={tooltip} position={3} align={2} multiline autoPosition={false}>Center</Balloon> -
     <Balloon tooltip={tooltip} position={3} align={3} multiline autoPosition={false}>End</Balloon>
 </div>
 ```
@@ -124,8 +124,8 @@ let tooltip = 'This is a simple balloon!';
 let tooltip = 'This is a simple balloon!';
 
 <div>
-    <Balloon tooltip={tooltip} position={4} align={1} multiline>Start</Balloon> - 
-    <Balloon tooltip={tooltip} position={4} align={2} multiline>Center</Balloon> - 
+    <Balloon tooltip={tooltip} position={4} align={1} multiline>Start</Balloon> -
+    <Balloon tooltip={tooltip} position={4} align={2} multiline>Center</Balloon> -
     <Balloon tooltip={tooltip} position={4} align={3} multiline>End</Balloon>
 </div>
 ```
@@ -137,7 +137,7 @@ let tooltip = 'This is a simple balloon!';
 ```jsx
 let Icon = require('../Icon').Icon;
 const classnames = require('classnames/bind');
-const css = classnames.bind(require('../Examples/Balloon.scss'));
+const css = classnames.bind(require('../../../docs/css/Balloon.scss'));
 
 let tooltip = (
     <span>
@@ -155,7 +155,7 @@ let tooltip = (
 ```jsx
 let Icon = require('../Icon').Icon;
 const classnames = require('classnames/bind');
-const css = classnames.bind(require('../Examples/Balloon.scss'));
+const css = classnames.bind(require('../../../docs/css/Balloon.scss'));
 
 let tooltip = (
     <span>
@@ -173,7 +173,7 @@ let tooltip = (
 ```jsx
 let Icon = require('../Icon').Icon;
 const classnames = require('classnames/bind');
-const css = classnames.bind(require('../Examples/Balloon.scss'));
+const css = classnames.bind(require('../../../docs/css/Balloon.scss'));
 
 let tooltip = (
     <span>
@@ -184,14 +184,14 @@ let tooltip = (
 <Balloon tooltip={tooltip} balloonClassName={css('balloon-yellow')}>
     <Icon icon='info'>This is a styled balloon</Icon>
 </Balloon>
-``` 
+```
 
 #### Show Balloon using Property
 
 ```jsx
 let Icon = require('../Icon').Icon;
 const classnames = require('classnames/bind');
-const css = classnames.bind(require('../Examples/Balloon.scss'));
+const css = classnames.bind(require('../../../docs/css/Balloon.scss'));
 let tooltip = (
     <span>
         This is a simple balloon!
@@ -208,7 +208,7 @@ let tooltip = (
 ```jsx
 let Icon = require('../Icon').Icon;
 const classnames = require('classnames/bind');
-const css = classnames.bind(require('../Examples/Balloon.scss'));
+const css = classnames.bind(require('../../../docs/css/Balloon.scss'));
 
 let tooltip = (
     <span>
@@ -219,4 +219,4 @@ let tooltip = (
 <Balloon tooltip={tooltip} attr={{balloonContainer: {className: css('balloon-yellow')}}}>
     <Icon icon='info'>This is a styled balloon</Icon>
 </Balloon>
-``` 
+```
