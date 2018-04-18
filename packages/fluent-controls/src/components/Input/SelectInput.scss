@@ -1,0 +1,91 @@
+@import '../../theme/index';
+
+$line-height: 4*$grid-size;
+
+.combo-container {
+    @include md-box(relative, block);
+    width: 100%;
+    font-family: $font-family-default;
+
+    color: $color-text-default;
+    font-size: $font-size-default;
+    line-height: $line-height;
+
+    .arrow {
+        @include md-box(absolute, block);
+        font-size: $font-size-small;
+        color: $color-text-chevron;
+        right: 2*$grid-size;
+        top: 2*$grid-size;
+        pointer-events: none;
+    }
+
+    .combo {
+        @include md-box();
+        width: 100%;
+        height: $input-height;
+        padding: 0px 3*$grid-size;
+        border: $border-default;
+        outline: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 0px;
+
+        background-color: $color-bg-default;
+
+        option {
+            height: $option-height;
+
+            &.option-hidden {
+                display: none;
+            }
+
+            &:first {
+                display: none;
+            }
+            
+            &:checked {
+                background-color: $color-bg-selected;
+                color: $color-text-bright;
+            }
+
+            &:disabled {
+                color: $color-text-select-option-disabled;
+                border: $border-disabled;
+                background-color: $color-bg-disabled;
+            }
+
+            &:hidden {
+                display: none;
+            }
+        }
+
+        &:hover {
+            border: $border-active;
+        }
+    
+        &:focus {
+            border: $border-active;
+        }
+
+        &:active {
+            border: $border-active;
+        }
+        
+        &:disabled {
+            color: $color-text-disabled;
+            border: $border-disabled;
+            background-color: $color-bg-disabled;
+        }
+
+        &::selection {
+            color: $color-text-bright;
+            background-color: $color-bg-selected;
+        }
+
+        &.error:not(:disabled) {
+            border: $border-error;
+        }
+    }
+}

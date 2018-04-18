@@ -1,0 +1,134 @@
+@import '../../theme/index';
+
+$pivot-max-width: 50*$grid-size;
+$pivot-min-height: 7*$grid-size;
+$pivot-max-height: 12*$grid-size;
+
+$line-height: 4*$grid-size;
+
+.pivot {
+    @include md-box(inline-block);
+    outline: none;
+    margin-left: 5*$grid-size;
+}
+
+.pivot-menu {
+    @include md-box(block, relative);
+    border-bottom: $border-default;
+    white-space: nowrap;
+    overflow: hidden;
+
+    a.disabled {
+        pointer-events: none;
+        cursor: default;
+    }
+}
+
+.pivot-container {
+    @include md-box(inline-block, relative);
+    padding: 0px 1px 0px 1px;
+
+    .pivot-icon, .pivot-icon-label {
+        @include md-box();
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: $pivot-max-width;
+    }
+
+    .pivot-icon-label {
+        margin-left: 2*$grid-size;
+        font-family: $font-family-default;
+        font-size: $font-size-default;
+        line-height: $line-height;
+
+        color: $color-text-inactive;
+    }
+
+    &:hover {
+        color: $color-text-default;
+        .pivot-icon, .pivot-label, .pivot-icon-label {
+            color: $color-text-default;
+        }
+    }
+
+    &.selected {
+        color: $color-text-default;
+
+        .pivot-icon, .pivot-label, .pivot-icon-label {
+            color: $color-text-default;
+        }
+
+        .pivot-border {
+            border-bottom: $border-pivot-selected;
+        }
+    }
+
+    &.disabled {
+        color: $color-text-disabled;
+
+        .pivot-icon, .pivot-label, .pivot-icon-label {
+            color: $color-text-disabled;
+        }
+
+        &.selected .pivot-border {
+            border-bottom: $border-pivot-disabled;
+        }
+    }
+
+    .pivot-icon {
+        @include md-box(inline-block, relative);
+        @extend .pivot-icon-label;
+        visibility: hidden;
+        white-space: nowrap;
+        min-height: $pivot-min-height;
+        max-height: $pivot-max-height;
+    }
+
+    .pivot-icon + .pivot-icon {
+        @include md-box(block, absolute);
+        visibility: visible;
+        top: 50%;
+        transform: translate(0, -25%);
+    }
+
+    .pivot-label {
+        @include md-box(inline-block, relative);
+        @extend .pivot-icon-label;
+        visibility: hidden;
+        white-space: nowrap;
+        min-height: $pivot-min-height;
+        max-height: $pivot-max-height;
+    }
+
+    .pivot-label + .pivot-label {
+        @include md-box(block, absolute);
+        visibility: visible;
+        top: 50%;
+        transform: translate(0, -25%);
+    }
+
+    .focus-border {
+        @include md-box(block, absolute);
+        left: -1*$grid-size;
+        right: -1*$grid-size;
+
+        top: 50%;
+        transform: translate(0, -50%);
+
+        height: 5.5*$grid-size;
+
+        a:focus & {
+            outline: $outline-focus;
+            outline-offset: 0;
+        }
+    }
+
+    .pivot-border {
+        @include md-box(block, absolute);
+        left: 0px;
+        width: 100%;
+        bottom: 0px;
+        height: 2.5*$grid-size;
+    }
+}
