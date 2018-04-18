@@ -29,7 +29,7 @@
         "url": "https://msazure.visualstudio.com/DefaultCollection/One/_git/azure-iot-ux-baseline"
     },
     "devDependencies": {
-        "@azure-iot/ux-fluent-css": "^2.0.1",
+        "@azure-iot/ux-fluent-css": "^2.0.2",
         "@types/chai": "^4.0.4",
         "@types/classnames": "^2.2.3",
         "@types/enzyme": "^2.8.9",
@@ -85,7 +85,7 @@
         "webpack-dev-server": "^2.9.4"
     },
     "peerDependencies": {
-        "@azure-iot/ux-fluent-css": "^2.0.1",
+        "@azure-iot/ux-fluent-css": "^2.0.2",
         "classnames": "^2.2.5",
         "prop-types": "^15.6.1",
         "react": "16.x",
