@@ -41,13 +41,13 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
 
 /**
  * High level generic form field
- * 
+ *
  * @param props Control properties (defined in `FormFieldProps` interface)
  */
 export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormFieldProps) => {
     const containerClass = css('input-container', {
-        'input-error': props.error,
-        'required': props.required && typeof(props.label) === 'string',        
+        'input-error': !!props.error,
+        'required': props.required && typeof(props.label) === 'string',
     }, props.className);
 
     let error = props.error;
@@ -55,10 +55,10 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
         error = <HorizontalLoader dots={6} />;
     }
 
-    const label = props.label ? 
+    const label = props.label ?
         <Attr.label
             className={css('label')}
-            htmlFor={props.name} 
+            htmlFor={props.name}
             attr={props.attr.fieldLabel}
         >
             {props.label}

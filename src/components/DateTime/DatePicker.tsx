@@ -160,7 +160,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                     ) {
                         /**
                          * Here we use props.initialValue to set the value of the text box
-                         * 
+                         *
                          * This happens if state.value is different from the new initialValue
                          * or if the text input (state.value) is in an invalid state such as
                          * empty values or invalid dates like febuary 30th (2/30/2017)
@@ -362,25 +362,25 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         this.calendar = element;
     }
 
-    render() { 
+    render() {
         const containerClassName = css('date-picker-container', this.props.className);
         const dropdownClassName = css('date-picker-dropdown', {
             'date-picker-above': this.props.showAbove
         });
-        
+
         const icon = <Icon
             icon='calendar'
             size={IconSize.xsmall}
             className={css('date-picker-calendar-icon')}
             attr={this.props.attr.inputIcon}
         />;
-        
+
         const placeholder = placeholders[this.props.format];
-        
+
         const parsed = this.parse(this.state.value);
         const inputClassName = css('date-picker-input', {
-            'error': this.props.error || (
-                !parsed.valid && this.props.initialValue
+            'error': !!this.props.error || (
+                !parsed.valid && !!this.props.initialValue
             )
         });
         const value = parsed.valid

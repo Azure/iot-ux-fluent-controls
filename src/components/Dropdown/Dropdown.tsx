@@ -213,10 +213,10 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             if (target === this.fixedContainer || target === this.container) {
                 break;
             }
-            
+
             if (target.parentElement) {
                 target = i < (depth - 1) ? target.parentElement : null;
-            
+
                 continue;
             } else {
                 target = null;
@@ -324,7 +324,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         }
 
         this.fixedContainer.className = css('md-dropdown-container', {
-            'interactive': this.props.onMouseEnter || this.props.onMouseLeave,
+            'interactive': !!(this.props.onMouseEnter || this.props.onMouseLeave),
         }, (this.props.attr.dropdownContainer || {className: ''}).className);
 
         const container = this.container.getBoundingClientRect();
@@ -352,7 +352,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             <Attr.span
                 className={css('dropdown-container', this.props.className, {
                     'interactive': this.props.visible
-                    && (this.props.onMouseEnter || this.props.onMouseLeave)
+                    && !!(this.props.onMouseEnter || this.props.onMouseLeave)
                 })}
                 methodRef={this.containerRef}
                 onMouseEnter={this.props.onMouseEnter}
@@ -363,7 +363,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
                 <Attr.span
                     className={css('md-dropdown', positionClassName, {
                         'interactive': this.props.visible
-                            && (this.props.onMouseEnter || this.props.onMouseLeave)
+                            && !!(this.props.onMouseEnter || this.props.onMouseLeave)
                     })}
                     attr={this.props.attr.dropdown}
                     methodRef={this.dropdownRef}

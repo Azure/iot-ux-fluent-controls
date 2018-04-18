@@ -30,7 +30,7 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 loaders: [
-                    'react-hot-loader/webpack',
+                    'react-hot-loader/babel',
                     'awesome-typescript-loader'
                 ],
                 exclude: path.resolve(__dirname, 'node_modules'),
@@ -48,7 +48,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loaders: ['style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[path]_[name]_[local]', 'sass-loader'] 
+                loaders: ['style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[path]_[name]_[local]', 'sass-loader']
             }
         ]
     }
