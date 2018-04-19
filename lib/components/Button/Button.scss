@@ -1,5 +1,5 @@
-@import './common/overrides';
-@import './common/mixins';
+@import '../../common/overrides';
+@import '../../common/mixins';
 
 $primary-color: md-color(selected, dark);
 $primary-pressed-color: md-color(shade, f);
@@ -69,7 +69,7 @@ $primary-button-bg-colors: (
         background-color: map-get-default($bg-colors, hover, $default-hover-bg-color);
         cursor: pointer;
     }
-    
+
     &:focus:not(:disabled) {
         outline: $outline;
     }
@@ -103,7 +103,7 @@ $primary-button-bg-colors: (
         vertical-align: middle;
         margin-right: 2*$gutter;
         margin-top: -2px;
-        
+
         font-size: 16px;
         line-height: 32px;
     }

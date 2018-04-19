@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, AnchorProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects} from '../../Attributes';
 import {PivotOption} from '../../Common';
-import {Pivot, PivotAttributes} from '../../Pivot';
+import {Pivot, PivotAttributes} from './Pivot';
 const css = classNames.bind(require('./Pivot.scss'));
 
 export interface PivotMenuType {}
@@ -22,7 +22,7 @@ export interface PivotMenuProps extends React.Props<PivotMenuType> {
     className?: string;
     anchorClassName?: string;
     pivotClassName?: string;
-    
+
     attr?: PivotMenuAttributes;
 }
 
@@ -33,7 +33,7 @@ export const PivotMenu: React.StatelessComponent<PivotMenuProps> = (props) => {
             attr={props.attr.container}
         >
             {props.links.map(link => {
-                return <Attr.a 
+                return <Attr.a
                     href={link.href}
                     onClick={link.onClick}
                     title={link.title}

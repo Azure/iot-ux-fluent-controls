@@ -5,6 +5,7 @@ import { mount } from 'enzyme';
 import { ComboInput, ComboInputAttributes } from './ComboInput';
 import { keyCode } from '../../Common';
 import { TestHookWrapper } from '../Tests';
+import { describe, it } from 'mocha';
 
 describe('<ComboInput />', () => {
     it('closes dropdown when the text input field loses focus (bug 1608336)', () => {
@@ -39,7 +40,7 @@ describe('<ComboInput />', () => {
 
         wrapper.dispatchEvent('focusin', {target: dropdown.node});
         expect(dropdown.hasClass('visible')).to.equal(true);
-        
+
         wrapper.dispatchEvent('focusin', {target: document.body});
         expect(dropdown.hasClass('visible')).to.equal(false);
     });
@@ -76,7 +77,7 @@ describe('<ComboInput />', () => {
         input.keyDown('enter');
         /**
          * We don't actually have to test anything here, test will throw an
-         * error there is a regression 
+         * error there is a regression
          */
     });
 });

@@ -1,4 +1,3 @@
-import { DatePickerProps } from '../../index';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import { MethodNode, dateIsValid, DateFormat } from '../../Common';
@@ -6,7 +5,7 @@ import { FormField, FormFieldAttributes } from '../Field/FormField';
 /** This import solves an error with exports of FormFieldAttributes defaults */
 import { FormErrorAttributes } from '../Field/FormError';
 import { TimeInput, TimeInputAttributes } from './TimeInput';
-import { DatePicker, DatePickerAttributes } from './DatePicker';
+import { DatePicker, DatePickerProps, DatePickerAttributes } from './DatePicker';
 import { DivProps, SpanProps, Elements as Attr } from '../../Attributes';
 const css = classNames.bind(require('./DateTimeField.scss'));
 
@@ -84,7 +83,7 @@ export interface DateTimeFieldState {
 
 /**
  * High level date time field
- * 
+ *
  * @param props Control properties (defined in `DateTimeFieldProps` interface)
  */
 export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<DateTimeFieldState>> {
@@ -142,10 +141,10 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
             if (typeof props.initialValue === 'string') {
                 const date = new Date(props.initialValue);
                 if (dateIsValid(date, local)) {
-                    /** 
+                    /**
                      * This is where DateTimeField receives an initial Date value
                      * so this is where localTimezone/GMT have to be handled.
-                     * 
+                     *
                      * Calling new Date(Date.UTC(year, month, date, ...)) creates
                      * a Date object that looks like the local timezone but actually
                      * represents a time in GMT
@@ -167,10 +166,10 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                 if (!dateIsValid(props.initialValue, local)) {
                     invalid = true;
                 } else {
-                    /** 
+                    /**
                      * This is where DateTimeField receives an initial Date value
                      * so this is where localTimezone/GMT have to be handled.
-                     * 
+                     *
                      * Calling new Date(Date.UTC(year, month, date, ...)) creates
                      * a Date object that looks like the local timezone but actually
                      * represents a time in GMT

@@ -7,6 +7,8 @@ import { RadioField } from './RadioField';
 import { RadioInputAttributes } from '../Input/RadioInput';
 import { keyCode } from '../../Common';
 import { TestHookWrapper } from '../Tests';
+import { describe, it } from 'mocha';
+
 const css = classNames.bind(require('../Input/RadioInput.scss'));
 
 describe('<RadioField />', () => {

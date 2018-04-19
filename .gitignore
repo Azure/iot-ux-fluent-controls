@@ -1,4 +1,6 @@
-static/lib/
-static/docs/
-styleguide/
+lib/**/*.js
+lib/**/*.d.ts
+docs/lib/
+docs/static/
+docs/index.html
 node_modules/

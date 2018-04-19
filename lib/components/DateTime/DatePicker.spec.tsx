@@ -4,12 +4,13 @@ import { expect, assert } from 'chai';
 import { mount, ReactWrapper } from 'enzyme';
 import { DateFormat} from '../../Common';
 import { DatePicker, DatePickerProps} from './DatePicker';
+import { describe, it } from 'mocha';
 
 class DatePickerWrapper extends ReactWrapper<DatePickerProps, any> {
     input: any;
 
     constructor(props: DatePickerProps) {
-        super(<DatePicker {...props}/>);
+        super(<DatePicker {...props as any}/>);
         this.input = this.find('input');
     }
 

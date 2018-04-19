@@ -6,6 +6,8 @@ import { mount } from 'enzyme';
 import { GenericManagementList, GenericManagementListAttributes } from './GenericManagementList';
 import { keyCode } from '../../Common';
 import { TestHookWrapper } from '../Tests';
+import { describe, it } from 'mocha';
+
 const css = classNames.bind(require('./GenericManagementList.scss'));
 
 export interface Row {
@@ -23,7 +25,7 @@ describe('<GenericManagementList />', () => {
     it('passes down attributes from Column and Row objects', () => {
         const rowRefs: HTMLDivElement[] = [];
         const colRefs: HTMLDivElement[] = [];
-        
+
         const createRow = (row: number) => {
             return {
                 col1: `Col 1 Row ${row}`,
@@ -97,7 +99,7 @@ describe('<GenericManagementList />', () => {
     it('applies auto-width class to change flexbox defaults', () => {
         const rowRefs: HTMLDivElement[] = [];
         const colRefs: HTMLDivElement[] = [];
-        
+
         const createRow = (row: number) => {
             return {
                 col1: `Col 1 Row ${row}`,

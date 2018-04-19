@@ -5,6 +5,7 @@ import { mount } from 'enzyme';
 import { ActionTrigger, ActionTriggerAttributes } from './ActionTrigger';
 import { keyCode } from '../../Common';
 import { TestHookWrapper } from '../Tests';
+import { describe, it } from 'mocha';
 
 describe('<ActionTrigger />', () => {
     it('properly passes through className property (bug 1625745)', () => {

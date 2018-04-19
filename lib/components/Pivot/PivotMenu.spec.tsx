@@ -5,6 +5,7 @@ import { mount } from 'enzyme';
 import { PivotMenu, PivotMenuAttributes } from './PivotMenu';
 import { keyCode } from '../../Common';
 import { TestHookWrapper } from '../Tests';
+import { describe, it } from 'mocha';
 
 describe('<PivotMenu />', () => {
     it('properly passes through props.links attributes', () => {
@@ -55,22 +56,22 @@ describe('<PivotMenu />', () => {
 
         const firstAnchor = wrapper.find('link-0-anchor').first();
         expect(firstAnchor.hasClass('link-0')).to.equal(true);
-        expect(firstAnchor.hasClass('link-0-anchor')).to.equal(true);        
+        expect(firstAnchor.hasClass('link-0-anchor')).to.equal(true);
         expect(firstAnchor.hasClass('link-1')).to.equal(false);
 
         const firstContainer = wrapper.find('link-0-container').first();
         expect(firstContainer.hasClass('link-0')).to.equal(true);
-        expect(firstContainer.hasClass('link-0-container')).to.equal(true);        
+        expect(firstContainer.hasClass('link-0-container')).to.equal(true);
         expect(firstContainer.hasClass('link-1')).to.equal(false);
 
         const lastAnchor = wrapper.find('link-5-anchor').last();
         expect(lastAnchor.hasClass('link-5')).to.equal(true);
-        expect(lastAnchor.hasClass('link-5-anchor')).to.equal(true);        
+        expect(lastAnchor.hasClass('link-5-anchor')).to.equal(true);
         expect(lastAnchor.hasClass('link-0')).to.equal(false);
 
         const lastContainer = wrapper.find('link-5-container').last();
         expect(lastContainer.hasClass('link-5')).to.equal(true);
-        expect(lastContainer.hasClass('link-5-container')).to.equal(true);        
+        expect(lastContainer.hasClass('link-5-container')).to.equal(true);
         expect(lastContainer.hasClass('link-0')).to.equal(false);
     });
 });

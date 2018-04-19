@@ -2,14 +2,12 @@
     "name": "@azure-iot/ux-fluent-controls",
     "version": "0.0.1",
     "description": "Microsoft Method React Framework",
-    "main": "./static/lib/index.js",
-    "types": "./static/lib/index.d.ts",
     "scripts": {
-        "build": "tsc && copyfiles -e src/components/Examples/**/*.scss src/**/*.scss static/lib -u 1",
+        "build": "tsc",
         "bundle": "webpack --config webpack.config.js",
         "test": "karma start",
-        "tslint": "tslint './src/**/*.ts{,x}'",
-        "sasslint": "sass-lint -c .sass-lint.yml 'src/**/*.scss' -v -q",
+        "tslint": "tslint './lib/**/*.ts{,x}'",
+        "sasslint": "sass-lint -c .sass-lint.yml 'lib/**/*.scss' -v -q",
         "docs": "styleguidist server",
         "docs:build": "styleguidist build"
     },

@@ -4,6 +4,8 @@ import { DivProps, ButtonProps, InputProps, Elements as Attr } from '../../Attri
 import { Icon, IconSize } from '../Icon';
 import { TextInput, TextInputAttributes } from './TextInput';
 import { MethodNode, keyCode } from '../../Common';
+import { describe, it } from 'mocha';
+
 const css = classNames.bind(require('./TextInput.scss'));
 
 export interface NumberInputType { }
@@ -56,7 +58,7 @@ export interface NumberInputState {
 
 /**
  * Low level text input control
- * 
+ *
  * (Use the `TextField` control instead when making a form with standard styling)
  */
 export class NumberInput extends React.Component<NumberInputProps, NumberInputState> {

@@ -1,5 +1,5 @@
-@import './common/overrides';
-@import './common/mixins';
+@import '../../common/overrides';
+@import '../../common/mixins';
 
 $default-link-colors: (
     default: md-color(link, default),
@@ -26,7 +26,7 @@ $default-link-outline: 1px dashed md-color(shade, 3);
         color: map-get-default($text-colors, hover, md-color(link, hover));
         cursor: pointer;
     }
-    
+
     &:focus:not(:global(.disabled)) {
         outline: $outline;
     }

@@ -6,6 +6,7 @@ import { NumberInput } from './NumberInput';
 import { TextInputAttributes } from './TextInput';
 import { keyCode } from '../../Common';
 import { TestHookWrapper } from '../Tests';
+import { describe, it } from 'mocha';
 
 describe('<NumberInput />', () => {
     it('handles null case', () => {
@@ -21,7 +22,7 @@ describe('<NumberInput />', () => {
         );
 
         const input = wrapper.ref('input');
-        
+
         input.input('1');
         expect(input.value).to.equal('1');
         expect(value).to.equal(1);
