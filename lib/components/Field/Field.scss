@@ -1,5 +1,6 @@
 @import '../../common/overrides';
 @import '../../common/mixins';
+@import '../../common/colors';
 
 $text-default-color: md-color(shade, 2);
 $text-disabled-color: md-color(shade, a);
@@ -12,7 +13,10 @@ $text-error-color: md-color(text, error);
 
 .label {
     @include md-box(inline-block);
-    color: $text-default-color;
+    @include themify {
+        color: themed('color-text-rest');
+    }
+
     font-family: $font-family-base;
     font-size: $font-size-text;
     line-height: 20px;
@@ -32,22 +36,22 @@ $text-error-color: md-color(text, error);
     }
 
     & + .content {
-        margin-top: $gutter;    
+        margin-top: $gutter;
     }
 
     & + .field-error {
-        margin-top: $gutter;    
+        margin-top: $gutter;
     }
 }
 
 .label-container {
     @include md-box(inline-block);
-    
+
     .label-icon {
         @include md-box(inline-block);
         margin-left: 2*$gutter;
     }
-    
+
     .label-balloon {
         width: 75*$grid;
     }
@@ -57,9 +61,9 @@ $text-error-color: md-color(text, error);
     @include md-box(inline-block, ellipsis);
     height: 5*$grid;
     width: 100%;
-    
+
     color: $text-error-color;
-    
+
     font-family: $font-family-base;
     font-size: $font-size-small;
     line-height: 20px;

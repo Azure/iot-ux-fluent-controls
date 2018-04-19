@@ -1,15 +1,12 @@
 
-$theme-dark: #005a9e;
 $theme-primary: #0078d7;
 $theme-secondary: #2488d8;
 $theme-primary-alt: #4ba0e4;
-$theme-light: #b3d6f2;
-$theme-lighter: #deecf9;
 
 // Neutral colors
 $black: #000000;
 $white: #ffffff;
-$neutral-primary: #333333; 
+$neutral-primary: #333333;
 $neutral-secondary: #3c3c3c;
 $neutral-primary-alt: #444444;
 $neutral-secondary-alt: #666666;
@@ -21,7 +18,7 @@ $neutral-tertiary-alt: $neutralTertiaryAlt;
 $neutral-tertiary-alt-hover: #dbdbdb;
 $neutral-light: #eaeaea;
 $neutral-lighter:#f4f4f4;
-$neutral-lighter-alt: #f8f8f8;  
+$neutral-lighter-alt: #f8f8f8;
 $white: $white;
 
 $coolgrey-1: #1f2328;
@@ -114,7 +111,6 @@ $dashed-viewport-textshadow: 1px 1px 5px rgba(255, 255, 255, .5), -1px -1px 2px 
 $tile-background: $white;
 
 $builder-text-color: $white;
-$builder-background-color: $theme-dark;
 
 $list-container-special-action: $neutral-secondary-alt;
 
@@ -141,3 +137,11 @@ $color-bg-gallery-card-yellow: #f2c80f;
 $color-bg-gallery-card-red: #d02e00;
 $color-text-bright: $white;
 $color-text-select-option-disabled: $coolgrey-6;
+
+// import the rest of the colors and the themify mixin:
+@import "~@azure-iot/ux-fluent-css/src/colors";
+@import "~@azure-iot/ux-fluent-css/src/mixins";
+
+// DEPRECATED! import the old theme colors till we migrate all
+// the method components to the new colors:
+@import "mapping.central";

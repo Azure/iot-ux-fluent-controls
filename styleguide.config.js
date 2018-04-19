@@ -12,6 +12,9 @@ module.exports = {
   webpackConfig: require('./webpack.styleguide.js'),
 
   styleguideDir: './dist/',
+  styleguideComponents: {
+    Wrapper: path.join(__dirname, 'lib/components/Shell/Shell'),
+  },
 
   require: [
     path.join(__dirname, './docs/css/icons.css'),
