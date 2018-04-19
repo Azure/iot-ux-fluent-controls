@@ -6,7 +6,7 @@ import { mount } from 'enzyme';
 import { RadioField } from './RadioField';
 import { RadioInputAttributes } from '../Input/RadioInput';
 import { keyCode } from '../../Common';
-import { TestHookWrapper } from '../Tests';
+import { TestHookWrapper } from '../../common/testHookWrapper.spec';
 import { describe, it } from 'mocha';
 
 const css = classNames.bind(require('../Input/RadioInput.scss'));

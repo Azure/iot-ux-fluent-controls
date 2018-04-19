@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {MethodNode, KeyCode, keyCode} from '../../Common';
+import {MethodNode, KeyCode, keyCode} from '../Common';
 import { mount, ReactWrapper } from 'enzyme';
 
 const testHook = (name: string) => `test-wrapper-${name}`;
@@ -85,14 +85,14 @@ export class TestHookElement<T extends HTMLElement> {
 export class TestHookWrapper<T> {
     private wrapper: ReactWrapper;
     private refs: {[el: string]: any};
-    
+
     private eventMap: {[event: string]: (event) => void};
 
     constructor(node: React.ReactElement<{attr: T}>, elements: (keyof T)[] = [], attr: any = {}) {
         this.refs = {};
         this.eventMap = {};
         window.addEventListener = this.addEventListener.bind(this);
-        
+
         elements.forEach(element => {
             const newAttr = {
                 ref: (el) => this.refs[element] = el,
@@ -104,7 +104,7 @@ export class TestHookWrapper<T> {
                 attr[element] = newAttr;
             }
         });
-        
+
         this.wrapper = mount(React.cloneElement(node, {attr: attr}));
     }
 

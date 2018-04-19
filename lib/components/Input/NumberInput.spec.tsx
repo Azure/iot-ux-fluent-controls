@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import { NumberInput } from './NumberInput';
 import { TextInputAttributes } from './TextInput';
 import { keyCode } from '../../Common';
-import { TestHookWrapper } from '../Tests';
+import { TestHookWrapper } from '../../common/testHookWrapper.spec';
 import { describe, it } from 'mocha';
 
 describe('<NumberInput />', () => {

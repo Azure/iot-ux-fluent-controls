@@ -3,7 +3,7 @@ import * as sinon from 'sinon';
 import { expect, assert } from 'chai';
 import { mount } from 'enzyme';
 import { CheckboxInput } from './CheckboxInput';
-import {TestHookWrapper} from '../Tests';
+import {TestHookWrapper} from '../../common/testHookWrapper.spec';
 import { xdescribe, it } from 'mocha';
 
 xdescribe('CheckboxInput', () => {

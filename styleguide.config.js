@@ -1,9 +1,9 @@
 const path = require('path');
-const glob = require('glob');
 
 module.exports = {
-  title: 'Azure Iot React Controls Documentation',
+  title: 'Azure IoT Fluent Controls Documentation',
   components: 'lib/components/**/*.{ts,tsx}',
+  ignore: ['**/*.spec.{js,jsx,ts,tsx}', '**/*.d.ts', '**/index.ts'],
   resolver: require('react-docgen').resolver.findAllComponentDefinitions,
 
   propsParser: require('react-docgen-typescript').parse,
@@ -11,7 +11,7 @@ module.exports = {
   assetsDir: './docs/',
   webpackConfig: require('./webpack.styleguide.js'),
 
-  styleguideDir: './docs/',
+  styleguideDir: './dist/',
 
   require: [
     path.join(__dirname, './docs/css/icons.css'),

@@ -3,11 +3,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: ['./docs/index.ts'],
   output: {
-    path: path.join(__dirname, 'docs/static'),
+    path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/',
   },
 
   // Enable sourcemaps for debugging webpack's output.
@@ -27,12 +25,6 @@ module.exports = {
         test: /\.tsx?$/,
         loaders: 'ts-loader',
         exclude: path.resolve(__dirname, 'node_modules'),
-      },
-      // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        loader: 'source-map-loader',
       },
       {
         test: /\.css$/,

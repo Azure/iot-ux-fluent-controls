@@ -1,3 +1,6 @@
+dist/
+docs/
+method-design/
 .sass-lint.yml
 karma.conf.js
 styleguide.config.js
@@ -5,11 +8,12 @@ tests.bundle.js
 tsconfig.*
 tslint.json
 webpack.*.js
-index.html
-src/
-node_modules/
-method-design/
-static/css/
-static/docs/
-static/fonts/
-*.map
+
+# no docs or tests
+*.md
+*.spec.*
+
+// no .tsx or .ts files, but include .d.ts
+*.tsx
+*.ts
+!*.d.ts

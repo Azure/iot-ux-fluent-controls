@@ -5,7 +5,7 @@ import { expect, assert } from 'chai';
 import { mount } from 'enzyme';
 import { GenericManagementList, GenericManagementListAttributes } from './GenericManagementList';
 import { keyCode } from '../../Common';
-import { TestHookWrapper } from '../Tests';
+import { TestHookWrapper } from '../../common/testHookWrapper.spec';
 import { describe, it } from 'mocha';
 
 const css = classNames.bind(require('./GenericManagementList.scss'));

@@ -4,7 +4,7 @@ import { expect, assert } from 'chai';
 import { mount } from 'enzyme';
 import { ComboInput, ComboInputAttributes } from './ComboInput';
 import { keyCode } from '../../Common';
-import { TestHookWrapper } from '../Tests';
+import { TestHookWrapper } from '../../common/testHookWrapper.spec';
 import { describe, it } from 'mocha';
 
 describe('<ComboInput />', () => {

@@ -4,7 +4,7 @@ import { expect, assert } from 'chai';
 import { mount } from 'enzyme';
 import { PivotMenu, PivotMenuAttributes } from './PivotMenu';
 import { keyCode } from '../../Common';
-import { TestHookWrapper } from '../Tests';
+import { TestHookWrapper } from '../../common/testHookWrapper.spec';
 import { describe, it } from 'mocha';
 
 describe('<PivotMenu />', () => {
