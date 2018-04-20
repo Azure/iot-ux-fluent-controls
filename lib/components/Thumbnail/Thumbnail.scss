@@ -1,0 +1,68 @@
+ @import "../styles/constants";
+ @import "../styles/colors";
+ @import "../styles/typography";
+
+$list-tile-thumbnail-size: 50px;
+$list-tile-thumbnail-icon-size: 20px;
+$user-thumbnail-height: 36px;
+$list-thumbnail-size: 30px;
+$list-thumbnail-icon-size: 16px;
+$search-thumbnail-icon-size: 28px;
+
+@mixin thumbnailSize($circle-size, $icon-size) {
+    width: $circle-size;
+    height: $circle-size;
+    :global(.icon) {
+        line-height: $circle-size;
+        font-size: $icon-size;
+    }
+    img {
+        width: $circle-size;
+        height: $circle-size;
+    }
+}
+
+@mixin thumbnailColor($bg, $color) {
+    background-color: themed($bg) !important;
+    :global(.icon) {
+        color: themed($color);
+    }
+}
+
+.circle {
+    border-radius: 100%;
+    -webkit-clip-path: circle(100% at center);
+    clip-path: circle(100% at center);
+    position: relative;
+    overflow: hidden;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    :global(.icon) {
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+
+    &.preview { @include thumbnailSize($img-size, $img-size / 2); }
+    &.masthead { @include thumbnailSize($user-thumbnail-height, $font-size-h2)}
+    &.list-item { @include thumbnailSize($list-thumbnail-size, $list-thumbnail-icon-size) }
+    &.search-result { @include thumbnailSize($search-thumbnail-size, $search-thumbnail-icon-size) }
+    // these numbers are intentionally hard-coded - they need to match the values specified in code in the model map
+    &.model-map { @include thumbnailSize(36px, 16px) }
+    &.list-tile { @include thumbnailSize($list-tile-thumbnail-size, $list-tile-thumbnail-icon-size) }
+
+
+    @include themify {
+        @include thumbnailColor('color-disabled', 'color-text-white');
+
+        &.user, &.user img { @include thumbnailColor('color-bg-thumbnail-user', 'color-text-bright')}
+        &.device, &.device img { @include thumbnailColor('color-bg-upload', 'color-text-neutral-primary')}
+    }
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}

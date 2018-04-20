@@ -1,0 +1,62 @@
+ @import "../styles/constants";
+ @import "../styles/mixins";
+ @import "../styles/colors";
+
+.navigation {
+    text-align: left;
+    z-index: $z-index-content-global-nav;
+    display: block;
+    position: absolute;
+    top: $layout-masthead-height;
+    bottom: 0;
+    width: $nav-collapsed-width;
+    transition-property: width, left, box-shadow;
+    transition-duration: $interaction-timing;
+
+    @include themify {
+        background-color: themed('color-bg-navbar');
+        box-shadow: 0px 0px 0px themed('color-nav-gradient');
+    }
+
+    &.expanded {
+        width: $nav-expanded-width;
+        @include themify {
+            box-shadow: 0px 0px 10px themed('color-nav-gradient');
+        }
+    }
+}
+
+.link-container {
+    width: 100%;
+    height: $layout-nav-item-height;
+    display: inline-block;
+    text-decoration: none!important;
+    position: relative;
+
+    @include themify {
+        color: themed('color-text-bright');
+        &:active, &:hover, &:focus {
+            color: themed('color-text-bright');
+            background-color: themed('color-bg-navbar-hover');
+        }
+    }
+
+    @include clickable;
+}
+
+.link-thumbnail {
+    width: $layout-nav-item-height;
+    text-align: center;
+    font-size: $icon-size-xsmall;
+}
+
+.link-label, .link-thumbnail {
+    height: $layout-nav-item-height;
+    line-height: $layout-nav-item-height;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.link-label {
+    width: calc(100% - #{$layout-nav-item-height});
+}

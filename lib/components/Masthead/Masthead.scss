@@ -1,0 +1,160 @@
+ @import "../styles/constants";
+ @import "../styles/mixins";
+ @import "../styles/colors";
+ @import "../styles/typography";
+
+$help-menu-flyout-width: 220px;
+$masthead-branding-width: 50%;
+$masthead-brandname-width: 200px;
+$masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
+$masthead-collapse-start: 660px;
+$masthead-button-width: $layout-nav-item-height;
+$masthead-wide-button-width: $masthead-button-width * 4;
+
+.masthead {
+    height: $header-height;
+}
+
+.masthead, .masthead a {
+    @include themify {
+        background-color: themed('color-bg-masthead');
+        color: themed('color-text-white');
+    }
+}
+
+.branding {
+    float: left;
+    text-align: left;
+    width: $masthead-branding-width;
+    padding: 0px $gutter-small;
+    height: $header-height;
+
+    &>* {
+        line-height: $header-height;
+        font-size: 20px;
+    }
+
+    &>*+*:before {
+        content: '|';
+        margin: 0px 10px;
+
+        @include themify {
+            color: themed('color-border-rest');
+        }
+    }
+
+    a {
+        text-decoration: none;
+        padding: $gutter-small;
+        margin-left: -$gutter-small;
+    }
+}
+
+.toolbar {
+    float: right;
+    width: 100% - $masthead-branding-width;
+    text-align: right;
+    position: relative;
+
+    li {
+        padding: 0px $gutter-small;
+        height: $header-height * 0.8;
+        line-height: $header-height * 0.8;
+        cursor: pointer;
+    }
+}
+
+.branding a, .toolbar li, .toolbar-btn {
+    @include themify {
+        background-color: themed('color-bg-masthead');
+
+        &:active, &:hover, &:focus {
+            background-color: themed('color-bg-masthead-hover');
+            color: themed('color-text-white');
+        }
+    }
+}
+
+.toolbar-btn {
+    width: $masthead-button-width;
+    height: $header-height;
+    line-height: $header-height;
+    justify-content: center;
+    display: inline-flex;
+    border-left: 1px solid;
+    cursor: pointer;
+    white-space: nowrap;
+    vertical-align: top;
+    text-decoration: none;
+
+    &.wide {
+        width: $masthead-wide-button-width;
+    }
+
+    @include themify {
+        border-color: themed('color-border-masthead');
+    }
+
+    .user-label {
+        margin-right: $gutter-normal / 2;
+        margin-left: $gutter-normal;
+        text-align: left;
+    }
+}
+
+.user-label {
+    position: relative;
+    display: inline-block;
+    height: $header-height;
+    vertical-align: top;
+    max-width: 150px - ($gutter-normal *2);
+
+    &>* {
+        height: $header-height / 2;
+        display: block;
+    }
+
+    .name {
+        line-height: $header-height / 2 + 5px;
+    }
+
+    .email {
+        line-height: $header-height / 2 - 10px;
+        font-size: $font-size-xsmall;
+        text-transform: uppercase;
+    }
+}
+
+.user-thumbnail {
+    align-self: center;
+    font-size: $font-size-h2;
+    margin-right: $gutter-normal;
+
+    &.hidden {
+        display: none;
+    }
+}
+
+@mixin collapse($count) {
+    $breakpoint: $masthead-collapse-start - $count * $header-height;
+    @media (min-width: $breakpoint + 1) {
+        .collapse-#{$count}-inverse {
+            display: none;
+        }
+    }
+    @media (max-width: $breakpoint) {
+        .collapse-#{$count} {
+            display: none;
+        }
+    }
+}
+
+@for $i from 0 through 10 {
+    @include collapse($i);
+}
+
+@media (max-width: $masthead-application-breakpoint) {
+    .branding *+* {
+        display: none;
+    }
+}
