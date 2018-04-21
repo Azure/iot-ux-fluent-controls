@@ -3,11 +3,11 @@
 
 .datetime-field {
     .date-picker {
-        padding-right: $gutter;        
+        padding-right: $grid-size;        
     }
 
     .time-picker {
-        padding-left: $gutter;
+        padding-left: $grid-size;
     }
 
     .field-content {

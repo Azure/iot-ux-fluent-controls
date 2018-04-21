@@ -1,7 +1,5 @@
 @import '../../common/mixins';
 
-$background-color: md-color(shade, 4);
-
 @mixin spinner-keyframes($name, $num-dots: 6, $diameter: 6px, $gap: 12px) {
     $pixels: ($num-dots / 2) * ($diameter + $gap);
     @keyframes #{$name} {

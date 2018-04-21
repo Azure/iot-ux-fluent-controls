@@ -1,4 +1,9 @@
-@import 'common';
+@import '../../common/overrides';
+@import '../../common/mixins';
+@import '../../common/colors';
+
+$text-area-min-height: 13*$grid-size;
+$line-height: 5*$grid-size;
 
 .textarea-container {
     @include md-box(block, relative);
@@ -15,52 +20,53 @@
 .textarea {
     @include md-box(block, relative);
     width: 100%;
-    min-height: 13*$grid;
-    padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
+    min-height: $text-area-min-height;
+    padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
     
-    font-family: $font-family-base;
-    color: $default-text-color;
-    font-size: $font-size-text;
-    line-height: 20px;
-    
-    border: $inactive-border;
+    font-family: $font-family-default;
+    @include themify {
+        color: themed('color-text-rest');
+        border: themed('border-default');
+        background-color: themed('color-bg-input-rest');
+    }
+    font-size: $font-size-default;
+    line-height: $line-height;
     outline: none;
+    @include themify{
+        &:hover {
+            border: themed('border-active');
+        }
 
-    background-color: $input-bg-color;
+        &:focus {
+            border: themed('border-active');
+        }
 
-    &:hover {
-        border: $default-border;
-    }
+        &:active {
+            border: themed('border-active');
+        }
+        
+        &:disabled {
+            color: themed('color-text-disabled');
+            border: themed('border-disabled');
+            background-color: themed('color-bg-input-disabled');
 
-    &:focus {
-        border: $default-border;
-    }
-
-    &:active {
-        border: $default-border;
-    }
-    
-    &:disabled {
-        color: $disabled-text-color;
-        border: $disabled-border;
-        background-color: $disabled-background-color;
+            &::placeholder {
+                color: themed('color-text-disabled');
+            }
+        }
 
         &::placeholder {
-            color: $disabled-text-color;
+            color: themed('color-text-placeholder');
         }
-    }
 
-    &::placeholder {
-        color: $placeholder-text-color;
-    }
+        &::selection {
+            color: themed('color-text-white');
+            background-color: themed('color-bg-item-selected');
+        }
 
-    &::selection {
-        color: $selection-text-color;
-        background-color: $selection-background-color;
-    }
-
-    &.error:not(:disabled) {
-        border: $error-border;
+        &.error:not(:disabled) {
+            border: themed('border-error');
+        }
     }
 
     &::-ms-clear {

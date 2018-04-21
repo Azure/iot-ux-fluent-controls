@@ -1,6 +1,7 @@
 @import 'overrides';
-@import 'colormap';
-	
+@import 'colormap'; // remove it
+
+// remove it
 /// Behaves like map-get except with a default value when $key doesn't
 /// exist in $map
 /// 
@@ -19,8 +20,8 @@
 /// Set the default font 
 ///
 @mixin md-default-font {
-    font-family: $font-family-base;
-    font-size: $font-size-text;
+    font-family: $font-family-default;
+    font-size: $font-size-default;
     line-height: 20px;
 }
 
@@ -44,13 +45,8 @@
     }
 }
 
-/// Reset the default anchor style  
-/// 
-@mixin md-default-anchor {
-    outline: none;
-    text-decoration: none;
-}
 
+// remove it 
 // Set the color based on the color map
 @function md-color($color-keys...) {
     $result: $color-map;

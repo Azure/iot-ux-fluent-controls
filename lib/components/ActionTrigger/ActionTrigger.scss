@@ -2,26 +2,22 @@
 @import '../../common/mixins';
 @import '../../common/colors';
 
-$text-default-color: md-color(shade, 6);
-$text-disabled-color: md-color(shade, a);
-$text-hover-color: md-color(shade, 3);
 $line-height: 4.5*$grid-size;
-$icon-size: 16px;
 
 .action-trigger-container {
     @include md-box(inline-block, relative, ellipsis);
-    font-family: $font-family-base;
-    font-size: $icon-size;
-    line-height: 18px;
-    padding: $gutter 2*$gutter;
-
-    color: $text-default-color;
-
+    font-family: $font-family-default;
+    font-size: $icon-size-xsmall;
+    line-height: $line-height;
+    padding: $grid-size 2*$grid-size;
+    @include themify {
+        color: themed('color-text-rest');
+    }
     text-decoration: none;
     outline: none;
 
     &.action-trigger-label-empty {
-        padding: $gutter 1.5*$gutter;
+        padding: $grid-size 1.5*$grid-size;
         
         .label {
             margin: 0;
@@ -29,26 +25,35 @@ $icon-size: 16px;
     }
 
     a:focus > & {
-        outline: $focus-outline;
         outline-offset: 1px;
-        color: $text-hover-color;
-        
+        @include themify {
+            outline: themed('outline-focus');
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-item-hover');
+        }
         &.disabled {
             outline: none;
-            color: $text-disabled-color;
+            @include themify {
+                color: themed('color-text-disabled');
+            }
         }
     }
     
     &:hover:not(.disabled) {
-        color: $text-hover-color;
+        @include themify {
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-item-hover');
+        }
     }
     
     &.disabled {
-        color: $text-disabled-color;
+        @include themify {
+            color: themed('color-text-disabled');
+        }
     }
     
     .suffix {        
-        margin-left: 2*$gutter;
+        margin-left: 2*$grid-size;
         
         &::before {
             margin: 0;
@@ -57,13 +62,13 @@ $icon-size: 16px;
 
     .action-trigger-label {    
         @include md-box(inline-block);
-        line-height: 18px;
+        line-height: $line-height;
         vertical-align: top;
-        font-size: $font-size-text;
-        margin-left: 2*$gutter;
+        font-size: $font-size-default;
+        margin-left: 2*$grid-size;
         margin-top: 1px;
 
-        max-width: 50*$grid;
+        max-width: 50*$grid-size;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -83,7 +88,10 @@ $icon-size: 16px;
     }
 
     &:focus:not(.disabled) {
-        outline: $outline-focus;
         outline-offset: 1px;
+        @include themify{
+            outline: themed('outline-focus');
+            background-color: themed('color-bg-item-hover');
+        }
     }
 }

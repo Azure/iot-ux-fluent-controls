@@ -1,108 +1,104 @@
-@import 'common';
+@import '../../common/overrides';
+@import '../../common/mixins';
+@import '../../common/colors';
 
-$default-border: 1px solid md-color(shade, 6);
-$checked-border: 1px solid md-color(form, selected);
-$hover-border: 1px solid md-color(shade, 3);
-$disabled-border: 1px solid md-color(shade, a);
-
-$background-checked-color: md-color(shade, 3);
-$background-disabled-color: md-color(shade, a);
-
-$text-default-color: md-color(shade, 2);
-$text-disabled-color: md-color(shade, a);
-
-$radio-bg-color: md-color(shade, f);
+$radio-input-size: 4*$grid-size;
+$line-height: 4*$grid-size;
+$outline-focus-border-width: 1px;
 
 .radio-container {
     @include md-box(block, relative);
-    font-family: $font-family-base;
-    color: $text-default-color;
-    font-size: $font-size-text;
-    line-height: 16px;
+    font-family: $font-family-default;
+    @include themify{
+        color: themed('color-text-rest');
+    }
+    font-size: $font-size-default;
+    line-height: $line-height;
 
     & + &:not(.columns) {
-        margin-top: 12px;
+        margin-top: 3*$grid-size;
     }
 
     &.columns {
         display: inline-block;
 
-        margin-right: 8px;
+        margin-right: 2*$grid-size;
     }
 
     input {
         @include md-box(inline-block, absolute);
         top: 1px;
         left: 1px;
-
         width: 0px;
         height: 0px;
         border: none;
         outline: none;
-
-        background-color: $input-bg-color;
+        @include themify{
+            background-color: themed('color-bg-input-rest');
+        }
 
         &:focus ~ .radio-button:not(.disabled) {
-            outline: $focus-outline;
-            outline-offset: 1px;
+            @include themify{
+                outline: themed('outline-focus');
+                outline-offset: $outline-focus-border-width;
+            }
         }
 
         &:hover:not(:checked) ~ .radio-button:not(.disabled) {
-            border: $hover-border;
+            @include themify{
+                border: themed('border-active');
+            }
         }
 
         &:focus:not(:checked) ~ .radio-button {
-            border: $hover-border;
+            @include themify{
+                border: themed('border-active');
+            }
         }
     }
 
     .radio-text {
         @include md-box(inline-block, relative);
         vertical-align: top;
-        padding-left: 8px;
+        padding-left: 2*$grid-size;
     }
 
     .radio-fill {
         @include md-box(inline-block, absolute);
-        left: 4px;
-        top: 4px;
-        width: 8px;
-        height: 8px;
-        border-radius: 4px;
+        left: $grid-size;
+        top: $grid-size;
+        width: 2*$grid-size;
+        height: 2*$grid-size;
+        border-radius: $grid-size;
 
         &.selected {
-            background-color: $background-checked-color;
-
-            &.disabled {
-                background-color: $background-disabled-color;
+            @include themify{
+                background-color: themed('color-bg-item-selected');
+                &.disabled {
+                    background-color: themed('color-bg-input-disabled');
+                }
             }
         }
     }
 
-    .radio-border {
-        @include md-box(inline-block, absolute);
-        left: -2px;
-        top: -2px;
-        width: 20px;
-        height: 20px;
-    }
-
     .radio-button {
         @include md-box(inline-block, relative);
-        width: 16px;
-        height: 16px;
-        background-color: $radio-bg-color;
-        border-radius: 8px;
-        border: $default-border;
+        width: $radio-input-size;
+        height: $radio-input-size;
+        @include themify{
+            background-color: themed('color-bg-input-rest');
+            border: themed('border-default');
+        }
+        border-radius: $radio-input-size / 2;
         outline: none;
         vertical-align: top;
-
-        &.selected {
-            border: $checked-border;
-        }
-
-        &.disabled {
-            border: $disabled-border;
+        @include themify{
+            &.selected {
+                border: themed('border-selected');
+            }
+            &.disabled {
+                border: themed('border-disabled')
+            }
         }
     }
 
@@ -110,7 +106,9 @@ $radio-bg-color: md-color(shade, f);
         @include md-box(inline-block, relative);
 
         &.disabled {
-            color: $text-disabled-color;
+            @include themify{
+                color: themed('color-text-disabled');
+            }
         }
     }
 

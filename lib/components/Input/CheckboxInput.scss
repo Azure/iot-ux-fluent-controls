@@ -1,127 +1,111 @@
-@import 'common';
+@import '../../common/overrides';
+@import '../../common/mixins';
+@import '../../common/colors';
 
-$default-border: 1px solid md-color(shade, 6);
-$hover-border: 1px solid md-color(shade, 3);
-$disabled-border: 1px solid md-color(shade, a);
-$indeterminate-border: 1px solid md-color(selected, default);
-$indeterminate-hover-border: 1px solid md-color(selected, hover);
-$selected-border: none;
+$line-height: 4*$grid-size;
+$line-height-small: 3*$grid-size;
+$outline-focus-border-width: 1px;
 
-$checkmark-color: md-color(selected, dark);
-$checkmark-disabled-color: md-color(shade, 7);
+@include themify{
+    .checkbox-container {
+        color: themed('color-text-rest');
 
-$bg-color: md-color(shade, f);
-$selected-bg-color: md-color(selected, default);
-$hover-bg-color: md-color(selected, hover);
-$disabled-bg-color: md-color(shade, a);
-$selected-disabled-bg-color: md-color(shade, c);
+        &:not(.disabled) input:focus + .checkbox-button {
+            outline: themed('outline-focus');
+            outline-offset: $outline-focus-border-width;
+        }
 
-$text-default-color: md-color(shade, 2);
-$text-disabled-color: md-color(shade, a);
-
-$fill-default: md-color(selected, dark);
-$fill-disabled: md-color(shade, a);
-
-
-.checkbox-container {
-    color: $text-default-color;
-
-    &:not(.disabled) input:focus + .checkbox-button {
-        outline: $focus-outline;
-        outline-offset: 1px;
-    }
-
-    .checkbox-button {
-        border: $default-border;
-        background-color: $bg-color;
-    }
-
-    &.disabled {
-        color: $text-disabled-color;
-    
         .checkbox-button {
-            border: $disabled-border;
-            background-color: $bg-color;
+            border: themed('border-default');
+            background-color: themed('color-bg-input-rest');
+        }
+
+        &.disabled {
+            color: themed('color-text-disabled');
+            .checkbox-button {
+                border: themed('border-disabled');
+                background-color: themed('color-bg-input-rest');
+            }
+        }
+        .checkbox-fill {
+            background-color: themed('color-text-rest');
         }
     }
 
-    .checkbox-fill {
-        background-color: $fill-default;
-    }
-}
-
-.checkbox-container:hover {
-    .checkbox-button {
-        border: $hover-border;
-    }
-
-    &.selected .checkbox-button {
-        background-color: $hover-bg-color;
-    }
-
-    &.disabled .checkbox-button {
-        border: $disabled-border;
-    }
-
-    &.indeterminate .checkbox-button {
-        border: $indeterminate-hover-border;
-        background-color: $bg-color;
-    }
-}
-
-.checkbox-container.selected {
-    .checkbox-button {
-        border: $selected-border;
-        background-color: $selected-bg-color;
-    }
-
-    .checkbox-checkmark {
-        color: $checkmark-color;
-    }
-
-    &.disabled {
+    .checkbox-container:hover {
         .checkbox-button {
-            background-color: $selected-disabled-bg-color;
-            border: none;
+            border: themed('border-active');
+        }
+
+        &.selected .checkbox-button {
+            background-color: themed('color-bg-item-selected');
+            border: themed('border-selected-hover');
+        }
+
+        &.disabled .checkbox-button {
+            border: themed('border-disabled');
+        }
+
+        &.indeterminate .checkbox-button {
+            border: themed('border-active');
+            background-color: themed('color-bg-input-rest');
+        }
+    }
+
+    .checkbox-container.selected {
+        .checkbox-button {
+            border: themed('border-selected');
+            background-color: themed('color-bg-item-selected');
         }
 
         .checkbox-checkmark {
-            color: $checkmark-disabled-color;
-        }   
-    }
-}
-
-.checkbox-container.indeterminate {
-    .checkbox-button {
-        border: $indeterminate-border;
-        background-color: $bg-color;
-    }
-
-    &.disabled {
-        .checkbox-button {
-            border: $disabled-border;
+            color: themed('color-text-white');
         }
 
-        .checkbox-fill {
-            background-color: $fill-disabled;
+        &.disabled {
+            .checkbox-button {
+                background-color: themed('color-bg-input-disabled');
+                border: none;
+            }
+
+            .checkbox-checkmark {
+                color: themed('color-text-disabled');
+            }   
+        }
+    }
+
+    .checkbox-container.indeterminate {
+        .checkbox-button {
+            border: themed('border-selected');
+            background-color: themed('color-bg-input-rest');
+        }
+
+        &.disabled {
+            .checkbox-button {
+                border: themed('border-disabled');
+            }
+
+            .checkbox-fill {
+                background-color: themed('color-text-disabled');
+            }
         }
     }
 }
 
 .checkbox-container {
     @include md-box(block, relative);
-    font-family: $font-family-base;
-    font-size: $font-size-text;
-    line-height: 4*$grid;
+    font-family: $font-family-default;
+    font-size: $font-size-default;
+    line-height: $line-height;
 
     & + &:not(.columns) {
-        margin-top: 3*$gutter;
+        margin-top: 3*$grid-size;
     }
 
     &.columns {
         display: inline-block;
             
-        margin-right: 2*$gutter;
+        margin-right: 2*$grid-size;
     }
 
     input {
@@ -139,22 +123,24 @@ $fill-disabled: md-color(shade, a);
     .checkbox-text {
         @include md-box(inline-block, relative);
         vertical-align: top;
-        padding-left: 2*$gutter;
+        padding-left: 2*$grid-size;
     }
 
     .checkbox-fill {
         @include md-box(display-none, absolute);
-        left: 1.5*$gutter;
-        top: 1.5*$gutter;
-        width: $grid;
-        height: $grid;
+        left: 1.5*$grid-size;
+        top: 1.5*$grid-size;
+        width: $grid-size;
+        height: $grid-size;
     }
 
     .checkbox-button {
         @include md-box(inline-block, relative);
-        width: 4*$grid;
-        height: 4*$grid;
-        background-color: $bg-color;
+        width: 4*$grid-size;
+        height: 4*$grid-size;
+        @include themify{
+            background-color: themed('color-bg-input-rest');
+        }
         outline: none;
         vertical-align: top;
     }
@@ -165,8 +151,8 @@ $fill-disabled: md-color(shade, a);
 
     .checkbox-checkmark {
         @include md-box(display-none, absolute);
-        font-size: 3*$grid;
-        line-height: 3*$grid;
+        font-size: $font-size-small;
+        line-height: $line-height-small;
         left: 2px;
     }
 

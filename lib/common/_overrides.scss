@@ -1,36 +1,46 @@
+/*
+Z Index Constants
+*/
 $z-index-small-step: 10;
 $z-index-medium-step: 100;
 $z-index-large-step: 1000;
 
-
-// overrides to the bootstrap variables
-$common-font-stack: "Segoe UI Regular", "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif;
-$font-family-base: $common-font-stack;
-
-// header font
-$headings-font-family: $font-family-base;
-$headings-font-weight: normal;
-$headings-line-height: 1.5;
-$font-size-h1: 36px;
-$font-size-h2: 20px;
-$font-size-h3: 18px;
-$font-size-h4: 16px;
-
-// general text font
-$font-size-text: 14px;
-$font-size-base: $font-size-text;
+/*
+Typography constants
+*/
+$font-size-h1: 36px; // this value was coming from constants
+$font-size-h2: 24px; // this value was coming from constants
+$font-size-h3: 18px; // this value was coming from overrides.  same size as h4.  what do?
+$font-size-h4: 18px; // this value was coming from constants
+$font-size-h5: 16px; // this value was coming from constants
+$font-size-default: 14px;
 $font-size-small: 12px;
 
-$focus-outline: 1px dashed #333333;
+/*
+Font stack
+*/
+$common-font-stack: "Segoe UI Regular", "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif;
+$font-family-default: $common-font-stack;
+$font-family-light: $common-font-stack;
+$font-family-din-regular: join('DIN-Regular', $font-family-default);
 
-// standard gutter size - use this for interior gutters between components inside a container
-$gutter: 4px;
-
-$grid: 4px;
-
-$grid-size: $grid;
+/*
+The basis for larger building blocks
+*/
+$grid-size: 4px;
 
 $input-height: 8*$grid-size;
 $option-height: 8*$grid-size;
 $dropdown-max-height: 50*$grid-size;
 
+/*
+ Icon
+*/
+$icon-font-family: "icons";
+$icon-size-base: 16px;
+$icon-size-xsmall: $icon-size-base;
+$icon-size-small: 1 * $icon-size-base;
+$icon-size-medium: 2 * $icon-size-base;
+$icon-size-large: 3 * $icon-size-base;
+$icon-size-xlarge: 4 * $icon-size-base;
+$icon-size-xxlarge: 5 * $icon-size-base;

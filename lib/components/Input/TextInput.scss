@@ -1,21 +1,17 @@
-@import 'common';
+@import '../../common/overrides';
+@import '../../common/mixins';
+@import '../../common/colors';
 
-$bg-color: md-color(shade, f);
+$line-height: 5*$grid-size;
+$line-height-small: 4*$grid-size;
 
-$prefix-color: md-color(shade, 6);
-$prefix-background: md-color(shade, c);
-
-$postfix-color: md-color(shade, 6);
-$postfix-background: md-color(shade, c);
 
 .text-input-container {
     @include md-box(flex, relative);
     width: 100%;
-    font-family: $font-family-base;
-
-    color: $default-text-color;
-    font-size: $font-size-text;
-    line-height: 20px;
+    font-family: $font-family-default;
+    font-size: $font-size-default;
+    line-height: $line-height;
 
     .input-container {
         @include md-box(block, relative);
@@ -25,71 +21,79 @@ $postfix-background: md-color(shade, c);
     .input {
         @include md-box(block, relative);
         width: 100%;
-        height: 8*$grid;
-        padding: 2*$gutter 2*$gutter 2*$gutter 3*$gutter;
-        border: $inactive-border;
+        height: $input-height;
+        padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
+        @include themify{
+            border: themed('border-default');
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-input-rest');
+        }
         outline: none;
-
-        background-color: $bg-color;
         max-width: 100%;
 
-        background-color: $input-bg-color;
-
         &:valid {
-            padding: 2*$gutter 3*$gutter 2*$gutter 3*$gutter;
+            padding: 2*$grid-size 3*$grid-size 2*$grid-size 3*$grid-size;
         }
-
-        &:hover {
-            border: $default-border;
+        @include themify{
+            &:hover {
+                border: themed('border-active');
+            }
         }
-    
         &:focus {
-            border: $default-border;
-
+            @include themify {
+                border: themed('border-active');
+            }
             &.show-cancel:not(:disabled) {
-                padding-right: 8*$gutter;
+                padding-right: 8*$grid-size;
 
                 + .cancel {
-                    color: $cancel-default-color;
+                    @include themify{
+                        color: themed('color-text-clear');
+                    }
                     pointer-events: auto;
                 }
             }
         }
 
         &:active {
-            border: $default-border;
-
+            @include themify {
+                border: themed('border-active');
+            }
             &.show-cancel:not(:disabled) {
-                padding-right: 8*$gutter;
+                padding-right: 8*$grid-size;
 
                 + .cancel {
-                    color: $cancel-default-color;
+                    @include themify{
+                        color: themed('color-text-clear');
+                    }
                     pointer-events: auto;
                 }
             }
         }
         
-        &:disabled {
-            color: $disabled-text-color;
-            border: $disabled-border;
-            background-color: $disabled-background-color;
+        @include themify{
+            &:disabled {
+                color: themed('color-text-disabled');
+                border: themed('border-disabled');
+                background-color: themed('color-bg-input-disabled');
+            }
     
             &::placeholder {
-                color: $disabled-text-color;
+                color: themed('color-text-disabled');
             }
-        }
-    
-        &::placeholder {
-            color: $placeholder-text-color;
-        }
-    
-        &::selection {
-            color: $selection-text-color;
-            background-color: $selection-background-color;
-        }
-
-        &.error:not(:disabled) {
-            border: $error-border;
+            
+            &::placeholder {
+                color: themed('color-text-placeholder');
+            }
+            
+            &::selection {
+                color: themed('color-text-white');
+                background-color: themed('color-bg-item-selected');
+            }
+            
+            &.error:not(:disabled) {
+                border: themed('border-error');
+            }
         }
 
         &::-ms-clear {
@@ -105,10 +109,10 @@ $postfix-background: md-color(shade, c);
         @include md-box(absolute, float-right);
         color: transparent;
         font-size: $font-size-small;
-        line-height: 16px;
-        padding: $gutter;
-        top: $gutter;
-        right: 2*$gutter;
+        line-height: $line-height-small;
+        padding: $grid-size;
+        top: $grid-size;
+        right: 2*$grid-size;
         border: none;
         background-color: transparent;
         outline: none;
@@ -116,7 +120,9 @@ $postfix-background: md-color(shade, c);
         cursor: pointer;
 
         &:active {
-            color: $cancel-default-color;
+            @include themify{
+                color: themed('color-text-clear');
+            }
             pointer-events: auto;
         }
 
@@ -127,49 +133,46 @@ $postfix-background: md-color(shade, c);
 
     .prefix {
         @include md-box(table-cell, relative);
-        color: $prefix-color;
-        padding-right: 2*$gutter;
-        
-        height: 8*$grid;
-        line-height: 8*$grid;
-
+        @include themify{
+            color: themed('color-text-rest');
+        }
+        padding-right: 2*$grid-size;
+        height: $input-height;
+        line-height: $input-height;
         white-space: nowrap;
-        
         flex-grow: 0;
     }
 
     .postfix {
         @include md-box(inline-block, relative);
-        color: $prefix-color;
-        padding-left: 2*$gutter;
-        
-        height: 8*$grid;
-        line-height: 8*$grid;
-
+        @include themify{
+            color: themed('color-text-rest');
+        }        
+        padding-left: 2*$grid-size;
+        height: $input-height;
+        line-height: $input-height;
         white-space: nowrap;
-        
         flex-grow: 0;
     }
 }
 
-.prefix-addon {
-    border-left: $inactive-border;
-    border-top: $inactive-border;
-    border-bottom: $inactive-border;
-
-    background-color: $prefix-background;
-    color: $prefix-color;
-
-    padding-right: 2*$gutter;
-}
-
-.postfix-addon {
-    border-right: $inactive-border;
-    border-top: $inactive-border;
-    border-bottom: $inactive-border;
+@include themify{
+    .prefix-addon {
+        border-left: themed('border-default');
+        border-top:  themed('border-default');
+        border-bottom:  themed('border-default');
+        background-color: themed('color-transparent');
+        color: themed('color-text-rest');
+        padding-right: 2*$grid-size;
+    }
     
-    padding-left: 2*$gutter;
-    
-    background-color: $prefix-background;
-    color: $prefix-color;
+    .postfix-addon {
+        border-right:  themed('border-default');
+        border-top:  themed('border-default');
+        border-bottom:  themed('border-default');
+        background-color: themed('color-transparent');
+        color: themed('color-text-rest');        
+        padding-left: 2*$grid-size;
+        
+    }
 }

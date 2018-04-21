@@ -1,7 +1,6 @@
 @import '../../common/overrides';
 @import '../../common/mixins';
-
-$font-family: join('Segoe UI Semilight', $font-family-base);
+@import '../../common/colors';
 
 $calendar-column-width: 10*$grid-size;
 $calendar-width: 52*$grid-size;
@@ -9,33 +8,24 @@ $calendar-width: 52*$grid-size;
 $line-height-chevron: 4*$grid-size;
 $line-height-header: 4*$grid-size;
 $line-height-row: $calendar-column-width;
-$header-color: md-color(shade, 2);
-$weekday-color: md-color(shade, 5);
-$selected-color: md-color(form, switch);
 
-$default-bg-color: md-color(transparent);
-$hover-bg-color: md-color(shade, d);
-$selected-bg-color: md-color(form, selected);
-
-$different-month-color: md-color(shade, 8);
-
-$weekday-border: 1px solid md-color(shade, c);
 
 .calendar {
     @include md-box(block, relative);
-    font-family: $font-family-base;
-    font-size: 12px;
-    padding-bottom: 8px;
-    color: $header-color;
-
+    font-family: $font-family-default;
+    font-size: $font-size-default;
+    padding-bottom: 2*$grid-size;
+    @include themify {
+        color: themed('color-text-rest');
+    }
     .calendar-header {
         @include md-box(block, relative);
-        margin-left: 16px;
-        font-family: $font-family;
+        margin-left: 4*$grid-size;
+        font-family: $font-family-light;
 
         & button {
             text-decoration: none;
-            background-color: $default-bg-color;
+            background-color: transparent;
             border: none;
 
             &:hover {
@@ -49,12 +39,14 @@ $weekday-border: 1px solid md-color(shade, c);
 
         .calendar-month {
             @include md-box(inline-block, relative);
-            margin-top: 16px;
-            color: $header-color;
-            font-size: 16px;
-            line-height: 16px;
+            margin-top: 4*$grid-size;
+            @include themify{
+                color: themed('color-text-rest')
+            }
+            font-size: $font-size-h5;
+            line-height: $line-height-header;
             text-align: left;
-            width: 208px;
+            width: $calendar-width;
             vertical-align: top;
         }
 
@@ -62,10 +54,10 @@ $weekday-border: 1px solid md-color(shade, c);
             @include md-box(inline-block, relative);
             text-align: center;
             vertical-align: bottom;
-            line-height: 16px;
-            margin-left: 4px;
-            padding-top: 8px;
-            width: 40px;
+            line-height: $line-height-chevron;
+            margin-left: $grid-size;
+            padding-top: 2*$grid-size;
+            width: $calendar-column-width;
             text-decoration: none;
 
             &:visited {
@@ -81,46 +73,51 @@ $weekday-border: 1px solid md-color(shade, c);
     .calendar-days {
         @include md-box(block, relative);
         width: 100%;
-        margin: 8px 0px;
-        padding-left: 8px;
-        padding-bottom: 6px;
-        border-bottom: $weekday-border;
-        color: $weekday-color;
-        
+        margin: 2*$grid-size 0px;
+        padding-left: 2*$grid-size;
+        padding-bottom: 1.5*$grid-size;
+        @include themify{
+            border-bottom: themed('border-default');
+            color: themed('color-text-rest')
+        }        
         & > div  {
             @include md-box(inline-block, relative);
-            width: 40px;
+            width: $calendar-column-width;
             text-align: center;
         }
 
         div + div {
-            margin-left: 4px;
+            margin-left: $grid-size;
         }
     }
 
     .calendar-row {
-        margin-left: 8px;
+        margin-left: 2*$grid-size;
 
         & > button.selected {
-            color: $selected-color;
-            background-color: $selected-bg-color;
+            @include themify{
+                color: themed('color-text-white');
+                background-color: themed('color-bg-input-selected');
+            }
         }
 
         & > button {
             @include md-box(inline-block, relative);
-            width: 40px;
-            height: 40px;
+            width: $calendar-column-width;
+            height: $calendar-column-width;
 
-            line-height: 40px;
+            line-height: $line-height-row;
             text-align: center;
             vertical-align: middle;
 
             text-decoration: none;
-            background-color: $default-bg-color;
+            background-color: transparent;
             border: none;
 
             &:hover:not(.selected), &:focus:not(.selected)  {
-                background-color: $hover-bg-color;
+                @include themify{
+                    background-color: themed('color-bg-item-hover');
+                }
                 cursor: pointer;
             }
 
@@ -134,15 +131,17 @@ $weekday-border: 1px solid md-color(shade, c);
         }
 
         & > button + button {
-            margin-left: 4px;
+            margin-left: $grid-size;
         }
 
         button.disabled {
-            color: $different-month-color;
+            @include themify{
+                color: themed('color-text-disabled');
+            }
         }
     }
 
     .calendar-row + .calendar-row {
-        margin-top: 4px;
+        margin-top: $grid-size;
     }
 }

@@ -2,12 +2,13 @@
 @import '../../common/mixins';
 @import '../../common/colors';
 
-$text-default-color: md-color(shade, 2);
-$text-disabled-color: md-color(shade, a);
-$text-error-color: md-color(text, error);
+$form-error-height: 5*$grid-size;
+$form-label-balloon-width: 75*$grid-size;
+
+$line-height: 5*$grid-size;
 
 .form-field {
-    font-family: $font-family-base;
+    font-family: $font-family-default;
     display: block;
 }
 
@@ -16,31 +17,36 @@ $text-error-color: md-color(text, error);
     @include themify {
         color: themed('color-text-rest');
     }
-
-    font-family: $font-family-base;
-    font-size: $font-size-text;
-    line-height: 20px;
+    font-family: $font-family-default;
+    font-size: $font-size-default;
+    line-height: $line-height;
 
     &.disabled {
-        color: $text-disabled-color;
+        @include themify {
+            color: themed('color-text-disabled');
+        }
     }
 
     .required &::after {
         content: ' *';
-        color: $text-error-color;
+        @include themify {
+            color: themed('color-text-error');
+        }
     }
 
     &.required::after {
         content: ' *';
-        color: $text-error-color;
+        @include themify {
+            color: themed('color-text-error');
+        }
     }
 
     & + .content {
-        margin-top: $gutter;
+        margin-top: $grid-size;
     }
 
     & + .field-error {
-        margin-top: $gutter;
+        margin-top: $grid-size;
     }
 }
 
@@ -49,24 +55,26 @@ $text-error-color: md-color(text, error);
 
     .label-icon {
         @include md-box(inline-block);
-        margin-left: 2*$gutter;
+        margin-left: 2*$grid-size;
     }
 
     .label-balloon {
-        width: 75*$grid;
+        width: $form-label-balloon-width;
     }
 }
 
 .field-error {
     @include md-box(inline-block, ellipsis);
-    height: 5*$grid;
+    height: $form-error-height;
     width: 100%;
 
-    color: $text-error-color;
+    @include themify {
+        color: themed('color-text-error');
+    }
 
-    font-family: $font-family-base;
+    font-family: $font-family-default;
     font-size: $font-size-small;
-    line-height: 20px;
+    line-height: $line-height;
 
     &.hidden {
         display: none;

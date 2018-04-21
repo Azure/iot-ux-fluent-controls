@@ -1,16 +1,11 @@
-@import '../Input/common';
+@import '../../common/overrides';
+@import '../../common/mixins';
+@import '../../common/colors';
 
 $date-picker-dropdown-width: 80*$grid-size;
 
 $line-height-text: 5*$grid-size;
 $line-height-icon: 4*$grid-size;
-$prefix-color: md-color(shade, 6);
-$prefix-background: md-color(shade, c);
-
-$postfix-color: md-color(shade, 6);
-$postfix-background: md-color(shade, c);
-
-$calendar-bg-color: md-color(shade, f);
 
 $calendar-z-index: 9 * $z-index-large-step + 5 * $z-index-medium-step;
 
@@ -19,11 +14,12 @@ $calc-margin: 5px;
 .date-picker-container {
     @include md-box(flex, relative);
     width: 100%;
-    font-family: $font-family-base;
-
-    color: $default-text-color;
-    font-size: $font-size-text;
-    line-height: 20px;
+    font-family: $font-family-default;
+    @include themify{
+        color: themed('color-text-rest');
+    }
+    font-size: $font-family-default;
+    line-height: $line-height-text;
 
     .date-picker-input-container {
         @include md-box(block, relative);
@@ -33,46 +29,57 @@ $calc-margin: 5px;
     .date-picker-input {
         @include md-box(block, relative);
         width: 100%;
-        height: 8*$grid;
-        padding: 2*$gutter 8*$gutter 2*$gutter 3*$gutter;
-        border: $inactive-border;
+        height: 8*$grid-size;
+        padding: 2*$grid-size 8*$grid-size 2*$grid-size 3*$grid-size;
         outline: none;
-
-        background-color: $input-bg-color;
-
-        &:hover {
-            border: $default-border;
-        }
-    
-        &:focus {
-            border: $default-border;
-        }
-
-        &:active {
-            border: $default-border;
+        @include themify{
+            border: themed('border-default');
+            background-color: themed('color-bg-input-rest');
+            
+            &:hover {
+                border:  themed('border-active');
+            }
+            
+            &:focus {
+                border:  themed('border-active');
+            }
+            
+            &:active {
+                border:  themed('border-active');
+            }
         }
         
         &:disabled {
-            color: $disabled-text-color;
-            border: $disabled-border;
-            background-color: $disabled-background-color;
+            @include themify{
+                color: themed('color-text-disabled');
+                background-color: themed('color-bg-input-disabled');
+                border: themed('border-disabled');
+            }
     
             &::placeholder {
-                color: $disabled-text-color;
+                @include themify{
+                    color: themed('color-text-disabled');
+                }
             }
         }
     
         &::placeholder {
-            color: $placeholder-text-color;
+            @include themify{
+                color: themed('color-text-placeholder');
+            }
         }
     
         &::selection {
-            color: $selection-text-color;
-            background-color: $selection-background-color;
+            @include themify{
+                color: themed('color-text-white');
+                background-color: themd('color-bg-item-selected');
+            }
         }
 
         &.error:not(:disabled) {
-            border: $error-border;
+            @include themify{
+                border: themed('border-error');
+            }
         }
 
         &::-ms-clear {
@@ -87,10 +94,10 @@ $calc-margin: 5px;
     .date-picker-calendar-icon {
         @include md-box(absolute, float-right);
         font-size: $font-size-small;
-        line-height: 16px;
-        padding: $gutter;
-        top: $gutter;
-        right: 2*$gutter;
+        line-height: $line-height-icon;
+        padding: $grid-size;
+        top: $grid-size;
+        right: 2*$grid-size;
         border: none;
         background-color: transparent;
         outline: none;
@@ -106,46 +113,51 @@ $calc-margin: 5px;
         bottom: calc(100% + 5px);
 
         .date-picker-calendar {
-            margin-bottom: 1.5*$gutter;
+            margin-bottom: 1.5*$grid-size;
         }
     }
 }
 
 .date-picker-dropdown {
-    padding-bottom: 2*$gutter;
+    padding-bottom: 2*$grid-size;
     left: 0px;
-    width: 80*$grid;
+    width: $date-picker-dropdown-width;
     visibility: hidden;
-    
-    :global(.md-dropdown-container) & {
-        background-color: $calendar-bg-color;
-        border: $default-border;
-        display: inline-block;
-        z-index: $calendar-z-index;
+    @include themify{
+        :global(.md-dropdown-container) & {   
+            display: inline-block;
+            z-index: $calendar-z-index;
+            background-color: themed('color-bg-input-rest');
+            border: themed('border-active');
+        }
     }
 
     .date-picker-dropdown-triangle {
         @include md-box(block, absolute);
-        width: 2*$grid;
-        height: 2*$grid;
-        left: 4*$gutter;
+        width: 2*$grid-size;
+        height: 2*$grid-size;
+        left: 4*$grid-size;
     }
 
     &:not(.above) .date-picker-dropdown-triangle {
         bottom: calc(100% - 4px);
 
-        background-color: $calendar-bg-color;
-        border-left: $default-border;
-        border-top: $default-border;
+        @include themify{
+            background-color: themed('color-bg-input-rest');
+            border-left: themed('border-active');
+            border-top: themed('border-active');
+        }
         transform: rotateZ(45deg);
     }
 
     &.date-picker-above .date-picker-dropdown-triangle {
         top: calc(100% - 4px);
         
-        background-color: $calendar-bg-color;
-        border-right: $default-border;
-        border-bottom: $default-border;
+        @include themify{
+            background-color: themed('color-bg-input-rest');
+            border-right: themed('border-active');
+            border-bottom: themed('border-active');
+        }        
         transform: rotateZ(45deg);
     }
 }
