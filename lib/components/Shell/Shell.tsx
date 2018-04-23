@@ -8,7 +8,7 @@ export interface Properties {
     isRtl?: boolean;
 }
 
-export default class Shell extends React.PureComponent<Properties> {
+export class Shell extends React.PureComponent<Properties> {
     render() {
         let { theme, isRtl } = this.props;
         if (theme === undefined) {
@@ -20,3 +20,5 @@ export default class Shell extends React.PureComponent<Properties> {
         </div>;
     }
 }
+
+export default Shell;

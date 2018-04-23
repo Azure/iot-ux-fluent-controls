@@ -1,10 +1,6 @@
 /*
 Z Index Constants
 */
-$z-index-small-step: 10;
-$z-index-medium-step: 100;
-$z-index-large-step: 1000;
-
 /*
 Typography constants
 */
@@ -23,6 +19,15 @@ $common-font-stack: "Segoe UI Regular", "Segoe UI", "Segoe WP", Tahoma, Arial, s
 $font-family-default: $common-font-stack;
 $font-family-light: $common-font-stack;
 $font-family-din-regular: join('DIN-Regular', $font-family-default);
+*/
+$gutter-xxsmall: 8px;
+$gutter-xsmall: 12px;
+$gutter-small: 16px;
+$gutter-normal: 20px;
+$gutter-big: 32px;
+$gutter-bigger: 40px;
+
+
 
 /*
 The basis for larger building blocks
@@ -44,3 +49,27 @@ $icon-size-medium: 2 * $icon-size-base;
 $icon-size-large: 3 * $icon-size-base;
 $icon-size-xlarge: 4 * $icon-size-base;
 $icon-size-xxlarge: 5 * $icon-size-base;
+/*
+Layout constants
+*/
+
+$layout-nav-item-height: 48px;
+
+/*
+Z Index Constants
+*/
+$z-index-large-step: 1000;
+$z-index-medium-step: 100;
+$z-index-small-step: 10;
+
+$z-index-content-layer: 0; // this constant is here for informative purposes - we should always assume content starts at 0
+$z-index-flyout-layer: $z-index-content-layer + 6 * $z-index-large-step;
+$z-index-interruptable-layer: $z-index-content-layer + 9 * $z-index-large-step;
+
+$z-index-chart-tooltip: $z-index-content-layer + 1 * $z-index-small-step;
+$z-index-content-sidebar: $z-index-content-layer + 1 * $z-index-medium-step;
+$z-index-content-global-nav: $z-index-content-layer + 2 * $z-index-medium-step;
+$z-index-flyouts-masthead: $z-index-flyout-layer + 5 * $z-index-medium-step;
+$z-index-flyouts-dropdown: $z-index-flyout-layer + 6 * $z-index-medium-step;
+$z-index-flyouts-inline-btn: $z-index-flyout-layer + 7 * $z-index-medium-step;
+$z-index-tutorial-tips: $z-index-flyout-layer + 8 * $z-index-medium-step;
