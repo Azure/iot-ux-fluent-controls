@@ -1,7 +1,6 @@
- @import "../styles/constants";
- @import "../styles/mixins";
- @import "../styles/colors";
- @import "../styles/typography";
+@import '../../common/colors';
+@import '../../common/overrides';
+@import '../../common/typography';
 
 $help-menu-flyout-width: 220px;
 $masthead-branding-width: 50%;
@@ -10,6 +9,7 @@ $masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
 $masthead-collapse-start: 660px;
 $masthead-button-width: $layout-nav-item-height;
 $masthead-wide-button-width: $masthead-button-width * 4;
+$header-height: $layout-nav-item-height;
 
 .masthead {
     height: $header-height;

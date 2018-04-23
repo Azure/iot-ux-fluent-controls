@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
-import Thumbnail from './thumbnail';
+import { Thumbnail } from '../Thumbnail';
 
-const cx = classnames.bind(require('./masthead.scss'));
+const cx = classnames.bind(require('./Masthead.scss'));
 
 export interface Properties {
     branding: React.ReactNode;
@@ -12,7 +12,7 @@ export interface Properties {
     };
 }
 
-export default class Masthead extends React.PureComponent<Properties> {
+export class Masthead extends React.PureComponent<Properties> {
     render() {
         return <nav className={cx('masthead')}>
             <div className={cx('branding', 'inline-text-overflow')} data-test-hook={'masthead-application-name'}>
@@ -39,3 +39,5 @@ export default class Masthead extends React.PureComponent<Properties> {
         </div>;
     }
 }
+
+export default Masthead;

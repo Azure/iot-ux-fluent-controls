@@ -1,8 +1,3 @@
-$z-index-small-step: 10;
-$z-index-medium-step: 100;
-$z-index-large-step: 1000;
-
-
 // overrides to the bootstrap variables
 $common-font-stack: "Segoe UI Regular", "Segoe UI", "Segoe WP", Tahoma, Arial, sans-serif;
 $font-family-base: $common-font-stack;
@@ -26,6 +21,17 @@ $focus-outline: 1px dashed #333333;
 // standard gutter size - use this for interior gutters between components inside a container
 $gutter: 4px;
 
+/*
+Gutters
+*/
+$gutter-xxsmall: 8px;
+$gutter-xsmall: 12px;
+$gutter-small: 16px;
+$gutter-normal: 20px;
+$gutter-big: 32px;
+$gutter-bigger: 40px;
+
+
 $grid: 4px;
 
 $grid-size: $grid;
@@ -34,3 +40,38 @@ $input-height: 8*$grid-size;
 $option-height: 8*$grid-size;
 $dropdown-max-height: 50*$grid-size;
 
+/*
+Interaction constants
+*/
+$interaction-timing: 200ms;
+$small-interaction-timing: 50ms;
+$popover-timing: 200ms;
+
+$clickable-scale: 0.9;
+$clickable-scale-shallow: 0.97;
+
+
+/*
+Layout constants
+*/
+
+$layout-nav-item-height: 48px;
+
+/*
+Z Index Constants
+*/
+$z-index-large-step: 1000;
+$z-index-medium-step: 100;
+$z-index-small-step: 10;
+
+$z-index-content-layer: 0; // this constant is here for informative purposes - we should always assume content starts at 0
+$z-index-flyout-layer: $z-index-content-layer + 6 * $z-index-large-step;
+$z-index-interruptable-layer: $z-index-content-layer + 9 * $z-index-large-step;
+
+$z-index-chart-tooltip: $z-index-content-layer + 1 * $z-index-small-step;
+$z-index-content-sidebar: $z-index-content-layer + 1 * $z-index-medium-step;
+$z-index-content-global-nav: $z-index-content-layer + 2 * $z-index-medium-step;
+$z-index-flyouts-masthead: $z-index-flyout-layer + 5 * $z-index-medium-step;
+$z-index-flyouts-dropdown: $z-index-flyout-layer + 6 * $z-index-medium-step;
+$z-index-flyouts-inline-btn: $z-index-flyout-layer + 7 * $z-index-medium-step;
+$z-index-tutorial-tips: $z-index-flyout-layer + 8 * $z-index-medium-step;

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as classnames from 'classnames/bind';
 
-const cx = classnames.bind(require('./navigation.scss'));
+const cx = classnames.bind(require('./Navigation.scss'));
 
 export interface NavigationItems {
     key: string;
@@ -18,7 +18,7 @@ export interface Properties {
     items: Array<NavigationItems>;
 }
 
-export default class Navigation extends React.PureComponent<Properties> {
+export class Navigation extends React.PureComponent<Properties> {
     render() {
         return (
             <div className={cx('navigation', { expanded: this.props.isExpanded })} data-test-hook='side-nav'>
@@ -35,3 +35,5 @@ export default class Navigation extends React.PureComponent<Properties> {
         );
     }
 }
+
+export default Navigation;
