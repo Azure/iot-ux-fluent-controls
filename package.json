@@ -4,6 +4,7 @@
     "description": "Microsoft Method React Framework",
     "scripts": {
         "build": "tsc",
+        "watch": "tsc --watch",
         "bundle": "webpack --config webpack.config.js",
         "test": "karma start",
         "tslint": "tslint './lib/**/*.ts{,x}'",
@@ -27,7 +28,7 @@
         "url": "https://msazure.visualstudio.com/DefaultCollection/One/_git/azure-iot-ux-baseline"
     },
     "devDependencies": {
-        "@azure-iot/ux-fluent-css": "^2.0.2",
+        "@azure-iot/ux-fluent-css": "^2.0.3",
         "@types/chai": "^4.0.4",
         "@types/classnames": "^2.2.3",
         "@types/enzyme": "^2.8.9",

@@ -1,6 +1,7 @@
 @import '../../common/colors';
 @import '../../common/overrides';
-@import '../../common/typography';
+@import '../../common/mixins';
+@import '../../common/normalize';
 
 $help-menu-flyout-width: 220px;
 $masthead-branding-width: 50%;
@@ -120,7 +121,7 @@ $header-height: $layout-nav-item-height;
 
     .email {
         line-height: $header-height / 2 - 10px;
-        font-size: $font-size-xsmall;
+        font-size: $font-size-small;
         text-transform: uppercase;
     }
 }

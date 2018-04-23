@@ -19,15 +19,13 @@ $common-font-stack: "Segoe UI Regular", "Segoe UI", "Segoe WP", Tahoma, Arial, s
 $font-family-default: $common-font-stack;
 $font-family-light: $common-font-stack;
 $font-family-din-regular: join('DIN-Regular', $font-family-default);
-*/
+
 $gutter-xxsmall: 8px;
 $gutter-xsmall: 12px;
 $gutter-small: 16px;
 $gutter-normal: 20px;
 $gutter-big: 32px;
 $gutter-bigger: 40px;
-
-
 
 /*
 The basis for larger building blocks
@@ -73,3 +71,59 @@ $z-index-flyouts-masthead: $z-index-flyout-layer + 5 * $z-index-medium-step;
 $z-index-flyouts-dropdown: $z-index-flyout-layer + 6 * $z-index-medium-step;
 $z-index-flyouts-inline-btn: $z-index-flyout-layer + 7 * $z-index-medium-step;
 $z-index-tutorial-tips: $z-index-flyout-layer + 8 * $z-index-medium-step;
+
+/*
+Interaction constants
+*/
+$interaction-timing: 200ms;
+$small-interaction-timing: 50ms;
+$popover-timing: 200ms;
+
+$clickable-scale: 0.9;
+$clickable-scale-shallow: 0.97;
+
+$layout-nav-item-height: 48px;
+$layout-header-large-height: $layout-nav-item-height * 3;
+$layout-header-medium-height: $layout-nav-item-height * 2;
+$layout-header-small-height: $layout-nav-item-height;
+$layout-split-panel-width: 300px;
+$layout-thumbnail-size: 100px;
+$layout-centered-text-width: 400px;
+$layout-masthead-height: 48px;
+$layout-nav-collapsed-width: 48px;
+$layout-chart-y-axis-width: $gutter-bigger;
+$layout-chart-x-axis-height: $gutter-big;
+$layout-chart-axis-tick-size: 6px;
+
+$nav-expanded-width: 220px;
+$nav-collapsed-width: $layout-nav-item-height;
+
+$header-nav-height: $layout-nav-item-height;
+$header-height: $header-nav-height;
+
+$sidebar-expanded-width: 240px;
+
+$workspace-gutter: $gutter-small;
+$workspace-inv-gutter: -$gutter-small;
+$workspace-gutter-height: $gutter-small * 2;
+$workspace-gutter-width: $gutter-small * 2;
+
+$loading-large-size: 60px;
+
+$btn-default-height: 43px;
+
+$pane-gutter: 2 * $gutter-small;
+
+$img-size: 160px;
+
+$search-thumbnail-size: 64px;
+
+// these control how we should transform a box that the user clicks
+$click-transition-time: 100ms;
+$click-scale: 0.9;
+
+$safari10-min-resolution:.001dpcm;
+$inline-popup-size: 1.4em;
+
+$field-width: $sidebar-expanded-width - (2 * $pane-gutter);
+$narrow-gutter: $gutter-small / 2;

@@ -1,5 +1,6 @@
 @import '../../common/colors';
-@import '../../common/typography';
+@import '../../common/overrides';
+@import '../../common/mixins';
 
 $list-tile-thumbnail-size: 50px;
 $list-tile-thumbnail-icon-size: 20px;

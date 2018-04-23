@@ -1,9 +1,11 @@
 @import '../../common/colors';
 @import '../../common/overrides';
+@import '../../common/mixins';
+@import '../../common/normalize';
 
 $nav-expanded-width: 220px;
 
-.navigation {
+.navigation { 
     text-align: left;
     z-index: $z-index-content-global-nav;
     display: block;
