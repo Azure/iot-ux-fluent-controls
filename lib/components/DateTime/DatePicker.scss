@@ -123,10 +123,12 @@ $calc-margin: 5px;
     left: 0px;
     width: $date-picker-dropdown-width;
     visibility: hidden;
+    display: inline-block;
+    z-index: $calendar-z-index;
     @include themify{
+        background-color: themed('color-bg-input-rest');
+        border: themed('border-active');
         :global(.md-dropdown-container) & {   
-            display: inline-block;
-            z-index: $calendar-z-index;
             background-color: themed('color-bg-input-rest');
             border: themed('border-active');
         }

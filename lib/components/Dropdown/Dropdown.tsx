@@ -140,7 +140,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             this.dropdownOffset = this.getDropdownOffset();
         }
 
-        if (this.fixedContainer.parentElement === document.body) {
+        if (this.fixedContainer.parentElement === document.querySelector('.shell')) {
             this.container.appendChild(this.fixedContainer);
         }
     }
@@ -291,8 +291,8 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             return;
         }
 
-        if (this.fixedContainer && this.fixedContainer.parentElement !== document.body) {
-            document.body.appendChild(this.fixedContainer);
+        if (this.fixedContainer && this.fixedContainer.parentElement !== document.querySelector('.shell')) {
+            document.querySelector('.shell').appendChild(this.fixedContainer);
         }
 
         if (!this.positionFailed && this.props.positionClassNames && this.props.positionClassNames.length > 0) {

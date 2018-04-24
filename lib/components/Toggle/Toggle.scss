@@ -20,8 +20,8 @@ $line-height: 3.5*$grid-size;
         vertical-align: middle;
         outline: none;
         @include themify{
-            border: 1px solid themed('color-bg-toggle-btn-rest-off');
-            background-color: themed('color-bg-input-rest');
+            border: 1px solid themed('color-border-toggle-btn-rest-off');
+            background-color: themed('color-bg-toggle-btn-rest-off');
         }
         border-radius: $border-toggle-radius;
         width: $toggle-width;
@@ -29,7 +29,7 @@ $line-height: 3.5*$grid-size;
         
         &:hover {
             @include themify{
-                border: themed('border-toggle-on-hover');
+                border: themed('color-border-toggle-btn-hover-off');
             }
             cursor: pointer;
         }
@@ -51,7 +51,7 @@ $line-height: 3.5*$grid-size;
         height: 2.5*$grid-size;
         border-radius: $toggle-switch-border-radius;
         @include themify{
-            background-color: themed('color-bg-input-rest');
+            background-color: themed('color-circle-toggle-btn-rest-off');
         }
         transition: $toggle-switch-transition;
 
@@ -71,13 +71,13 @@ $line-height: 3.5*$grid-size;
     &.toggle-on {
         .toggle-button {
             @include themify{
-                border: themed('border-toggle-on');
-                background-color: themed('color-bg-item-selected');
+                border: themed('color-border-toggle-btn-rest-on');
+                background-color: themed('color-bg-toggle-btn-rest-on');
             }
             &:hover {
                 @include themify{
-                    border: themed('border-toggle-on-hover');
-                    background-color: themed('color-bg-item-selected');
+                    border: themed('color-border-toggle-btn-hover-on');
+                    background-color: themed('color-bg-toggle-btn-hover-on');
                 }            
             }
         }
@@ -85,21 +85,21 @@ $line-height: 3.5*$grid-size;
         .toggle-switch {
             left: 25px;
             @include themify{
-                background-color: themed('color-text-white');
+                background-color: themed('color-bg-toggle-btn-rest-on');
             }
         }
 
         &.disabled {
             .toggle-button {
                 @include themify{
-                    border: themed('border-toggle-on-disabled');
-                    background-color: themed('color-bg-input-disabled');
+                    border: themed('color-border-toggle-btn-rest-on');
+                    background-color: themed('color-bg-toggle-btn-rest-on');
                 }
             }
     
             .toggle-switch {
                 @include themify{
-                    background-color: themed('color-text-disabled');
+                    background-color: themed('color-circle-toggle-btn-rest-on');
                 }
             }
         }
@@ -115,7 +115,7 @@ $line-height: 3.5*$grid-size;
 
         .toggle-switch {
             @include themify{
-                background-color: themed('color-text-disabled');
+                background-color: themed('color-bg-toggle-btn-disabled-off');
             }        }
 
         .toggle-label {

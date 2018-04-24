@@ -64,9 +64,9 @@
         margin-right: auto;
     }
 
-    // @for $num from 1 through $num-dots {
-    //     @include spinner-child($name, $num, $num-dots, $diameter, $gap, $duration, $delay, $timing);
-    // }
+    @for $num from 1 through $num-dots {
+        @include spinner-child($name, $num, $num-dots, $diameter, $gap, $duration, $delay, $timing);
+    }
 }
 
 @include spinner('cs-loader');

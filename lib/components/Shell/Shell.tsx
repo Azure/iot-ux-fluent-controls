@@ -12,9 +12,9 @@ export class Shell extends React.PureComponent<Properties> {
         let { theme, isRtl } = this.props;
         if (theme === undefined) {
             theme = 'light';
-        } 
+        }
 
-        return <div className={css('theme-' + theme, { rtl: isRtl })}>
+        return <div className={css('shell', 'theme-' + theme, { rtl: isRtl })}>
             {this.props.children}
         </div>;
     }

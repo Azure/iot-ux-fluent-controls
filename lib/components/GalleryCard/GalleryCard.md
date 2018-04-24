@@ -22,6 +22,8 @@ ______________________________________________________________________________
 
 ```jsx
 const SolidBackground = require('./SolidBackground').SolidBackground;
+const GalleryCard = require('./GalleryCard').GalleryCard;
+
 <div>
     <a href='#'>
         <GalleryCard background={<SolidBackground backgroundColor='red'/>}>

@@ -116,7 +116,7 @@ $balloon-width: 65*$grid-size;
     font-family: $font-family-default;
     @include themify{
         box-shadow: themed('balloon-shadow');
-        color: themed('color-text-white');
+        color: themed('color-text-rest');
         background-color: themed('color-bg-balloon');
     }
     width: $balloon-width;

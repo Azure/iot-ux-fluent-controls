@@ -96,8 +96,9 @@ $line-height-row: $calendar-column-width;
 
         & > button.selected {
             @include themify{
-                color: themed('color-text-white');
+                color: themed('color-text-rest');
                 background-color: themed('color-bg-input-selected');
+                border: 1px solid themed('color-border-rest');
             }
         }
 

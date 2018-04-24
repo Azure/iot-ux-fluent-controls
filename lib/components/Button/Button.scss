@@ -1,151 +1,131 @@
-// @import '../../common/overrides';
-// @import '../../common/mixins';
+@import '../../common/overrides';
+@import '../../common/mixins';
+@import '../../common/colors';
 
-// $button-max-width: 140px;
+$button-max-width: 140px;
+$line-height: 8*$grid-size;
+$outline-focus-border-width: 1px;
 
-// $line-height: 8*$grid-size;
+:global(.btn-primary), .method-btn-primary, :global(.btn-danger), .method-btn-danger, :global(.btn), .method-btn {
+    @include md-box(inline-block, relative);
+    font-family: $font-family-default;
+    font-size: $font-size-default;
+    line-height: $line-height;
 
-// $color-text-white: white;
+    height: 8*$grid-size;
+    padding-left: 5*$grid-size;
+    padding-right: 5*$grid-size;
 
-// $primary-color: $color-text-white;
-// $primary-pressed-color: $color-text-white;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    text-decoration: none;
 
-// $primary-bg-color: $color-bg-btn-primary-default;
-// $primary-hover-bg-color: $color-bg-btn-primary-hover;
-// $primary-pressed-bg-color: $color-bg-btn-primary-pressed;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: $button-max-width;
+}
 
-// $default-color: $color-text-white;
-// $default-pressed-color: $color-text-white;
+:global(.btn), .method-btn {
+    @include themify{
+        color: themed('color-text-rest');
+        background-color: themed('color-bg-btn-standard-rest');
+        &:hover:not(:disabled) {
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-btn-standard-hover');
+            cursor: pointer;
+        }
+        
+        &:focus:not(:disabled) {
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-btn-standard-focus');
+            outline: themed('outline-focus');
+            outline-offset: -$outline-focus-border-width;
+        }
+        
+        &:active:not(:disabled) {
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-btn-standard-pressed-selected');
+        }
+        
+        &:disabled {
+            color: themed('color-text-disabled');
+            background-color: themed('color-bg-btn-standard-disabled');
+        }
+    }
+}
 
-// $default-bg-color: $color-bg-btn-secondary-default;
-// $default-hover-bg-color: $color-bg-btn-secondary-hover;
-// $default-pressed-bg-color: $color-bg-btn-secondary-pressed;
+:global(.btn-primary), .method-btn-primary {
+    @include themify{
+        color: themed('color-text-rest');
+        background-color: themed('color-bg-btn-primary-rest');
+        &:hover:not(:disabled) {
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-btn-primary-hover');
+            cursor: pointer;
+        }
+        
+        &:focus:not(:disabled) {
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-btn-primary-focus');
+            outline: themed('outline-focus');
+            outline-offset: -$outline-focus-border-width;
+        }
+        
+        &:active:not(:disabled) {
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-btn-primary-pressed-selected');
+        }
+        
+        &:disabled {
+            color: themed('color-text-disabled');
+            background-color: themed('color-bg-btn-primary-disabled');
+        }
+    }
+}
 
-// $disabled-color: $color-text-white;
-// $disabled-bg-color: $color-bg-disabled;
+ :global(.btn-danger), .method-btn-danger {
+    @include themify{
+        color: themed('color-text-rest');
+        background-color: themed('color-bg-btn-danger-rest');
+        &:hover:not(:disabled) {
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-btn-danger-hover');
+            cursor: pointer;
+        }
+        
+        &:focus:not(:disabled) {
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-btn-danger-focus');
+            outline: themed('outline-focus');
+            outline-offset: -$outline-focus-border-width;
+        }
+        
+        &:active:not(:disabled) {
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-btn-danger-pressed-selected');
+        }
+        
+        &:disabled {
+            color: themed('color-text-disabled');
+            background-color: themed('color-bg-btn-danger-disabled');
+        }
+    }
+ }
 
-// $primary-disabled-bg-color: $color-bg-btn-primary-disabled;
+:global(.btn), :global(.btn-primary), .method-btn, .method-btn-primary {
+    vertical-align: middle;
+    font-size: $font-size-default;
+    line-height: $line-height;
 
-// $danger-color: $color-text-white;
-// $danger-pressed-color: $color-text-white;
+    :global(.icon) {
+        @include md-box(inline-block);
+        vertical-align: middle;
+        margin-right: 2*$grid-size;
+        margin-top: -0.5*$grid-size;
 
-// $danger-bg-color: $color-bg-btn-danger-default;
-// $danger-hover-bg-color: $color-bg-btn-danger-hover;
-// $danger-pressed-bg-color: $color-bg-btn-danger-pressed;
-
-
-// $default-button-colors: (
-//     default: $default-color,
-//     pressed: $default-pressed-color,
-//     disabled: $disabled-color,
-// );
-
-// $default-button-bg-colors: (
-//     default: $default-bg-color,
-//     hover: $default-hover-bg-color,
-//     pressed: $default-pressed-bg-color,
-//     disabled: $disabled-bg-color
-// );
-
-// $primary-button-colors: (
-//     default: $primary-color,
-//     pressed: $primary-pressed-color,
-//     disabled: $disabled-color,
-// );
-
-// $primary-button-bg-colors: (
-//     default: $primary-bg-color,
-//     hover: $primary-hover-bg-color,
-//     pressed: $primary-pressed-bg-color,
-//     disabled: $primary-disabled-bg-color,
-// );
-
-// $danger-button-colors: (
-//     default: $danger-color,
-//     pressed: $danger-pressed-color,
-//     disabled: $disabled-color,
-// );
-
-// $danger-button-bg-colors: (
-//     default: $danger-bg-color,
-//     hover: $danger-hover-bg-color,
-//     pressed: $danger-pressed-bg-color,
-//     disabled: $disabled-bg-color,
-// );
-
-// @mixin md-button-style($text-colors: $default-button-colors, $bg-colors: $default-button-colors) {
-//     @include md-box(inline-block, relative);
-//     font-family: $font-family-default;
-//     font-size: $font-size-default;
-//     line-height: $line-height;
-
-//     height: 8*$grid-size;
-//     padding-left: 5*$grid-size;
-//     padding-right: 5*$grid-size;
-
-//     border: none;
-//     outline: none;
-//     box-shadow: none;
-//     text-decoration: none;
-
-//     overflow: hidden;
-//     text-overflow: ellipsis;
-//     white-space: nowrap;
-//     max-width: $button-max-width;
-
-//     color: map-get-default($text-colors, default, $default-color);
-//     background-color: map-get-default($bg-colors, default, $default-bg-color);
-
-//     &:hover:not(:disabled) {
-//         color: map-get-default($text-colors, hover, $default-color);
-//         background-color: map-get-default($bg-colors, hover, $default-hover-bg-color);
-//         cursor: pointer;
-//     }
-
-//     &:focus:not(:disabled) {
-//         color: map-get-default($text-colors, pressed, $default-pressed-color);
-//         background-color: map-get-default($bg-colors, pressed, $default-pressed-bg-color);
-//         @include themify{
-//             outline: themed('outline-focus');
-//             outline-offset: -$outline-focus-border-width;
-//         }
-//     }
-
-//     &:active:not(:disabled) {
-//         color: map-get-default($text-colors, pressed, $default-pressed-color);
-//         background-color: map-get-default($bg-colors, pressed, $default-pressed-bg-color);
-//     }
-
-//     &:disabled {
-//         color: map-get-default($text-colors, disabled, $disabled-color);
-//         background-color: map-get-default($bg-colors, disabled, $disabled-bg-color);
-//     }
-// }
-
-// :global(.btn), .method-btn {
-//     @include md-button-style($default-button-colors, $default-button-bg-colors);
-// }
-
-// :global(.btn-primary), .method-btn-primary {
-//     @include md-button-style($primary-button-colors, $primary-button-bg-colors);
-// }
-
-// :global(.btn-danger), .method-btn-danger {
-//     @include md-button-style($danger-button-colors, $danger-button-bg-colors);
-// }
-
-// :global(.btn), :global(.btn-primary), .method-btn, .method-btn-primary {
-//     vertical-align: middle;
-//     font-size: $font-size-default;
-//     line-height: $line-height;
-
-//     :global(.icon) {
-//         @include md-box(inline-block);
-//         vertical-align: middle;
-//         margin-right: 2*$grid-size;
-//         margin-top: -0.5*$grid-size;
-
-//         font-size: $icon-size-xsmall;
-//         line-height: $line-height;
-//     }
-// }
+        font-size: $icon-size-xsmall;
+        line-height: $line-height;
+    }
+}
