@@ -29,7 +29,7 @@ $line-height: 3.5*$grid-size;
         
         &:hover {
             @include themify{
-                border: themed('color-border-toggle-btn-hover-off');
+                border: 1px solid themed('color-border-toggle-btn-hover-off');
             }
             cursor: pointer;
         }
@@ -71,12 +71,12 @@ $line-height: 3.5*$grid-size;
     &.toggle-on {
         .toggle-button {
             @include themify{
-                border: themed('color-border-toggle-btn-rest-on');
+                border: 1px solid themed('color-border-toggle-btn-rest-on');
                 background-color: themed('color-bg-toggle-btn-rest-on');
             }
             &:hover {
                 @include themify{
-                    border: themed('color-border-toggle-btn-hover-on');
+                    border: 1px solid themed('color-border-toggle-btn-hover-on');
                     background-color: themed('color-bg-toggle-btn-hover-on');
                 }            
             }
@@ -85,21 +85,21 @@ $line-height: 3.5*$grid-size;
         .toggle-switch {
             left: 25px;
             @include themify{
-                background-color: themed('color-bg-toggle-btn-rest-on');
+                background-color: themed('color-circle-toggle-btn-rest-on');
             }
         }
 
         &.disabled {
             .toggle-button {
                 @include themify{
-                    border: themed('color-border-toggle-btn-rest-on');
-                    background-color: themed('color-bg-toggle-btn-rest-on');
+                    border: 1px solid themed('color-border-toggle-btn-disabled-on');
+                    background-color: themed('color-bg-toggle-btn-disabled-on');
                 }
             }
     
             .toggle-switch {
                 @include themify{
-                    background-color: themed('color-circle-toggle-btn-rest-on');
+                    background-color: themed('color-circle-toggle-btn-disabled-on');
                 }
             }
         }

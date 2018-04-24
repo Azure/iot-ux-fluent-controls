@@ -1,11 +1,10 @@
 {
     "name": "@azure-iot/ux-fluent-controls",
-    "version": "0.1.0",
+    "version": "0.0.1",
     "description": "Microsoft Fluent React Controls",
     "scripts": {
         "build": "tsc",
         "watch": "tsc --watch",
-        "bundle": "webpack --config webpack.config.js",
         "test": "karma start",
         "tslint": "tslint './lib/**/*.ts{,x}'",
         "sasslint": "sass-lint -c .sass-lint.yml 'lib/**/*.scss' -v -q",

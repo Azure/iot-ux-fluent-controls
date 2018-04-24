@@ -71,6 +71,11 @@ export const GalleryCard: React.StatelessComponent<GalleryCardProps> = (props: G
         outputProps['data-test-hook'] = props.dataTestHook;
     }
 
+    const banner = props.banner ? (
+        <Banner attr={{container: props.attr.banner}}>{props.banner}</Banner>
+    ) : null;
+    
+
     const content = props.children ? (
         <Attr.div className={contentClassName} attr={props.attr.content}>
             {props.children}
@@ -81,7 +86,7 @@ export const GalleryCard: React.StatelessComponent<GalleryCardProps> = (props: G
         <Attr.div {...outputProps} attr={props.attr.container}>
             {props.background}
             {content}
-            {props.banner}
+            {banner}
         </Attr.div>
     );
 };
@@ -93,6 +98,35 @@ GalleryCard.defaultProps = {
         container: {},
         content: {},
         banner: {},
+    }
+};
+
+
+export interface BannerType {}
+
+export interface BannerAttributes {
+    container?: DivProps;
+}
+
+export interface BannerProps extends React.Props<BannerType> {
+    className?: string;
+    attr?: BannerAttributes;
+}
+
+/** TODO: Remove this Banner control. GalleryCard banner is now a string */
+export const Banner: React.StatelessComponent<BannerProps> = (props: BannerProps) => {
+    let cls = css({
+        'banner': true,
+    }, props.className);
+
+    return (<Attr.div className={cls} attr={props.attr.container}>
+        {props.children}
+    </Attr.div>);
+};
+
+Banner.defaultProps = {
+    attr: {
+        container: {}
     }
 };
 

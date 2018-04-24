@@ -49,5 +49,6 @@ const GalleryCard = require('./GalleryCard').GalleryCard;
             <section>Content</section>
         </GalleryCard>
     </a>
+    
 </div>
 ```
