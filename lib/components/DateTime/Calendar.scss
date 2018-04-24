@@ -96,9 +96,14 @@ $line-height-row: $calendar-column-width;
 
         & > button.selected {
             @include themify{
-                color: themed('color-text-rest');
-                background-color: themed('color-bg-input-selected');
-                border: 1px solid themed('color-border-rest');
+                color: themed('color-text-white');
+                background-color: themed('color-bg-btn-primary-rest');
+
+                &:focus {
+                    outline: none;
+                    color: themed('color-text-rest');
+                    background-color: transparent;
+                }
             }
         }
 
@@ -128,6 +133,11 @@ $line-height-row: $calendar-column-width;
 
             &:focus {
                 outline: none;
+
+                @include themify{
+                    border: 1px solid themed('color-border-input-hover');
+                    background-color: transparent !important;
+                }
             }
         }
 

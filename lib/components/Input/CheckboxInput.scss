@@ -39,7 +39,8 @@ $outline-focus-border-width: 1px;
         }
 
         &.selected .checkbox-button {
-            background-color: themed('color-bg-input-selected');
+            color: themed('color-text-white');
+            background-color: themed('color-bg-btn-primary-rest');
             border: themed('border-selected-hover');
         }
 
@@ -58,11 +59,11 @@ $outline-focus-border-width: 1px;
     @include themify{
         .checkbox-button {
             border: themed('border-selected');
-            background-color: themed('color-bg-input-selected');
+            background-color: themed('color-bg-btn-primary-rest');
         }
 
         .checkbox-checkmark {
-            color: themed('color-text-rest');
+            color: themed('color-text-white');
         }
 
         &.disabled {

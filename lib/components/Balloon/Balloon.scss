@@ -17,6 +17,8 @@ $balloon-width: 65*$grid-size;
         
         @if $location == 'top' {
             top: -1*$grid-size;
+            border-left: inherit;
+            border-top: inherit;
             @if $offset == 'start' {
                 left: 3*$grid-size;
             } @else if $offset == 'end' {
@@ -26,7 +28,9 @@ $balloon-width: 65*$grid-size;
                 transform: translateX(-50%) rotateZ(45deg);
             }
         } @else if $location == 'left' {
-            left: -1*$grid-size;
+            left: -1*$grid-size;            
+            border-left: inherit;
+            border-bottom: inherit;
             @if $offset == 'start' {
                 top: 3*$grid-size;
             } @else if $offset == 'end' {
@@ -37,6 +41,8 @@ $balloon-width: 65*$grid-size;
             }
         } @else if $location == 'right' {
             right: -1*$grid-size;
+            border-right: inherit;
+            border-top: inherit;
             @if $offset == 'start' {
                 top: 3*$grid-size;
             } @else if $offset == 'end' {
@@ -47,6 +53,8 @@ $balloon-width: 65*$grid-size;
             }
         } @else {
             bottom: -1*$grid-size;
+            border-right: inherit;
+            border-bottom: inherit;            
             @if $offset == 'start' {
                 left: 3*$grid-size;
             } @else if $offset == 'end' {
@@ -118,6 +126,7 @@ $balloon-width: 65*$grid-size;
         box-shadow: themed('balloon-shadow');
         color: themed('color-text-rest');
         background-color: themed('color-bg-balloon');
+        border: 1px solid themed('color-border-controls');
     }
     width: $balloon-width;
 

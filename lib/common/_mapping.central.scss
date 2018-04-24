@@ -193,7 +193,7 @@ $mappings: (
         shadow-gradient-pane: $pane-box-shadow map-get($map, 'color-shadow-gradient-pane'),
         shadow-gradient-pane-rtl: $pane-box-shadow-rtl map-get($map, 'color-shadow-gradient-pane'),
         standard-box-shadow: 0px 24px 74px 0px map-get($map, 'color-standard-shadow'),
-        balloon-shadow: 0px 24px 74px 0px map-get($map, 'color-standard-shadow'),
+        balloon-shadow: 0px 8px 10px 0px map-get($map, 'color-standard-shadow'),
         outline-focus: $outline-focus-border-width dashed map-get($map, 'color-outline-focus'),
     );
 }

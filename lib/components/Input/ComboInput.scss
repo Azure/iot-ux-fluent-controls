@@ -190,7 +190,7 @@ $dropdown-z-index: $z-index-medium-step;
 
     &.selected {
         @include themify{
-            color: themed('color-text-white');
+            color: themed('color-text-rest');
             background-color: themed('color-bg-item-selected');
         }
     }
@@ -206,8 +206,8 @@ $dropdown-z-index: $z-index-medium-step;
             }
             
             &:active {
-                color: themed('color-text-white');
-                background-color: themed('color-bg-input-selected');
+                color: themed('color-text-rest');
+                background-color: themed('color-bg-item-selected');
             }
         }
     }
