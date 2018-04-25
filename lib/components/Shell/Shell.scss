@@ -1,4 +1,5 @@
-.rtl {
+@import '../../common/mixins';
+
+@include rtl {
     direction: rtl;
 }
-
