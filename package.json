@@ -1,6 +1,6 @@
 {
     "name": "@azure-iot/ux-fluent-controls",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "description": "Microsoft Fluent React Controls",
     "scripts": {
         "build": "tsc",
@@ -9,7 +9,7 @@
         "tslint": "tslint './lib/**/*.ts{,x}'",
         "sasslint": "sass-lint -c .sass-lint.yml 'lib/**/*.scss' -v -q",
         "docs": "styleguidist server",
-        "docs:build": "styleguidist build" 
+        "docs:build": "styleguidist build"
     },
     "repository": {
         "type": "git",
@@ -86,6 +86,5 @@
         "prop-types": "^15.6.1",
         "react": "16.x",
         "react-dom": "16.x"
-    },
-    "dependencies": {}
+    }
 }
