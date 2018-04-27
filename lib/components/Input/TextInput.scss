@@ -1,4 +1,4 @@
-@import '../../common/overrides';
+@import '../../common/constants';
 @import '../../common/mixins';
 @import '../../common/colors';
 
@@ -41,7 +41,7 @@ $line-height-small: 4*$grid-size;
         }
         &:focus {
             @include themify {
-                border: themed('border-active');
+                border: 1px solid themed('color-border-input-selected');
             }
             &.show-cancel:not(:disabled) {
                 padding-right: 8*$grid-size;

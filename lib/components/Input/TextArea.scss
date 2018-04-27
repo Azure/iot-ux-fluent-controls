@@ -1,4 +1,4 @@
-@import '../../common/overrides';
+@import '../../common/constants';
 @import '../../common/mixins';
 @import '../../common/colors';
 
@@ -38,7 +38,7 @@ $line-height: 5*$grid-size;
         }
 
         &:focus {
-            border: themed('border-active');
+            border: 1px solid themed('color-border-input-selected');
         }
 
         &:active {

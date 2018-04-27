@@ -1,4 +1,4 @@
-@import '../../common/overrides';
+@import '../../common/constants';
 @import '../../common/mixins';
 @import '../../common/colors';
 
@@ -10,7 +10,7 @@ $line-height: 4*$grid-size;
 
 .pivot {
     @include md-box(inline-block);
-    outline: none;
+    outline: none !important;
     margin-left: 5*$grid-size;
 }
 
@@ -74,9 +74,11 @@ $line-height: 4*$grid-size;
 
         .pivot-border {
             @include themify {
-                border-bottom: themed('border-pivot-selected');
+                border-bottom: 2px solid themed('color-border-pivot-tab');
             }
         }
+
+        outline: none;
     }
 
     &.disabled {
@@ -153,5 +155,6 @@ $line-height: 4*$grid-size;
         width: 100%;
         bottom: 0px;
         height: 2.5*$grid-size;
+        outline: none;
     }
 }

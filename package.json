@@ -9,7 +9,7 @@
         "tslint": "tslint './lib/**/*.ts{,x}'",
         "sasslint": "sass-lint -c .sass-lint.yml 'lib/**/*.scss' -v -q",
         "docs": "styleguidist server",
-        "docs:build": "styleguidist build"
+        "docs:build": "styleguidist build" 
     },
     "repository": {
         "type": "git",
@@ -27,7 +27,7 @@
         "url": "https://msazure.visualstudio.com/DefaultCollection/One/_git/azure-iot-ux-baseline"
     },
     "devDependencies": {
-        "@azure-iot/ux-fluent-css": "^2.0.3",
+        "@azure-iot/ux-fluent-css": "^2.0.4",
         "@types/chai": "^4.0.4",
         "@types/classnames": "^2.2.3",
         "@types/enzyme": "^2.8.9",

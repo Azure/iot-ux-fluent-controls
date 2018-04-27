@@ -1,4 +1,4 @@
-@import '../../common/overrides';
+@import '../../common/constants';
 @import '../../common/mixins';
 
 @mixin horizontal-loader-keyframes($name, $num-dots: 6, $diameter: 6px, $gap: 12px) {

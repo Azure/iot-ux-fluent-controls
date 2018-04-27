@@ -1,5 +1,5 @@
 @import '../../common/colors';
-@import '../../common/overrides';
+@import '../../common/constants';
 @import '../../common/mixins';
 
 $list-tile-thumbnail-size: 50px;
@@ -54,7 +54,7 @@ $img-size: 160px;
     @include themify {
         @include thumbnailColor('color-disabled', 'color-text-white');
 
-        &.user, &.user img { @include thumbnailColor('color-bg-thumbnail-user', 'color-text-bright')}
+        &.user, &.user img { @include thumbnailColor('color-bg-thumbnail-user', 'color-text-rest')}
         &.device, &.device img { @include thumbnailColor('color-bg-upload', 'color-text-neutral-primary')}
     }
 

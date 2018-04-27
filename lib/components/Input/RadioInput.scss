@@ -1,4 +1,4 @@
-@import '../../common/overrides';
+@import '../../common/constants';
 @import '../../common/mixins';
 @import '../../common/colors';
 
@@ -33,25 +33,24 @@ $outline-focus-border-width: 1px;
         border: none;
         outline: none;
         @include themify{
-            background-color: themed('color-bg-input-rest');
+            background-color: themed('color-bg-radio-btn-rest');
         }
 
         &:focus ~ .radio-button:not(.disabled) {
             @include themify{
-                outline: themed('outline-focus');
                 outline-offset: $outline-focus-border-width;
             }
         }
 
         &:hover:not(:checked) ~ .radio-button:not(.disabled) {
             @include themify{
-                border: themed('border-active');
+                border: 1px solid themed('color-border-radio-btn-hover');
             }
         }
 
         &:focus:not(:checked) ~ .radio-button {
             @include themify{
-                border: themed('border-active');
+                border: 1px solid themed('color-border-radio-btn-focused');
             }
         }
     }
@@ -85,18 +84,18 @@ $outline-focus-border-width: 1px;
         width: $radio-input-size;
         height: $radio-input-size;
         @include themify{
-            background-color: themed('color-bg-input-rest');
-            border: themed('border-default');
+            background-color: themed('color-bg-radio-btn-rest');
+            border: 1px solid themed('color-border-radio-btn-rest');
         }
         border-radius: $radio-input-size / 2;
         outline: none;
         vertical-align: top;
         @include themify{
             &.selected {
-                border: themed('border-selected');
+                border: 1px solid themed('color-border-radio-btn-selected');
             }
             &.disabled {
-                border: themed('border-disabled')
+                border: 1px solid themed('color-border-radio-btn-disabled')
             }
         }
     }

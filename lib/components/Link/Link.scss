@@ -1,4 +1,5 @@
-@import '../../common/overrides';
+@import '../../common/constants';
+@import '../../common/colors';
 @import '../../common/mixins';
 
 $default-link-colors: (
@@ -20,10 +21,14 @@ $default-link-outline: 1px dashed md-color(shade, 3);
     box-shadow: none;
     text-decoration: none;
 
-    color: map-get-default($text-colors, default, md-color(link, default));
+    @include themify {
+        color: themed('color-text-hyperlink-rest');
+    }    
 
     &:hover:not(:global(.disabled)) {
-        color: map-get-default($text-colors, hover, md-color(link, hover));
+        @include themify {
+            color: themed('color-text-hyperlink-hover');
+        }
         cursor: pointer;
     }
 
@@ -32,16 +37,22 @@ $default-link-outline: 1px dashed md-color(shade, 3);
     }
 
     &:active:not(:global(.disabled)) {
-        color: map-get-default($text-colors, pressed, md-color(link, pressed));
+        @include themify {
+            color: themed('color-text-hyperlink-focus');
+        }
     }
 
     &:visited:not(:global(.disabled)) {
-        color: map-get-default($text-colors, visited, md-color(link, visited));
+        @include themify {
+            color: themed('color-text-hyperlink-rest');
+        }
     }
 
     &:global(.disabled) {
         pointer-events: none;
-        color: map-get-default($text-colors, disabled, md-color(link, disabled));
+        @include themify {
+            color: themed('color-text-hyperlink-disabled');
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-@import '../../common/overrides';
+@import '../../common/constants';
 @import '../../common/mixins';
 @import '../../common/colors';
 
@@ -67,7 +67,13 @@ $icon-margin-top: 3px;
     &.alert-info {
         @include themify{
             background-color: themed('color-bg-alert-info');
-            color: themed('color-text-black');
+            color: themed('color-text-rest');
+        }
+
+        .alert-text {
+            @include themify{
+                color: themed('color-text-rest');
+            }
         }
     }
 

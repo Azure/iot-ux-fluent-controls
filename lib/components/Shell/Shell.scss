@@ -1,5 +1,6 @@
-@import '../../common/mixins';
+@import "~@azure-iot/ux-fluent-css/src/normalize";
+@import "~@azure-iot/ux-fluent-css/src/icons";
 
-@include rtl {
+:global(.rtl) {
     direction: rtl;
 }

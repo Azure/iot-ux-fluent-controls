@@ -1,6 +1,5 @@
-@import 'overrides';
+@import "~@azure-iot/ux-fluent-css/src/mixins";
 @import 'colormap'; // remove it
-@import 'overrides';
 
 // remove it
 /// Behaves like map-get except with a default value when $key doesn't
@@ -205,41 +204,4 @@
         @include md-box-float($option);
         @include md-box-size($option);
     }
-}
-
-/// RTL
-@mixin rtl {
-    :global(.rtl) {
-        @content;
-    }
-}
-
-
-/// click animation,]
-@mixin clickable($scale: $clickable-scale, $duration: $interaction-timing) {
-    transition-property: transform, background-color!important;
-    transition-duration: $duration!important;
-
-    transform: scale(1);
-    cursor: pointer;
-    &:active {
-        transform: scale($scale);
-    }
-}
-
-// Box sizing
-@mixin box-sizing($boxmodel) {
-    -webkit-box-sizing: $boxmodel;
-    -moz-box-sizing: $boxmodel;
-    box-sizing: $boxmodel;
-}
-
-  // WebKit-style focus
-
-  @mixin tab-focus() {
-    // WebKit-specific. Other browsers will keep their default outline style.
-    // (Initially tried to also force default via `outline: initial`,
-    // but that seems to erroneously remove the outline in Firefox altogether.)
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px;
 }
