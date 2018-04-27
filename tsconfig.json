@@ -17,6 +17,9 @@
             "@types/react-dom"
         ]
     },
+    "include": [
+        "lib/**/*"
+    ],
     "exclude": [
         "node_modules",
         "docs"
