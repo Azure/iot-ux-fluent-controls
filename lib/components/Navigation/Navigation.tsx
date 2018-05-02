@@ -12,13 +12,13 @@ export interface NavigationItems {
     to: string;
 }
 
-export interface Properties {
+export interface NavigationProperties {
     isExpanded: boolean;
     onClick: React.MouseEventHandler<any>;
     items: Array<NavigationItems>;
 }
 
-export class Navigation extends React.PureComponent<Properties> {
+export class Navigation extends React.PureComponent<NavigationProperties> {
     render() {
         return (
             <div className={cx('navigation', { expanded: this.props.isExpanded })} data-test-hook='side-nav'>

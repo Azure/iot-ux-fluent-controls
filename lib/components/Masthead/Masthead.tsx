@@ -4,7 +4,7 @@ import { Thumbnail } from '../Thumbnail';
 
 const cx = classnames.bind(require('./Masthead.scss'));
 
-export interface Properties {
+export interface MastheadProperties {
     branding: React.ReactNode;
     user?: {
         displayName: string;
@@ -12,7 +12,7 @@ export interface Properties {
     };
 }
 
-export class Masthead extends React.PureComponent<Properties> {
+export class Masthead extends React.PureComponent<MastheadProperties> {
     render() {
         return <nav className={cx('masthead')}>
             <div className={cx('branding', 'inline-text-overflow')} data-test-hook={'masthead-application-name'}>

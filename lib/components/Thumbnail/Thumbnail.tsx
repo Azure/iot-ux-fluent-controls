@@ -6,7 +6,7 @@ const cx = classNames.bind(require('./Thumbnail.scss'));
  * Scalable thumbnail for a product or a device
  */
 
-export interface Properties {
+export interface ThumbnailProperties {
     // if we are loading then the loading state is displayed
     // if not and we have a display url, we load the image
     // if the image doesn't load and we have a kind, we use that
@@ -32,7 +32,7 @@ export interface Properties {
  * one in-memory boolean flag that doesn't affect anything outside this component,
  * we can just use React's setState instead of creating a new Store for this.
  */
-export interface State {
+export interface ThumbnailState {
     /** Flag that is set when the browser has finished loading the image */
     imageLoaded: boolean;
 }
@@ -48,8 +48,8 @@ const kindIcons = {
     'missing': 'icon-alias-missing-image'
 };
 
-export class Thumbnail extends React.Component<Properties, State> {
-    constructor(props: Properties) {
+export class Thumbnail extends React.Component<ThumbnailProperties, ThumbnailState> {
+    constructor(props: ThumbnailProperties) {
         super(props);
         this.state = { imageLoaded: false };
     }
