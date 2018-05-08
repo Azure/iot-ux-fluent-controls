@@ -17,3 +17,5 @@ export * from './components/Pivot';
 export * from './components/Shell';
 export * from './components/Thumbnail';
 export * from './components/Toggle';
+export * from './components/Accordion';
+export * from './components/InlinePopup';

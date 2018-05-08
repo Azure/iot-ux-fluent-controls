@@ -1,0 +1,10 @@
+.accordion-label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.accordion-content {
+    &:not(.open) {
+        display: none;
+    }
+}

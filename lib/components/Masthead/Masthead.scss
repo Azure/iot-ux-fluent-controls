@@ -2,32 +2,26 @@
 @import '../../common/constants';
 @import '../../common/mixins';
 
-$help-menu-flyout-width: 220px;
+$header-height: $layout-nav-item-height;
 $masthead-branding-width: 50%;
 $masthead-brandname-width: 200px;
 $masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
 $masthead-collapse-start: 660px;
 $masthead-button-width: $layout-nav-item-height;
 $masthead-wide-button-width: $masthead-button-width * 4;
-$header-height: $layout-nav-item-height;
 
 .masthead {
     height: $header-height;
-}
-
-.masthead, .masthead a {
     @include themify {
         background-color: themed('color-bg-masthead');
-        color: themed('color-text-white');
     }
 }
 
-.branding {
-    float: left;
-    text-align: left;
+.masthead-branding {
     width: $masthead-branding-width;
-    padding: 0px $gutter-small;
     height: $header-height;
+    display: flex;
+    align-items: flex-start;
 
     &>* {
         line-height: $header-height;
@@ -37,45 +31,184 @@ $header-height: $layout-nav-item-height;
     &>*+*:before {
         content: '|';
         margin: 0px 10px;
-
         @include themify {
-            color: themed('color-border-rest');
+            color: themed('color-border-masthead');
         }
     }
 
     a {
+        padding: 0 $gutter-small;
         text-decoration: none;
-        padding: $gutter-small;
-        margin-left: -$gutter-small;
-    }
-}
-
-.toolbar {
-    float: right;
-    width: 100% - $masthead-branding-width;
-    text-align: right;
-    position: relative;
-
-    li {
-        padding: 0px $gutter-small;
-        height: $header-height * 0.8;
-        line-height: $header-height * 0.8;
-        cursor: pointer;
-    }
-}
-
-.branding a, .toolbar li, .toolbar-btn {
-    @include themify {
-        background-color: themed('color-bg-masthead');
-
-        &:active, &:hover, &:focus {
-            background-color: themed('color-bg-masthead-hover');
-            color: themed('color-text-white');
+        &:hover {
+            @include themify {
+                background-color: themed('color-bg-masthead-hover');
+            }
         }
     }
 }
 
-.toolbar-btn {
+.masthead-toolbar-container {
+    width: 100% - $masthead-branding-width;
+    text-align: right;
+    position: relative;
+
+    .tall {
+        height: auto;
+        @include themify {
+            border-bottom: 1px solid themed('color-border-masthead-toolbar');
+        }
+    }
+}
+
+.masthead-toolbar {
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    list-style-type: none;
+}
+
+
+.masthead {
+    height: $header-height;
+    @include themify {
+        background-color: themed('color-bg-masthead');
+    }
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.masthead, .masthead a {
+    @include themify {
+        color: themed('color-text-bright');
+    }
+}
+
+.masthead-toolbar-menu-item, .masthead-toolbar-menu-item a {
+    @include themify {
+        color: themed('color-text-default');
+    }
+}
+
+.masthead-toolbar-menu-item.sub-menu {
+    .menu-link {
+        padding-left: $gutter-small * 2;
+    }
+}
+
+.masthead-toolbar-menu {
+    @include themify {
+        background-color: themed('color-bg-masthead');
+    }
+    border: none !important;
+    margin-top: 0px !important;
+    text-align: left;
+    padding: 0 !important;
+
+    button, .menu-link, .user-label {
+        text-align: inherit;
+        background: none;
+        border: none;
+        padding: 0px $gutter-small;
+        width: 100%;
+
+        &:hover {
+            @include themify {
+                background-color: themed('color-bg-disabled');
+            }
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        width: $masthead-wide-button-width + 1px; // 1px to account for button border
+    }
+
+
+    .masthead-toolbar-menu-item {
+        line-height: $header-height * 0.8;
+
+        &:not(:last-child) {
+            @include themify {
+                border-bottom: 1px solid themed('color-border-disabled') !important;
+            }
+
+            &:focus {
+                border-bottom-color: transparent;
+            }
+        }
+
+        .menu-link {
+            display: block;
+        }
+
+        button:focus, .menu-link:focus {
+            @include themify {
+                outline: themed('color-text-default') dashed 1px !important;
+            }
+        }
+
+        button:focus {
+            outline-offset: -2px; // tab focus mixin is using -2px for outline offsets
+        }
+    }
+
+    &.wide {
+        width: calc(100vw - #{$nav-collapsed-width});
+    }
+
+    &.search-bar {
+        right: calc(-#{$masthead-button-width} - #{$masthead-wide-button-width} - 2px); //2px to account for border
+    }
+}
+
+.sub-menu .help-menu {
+    @include themify {
+        border-top: 1px solid themed('color-border-disabled');
+    }
+}
+
+.masthead-toolbar-item {
+    @include themify {
+        border-left: 1px solid themed('color-border-masthead');    
+    }
+    min-width: $masthead-button-width;
+}
+
+.masthead-toolbar-btn {
+    width: $masthead-button-width!important;
+    height: $header-height!important;
+    line-height: $header-height;
+    justify-content: center;
+    align-items: center;
+    display: flex!important;
+    border: none;
+    white-space: nowrap;
+    text-decoration: none;
+    padding: 0!important;
+    @include themify {
+        background-color: themed('color-bg-masthead') !important;
+    }
+
+    &:hover {
+        @include themify {
+            background-color: themed('color-bg-masthead-hover') !important;
+        }        
+        border: 1px solid transparent!important;
+    }
+
+    .user-label {
+        margin-right: $gutter-normal / 2;
+        margin-left: $gutter-normal;
+        text-align: left;
+        color: inherit;
+    }
+
     width: $masthead-button-width;
     height: $header-height;
     line-height: $header-height;
@@ -91,10 +224,6 @@ $header-height: $layout-nav-item-height;
         width: $masthead-wide-button-width;
     }
 
-    @include themify {
-        border-color: themed('color-border-masthead');
-    }
-
     .user-label {
         margin-right: $gutter-normal / 2;
         margin-left: $gutter-normal;
@@ -102,12 +231,28 @@ $header-height: $layout-nav-item-height;
     }
 }
 
+.masthead-branding a:focus, .masthead-toolbar-btn:focus {
+    outline-offset: -1px!important;
+    background-color: none!important;
+    @include themify {
+        outline: 1px themed('color-border-controls') dashed !important;
+    }    
+}
+
+.user-menu-btn {
+    width: $masthead-wide-button-width!important;
+    display: flex;
+    align-content: center;
+}
+
 .user-label {
-    position: relative;
-    display: inline-block;
-    height: $header-height;
-    vertical-align: top;
-    max-width: 150px - ($gutter-normal *2);
+    height: $header-height - 2px; // 2px to account for border of outer container.
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    justify-content: space-between;
+    width: 150px - ($gutter-normal *2);
 
     &>* {
         height: $header-height / 2;
@@ -120,7 +265,10 @@ $header-height: $layout-nav-item-height;
 
     .email {
         line-height: $header-height / 2 - 10px;
-        font-size: $font-size-small;
+        @include themify {
+            color: themed('color-text-masthead-sub-label');
+        }
+        font-size: $font-size-xsmall;
         text-transform: uppercase;
     }
 }
@@ -154,7 +302,74 @@ $header-height: $layout-nav-item-height;
 }
 
 @media (max-width: $masthead-application-breakpoint) {
-    .branding *+* {
+    .masthead-branding *+* {
         display: none;
+    }
+}
+
+.masthead-branding {
+    @include rtl {
+        direction: rtl;
+        margin-left: unset;
+        margin-right: 0;
+    }
+}
+
+.masthead-toolbar-container {
+    @include rtl {
+        direction: rtl;
+        text-align: left;
+    }
+}
+
+.masthead-toolbar-menu {
+    @include rtl {
+        direction: rtl;
+        text-align: right;
+
+        &.search-bar {
+            right: unset;
+            left: calc(-#{$masthead-button-width} - #{$masthead-wide-button-width} - 2px); //2px to account for border.
+        }
+    }
+}
+
+.masthead-toolbar-btn {
+    @include rtl {
+        @include themify {
+            border-right: 1px solid themed('color-border-masthead');
+        }
+        border-left: 0;
+
+        .user-label {
+            margin-left: $gutter-normal / 2;
+            margin-right: $gutter-normal;
+            text-align: right;
+        }
+    }
+}
+
+.user-thumbnail {
+    @include rtl {
+        margin-left: $gutter-normal;
+        margin-right: 0;
+    }
+}
+
+.masthead-toolbar-item {
+    @include rtl {
+        @include themify {
+            border-right: 1px solid themed('color-border-masthead');        
+        }
+        border-left: unset;
+    }
+}
+
+.masthead-toolbar-menu-item.sub-menu {
+    @include rtl {
+        .menu-link {
+            padding-right: $gutter-small * 2;
+            padding-left: $gutter-small;
+        }
     }
 }
