@@ -77,7 +77,7 @@ $line-height-row: $calendar-column-width;
         padding-left: 2*$grid-size;
         padding-bottom: 1.5*$grid-size;
         @include themify{
-            border-bottom: themed('border-default');
+            border-bottom: 1px solid themed('color-border-rest');
             color: themed('color-text-rest')
         }        
         & > div  {

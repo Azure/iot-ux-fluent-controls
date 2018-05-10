@@ -10,19 +10,19 @@ $outline-focus-border-width: 1px;
     @include themify{
         color: themed('color-text-rest');
         &:not(.disabled) input:focus + .checkbox-button {
-            outline: themed('outline-focus');
+            outline: $outline-focus-border-width dashed themed('color-border-focus');
             outline-offset: $outline-focus-border-width;
         }
 
         .checkbox-button {
-            border: themed('border-default'); 
+            border: 1px solid themed('color-border-rest'); 
             background-color: themed('color-bg-input-rest');
         }
 
         &.disabled {
             color: themed('color-text-disabled');
             .checkbox-button { 
-                border: themed('border-disabled');
+                border: 1px solid themed('color-border-disabled');
                 background-color: themed('color-bg-input-rest');
             }
         }
@@ -35,21 +35,21 @@ $outline-focus-border-width: 1px;
 .checkbox-container:hover {
     @include themify{
         .checkbox-button {
-            border: themed('border-active');
+            border: 1px solid themed('color-border-selected');
         }
 
         &.selected .checkbox-button {
             color: themed('color-text-white');
             background-color: themed('color-bg-btn-primary-rest');
-            border: themed('border-selected-hover');
+            border: 1px solid themed('color-border-hover');
         }
 
         &.disabled .checkbox-button {
-            border: themed('border-disabled');
+            border: 1px solid themed('color-border-disabled');
         }
 
         &.indeterminate .checkbox-button {
-            border: themed('border-active');
+            border: 1px solid themed('color-border-selected');
             background-color: themed('color-bg-input-rest');
         }
     }
@@ -58,7 +58,7 @@ $outline-focus-border-width: 1px;
 .checkbox-container.selected {
     @include themify{
         .checkbox-button {
-            border: themed('border-selected');
+            border: 1px solid themed('color-border-selected');
             background-color: themed('color-bg-btn-primary-rest');
         }
 
@@ -82,13 +82,13 @@ $outline-focus-border-width: 1px;
 .checkbox-container.indeterminate {
     @include themify{
         .checkbox-button {
-            border: themed('border-selected');
+            border: 1px solid themed('color-border-selected');
             background-color: themed('color-bg-input-rest');
         }
 
         &.disabled {
             .checkbox-button {
-                border: themed('border-disabled');
+                border: 1px solid themed('color-border-disabled');
             }
 
             .checkbox-fill {

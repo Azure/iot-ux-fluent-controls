@@ -40,7 +40,7 @@ $swatches-horizontal: 3;
 
         &:focus {
             @include themify {
-                border: themed('outline-focus');
+                border: 1px dashed themed('color-border-focus');
             }
             background-color: transparent;
         }
@@ -50,7 +50,7 @@ $swatches-horizontal: 3;
         .inline-popup-label {
             @include themify {
                 background-color: themed('color-bg-content');
-                border: 1px solid themed('color-border-inactive');
+                border: 1px solid themed('color-border-rest');
             }            
             border-bottom: 0px;
             z-index: $z-index-flyouts-inline-btn + 1;
@@ -70,9 +70,9 @@ $swatches-horizontal: 3;
         padding: $grid-size / 2;        
         margin-top: -1px; // pulls the inline popup panel up and underneath the container
         @include themify {
-            background-color: themed('color-bg-panel');
-            border: 1px solid themed('color-border-inactive');  
-            box-shadow: themed('shadow-gradient-no-top');      
+            background-color: themed('color-bg-panel-primary');
+            border: 1px solid themed('color-border-rest');  
+            box-shadow: -3px 3px 10px -3px $color-black-transparent-primary;      
         }
 
         &.left {
@@ -115,7 +115,7 @@ $swatches-horizontal: 3;
 
     &:hover, &:focus {
         @include themify {
-            background-color: themed('color-bg-btn-inline');
+            background-color: themed('color-bg-item-hover');
         }        
         outline: none;
     }

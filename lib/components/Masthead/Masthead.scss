@@ -32,7 +32,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
         content: '|';
         margin: 0px 10px;
         @include themify {
-            color: themed('color-border-masthead');
+            color: themed('color-border-panel');
         }
     }
 
@@ -55,7 +55,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
     .tall {
         height: auto;
         @include themify {
-            border-bottom: 1px solid themed('color-border-masthead-toolbar');
+            border-bottom: 1px solid themed('color-border-panel');
         }
     }
 }
@@ -84,13 +84,13 @@ $masthead-wide-button-width: $masthead-button-width * 4;
 
 .masthead, .masthead a {
     @include themify {
-        color: themed('color-text-bright');
+        color: themed('color-text-white');
     }
 }
 
 .masthead-toolbar-menu-item, .masthead-toolbar-menu-item a {
     @include themify {
-        color: themed('color-text-default');
+        color: themed('color-text-rest');
     }
 }
 
@@ -118,7 +118,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
 
         &:hover {
             @include themify {
-                background-color: themed('color-bg-disabled');
+                background-color: themed('color-bg-item-hover');
             }
         }
     }
@@ -149,7 +149,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
 
         button:focus, .menu-link:focus {
             @include themify {
-                outline: themed('color-text-default') dashed 1px !important;
+                outline: themed('color-text-rest') dashed 1px !important;
             }
         }
 
@@ -175,7 +175,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
 
 .masthead-toolbar-item {
     @include themify {
-        border-left: 1px solid themed('color-border-masthead');    
+        border-left: 1px solid themed('color-border-panel');    
     }
     min-width: $masthead-button-width;
 }
@@ -266,7 +266,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
     .email {
         line-height: $header-height / 2 - 10px;
         @include themify {
-            color: themed('color-text-masthead-sub-label');
+            color: themed('color-text-placeholder');
         }
         font-size: $font-size-xsmall;
         text-transform: uppercase;
@@ -337,7 +337,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
 .masthead-toolbar-btn {
     @include rtl {
         @include themify {
-            border-right: 1px solid themed('color-border-masthead');
+            border-right: 1px solid themed('color-border-panel');
         }
         border-left: 0;
 
@@ -359,7 +359,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
 .masthead-toolbar-item {
     @include rtl {
         @include themify {
-            border-right: 1px solid themed('color-border-masthead');        
+            border-right: 1px solid themed('color-border-panel');        
         }
         border-left: unset;
     }

@@ -17,7 +17,7 @@ $line-height: 4*$grid-size;
 .pivot-menu {
     @include md-box(block, relative);
     @include themify{
-        border-bottom: themed('border-default');
+        border-bottom: 1px solid themed('color-border-rest');
     }
     white-space: nowrap;
     overflow: hidden;
@@ -94,7 +94,7 @@ $line-height: 4*$grid-size;
 
         &.selected .pivot-border {
             @include themify {
-                border-bottom: themed('border-pivot-disabled');
+                border-bottom: 2px solid themed('color-border-disabled');
             }
         }
     }
@@ -143,7 +143,7 @@ $line-height: 4*$grid-size;
 
         a:focus & {
             @include themify{
-                outline: themed('outline-focus');
+                outline: 1px dashed themed('color-border-focus');
             }
             outline-offset: 0;
         }

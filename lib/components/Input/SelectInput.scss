@@ -36,7 +36,7 @@ $line-height: 4*$grid-size;
         appearance: none;
         border-radius: 0px;
         @include themify{
-            border: themed('border-default');
+            border: 1px solid themed('color-border-rest');
             background-color: themed('color-bg-input-rest');
         }
 
@@ -61,7 +61,7 @@ $line-height: 4*$grid-size;
             &:disabled {
                 @include themify{
                     color: themed('color-text-disabled');
-                    border: themed('border-disabled');
+                    border: 1px solid themed('color-border-disabled');
                     background-color: themed('color-bg-input-disabled');
                 }
             }
@@ -73,7 +73,7 @@ $line-height: 4*$grid-size;
 
         @include themify{
             &:hover {
-                border: themed('border-active');
+                border: 1px solid themed('color-border-selected');
             }
             
             &:focus {
@@ -81,12 +81,12 @@ $line-height: 4*$grid-size;
             }
             
             &:active {
-                border: themed('border-active');
+                border: 1px solid themed('color-border-selected');
             }
             
             &:disabled {
                 color: themed('color-text-disabled');
-                border: themed('border-disabled');
+                border: 1px solid themed('color-border-disabled');
                 background-color: themed('color-bg-input-disabled');
             }   
             &::selection {
@@ -95,7 +95,7 @@ $line-height: 4*$grid-size;
             }
     
             &.error:not(:disabled) {
-                border: themed('border-error');
+                border: 1px solid themed('color-border-error');
             }
         }
     }

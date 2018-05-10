@@ -19,20 +19,20 @@ $card-icon-left: ($gallery-card-width - $gallery-card-icon-size);
 
 a:focus .card:not(.disabled) {
   @include themify{
-    border: themed('border-gallery-card-hover');
+    border: 1px solid themed('color-border-tile-hover');
   }}
 
 .card {
   @include md-box(inline-block, relative, hidden);
   @include themify{
     background-color: themed('color-bg-gallery-tile');
-    border: themed('border-gallery-card-default');
+    border: 1px solid themed('color-border-tile');
   }
   margin: 2.5*$grid-size;
 
   &:hover:not(.disabled) {
     @include themify{
-      border: themed('border-gallery-card-hover');
+      border: 1px solid themed('color-border-tile-hover');
     }
   }
 

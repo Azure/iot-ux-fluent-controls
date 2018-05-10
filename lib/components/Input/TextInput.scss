@@ -24,7 +24,7 @@ $line-height-small: 4*$grid-size;
         height: $input-height;
         padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
         @include themify{
-            border: themed('border-default');
+            border: 1px solid themed('color-border-rest');
             color: themed('color-text-rest');
             background-color: themed('color-bg-input-rest');
         }
@@ -36,7 +36,7 @@ $line-height-small: 4*$grid-size;
         }
         @include themify{
             &:hover {
-                border: themed('border-active');
+                border: 1px solid themed('color-border-selected');
             }
         }
         &:focus {
@@ -57,7 +57,7 @@ $line-height-small: 4*$grid-size;
 
         &:active {
             @include themify {
-                border: themed('border-active');
+                border: 1px solid themed('color-border-selected');
             }
             &.show-cancel:not(:disabled) {
                 padding-right: 8*$grid-size;
@@ -74,7 +74,7 @@ $line-height-small: 4*$grid-size;
         @include themify{
             &:disabled {
                 color: themed('color-text-disabled');
-                border: themed('border-disabled');
+                border: 1px solid themed('color-border-disabled');
                 background-color: themed('color-bg-input-disabled');
             }
     
@@ -92,7 +92,7 @@ $line-height-small: 4*$grid-size;
             }
             
             &.error:not(:disabled) {
-                border: themed('border-error');
+                border: 1px solid themed('color-border-error');
             }
         }
 
@@ -158,19 +158,19 @@ $line-height-small: 4*$grid-size;
 
 @include themify{
     .prefix-addon {
-        border-left: themed('border-default');
-        border-top:  themed('border-default');
-        border-bottom:  themed('border-default');
-        background-color: themed('color-transparent');
+        border-left: 1px solid themed('color-border-rest');
+        border-top:  1px solid themed('color-border-rest');
+        border-bottom:  1px solid themed('color-border-rest');
+        background-color: transparent;
         color: themed('color-text-rest');
         padding-right: 2*$grid-size;
     }
     
     .postfix-addon {
-        border-right:  themed('border-default');
-        border-top:  themed('border-default');
-        border-bottom:  themed('border-default');
-        background-color: themed('color-transparent');
+        border-right:  1px solid themed('color-border-rest');
+        border-top:  1px solid themed('color-border-rest');
+        border-bottom:  1px solid themed('color-border-rest');
+        background-color: transparent;
         color: themed('color-text-rest');        
         padding-left: 2*$grid-size;
         

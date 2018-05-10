@@ -37,7 +37,7 @@ $line-height: 3.5*$grid-size;
 
     &:not(.disabled) .toggle-button:focus {
         @include themify{
-            outline: themed('outline-focus');
+            outline: 1px dashed themed('color-border-focus');
         }
         outline-offset: 1px;
     }

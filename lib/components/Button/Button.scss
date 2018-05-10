@@ -40,7 +40,7 @@ $outline-focus-border-width: 1px;
         &:focus:not(:disabled) {
             color: themed('color-text-black');
             background-color: themed('color-bg-btn-standard-focus');
-            outline: themed('outline-focus');
+            outline: $outline-focus-border-width dashed themed('color-border-focus');
             outline-offset: -$outline-focus-border-width;
         }
         
@@ -69,7 +69,7 @@ $outline-focus-border-width: 1px;
         &:focus:not(:disabled) {
             color: themed('color-text-white');
             background-color: themed('color-bg-btn-primary-focus');
-            outline: themed('outline-focus');
+            outline: $outline-focus-border-width dashed themed('color-border-focus');
             outline-offset: -$outline-focus-border-width;
         }
         
@@ -98,7 +98,7 @@ $outline-focus-border-width: 1px;
         &:focus:not(:disabled) {
             color: themed('color-text-rest');
             background-color: themed('color-bg-btn-danger-focus');
-            outline: themed('outline-focus');
+            outline: $outline-focus-border-width dashed themed('color-border-focus');
             outline-offset: -$outline-focus-border-width;
         }
         

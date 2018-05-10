@@ -33,7 +33,7 @@ $z-index-focus: 2*$z-index-small-step;
         padding: 0px 0px 0px 4*$grid-size;
         @include themify{
             background-color: themed('color-bg-input-rest');
-            border: themed('border-default');
+            border: 1px solid themed('color-border-rest');
         }
 
         option {
@@ -53,23 +53,23 @@ $z-index-focus: 2*$z-index-small-step;
         }
         @include themify{
             &:hover {
-                border: themed('border-active');
+                border: 1px solid themed('color-border-selected');
                 z-index: $z-index-hover;
             }
             
             &:focus {
-                border: themed('border-active');
+                border: 1px solid themed('color-border-selected');
                 z-index: $z-index-focus;
             }
             
             &:active {
-                border: themed('border-active');
+                border: 1px solid themed('color-border-selected');
             }
             
             &:disabled {
                 color: themed('color-text-disabled');
                 background-color: themed('color-bg-input-disabled');
-                border: themed('border-disabled');
+                border: 1px solid themed('color-border-disabled');
             }
             
             &::selection {
@@ -78,7 +78,7 @@ $z-index-focus: 2*$z-index-small-step;
             }
             
             &.error:not(:disabled) {
-                border: themed('border-error');
+                border: 1px solid themed('color-border-error');
             }
         }
     }

@@ -27,7 +27,7 @@ $line-height: 4.5*$grid-size;
     a:focus > & {
         outline-offset: 1px;
         @include themify {
-            outline: themed('outline-focus');
+            outline: 1px dashed themed('color-border-focus');
             color: themed('color-text-rest');
             background-color: themed('color-bg-item-hover');
         }
@@ -87,10 +87,16 @@ $line-height: 4.5*$grid-size;
         cursor: default;        
     }
 
+    &:hover:not(.disabled) {
+        @include themify {
+            background-color: themed('color-bg-item-hover');
+        }
+    }
+
     &:focus:not(.disabled) {
         outline-offset: 1px;
         @include themify{
-            outline: themed('outline-focus');
+            outline: 1px dashed themed('color-border-focus');
             background-color: themed('color-bg-item-hover');
         }
     }

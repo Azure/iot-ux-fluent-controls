@@ -17,13 +17,13 @@ $nav-expanded-width: 220px;
 
     @include themify {
         background-color: themed('color-bg-navbar');
-        box-shadow: 0px 0px 0px themed('color-nav-gradient');
+        box-shadow: 0px 0px 0px $color-black-transparent-primary;
     }
 
     &.expanded {
         width: $nav-expanded-width;
         @include themify {
-            box-shadow: 0px 0px 10px themed('color-nav-gradient');
+            box-shadow: 0px 0px 10px $color-black-transparent-primary;
         }
     }
 }
@@ -36,9 +36,9 @@ $nav-expanded-width: 220px;
     position: relative;
 
     @include themify {
-        color: themed('color-text-bright');
+        color: themed('color-text-white');
         &:active, &:hover, &:focus {
-            color: themed('color-text-bright');
+            color: themed('color-text-white');
             background-color: themed('color-bg-navbar-hover');
         }
     }

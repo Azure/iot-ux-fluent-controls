@@ -38,7 +38,7 @@ $outline-focus-border-width: 1px;
 
         &:focus ~ .radio-button:not(.disabled) {
             @include themify{
-                outline-offset: $outline-focus-border-width;
+                outline-offset: 1px;
             }
         }
 

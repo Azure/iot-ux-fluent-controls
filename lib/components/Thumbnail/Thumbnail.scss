@@ -52,10 +52,10 @@ $img-size: 160px;
 
 
     @include themify {
-        @include thumbnailColor('color-disabled', 'color-text-white');
+        @include thumbnailColor('color-bg-input-disabled', 'color-text-white');
 
-        &.user, &.user img { @include thumbnailColor('color-bg-thumbnail-user', 'color-text-rest')}
-        &.device, &.device img { @include thumbnailColor('color-bg-upload', 'color-text-neutral-primary')}
+        &.user, &.user img { @include thumbnailColor('color-bg-panel-contextual', 'color-text-rest')}
+        &.device, &.device img { @include thumbnailColor('color-bg-upload', 'color-text-rest')}
     }
 
     img {

@@ -29,19 +29,19 @@ $dropdown-z-index: $z-index-medium-step;
         padding: 2*$grid-size 8*$grid-size 2*$grid-size 3*$grid-size;
         outline: none;
         @include themify{
-            border: themed('border-default');
+            border: 1px solid themed('color-border-rest');
             background-color: themed('color-bg-input-rest');
         }
 
         &:hover {
             @include themify{
-                border: themed('border-active');
+                border: 1px solid themed('color-border-selected');
             }
         }
 
         &:focus, &:active, &.visible {
             @include themify{
-                border: themed('border-active');
+                border: 1px solid themed('color-border-selected');
             }
 
             &:not(.disabled) {
@@ -62,7 +62,7 @@ $dropdown-z-index: $z-index-medium-step;
         &:disabled {
             @include themify{
                 color: themed('color-text-disabled');
-                border: themed('border-disabled');
+                border: 1px solid themed('color-border-disabled');
                 background-color: themed('color-bg-input-disabled');
             }
     
@@ -88,7 +88,7 @@ $dropdown-z-index: $z-index-medium-step;
 
         &.error:not(:disabled) {
             @include themify{
-                border: themed('border-error');
+                border: 1px solid themed('color-border-error');
             }
         }
 
@@ -157,7 +157,7 @@ $dropdown-z-index: $z-index-medium-step;
     overflow-y: auto;
     @include themify{
         background-color: themed('color-bg-input-rest');
-        border: themed('border-default');
+        border: 1px solid themed('color-border-rest');
     }
 }
 

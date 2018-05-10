@@ -26,7 +26,7 @@ $line-height: 5*$grid-size;
     font-family: $font-family-default;
     @include themify {
         color: themed('color-text-rest');
-        border: themed('border-default');
+        border: 1px solid themed('color-border-rest');
         background-color: themed('color-bg-input-rest');
     }
     font-size: $font-size-default;
@@ -34,7 +34,7 @@ $line-height: 5*$grid-size;
     outline: none;
     @include themify{
         &:hover {
-            border: themed('border-active');
+            border: 1px solid themed('color-border-selected');
         }
 
         &:focus {
@@ -42,12 +42,12 @@ $line-height: 5*$grid-size;
         }
 
         &:active {
-            border: themed('border-active');
+            border: 1px solid themed('color-border-selected');
         }
         
         &:disabled {
             color: themed('color-text-disabled');
-            border: themed('border-disabled');
+            border: 1px solid themed('color-border-disabled');
             background-color: themed('color-bg-input-disabled');
 
             &::placeholder {
@@ -65,7 +65,7 @@ $line-height: 5*$grid-size;
         }
 
         &.error:not(:disabled) {
-            border: themed('border-error');
+            border: 1px solid themed('color-border-error');
         }
     }
 
