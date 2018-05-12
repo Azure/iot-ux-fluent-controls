@@ -25,40 +25,44 @@ $nav-expanded-width: 220px;
         @include themify {
             box-shadow: 0px 0px 10px $color-black-transparent-primary;
         }
+        @include rtl {
+            left: calc(100% - #{$nav-expanded-width});
+        }
+    }
+
+    @include rtl {
+        left: calc(100% - #{$nav-collapsed-width});
+        direction: rtl;
+        text-align: right;
     }
 }
 
-.link-container {
+.hamburger-button {
     width: 100%;
     height: $layout-nav-item-height;
-    display: inline-block;
-    text-decoration: none!important;
-    position: relative;
-
+    border: none;
+    outline: none;
+    padding: 0;
+    
     @include themify {
         color: themed('color-text-white');
+        background-color: themed('color-bg-navbar');
+
         &:active, &:hover, &:focus {
             color: themed('color-text-white');
             background-color: themed('color-bg-navbar-hover');
         }
-    }
 
+        &:focus {
+            outline: 1px dashed themed('color-border-focus');
+        }
+    }
+        
     @include clickable;
 }
 
-.link-thumbnail {
-    width: $layout-nav-item-height;
+.hamburger-icon {
     text-align: center;
     font-size: $icon-size-xsmall;
-}
-
-.link-label, .link-thumbnail {
-    height: $layout-nav-item-height;
-    line-height: $layout-nav-item-height;
-    display: inline-block;
-    vertical-align: top;
-}
-
-.link-label {
-    width: calc(100% - #{$layout-nav-item-height});
+    width: $layout-nav-item-height;
 }

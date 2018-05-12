@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
-import {DivProps, SpanProps, ButtonProps as AttrButtonProps, Elements as Attr} from '../../Attributes';
-import {Icon, IconSize, IconAttributes} from '../Icon';
+import {SpanProps, ButtonProps as AttrButtonProps, Elements as Attr} from '../../Attributes';
 const css = classnames.bind(require('./Button.scss'));
 
 export interface ButtonComponentType {}

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { TabOrder } from '../../common/tabOrder';
+import { ButtonProps } from '../../Attributes';
 import * as classnames from 'classnames/bind';
 
 const cx = classnames.bind(require('./Navigation.scss'));
@@ -12,26 +13,40 @@ export interface NavigationItems {
     to: string;
 }
 
+export interface NavigationAttributes {
+    navButton?: ButtonProps;
+    tabIndex?: number;
+}
+
 export interface NavigationProperties {
     isExpanded: boolean;
-    onClick: React.MouseEventHandler<any>;
-    items: Array<NavigationItems>;
+    onClick: React.EventHandler<any>;
+    attr?: NavigationAttributes;
 }
 
 export class Navigation extends React.PureComponent<NavigationProperties> {
+    public static defaultProps: Partial<NavigationProperties> = {
+        attr: {
+            navButton: null,
+            tabIndex: TabOrder.navigation
+        }
+    };
+
     render() {
         return (
-            <div className={cx('navigation', { expanded: this.props.isExpanded })} data-test-hook='side-nav'>
-                <div className={cx('link-container')} key='globalNavButton' onClick={this.props.onClick}>
-                    <div className={cx('link-thumbnail', 'icon', 'icon-globalNavButton')} />
-                </div>
-                {this.props.items.map(x => (
-                    <Link to={x.to} className={cx('link-container')} key={x.key} title={x.title}>
-                        <div className={cx('link-thumbnail', x.icon)} />
-                        <div className={cx('link-label', 'inline-text-overflow')}>{x.label}</div>
-                    </Link>
-                ))}
-            </div>
+            <nav className={cx('navigation', { expanded: this.props.isExpanded })} data-test-hook='side-nav'>
+                <button 
+                    className={cx('hamburger-button')} 
+                    key='globalNavButton'
+                    onClick={this.props.onClick} 
+                    title={this.props.attr.navButton && this.props.attr.navButton.title}
+                    aria-label={this.props.attr.navButton && this.props.attr.navButton.title}
+                    tabIndex={this.props.attr.tabIndex}
+                >
+                    <div className={cx('hamburger-icon', 'icon', 'icon-globalNavButton')} />
+                </button>
+                {this.props.children}                
+            </nav>
         );
     }
 }

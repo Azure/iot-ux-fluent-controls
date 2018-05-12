@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as classNames from 'classnames';
-import {MethodNode} from './Common';
 
 export type AttrProps<T extends HTMLElement> = React.HTMLProps<T> & React.ClassAttributes<T> & any;
 
