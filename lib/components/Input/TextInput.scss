@@ -70,27 +70,27 @@ $line-height-small: 4*$grid-size;
                 }
             }
         }
-        
+
         @include themify{
             &:disabled {
                 color: themed('color-text-disabled');
                 border: 1px solid themed('color-border-disabled');
                 background-color: themed('color-bg-input-disabled');
             }
-    
+
             &::placeholder {
                 color: themed('color-text-disabled');
             }
-            
+
             &::placeholder {
                 color: themed('color-text-placeholder');
             }
-            
+
             &::selection {
                 color: themed('color-text-white');
                 background-color: themed('color-bg-item-selected');
             }
-            
+
             &.error:not(:disabled) {
                 border: 1px solid themed('color-border-error');
             }
@@ -147,7 +147,7 @@ $line-height-small: 4*$grid-size;
         @include md-box(inline-block, relative);
         @include themify{
             color: themed('color-text-rest');
-        }        
+        }
         padding-left: 2*$grid-size;
         height: $input-height;
         line-height: $input-height;
@@ -156,23 +156,26 @@ $line-height-small: 4*$grid-size;
     }
 }
 
-@include themify{
-    .prefix-addon {
+.prefix-addon {
+    background-color: transparent;
+    padding-right: 2*$grid-size;
+
+    @include themify{
         border-left: 1px solid themed('color-border-rest');
         border-top:  1px solid themed('color-border-rest');
         border-bottom:  1px solid themed('color-border-rest');
-        background-color: transparent;
         color: themed('color-text-rest');
-        padding-right: 2*$grid-size;
     }
-    
-    .postfix-addon {
+}
+
+.postfix-addon {
+    background-color: transparent;
+    padding-left: 2*$grid-size;
+
+    @include themify {
         border-right:  1px solid themed('color-border-rest');
         border-top:  1px solid themed('color-border-rest');
         border-bottom:  1px solid themed('color-border-rest');
-        background-color: transparent;
-        color: themed('color-text-rest');        
-        padding-left: 2*$grid-size;
-        
+        color: themed('color-text-rest');
     }
 }
