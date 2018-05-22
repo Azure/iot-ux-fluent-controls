@@ -36,9 +36,24 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: [
-          'style-loader',
-          'css-loader?modules&importLoaders=1&localIdentName=[path]_[name]_[local]',
-          'sass-loader',
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader:
+              'css-loader?modules&importLoaders=1&localIdentName=[path]_[name]_[local]',
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: [
+                path.resolve(
+                  __dirname,
+                  'node_modules/@azure-iot/ux-fluent-css/src/'
+                ),
+              ],
+            },
+          },
         ],
       },
     ],

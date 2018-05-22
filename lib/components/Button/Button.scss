@@ -1,6 +1,6 @@
 @import '../../common/constants';
 @import '../../common/mixins';
-@import '../../common/colors';
+@import '../../common/color.controls';
 
 $button-max-width: 140px;
 $line-height: 8*$grid-size;
@@ -119,7 +119,7 @@ $outline-focus-border-width: 1px;
     font-size: $font-size-default;
     line-height: $line-height;
 
-    :global(.icon) {
+:global(.icon) {
         @include md-box(inline-block);
         vertical-align: middle;
         margin-right: 2*$grid-size;
