@@ -26,15 +26,16 @@ export interface TextAreaFieldProps extends React.Props<TextAreaFieldType> {
     autogrow?: boolean;
     /** Disable HTML textarea element */
     disabled?: boolean;
-        /** Read only HTML input element */
-        readOnly?: boolean;
+    /** Read only HTML input element */
+    readOnly?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
     /** Autofocus */
     autoFocus?: boolean;
-
+    /** Tooltip text to display in info icon bubble */
+    tooltip?: MethodNode;
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
 
@@ -48,10 +49,31 @@ export interface TextAreaFieldProps extends React.Props<TextAreaFieldType> {
 
 /**
  * High level form text field
- * 
+ *
  * @param props Control properties (defined in `TextAreaFieldProps` interface)
  */
 export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (props: TextAreaFieldProps) => {
+    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
+    const textAreaAttr: TextAreaAttributes = {
+        container: props.attr.container,
+        textarea: Object.assign({
+            'aria-label': props.label,
+            'aria-describedby': tooltipId
+        }, props.attr.textarea),
+        pre: props.attr.pre
+    };
+    const fieldAttr: FormFieldAttributes = {
+        fieldLabel: Object.assign({
+            balloon: {
+                balloon: {
+                    id: tooltipId
+                }
+            }
+        }, props.attr.fieldLabel),
+        fieldError: props.attr.fieldError,
+        fieldContent: props.attr.fieldContent,
+        fieldContainer: props.attr.fieldContainer
+    };
     return (
         <FormField
             name={props.name}
@@ -60,8 +82,9 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
             errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
+            tooltip={props.tooltip}
             className={props.className}
-            attr={props.attr}
+            attr={fieldAttr}
         >
             <TextArea
                 name={props.name}
@@ -75,7 +98,7 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
                 autogrow={props.autogrow}
                 autoFocus={props.autoFocus}
                 required={props.required}
-                attr={props.attr}
+                attr={textAreaAttr}
             />
         </FormField>
     );

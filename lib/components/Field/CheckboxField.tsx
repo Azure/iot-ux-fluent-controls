@@ -10,20 +10,20 @@ export interface CheckboxFieldType {}
 export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
     /** HTML form element name */
     name: string;
-    /** 
+    /**
      * Current value of HTML checkbox element
-     * 
+     *
      * This must be an `Object` that is in `CheckboxFieldProps.options`
      */
     value: boolean;
-    
+
     /** Label to display above input element */
     label: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
     /** Error HTML title in case of overflow */
     errorTitle?: string;
-    
+
     /** Disable HTML input element */
     disabled?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
@@ -32,7 +32,8 @@ export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
     loading?: boolean;
     /** Autofocus */
     autoFocus?: boolean;
-
+    /** Tooltip text to display in info icon bubble */
+    tooltip?: MethodNode;
     /** Callback for HTML checkbox element `onChange` events */
     onChange: (newValue: boolean) => void;
 
@@ -46,15 +47,41 @@ export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
 
 /**
  * High level form checkbox control
- * 
+ *
  * IMPORTANT: The options provided to this control must all be UNIQUE. The
  * `value` property of checkboxes is the numerical index of the option in
  * `CheckboxField.options` so `CheckboxField.value` is compared to each value in
  * `options` (===) to decide which option is the one currently selected.
- * 
+ *
  * @param props: Object fulfilling `CheckboxFieldProps` interface
  */
-export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (props: CheckboxFieldProps) => {
+export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (props: CheckboxFieldProps) => {const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
+    const checkboxAttr: CheckboxInputAttributes = {
+        container: props.attr.container,
+        input: Object.assign({
+            'aria-label': props.label,
+            'aria-describedby': tooltipId
+        }, props.attr.input),
+        label: props.attr.label,
+        text: props.attr.text,
+        checkbox: props.attr.checkbox,
+        indeterminateFill: props.attr.indeterminateFill,
+        checkmarkIcon: props.attr.checkmarkIcon,
+        border: props.attr.border,
+    };
+    const fieldAttr: FormFieldAttributes = {
+        fieldLabel: Object.assign({
+            balloon: {
+                balloon: {
+                    id: tooltipId
+                }
+            }
+        }, props.attr.fieldLabel),
+        fieldError: props.attr.fieldError,
+        fieldContent: props.attr.fieldContent,
+        fieldContainer: props.attr.fieldContainer
+    };
+
     return (
         <FormField
             name={props.name}
@@ -63,8 +90,9 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
             errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
+            tooltip={props.tooltip}
             className={props.className}
-            attr={props.attr}
+            attr={fieldAttr}
         >
             <div>
                 <CheckboxInput
@@ -76,7 +104,7 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
                     className={props.inputClassName}
                     autoFocus={props.autoFocus}
                     required={props.required}
-                    attr={props.attr}
+                    attr={checkboxAttr}
                 />
             </div>
         </FormField>

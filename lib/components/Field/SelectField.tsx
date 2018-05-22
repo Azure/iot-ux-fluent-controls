@@ -11,29 +11,29 @@ export interface SelectFieldType {}
 export interface SelectFieldProps extends React.Props<SelectFieldType> {
     /** HTML form element name */
     name: string;
-    /** 
+    /**
      * Current value of HTML select element
-     * 
+     *
      * This must be an `Object` that is in `SelectInputProps.options`
      */
     value: any;
-    /** 
+    /**
      * List of HTML select element options in the format:
-     * 
+     *
      * `{
      *     label: string,
      *     value: any
      * }`
      */
     options: (FormOption & OptionAttr<OptionProps>)[];
-    
+
     /** Label to display above input element */
     label: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
     /** Error HTML title in case of overflow */
     errorTitle?: string;
-    
+
     /** Disable HTML input element */
     disabled?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
@@ -41,8 +41,9 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
     /** Autofocus */
-    autoFocus?: boolean;   
-
+    autoFocus?: boolean;
+    /** Tooltip text to display in info icon bubble */
+    tooltip?: MethodNode;
     /** Callback for HTML select element `onChange` events */
     onChange: (newValue: any) => void;
 
@@ -56,15 +57,39 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
 
 /**
  * High level form select box control
- * 
- * IMPORTANT: The options provided to this control must all be UNIQUE. The 
+ *
+ * IMPORTANT: The options provided to this control must all be UNIQUE. The
  * `value` property of option tags is the numerical index of the option in
  * `SelectField.options` so `SelectField.value` is compared to each value in
  * `options` (===) to decide which option is the one currently selected.
- * 
+ *
  * @param props: Object fulfilling `SelectFieldProps` interface
  */
 export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: SelectFieldProps) => {
+    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
+    const selectAttr: SelectInputAttributes = {
+        container: props.attr.container,
+        select: Object.assign({
+            'aria-label': props.label,
+            'aria-describedby': tooltipId
+        }, props.attr.select),
+        option: props.attr.option,
+        chevron: props.attr.chevron,
+    };
+
+    const fieldAttr: FormFieldAttributes = {
+        fieldLabel: Object.assign({
+            balloon: {
+                balloon: {
+                    id: tooltipId
+                }
+            }
+        }, props.attr.fieldLabel),
+        fieldError: props.attr.fieldError,
+        fieldContent: props.attr.fieldContent,
+        fieldContainer: props.attr.fieldContainer
+    };
+
     return (
         <FormField
             name={props.name}
@@ -73,8 +98,9 @@ export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: S
             errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
+            tooltip={props.tooltip}
             className={props.className}
-            attr={props.attr}
+            attr={fieldAttr}
         >
             <SelectInput
                 name={props.name}
@@ -86,7 +112,7 @@ export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: S
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
                 required={props.required}
-                attr={props.attr}
+                attr={selectAttr}
             />
         </FormField>
     );

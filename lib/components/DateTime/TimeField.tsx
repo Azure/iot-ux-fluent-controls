@@ -26,7 +26,7 @@ export interface TimeFieldProps extends React.Props<TimeFieldType> {
     showSeconds?: boolean;
     /** Use 24 hour clock */
     militaryTime?: boolean;
-    
+
     /** Label to display above input element */
     label: MethodNode;
     /** Error to display below input element */
@@ -40,7 +40,8 @@ export interface TimeFieldProps extends React.Props<TimeFieldType> {
     required?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
-    
+    /** Tooltip text to display in info icon bubble */
+    tooltip?: MethodNode;
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
 
@@ -54,7 +55,7 @@ export interface TimeFieldProps extends React.Props<TimeFieldType> {
 
 /**
  * High level form text field
- * 
+ *
  * @param props Control properties (defined in `TimeFieldProps` interface)
  */
 export const TimeField: React.StatelessComponent<TimeFieldProps> = (props: TimeFieldProps) => {

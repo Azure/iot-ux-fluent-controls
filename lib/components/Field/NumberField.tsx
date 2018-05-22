@@ -44,10 +44,10 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     loading?: boolean;
     /** Autofocus */
     autoFocus?: boolean;
-
+    /** Tooltip text to display in info icon bubble */
+    tooltip?: MethodNode;
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: number | 'invalid') => void;
-
     /** Classname to append to top level element */
     className?: string;
     /** Classname to append to top level element of TextInput */
@@ -58,10 +58,35 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
 
 /**
  * High level form text field
- * 
+ *
  * @param props Control properties (defined in `NumberFieldProps` interface)
  */
 export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: NumberFieldProps) => {
+    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
+    const numberAttr: TextInputAttributes = {
+        container: props.attr.container,
+        input: Object.assign({
+            'aria-label': props.label,
+            'aria-describedby': tooltipId
+        }, props.attr.input),
+        inputContainer: props.attr.inputContainer,
+        prefix: props.attr.prefix,
+        postfix: props.attr.postfix,
+        clearButton: props.attr.clearButton
+    };
+    const fieldAttr: FormFieldAttributes = {
+        fieldLabel: Object.assign({
+            balloon: {
+                balloon: {
+                    id: tooltipId
+                }
+            }
+        }, props.attr.fieldLabel),
+        fieldError: props.attr.fieldError,
+        fieldContent: props.attr.fieldContent,
+        fieldContainer: props.attr.fieldContainer
+    };
+
     return (
         <FormField
             name={props.name}
@@ -70,8 +95,9 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
             errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
+            tooltip={props.tooltip}
             className={props.className}
-            attr={props.attr}
+            attr={fieldAttr}
         >
             <NumberInput
                 name={props.name}
@@ -89,7 +115,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
                 min={props.min}
                 max={props.max}
                 required={props.required}
-                attr={props.attr}
+                attr={numberAttr}
             />
         </FormField>
     );

@@ -14,12 +14,11 @@ $line-height: 5*$grid-size;
 
 .label {
     @include md-box(inline-block);
-    @include themify {
-        color: themed('color-text-rest');
-    }
+    color: inherit;
     font-family: $font-family-default;
     font-size: $font-size-default;
     line-height: $line-height;
+    margin-top: $grid-size / 2;
 
     &.disabled {
         @include themify {
@@ -41,17 +40,14 @@ $line-height: 5*$grid-size;
         }
     }
 
-    & + .content {
-        margin-top: $grid-size;
-    }
-
     & + .field-error {
         margin-top: $grid-size;
     }
 }
 
 .label-container {
-    @include md-box(inline-block);
+    @include md-box(flex-row);
+    align-items: flex-end;
 
     .label-icon {
         @include md-box(inline-block);
@@ -60,6 +56,10 @@ $line-height: 5*$grid-size;
 
     .label-balloon {
         width: $form-label-balloon-width;
+    }
+
+    & + .content {
+        margin-top: $grid-size;
     }
 }
 

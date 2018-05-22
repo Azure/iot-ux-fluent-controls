@@ -29,7 +29,7 @@ export interface TextInputProps extends React.Props<TextInputType> {
     placeholder?: string;
     /**
      * HTML input element type
-     * 
+     *
      * Default: text
      */
     type?: string;
@@ -42,7 +42,7 @@ export interface TextInputProps extends React.Props<TextInputType> {
     postfix?: MethodNode;
     /** Class to append to postfix container */
     postfixClassName?: string;
-    
+
     /** Apply error styling to input element */
     error?: boolean;
     /** Add required attribute to HTML input element */
@@ -65,96 +65,109 @@ export interface TextInputProps extends React.Props<TextInputType> {
 
 /**
  * Low level text input control
- * 
+ *
  * (Use the `TextField` control instead when making a form with standard styling)
  */
-export const TextInput: React.StatelessComponent<TextInputProps> = (props: TextInputProps) => {
-    const containerClassName = css('text-input-container', props.className);
-    const inputContainerClassName = css('input-container');
-    const inputClassName = css({
-        'input': true,
-        'error': props.error,
-        'show-cancel': !!props.value && props.type !== 'number'
-    });
-    const cancelClassName = css('cancel', 'icon icon-cancelLegacy');
+export class TextInput extends React.PureComponent<TextInputProps> {
 
-    const onChange = (event) => {
-        if (props.value !== event.target.value) {
-            props.onChange(event.target.value);
+    public static defaultProps: Partial<TextInputProps> = {
+        name: undefined,
+        value: undefined,
+        onChange: undefined,
+        type: 'text',
+        attr: {
+            container: {},
+            input: {},
+            inputContainer: {},
+            prefix: {},
+            postfix: {},
+            clearButton: {},
         }
-        event.stopPropagation();
     };
 
-    const clearButton = props.disabled || props.type === 'number' ? '' :
+    constructor(props: TextInputProps) {
+        super(props);
+        this.onChange = this.onChange.bind(this);
+        this.onClear = this.onClear.bind(this);
+    }
+
+    onChange(event: React.SyntheticEvent<HTMLInputElement>) {
+        const targetValue = (event.target as HTMLInputElement ).value;
+        if (this.props.value !== targetValue) {
+            this.props.onChange(targetValue);
+        }
+        event.stopPropagation();
+    }
+
+    onClear() {
+        this.props.onChange('');
+    }
+
+    render() {
+        const containerClassName = css('text-input-container', this.props.className);
+        const inputContainerClassName = css('input-container');
+        const inputClassName = css({
+            'input': true,
+            'error': this.props.error,
+            'show-cancel': !!this.props.value && this.props.type !== 'number'
+        });
+        const cancelClassName = css('cancel', 'icon icon-cancelLegacy');
+        const clearButton = this.props.disabled || this.props.type === 'number' ? '' :
         <Attr.button
             type='button'
             className={cancelClassName}
-            onClick={() => props.onChange('')}
+            onClick={this.onClear}
             tabIndex={-1}
-            attr={props.attr.clearButton}
+            attr={this.props.attr.clearButton}
         />;
 
-    let prefix = null;
-    if (props.prefix) {
-        const className = css('prefix', props.prefixClassName);
-        prefix = (
-            <Attr.div className={className} attr={props.attr.prefix}>
-                {props.prefix}
+        let prefix = null;
+        if (this.props.prefix) {
+            const className = css('prefix', this.props.prefixClassName);
+            prefix = (
+                <Attr.div className={className} attr={this.props.attr.prefix}>
+                    {this.props.prefix}
+                </Attr.div>
+            );
+        }
+
+        let postfix = null;
+        if (this.props.postfix) {
+            const className = css('postfix', this.props.postfixClassName);
+            postfix = (
+                <Attr.div className={className} attr={this.props.attr.postfix}>
+                    {this.props.postfix}
+                </Attr.div>
+            );
+        }
+
+        return (
+            <Attr.div className={containerClassName} attr={this.props.attr.container}>
+                {prefix}
+                <Attr.div
+                    className={inputContainerClassName}
+                    attr={this.props.attr.inputContainer}
+                >
+                    <Attr.input
+                        type={this.props.type}
+                        name={this.props.name}
+                        value={this.props.value == null ? '' : this.props.value}
+                        className={inputClassName}
+                        onChange={this.onChange}
+                        placeholder={this.props.placeholder}
+                        required={this.props.required}
+                        disabled={this.props.disabled}
+                        readOnly={this.props.readOnly}
+                        autoFocus={this.props.autoFocus}
+                        methodRef={this.props.autoFocus && autoFocusRef}
+                        attr={this.props.attr.input}
+                    />
+                    {clearButton}
+                </Attr.div>
+                {postfix}
             </Attr.div>
         );
     }
-
-    let postfix = null;
-    if (props.postfix) {
-        const className = css('postfix', props.postfixClassName);
-        postfix = (
-            <Attr.div className={className} attr={props.attr.postfix}>
-                {props.postfix}
-            </Attr.div>
-        );
-    }
-
-    return (
-        <Attr.div className={containerClassName} attr={props.attr.container}>
-            {prefix}
-            <Attr.div
-                className={inputContainerClassName}
-                attr={props.attr.inputContainer}
-            >
-                <Attr.input 
-                    type={props.type}
-                    name={props.name}
-                    value={props.value == null ? '' : props.value}
-                    className={inputClassName}
-                    onChange={onChange}
-                    placeholder={props.placeholder}
-                    required={props.required}
-                    disabled={props.disabled}
-                    readOnly={props.readOnly}                    
-                    autoFocus={props.autoFocus}
-                    methodRef={props.autoFocus && autoFocusRef}
-                    attr={props.attr.input}
-                />
-                {clearButton}
-            </Attr.div>
-            {postfix}
-        </Attr.div>
-    );
-};
-
-TextInput.defaultProps = {
-    name: undefined,
-    value: undefined,
-    onChange: undefined,
-    type: 'text',
-    attr: {
-        container: {},
-        input: {},
-        inputContainer: {},
-        prefix: {},
-        postfix: {},
-        clearButton: {},
-    }
-};
+}
 
 export default TextInput;

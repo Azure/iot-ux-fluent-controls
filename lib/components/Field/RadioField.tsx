@@ -11,29 +11,29 @@ export interface RadioFieldType {}
 export interface RadioFieldProps extends React.Props<RadioFieldType> {
     /** HTML form element name */
     name: string;
-    /** 
+    /**
      * Current value of HTML radio button element
-     * 
+     *
      * This must be an `Object` that is in `RadioFieldProps.options`
      */
     value: any;
-    /** 
+    /**
      * List of HTML radio button element options in the format:
-     * 
+     *
      * `{
      *     label: string,
      *     value: any
      * }`
      */
     options: (FormOption & OptionAttr<RadioInputAttributes>)[];
-    
+
     /** Label to display above input element */
     label: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
     /** Error HTML title in case of overflow */
     errorTitle?: string;
-    
+
     /** Allow radio buttons to show up in columns */
     columns?: boolean;
     /** Disable HTML input element */
@@ -44,10 +44,10 @@ export interface RadioFieldProps extends React.Props<RadioFieldType> {
     loading?: boolean;
     /** Autofocus */
     autoFocus?: boolean;
-
+    /** Tooltip text to display in info icon bubble */
+    tooltip?: MethodNode;
     /** Callback for HTML radio button element `onChange` events */
     onChange: (newValue: any) => void;
-
     /** Classname to append to top level element */
     className?: string;
     /** Classname to append to top level element of RadioInput */
@@ -58,12 +58,12 @@ export interface RadioFieldProps extends React.Props<RadioFieldType> {
 
 /**
  * High level form select box control
- * 
+ *
  * IMPORTANT: The options provided to this control must all be UNIQUE. The
  * `value` property of radio buttons is the numerical index of the option in
  * `RadioField.options` so `RadioField.value` is compared to each value in
  * `options` (===) to decide which option is the one currently selected.
- * 
+ *
  * @param props: Object fulfilling `RadioFieldProps` interface
  */
 export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: RadioFieldProps) => {
@@ -71,8 +71,36 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
         const index = parseInt(newValue);
         props.onChange(props.options[index].value);
     };
-    
+
+    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
+
+    const fieldAttr: FormFieldAttributes = {
+        fieldLabel: Object.assign({
+            balloon: {
+                balloon: {
+                    id: tooltipId
+                }
+            }
+        }, props.attr.fieldLabel),
+        fieldError: props.attr.fieldError,
+        fieldContent: props.attr.fieldContent,
+        fieldContainer: props.attr.fieldContainer
+    };
+
     const options = props.options.map((option, index) => {
+        const radioAttr: RadioInputAttributes = {
+            container: props.attr.container,
+            label: props.attr.label,
+            input: Object.assign({
+                'aria-label': option.label,
+                'aria-describedby': tooltipId
+            }, props.attr.input),
+            radio: props.attr.radio,
+            text: props.attr.text,
+            fill: props.attr.fill,
+            border: props.attr.border
+        };
+
         return (
             <RadioInput
                 name={props.name}
@@ -87,7 +115,7 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
                 key={`${props.name}-${index}`}
                 autoFocus={props.autoFocus}
                 required={props.required}
-                attr={mergeAttributeObjects(props.attr, option.attr, [
+                attr={mergeAttributeObjects(radioAttr, option.attr, [
                     'container',
                     'label',
                     'input',
@@ -108,8 +136,9 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
             errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
+            tooltip={props.tooltip}
             className={props.className}
-            attr={props.attr}
+            attr={fieldAttr}
         >
             <div>
                 {options}

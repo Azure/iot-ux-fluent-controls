@@ -3,16 +3,22 @@ import * as classNames from 'classnames/bind';
 import {DivProps, LabelProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 import {HorizontalLoader} from '../Loader';
+import {FormLabel, FormLabelAttributes} from './FormLabel';
 import {FormError, FormErrorAttributes} from './FormError';
+import { BalloonPosition, BalloonAlignment } from '../Balloon';
 const css = classNames.bind(require('./Field.scss'));
 
 export interface FormFieldType {}
 
 export interface FormFieldAttributes {
     fieldContainer?: DivProps;
-    fieldLabel?: LabelProps;
+    fieldLabel?: FormLabelAttributes;
     fieldContent?: DivProps;
     fieldError?: DivProps;
+    fieldTooltip?: {
+        balloonPosition?: BalloonPosition;
+        balloonAlignment?: BalloonAlignment;
+    };
 }
 
 export interface FormFieldProps extends React.Props<FormFieldType> {
@@ -30,7 +36,8 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     required?: boolean;
     /** Set error field to display: none */
     hideError?: boolean;
-
+    /** Tooltip text to display in info icon bubble */
+    tooltip?: MethodNode;
     /** Classname to append to top level element */
     className?: string;
     /** Classname to append to top level error element */
@@ -55,18 +62,18 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
         error = <HorizontalLoader dots={6} />;
     }
 
-    const label = props.label ?
-        <Attr.label
-            className={css('label')}
-            htmlFor={props.name}
-            attr={props.attr.fieldLabel}
-        >
-            {props.label}
-        </Attr.label> : '';
-
     return (
         <Attr.div className={containerClass} attr={props.attr.fieldContainer}>
-            {label}
+            {(!!props.label) && <FormLabel
+                name={props.name}
+                icon='info'
+                balloon={props.tooltip}
+                attr={props.attr.fieldLabel}
+                required={props.required}
+                {...props.attr.fieldTooltip}
+            >
+                {props.label}
+            </FormLabel>}
             <Attr.div className={css('content')} attr={props.attr.fieldContent}>
                 {props.children}
             </Attr.div>
@@ -74,7 +81,11 @@ export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormF
                 className={props.errorClassName}
                 hidden={props.hideError}
                 title={props.errorTitle}
-                attr={{container: props.attr.fieldError}}
+                attr={{container: {
+                    'aria-live': 'polite', // this tags are for screen readers to read the error when it appears
+                    'aria-atomic': 'true',
+                    ...props.attr.fieldError }
+                }}
             >
                 {error}
             </FormError>
@@ -86,7 +97,6 @@ FormField.defaultProps = {
     name: undefined,
     label: undefined,
     loading: false,
-    required: false,
     hideError: false,
     attr: {
         fieldContainer: {},

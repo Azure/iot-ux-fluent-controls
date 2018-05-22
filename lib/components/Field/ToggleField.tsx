@@ -9,13 +9,13 @@ export interface ToggleFieldType {}
 export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
     /** HTML form element name */
     name: string;
-    /** 
+    /**
      * Current value of HTML select element
-     * 
+     *
      * This must be an `Object` that is in `SelectInputProps.options`
      */
     value: boolean;
-    
+
     /** Label to display above input element */
     label: MethodNode;
     /** Error to display below input element */
@@ -25,7 +25,7 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
 
     onLabel?: MethodNode;
     offLabel?: MethodNode;
-    
+
     /** Disable HTML input element */
     disabled?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
@@ -34,7 +34,8 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
     loading?: boolean;
     /** Auto Focus */
     autoFocus?: boolean;
-
+    /** Tooltip text to display in info icon bubble */
+    tooltip?: MethodNode;
     /** Callback for `onChange` events */
     onChange: (newValue: any) => void;
 
@@ -48,10 +49,34 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
 
 /**
  * High level form toggle switch control
- * 
+ *
  * @param props: Object fulfilling `ToggleFieldProps` interface
  */
 export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: ToggleFieldProps) => {
+    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
+    const toggleAttr: ToggleAttributes = {
+        container: props.attr.container,
+        button: Object.assign({
+            'aria-label': props.label,
+            'aria-describedby': tooltipId
+        }, props.attr.button),
+        border: props.attr.border,
+        switch: props.attr.switch,
+        text: props.attr.text
+    };
+    const fieldAttr: FormFieldAttributes = {
+        fieldLabel: Object.assign({
+            balloon: {
+                balloon: {
+                    id: tooltipId
+                }
+            }
+        }, props.attr.fieldLabel),
+        fieldError: props.attr.fieldError,
+        fieldContent: props.attr.fieldContent,
+        fieldContainer: props.attr.fieldContainer,
+    };
+
     return (
         <FormField
             name={props.name}
@@ -60,22 +85,21 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
             errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
+            tooltip={props.tooltip}
             className={props.className}
-            attr={props.attr}
+            attr={fieldAttr}
         >
-            <div>
-                <Toggle
-                    on={props.value}
-                    name={props.name}
-                    disabled={props.disabled}
-                    onChange={props.onChange}
-                    onLabel={props.onLabel}
-                    offLabel={props.offLabel}
-                    className={props.inputClassName}
-                    autoFocus={props.autoFocus}
-                    attr={props.attr}
-                />
-            </div>
+            <Toggle
+                on={props.value}
+                name={props.name}
+                disabled={props.disabled}
+                onChange={props.onChange}
+                onLabel={props.onLabel}
+                offLabel={props.offLabel}
+                className={props.inputClassName}
+                autoFocus={props.autoFocus}
+                attr={toggleAttr}
+            />
         </FormField>
     );
 };

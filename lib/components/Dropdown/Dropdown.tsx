@@ -87,6 +87,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
 
     private dropdownOffset: {top: number, left: number, width: number, height: number};
     private previousPosition: ClientRect;
+    private dropdownDirection: 'top' | 'bottom';
 
     private animationRequest: number;
     private eventsConnected: boolean;
@@ -140,7 +141,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             this.dropdownOffset = this.getDropdownOffset();
         }
 
-        if (this.fixedContainer.parentElement === document.querySelector('.shell')) {
+        if (this.fixedContainer.parentElement === document.body) {
             this.container.appendChild(this.fixedContainer);
         }
     }
@@ -340,6 +341,23 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
             this.fixedContainer.style.width = `${this.dropdownOffset.width}px`;
             this.fixedContainer.style.height = `${this.dropdownOffset.height}px`;
             this.previousPosition = container;
+            this.dropdownDirection = 'bottom';
+        }
+
+        const dropdownRect = this.dropdown.getBoundingClientRect();
+        if (this.dropdownDirection === 'bottom' && dropdownRect.bottom >= window.innerHeight) {
+            // Switch direction if drop down bottom exceeds viewport
+            this.fixedContainer.style.top = `${container.top - this.dropdownOffset.height}px`;
+            this.dropdownDirection = 'top';
+        } else if (this.dropdownDirection === 'top') {
+            if (container.top + container.height + dropdownRect.height < window.innerHeight) {
+                // Switch direction if there's enough space in bottom
+                this.fixedContainer.style.top = `${container.top + this.dropdownOffset.top}px`;
+                this.dropdownDirection = 'bottom';
+            } else {
+                // Otherwise always adjust top per drop down height
+                this.fixedContainer.style.top = `${container.top - this.dropdownOffset.height}px`;
+            }
         }
     }
 
@@ -363,7 +381,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
                 <Attr.span
                     className={css('md-dropdown', positionClassName, {
                         'interactive': this.props.visible
-                            && !!(this.props.onMouseEnter || this.props.onMouseLeave)
+                        && !!(this.props.onMouseEnter || this.props.onMouseLeave)
                     })}
                     attr={this.props.attr.dropdown}
                     methodRef={this.dropdownRef}

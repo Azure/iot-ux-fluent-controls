@@ -16,12 +16,12 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     /** HTML input element placeholder */
     placeholder?: string;
     /**
-     * HTML input element type 
-     * 
+     * HTML input element type
+     *
      * Default: text
      */
     type?: string;
-    
+
     /** Label to display above input element */
     label: MethodNode;
     /** Error to display below input element */
@@ -37,18 +37,19 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     postfix?: MethodNode;
     /** Class to append to postfix container */
     postfixClassName?: string;
-    
+
     /** Disable HTML input element */
     disabled?: boolean;
-        /** Read only HTML input element */
-        readOnly?: boolean;
+    /** Read only HTML input element */
+    readOnly?: boolean;
     /** Form field is required (appends a red asterisk to the label) */
     required?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
     /** Autofocus */
     autoFocus?: boolean;
-    
+    /** Tooltip text to display in info icon bubble */
+    tooltip?: MethodNode;
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
 
@@ -62,10 +63,42 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
 
 /**
  * High level form text field
- * 
+ *
  * @param props Control properties (defined in `TextFieldProps` interface)
  */
 export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextFieldProps) => {
+    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
+    const errorId = `${props.name}-error`;
+    let describedby = errorId;
+    if (tooltipId) {
+        describedby += ' ' + tooltipId;
+    }
+    const textAttr: TextInputAttributes = {
+        container: props.attr.container,
+        input: Object.assign({
+            'aria-label': props.label,
+            'aria-describedby': describedby
+        }, props.attr.input),
+        inputContainer: props.attr.inputContainer,
+        prefix: props.attr.prefix,
+        postfix: props.attr.postfix,
+        clearButton: props.attr.clearButton
+    };
+    const fieldAttr: FormFieldAttributes = {
+        fieldLabel: Object.assign({
+            balloon: {
+                balloon: {
+                    id: tooltipId
+                }
+            }
+        }, props.attr.fieldLabel),
+        fieldError: Object.assign({
+            id: errorId
+        }, props.attr.fieldError),
+        fieldContent: props.attr.fieldContent,
+        fieldContainer: props.attr.fieldContainer
+    };
+
     return (
         <FormField
             name={props.name}
@@ -74,8 +107,9 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
             errorTitle={props.errorTitle}
             loading={props.loading}
             required={props.required}
+            tooltip={props.tooltip}
             className={props.className}
-            attr={props.attr}
+            attr={fieldAttr}
         >
             <TextInput
                 name={props.name}
@@ -93,7 +127,7 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
                 required={props.required}
-                attr={props.attr}
+                attr={textAttr}
             />
         </FormField>
     );

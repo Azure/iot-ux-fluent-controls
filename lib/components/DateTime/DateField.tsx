@@ -11,12 +11,12 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
     name: string;
     /**
      * Initial value of date picker
-     * 
+     *
      * The onChange callback API does not receives invalid Date UTC ISO strings
      * so we can only provide an initialValue to the DatePicker
      */
     initialValue?: Date | string;
-    
+
     /** Tab index for calendar control */
     tabIndex?: number;
     /**
@@ -46,7 +46,8 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
     required?: boolean;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
-    
+    /** Tooltip text to display in info icon bubble */
+    tooltip?: MethodNode;
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
 
@@ -60,10 +61,41 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
 
 /**
  * High level form text field
- * 
+ *
  * @param props Control properties (defined in `DateFieldProps` interface)
  */
 export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateFieldProps) => {
+    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
+    const errorId = `${props.name}-error`;
+    let describedby = errorId;
+    if (tooltipId) {
+        describedby += ' ' + tooltipId;
+    }
+    const dateAttr: DatePickerAttributes = {
+        input: Object.assign({
+            'aria-label': props.label,
+            'aria-describedby': describedby
+        }, props.attr.input),
+        inputContainer: props.attr.inputContainer,
+        inputIcon: props.attr.inputIcon,
+        dropdownTriangle: props.attr.dropdownTriangle,
+        calendar: props.attr.calendar
+    };
+    const fieldAttr: FormFieldAttributes = {
+        fieldLabel: Object.assign({
+            balloon: {
+                balloon: {
+                    id: tooltipId
+                }
+            }
+        }, props.attr.fieldLabel),
+        fieldError: Object.assign({
+            id: errorId
+        }, props.attr.fieldError),
+        fieldContent: props.attr.fieldContent,
+        fieldContainer: props.attr.fieldContainer
+    };
+
     return (
         <FormField
             name={props.name}
@@ -73,8 +105,8 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
             loading={props.loading}
             required={props.required}
             className={props.className}
-            attr={props.attr}
-            
+            attr={fieldAttr}
+            tooltip={props.tooltip}
         >
             <DatePicker
                 name={props.name}
@@ -88,7 +120,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
                 required={props.required}
                 onChange={props.onChange}
                 className={props.inputClassName}
-                attr={props.attr}
+                attr={dateAttr}
             />
         </FormField>
     );

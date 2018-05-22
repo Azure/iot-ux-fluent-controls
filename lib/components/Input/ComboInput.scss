@@ -58,27 +58,27 @@ $dropdown-z-index: $z-index-medium-step;
                 }
             }
         }
-        
+
         &:disabled {
             @include themify{
                 color: themed('color-text-disabled');
                 border: 1px solid themed('color-border-disabled');
                 background-color: themed('color-bg-input-disabled');
             }
-    
+
             &::placeholder {
                 @include themify{
                     color: themed('color-text-disabled');
                 }
             }
         }
-    
+
         &::placeholder {
             @include themify{
                 color: themed('color-text-placeholder');
             }
         }
-    
+
         &::selection {
             @include themify{
                 color: themed('color-text-white');
@@ -170,7 +170,7 @@ $dropdown-z-index: $z-index-medium-step;
 .option {
     @include md-box(block);
     width: 100%;
-    height: $option-height;
+    min-height: $option-height;
     line-height: $line-height-small;
     padding: 0px 3*$grid-size;
 
@@ -200,18 +200,18 @@ $dropdown-z-index: $z-index-medium-step;
             &:not(.selected) {
                 background-color: themed('color-bg-item-hover');
             }
-            
+
             &.selected {
                 background-color: themed('color-bg-item-selected');
             }
-            
+
             &:active {
                 color: themed('color-text-rest');
                 background-color: themed('color-bg-item-selected');
             }
         }
     }
-    
+
     &.disabled {
         @include themify{
            color: themed('color-text-disabled');

@@ -26,7 +26,7 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     initialValue: string | Date;
 
     /** Label to display above input element */
-    label: MethodNode;
+    label?: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
     /** Error HTML title in case of overflow */
@@ -63,7 +63,8 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     loading?: boolean;
     /** Set error field to display: none */
     hideError?: boolean;
-
+    /** Tooltip text to display in info icon bubble */
+    tooltip?: MethodNode;
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
 
@@ -175,7 +176,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                      * represents a time in GMT
                      */
                     initialValue = local
-                        ? new Date(props.initialValue as any)
+                        ? props.initialValue
                         : new Date(Date.UTC(
                             props.initialValue.getUTCFullYear(),
                             props.initialValue.getUTCMonth(),
@@ -206,7 +207,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
             initialDate: invalid ? props.initialValue : initialValue.toJSON(),
             lastTime: invalid ? defaultTime.toJSON() : initialValue.toJSON(),
             lastDate: invalid ? 'invalid' : initialValue.toJSON()
-        };
+         };
     }
 
     componentWillReceiveProps(newProps: DateTimeFieldProps) {
@@ -215,7 +216,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
         }
     }
 
-    onDatePaste(newDate: string): boolean {
+    onDatePaste = (newDate: string): boolean => {
         const date = new Date(newDate);
         if (dateIsValid(date, this.props.localTimezone)) {
             const utcDate = date.toJSON();
@@ -234,14 +235,14 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
         return true;
     }
 
-    onChange(newDate: string | Date, newTime: string | Date): Date {
+    onChange = (newDate: string | Date, newTime: string | Date): Date => {
         if (newDate === 'invalid' || newTime === 'invalid' || !newDate || !newTime) {
             this.props.onChange('invalid');
             return null;
         }
 
-        const date = typeof (newDate) === 'string' ? new Date(newDate) : newDate;
-        const time = typeof (newTime) === 'string' ? new Date(newTime) : newTime;
+        const date = typeof(newDate) === 'string' ? new Date(newDate) : newDate;
+        const time = typeof(newTime) === 'string' ? new Date(newTime) : newTime;
         const newValue = this.props.localTimezone
             ? new Date(
                 date.getFullYear(),
@@ -267,7 +268,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
         return newValue;
     }
 
-    onDateChange(newDate: string) {
+    onDateChange = (newDate: string) => {
         const newValue = this.onChange(newDate, this.state.lastTime);
         if (newValue) {
             const utcValue = newValue.toJSON();
@@ -282,7 +283,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
         }
     }
 
-    onTimeChange(newTime: string) {
+    onTimeChange = (newTime: string) => {
         const newValue = this.onChange(this.state.lastDate, newTime);
         if (newValue) {
             const utcValue = newValue.toJSON();
@@ -295,6 +296,55 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
     }
 
     render() {
+        const tooltipId = (!!this.props.tooltip) ? `${this.props.name}-tt` : undefined;
+        const errorId = `${this.props.name}-error`;
+        let describedby = errorId;
+        if (tooltipId) {
+            describedby += ' ' + tooltipId;
+        }
+        const dateAttr: DatePickerAttributes = {
+            input: Object.assign({
+                'aria-describedby': describedby
+            }, this.props.attr.datePicker && this.props.attr.datePicker.input),
+            inputContainer: this.props.attr.datePicker && this.props.attr.datePicker.inputContainer,
+            inputIcon: this.props.attr.datePicker && this.props.attr.datePicker.inputIcon,
+            dropdownTriangle: this.props.attr.datePicker && this.props.attr.datePicker.dropdownTriangle,
+            calendar: this.props.attr.datePicker && this.props.attr.datePicker.calendar
+        };
+        const timeAttr: TimeInputAttributes = {
+            hourSelect: {
+                'aria-describedby': describedby,
+                ...(this.props.attr.timeInput && this.props.attr.timeInput.hourSelect)
+            },
+            minuteSelect: {
+                'aria-describedby': describedby,
+                ...(this.props.attr.timeInput && this.props.attr.timeInput.minuteSelect)
+            },
+            secondSelect: {
+                'aria-describedby': describedby,
+                ...(this.props.attr.timeInput && this.props.attr.timeInput.secondSelect)
+            },
+            periodSelect: {
+                'aria-describedby': describedby,
+                ...(this.props.attr.timeInput && this.props.attr.timeInput.periodSelect)
+            },
+            ...(this.props.attr.timeInput && this.props.attr.timeInput)
+        };
+        const fieldAttr: FormFieldAttributes = {
+            fieldLabel: Object.assign({
+                balloon: {
+                    balloon: {
+                        id: tooltipId
+                    }
+                }
+            }, this.props.attr.fieldLabel),
+            fieldError: Object.assign({
+                id: errorId
+            }, this.props.attr.fieldError),
+            fieldContent: this.props.attr.fieldContent,
+            fieldContainer: this.props.attr.fieldContainer
+        };
+
         return (
             <FormField
                 name={this.props.name}
@@ -305,7 +355,8 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                 required={this.props.required}
                 hideError={this.props.hideError}
                 className={css('datetime-field', this.props.className)}
-                attr={this.props.attr}
+                attr={fieldAttr}
+                tooltip={this.props.tooltip}
             >
                 <Attr.div
                     className={css('field-content')}
@@ -325,15 +376,15 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                             showAbove={this.props.showAbove}
                             format={this.props.format}
                             required={this.props.required}
-                            onPaste={newDate => this.onDatePaste(newDate)}
-                            onChange={newDate => this.onDateChange(newDate)}
+                            onPaste={this.onDatePaste}
+                            onChange={this.onDateChange}
                             className={css('date-picker', this.props.inputClassName)}
-                            attr={this.props.attr.datePicker}
+                            attr={dateAttr}
                         />
                     </Attr.span>
                     <Attr.span
                         className={css('field-time')}
-                        attr={this.props.attr.dateColumn}
+                        attr={this.props.attr.timeColumn}
                     >
                         <TimeInput
                             name={this.props.name}
@@ -345,9 +396,9 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                             militaryTime={this.props.militaryTime}
                             error={!!this.props.error}
                             disabled={this.props.disabled}
-                            onChange={newTime => this.onTimeChange(newTime)}
+                            onChange={this.onTimeChange}
                             className={css('time-picker', this.props.inputClassName)}
-                            attr={this.props.attr.timeInput}
+                            attr={timeAttr}
                         />
                     </Attr.span>
                 </Attr.div>
