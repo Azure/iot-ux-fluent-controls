@@ -1,32 +1,7 @@
 @import "~@azure-iot/ux-fluent-css/src/mixins";
-@import 'colormap'; // remove it
-
-// remove it
-/// Behaves like map-get except with a default value when $key doesn't
-/// exist in $map
-/// 
-/// @param $map map possibly containing $key
-/// @param $key key to look up in $map
-/// @param $default default value to return when $key doesn't exist in $map
-/// @returns value in $map at $key or $default if not found
-@function map-get-default($map, $key, $default) {
-    @if map-has-key($map, $key) {
-        @return map-get($map, $key);
-    } @else {
-        @return $default;
-    }
-}
-
-/// Set the default font 
-///
-@mixin md-default-font {
-    font-family: $font-family-default;
-    font-size: $font-size-default;
-    line-height: 20px;
-}
 
 /// Reset button styles
-/// 
+///
 /// Touches border, outline, background, box-shadow, text-decoration,
 /// and cursor CSS properties
 @mixin md-button-reset {
@@ -45,22 +20,10 @@
     }
 }
 
-
-// remove it 
-// Set the color based on the color map
-@function md-color($color-keys...) {
-    $result: $color-map;
-    @each $key in $color-keys {
-        $result: map-get($result, $key);
-    }
-    @return $result;
-}
-
-
 /// Styles for a circle element
-/// 
+///
 /// Touches width, height, and border-radius CSS properties
-/// 
+///
 /// @param $width circle diameter
 @mixin circle($width) {
     width: $width;
@@ -69,9 +32,9 @@
 }
 
 /// Pattern matching mixin for position style (used internally by md-box)
-/// 
+///
 /// Touches position CSS property
-/// 
+///
 /// @param $option One of: 'absolute', 'relative', 'fixed'
 @mixin md-box-position($option) {
     @if $option == 'absolute' {
@@ -84,9 +47,9 @@
 }
 
 /// Pattern matching mixin for display style (used internally by md-box)
-/// 
+///
 /// Touches display CSS property
-/// 
+///
 /// @param $option One of: 'inline', 'block', 'inline-block', 'table-cell',
 ///     'flex', 'flex-column', 'flex-row', or 'display-none'
 @mixin md-box-display($option) {
@@ -112,9 +75,9 @@
 }
 
 /// Pattern matching mixin for overflow style (used internally by md-box)
-/// 
+///
 /// Touches overflow, white-space, and text-overflow CSS properties
-/// 
+///
 /// @param $option One of: 'hidden', 'scroll', 'visible', 'auto', 'x-hidden',
 /// 'x-scroll', 'x-visible', 'x-auto', 'y-hidden', 'y-scroll', 'y-visible',
 /// 'y-auto', 'ellipsis', or 'y-ellipsis'
@@ -155,9 +118,9 @@
 }
 
 /// Pattern matching mixin for float style (used internally by md-box)
-/// 
+///
 /// Touches float and clear CSS properties
-/// 
+///
 /// @param $option One of: 'float-left', 'float-right', 'float-none',
 /// 'clear-left', 'clear-right', or 'clear-both'
 @mixin md-box-float($option) {
@@ -177,9 +140,9 @@
 }
 
 /// Pattern matching mixin for size style (used internally by md-box)
-/// 
+///
 /// Touches width and height CSS properties
-/// 
+///
 /// @param $option Only option: 'fill-parent'
 @mixin md-box-size($option) {
     @if $option == 'fill-parent' {
@@ -191,7 +154,7 @@
 /// Base styling mixin to remove boilerplate
 ///
 /// See above patern matching mixins for options
-/// 
+///
 /// @param $options... List of string options found in above md-box-* mixins
 @mixin md-box($options...) {
     box-sizing: border-box;

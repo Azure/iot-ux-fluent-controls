@@ -14,9 +14,13 @@ export class Shell extends React.PureComponent<ShellProperties> {
             theme = 'light';
         }
 
-        return <div className={css('shell', 'theme-' + theme, { rtl: isRtl })}>
-            {this.props.children}
-        </div>;
+        return (
+            <div className={css('theme-' + theme)}>
+                <div className={css('shell', { rtl: isRtl })}>
+                    {this.props.children}
+                </div>
+            </div>
+        );
     }
 }
 

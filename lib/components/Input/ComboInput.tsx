@@ -411,7 +411,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         this.inputElement.blur();
                     }}
                     onMouseEnter={option.disabled ? undefined : (event) => {
-                        this.setSelection(option.value);
+                        this.setSelection(this.props.optionMap(option));
                     }}
                     onMouseLeave={option.disabled ? undefined : (event) => {
                         this.setSelection(null);
@@ -420,7 +420,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                     key={index}
                     methodRef={(element) => {
                         if (element) {
-                            this.optionElements[option.value] = element;
+                            this.optionElements[this.props.optionMap(option)] = element;
                         }
                     }}
                     attr={mergeAttributes(this.props.attr.option, option.attr)}

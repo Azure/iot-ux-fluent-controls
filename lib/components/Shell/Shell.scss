@@ -1,6 +1,55 @@
 @import "~@azure-iot/ux-fluent-css/src/normalize";
 @import "~@azure-iot/ux-fluent-css/src/icons";
+@import "colors";
 
-:global(.rtl) {
-    direction: rtl;
+// provide some common styling that everyone requires:
+:global {
+    .link {
+        @include themify {
+            color: themed('color-text-hyperlink-rest');
+        }
+
+        &:hover:not(.disabled) {
+            @include themify {
+                color: themed('color-text-hyperlink-hover');
+            }
+        }
+
+        &:focus:not(.disabled) {
+            outline-offset: -1px;
+            @include themify {
+                outline: 1px dashed themed('color-border-focus');
+            }
+        }
+
+        &:active:not(.disabled) {
+            @include themify {
+                color: themed('color-text-hyperlink-focus');
+            }
+        }
+
+        &:visited:not(.disabled) {
+            @include themify {
+                color: themed('color-text-hyperlink-rest');
+            }
+        }
+
+        &.disabled {
+            cursor: not-allowed;
+
+            @include themify {
+                color: themed('color-text-hyperlink-disabled');
+            }
+        }
+    }
+
+    .rtl {
+        direction: rtl;
+    }
+
+    .shell {
+        @include themify {
+            color: themed('color-text-rest');
+        }
+    }
 }
