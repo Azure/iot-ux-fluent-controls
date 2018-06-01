@@ -69,9 +69,18 @@ $outline-focus-border-width: 1px;
         height: 2*$grid-size;
         border-radius: $grid-size;
 
+        &:not(.disabled):hover {
+            @include themify{
+                background-color: themed('color-center-radio-btn-hover');
+            }
+        }
+
         &.selected {
             @include themify{
                 background-color: themed('color-center-radio-btn-selected');
+                &:hover, &:focus {
+                    background-color: themed('color-center-radio-btn-selected')
+                }
                 &.disabled {
                     background-color: themed('color-center-radio-btn-disabled');
                 }

@@ -93,9 +93,9 @@ export class TestHookWrapper<T> {
         this.eventMap = {};
         window.addEventListener = this.addEventListener.bind(this);
 
-        elements.forEach(element => {
+        elements.forEach((element) => {
             const newAttr = {
-                ref: (el) => this.refs[element] = el,
+                ref: (el) => this.refs[element.toString()] = el,
                 'data-test-hook': `test-wrapper-${element}`
             };
             if (attr[element]) {

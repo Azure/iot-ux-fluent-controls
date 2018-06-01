@@ -26,20 +26,27 @@ $line-height: 3.5*$grid-size;
         border-radius: $border-toggle-radius;
         width: $toggle-width;
         height: $toggle-height;
-        
+    }
+
+    &:not(.disabled) .toggle-button {
+        &:focus {
+            @include themify{
+                outline: 1px dashed themed('color-border-focus');
+            }
+            outline-offset: 1px;
+        }
+
         &:hover {
             @include themify{
                 border: 1px solid themed('color-border-toggle-btn-hover-off');
             }
             cursor: pointer;
+            + .toggle-switch {
+                @include themify{
+                    background-color: themed('color-circle-toggle-btn-hover-off');
+                }
+            }
         }
-    }
-
-    &:not(.disabled) .toggle-button:focus {
-        @include themify{
-            outline: 1px dashed themed('color-border-focus');
-        }
-        outline-offset: 1px;
     }
 
     .toggle-switch {
@@ -69,7 +76,7 @@ $line-height: 3.5*$grid-size;
     }
 
     &.toggle-on {
-        .toggle-button {
+        &:not(.disabled) .toggle-button {
             @include themify{
                 border: 1px solid themed('color-border-toggle-btn-rest-on');
                 background-color: themed('color-bg-toggle-btn-rest-on');
@@ -78,6 +85,11 @@ $line-height: 3.5*$grid-size;
                 @include themify{
                     border: 1px solid themed('color-border-toggle-btn-hover-on');
                     background-color: themed('color-bg-toggle-btn-hover-on');
+                }
+                + .toggle-switch {
+                    @include themify{
+                        background-color: themed('color-circle-toggle-btn-hover-on');
+                    }
                 }            
             }
         }

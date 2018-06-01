@@ -87,23 +87,23 @@ $outline-focus-border-width: 1px;
 
  :global(.btn-danger), .method-btn-danger {
     @include themify{
-        color: themed('color-text-rest');
+        color: themed('color-text-white');
         background-color: themed('color-bg-btn-danger-rest');
         &:hover:not(:disabled) {
-            color: themed('color-text-rest');
+            color: themed('color-text-white');
             background-color: themed('color-bg-btn-danger-hover');
             cursor: pointer;
         }
         
         &:focus:not(:disabled) {
-            color: themed('color-text-rest');
+            color: themed('color-text-white');
             background-color: themed('color-bg-btn-danger-focus');
             outline: $outline-focus-border-width dashed themed('color-border-focus');
             outline-offset: -$outline-focus-border-width;
         }
         
         &:active:not(:disabled) {
-            color: themed('color-text-rest');
+            color: themed('color-text-white');
             background-color: themed('color-bg-btn-danger-pressed-selected');
         }
         

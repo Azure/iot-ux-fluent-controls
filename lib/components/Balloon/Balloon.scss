@@ -125,7 +125,7 @@ $box-shadow-blur: $grid-size*2.5;
     @include md-box(inline-block, absolute);
     font-family: $font-family-default;
     @include themify{
-        box-shadow: 0px $box-shadow-offset-y $box-shadow-blur 0px $color-black-transparent-third;
+        box-shadow: 0px $box-shadow-offset-y $box-shadow-blur 0px $color-black-transparent-tenth;
         color: themed('color-text-rest');
         background-color: themed('color-bg-balloon');
         border: 1px solid themed('color-border-controls');
