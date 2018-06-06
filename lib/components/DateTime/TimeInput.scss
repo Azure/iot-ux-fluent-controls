@@ -31,10 +31,6 @@ $z-index-focus: 2*$z-index-small-step;
         appearance: none;
         border-radius: 0px;
         padding: 0px 0px 0px 4*$grid-size;
-        @include themify{
-            background-color: themed('color-bg-input-rest');
-            border: 1px solid themed('color-border-rest');
-        }
 
         option {
             height: 8*$grid-size;
@@ -43,7 +39,7 @@ $z-index-focus: 2*$z-index-small-step;
             &:first {
                 display: none;
             }
-            
+
             &:checked {
                 @include themify{
                     color: themed('color-text-white');
@@ -51,32 +47,39 @@ $z-index-focus: 2*$z-index-small-step;
                 }
             }
         }
+
+        &:focus {
+            outline-offset: -1px;
+            z-index: $z-index-focus;
+            @include themify{
+                outline: 1px dashed themed('color-border-focus');
+            }
+        }
+
         @include themify{
+            background-color: themed('color-bg-input-rest');
+            border: 1px solid themed('color-border-rest');
+
             &:hover {
                 border: 1px solid themed('color-border-selected');
                 z-index: $z-index-hover;
             }
-            
-            &:focus {
-                border: 1px solid themed('color-border-selected');
-                z-index: $z-index-focus;
-            }
-            
+
             &:active {
                 border: 1px solid themed('color-border-selected');
             }
-            
+
             &:disabled {
                 color: themed('color-text-disabled');
                 background-color: themed('color-bg-input-disabled');
                 border: 1px solid themed('color-border-disabled');
             }
-            
+
             &::selection {
                 color: themed('color-text-white');
                 background-color: themed('color-bg-item-selected');
             }
-            
+
             &.error:not(:disabled) {
                 border: 1px solid themed('color-border-error');
             }
@@ -84,6 +87,6 @@ $z-index-focus: 2*$z-index-small-step;
     }
 
     .time-input-period {
-        padding: 0px 0px 0px 3*$grid-size;        
+        padding: 0px 0px 0px 3*$grid-size;
     }
 }

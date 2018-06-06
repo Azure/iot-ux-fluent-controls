@@ -25,30 +25,52 @@ $outline-focus-border-width: 1px;
     text-overflow: ellipsis;
     white-space: nowrap;
     max-width: $button-max-width;
+    vertical-align: middle;
+
+    :global(.icon) {
+        @include md-box(inline-block);
+        vertical-align: middle;
+        margin-right: 2*$grid-size;
+        margin-top: -0.5*$grid-size;
+
+        font-size: $icon-size-xsmall;
+        line-height: $line-height;
+    }
+
+    &:hover:not(:disabled) {
+        cursor: pointer;
+    }
+
+    &:focus:not(:disabled) {
+        outline-offset: -$outline-focus-border-width;
+    }
+
+    &:disabled {
+        cursor: not-allowed;
+    }
 }
 
 :global(.btn), .method-btn {
     @include themify{
         color: themed('color-text-black');
         background-color: themed('color-bg-btn-standard-rest');
+
         &:hover:not(:disabled) {
             color: themed('color-text-black');
             background-color: themed('color-bg-btn-standard-hover');
-            cursor: pointer;
         }
-        
+
         &:focus:not(:disabled) {
             color: themed('color-text-black');
             background-color: themed('color-bg-btn-standard-focus');
             outline: $outline-focus-border-width dashed themed('color-border-focus');
-            outline-offset: -$outline-focus-border-width;
         }
-        
+
         &:active:not(:disabled) {
             color: themed('color-text-black');
             background-color: themed('color-bg-btn-standard-pressed-selected');
         }
-        
+
         &:disabled {
             color: themed('color-text-disabled');
             background-color: themed('color-bg-btn-standard-disabled');
@@ -60,24 +82,23 @@ $outline-focus-border-width: 1px;
     @include themify{
         color: themed('color-text-white');
         background-color: themed('color-bg-btn-primary-rest');
+
         &:hover:not(:disabled) {
             color: themed('color-text-white');
             background-color: themed('color-bg-btn-primary-hover');
-            cursor: pointer;
         }
-        
+
         &:focus:not(:disabled) {
             color: themed('color-text-white');
             background-color: themed('color-bg-btn-primary-focus');
             outline: $outline-focus-border-width dashed themed('color-border-focus');
-            outline-offset: -$outline-focus-border-width;
         }
-        
+
         &:active:not(:disabled) {
             color: themed('color-text-white');
             background-color: themed('color-bg-btn-primary-pressed-selected');
         }
-        
+
         &:disabled {
             color: themed('color-text-disabled');
             background-color: themed('color-bg-btn-primary-disabled');
@@ -89,43 +110,26 @@ $outline-focus-border-width: 1px;
     @include themify{
         color: themed('color-text-white');
         background-color: themed('color-bg-btn-danger-rest');
+
         &:hover:not(:disabled) {
             color: themed('color-text-white');
             background-color: themed('color-bg-btn-danger-hover');
-            cursor: pointer;
         }
-        
+
         &:focus:not(:disabled) {
             color: themed('color-text-white');
             background-color: themed('color-bg-btn-danger-focus');
             outline: $outline-focus-border-width dashed themed('color-border-focus');
-            outline-offset: -$outline-focus-border-width;
         }
-        
+
         &:active:not(:disabled) {
             color: themed('color-text-white');
             background-color: themed('color-bg-btn-danger-pressed-selected');
         }
-        
+
         &:disabled {
             color: themed('color-text-disabled');
             background-color: themed('color-bg-btn-danger-disabled');
         }
     }
  }
-
-:global(.btn), :global(.btn-primary), .method-btn, .method-btn-primary {
-    vertical-align: middle;
-    font-size: $font-size-default;
-    line-height: $line-height;
-
-:global(.icon) {
-        @include md-box(inline-block);
-        vertical-align: middle;
-        margin-right: 2*$grid-size;
-        margin-top: -0.5*$grid-size;
-
-        font-size: $icon-size-xsmall;
-        line-height: $line-height;
-    }
-}

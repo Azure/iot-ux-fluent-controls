@@ -37,20 +37,16 @@ $outline-focus-border-width: 1px;
         }
 
         &:focus ~ .radio-button:not(.disabled) {
-            @include themify{
-                outline-offset: 1px;
+            outline-offset: -1px;
+            @include themify {
+                outline: 1px dashed themed('color-border-focus');
             }
         }
 
         &:hover:not(:checked) ~ .radio-button:not(.disabled) {
+            outline-offset: -1px;
             @include themify{
-                border: 1px solid themed('color-border-radio-btn-hover');
-            }
-        }
-
-        &:focus:not(:checked) ~ .radio-button {
-            @include themify{
-                border: 1px solid themed('color-border-radio-btn-focused');
+                outline: 1px solid themed('color-border-radio-btn-hover');
             }
         }
     }

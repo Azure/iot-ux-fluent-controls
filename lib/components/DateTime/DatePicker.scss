@@ -32,43 +32,47 @@ $calc-margin: 5px;
         height: 8*$grid-size;
         padding: 2*$grid-size 8*$grid-size 2*$grid-size 3*$grid-size;
         outline: none;
+
+        &:focus {
+            outline-offset: -1px;
+            @include themify{
+                outline: 1px dashed themed('color-border-focus');
+            }
+        }
+
         @include themify{
             border: 1px solid themed('color-border-rest');
             background-color: themed('color-bg-input-rest');
-            
+
             &:hover {
                 border:  1px solid themed('color-border-selected');
             }
-            
-            &:focus {
-                border:  1px solid themed('color-border-selected');
-            }
-            
+
             &:active {
                 border:  1px solid themed('color-border-selected');
             }
         }
-        
+
         &:disabled {
             @include themify{
                 color: themed('color-text-disabled');
                 background-color: themed('color-bg-input-disabled');
                 border: 1px solid themed('color-border-disabled');
             }
-    
+
             &::placeholder {
                 @include themify{
                     color: themed('color-text-disabled');
                 }
             }
         }
-    
+
         &::placeholder {
             @include themify{
                 color: themed('color-text-placeholder');
             }
         }
-    
+
         &::selection {
             @include themify{
                 color: themed('color-text-white');
@@ -128,7 +132,7 @@ $calc-margin: 5px;
     @include themify{
         background-color: themed('color-bg-input-rest');
         border: 1px solid themed('color-border-selected');
-        :global(.md-dropdown-container) & {   
+        :global(.md-dropdown-container) & {
             background-color: themed('color-bg-input-rest');
             border: 1px solid themed('color-border-selected');
         }
@@ -154,12 +158,12 @@ $calc-margin: 5px;
 
     &.date-picker-above .date-picker-dropdown-triangle {
         top: calc(100% - 4px);
-        
+
         @include themify{
             background-color: themed('color-bg-input-rest');
             border-right: 1px solid themed('color-border-selected');
             border-bottom: 1px solid themed('color-border-selected');
-        }        
+        }
         transform: rotateZ(45deg);
     }
 }

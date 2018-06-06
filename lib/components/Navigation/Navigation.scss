@@ -4,7 +4,7 @@
 
 $nav-expanded-width: 220px;
 
-.navigation { 
+.navigation {
     text-align: left;
     z-index: $z-index-content-global-nav;
     display: block;
@@ -43,7 +43,7 @@ $nav-expanded-width: 220px;
     border: none;
     outline: none;
     padding: 0;
-    
+
     @include themify {
         color: themed('color-text-white');
         background-color: themed('color-bg-navbar');
@@ -52,12 +52,15 @@ $nav-expanded-width: 220px;
             color: themed('color-text-white');
             background-color: themed('color-bg-navbar-hover');
         }
+    }
 
-        &:focus {
+    &:focus {
+        outline-offset: -1px;
+        @include themify {
             outline: 1px dashed themed('color-border-focus');
         }
     }
-        
+
     @include clickable;
 }
 

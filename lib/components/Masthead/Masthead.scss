@@ -82,7 +82,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
     flex-wrap: nowrap;
 }
 
-.masthead, .masthead a {
+.masthead {
     @include themify {
         color: themed('color-text-white');
     }
@@ -148,13 +148,10 @@ $masthead-wide-button-width: $masthead-button-width * 4;
         }
 
         button:focus, .menu-link:focus {
+            outline-offset: -1px;
             @include themify {
-                outline: themed('color-text-rest') dashed 1px !important;
+                outline: 1px dashed themed('color-border-focus');
             }
-        }
-
-        button:focus {
-            outline-offset: -2px; // tab focus mixin is using -2px for outline offsets
         }
     }
 
@@ -175,7 +172,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
 
 .masthead-toolbar-item {
     @include themify {
-        border-left: 1px solid themed('color-border-panel');    
+        border-left: 1px solid themed('color-border-panel');
     }
     min-width: $masthead-button-width;
 }
@@ -198,7 +195,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
     &:hover {
         @include themify {
             background-color: themed('color-bg-masthead-hover') !important;
-        }        
+        }
         border: 1px solid transparent!important;
     }
 
@@ -229,14 +226,6 @@ $masthead-wide-button-width: $masthead-button-width * 4;
         margin-left: $gutter-normal;
         text-align: left;
     }
-}
-
-.masthead-branding a:focus, .masthead-toolbar-btn:focus {
-    outline-offset: -1px!important;
-    background-color: none!important;
-    @include themify {
-        outline: 1px themed('color-border-controls') dashed !important;
-    }    
 }
 
 .user-menu-btn {
@@ -359,7 +348,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
 .masthead-toolbar-item {
     @include rtl {
         @include themify {
-            border-right: 1px solid themed('color-border-panel');        
+            border-right: 1px solid themed('color-border-panel');
         }
         border-left: unset;
     }

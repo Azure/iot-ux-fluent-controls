@@ -65,7 +65,7 @@ $line-height: 3.5*$grid-size;
         pointer-events: none;
     }
 
-    .toggle-label { 
+    .toggle-label {
         @include md-box(inline-block, relative);
         margin-left: 2*$grid-size;
 
@@ -90,7 +90,7 @@ $line-height: 3.5*$grid-size;
                     @include themify{
                         background-color: themed('color-circle-toggle-btn-hover-on');
                     }
-                }            
+                }
             }
         }
 
@@ -108,7 +108,7 @@ $line-height: 3.5*$grid-size;
                     background-color: themed('color-bg-toggle-btn-disabled-on');
                 }
             }
-    
+
             .toggle-switch {
                 @include themify{
                     background-color: themed('color-circle-toggle-btn-disabled-on');
@@ -120,7 +120,7 @@ $line-height: 3.5*$grid-size;
     &.disabled {
         .toggle-button {
             @include themify{
-                border: 1px solid themed('color-border-toggle-btn-disabled-off'); 
+                border: 1px solid themed('color-border-toggle-btn-disabled-off');
                 background-color: themed('color-bg-toggle-btn-disabled-off');
             }
             cursor: default;
@@ -129,7 +129,7 @@ $line-height: 3.5*$grid-size;
         .toggle-switch {
             @include themify{
                 background-color: themed('color-circle-toggle-btn-disabled-off');
-            }        
+            }
         }
 
         .toggle-label {

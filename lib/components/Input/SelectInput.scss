@@ -50,7 +50,7 @@ $line-height: 4*$grid-size;
             &:first {
                 display: none;
             }
-            
+
             &:checked {
                 @include themify{
                     background-color: themed('color-bg-item-selected');
@@ -71,29 +71,32 @@ $line-height: 4*$grid-size;
             }
         }
 
+        &:focus {
+            outline-offset: -1px;
+            @include themify {
+                outline: 1px dashed themed('color-border-focus');
+            }
+        }
+
         @include themify{
             &:hover {
                 border: 1px solid themed('color-border-selected');
             }
-            
-            &:focus {
-                border: 1px solid themed('color-border-input-selected');
-            }
-            
+
             &:active {
                 border: 1px solid themed('color-border-selected');
             }
-            
+
             &:disabled {
                 color: themed('color-text-disabled');
                 border: 1px solid themed('color-border-disabled');
                 background-color: themed('color-bg-input-disabled');
-            }   
+            }
             &::selection {
                 color: themed('color-text-white');
                 background-color: themed('color-bg-item-selected');
             }
-    
+
             &.error:not(:disabled) {
                 border: 1px solid themed('color-border-error');
             }

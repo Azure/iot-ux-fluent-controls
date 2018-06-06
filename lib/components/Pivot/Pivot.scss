@@ -85,7 +85,7 @@ $line-height: 4*$grid-size;
         @include themify {
             color: themed('color-text-disabled');
         }
-    
+
         .pivot-icon, .pivot-label, .pivot-icon-label {
             @include themify {
                 color: themed('color-text-disabled');
@@ -140,13 +140,6 @@ $line-height: 4*$grid-size;
         transform: translate(0, -50%);
 
         height: 5.5*$grid-size;
-
-        a:focus & {
-            @include themify{
-                outline: 1px dashed themed('color-border-focus');
-            }
-            outline-offset: 0;
-        }
     }
 
     .pivot-border {

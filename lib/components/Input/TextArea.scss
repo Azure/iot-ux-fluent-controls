@@ -22,7 +22,7 @@ $line-height: 5*$grid-size;
     width: 100%;
     min-height: $text-area-min-height;
     padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
-    
+
     font-family: $font-family-default;
     @include themify {
         color: themed('color-text-rest');
@@ -32,19 +32,23 @@ $line-height: 5*$grid-size;
     font-size: $font-size-default;
     line-height: $line-height;
     outline: none;
+
+    &:focus {
+        outline-offset: -1px;
+        @include themify {
+            outline: 1px dashed themed('color-border-focus');
+        }
+    }
+
     @include themify{
         &:hover {
             border: 1px solid themed('color-border-selected');
         }
 
-        &:focus {
-            border: 1px solid themed('color-border-input-selected');
-        }
-
         &:active {
             border: 1px solid themed('color-border-selected');
         }
-        
+
         &:disabled {
             color: themed('color-text-disabled');
             border: 1px solid themed('color-border-disabled');

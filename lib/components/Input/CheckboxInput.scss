@@ -11,17 +11,17 @@ $outline-focus-border-width: 1px;
         color: themed('color-text-rest');
         &:not(.disabled) input:focus + .checkbox-button {
             outline: $outline-focus-border-width dashed themed('color-border-focus');
-            outline-offset: $outline-focus-border-width;
+            outline-offset: -$outline-focus-border-width;
         }
 
         .checkbox-button {
-            border: 1px solid themed('color-border-rest'); 
+            border: 1px solid themed('color-border-rest');
             background-color: themed('color-bg-input-rest');
         }
 
         &.disabled {
             color: themed('color-text-disabled');
-            .checkbox-button { 
+            .checkbox-button {
                 border: 1px solid themed('color-border-disabled');
                 background-color: themed('color-bg-input-rest');
             }
@@ -74,7 +74,7 @@ $outline-focus-border-width: 1px;
 
             .checkbox-checkmark {
                 color: themed('color-text-disabled');
-            }   
+            }
         }
 }
 }
@@ -110,7 +110,7 @@ $outline-focus-border-width: 1px;
 
     &.columns {
         display: inline-block;
-            
+
         margin-right: 2*$grid-size;
     }
 

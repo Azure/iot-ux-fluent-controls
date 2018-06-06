@@ -17,10 +17,6 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
 $card-icon-top: ($gallery-card-background-height - $gallery-card-icon-size);
 $card-icon-left: ($gallery-card-width - $gallery-card-icon-size);
 
-a:focus .card:not(.disabled) {
-  @include themify{
-    border: 1px solid themed('color-border-tile-hover');
-  }}
 
 .card {
   @include md-box(inline-block, relative, hidden);
@@ -33,6 +29,13 @@ a:focus .card:not(.disabled) {
   &:hover:not(.disabled) {
     @include themify{
       border: 1px solid themed('color-border-tile-hover');
+    }
+  }
+
+  &:focus:not(.disabled) {
+    outline-offset: -1px;
+    @include themify {
+        outline: 1px dashed themed('color-border-focus');
     }
   }
 

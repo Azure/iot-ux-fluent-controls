@@ -79,7 +79,7 @@ $line-height-row: $calendar-column-width;
         @include themify{
             border-bottom: 1px solid themed('color-border-rest');
             color: themed('color-text-rest')
-        }        
+        }
         & > div  {
             @include md-box(inline-block, relative);
             width: $calendar-column-width;
@@ -132,11 +132,10 @@ $line-height-row: $calendar-column-width;
             }
 
             &:focus {
-                outline: none;
-
+                outline-offset: -1px;
+                background-color: transparent !important;
                 @include themify{
-                    border: 1px solid themed('color-border-input-hover');
-                    background-color: transparent !important;
+                    outline: 1px dashed themed('color-border-focus');
                 }
             }
         }

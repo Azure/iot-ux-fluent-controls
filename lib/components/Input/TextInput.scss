@@ -39,10 +39,13 @@ $line-height-small: 4*$grid-size;
                 border: 1px solid themed('color-border-selected');
             }
         }
+
         &:focus {
+            outline-offset: -1px;
             @include themify {
-                border: 1px solid themed('color-border-input-selected');
+                outline: 1px dashed themed('color-border-focus');
             }
+
             &.show-cancel:not(:disabled) {
                 padding-right: 8*$grid-size;
 

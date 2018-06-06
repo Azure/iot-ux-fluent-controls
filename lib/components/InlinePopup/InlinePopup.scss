@@ -39,10 +39,11 @@ $swatches-horizontal: 3;
         }
 
         &:focus {
-            @include themify {
-                border: 1px dashed themed('color-border-focus');
-            }
+            outline-offset: -1px;
             background-color: transparent;
+            @include themify {
+                outline: 1px dashed themed('color-border-focus');
+            }
         }
     }
 
@@ -51,7 +52,7 @@ $swatches-horizontal: 3;
             @include themify {
                 background-color: themed('color-bg-content');
                 border: 1px solid themed('color-border-rest');
-            }            
+            }
             border-bottom: 0px;
             z-index: $z-index-flyouts-inline-btn + 1;
 
@@ -67,12 +68,12 @@ $swatches-horizontal: 3;
         position: absolute;
         top: 100%;
         z-index: $z-index-flyouts-inline-btn;
-        padding: $grid-size / 2;        
+        padding: $grid-size / 2;
         margin-top: -1px; // pulls the inline popup panel up and underneath the container
         @include themify {
             background-color: themed('color-bg-panel-primary');
-            border: 1px solid themed('color-border-rest');  
-            box-shadow: -3px 3px 10px -3px $color-black-transparent-primary;      
+            border: 1px solid themed('color-border-rest');
+            box-shadow: -3px 3px 10px -3px $color-black-transparent-primary;
         }
 
         &.left {
@@ -90,7 +91,7 @@ $swatches-horizontal: 3;
             right: 0;
         }
     }
-    
+
     .inline-popup-panel.right {
         @include rtl {
             left: 0;
@@ -116,7 +117,6 @@ $swatches-horizontal: 3;
     &:hover, &:focus {
         @include themify {
             background-color: themed('color-bg-item-hover');
-        }        
-        outline: none;
+        }
     }
 }
