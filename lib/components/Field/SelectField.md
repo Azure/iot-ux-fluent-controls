@@ -61,14 +61,14 @@ class SelectFieldDemo extends React.Component {
     render() {
         return (
             <div>
-                <SelectField 
+                <SelectField
                     name='radio1'
                     value={this.state.field1}
                     options={this.state.options}
                     label='Field 1'
                     onChange={(newValue) => this.setState({field1: newValue})}
                 />
-                <SelectField 
+                <SelectField
                     name='radio2'
                     value={this.state.field2}
                     options={this.state.options}
@@ -77,7 +77,7 @@ class SelectFieldDemo extends React.Component {
                     required
                     error='This field is required!'
                 />
-                <SelectField 
+                <SelectField
                     name='radio3'
                     value={this.state.field3}
                     options={this.state.options}
@@ -86,7 +86,7 @@ class SelectFieldDemo extends React.Component {
                     required
                     loading
                 />
-                <SelectField 
+                <SelectField
                     name='radio4'
                     value={this.state.field4}
                     options={this.state.options}
@@ -94,6 +94,14 @@ class SelectFieldDemo extends React.Component {
                     onChange={(newValue) => this.setState({field4: newValue})}
                     required
                     disabled
+                />
+                <SelectField
+                    name='radio1'
+                    value={this.state.field1}
+                    options={this.state.options}
+                    tooltip='toolip radio 1'
+                    label='Field 1'
+                    onChange={(newValue) => this.setState({field1: newValue})}
                 />
             </div>
         );

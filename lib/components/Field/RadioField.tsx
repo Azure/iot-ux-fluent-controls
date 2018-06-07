@@ -77,7 +77,7 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
     const fieldAttr: FormFieldAttributes = {
         fieldLabel: Object.assign({
             balloon: {
-                balloon: {
+                balloonContent: {
                     id: tooltipId
                 }
             }

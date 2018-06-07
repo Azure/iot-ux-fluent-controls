@@ -51,14 +51,14 @@ const initialState = {
 };
 
 <div>
-    <RadioField 
+    <RadioField
         name='radio_field1'
         value={state.field1}
         options={state.options}
         label='Field 1'
         onChange={(newValue) => setState({field1: newValue})}
     />
-    <RadioField 
+    <RadioField
         name='radio_field2'
         value={state.field2}
         options={state.options}
@@ -67,7 +67,7 @@ const initialState = {
         onChange={(newValue) => setState({field2: newValue})}
         required
     />
-    <RadioField 
+    <RadioField
         name='radio_field3'
         value={state.field3}
         options={state.options}
@@ -75,7 +75,7 @@ const initialState = {
         onChange={(newValue) => setState({field3: newValue})}
         required loading
     />
-    <RadioField 
+    <RadioField
         name='radio_field4'
         value={state.field4}
         options={state.options}
@@ -83,7 +83,7 @@ const initialState = {
         onChange={(newValue) => setState({field4: newValue})}
         required columns
     />
-    <RadioField 
+    <RadioField
         name='radio_field5'
         value={state.field5}
         options={state.options}
@@ -91,6 +91,14 @@ const initialState = {
         error='This is an example error'
         onChange={(newValue) => setState({field5: newValue})}
         disabled
+    />
+    <RadioField
+        name='radio_field1'
+        value={state.field1}
+        options={state.options}
+        tooltip='tooltip field 1'
+        label='Field 1'
+        onChange={(newValue) => setState({field1: newValue})}
     />
 </div>
 ```

@@ -43,6 +43,7 @@ const initialState = {
     field3: '',
     field4: '',
     field5: '',
+    field6: ''
 };
 
 <div>
@@ -97,10 +98,17 @@ const initialState = {
     />
     <TextField
         name='form-field8'
-        label='Label 5'
+        label='Label 8'
         placeholder='Field 8'
         onChange={(newValue) => setState({field5: newValue})}
         disabled
+    />
+    <TextField
+        name='form-field9'
+        label='Label 9'
+        placeholder='Field 9'
+        tooltip='tooltip 9'
+        onChange={(newValue) => setState({field6: newValue})}
     />
 </div>
 ```

@@ -38,7 +38,8 @@ const initialState = {
     field3: true,
     field4: false,
     field5: false,
-    field6: true
+    field6: true,
+    field7: true
 };
 
 <div>
@@ -83,6 +84,13 @@ const initialState = {
         label='Label 6'
         onChange={(newValue) => setState({field6: newValue})}
         disabled
+    />
+    <ToggleField
+        name='form-field7'
+        value={state.field7}
+        tooltip='form field 7'
+        label='Label 7'
+        onChange={(newValue) => setState({field7: newValue})}
     />
 </div>
 ```

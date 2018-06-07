@@ -80,7 +80,7 @@ export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: S
     const fieldAttr: FormFieldAttributes = {
         fieldLabel: Object.assign({
             balloon: {
-                balloon: {
+                balloonContent: {
                     id: tooltipId
                 }
             }

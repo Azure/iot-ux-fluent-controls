@@ -64,6 +64,25 @@ const initialState = {
 </div>
 ```
 
+```jsx
+const initialState = {
+    value: 'Mon, 25 Sep 2017 03:07:00 GMT'
+};
+
+<div>
+    <div style={{marginBottom: '20px'}}>
+        Current value:  {state.value}
+    </div>
+    <TimeField
+        name="time-input-0"
+        label='Default (Local)'
+        tooltip='example with tooltip'
+        value={state.value}
+        onChange={newValue => setState({value: newValue})}
+    />
+</div>
+```
+
 #### Default with GMT Timezone
 
 ```jsx

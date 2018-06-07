@@ -67,7 +67,7 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
     const fieldAttr: FormFieldAttributes = {
         fieldLabel: Object.assign({
             balloon: {
-                balloon: {
+                balloonContent: {
                     id: tooltipId
                 }
             }

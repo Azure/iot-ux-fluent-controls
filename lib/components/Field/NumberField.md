@@ -83,5 +83,13 @@ const initialState = {
         onChange={(newValue) => setState({field5: newValue})}
         disabled
     />
+    <NumberField
+        name='form-field5'
+        label='Label 5'
+        tooltip='tooltip 5'
+        placeholder='Field 5'
+        onChange={(newValue) => setState({field5: newValue})}
+        disabled
+    />
 </div>
 ```

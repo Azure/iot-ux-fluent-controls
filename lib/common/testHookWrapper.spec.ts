@@ -35,9 +35,15 @@ export class TestHookElement<T extends HTMLElement> {
         this.simulate('blur');
     }
 
-    keyDown(key: keyof KeyCode | number) {
+    keyDown(key: keyof KeyCode | number, modifier?: { altKey?: boolean }) {
         let char: number = typeof(key) === 'number' ? key : keyCode[key];
-        this.simulate('keydown', {keyCode: char});
+        let payload: {[key: string]: any} = {keyCode: char};
+        if (modifier) {
+            if (modifier.altKey) {
+                payload.altKey = modifier.altKey;
+            }
+        }
+        this.simulate('keydown', payload);
     }
 
     keyUp(key: keyof KeyCode | number) {
@@ -109,7 +115,7 @@ export class TestHookWrapper<T> {
     }
 
     find(testHook: string) {
-        return this.wrapper.find(`[data-test-hook="${testHook}"]`);
+        return this.wrapper.find(`[data-test-hook='${testHook}']`);
     }
 
     selector(selector) {

@@ -77,7 +77,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
     const fieldAttr: FormFieldAttributes = {
         fieldLabel: Object.assign({
             balloon: {
-                balloon: {
+                balloonContent: {
                     id: tooltipId
                 }
             }

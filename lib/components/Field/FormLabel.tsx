@@ -50,6 +50,11 @@ export interface FormLabelProps extends React.Props<FormLabelType> {
      */
     balloonAlignment?: BalloonAlignment;
 
+    /**
+     * force balloon to be visible
+     */
+    balloonExpanded?: boolean;
+
     /** Classname to append to top level element */
     className?: string;
 
@@ -71,14 +76,18 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
             position={props.balloonPosition || BalloonPosition.Top}
             className={css('label-icon')}
             multiline
+            expanded={props.balloonExpanded}
             attr={mergeAttributeObjects(
                 props.attr.balloon,
                 {balloon: {
                     className: css('label-balloon'),
+                },
+                balloonContent: {
                     role: 'tooltip',
-                    'aria-label': typeof props.balloon === 'string' ? props.balloon : undefined
+                    'aria-live': 'polite',
+                    'aria-atomic': 'true'
                 }},
-                ['container', 'balloonContainer', 'balloon']
+                ['container', 'balloonContainer', 'balloon', 'balloonContent']
             )}
         >
             <Icon

@@ -111,5 +111,13 @@ const initialState = {
             error
         />
     </FormField>
+    <FormField name='form-field8' label='Label 8' tooltip='tooltip-8'>
+        <TextInput
+            name='form-field8'
+            value={state.field1}
+            placeholder='Field 8'
+            onChange={(newValue) => setState({field1: newValue})}
+        />
+    </FormField>
 </div>
 ```

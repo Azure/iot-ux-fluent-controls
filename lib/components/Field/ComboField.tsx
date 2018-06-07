@@ -161,7 +161,7 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
     const fieldAttr: FormFieldAttributes = {
         fieldLabel: Object.assign({
             balloon: {
-                balloon: {
+                balloonContent: {
                     id: tooltipId
                 }
             }

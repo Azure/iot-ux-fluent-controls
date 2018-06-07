@@ -18,7 +18,7 @@ ______________________________________________________________________________
                         <div className='dropdown' {...props.attr.dropdown}>
                             <button className='option' {...props.attr.option} />
                             ...
-                            <button className='option' {...props.attr.option} />                
+                            <button className='option' {...props.attr.option} />
                         </div>
                     </div>
                 </div>
@@ -59,6 +59,39 @@ const initialState = {
     <ComboField
         name='combo-field1'
         label='Combo Field 1'
+        value={state.value}
+        onChange={newValue => setState({value: newValue})}
+        options={state.options}
+        placeholder='Example placeholder'
+    />
+</div>
+```
+
+#### With Tooltip
+
+```jsx
+const initialState = {
+    value: '',
+    options: [
+        {label: 'Label 1', value: 'Option 1'},
+        {label: 'Label 2', value: 'Option 2'},
+        {label: 'Label 3', value: 'Option 3'},
+        {label: 'Label 4', value: 'Option 4', hidden: true},
+        {label: 'Label 5', value: 'Option 5', disabled: true},
+    ]
+};
+
+<div>
+    <div style={{marginBottom: '20px'}}>
+        Current value:  {
+            typeof(state.value) === 'string' ? `'${state.value}'`
+                : <pre>{JSON.stringify(state.value, null, 2)}</pre>
+        }
+    </div>
+    <ComboField
+        name='combo-field1'
+        label='Combo Field 1'
+        tooltip='example with tooltip'
         value={state.value}
         onChange={newValue => setState({value: newValue})}
         options={state.options}

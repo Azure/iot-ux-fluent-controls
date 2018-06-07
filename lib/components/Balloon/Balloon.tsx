@@ -24,6 +24,7 @@ export interface BalloonAttributes {
     container?: SpanProps;
     balloonContainer?: DivProps;
     balloon?: SpanProps;
+    balloonContent?: SpanProps;
 }
 
 export interface BalloonProps extends React.Props<BalloonType> {
@@ -32,29 +33,29 @@ export interface BalloonProps extends React.Props<BalloonType> {
 
     /**
      * Where to display Balloon relative to child element
-     * 
+     *
      * `BalloonPosition.[Top | Bottom | Left | Right]`
-     * 
+     *
      * Default: BalloonPosition.Top
      */
     position?: BalloonPosition;
     /**
      * Alignment of Balloon relative to child
-     * 
+     *
      * `BalloonAlignment.[Start | Center | End]`
-     * 
+     *
      * Default: BalloonAllignment.Center
      */
     align?: BalloonAlignment;
     /**
      * Allow Balloon contents to span multiple lines
-     * 
+     *
      * default: true
      */
     multiline?: boolean;
     /**
      * Allow balloon to reposition itself if it isn't completely visible
-     * 
+     *
      * default: true
      */
     autoPosition?: boolean;
@@ -87,10 +88,10 @@ const compareClientRect = (first: ClientRect, second: ClientRect): boolean => {
 
 /**
  * SimpleBalloon shows tooltip (with HTML) on hover over child
- * 
+ *
  * NOTE: If a parent element of this control is `overflow: hidden` then the
  * balloon may not show up.
- * 
+ *
  * @param props Control properties (defined in `SimpleBalloonProps` interface)
  */
 export class Balloon extends React.Component<BalloonProps, BalloonState> {
@@ -208,9 +209,9 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         return (
             <Dropdown
                 dropdown={
-                    <span className={innerClassName}>
+                    <Attr.span className={innerClassName} attr={this.props.attr.balloonContent}>
                         {this.props.tooltip}
-                    </span>
+                    </Attr.span>
                 }
                 visible={this.state.visible}
                 className={className}

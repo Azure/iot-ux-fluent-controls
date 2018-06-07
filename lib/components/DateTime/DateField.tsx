@@ -84,7 +84,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
     const fieldAttr: FormFieldAttributes = {
         fieldLabel: Object.assign({
             balloon: {
-                balloon: {
+                balloonContent: {
                     id: tooltipId
                 }
             }

@@ -72,7 +72,7 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
     const fieldAttr: FormFieldAttributes = {
         fieldLabel: Object.assign({
             balloon: {
-                balloon: {
+                balloonContent: {
                     id: tooltipId
                 }
             }

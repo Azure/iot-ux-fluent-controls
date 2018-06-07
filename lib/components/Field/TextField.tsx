@@ -87,7 +87,7 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
     const fieldAttr: FormFieldAttributes = {
         fieldLabel: Object.assign({
             balloon: {
-                balloon: {
+                balloonContent: {
                     id: tooltipId
                 }
             }

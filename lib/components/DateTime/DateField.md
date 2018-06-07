@@ -59,6 +59,23 @@ const initialState = {value: 'Sep 20, 2010 07:00:00 GMT'};
     </div>
     <DateField
         name='date-picker'
+        label='Default Example (Local)'
+        tooltip='example with tooltip'
+        onChange={(newValue) => setState({value: newValue}) }
+        initialValue={state.value}
+    />
+</div>
+```
+
+```jsx
+const initialState = {value: 'Sep 20, 2010 07:00:00 GMT'};
+
+<div>
+    <div style={{marginBottom: '20px'}}>
+        Current Value: {state.value}
+    </div>
+    <DateField
+        name='date-picker'
         label='Default Example (GMT)'
         onChange={(newValue) => setState({value: newValue}) }
         initialValue={state.value}
@@ -79,7 +96,7 @@ const initialState = {value: 'Sep 20, 2010 00:00:00 GMT'};
         label='Disabled Example'
         onChange={(newValue) => setState({value: newValue}) }
         initialValue={state.value}
-        disabled 
+        disabled
     />
 </div>
 ```

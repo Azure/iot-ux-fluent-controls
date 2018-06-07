@@ -43,6 +43,22 @@ const initialState = {value: 'Sep 20, 2010 05:00:00 GMT'};
 const initialState = {value: 'Sep 20, 2010 05:00:00 GMT'};
 
 <div>
+    <div style={{marginBottom: '20px'}}>Current Value: {state.value}</div>
+    <DateTimeField
+        name='date-picker-0'
+        initialValue={'Sep 20, 2010 05:00:00 GMT'}
+        label='Default example (Local)'
+        tooltip='example with tooltip'
+        localTimezone={true}
+        onChange={(newValue) => setState({value: newValue})}
+    />
+</div>
+```
+
+```jsx
+const initialState = {value: 'Sep 20, 2010 05:00:00 GMT'};
+
+<div>
         <div style={{marginBottom: '20px'}}>Current Value: {state.value}</div>
     <DateTimeField
         name='date-picker-1'

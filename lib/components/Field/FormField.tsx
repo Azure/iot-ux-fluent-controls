@@ -8,6 +8,11 @@ import {FormError, FormErrorAttributes} from './FormError';
 import { BalloonPosition, BalloonAlignment } from '../Balloon';
 const css = classNames.bind(require('./Field.scss'));
 
+const keyCodes = {
+    Escape: 27,
+    F1: 112
+};
+
 export interface FormFieldType {}
 
 export interface FormFieldAttributes {
@@ -46,64 +51,115 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     attr?: FormFieldAttributes;
 }
 
+export interface FormFieldState {
+    tooltipVisible: boolean;
+}
+
 /**
  * High level generic form field
  *
  * @param props Control properties (defined in `FormFieldProps` interface)
  */
-export const FormField: React.StatelessComponent<FormFieldProps> = (props: FormFieldProps) => {
-    const containerClass = css('input-container', {
-        'input-error': !!props.error,
-        'required': props.required && typeof(props.label) === 'string',
-    }, props.className);
+export class FormField extends React.PureComponent<FormFieldProps, FormFieldState> {
+    static defaultProps = {
+        name: undefined,
+        label: undefined,
+        loading: false,
+        hideError: false,
+        attr: {
+            fieldContainer: {},
+            fieldLabel: {},
+            fieldContent: {},
+            fieldError: {},
+        }
+    };
 
-    let error = props.error;
-    if (props.loading) {
-        error = <HorizontalLoader dots={6} />;
+    private _self: React.RefObject<HTMLDivElement>;
+
+    constructor(props: FormFieldProps) {
+        super(props);
+        this.handleKeyDown = this.handleKeyDown.bind(this);
+        this._self = React.createRef();
+        this.state = {
+            tooltipVisible: false
+        };
     }
 
-    return (
-        <Attr.div className={containerClass} attr={props.attr.fieldContainer}>
-            {(!!props.label) && <FormLabel
-                name={props.name}
-                icon='info'
-                balloon={props.tooltip}
-                attr={props.attr.fieldLabel}
-                required={props.required}
-                {...props.attr.fieldTooltip}
-            >
-                {props.label}
-            </FormLabel>}
-            <Attr.div className={css('content')} attr={props.attr.fieldContent}>
-                {props.children}
+    handleKeyDown(e: React.KeyboardEvent<any>) {
+        // if user pressed Alt + F1 open the tooltip
+        if (e.altKey && e.keyCode === keyCodes.F1) {
+            this.setState({
+                tooltipVisible: true
+            });
+
+            // TODO move tooltip and error id creation into this component
+            // if the tooltip balloon has an id, the pattern is being adhered to
+            // this is a way to leverage aria-live.  aria-live watches for changes inside the element.
+            // by removing and resetting the tooltip contents, aria live will see this as a change and
+            // screen reader will read out the contents
+            const tt = this._self.current.querySelector(`#${this.props.name}-tt`);
+            if (tt != null && typeof this.props.tooltip === 'string') {
+                const innerContent = tt.innerHTML;
+                tt.innerHTML = '';
+                tt.innerHTML = innerContent;
+            }
+
+            e.preventDefault();
+        // if the user pressed escape key, close the tooltip
+        } else if (e.keyCode === keyCodes.Escape) {
+            this.setState({
+                tooltipVisible: false
+            });
+        }
+    }
+
+    render() {
+        const props = this.props;
+        const containerClass = css('input-container', {
+            'input-error': !!props.error,
+            'required': props.required && typeof(props.label) === 'string',
+        }, props.className);
+
+        let error = props.error;
+        if (props.loading) {
+            error = <HorizontalLoader dots={6} />;
+        }
+
+        return (
+            <Attr.div methodRef={this._self} className={containerClass} attr={props.attr.fieldContainer}>
+                {(!!props.label) && <FormLabel
+                    name={props.name}
+                    icon='info'
+                    balloon={props.tooltip}
+                    attr={props.attr.fieldLabel}
+                    required={props.required}
+                    balloonExpanded={this.state.tooltipVisible}
+                    {...props.attr.fieldTooltip}
+                >
+                    {props.label}
+                </FormLabel>}
+                <Attr.div
+                    className={css('content')}
+                    attr={props.attr.fieldContent}
+                    onKeyDown={this.handleKeyDown}
+                >
+                    {props.children}
+                </Attr.div>
+                <FormError
+                    className={props.errorClassName}
+                    hidden={props.hideError}
+                    title={props.errorTitle}
+                    attr={{container: {
+                        'aria-live': 'polite', // this tags are for screen readers to read the error when it appears
+                        'aria-atomic': 'true',
+                        ...props.attr.fieldError }
+                    }}
+                >
+                    {error}
+                </FormError>
             </Attr.div>
-            <FormError
-                className={props.errorClassName}
-                hidden={props.hideError}
-                title={props.errorTitle}
-                attr={{container: {
-                    'aria-live': 'polite', // this tags are for screen readers to read the error when it appears
-                    'aria-atomic': 'true',
-                    ...props.attr.fieldError }
-                }}
-            >
-                {error}
-            </FormError>
-        </Attr.div>
-    );
-};
-
-FormField.defaultProps = {
-    name: undefined,
-    label: undefined,
-    loading: false,
-    hideError: false,
-    attr: {
-        fieldContainer: {},
-        fieldLabel: {},
-        fieldContent: {},
-        fieldError: {},
+        );
     }
-};
+}
 
 export default FormField;
