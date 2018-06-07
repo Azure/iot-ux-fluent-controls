@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
+import { MethodNode } from '../../Common';
 import * as InlinePopup from '../InlinePopup';
 import { Accordion } from '../Accordion';
 import { Thumbnail } from '../Thumbnail';
@@ -13,18 +14,20 @@ export interface MastheadAttributes {
 }
 
 export interface MastheadProperties {
-    branding: React.ReactNode;
-    user?: {
-        email: string;
-        displayName: string;
-        menuItems: MastheadUserMenuItem[];
-        menuExpanded?: boolean;
-        onMenuClick: () => void;  
-        thumbnailUrl?: string;
-    };
+    branding: MethodNode;
+    user?: MastheadUserProperties;
     toolbarItems?: MastheadToolbarItemProperties[];
-    mobileMenuItems?: MastheadMobileMenuItem[];    
+    mobileMenuItems?: MastheadMobileMenuItem[];
     attr?: MastheadAttributes;
+}
+
+export interface MastheadUserProperties {
+    email: string;
+    displayName: string;
+    menuItems: MastheadUserMenuItem[];
+    menuExpanded?: boolean;
+    onMenuClick: () => void;
+    thumbnailUrl?: string;
 }
 
 export type MastheadMobileMenuItem = {
@@ -160,7 +163,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
             user: {
                 onMenuClick,
                 menuExpanded,
-            },            
+            },
             attr
         } = this.props;
 
@@ -203,7 +206,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                         <MastheadToolbarItem
                             alignment='right'
                             attr={{ ariaLabel: attr.mobileMenuAriaLabel, dataTestHook: 'masthead-application-mobile-menu' }}
-                            content={mobileMenu}                            
+                            content={mobileMenu}
                             expanded={menuExpanded}
                             icon='more'
                             key='mobile'

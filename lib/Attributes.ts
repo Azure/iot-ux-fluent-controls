@@ -11,6 +11,7 @@ export type HeaderProps = AttrProps<HTMLDivElement>;
 export type InputProps = AttrProps<HTMLInputElement>;
 export type ImageProps = AttrProps<HTMLImageElement>;
 export type LabelProps = AttrProps<HTMLLabelElement>;
+export type NavProps = AttrProps<HTMLDivElement>;
 export type OptionProps = AttrProps<HTMLOptionElement>;
 export type PreProps = AttrProps<HTMLPreElement>;
 export type SectionProps = AttrProps<HTMLDivElement>;
@@ -113,7 +114,7 @@ export function AttrElementWrapper<T extends HTMLElement>(element: string): Attr
             }
             return React.createElement(element, props, ...children);
         }
-        
+
         const className = classNames(props.className, attr.className);
         if (props.className) {
             delete props.className;
@@ -141,7 +142,7 @@ export function AttrElementWrapper<T extends HTMLElement>(element: string): Attr
         if (attr.key) {
             delete attr.key;
         }
-        
+
         let hasChildren = false;
         let propChildren = [];
         if (props.children) {
@@ -177,6 +178,7 @@ const header = AttrElementWrapper<HTMLDivElement>('header');
 const input = AttrElementWrapper<HTMLInputElement>('input');
 const image = AttrElementWrapper<HTMLInputElement>('img');
 const label = AttrElementWrapper<HTMLLabelElement>('label');
+const nav = AttrElementWrapper<HTMLDivElement>('nav');
 const option = AttrElementWrapper<HTMLOptionElement>('option');
 const pre = AttrElementWrapper<HTMLPreElement>('pre');
 const section = AttrElementWrapper<HTMLDivElement>('section');
@@ -193,6 +195,7 @@ export const Elements = {
     input: input,
     image: image,
     label: label,
+    nav: nav,
     option: option,
     pre: pre,
     section: section,
