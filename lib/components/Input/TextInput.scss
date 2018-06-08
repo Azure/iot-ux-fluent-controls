@@ -34,34 +34,17 @@ $line-height-small: 4*$grid-size;
         &:valid {
             padding: 2*$grid-size 3*$grid-size 2*$grid-size 3*$grid-size;
         }
-        @include themify{
-            &:hover {
+
+        &:active, &:hover, &:focus {
+            // inputs look really weird with a dashed outline, so standardize
+            // on the solid selected border for all the above states:
+
+            @include themify{
                 border: 1px solid themed('color-border-selected');
             }
         }
 
-        &:focus {
-            outline-offset: -1px;
-            @include themify {
-                outline: 1px dashed themed('color-border-focus');
-            }
-
-            &.show-cancel:not(:disabled) {
-                padding-right: 8*$grid-size;
-
-                + .cancel {
-                    @include themify{
-                        color: themed('color-text-clear');
-                    }
-                    pointer-events: auto;
-                }
-            }
-        }
-
-        &:active {
-            @include themify {
-                border: 1px solid themed('color-border-selected');
-            }
+        &:active, &:focus {
             &.show-cancel:not(:disabled) {
                 padding-right: 8*$grid-size;
 

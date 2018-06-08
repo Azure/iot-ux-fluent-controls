@@ -33,20 +33,9 @@ $dropdown-z-index: $z-index-medium-step;
             background-color: themed('color-bg-input-rest');
         }
 
-        &:hover {
-            @include themify{
-                border: 1px solid themed('color-border-selected');
-            }
-        }
-
-        &:focus {
-            outline-offset: -1px;
-            @include themify {
-                outline: 1px dashed themed('color-border-focus');
-            }
-        }
-
-        &:active, &.visible {
+        &:hover, &:focus, &:active {
+            // inputs look really weird with a dashed outline, so standardize
+            // on the solid selected border for all the above states:
             @include themify{
                 border: 1px solid themed('color-border-selected');
             }

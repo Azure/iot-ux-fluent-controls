@@ -71,19 +71,10 @@ $line-height: 4*$grid-size;
             }
         }
 
-        &:focus {
-            outline-offset: -1px;
-            @include themify {
-                outline: 1px dashed themed('color-border-focus');
-            }
-        }
-
         @include themify{
-            &:hover {
-                border: 1px solid themed('color-border-selected');
-            }
-
-            &:active {
+            &:active, &:hover, &:focus {
+                // inputs look really weird with a dashed outline, so standardize
+                // on the solid selected border for all the above states:
                 border: 1px solid themed('color-border-selected');
             }
 
