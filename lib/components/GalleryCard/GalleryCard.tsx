@@ -17,7 +17,7 @@ export interface GalleryCardAttributes {
 export interface GalleryCardProps extends React.Props<GalleryCardType> {
     /**
      * Element to display as `GalleryCard` background
-     * 
+     *
      * Default: Solid background with color #eaeaea
      * */
     background?: MethodNode;
@@ -26,12 +26,10 @@ export interface GalleryCardProps extends React.Props<GalleryCardType> {
 
     /**
      * Fixed width and height (284 pixels)
-     * 
+     *
      * Default: true
      */
     fixed?: boolean;
-    /** Disables interaction CSS */
-    disabled?: boolean;
 
     /** Classname to append to top level element */
     className?: string;
@@ -45,18 +43,17 @@ export interface GalleryCardProps extends React.Props<GalleryCardType> {
 
 /**
  * Gallery Card control
- * 
+ *
  * You should usually mark this control as `fixed` because the container
  * element gets its width from its content like the background and children
- * 
+ *
  * @param props Control properties (Defined in `GalleryCardProps` interface)
  */
 export const GalleryCard: React.StatelessComponent<GalleryCardProps> = (props: GalleryCardProps) => {
     let classNames = css({
         'card': true,
         'fixed': !!props.fixed,
-        'fullbg': !props.children,
-        'disabled': props.disabled
+        'fullbg': !props.children
     }, props.className || '');
 
     let contentClassName = css({
@@ -74,7 +71,7 @@ export const GalleryCard: React.StatelessComponent<GalleryCardProps> = (props: G
     const banner = props.banner ? (
         <Banner attr={{container: props.attr.banner}}>{props.banner}</Banner>
     ) : null;
-    
+
 
     const content = props.children ? (
         <Attr.div className={contentClassName} attr={props.attr.content}>

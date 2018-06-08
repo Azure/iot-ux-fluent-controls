@@ -17,6 +17,39 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
 $card-icon-top: ($gallery-card-background-height - $gallery-card-icon-size);
 $card-icon-left: ($gallery-card-width - $gallery-card-icon-size);
 
+:global(.gallery-card-link) {
+  // most consumers of GalleryCard will wrap it in a React-Router
+  // Link component; specify some default styling for that:
+
+  display: inline-block; // this is a tile, not a normal <a> tag
+  margin: 2.5 * $grid-size; // put some spacing between the tiles by default
+
+  &:not(:global(.disabled)) {
+    &:active {
+      .card {
+          @include themify {
+            border: 1px solid themed('color-border-selected');
+          }
+        }
+    }
+
+    &:hover {
+      .card {
+          @include themify {
+            border: 1px solid themed('color-border-hover');
+          }
+        }
+    }
+
+    &:focus {
+      .card {
+        @include themify {
+          border: 1px dashed themed('color-border-focus');
+        }
+      }
+    }
+  }
+}
 
 .card {
   @include md-box(inline-block, relative, hidden);
@@ -24,34 +57,15 @@ $card-icon-left: ($gallery-card-width - $gallery-card-icon-size);
     background-color: themed('color-bg-gallery-tile');
     border: 1px solid themed('color-border-tile');
   }
-  margin: 2.5*$grid-size;
 
-  &:hover:not(.disabled) {
-    @include themify{
-      border: 1px solid themed('color-border-tile-hover');
-    }
-  }
-
-  &:focus:not(.disabled) {
-    outline-offset: -1px;
-    @include themify {
-        outline: 1px dashed themed('color-border-focus');
-    }
-  }
+  margin: 0;
+  margin-bottom: -$grid-size; // to avoid the extra spacing visible on :active
+  padding: 0;
+  box-sizing: border-box;
 
   &.fixed {
     height: $gallery-card-height;
     width: $gallery-card-width;
-  }
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  a {
-    text-decoration: none;
   }
 }
 
