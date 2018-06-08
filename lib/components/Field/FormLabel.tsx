@@ -82,7 +82,7 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
                 {balloon: {
                     className: css('label-balloon'),
                 },
-                balloonContent: {
+                balloonContainer: {
                     role: 'tooltip',
                     'aria-live': 'polite',
                     'aria-atomic': 'true'

@@ -91,19 +91,6 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
             this.setState({
                 tooltipVisible: true
             });
-
-            // TODO move tooltip and error id creation into this component
-            // if the tooltip balloon has an id, the pattern is being adhered to
-            // this is a way to leverage aria-live.  aria-live watches for changes inside the element.
-            // by removing and resetting the tooltip contents, aria live will see this as a change and
-            // screen reader will read out the contents
-            const tt = this._self.current.querySelector(`#${this.props.name}-tt`);
-            if (tt != null && typeof this.props.tooltip === 'string') {
-                const innerContent = tt.innerHTML;
-                tt.innerHTML = '';
-                tt.innerHTML = innerContent;
-            }
-
             e.preventDefault();
         // if the user pressed escape key, close the tooltip
         } else if (e.keyCode === keyCodes.Escape) {
