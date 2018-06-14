@@ -34,21 +34,19 @@ $outline-focus-border-width: 1px;
         outline: none;
         @include themify{
             background-color: themed('color-bg-radio-btn-rest');
-        }
+        }   
 
         &:focus ~ .radio-button:not(.disabled) {
-            outline-offset: -1px;
             @include themify {
-                outline: 1px dashed themed('color-border-focus');
+                border: 1px dashed themed('color-border-focus');
             }
         }
 
         &:hover:not(:checked) ~ .radio-button:not(.disabled) {
-            outline-offset: -1px;
             @include themify{
-                outline: 1px solid themed('color-border-radio-btn-hover');
+                border: 1px solid themed('color-border-radio-btn-hover');
             }
-        }
+        }   
     }
 
     .radio-text {

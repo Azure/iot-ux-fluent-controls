@@ -103,8 +103,8 @@ $masthead-wide-button-width: $masthead-button-width * 4;
 .masthead-toolbar-menu {
     @include themify {
         background-color: themed('color-bg-masthead');
+        border: 1px solid themed('color-border-controls') !important;
     }
-    border: none !important;
     margin-top: 0px !important;
     text-align: left;
     padding: 0 !important;
@@ -134,13 +134,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
         line-height: $header-height * 0.8;
 
         &:not(:last-child) {
-            @include themify {
-                border-bottom: 1px solid themed('color-border-disabled') !important;
-            }
-
-            &:focus {
-                border-bottom-color: transparent;
-            }
+            border-bottom-color: transparent;
         }
 
         .menu-link {

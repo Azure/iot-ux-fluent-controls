@@ -67,7 +67,6 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     tooltip?: MethodNode;
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
-
     /** Classname to append to top level element */
     className?: string;
     /** Classname to append to top level element of DatePicker and TimeInput */
@@ -134,7 +133,6 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
 
     getInitialState(props: DateTimeFieldProps): DateTimeFieldState {
         let datetime = null, timeValue = null, dateValue = null;
-
         const local = props.localTimezone;
         let invalid = false;
         let initialValue = null;
@@ -176,7 +174,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                      * represents a time in GMT
                      */
                     initialValue = local
-                        ? props.initialValue
+                        ? new Date(props.initialValue)
                         : new Date(Date.UTC(
                             props.initialValue.getUTCFullYear(),
                             props.initialValue.getUTCMonth(),
@@ -207,7 +205,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
             initialDate: invalid ? props.initialValue : initialValue.toJSON(),
             lastTime: invalid ? defaultTime.toJSON() : initialValue.toJSON(),
             lastDate: invalid ? 'invalid' : initialValue.toJSON()
-         };
+        };
     }
 
     componentWillReceiveProps(newProps: DateTimeFieldProps) {
@@ -241,8 +239,8 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
             return null;
         }
 
-        const date = typeof(newDate) === 'string' ? new Date(newDate) : newDate;
-        const time = typeof(newTime) === 'string' ? new Date(newTime) : newTime;
+        const date = typeof (newDate) === 'string' ? new Date(newDate) : newDate;
+        const time = typeof (newTime) === 'string' ? new Date(newTime) : newTime;
         const newValue = this.props.localTimezone
             ? new Date(
                 date.getFullYear(),

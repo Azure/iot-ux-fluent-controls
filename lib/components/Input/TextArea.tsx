@@ -19,7 +19,7 @@ export interface TextAreaProps extends React.Props<TextAreaType> {
     value?: string;
     /** Text area placeholder */
     placeholder?: string;
-
+    
     /** Apply error styling to input element */
     error?: boolean;
     /** Add required attribute to HTML input element */
@@ -47,7 +47,7 @@ export interface TextAreaState {
 
 /**
  * Low level text input control
- *
+ * 
  * (Use the `TextField` control instead when making a form with standard styling)
  */
 export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
@@ -79,7 +79,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
     }
 
     render() {
-        const value = this.props.value;
+        const value = this.props.value || '';
 
         return (
             <Attr.div
@@ -99,14 +99,14 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     required={this.props.required}
                     attr={this.props.attr.textarea}
                 />
-                {this.props.autogrow ?
+                {this.props.autogrow ? 
                     <Attr.pre
                         className={css('textarea', 'textarea-ghost')}
                         methodRef={this.bindGhost}
                         attr={this.props.attr.pre}
                     >
                         {value + (value[value.length - 1] === '\n' ? '\n' : '')}
-                    </Attr.pre>
+                    </Attr.pre> 
                 : ''}
             </Attr.div>
         );
@@ -118,7 +118,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
             autoFocusRef(element);
         }
     }
-
+    
     private bindGhost = element => this.ghost = element;
 }
 
