@@ -14,17 +14,22 @@ export interface ThumbnailProperties {
     // if we don't have a kind, then we display an unknown view which looks like the regular loading view but with an error message underneath
     loading?: boolean;
     url?: string;
-    kind?: 'product' | 'device' | 'user';
+
+    /** The icon to display. */
+    icon?: string;
+
+    /**
+     * The kind of thumbnail icon.
+     * @deprecated use `icon` instead
+     */
+    kind?: 'product' | 'device' | 'user' | 'unknown' | 'missing';
 
     // these allow customization of the styles by passing in other classes
     className?: string;
 
     // this is supposed to be one of the presets present - if not passed it defaults to preview
     // size should be controlled by the
-    size?: 'preview' | 'masthead' | 'list-item' | 'search-result';
-
-    // this is an override of the icon
-    icon?: string;
+    size?: 'preview' | 'masthead' | 'list-item' | 'list-tile' | 'search-result';
 }
 
 /**
@@ -48,18 +53,19 @@ const kindIcons = {
     'missing': 'icon-alias-missing-image'
 };
 
-export class Thumbnail extends React.Component<ThumbnailProperties, ThumbnailState> {
+export class Thumbnail extends React.PureComponent<ThumbnailProperties, ThumbnailState> {
     constructor(props: ThumbnailProperties) {
         super(props);
         this.state = { imageLoaded: false };
     }
+
     render() {
-        const className = cx('circle', this.props.className, this.props.size || 'preview');
+        const className = cx('circle', this.props.size || 'preview', this.props.className);
         if (this.props.loading) {
             return <div className={className}/>;
         } else {
             let icon = this.props.icon || kindIcons[this.props.kind];
-            return <div className={cx(className, this.props.kind)}>
+            return <div className={className}>
                 {!!this.props.url
                     ? <img className={cx({ 'hidden': !this.state.imageLoaded })}
                         src={this.props.url}

@@ -72,7 +72,7 @@ $swatches-horizontal: 3;
         margin-top: -1px; // pulls the inline popup panel up and underneath the container
         @include themify {
             background-color: themed('color-bg-panel-primary');
-            border: 1px solid themed('color-border-rest');
+            border: 1px solid themed('color-border-controls');
             box-shadow: -3px 3px 10px -3px $color-black-transparent-primary;
         }
 

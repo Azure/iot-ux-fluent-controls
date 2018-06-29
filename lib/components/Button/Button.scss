@@ -26,6 +26,7 @@ $outline-focus-border-width: 1px;
     white-space: nowrap;
     max-width: $button-max-width;
     vertical-align: middle;
+    cursor: pointer;
 
     :global(.icon) {
         @include md-box(inline-block);
@@ -37,12 +38,12 @@ $outline-focus-border-width: 1px;
         line-height: $line-height;
     }
 
-    &:hover:not(:disabled) {
-        cursor: pointer;
-    }
+    &:not(:disabled) {
+        &:focus {
+            outline-offset: -$outline-focus-border-width;
+        }
 
-    &:focus:not(:disabled) {
-        outline-offset: -$outline-focus-border-width;
+        @include clickable;
     }
 
     &:disabled {

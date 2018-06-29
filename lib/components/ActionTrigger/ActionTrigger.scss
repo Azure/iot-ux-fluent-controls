@@ -83,21 +83,33 @@ $line-height: 4.5*$grid-size;
     @include md-button-reset();
     line-height: 0px;
 
-    &.disabled:hover {
-        cursor: default;
-    }
-
-    &:hover:not(.disabled) {
+    &.disabled {
+        cursor: not-allowed;
         @include themify {
-            background-color: themed('color-bg-item-hover');
+            color: themed('color-text-disabled');
         }
     }
 
-    &:focus:not(.disabled) {
-        outline-offset: -1px;
-        @include themify{
-            outline: 1px dashed themed('color-border-focus');
-            background-color: themed('color-bg-item-hover');
+    &:not(.disabled) {
+        &:active {
+            @include themify {
+                background-color: themed('color-bg-item-selected');
+            }
         }
+
+        &:hover {
+            @include themify {
+                background-color: themed('color-bg-item-hover');
+            }
+        }
+
+        &:focus {
+            @include themify{
+                outline: 1px dashed themed('color-border-focus');
+                background-color: themed('color-bg-item-hover');
+            }
+        }
+
+        @include clickable;
     }
 }

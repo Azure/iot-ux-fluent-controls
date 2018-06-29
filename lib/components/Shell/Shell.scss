@@ -28,12 +28,6 @@
             }
         }
 
-        &:visited:not(.disabled) {
-            @include themify {
-                color: themed('color-text-hyperlink-rest');
-            }
-        }
-
         &.disabled {
             cursor: not-allowed;
 

@@ -103,8 +103,8 @@ $masthead-wide-button-width: $masthead-button-width * 4;
 .masthead-toolbar-menu {
     @include themify {
         background-color: themed('color-bg-masthead');
-        border: 1px solid themed('color-border-controls') !important;
     }
+
     margin-top: 0px !important;
     text-align: left;
     padding: 0 !important;
@@ -166,7 +166,7 @@ $masthead-wide-button-width: $masthead-button-width * 4;
 
 .masthead-toolbar-item {
     @include themify {
-        border-left: 1px solid themed('color-border-panel');
+        border-left: 1px solid themed('color-border-masthead-item');
     }
     min-width: $masthead-button-width;
 }
