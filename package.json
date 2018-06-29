@@ -1,6 +1,6 @@
 {
     "name": "@azure-iot/ux-fluent-controls",
-    "version": "0.4.9",
+    "version": "0.5.0",
     "description": "Microsoft Fluent React Controls",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
