@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize, IconAttributes} from '../Icon';
+import { ActionTriggerAttributes } from '../ActionTrigger/ActionTrigger';
+import ActionTriggerButton from '../ActionTrigger/ActionTriggerButton';
 const css = classNames.bind(require('./Alert.scss'));
 
 export enum AlertType {
@@ -16,7 +18,7 @@ export interface AlertAttributes {
     container?: DivProps;
     icon?: IconAttributes;
     contents?: DivProps;
-    closeIcon?: IconAttributes;
+    closeButtonTitle?: string;
 }
 
 export interface AlertProps extends React.Props<AlertComponentType> {
@@ -24,23 +26,23 @@ export interface AlertProps extends React.Props<AlertComponentType> {
     icon?: string;
     /**
      * Alert type described using `AlertType` enum
-     * 
+     *
      * (`AlertType.[Information | Warning | Error]`)
      */
     type?: AlertType;
-    
-    /** 
+
+    /**
      * Callback for close button
-     * 
+     *
      * (If empty, the close button is not displayed)
-     */    
+     */
     onClose?: () => void;
-    
+
     /** Fixed width (284 pixels) */
     fixed?: boolean;
     /**
      * Alert displays multiple lines
-     * 
+     *
      * (By default, alerts only show one line with ellipsis overflow)
      */
     multiline?: boolean;
@@ -53,7 +55,7 @@ export interface AlertProps extends React.Props<AlertComponentType> {
 
 /**
  * Alert showing Information, Warning, or Error with text, icon, and optional close button
- * 
+ *
  * @param props Control properties (defined in `AlertProps` interface)
  */
 export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) => {
@@ -79,7 +81,7 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
 
     const iconClassName = css('alert-icon');
     const icon = <Icon
-        className={iconClassName} 
+        className={iconClassName}
         size={IconSize.xsmall}
         icon={iconName}
         attr={props.attr.icon}
@@ -97,17 +99,16 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
 
     let close;
     if (props.onClose) {
-        const closeClassName = css('alert-close');
-        const closeProps = {
-            ...props.attr.closeIcon,
-            container: {onClick: props.onClose}
-        };
+        const closeButtonTitle = props.attr && props.attr.closeButtonTitle ? props.attr.closeButtonTitle : undefined;
         close = (
-            <Icon 
-                className={closeClassName} 
-                size={IconSize.xsmall}
-                icon='cancelLegacy'
-                attr={closeProps}
+            <ActionTriggerButton
+                onClick={props.onClose}
+                icon={'cancelLegacy'}
+                attr={{
+                    button: {
+                        title: closeButtonTitle
+                    }
+                }}
             />
         );
     }
@@ -126,8 +127,7 @@ Alert.defaultProps = {
     attr: {
         container: {},
         icon: {},
-        contents: {},
-        closeIcon: {},
+        contents: {}
     }
 };
 

@@ -45,19 +45,10 @@ $icon-margin-top: 3px;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        
+
         & + .close {
             margin-left: 2*$grid-size;
         }
-    }
-
-    .alert-close {
-        flex: 0 0 4*$grid-size;
-        margin-top: 1.5*$grid-size;
-        margin-left: auto;
-        margin-right: 2*$grid-size;
-        line-height: $line-height-close;
-        cursor: pointer;
     }
 
     &.alert-fixed {
