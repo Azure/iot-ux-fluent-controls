@@ -18,7 +18,6 @@ export interface AlertAttributes {
     container?: DivProps;
     icon?: IconAttributes;
     contents?: DivProps;
-    closeIcon?: IconAttributes;
 }
 
 export interface AlertProps extends React.Props<AlertComponentType> {
@@ -49,6 +48,9 @@ export interface AlertProps extends React.Props<AlertComponentType> {
 
     /** Classname to append to top level element */
     className?: string;
+
+    /** title text for close button.  needed for accessbility */
+    closeButtonTitle?: string;
 
     attr?: AlertAttributes;
 }
@@ -99,16 +101,15 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
 
     let close;
     if (props.onClose) {
-        const closeClassName = css('alert-close');
-        const closeProps: ActionTriggerAttributes = {
-            icon: props.attr.icon
-        };
         close = (
             <ActionTriggerButton
                 onClick={props.onClose}
-                className={closeClassName}
                 icon={'cancelLegacy'}
-                attr={closeProps}
+                attr={{
+                    button: {
+                        title: props.closeButtonTitle
+                    }
+                }}
             />
         );
     }
@@ -127,8 +128,7 @@ Alert.defaultProps = {
     attr: {
         container: {},
         icon: {},
-        contents: {},
-        closeIcon: {},
+        contents: {}
     }
 };
 
