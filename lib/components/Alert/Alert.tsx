@@ -102,11 +102,15 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
         const closeButtonTitle = props.attr && props.attr.closeButtonTitle ? props.attr.closeButtonTitle : undefined;
         close = (
             <ActionTriggerButton
+                className={css('close-button')}
                 onClick={props.onClose}
                 icon={'cancelLegacy'}
                 attr={{
                     button: {
                         title: closeButtonTitle
+                    },
+                    container: {
+                        className: css('close-button-container')
                     }
                 }}
             />

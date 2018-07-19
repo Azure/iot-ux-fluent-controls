@@ -51,6 +51,12 @@ $icon-margin-top: 3px;
         }
     }
 
+    .close-button {
+        &:focus {
+            outline-offset: -1px;
+        }
+    }
+
     &.alert-fixed {
         width: 71*$grid-size;
     }
@@ -59,11 +65,15 @@ $icon-margin-top: 3px;
         @include themify{
             background-color: themed('color-bg-alert-info');
             color: themed('color-text-rest');
-        }
 
-        .alert-text {
-            @include themify{
+            .alert-text {
                 color: themed('color-text-rest');
+            }
+
+            .close-button {
+                &:hover, &:focus {
+                    background-color: themed('color-bg-alert-info-close-hover');
+                }
             }
         }
     }
@@ -72,6 +82,16 @@ $icon-margin-top: 3px;
         @include themify{
             background-color: themed('color-bg-alert-warning');
             color: themed('color-text-black');
+
+            .close-button {
+                &:hover, &:focus {
+                    background-color: themed('color-bg-alert-warning-close-hover');
+                }
+            }
+
+            .close-button-container {
+                color: themed('color-text-black');
+            }
         }
     }
 
@@ -79,12 +99,22 @@ $icon-margin-top: 3px;
         @include themify{
             background-color: themed('color-bg-alert-error');
             color: themed('color-text-white');
-        }
-        .alert-text {
-            @include themify{
+
+            .alert-text {
+                color: themed('color-text-white');
+            }
+
+            .close-button {
+                &:hover, &:focus {
+                    background-color: themed('color-bg-alert-error-close-hover');
+                }
+            }
+
+            .close-button-container {
                 color: themed('color-text-white');
             }
         }
+
     }
 
     &.alert-multiline {
