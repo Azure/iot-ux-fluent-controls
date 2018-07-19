@@ -1,6 +1,6 @@
 {
     "name": "@microsoft/azure-iot-ux-fluent-controls",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "Azure IoT Fluent React Controls",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
@@ -29,7 +29,7 @@
         "url": "https://msazure.visualstudio.com/DefaultCollection/One/_git/azure-iot-ux-baseline"
     },
     "devDependencies": {
-        "@microsoft/azure-iot-ux-fluent-css": "^1.0.0",
+        "@microsoft/azure-iot-ux-fluent-css": "^1.1.0",
         "@types/chai": "^4.0.4",
         "@types/classnames": "^2.2.3",
         "@types/enzyme": "^2.8.9",
