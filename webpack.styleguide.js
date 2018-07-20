@@ -49,7 +49,7 @@ module.exports = {
               includePaths: [
                 path.resolve(
                   __dirname,
-                  'node_modules/@microsoft/azure-iot-ux-fluent-css/src/'
+                  'node_modules/@azure-iot/ux-fluent-css/src/'
                 ),
               ],
             },
