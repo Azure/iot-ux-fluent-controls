@@ -23,11 +23,11 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 ## Docs
 1. npm run docs:build
 2. npm run docs
-3. You can now view style guide in the browser: 
-   
+3. You can now view style guide in the browser:
+
     - `On Local:`         http://localhost:6060/
-   
-    - `On your network:`  http://10.0.75.1:6060/
+
+    - `On your network:`  http://{machine ip address}:6060/
 
 ## Bug/ Issue
 
