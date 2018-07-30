@@ -3,9 +3,8 @@ import * as classNames from 'classnames/bind';
 import { MethodNode, dateIsValid, DateFormat } from '../../Common';
 import { FormField, FormFieldAttributes } from '../Field/FormField';
 /** This import solves an error with exports of FormFieldAttributes defaults */
-import { FormErrorAttributes } from '../Field/FormError';
 import { TimeInput, TimeInputAttributes } from './TimeInput';
-import { DatePicker, DatePickerProps, DatePickerAttributes } from './DatePicker';
+import { DatePicker, DatePickerAttributes } from './DatePicker';
 import { DivProps, SpanProps, Elements as Attr } from '../../Attributes';
 const css = classNames.bind(require('./DateTimeField.scss'));
 
@@ -132,7 +131,6 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
     }
 
     getInitialState(props: DateTimeFieldProps): DateTimeFieldState {
-        let datetime = null, timeValue = null, dateValue = null;
         const local = props.localTimezone;
         let invalid = false;
         let initialValue = null;

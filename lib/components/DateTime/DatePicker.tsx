@@ -1,11 +1,12 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, SpanProps, InputProps, Elements as Attr, mergeAttributeObjects} from '../../Attributes';
+import {DivProps, InputProps, Elements as Attr, mergeAttributeObjects} from '../../Attributes';
 import {Calendar, CalendarAttributes} from './Calendar';
-import {Icon, IconSize, IconAttributes} from '../Icon';
+import {IconAttributes} from '../Icon';
 import {Dropdown, DropdownAttributes} from '../Dropdown';
-import {replaceAt, formatDate, placeholders} from './helpers';
+import {formatDate, placeholders} from './helpers';
 import {keyCode, MethodDate, dateIsValid, DateFormat} from '../../Common';
+import { ActionTriggerButton } from '../ActionTrigger';
 const css = classNames.bind(require('./DatePicker.scss'));
 
 export interface DatePickerType {}
@@ -338,7 +339,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         }
     }
 
-    onFocus = () => {
+    onIconClick = () => {
         this.setState({visible: true});
     }
 
@@ -354,7 +355,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         }
     }
 
-    onPaste = (event) => {
+    onPaste = () => {
         this.paste = true;
     }
 
@@ -362,16 +363,16 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         this.calendar = element;
     }
 
+    onOuterEvent = () => this.setState({visible: false});
+
     render() {
         const containerClassName = css('date-picker-container', this.props.className);
-        const dropdownClassName = css('date-picker-dropdown', {
-            'date-picker-above': this.props.showAbove
-        });
 
-        const icon = <Icon
+        const icon = <ActionTriggerButton
             icon='calendar'
-            size={IconSize.xsmall}
             className={css('date-picker-calendar-icon')}
+            onClick={this.onIconClick}
+            disabled={this.props.disabled}
             attr={this.props.attr.inputIcon}
         />;
 
@@ -426,7 +427,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                  */
                 onMouseEnter={() => {}}
                 outerEvents={['click', 'focusin']}
-                onOuterEvent={(event) => this.setState({visible: false})}
+                onOuterEvent={this.onOuterEvent}
                 attr={mergeAttributeObjects(
                     this.props.attr,
                     {
@@ -447,7 +448,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         value={this.state.value}
                         className={inputClassName}
                         placeholder={placeholder}
-                        onFocus={this.onFocus}
                         onChange={this.onChange}
                         onPaste={this.onPaste}
                         onKeyUp={this.onKeyUp}

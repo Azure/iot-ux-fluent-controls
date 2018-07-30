@@ -96,17 +96,17 @@ $calc-margin: 5px;
     }
 
     .date-picker-calendar-icon {
-        @include md-box(absolute, float-right);
+        @include md-box(absolute);
         font-size: $font-size-small;
         line-height: $line-height-icon;
-        padding: $grid-size;
-        top: $grid-size;
-        right: 2*$grid-size;
+        top: 0;
+        right: 0;
         border: none;
         background-color: transparent;
-        outline: none;
-        pointer-events: none;
-        cursor: pointer;
+
+        &:focus:not(:disabled) {
+            outline-offset: -2px;
+        }
     }
 
     .date-picker-dropdown:not(.above) {
