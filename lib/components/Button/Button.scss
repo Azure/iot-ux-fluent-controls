@@ -92,7 +92,8 @@ $outline-focus-border-width: 1px;
         &:focus:not(:disabled) {
             color: themed('color-text-white');
             background-color: themed('color-bg-btn-primary-focus');
-            outline: $outline-focus-border-width dashed themed('color-border-focus');
+            outline: $outline-focus-border-width dashed themed('color-outline-btn-primary-focus');
+            outline-offset: -2px;
         }
 
         &:active:not(:disabled) {
