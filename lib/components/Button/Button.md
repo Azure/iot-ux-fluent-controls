@@ -119,6 +119,17 @@ const classnames = require('classnames');
 </Button>
 ```
 
+#### React Danger Button
+
+```jsx
+<Button
+    className='btn-danger'
+    attr={{container: {'data-test-hook': 'button1'}}}
+>
+    Danger Button
+</Button>
+```
+
 #### React Disabled Button
 
 ```jsx

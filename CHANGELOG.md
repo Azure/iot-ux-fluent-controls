@@ -1,5 +1,11 @@
 # CHANGELOG
 
+
+## v2.0.4
+### Fixed
+- add outline for danger button
+- upgrade fluent css version
+
 ## v2.0.3
 ### Fixed
 - add outline for primary  button
