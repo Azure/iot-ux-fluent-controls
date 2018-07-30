@@ -3,6 +3,7 @@
 ## v2.0.3
 ### Fixed
 - add outline for primary  button
+- upgrade fluent css version
 
 ## v2.0.2
 migrating to private package registry and changing package scope.
