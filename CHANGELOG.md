@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v2.0.5
+### Fixed
+- date picker should not open when input receives focus
 
 ## v2.0.4
 ### Fixed
@@ -8,7 +11,7 @@
 
 ## v2.0.3
 ### Fixed
-- add outline for primary  button
+- add outline for primary button
 - upgrade fluent css version
 
 ## v2.0.2
