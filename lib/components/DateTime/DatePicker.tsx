@@ -112,7 +112,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
      * if the pasted string is malformed to give the user a chance to correct it
      */
     private paste: boolean;
-    private calendar: Calendar;
     private input: HTMLInputElement;
 
     oldSetState: any;
@@ -209,17 +208,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             this.setState({
                 ...newState,
             });
-        }
-    }
-
-    /**
-     * Fire props.onChange handler when state.value changes
-     *
-     * Fires props.onChange('invalid') if input is invalid
-     */
-    componentDidUpdate(oldProps: DatePickerProps, oldState: DatePickerState) {
-        if (this.state.visible !== oldState.visible && !this.state.visible) {
-            this.calendar.stopAccessibility();
         }
     }
 
@@ -340,7 +328,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     }
 
     onIconClick = () => {
-        this.setState({visible: true});
+        this.setState({visible: !this.state.visible});
     }
 
     onSelect = (newValue: Date) => {
@@ -348,33 +336,14 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         this.props.onChange(newValue.toJSON());
     }
 
-    onKeyUp = (event) => {
-        if (event.keyCode === keyCode.enter) {
-            this.calendar.startAccessibility();
-            event.preventDefault();
-        }
-    }
-
     onPaste = () => {
         this.paste = true;
-    }
-
-    calendarRef = (element: Calendar) => {
-        this.calendar = element;
     }
 
     onOuterEvent = () => this.setState({visible: false});
 
     render() {
         const containerClassName = css('date-picker-container', this.props.className);
-
-        const icon = <ActionTriggerButton
-            icon='calendar'
-            className={css('date-picker-calendar-icon')}
-            onClick={this.onIconClick}
-            disabled={this.props.disabled}
-            attr={this.props.attr.inputIcon}
-        />;
 
         const placeholder = placeholders[this.props.format];
 
@@ -392,52 +361,8 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 parsed.date
             ).dateObject.toJSON() : null;
 
-        const calendar = [
-            <Calendar
-                value={value}
-                onChange={newValue => this.onSelect(newValue)}
-                className={css('date-picker-calendar')}
-                year={parsed.year || null}
-                month={parsed.month - 1}
-                tabIndex={this.props.tabIndex}
-                ref={this.calendarRef}
-                key='1'
-                attr={this.props.attr.calendar}
-            />,
-            <Attr.div
-                className={css('date-picker-dropdown-triangle')}
-                key='2'
-                attr={this.props.attr.dropdownTriangle}
-            />
-        ];
-
         return (
-            <Dropdown
-                dropdown={calendar}
-                visible={this.state.visible}
-                className={containerClassName}
-                positionClassNames={[
-                    css('date-picker-dropdown'),
-                    css('date-picker-dropdown', 'date-picker-above')
-                ]}
-                /**
-                 * This is empty on purpose. When onMouseEnter/Leave is set,
-                 * the dropdown starts to accept pointer events needed for
-                 * interactive dropdowns
-                 */
-                onMouseEnter={() => {}}
-                outerEvents={['click', 'focusin']}
-                onOuterEvent={this.onOuterEvent}
-                attr={mergeAttributeObjects(
-                    this.props.attr,
-                    {
-                        dropdown: {
-                            className: css('date-picker-dropdown'),
-                        },
-                    },
-                    ['container', 'dropdownContainer', 'dropdown']
-                )}
-            >
+            <Attr.div className={containerClassName}>
                 <Attr.div
                     className={css('date-picker-input-container')}
                     attr={this.props.attr.inputContainer}
@@ -450,15 +375,41 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         placeholder={placeholder}
                         onChange={this.onChange}
                         onPaste={this.onPaste}
-                        onKeyUp={this.onKeyUp}
                         required={this.props.required}
                         disabled={this.props.disabled}
                         methodRef={this.inputRef}
                         attr={this.props.attr.input}
                     />
-                    {icon}
+                    <ActionTriggerButton
+                        icon='calendar'
+                        className={css('date-picker-calendar-icon')}
+                        onClick={this.onIconClick}
+                        disabled={this.props.disabled}
+                        attr={this.props.attr.inputIcon}
+                    />
                 </Attr.div>
-            </Dropdown>
+                {this.state.visible &&
+                    <Attr.div
+                        className={css('date-picker-dropdown', {
+                            'above': this.props.showAbove
+                        })}
+                    >
+                        <Calendar
+                            value={value}
+                            onChange={this.onSelect}
+                            className={css('date-picker-calendar')}
+                            year={parsed.year || null}
+                            month={parsed.month - 1}
+                            tabIndex={this.props.tabIndex}
+                            attr={this.props.attr.calendar}
+                        />
+                        <Attr.div
+                            className={css('date-picker-dropdown-triangle')}
+                            attr={this.props.attr.dropdownTriangle}
+                        />
+                    </Attr.div>
+                }
+            </Attr.div>
         );
     }
 }
