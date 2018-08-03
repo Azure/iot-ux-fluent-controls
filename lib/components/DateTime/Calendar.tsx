@@ -80,6 +80,10 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
     private value: MethodDate;
     private monthNames: string[];
     private dayNames: string[];
+    private _container: HTMLDivElement;
+    private nextFocusRow?: number;
+    private nextFocusCol?: number;
+
 
     constructor(props: CalendarProps) {
         const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
@@ -113,6 +117,8 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
 
         this.onPrevMonth = this.onPrevMonth.bind(this);
         this.onNextMonth = this.onNextMonth.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
+        this.setContainerRef = this.setContainerRef.bind(this);
     }
 
     public startAccessibility() {
@@ -160,6 +166,15 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         }
     }
 
+    componentDidUpdate() {
+        if (this.nextFocusRow != null && this.nextFocusCol != null) {
+            const nextFocus = this._container.querySelectorAll(`[data-row="${this.nextFocusRow}"][data-col="${this.nextFocusCol}"]`)[0] as HTMLElement;
+            nextFocus.focus();
+            this.nextFocusRow = undefined;
+            this.nextFocusCol = undefined;
+        }
+    }
+
     onClick(date: MethodDate) {
         if (this.props.onChange) {
             this.props.onChange(date.dateObject);
@@ -182,6 +197,16 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
     onPrevMonth(event) {
         event.preventDefault();
 
+        this.decrementMonth();
+    }
+
+    onNextMonth(event) {
+        event.preventDefault();
+
+        this.incrementMonth();
+    }
+
+    decrementMonth() {
         /** Dates are mutable so we're going to copy it over */
         const newDate = this.state.currentDate.copy();
         const curDate = newDate.date;
@@ -196,9 +221,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         this.setState({ currentDate: newDate, detached: true });
     }
 
-    onNextMonth(event) {
-        event.preventDefault();
-
+    incrementMonth() {
         /** Dates are mutable so we're going to copy it over */
         const newDate = this.state.currentDate.copy();
         const curDate = newDate.date;
@@ -210,6 +233,71 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             newDate.month = targetMonth + 1;
         }
         this.setState({ currentDate: newDate, detached: true });
+    }
+
+    onKeyDown(e: React.KeyboardEvent<any>) {
+        const element: HTMLElement = e.currentTarget;
+        const row = parseInt(element.getAttribute('data-row'), 10);
+        const col = parseInt(element.getAttribute('data-col'), 10);
+
+        if (!isNaN(row) && !isNaN(col)) {
+            let nextRow = row;
+            let nextCol = col;
+            let nextFocus: HTMLElement;
+            switch (e.keyCode) {
+                case keyCode.pagedown:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.nextFocusCol = nextCol;
+                    this.nextFocusRow = nextRow;
+                    this.incrementMonth();
+                    break;
+                case keyCode.pageup:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.nextFocusCol = nextCol;
+                    this.nextFocusRow = nextRow;
+                    this.decrementMonth();
+                    break;
+                case keyCode.up:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    nextRow -= 1;
+                    break;
+                case keyCode.down:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    nextRow += 1;
+                    break;
+                case keyCode.left:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    nextCol -= 1;
+                    if (nextCol < 0) {
+                        nextCol = 6;
+                        nextRow -= 1;
+                    }
+                    break;
+                case keyCode.right:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    nextCol += 1;
+                    if (nextCol > 6) {
+                        nextCol = 0;
+                        nextRow += 1;
+                    }
+                    break;
+            }
+            nextFocus = this._container.querySelectorAll(`[data-row="${nextRow}"][data-col="${nextCol}"]`)[0] as HTMLElement;
+            // if we found the next button to focus on, focus it
+            if (!!nextFocus) {
+                nextFocus.focus();
+            }
+        }
+    }
+
+    setContainerRef(element: HTMLDivElement) {
+        this._container = element;
     }
 
     render() {
@@ -259,6 +347,8 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                     event.preventDefault();
                 };
 
+                // TODO aria-label with date
+
                 const date = col.date;
                 const colMonth = col.month;
                 const key = `${colMonth}-${date}`;
@@ -267,6 +357,9 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                     return (
                         <Attr.button
                             type='button'
+                            data-row={rowIndex}
+                            data-col={colIndex}
+                            onKeyDown={this.onKeyDown}
                             className={colClassName}
                             onClick={onClick}
                             key={key}
@@ -289,6 +382,9 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                         return (
                             <Attr.button
                                 type='button'
+                                data-row={rowIndex}
+                                data-col={colIndex}
+                                onKeyDown={this.onKeyDown}
                                 className={css('selected')}
                                 onClick={onClick}
                                 key={key}
@@ -305,6 +401,9 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                 return (
                     <Attr.button
                         type='button'
+                        data-row={rowIndex}
+                        data-col={colIndex}
+                        onKeyDown={this.onKeyDown}
                         onClick={onClick}
                         key={key}
                         onFocus={this.onFocus.bind(this, date)}
@@ -327,6 +426,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         });
         return (
             <Attr.div
+                methodRef={this.setContainerRef}
                 className={css('calendar', this.props.className)}
                 attr={this.props.attr.container}
             >
