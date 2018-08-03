@@ -113,6 +113,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
      */
     private paste: boolean;
     private input: HTMLInputElement;
+    private _containerRef: HTMLElement;
 
     oldSetState: any;
 
@@ -328,7 +329,13 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     }
 
     onIconClick = () => {
-        this.setState({visible: !this.state.visible});
+        const nextVisible = !this.state.visible;
+
+        if (nextVisible) {
+            window.addEventListener('click', this.onOuterEvent);
+        }
+
+        this.setState({visible: nextVisible});
     }
 
     onSelect = (newValue: Date) => {
@@ -340,10 +347,18 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         this.paste = true;
     }
 
-    onOuterEvent = () => this.setState({visible: false});
+    onOuterEvent = (e: MouseEvent) => {
+        if (!this._containerRef.contains(e.target as HTMLElement)) {
+            window.removeEventListener('click', this.onOuterEvent);
+            this.setState({visible: false});
+        }
+    }
+
+    setContainerRef = (element: HTMLElement) => {
+        this._containerRef = element;
+    }
 
     render() {
-        const containerClassName = css('date-picker-container', this.props.className);
 
         const placeholder = placeholders[this.props.format];
 
@@ -362,7 +377,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             ).dateObject.toJSON() : null;
 
         return (
-            <Attr.div className={containerClassName}>
+            <div ref={this.setContainerRef} className={css('date-picker-container', this.props.className)}>
                 <Attr.div
                     className={css('date-picker-input-container')}
                     attr={this.props.attr.inputContainer}
@@ -409,7 +424,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         />
                     </Attr.div>
                 }
-            </Attr.div>
+            </div>
         );
     }
 }
