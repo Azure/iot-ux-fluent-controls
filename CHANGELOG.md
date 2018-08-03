@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v3.0.0
+### Changed
+- calendar api changed. no longer extends drop down
+### Fixed
+- calendar in datepicker is now reachable via keyboard
+
 ## v2.0.5
 ### Fixed
 - date picker should not open when input receives focus

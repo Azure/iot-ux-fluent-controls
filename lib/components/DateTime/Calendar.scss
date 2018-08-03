@@ -55,6 +55,7 @@ $line-height-row: $calendar-column-width;
             text-align: center;
             vertical-align: bottom;
             line-height: $line-height-chevron;
+            margin-top: 1px;
             margin-left: $grid-size;
             padding-top: 2*$grid-size;
             width: $calendar-column-width;

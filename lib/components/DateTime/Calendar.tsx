@@ -36,9 +36,6 @@ export interface CalendarProps extends React.Props<CalendarComponentType> {
      */
     localTimezone?: boolean;
 
-    /** Tab index of calendar buttons */
-    tabIndex?: number;
-
     /**
      * Callback for date change events
      * */
@@ -67,7 +64,6 @@ export interface CalendarState {
 export class Calendar extends React.Component<CalendarProps, Partial<CalendarState>> {
     static defaultProps = {
         localTimezone: true,
-        tabIndex: -1,
         attr: {
             container: {},
             header: {},
@@ -120,12 +116,8 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         this.buttons = {};
         this.buttonIndex = 0;
         this.dayRef = this.dayRef.bind(this);
-
-        this.onKeyDown = this.onKeyDown.bind(this);
-    }
-
-    get focusedButton(): HTMLButtonElement {
-        return this.buttons[this.state.currentDate.date - 1];
+        this.onPrevMonth = this.onPrevMonth.bind(this);
+        this.onNextMonth = this.onNextMonth.bind(this);
     }
 
     public startAccessibility() {
@@ -151,18 +143,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         }
     }
 
-    componentWillMount() {
-        window.addEventListener('keydown', this.onKeyDown);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('keydown', this.onKeyDown);
-    }
-
     componentDidUpdate(oldProps: CalendarProps, oldState: CalendarState) {
-        if (this.state.accessibility && this.state.currentDate !== oldState.currentDate) {
-            this.focusedButton.focus();
-        }
         this.buttonIndex = 0;
     }
 
@@ -192,78 +173,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             } else {
                 this.value = new MethodDate(newProps.localTimezone);
             }
-        }
-    }
-
-    onKeyDown(event) {
-        if (!this.state.accessibility) {
-            return;
-        }
-        /** So that we don't block any browser shortcuts */
-        if (event.ctrlKey || event.altKey) {
-            return;
-        }
-        if (document.activeElement === this.focusedButton) {
-            const date = this.state.currentDate.copy();
-            let detached = this.state.detached;
-            let newDay = date.date;
-            let newMonth = date.month;
-            let newYear = date.year;
-            let weekMove = false;
-            switch (event.keyCode) {
-                case keyCode.left:
-                    newDay -= 1;
-                    break;
-                case keyCode.right:
-                    newDay += 1;
-                    break;
-                case keyCode.up:
-                    weekMove = true;
-                    newDay -= 7;
-                    break;
-                case keyCode.down:
-                    weekMove = true;
-                    newDay += 7;
-                    break;
-                case keyCode.pageup:
-                    if (event.ctrlKey) {
-                        newYear -= 1;
-                    } else {
-                        newMonth -= 1;
-                    }
-                    break;
-                case keyCode.pagedown:
-                    if (event.ctrlKey) {
-                        newYear += 1;
-                    } else {
-                        newMonth += 1;
-                    }
-                    break;
-                case keyCode.home:
-                    newDay = 1;
-                    break;
-                case keyCode.end:
-                    newDay = 0;
-                    newMonth += 1;
-                    break;
-                default:
-                    return;
-            }
-            date.year = newYear;
-            date.month = newMonth;
-            date.date = newDay;
-
-            if (newDay > 0 && date.date !== newDay && !weekMove) {
-                date.month += 1;
-                date.date = 0;
-            }
-
-            event.stopPropagation();
-            event.preventDefault();
-            this.setState({
-                currentDate: date,
-                detached: detached
-            });
         }
     }
 
@@ -322,11 +231,9 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
     render() {
         const rowClassName = css('calendar-row');
         const colClassName = css('disabled');
-        const tabIndex = this.props.tabIndex;
 
         const curYear = this.state.currentDate.year;
         const curMonth = this.state.currentDate.month;
-        const curDate = this.state.currentDate.date;
 
         const weekdays = this.dayNames.map(day => {
             return (
@@ -379,7 +286,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                             className={colClassName}
                             onClick={onClick}
                             key={key}
-                            tabIndex={tabIndex}
                             attr={this.props.attr.dateButton}
                         >
                             {date}
@@ -402,7 +308,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                                 className={css('selected')}
                                 onClick={onClick}
                                 key={key}
-                                tabIndex={tabIndex}
                                 methodRef={this.dayRef}
                                 onFocus={this.onFocus.bind(this, date)}
                                 attr={this.props.attr.dateButton}
@@ -419,7 +324,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                         type='button'
                         onClick={onClick}
                         key={key}
-                        tabIndex={tabIndex}
                         methodRef={this.dayRef}
                         onFocus={this.onFocus.bind(this, date)}
                         attr={this.props.attr.dateButton}
@@ -456,16 +360,14 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                     </Attr.div>
                     <ActionTriggerButton
                         className={css('calendar-chevron')}
-                        onClick={event => this.onPrevMonth(event)}
-                        tabIndex={tabIndex}
+                        onClick={this.onPrevMonth}
                         icon='chevronUp'
                         attr={this.props.attr.prevMonthButton}
                     />
                     <ActionTriggerButton
                         icon='chevronDown'
                         className={css('calendar-chevron')}
-                        onClick={event => this.onNextMonth(event)}
-                        tabIndex={tabIndex}
+                        onClick={this.onNextMonth}
                         attr={this.props.attr.nextMonthButton}
                     />
                 </Attr.div>

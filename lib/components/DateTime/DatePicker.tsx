@@ -1,22 +1,20 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, InputProps, Elements as Attr, mergeAttributeObjects} from '../../Attributes';
+import {DivProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Calendar, CalendarAttributes} from './Calendar';
-import {IconAttributes} from '../Icon';
-import {Dropdown, DropdownAttributes} from '../Dropdown';
 import {formatDate, placeholders} from './helpers';
-import {keyCode, MethodDate, dateIsValid, DateFormat} from '../../Common';
-import { ActionTriggerButton } from '../ActionTrigger';
+import {MethodDate, dateIsValid, DateFormat} from '../../Common';
+import { ActionTriggerButton, ActionTriggerButtonAttributes } from '../ActionTrigger';
 const css = classNames.bind(require('./DatePicker.scss'));
 
 export interface DatePickerType {}
 
-export interface DatePickerAttributes extends DropdownAttributes {
+export interface DatePickerAttributes {
     inputContainer?: DivProps;
     input?: InputProps;
-    inputIcon?: IconAttributes;
-    dropdownTriangle?: DivProps;
+    inputIcon?: ActionTriggerButtonAttributes;
     calendar?: CalendarAttributes;
+    container?: DivProps;
 }
 
 export interface DatePickerProps extends React.Props<DatePickerType> {
@@ -97,9 +95,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             inputContainer: {},
             input: {},
             inputIcon: {},
-            dropdownContainer: {},
-            dropdown: {},
-            dropdownTriangle: {},
             calendar: {},
         }
     };
@@ -377,7 +372,11 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             ).dateObject.toJSON() : null;
 
         return (
-            <div ref={this.setContainerRef} className={css('date-picker-container', this.props.className)}>
+            <Attr.div
+                methodRef={this.setContainerRef}
+                className={css('date-picker-container', this.props.className)}
+                attr={this.props.attr.container}
+            >
                 <Attr.div
                     className={css('date-picker-input-container')}
                     attr={this.props.attr.inputContainer}
@@ -394,6 +393,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         disabled={this.props.disabled}
                         methodRef={this.inputRef}
                         attr={this.props.attr.input}
+                        role='combobox'
                     />
                     <ActionTriggerButton
                         icon='calendar'
@@ -401,6 +401,8 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         onClick={this.onIconClick}
                         disabled={this.props.disabled}
                         attr={this.props.attr.inputIcon}
+                        aria-haspopup={true}
+                        aria-expanded={this.state.visible}
                     />
                 </Attr.div>
                 {this.state.visible &&
@@ -415,16 +417,12 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                             className={css('date-picker-calendar')}
                             year={parsed.year || null}
                             month={parsed.month - 1}
-                            tabIndex={this.props.tabIndex}
                             attr={this.props.attr.calendar}
                         />
-                        <Attr.div
-                            className={css('date-picker-dropdown-triangle')}
-                            attr={this.props.attr.dropdownTriangle}
-                        />
+                        <div className={css('date-picker-dropdown-triangle')}></div>
                     </Attr.div>
                 }
-            </div>
+            </Attr.div>
         );
     }
 }

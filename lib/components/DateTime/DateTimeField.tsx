@@ -106,8 +106,6 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                 inputContainer: {},
                 input: {},
                 inputIcon: {},
-                dropdownContainer: {},
-                dropdownTriangle: {},
                 calendar: {},
             },
             timeInput: {
@@ -304,7 +302,6 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
             }, this.props.attr.datePicker && this.props.attr.datePicker.input),
             inputContainer: this.props.attr.datePicker && this.props.attr.datePicker.inputContainer,
             inputIcon: this.props.attr.datePicker && this.props.attr.datePicker.inputIcon,
-            dropdownTriangle: this.props.attr.datePicker && this.props.attr.datePicker.dropdownTriangle,
             calendar: this.props.attr.datePicker && this.props.attr.datePicker.calendar
         };
         const timeAttr: TimeInputAttributes = {
