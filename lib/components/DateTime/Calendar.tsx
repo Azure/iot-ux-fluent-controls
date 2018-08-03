@@ -169,7 +169,9 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
     componentDidUpdate() {
         if (this.nextFocusRow != null && this.nextFocusCol != null) {
             const nextFocus = this._container.querySelectorAll(`[data-row="${this.nextFocusRow}"][data-col="${this.nextFocusCol}"]`)[0] as HTMLElement;
-            nextFocus.focus();
+            if (nextFocus != null) {
+                nextFocus.focus();
+            }
             this.nextFocusRow = undefined;
             this.nextFocusCol = undefined;
         }
@@ -290,7 +292,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             }
             nextFocus = this._container.querySelectorAll(`[data-row="${nextRow}"][data-col="${nextCol}"]`)[0] as HTMLElement;
             // if we found the next button to focus on, focus it
-            if (!!nextFocus) {
+            if (nextFocus != null) {
                 nextFocus.focus();
             }
         }
