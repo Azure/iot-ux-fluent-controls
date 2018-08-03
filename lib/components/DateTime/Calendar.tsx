@@ -80,8 +80,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
     private value: MethodDate;
     private monthNames: string[];
     private dayNames: string[];
-    private buttons: { [date: string]: HTMLButtonElement };
-    private buttonIndex: number;
 
     constructor(props: CalendarProps) {
         const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
@@ -113,9 +111,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
 
         this.dayNames = getLocalWeekdays(locale);
 
-        this.buttons = {};
-        this.buttonIndex = 0;
-        this.dayRef = this.dayRef.bind(this);
         this.onPrevMonth = this.onPrevMonth.bind(this);
         this.onNextMonth = this.onNextMonth.bind(this);
     }
@@ -134,17 +129,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         this.setState({
             accessibility: false
         });
-    }
-
-    dayRef(element: HTMLButtonElement) {
-        if (element) {
-            this.buttons[this.buttonIndex] = element;
-            this.buttonIndex++;
-        }
-    }
-
-    componentDidUpdate(oldProps: CalendarProps, oldState: CalendarState) {
-        this.buttonIndex = 0;
     }
 
     componentWillReceiveProps(newProps: CalendarProps) {
@@ -308,7 +292,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                                 className={css('selected')}
                                 onClick={onClick}
                                 key={key}
-                                methodRef={this.dayRef}
                                 onFocus={this.onFocus.bind(this, date)}
                                 attr={this.props.attr.dateButton}
                             >
@@ -324,7 +307,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                         type='button'
                         onClick={onClick}
                         key={key}
-                        methodRef={this.dayRef}
                         onFocus={this.onFocus.bind(this, date)}
                         attr={this.props.attr.dateButton}
                     >

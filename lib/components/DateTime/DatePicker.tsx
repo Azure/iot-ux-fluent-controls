@@ -3,7 +3,7 @@ import * as classNames from 'classnames/bind';
 import {DivProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Calendar, CalendarAttributes} from './Calendar';
 import {formatDate, placeholders} from './helpers';
-import {MethodDate, dateIsValid, DateFormat} from '../../Common';
+import {MethodDate, dateIsValid, DateFormat, keyCode} from '../../Common';
 import { ActionTriggerButton, ActionTriggerButtonAttributes } from '../ActionTrigger';
 const css = classNames.bind(require('./DatePicker.scss'));
 
@@ -327,7 +327,8 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         const nextVisible = !this.state.visible;
 
         if (nextVisible) {
-            window.addEventListener('click', this.onOuterEvent);
+            window.addEventListener('click', this.onOuterMouseEvent);
+            window.addEventListener('keydown', this.onKeydown);
         }
 
         this.setState({visible: nextVisible});
@@ -342,9 +343,18 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         this.paste = true;
     }
 
-    onOuterEvent = (e: MouseEvent) => {
+    onOuterMouseEvent = (e: MouseEvent) => {
         if (!this._containerRef.contains(e.target as HTMLElement)) {
-            window.removeEventListener('click', this.onOuterEvent);
+            window.removeEventListener('click', this.onOuterMouseEvent);
+            this.setState({visible: false});
+        }
+    }
+
+    onKeydown = (e: KeyboardEvent) => {
+        if (e.keyCode === keyCode.escape) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.removeEventListener('keydown', this.onKeydown);
             this.setState({visible: false});
         }
     }
