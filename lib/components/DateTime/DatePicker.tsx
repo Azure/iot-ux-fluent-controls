@@ -359,6 +359,11 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         }
     }
 
+    onBlur = (e: React.FocusEvent<any>) => {
+        if (!this._containerRef.contains(e.relatedTarget as HTMLElement)) {
+            this.setState({visible: false});
+        }
+    }
     setContainerRef = (element: HTMLElement) => {
         this._containerRef = element;
     }
@@ -386,6 +391,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 methodRef={this.setContainerRef}
                 className={css('date-picker-container', this.props.className)}
                 attr={this.props.attr.container}
+                onBlur={this.onBlur}
             >
                 <Attr.div
                     className={css('date-picker-input-container')}
