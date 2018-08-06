@@ -1,22 +1,20 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, InputProps, Elements as Attr, mergeAttributeObjects} from '../../Attributes';
+import {DivProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Calendar, CalendarAttributes} from './Calendar';
-import {IconAttributes} from '../Icon';
-import {Dropdown, DropdownAttributes} from '../Dropdown';
 import {formatDate, placeholders} from './helpers';
-import {keyCode, MethodDate, dateIsValid, DateFormat} from '../../Common';
-import { ActionTriggerButton } from '../ActionTrigger';
+import {MethodDate, dateIsValid, DateFormat, keyCode} from '../../Common';
+import { ActionTriggerButton, ActionTriggerButtonAttributes } from '../ActionTrigger';
 const css = classNames.bind(require('./DatePicker.scss'));
 
 export interface DatePickerType {}
 
-export interface DatePickerAttributes extends DropdownAttributes {
+export interface DatePickerAttributes {
     inputContainer?: DivProps;
     input?: InputProps;
-    inputIcon?: IconAttributes;
-    dropdownTriangle?: DivProps;
+    inputIcon?: ActionTriggerButtonAttributes;
     calendar?: CalendarAttributes;
+    container?: DivProps;
 }
 
 export interface DatePickerProps extends React.Props<DatePickerType> {
@@ -97,9 +95,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             inputContainer: {},
             input: {},
             inputIcon: {},
-            dropdownContainer: {},
-            dropdown: {},
-            dropdownTriangle: {},
             calendar: {},
         }
     };
@@ -112,8 +107,8 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
      * if the pasted string is malformed to give the user a chance to correct it
      */
     private paste: boolean;
-    private calendar: Calendar;
     private input: HTMLInputElement;
+    private _containerRef: HTMLElement;
 
     oldSetState: any;
 
@@ -209,17 +204,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             this.setState({
                 ...newState,
             });
-        }
-    }
-
-    /**
-     * Fire props.onChange handler when state.value changes
-     *
-     * Fires props.onChange('invalid') if input is invalid
-     */
-    componentDidUpdate(oldProps: DatePickerProps, oldState: DatePickerState) {
-        if (this.state.visible !== oldState.visible && !this.state.visible) {
-            this.calendar.stopAccessibility();
         }
     }
 
@@ -340,7 +324,14 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     }
 
     onIconClick = () => {
-        this.setState({visible: true});
+        const nextVisible = !this.state.visible;
+
+        if (nextVisible) {
+            window.addEventListener('click', this.onOuterMouseEvent);
+            window.addEventListener('keydown', this.onKeydown);
+        }
+
+        this.setState({visible: nextVisible});
     }
 
     onSelect = (newValue: Date) => {
@@ -348,33 +339,36 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         this.props.onChange(newValue.toJSON());
     }
 
-    onKeyUp = (event) => {
-        if (event.keyCode === keyCode.enter) {
-            this.calendar.startAccessibility();
-            event.preventDefault();
-        }
-    }
-
     onPaste = () => {
         this.paste = true;
     }
 
-    calendarRef = (element: Calendar) => {
-        this.calendar = element;
+    onOuterMouseEvent = (e: MouseEvent) => {
+        if (!this._containerRef.contains(e.target as HTMLElement)) {
+            window.removeEventListener('click', this.onOuterMouseEvent);
+            this.setState({visible: false});
+        }
     }
 
-    onOuterEvent = () => this.setState({visible: false});
+    onKeydown = (e: KeyboardEvent) => {
+        if (e.keyCode === keyCode.escape) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.removeEventListener('keydown', this.onKeydown);
+            this.setState({visible: false});
+        }
+    }
+
+    onBlur = (e: React.FocusEvent<any>) => {
+        if (!this._containerRef.contains(e.relatedTarget as HTMLElement)) {
+            this.setState({visible: false});
+        }
+    }
+    setContainerRef = (element: HTMLElement) => {
+        this._containerRef = element;
+    }
 
     render() {
-        const containerClassName = css('date-picker-container', this.props.className);
-
-        const icon = <ActionTriggerButton
-            icon='calendar'
-            className={css('date-picker-calendar-icon')}
-            onClick={this.onIconClick}
-            disabled={this.props.disabled}
-            attr={this.props.attr.inputIcon}
-        />;
 
         const placeholder = placeholders[this.props.format];
 
@@ -392,51 +386,12 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 parsed.date
             ).dateObject.toJSON() : null;
 
-        const calendar = [
-            <Calendar
-                value={value}
-                onChange={newValue => this.onSelect(newValue)}
-                className={css('date-picker-calendar')}
-                year={parsed.year || null}
-                month={parsed.month - 1}
-                tabIndex={this.props.tabIndex}
-                ref={this.calendarRef}
-                key='1'
-                attr={this.props.attr.calendar}
-            />,
-            <Attr.div
-                className={css('date-picker-dropdown-triangle')}
-                key='2'
-                attr={this.props.attr.dropdownTriangle}
-            />
-        ];
-
         return (
-            <Dropdown
-                dropdown={calendar}
-                visible={this.state.visible}
-                className={containerClassName}
-                positionClassNames={[
-                    css('date-picker-dropdown'),
-                    css('date-picker-dropdown', 'date-picker-above')
-                ]}
-                /**
-                 * This is empty on purpose. When onMouseEnter/Leave is set,
-                 * the dropdown starts to accept pointer events needed for
-                 * interactive dropdowns
-                 */
-                onMouseEnter={() => {}}
-                outerEvents={['click', 'focusin']}
-                onOuterEvent={this.onOuterEvent}
-                attr={mergeAttributeObjects(
-                    this.props.attr,
-                    {
-                        dropdown: {
-                            className: css('date-picker-dropdown'),
-                        },
-                    },
-                    ['container', 'dropdownContainer', 'dropdown']
-                )}
+            <Attr.div
+                methodRef={this.setContainerRef}
+                className={css('date-picker-container', this.props.className)}
+                attr={this.props.attr.container}
+                onBlur={this.onBlur}
             >
                 <Attr.div
                     className={css('date-picker-input-container')}
@@ -450,15 +405,40 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         placeholder={placeholder}
                         onChange={this.onChange}
                         onPaste={this.onPaste}
-                        onKeyUp={this.onKeyUp}
                         required={this.props.required}
                         disabled={this.props.disabled}
                         methodRef={this.inputRef}
                         attr={this.props.attr.input}
+                        role='combobox'
                     />
-                    {icon}
+                    <ActionTriggerButton
+                        icon='calendar'
+                        className={css('date-picker-calendar-icon')}
+                        onClick={this.onIconClick}
+                        disabled={this.props.disabled}
+                        attr={this.props.attr.inputIcon}
+                        aria-haspopup={true}
+                        aria-expanded={this.state.visible}
+                    />
                 </Attr.div>
-            </Dropdown>
+                {this.state.visible &&
+                    <Attr.div
+                        className={css('date-picker-dropdown', {
+                            'above': this.props.showAbove
+                        })}
+                    >
+                        <Calendar
+                            value={value}
+                            onChange={this.onSelect}
+                            className={css('date-picker-calendar')}
+                            year={parsed.year || null}
+                            month={parsed.month - 1}
+                            attr={this.props.attr.calendar}
+                        />
+                        <div className={css('date-picker-dropdown-triangle')}></div>
+                    </Attr.div>
+                }
+            </Attr.div>
         );
     }
 }

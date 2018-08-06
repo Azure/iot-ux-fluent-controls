@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as classNames from 'classnames/bind';
 import {MethodNode, DateFormat} from '../../Common';
 import {DatePicker, DatePickerAttributes} from './DatePicker';
 import {FormField, FormFieldAttributes} from '../Field/FormField';
@@ -78,7 +77,6 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
         }, props.attr.input),
         inputContainer: props.attr.inputContainer,
         inputIcon: props.attr.inputIcon,
-        dropdownTriangle: props.attr.dropdownTriangle,
         calendar: props.attr.calendar
     };
     const fieldAttr: FormFieldAttributes = {
@@ -139,12 +137,9 @@ DateField.defaultProps = {
         fieldLabel: {},
         fieldContent: {},
         fieldError: {},
-        container: {},
         inputContainer: {},
         input: {},
         inputIcon: {},
-        dropdownContainer: {},
-        dropdownTriangle: {},
         calendar: {},
     }
 };

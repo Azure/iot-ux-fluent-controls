@@ -36,9 +36,6 @@ export interface CalendarProps extends React.Props<CalendarComponentType> {
      */
     localTimezone?: boolean;
 
-    /** Tab index of calendar buttons */
-    tabIndex?: number;
-
     /**
      * Callback for date change events
      * */
@@ -67,7 +64,6 @@ export interface CalendarState {
 export class Calendar extends React.Component<CalendarProps, Partial<CalendarState>> {
     static defaultProps = {
         localTimezone: true,
-        tabIndex: -1,
         attr: {
             container: {},
             header: {},
@@ -84,8 +80,10 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
     private value: MethodDate;
     private monthNames: string[];
     private dayNames: string[];
-    private buttons: { [date: string]: HTMLButtonElement };
-    private buttonIndex: number;
+    private _container: HTMLDivElement;
+    private nextFocusRow?: number;
+    private nextFocusCol?: number;
+
 
     constructor(props: CalendarProps) {
         const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
@@ -117,15 +115,10 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
 
         this.dayNames = getLocalWeekdays(locale);
 
-        this.buttons = {};
-        this.buttonIndex = 0;
-        this.dayRef = this.dayRef.bind(this);
-
+        this.onPrevMonth = this.onPrevMonth.bind(this);
+        this.onNextMonth = this.onNextMonth.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
-    }
-
-    get focusedButton(): HTMLButtonElement {
-        return this.buttons[this.state.currentDate.date - 1];
+        this.setContainerRef = this.setContainerRef.bind(this);
     }
 
     public startAccessibility() {
@@ -142,28 +135,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         this.setState({
             accessibility: false
         });
-    }
-
-    dayRef(element: HTMLButtonElement) {
-        if (element) {
-            this.buttons[this.buttonIndex] = element;
-            this.buttonIndex++;
-        }
-    }
-
-    componentWillMount() {
-        window.addEventListener('keydown', this.onKeyDown);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('keydown', this.onKeyDown);
-    }
-
-    componentDidUpdate(oldProps: CalendarProps, oldState: CalendarState) {
-        if (this.state.accessibility && this.state.currentDate !== oldState.currentDate) {
-            this.focusedButton.focus();
-        }
-        this.buttonIndex = 0;
     }
 
     componentWillReceiveProps(newProps: CalendarProps) {
@@ -195,75 +166,14 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         }
     }
 
-    onKeyDown(event) {
-        if (!this.state.accessibility) {
-            return;
-        }
-        /** So that we don't block any browser shortcuts */
-        if (event.ctrlKey || event.altKey) {
-            return;
-        }
-        if (document.activeElement === this.focusedButton) {
-            const date = this.state.currentDate.copy();
-            let detached = this.state.detached;
-            let newDay = date.date;
-            let newMonth = date.month;
-            let newYear = date.year;
-            let weekMove = false;
-            switch (event.keyCode) {
-                case keyCode.left:
-                    newDay -= 1;
-                    break;
-                case keyCode.right:
-                    newDay += 1;
-                    break;
-                case keyCode.up:
-                    weekMove = true;
-                    newDay -= 7;
-                    break;
-                case keyCode.down:
-                    weekMove = true;
-                    newDay += 7;
-                    break;
-                case keyCode.pageup:
-                    if (event.ctrlKey) {
-                        newYear -= 1;
-                    } else {
-                        newMonth -= 1;
-                    }
-                    break;
-                case keyCode.pagedown:
-                    if (event.ctrlKey) {
-                        newYear += 1;
-                    } else {
-                        newMonth += 1;
-                    }
-                    break;
-                case keyCode.home:
-                    newDay = 1;
-                    break;
-                case keyCode.end:
-                    newDay = 0;
-                    newMonth += 1;
-                    break;
-                default:
-                    return;
+    componentDidUpdate() {
+        if (this.nextFocusRow != null && this.nextFocusCol != null) {
+            const nextFocus = this._container.querySelectorAll(`[data-row="${this.nextFocusRow}"][data-col="${this.nextFocusCol}"]`)[0] as HTMLElement;
+            if (nextFocus != null) {
+                nextFocus.focus();
             }
-            date.year = newYear;
-            date.month = newMonth;
-            date.date = newDay;
-
-            if (newDay > 0 && date.date !== newDay && !weekMove) {
-                date.month += 1;
-                date.date = 0;
-            }
-
-            event.stopPropagation();
-            event.preventDefault();
-            this.setState({
-                currentDate: date,
-                detached: detached
-            });
+            this.nextFocusRow = undefined;
+            this.nextFocusCol = undefined;
         }
     }
 
@@ -289,6 +199,16 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
     onPrevMonth(event) {
         event.preventDefault();
 
+        this.decrementMonth();
+    }
+
+    onNextMonth(event) {
+        event.preventDefault();
+
+        this.incrementMonth();
+    }
+
+    decrementMonth() {
         /** Dates are mutable so we're going to copy it over */
         const newDate = this.state.currentDate.copy();
         const curDate = newDate.date;
@@ -303,9 +223,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         this.setState({ currentDate: newDate, detached: true });
     }
 
-    onNextMonth(event) {
-        event.preventDefault();
-
+    incrementMonth() {
         /** Dates are mutable so we're going to copy it over */
         const newDate = this.state.currentDate.copy();
         const curDate = newDate.date;
@@ -319,14 +237,77 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         this.setState({ currentDate: newDate, detached: true });
     }
 
+    onKeyDown(e: React.KeyboardEvent<any>) {
+        const element: HTMLElement = e.currentTarget;
+        const row = parseInt(element.getAttribute('data-row'), 10);
+        const col = parseInt(element.getAttribute('data-col'), 10);
+
+        if (!isNaN(row) && !isNaN(col)) {
+            let nextRow = row;
+            let nextCol = col;
+            let nextFocus: HTMLElement;
+            switch (e.keyCode) {
+                case keyCode.pagedown:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.nextFocusCol = nextCol;
+                    this.nextFocusRow = nextRow;
+                    this.incrementMonth();
+                    break;
+                case keyCode.pageup:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.nextFocusCol = nextCol;
+                    this.nextFocusRow = nextRow;
+                    this.decrementMonth();
+                    break;
+                case keyCode.up:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    nextRow -= 1;
+                    break;
+                case keyCode.down:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    nextRow += 1;
+                    break;
+                case keyCode.left:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    nextCol -= 1;
+                    if (nextCol < 0) {
+                        nextCol = 6;
+                        nextRow -= 1;
+                    }
+                    break;
+                case keyCode.right:
+                    e.preventDefault();
+                    e.stopPropagation();
+                    nextCol += 1;
+                    if (nextCol > 6) {
+                        nextCol = 0;
+                        nextRow += 1;
+                    }
+                    break;
+            }
+            nextFocus = this._container.querySelectorAll(`[data-row="${nextRow}"][data-col="${nextCol}"]`)[0] as HTMLElement;
+            // if we found the next button to focus on, focus it
+            if (nextFocus != null) {
+                nextFocus.focus();
+            }
+        }
+    }
+
+    setContainerRef(element: HTMLDivElement) {
+        this._container = element;
+    }
+
     render() {
         const rowClassName = css('calendar-row');
         const colClassName = css('disabled');
-        const tabIndex = this.props.tabIndex;
 
         const curYear = this.state.currentDate.year;
         const curMonth = this.state.currentDate.month;
-        const curDate = this.state.currentDate.date;
 
         const weekdays = this.dayNames.map(day => {
             return (
@@ -368,6 +349,8 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                     event.preventDefault();
                 };
 
+                // TODO aria-label with date
+
                 const date = col.date;
                 const colMonth = col.month;
                 const key = `${colMonth}-${date}`;
@@ -376,10 +359,12 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                     return (
                         <Attr.button
                             type='button'
+                            data-row={rowIndex}
+                            data-col={colIndex}
+                            onKeyDown={this.onKeyDown}
                             className={colClassName}
                             onClick={onClick}
                             key={key}
-                            tabIndex={tabIndex}
                             attr={this.props.attr.dateButton}
                         >
                             {date}
@@ -399,11 +384,12 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                         return (
                             <Attr.button
                                 type='button'
+                                data-row={rowIndex}
+                                data-col={colIndex}
+                                onKeyDown={this.onKeyDown}
                                 className={css('selected')}
                                 onClick={onClick}
                                 key={key}
-                                tabIndex={tabIndex}
-                                methodRef={this.dayRef}
                                 onFocus={this.onFocus.bind(this, date)}
                                 attr={this.props.attr.dateButton}
                             >
@@ -417,10 +403,11 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                 return (
                     <Attr.button
                         type='button'
+                        data-row={rowIndex}
+                        data-col={colIndex}
+                        onKeyDown={this.onKeyDown}
                         onClick={onClick}
                         key={key}
-                        tabIndex={tabIndex}
-                        methodRef={this.dayRef}
                         onFocus={this.onFocus.bind(this, date)}
                         attr={this.props.attr.dateButton}
                     >
@@ -441,6 +428,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         });
         return (
             <Attr.div
+                methodRef={this.setContainerRef}
                 className={css('calendar', this.props.className)}
                 attr={this.props.attr.container}
             >
@@ -456,16 +444,14 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                     </Attr.div>
                     <ActionTriggerButton
                         className={css('calendar-chevron')}
-                        onClick={event => this.onPrevMonth(event)}
-                        tabIndex={tabIndex}
+                        onClick={this.onPrevMonth}
                         icon='chevronUp'
                         attr={this.props.attr.prevMonthButton}
                     />
                     <ActionTriggerButton
                         icon='chevronDown'
                         className={css('calendar-chevron')}
-                        onClick={event => this.onNextMonth(event)}
-                        tabIndex={tabIndex}
+                        onClick={this.onNextMonth}
                         attr={this.props.attr.nextMonthButton}
                     />
                 </Attr.div>

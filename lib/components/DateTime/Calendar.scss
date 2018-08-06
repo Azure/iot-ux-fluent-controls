@@ -67,6 +67,10 @@ $line-height-row: $calendar-column-width;
             &.disabled {
                 pointer-events: none;
             }
+
+            &:focus {
+                outline-offset: -1px;
+            }
         }
     }
 
@@ -100,9 +104,9 @@ $line-height-row: $calendar-column-width;
                 background-color: themed('color-bg-btn-primary-rest');
 
                 &:focus {
-                    outline: none;
-                    color: themed('color-text-rest');
-                    background-color: transparent;
+                    outline: 1px dashed themed('color-outline-btn-primary-focus');
+                    background-color: themed('color-bg-btn-primary-focus');
+                    outline-offset: -2px;
                 }
             }
         }
@@ -131,9 +135,8 @@ $line-height-row: $calendar-column-width;
                 color: inherit;
             }
 
-            &:focus {
-                outline-offset: -1px;
-                background-color: transparent !important;
+            &:focus:not(.selected) {
+                outline-offset: -2px;
                 @include themify{
                     outline: 1px dashed themed('color-border-focus');
                 }

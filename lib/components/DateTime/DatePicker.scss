@@ -12,7 +12,7 @@ $calendar-z-index: 9 * $z-index-large-step + 5 * $z-index-medium-step;
 $calc-margin: 5px;
 
 .date-picker-container {
-    @include md-box(flex, relative);
+    @include md-box(relative);
     width: 100%;
     font-family: $font-family-default;
     @include themify{
@@ -108,27 +108,25 @@ $calc-margin: 5px;
             outline-offset: -2px;
         }
     }
-
-    .date-picker-dropdown:not(.above) {
-        top: calc(100% + 5px);
-    }
-
-    .date-picker-dropdown.above {
-        bottom: calc(100% + 5px);
-
-        .date-picker-calendar {
-            margin-bottom: 1.5*$grid-size;
-        }
-    }
 }
 
 .date-picker-dropdown {
     padding-bottom: 2*$grid-size;
     left: 0px;
     width: $date-picker-dropdown-width;
-    visibility: hidden;
     display: inline-block;
     z-index: $calendar-z-index;
+    position: absolute;
+
+    &:not(.above) {
+        top: calc(100% + 5px);
+    }
+
+    &.above {
+        bottom: calc(100% + 5px);
+    }
+
+
     @include themify{
         background-color: themed('color-bg-input-rest');
         border: 1px solid themed('color-border-selected');
@@ -146,7 +144,7 @@ $calc-margin: 5px;
     }
 
     &:not(.above) .date-picker-dropdown-triangle {
-        bottom: calc(100% - 4px);
+        bottom: calc(100% - 3px);
 
         @include themify{
             background-color: themed('color-bg-input-rest');
@@ -156,8 +154,8 @@ $calc-margin: 5px;
         transform: rotateZ(45deg);
     }
 
-    &.date-picker-above .date-picker-dropdown-triangle {
-        top: calc(100% - 4px);
+    &.above .date-picker-dropdown-triangle {
+        top: calc(100% - 3px);
 
         @include themify{
             background-color: themed('color-bg-input-rest');
