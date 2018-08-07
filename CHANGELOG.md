@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v3.0.1
+### Fixed
+- blur listener for datepicker was too greedy.
+
 ## v3.0.0
 ### Changed
 - calendar api changed. no longer extends drop down
