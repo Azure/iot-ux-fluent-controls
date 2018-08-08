@@ -10,7 +10,6 @@ $line-height-chevron: 4*$grid-size;
 $line-height-header: 4*$grid-size;
 $line-height-row: $calendar-column-width;
 
-
 .calendar {
     @include md-box(block, relative);
     font-family: $font-family-default;
@@ -26,8 +25,6 @@ $line-height-row: $calendar-column-width;
         display: flex;
         align-items: center;
         justify-content: space-between;
-
-
 
         & button {
             text-decoration: none;
