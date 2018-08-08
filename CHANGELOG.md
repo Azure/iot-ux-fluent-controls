@@ -4,6 +4,7 @@
 ### Fixed
 - blur listener for datepicker was too greedy.
 - shrink calendar
+- move date picker window listers to component mounting events
 
 ## v3.0.0
 ### Changed
