@@ -442,18 +442,20 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                     >
                         {`${this.monthNames[curMonth]} ${curYear}`}
                     </Attr.div>
-                    <ActionTriggerButton
-                        className={css('calendar-chevron')}
-                        onClick={this.onPrevMonth}
-                        icon='chevronUp'
-                        attr={this.props.attr.prevMonthButton}
-                    />
-                    <ActionTriggerButton
-                        icon='chevronDown'
-                        className={css('calendar-chevron')}
-                        onClick={this.onNextMonth}
-                        attr={this.props.attr.nextMonthButton}
-                    />
+                    <div className={css('action-bar')}>
+                        <ActionTriggerButton
+                            className={css('calendar-chevron')}
+                            onClick={this.onPrevMonth}
+                            icon='chevronUp'
+                            attr={this.props.attr.prevMonthButton}
+                        />
+                        <ActionTriggerButton
+                            icon='chevronDown'
+                            className={css('calendar-chevron')}
+                            onClick={this.onNextMonth}
+                            attr={this.props.attr.nextMonthButton}
+                        />
+                    </div>
                 </Attr.div>
                 <Attr.div
                     className={css('calendar-days')}

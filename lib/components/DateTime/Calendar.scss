@@ -2,7 +2,8 @@
 @import '../../common/mixins';
 @import '../../common/color.controls';
 
-$calendar-column-width: 32px;
+$calendar-column-width: 8*$grid-size;
+$calendar-chevron-width: 10*$grid-size;
 $calendar-width: 40*$grid-size;
 
 $line-height-chevron: 4*$grid-size;
@@ -22,7 +23,11 @@ $line-height-row: $calendar-column-width;
         @include md-box(block, relative);
         margin-left: 2*$grid-size;
         font-family: $font-family-light;
-        @include clearfix;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+
 
         & button {
             text-decoration: none;
@@ -38,6 +43,12 @@ $line-height-row: $calendar-column-width;
             }
         }
 
+        .action-bar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
         .calendar-month {
             @include md-box(inline-block, relative);
             margin-top: 4*$grid-size;
@@ -48,7 +59,7 @@ $line-height-row: $calendar-column-width;
             line-height: $line-height-header;
             text-align: left;
             vertical-align: top;
-            float: left;
+            width: 100%
         }
 
         .calendar-chevron {
@@ -56,11 +67,9 @@ $line-height-row: $calendar-column-width;
             text-align: center;
             vertical-align: bottom;
             line-height: $line-height-chevron;
-            margin-left: $grid-size;
             padding-top: 2*$grid-size;
-            width: $calendar-column-width;
+            width: $calendar-chevron-width;
             text-decoration: none;
-            float: right;
 
             &:visited {
                 color: inherit;
