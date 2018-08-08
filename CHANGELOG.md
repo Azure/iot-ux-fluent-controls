@@ -3,6 +3,7 @@
 ## v3.0.1
 ### Fixed
 - blur listener for datepicker was too greedy.
+- shrink calendar
 
 ## v3.0.0
 ### Changed
