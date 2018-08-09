@@ -207,6 +207,16 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         }
     }
 
+    componentDidMount() {
+        window.addEventListener('click', this.onOuterMouseEvent);
+        window.addEventListener('keydown', this.onKeydown);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('click', this.onOuterMouseEvent);
+        window.removeEventListener('keydown', this.onKeydown);
+    }
+
     parse(newValue: string) {
         let valid = true;
 
@@ -326,11 +336,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     onIconClick = () => {
         const nextVisible = !this.state.visible;
 
-        if (nextVisible) {
-            window.addEventListener('click', this.onOuterMouseEvent);
-            window.addEventListener('keydown', this.onKeydown);
-        }
-
         this.setState({visible: nextVisible});
     }
 
@@ -344,26 +349,25 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     }
 
     onOuterMouseEvent = (e: MouseEvent) => {
-        if (!this._containerRef.contains(e.target as HTMLElement)) {
-            window.removeEventListener('click', this.onOuterMouseEvent);
+        if (this.state.visible && !this._containerRef.contains(e.target as HTMLElement)) {
             this.setState({visible: false});
         }
     }
 
     onKeydown = (e: KeyboardEvent) => {
-        if (e.keyCode === keyCode.escape) {
+        if (this.state.visible && e.keyCode === keyCode.escape) {
             e.preventDefault();
             e.stopPropagation();
-            window.removeEventListener('keydown', this.onKeydown);
             this.setState({visible: false});
         }
     }
 
     onBlur = (e: React.FocusEvent<any>) => {
-        if (!this._containerRef.contains(e.relatedTarget as HTMLElement)) {
+        if (e.relatedTarget && !this._containerRef.contains(e.relatedTarget as HTMLElement)) {
             this.setState({visible: false});
         }
     }
+
     setContainerRef = (element: HTMLElement) => {
         this._containerRef = element;
     }

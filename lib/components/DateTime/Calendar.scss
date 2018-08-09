@@ -2,13 +2,13 @@
 @import '../../common/mixins';
 @import '../../common/color.controls';
 
-$calendar-column-width: 10*$grid-size;
-$calendar-width: 52*$grid-size;
+$calendar-column-width: 8*$grid-size;
+$calendar-chevron-width: 10*$grid-size;
+$calendar-width: 40*$grid-size;
 
 $line-height-chevron: 4*$grid-size;
 $line-height-header: 4*$grid-size;
 $line-height-row: $calendar-column-width;
-
 
 .calendar {
     @include md-box(block, relative);
@@ -20,8 +20,11 @@ $line-height-row: $calendar-column-width;
     }
     .calendar-header {
         @include md-box(block, relative);
-        margin-left: 4*$grid-size;
+        margin-left: 2*$grid-size;
         font-family: $font-family-light;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
 
         & button {
             text-decoration: none;
@@ -37,6 +40,12 @@ $line-height-row: $calendar-column-width;
             }
         }
 
+        .action-bar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
         .calendar-month {
             @include md-box(inline-block, relative);
             margin-top: 4*$grid-size;
@@ -46,8 +55,8 @@ $line-height-row: $calendar-column-width;
             font-size: $font-size-h5;
             line-height: $line-height-header;
             text-align: left;
-            width: $calendar-width;
             vertical-align: top;
+            width: 100%
         }
 
         .calendar-chevron {
@@ -55,9 +64,8 @@ $line-height-row: $calendar-column-width;
             text-align: center;
             vertical-align: bottom;
             line-height: $line-height-chevron;
-            margin-left: $grid-size;
             padding-top: 2*$grid-size;
-            width: $calendar-column-width;
+            width: $calendar-chevron-width;
             text-decoration: none;
 
             &:visited {
@@ -78,7 +86,7 @@ $line-height-row: $calendar-column-width;
         @include md-box(block, relative);
         width: 100%;
         margin: 2*$grid-size 0px;
-        padding-left: 2*$grid-size;
+        padding-left: $grid-size;
         padding-bottom: 1.5*$grid-size;
         @include themify{
             border-bottom: 1px solid themed('color-border-rest');
@@ -96,7 +104,7 @@ $line-height-row: $calendar-column-width;
     }
 
     .calendar-row {
-        margin-left: 2*$grid-size;
+        margin-left: $grid-size;
 
         & > button.selected {
             @include themify{
