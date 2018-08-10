@@ -31,6 +31,7 @@ const initialState = {value: ''};
         name='date-picker'
         onChange={(newValue) => setState({value: newValue}) }
         initialValue={initialValue}
+        onExpand={(expanded) => {alert(`next expanded state: ${expanded}`)}}
     />
 </div>
 ```
@@ -75,7 +76,7 @@ const initialState = {value: ''};
         name='date-picker'
         onChange={(newValue) => setState({value: newValue}) }
         initialValue={initialValue}
-        disabled 
+        disabled
     />
 </div>
 ```
@@ -90,7 +91,7 @@ const initialState = {value: ''};
         name='date-picker'
         onChange={(newValue) => setState({value: newValue}) }
         initialValue={initialValue}
-        showAbove error 
+        showAbove error
     />
 </div>
 ```

@@ -79,6 +79,7 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
     constructor(props: FormFieldProps) {
         super(props);
         this.handleKeyDown = this.handleKeyDown.bind(this);
+        this.handleBlur = this.handleBlur.bind(this);
         this._self = React.createRef();
         this.state = {
             tooltipVisible: false
@@ -100,6 +101,14 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
         }
     }
 
+    handleBlur(e: FocusEvent) {
+        if (!!e.relatedTarget && !this._self.current.contains(e.relatedTarget as HTMLElement)) {
+            this.setState({
+                tooltipVisible: false
+            });
+        }
+    }
+
     render() {
         const props = this.props;
         const containerClass = css('input-container', {
@@ -113,7 +122,12 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
         }
 
         return (
-            <Attr.div methodRef={this._self} className={containerClass} attr={props.attr.fieldContainer}>
+            <Attr.div
+                methodRef={this._self}
+                className={containerClass}
+                attr={props.attr.fieldContainer}
+                onBlur={this.handleBlur}
+            >
                 {(!!props.label) && <FormLabel
                     name={props.name}
                     icon='info'

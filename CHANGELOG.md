@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v3.0.2
+### Fixed
+- expose callback for clicking calendar icon in date picker. includes next visible state.
+- blur handler for form field tooltip so it will close when focus leaves the field
+
 ## v3.0.1
 ### Fixed
 - blur listener for datepicker was too greedy.

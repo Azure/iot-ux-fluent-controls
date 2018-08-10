@@ -66,6 +66,11 @@ export interface DatePickerProps extends React.Props<DatePickerType> {
      */
     onPaste?: (newValue: string) => void;
 
+    /**
+     * callback for clicking the calendar icon.
+     */
+    onExpand?: (expanded: boolean) => void;
+
     /** Class to append to top level element */
     className?: string;
 
@@ -76,7 +81,7 @@ export interface DatePickerState {
     value: string;
     initialValue?: MethodDate;
 
-    visible?: boolean;
+    expanded?: boolean;
 }
 
 /**
@@ -118,7 +123,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         const newState = this.getInitialState(props, '');
         this.state = {
             ...newState,
-            visible: false,
+            expanded: false,
         };
 
         this.paste = false;
@@ -333,14 +338,18 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         }
     }
 
-    onIconClick = () => {
-        const nextVisible = !this.state.visible;
+    onExpand = () => {
+        const nextExpanded = !this.state.expanded;
 
-        this.setState({visible: nextVisible});
+        this.setState({expanded: nextExpanded});
+
+        if (typeof this.props.onExpand === 'function') {
+            this.props.onExpand(nextExpanded);
+        }
     }
 
     onSelect = (newValue: Date) => {
-        this.setState({visible: false});
+        this.setState({expanded: false});
         this.props.onChange(newValue.toJSON());
     }
 
@@ -349,22 +358,22 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     }
 
     onOuterMouseEvent = (e: MouseEvent) => {
-        if (this.state.visible && !this._containerRef.contains(e.target as HTMLElement)) {
-            this.setState({visible: false});
+        if (this.state.expanded && !this._containerRef.contains(e.target as HTMLElement)) {
+            this.setState({expanded: false});
         }
     }
 
     onKeydown = (e: KeyboardEvent) => {
-        if (this.state.visible && e.keyCode === keyCode.escape) {
+        if (this.state.expanded && e.keyCode === keyCode.escape) {
             e.preventDefault();
             e.stopPropagation();
-            this.setState({visible: false});
+            this.setState({expanded: false});
         }
     }
 
     onBlur = (e: React.FocusEvent<any>) => {
         if (e.relatedTarget && !this._containerRef.contains(e.relatedTarget as HTMLElement)) {
-            this.setState({visible: false});
+            this.setState({expanded: false});
         }
     }
 
@@ -418,14 +427,14 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                     <ActionTriggerButton
                         icon='calendar'
                         className={css('date-picker-calendar-icon')}
-                        onClick={this.onIconClick}
+                        onClick={this.onExpand}
                         disabled={this.props.disabled}
                         attr={this.props.attr.inputIcon}
                         aria-haspopup={true}
-                        aria-expanded={this.state.visible}
+                        aria-expanded={this.state.expanded}
                     />
                 </Attr.div>
-                {this.state.visible &&
+                {this.state.expanded &&
                     <Attr.div
                         className={css('date-picker-dropdown', {
                             'above': this.props.showAbove
