@@ -71,6 +71,11 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     /** Classname to append to top level element of DatePicker and TimeInput */
     inputClassName?: string;
 
+    /**
+     * callback for clicking calendar icon
+     */
+    onExpand?: (expanded: boolean) => void
+
     attr?: DateTimeFieldAttributes & FormFieldAttributes;
 }
 
@@ -371,6 +376,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                             required={this.props.required}
                             onPaste={this.onDatePaste}
                             onChange={this.onDateChange}
+                            onExpand={this.props.onExpand}
                             className={css('date-picker', this.props.inputClassName)}
                             attr={dateAttr}
                         />

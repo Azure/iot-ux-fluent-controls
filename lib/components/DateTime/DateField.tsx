@@ -55,6 +55,11 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
     /** Classname to append to top level element of TextInput */
     inputClassName?: string;
 
+    /**
+     * callback for clicking the calendar icon
+     */
+    onExpand?: (expanded: boolean) => void;
+
     attr?: DatePickerAttributes & FormFieldAttributes;
 }
 
@@ -117,6 +122,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
                 disabled={props.disabled}
                 required={props.required}
                 onChange={props.onChange}
+                onExpand={props.onExpand}
                 className={props.inputClassName}
                 attr={dateAttr}
             />
