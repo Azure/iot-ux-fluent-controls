@@ -52,8 +52,6 @@ export interface CalendarState {
     currentDate: MethodDate;
     /** Whether or not props.year/month updates update the view */
     detached: boolean;
-    /** Whether accessibility is activated */
-    accessibility: boolean;
 }
 
 /**
@@ -107,8 +105,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         currentDate.date = 1;
         this.state = {
             currentDate: currentDate,
-            detached: false,
-            accessibility: false
+            detached: false
         };
 
         this.monthNames = getLocalMonths(locale);
@@ -119,22 +116,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         this.onNextMonth = this.onNextMonth.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
         this.setContainerRef = this.setContainerRef.bind(this);
-    }
-
-    public startAccessibility() {
-        const newDate = this.state.currentDate.copy();
-        newDate.date = 1;
-
-        this.setState({
-            accessibility: true,
-            currentDate: newDate
-        });
-    }
-
-    public stopAccessibility() {
-        this.setState({
-            accessibility: false
-        });
     }
 
     componentWillReceiveProps(newProps: CalendarProps) {
@@ -182,17 +163,8 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             this.props.onChange(date.dateObject);
             this.setState({
                 currentDate: MethodDate.fromDate(this.props.localTimezone, date.dateObject),
-                detached: false,
-                accessibility: false
+                detached: false
             });
-        }
-    }
-
-    onFocus(date: number, event) {
-        if (!this.state.accessibility) {
-            const newDate = this.state.currentDate.copy();
-            newDate.date = date;
-            this.setState({ currentDate: newDate, accessibility: true });
         }
     }
 
@@ -308,6 +280,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
 
         const curYear = this.state.currentDate.year;
         const curMonth = this.state.currentDate.month;
+        const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
 
         const weekdays = this.dayNames.map(day => {
             return (
@@ -349,16 +322,17 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                     event.preventDefault();
                 };
 
-                // TODO aria-label with date
-
                 const date = col.date;
                 const colMonth = col.month;
                 const key = `${colMonth}-${date}`;
+                const ariaLabel = `${date} ${this.monthNames[colMonth]} ${curYear}`;
+
                 /** Grayed out day from another month */
                 if (colMonth !== curMonth) {
                     return (
                         <Attr.button
                             type='button'
+                            aria-label={ariaLabel}
                             data-row={rowIndex}
                             data-col={colIndex}
                             onKeyDown={this.onKeyDown}
@@ -384,13 +358,13 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                         return (
                             <Attr.button
                                 type='button'
+                                aria-label={ariaLabel}
                                 data-row={rowIndex}
                                 data-col={colIndex}
                                 onKeyDown={this.onKeyDown}
                                 className={css('selected')}
                                 onClick={onClick}
                                 key={key}
-                                onFocus={this.onFocus.bind(this, date)}
                                 attr={this.props.attr.dateButton}
                             >
                                 {date}
@@ -403,12 +377,12 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                 return (
                     <Attr.button
                         type='button'
+                        aria-label={ariaLabel}
                         data-row={rowIndex}
                         data-col={colIndex}
                         onKeyDown={this.onKeyDown}
                         onClick={onClick}
                         key={key}
-                        onFocus={this.onFocus.bind(this, date)}
                         attr={this.props.attr.dateButton}
                     >
                         {date}
