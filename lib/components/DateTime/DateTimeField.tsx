@@ -46,6 +46,8 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
      * Default: true
      */
     localTimezone?: boolean;
+    /** i18n locale */
+    locale?: string;
     /**
      * Show Calendar below date picker input
      */
@@ -370,6 +372,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                             tabIndex={this.props.tabIndex}
                             error={!!this.props.error}
                             disabled={this.props.disabled}
+                            locale={this.props.locale}
                             localTimezone={this.props.localTimezone}
                             showAbove={this.props.showAbove}
                             format={this.props.format}

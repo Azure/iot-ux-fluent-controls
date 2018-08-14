@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v3.0.3
+### Fixed
+- screen reader support for calendar
+- take in props to override browser locale for calendar
+
 ## v3.0.2
 ### Fixed
 - expose callback for clicking calendar icon in date picker. includes next visible state.

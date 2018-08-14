@@ -24,6 +24,8 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
      * Default: true
      */
     localTimezone?: boolean;
+    /** i18n locale */
+    locale?: string;
     /**
      * Show Calendar below date picker input
      */
@@ -114,6 +116,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
             <DatePicker
                 name={props.name}
                 initialValue={props.initialValue}
+                locale={props.locale}
                 localTimezone={props.localTimezone}
                 tabIndex={props.tabIndex}
                 showAbove={props.showAbove}
