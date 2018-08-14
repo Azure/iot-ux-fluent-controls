@@ -42,6 +42,9 @@ export interface DatePickerProps extends React.Props<DatePickerType> {
      * Default: true
      */
     localTimezone?: boolean;
+
+    /** i18n locale */
+    locale?: string;
     /**
      * Show Calendar below date picker input
      */
@@ -446,6 +449,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                             className={css('date-picker-calendar')}
                             year={parsed.year || null}
                             month={parsed.month - 1}
+                            locale={this.props.locale}
                             attr={this.props.attr.calendar}
                         />
                         <div className={css('date-picker-dropdown-triangle')}></div>

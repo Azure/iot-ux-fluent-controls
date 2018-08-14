@@ -23,6 +23,8 @@ export interface CalendarAttributes {
 export interface CalendarProps extends React.Props<CalendarComponentType> {
     /** Current selected date */
     value?: Date | string;
+    /** i18n locale */
+    locale?: string;
 
     /** Year to display (otherwise shows the year from value) */
     year?: number;
@@ -84,7 +86,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
 
 
     constructor(props: CalendarProps) {
-        const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
         super(props);
 
         if (typeof (this.props.value) === 'string') {
@@ -108,9 +109,9 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             detached: false
         };
 
-        this.monthNames = getLocalMonths(locale);
+        this.monthNames = getLocalMonths(this.props.locale);
 
-        this.dayNames = getLocalWeekdays(locale);
+        this.dayNames = getLocalWeekdays(this.props.locale);
 
         this.onPrevMonth = this.onPrevMonth.bind(this);
         this.onNextMonth = this.onNextMonth.bind(this);
@@ -280,7 +281,6 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
 
         const curYear = this.state.currentDate.year;
         const curMonth = this.state.currentDate.month;
-        const locale = navigator['userLanguage'] || (navigator.language || 'en-us');
 
         const weekdays = this.dayNames.map(day => {
             return (
@@ -325,7 +325,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                 const date = col.date;
                 const colMonth = col.month;
                 const key = `${colMonth}-${date}`;
-                const ariaLabel = `${date} ${this.monthNames[colMonth]} ${curYear}`;
+                const ariaLabel = new Date(`${curYear}-${colMonth + 1}-${date}`).toLocaleDateString(this.props.locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
                 /** Grayed out day from another month */
                 if (colMonth !== curMonth) {
