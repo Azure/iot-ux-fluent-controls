@@ -36,7 +36,7 @@ export interface ToggleProps extends React.Props<ToggleType> {
 
 /**
  * Toggle button that is an on or off state
- * 
+ *
  * @param props Control properties (defined in `ToggleProps` interface)
  */
 export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps) => {
@@ -64,6 +64,10 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
                 name={props.name}
                 autoFocus={props.autoFocus}
                 methodRef={props.autoFocus && autoFocusRef}
+                // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_switch_role
+                // the switch role represents the states "on" and "off."
+                role='switch'
+                aria-checked={props.on}
                 attr={props.attr.button}
             />
             <Attr.div className={css('toggle-switch')} attr={props.attr.switch}/>

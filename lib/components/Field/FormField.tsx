@@ -93,11 +93,14 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
                 tooltipVisible: true
             });
             e.preventDefault();
+            e.stopPropagation();
         // if the user pressed escape key, close the tooltip
         } else if (e.keyCode === keyCodes.Escape) {
             this.setState({
                 tooltipVisible: false
             });
+            e.preventDefault();
+            e.stopPropagation();
         }
     }
 
