@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v3.0.4
+### Fixed
+- toggle controls need switch role for screen readers
+- prevent default and stop propagation for tooltip keyboard shortcut in form field
+
 ## v3.0.3
 ### Fixed
 - screen reader support for calendar
