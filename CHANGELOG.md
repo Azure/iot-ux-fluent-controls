@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v4.0.0
+### Changed
+- move to @microsoft npm scope
+
 ## v3.0.4
 ### Fixed
 - toggle controls need switch role for screen readers
