@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v4.0.1
+### Fixed
+- remove publish restriction
+- fix bugs url
+
 ## v4.0.0
 ### Changed
 - move to @microsoft npm scope
