@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v4.0.2
+### Fixed
+- fix crawling ant color for light and dark theme
+- update documentation backgrounds for loaders
+
 ## v4.0.1
 ### Fixed
 - remove publish restriction

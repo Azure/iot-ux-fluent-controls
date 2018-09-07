@@ -1,5 +1,6 @@
 @import '../../common/constants';
 @import '../../common/mixins';
+@import '../../common/color.controls';
 
 @mixin horizontal-loader-keyframes($name, $num-dots: 6, $diameter: 6px, $gap: 12px) {
     $pixels: ($num-dots / 2) * ($diameter + $gap);
@@ -43,7 +44,7 @@
     }
 }
 
-@mixin horizontal-loader($name, $num-dots: 6, $diameter: 6px, $gap: 12px, $duration: 3s, $delay: 200ms, $timing: ease-in-out, $height: 20px, $color: black) {
+@mixin horizontal-loader($name, $num-dots: 6, $diameter: 6px, $gap: 12px, $duration: 3s, $delay: 200ms, $timing: ease-in-out, $height: 20px) {
     $class-name: '.#{$name}';
     $inner-class-name: '#{$class-name}-inner';
 
@@ -66,7 +67,9 @@
         width: $diameter;
         height: $diameter;
         border-radius: $diameter;
-        background-color: $color;
+        @include themify {
+            background-color: themed('color-text-rest');
+        }
     }
 
     @for $num from 1 through $num-dots {
