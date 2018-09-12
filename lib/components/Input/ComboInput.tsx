@@ -440,7 +440,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             }
         }
 
-        const clearButton = this.props.disabled ? '' :
+        const clearButton = (this.props.disabled || this.props.readOnly) ? '' :
             <Attr.button
                 type='button'
                 className={css('cancel', 'icon icon-cancel')}
