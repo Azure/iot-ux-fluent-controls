@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v4.0.5
+### Fixed
+- hover background for alert close button was incorrect on all browsers except firefox
+
 ## v4.0.4
 ### Fixed
 - add padding to fix select dropdown component where selected text overlaps with the icon

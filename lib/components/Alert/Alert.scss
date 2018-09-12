@@ -5,8 +5,6 @@
 $line-height-text: 5*$grid-size;
 $line-height-close: 4*$grid-size;
 
-$icon-margin-top: 3px;
-
 .alert-container {
     position: relative;
     display: flex;
@@ -23,12 +21,12 @@ $icon-margin-top: 3px;
     .alert-icon {
         @include md-box(inline-block, relative);
         margin-left: 2*$grid-size;
-        margin-top: $icon-margin-top;
+        margin-right: 2*$grid-size;
+        margin-top: $grid-size;
         flex: 0 0 4*$grid-size;
     }
 
     .alert-text {
-        margin-left: 2*$grid-size;
         margin-top: 1.25*$grid-size;
         margin-right: 3*$grid-size;
         padding-bottom: 2*$grid-size;
@@ -75,6 +73,12 @@ $icon-margin-top: 3px;
                     background-color: themed('color-bg-alert-info-close-hover');
                 }
             }
+
+            .close-button-container {
+                &:hover, &:focus {
+                    background: transparent;
+                }
+            }
         }
     }
 
@@ -91,6 +95,10 @@ $icon-margin-top: 3px;
 
             .close-button-container {
                 color: themed('color-text-black');
+
+                &:hover, &:focus {
+                    background: transparent;
+                }
             }
         }
     }
@@ -112,6 +120,10 @@ $icon-margin-top: 3px;
 
             .close-button-container {
                 color: themed('color-text-white');
+
+                &:hover, &:focus {
+                    background: transparent;
+                }
             }
         }
 
