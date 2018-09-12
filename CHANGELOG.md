@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v4.0.4
+### Fixed
+- add padding to fix select dropdown component where selected text overlaps with the icon
+
 ## v4.0.2
 ### Fixed
 - fix crawling ant color for light and dark theme
