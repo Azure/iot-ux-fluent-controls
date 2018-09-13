@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v4.0.6
+### Fixed
+- remove cancel button when input is readonly
+
 ## v4.0.5
 ### Fixed
 - hover background for alert close button was incorrect on all browsers except firefox
