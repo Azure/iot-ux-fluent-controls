@@ -64,6 +64,7 @@ export class Label extends React.Component<Properties & { title?: string }> {
             className={cx('inline-popup-label', 'inline-btn', {
                 'disabled': this.props.disabled
             }, this.props.className)}
+            disabled={this.props.disabled}
             tabIndex={tabIndex}
             onClick={this.props.onClick}>
             {this.props.children}
