@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v4.0.7
+### Fixed
+- InlinePopup should be disableable
+
 ## v4.0.6
 ### Fixed
 - remove cancel button when input is readonly
