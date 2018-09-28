@@ -155,16 +155,17 @@ const initialState = {value: 'Sep 20, 2010 05:00:00 GMT'};
 ```
 
 ```jsx
-const initialValue = '';
 const initialState = {value: ''};
 
 <div>
-    <div>Current Value: {state.value}</div>
-    <DatePicker
-        name='date-picker'
-        onChange={(newValue) => setState({value: newValue}) }
-        initialValue={initialValue}
+        <div style={{marginBottom: '20px'}}>Current Value: {state.value}</div>
+    <DateTimeField
+        name='date-picker-disabled'
+        initialValue={''}
+        label='Empty string example (GMT)'
+        error={state.value === 'invalid' ? 'This must be a valid date and time!' : ''}
         localTimezone={false}
+        onChange={(newValue) => setState({value: newValue})}
     />
 </div>
 ```
