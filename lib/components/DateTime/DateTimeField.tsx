@@ -139,7 +139,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
         const local = props.localTimezone;
         let invalid = false;
         let initialValue = null;
-        if (props.initialValue) {
+        if (props.initialValue || props.initialValue === '') {
             if (typeof props.initialValue === 'string') {
                 const date = new Date(props.initialValue);
                 if (dateIsValid(date, local)) {
