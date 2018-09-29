@@ -165,4 +165,26 @@ $line-height-row: $calendar-column-width;
     .calendar-row + .calendar-row {
         margin-top: $grid-size;
     }
+
+    @include rtl {
+        .calendar-header {
+            margin-left: unset;
+            margin-right: 2*$grid-size;
+        }
+
+        .calendar-month {
+            text-align: right;
+        }
+
+        .calendar-days {
+            padding-left: unset;
+            padding-right: $grid-size;
+
+            div + div {
+                margin-left: unset;
+                margin-right: $grid-size;
+            }
+        }
+    }
 }
+
