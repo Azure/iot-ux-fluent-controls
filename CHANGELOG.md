@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v4.0.8
+### Fixed
+- DateTimeField accepts empty string and renders placeholder.
+
 ## v4.0.7
 ### Fixed
 - InlinePopup should be disableable
