@@ -3,3 +3,4 @@ lib/**/*.d.ts
 dist/
 node_modules/
 static/
+storybook-static/
