@@ -1,5 +1,5 @@
 const path = require('path');
-const TSDocgenPlugin = require('react-docgen-typescript-webpack-plugin');
+// const TSDocgenPlugin = require('react-docgen-typescript-webpack-plugin');
 const webpack = require('webpack');
 
 // you can use this file to add your custom webpack plugins, loaders and anything you like.
@@ -21,12 +21,16 @@ module.exports = (baseConfig, env, defaultConfig) => {
   // },
   defaultConfig.resolve.extensions.push('.ts', '.tsx');
   defaultConfig.plugins.push(
-    new TSDocgenPlugin(),
+    // new TSDocgenPlugin(),
     new webpack.NamedModulesPlugin()
   );
   defaultConfig.module.rules.push({
     test: /\.tsx?$/,
-    loaders: 'ts-loader',
+    use: [
+      'ts-loader',
+      'react-docgen-typescript-loader'
+    ],
+    // loaders: 'ts-loader',
     exclude: path.resolve(__dirname, 'node_modules'),
   },
   {
