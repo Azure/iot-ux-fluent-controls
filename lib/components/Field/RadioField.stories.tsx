@@ -16,8 +16,22 @@ const options = [{
 
 storiesOf('Radio Field', module)
     .add('default',
-        withState({})(
-            withInfo({ inline: true }) (
+        withState({}) (
+            withInfo({ inline: true })(
+                ({ store }) => <RadioField
+                    disabled={boolean('Disabled', false)}
+                    required={boolean('Required', false)}
+                    name='example1'
+                    options={options}
+                    onChange={(value) => store.set({ value })}
+                    value={store.state.value}
+                    label='Radio Field Example'
+                />
+            )
+        )
+    ).add('with initial value',
+        withState({ value: 'utc' }) (
+            withInfo({ inline: true })(
                 ({ store }) => <RadioField
                     disabled={boolean('Disabled', false)}
                     required={boolean('Required', false)}
@@ -30,8 +44,8 @@ storiesOf('Radio Field', module)
             )
         )
     ).add('with tooltip',
-        withState({})(
-            withInfo({ inline: true }) (
+        withState({}) (
+            withInfo({ inline: true })(
                 ({ store }) =>
                     <RadioField
                         disabled={boolean('Disabled', false)}
@@ -46,20 +60,20 @@ storiesOf('Radio Field', module)
             )
         )
     ).add('with error',
-    withState({})(
-        withInfo({ inline: true }) (
-            ({ store }) =>
-                <RadioField
-                    disabled={boolean('Disabled', false)}
-                    required={boolean('Required', false)}
-                    error={'oh no! something is wrong!'}
-                    errorTitle={'error hover text'}
-                    name='example1'
-                    options={options}
-                    onChange={(value) => store.set({ value })}
-                    value={store.state.value}
-                    label='Radio Field Example'
-                />
+        withState({})(
+            withInfo({ inline: true })(
+                ({ store }) =>
+                    <RadioField
+                        disabled={boolean('Disabled', false)}
+                        required={boolean('Required', false)}
+                        error={'oh no! something is wrong!'}
+                        errorTitle={'error hover text'}
+                        name='example1'
+                        options={options}
+                        onChange={(value) => store.set({ value })}
+                        value={store.state.value}
+                        label='Radio Field Example'
+                    />
+            )
         )
     )
-)
