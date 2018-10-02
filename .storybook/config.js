@@ -18,7 +18,7 @@ setOptions({
 });
 
 setAddon(infoAddon);
-addDecorator((story, context) => withInfo({ inline: true })(story)(context));
+// addDecorator((story, context) => withInfo({ inline: true })(story)(context));
 addDecorator((story) => {
   const content = story();
   return (

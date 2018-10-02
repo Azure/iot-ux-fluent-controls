@@ -4,7 +4,7 @@ import {DivProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Calendar, CalendarAttributes} from './Calendar';
 import {formatDate, placeholders} from './helpers';
 import {MethodDate, dateIsValid, DateFormat, keyCode} from '../../Common';
-import { ActionTriggerButton, ActionTriggerButtonAttributes } from '../ActionTrigger';
+import { ActionTriggerButton, ActionTriggerButtonAttributes } from '../ActionTrigger/ActionTriggerButton';
 const css = classNames.bind(require('./DatePicker.scss'));
 
 export interface DatePickerType {}
