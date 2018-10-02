@@ -88,6 +88,7 @@ export class TextInput extends React.PureComponent<TextInputProps> {
     constructor(props: TextInputProps) {
         super(props);
         this.onChange = this.onChange.bind(this);
+        this.onBlur = this.onBlur.bind(this);
         this.onClear = this.onClear.bind(this);
     }
 
@@ -97,6 +98,19 @@ export class TextInput extends React.PureComponent<TextInputProps> {
             this.props.onChange(targetValue);
         }
         event.stopPropagation();
+    }
+
+    onBlur(event: React.SyntheticEvent<HTMLInputElement>) {
+        const target = (event.target as HTMLInputElement);
+
+        // Bad inputs won't trigger 'onChange', so we clean the field to avoid losing track of the value
+        if (this.props.type === 'number' && target.validity.badInput) {
+            target.value = '';
+
+            if (this.props.value !== target.value) {
+                this.props.onChange(target.value);
+            }
+        }
     }
 
     onClear() {
@@ -154,6 +168,7 @@ export class TextInput extends React.PureComponent<TextInputProps> {
                         value={this.props.value == null ? '' : this.props.value}
                         className={inputClassName}
                         onChange={this.onChange}
+                        onBlur={this.onBlur}
                         placeholder={this.props.placeholder}
                         required={this.props.required}
                         disabled={this.props.disabled}
