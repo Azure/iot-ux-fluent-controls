@@ -4,6 +4,7 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "jsx": "react",
+        "allowJs": false,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
         "noImplicitAny": false,
