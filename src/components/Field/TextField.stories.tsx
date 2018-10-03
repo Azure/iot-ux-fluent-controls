@@ -24,20 +24,10 @@ storiesOf('Text Field', module)
             disabled={boolean('Disabled', false)}
             required={boolean('Required', false)} />
     )))
-    .add('with error', withInfo({inline: true})(() => (
-        <TextField
-            name='example1'
-            error='oh no! something is wrong!'
-            value={undefined}
-            label='Text Field Example'
-            onChange={action('value changed')}
-            disabled={boolean('Disabled', false)}
-            required={boolean('Required', false)} />
-    )))
     .add('with error title', withInfo({inline: true})(() => (
         <TextField
             name='example1'
-            error='oh no! something is...'
+            error='oh no! something is wrong!'
             errorTitle='oh no! something is wrong!'
             value={undefined} label='Text Field Example'
             onChange={action('value changed')}
