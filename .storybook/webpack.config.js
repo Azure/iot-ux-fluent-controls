@@ -28,7 +28,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
       'react-docgen-typescript-loader'
     ],
     // loaders: 'ts-loader',
-    exclude: path.resolve(__dirname, '../node_modules')
+    exclude: [path.resolve(__dirname, '../node_modules')]
   },
   {
     test: /\.css$/,
@@ -36,6 +36,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
       'style-loader',
       'css-loader?modules&importLoaders=1&localIdentName=[local]',
     ],
+    exclude: [path.resolve(__dirname, '../lib')]
   },
   {
     test: /\.scss$/,
@@ -51,6 +52,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
         loader: 'sass-loader',
         options: {
           includePaths: [
+            path.resolve(__dirname, '../lib'),
             path.resolve(
               __dirname,
               '../node_modules/@microsoft/azure-iot-ux-fluent-css/src/'

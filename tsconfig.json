@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "outDir": "lib",
         "target": "es6",
         "module": "commonjs",
         "moduleResolution": "node",
@@ -8,7 +9,7 @@
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
         "noImplicitAny": false,
-        "rootDir": "lib",
+        "rootDir": "src",
         "sourceMap": false,
         "declaration": true,
         "types": [
@@ -18,7 +19,7 @@
         ]
     },
     "include": [
-        "lib/**/*"
+        "src/**/*"
     ],
     "exclude": [
         "node_modules",

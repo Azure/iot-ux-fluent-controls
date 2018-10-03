@@ -5,7 +5,8 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy-scss-to-lib",
+    "copy-scss-to-lib": "cpx \"./src/**/*.scss\" ./lib",
     "watch": "tsc --watch",
     "test": "karma start",
     "tslint": "tslint './lib/**/*.ts{,x}'",
@@ -52,6 +53,7 @@
     "cheerio": "^1.0.0-rc.1",
     "classnames": "^2.2.5",
     "copyfiles": "^1.2.0",
+    "cpx": "^1.5.0",
     "css-loader": "^0.28.5",
     "enzyme": "^2.8.9",
     "html-webpack-plugin": "^2.30.1",
