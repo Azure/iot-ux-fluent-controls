@@ -1,5 +1,4 @@
 const path = require('path');
-// const TSDocgenPlugin = require('react-docgen-typescript-webpack-plugin');
 const webpack = require('webpack');
 
 // you can use this file to add your custom webpack plugins, loaders and anything you like.
@@ -11,19 +10,17 @@ const webpack = require('webpack');
 // to "React Create App". This only has babel loader to load JavaScript.
 
 module.exports = (baseConfig, env, defaultConfig) => {
-  // plugins: [
-  //   // your custom plugins
-  // ],
-  // module: {
-  //   rules: [
-  //     // add your custom rules.
-  //   ],
-  // },
   defaultConfig.resolve.extensions.push('.ts', '.tsx');
   defaultConfig.plugins.push(
-    // new TSDocgenPlugin(),
     new webpack.NamedModulesPlugin()
   );
+  // the wrong file get's resolved if you have output from tsc
+  // webpack should ignore those files when building storybook
+  defaultConfig.module.rules.forEach(rule => {
+    if (rule.test.toString() === /\.jsx?$/.toString()) {
+      rule.exclude.push(path.resolve(__dirname, '../lib'))
+    }
+  });
   defaultConfig.module.rules.push({
     test: /\.tsx?$/,
     use: [
@@ -31,7 +28,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
       'react-docgen-typescript-loader'
     ],
     // loaders: 'ts-loader',
-    exclude: path.resolve(__dirname, 'node_modules'),
+    exclude: path.resolve(__dirname, '../node_modules')
   },
   {
     test: /\.css$/,
