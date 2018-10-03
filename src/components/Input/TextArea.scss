@@ -1,0 +1,74 @@
+@import '../../common/constants';
+@import '../../common/mixins';
+@import '../../common/color.controls';
+
+$text-area-min-height: 13*$grid-size;
+$line-height: 5*$grid-size;
+
+.textarea-container {
+    @include md-box(block, relative);
+
+    .textarea-ghost {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        visibility: hidden;
+    }
+}
+
+.textarea {
+    @include md-box(block, relative);
+    width: 100%;
+    min-height: $text-area-min-height;
+    padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
+
+    font-family: $font-family-default;
+    @include themify {
+        color: themed('color-text-rest');
+        border: 1px solid themed('color-border-rest');
+        background-color: themed('color-bg-input-rest');
+    }
+    font-size: $font-size-default;
+    line-height: $line-height;
+    outline: none;
+
+    @include themify{
+        &:active, &:hover, &:focus {
+            // inputs look really weird with a dashed outline, so standardize
+            // on the solid selected border for all the above states:
+            border: 1px solid themed('color-border-selected');
+        }
+
+        &:disabled {
+            color: themed('color-text-disabled');
+            border: 1px solid themed('color-border-disabled');
+            background-color: themed('color-bg-input-disabled');
+
+            &::placeholder {
+                color: themed('color-text-disabled');
+            }
+        }
+
+        &::placeholder {
+            color: themed('color-text-placeholder');
+        }
+
+        &::selection {
+            color: themed('color-text-white');
+            background-color: themed('color-bg-item-selected');
+        }
+
+        &.error:not(:disabled) {
+            border: 1px solid themed('color-border-error');
+        }
+    }
+
+    &::-ms-clear {
+        display: none;
+    }
+
+    &:invalid {
+        box-shadow: none;
+    }
+}

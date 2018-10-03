@@ -1,0 +1,153 @@
+@import '../../common/constants';
+@import '../../common/mixins';
+@import '../../common/color.controls';
+
+$pivot-max-width: 50*$grid-size;
+$pivot-min-height: 7*$grid-size;
+$pivot-max-height: 12*$grid-size;
+
+$line-height: 4*$grid-size;
+
+.pivot {
+    @include md-box(inline-block);
+    outline: none !important;
+    margin-left: 5*$grid-size;
+}
+
+.pivot-menu {
+    @include md-box(block, relative);
+    @include themify{
+        border-bottom: 1px solid themed('color-border-rest');
+    }
+    white-space: nowrap;
+    overflow: hidden;
+
+    a.disabled {
+        pointer-events: none;
+        cursor: default;
+    }
+}
+
+.pivot-container {
+    @include md-box(inline-block, relative);
+    padding: 0px 1px 0px 1px;
+
+    .pivot-icon, .pivot-icon-label {
+        @include md-box();
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: $pivot-max-width;
+    }
+
+    .pivot-icon-label {
+        margin-left: 2*$grid-size;
+        font-family: $font-family-default;
+        font-size: $font-size-default;
+        line-height: $line-height;
+        @include themify {
+            color: themed('color-text-rest');
+        }
+    }
+
+    &:hover {
+        @include themify {
+            color: themed('color-text-rest');
+        }
+        .pivot-icon, .pivot-label, .pivot-icon-label {
+            @include themify {
+                color: themed('color-text-rest');
+            }
+        }
+    }
+
+    &.selected {
+        @include themify {
+            color: themed('color-text-rest');
+        }
+
+        .pivot-icon, .pivot-label, .pivot-icon-label {
+            @include themify {
+                color: themed('color-text-rest');
+            }
+        }
+
+        .pivot-border {
+            @include themify {
+                border-bottom: 2px solid themed('color-border-pivot-tab');
+            }
+        }
+
+        outline: none;
+    }
+
+    &.disabled {
+        @include themify {
+            color: themed('color-text-disabled');
+        }
+
+        .pivot-icon, .pivot-label, .pivot-icon-label {
+            @include themify {
+                color: themed('color-text-disabled');
+            }
+        }
+
+        &.selected .pivot-border {
+            @include themify {
+                border-bottom: 2px solid themed('color-border-disabled');
+            }
+        }
+    }
+
+    .pivot-icon {
+        @include md-box(inline-block, relative);
+        @extend .pivot-icon-label;
+        visibility: hidden;
+        white-space: nowrap;
+        min-height: $pivot-min-height;
+        max-height: $pivot-max-height;
+    }
+
+    .pivot-icon + .pivot-icon {
+        @include md-box(block, absolute);
+        visibility: visible;
+        top: 50%;
+        transform: translate(0, -25%);
+    }
+
+    .pivot-label {
+        @include md-box(inline-block, relative);
+        @extend .pivot-icon-label;
+        visibility: hidden;
+        white-space: nowrap;
+        min-height: $pivot-min-height;
+        max-height: $pivot-max-height;
+    }
+
+    .pivot-label + .pivot-label {
+        @include md-box(block, absolute);
+        visibility: visible;
+        top: 50%;
+        transform: translate(0, -25%);
+    }
+
+    .focus-border {
+        @include md-box(block, absolute);
+        left: -1*$grid-size;
+        right: -1*$grid-size;
+
+        top: 50%;
+        transform: translate(0, -50%);
+
+        height: 5.5*$grid-size;
+    }
+
+    .pivot-border {
+        @include md-box(block, absolute);
+        left: 0px;
+        width: 100%;
+        bottom: 0px;
+        height: 2.5*$grid-size;
+        outline: none;
+    }
+}

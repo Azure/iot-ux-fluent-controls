@@ -1,0 +1,141 @@
+@import '../../common/constants';
+@import '../../common/mixins';
+@import '../../common/color.controls';
+
+$toggle-switch-transition: 75ms ease-in-out;
+
+$toggle-width: 10*$grid-size;
+$toggle-height: 5*$grid-size;
+$border-toggle-radius: $toggle-height / 2;
+$toggle-switch-border-radius: 5px;
+
+$line-height: 3.5*$grid-size;
+
+.toggle {
+    @include md-box(inline-block, relative);
+    line-height: $line-height;
+
+    .toggle-button {
+        @include md-box(inline-block, relative, fill-parent);
+        vertical-align: middle;
+        outline: none;
+        @include themify{
+            border: 1px solid themed('color-border-toggle-btn-rest-off');
+            background-color: themed('color-bg-toggle-btn-rest-off');
+        }
+        border-radius: $border-toggle-radius;
+        width: $toggle-width;
+        height: $toggle-height;
+    }
+
+    &:not(.disabled) .toggle-button {
+        &:focus {
+            @include themify{
+                outline: 1px dashed themed('color-border-focus');
+            }
+            outline-offset: 1px;
+        }
+
+        &:hover {
+            @include themify{
+                border: 1px solid themed('color-border-toggle-btn-hover-off');
+            }
+            cursor: pointer;
+            + .toggle-switch {
+                @include themify{
+                    background-color: themed('color-circle-toggle-btn-hover-off');
+                }
+            }
+        }
+    }
+
+    .toggle-switch {
+        @include md-box(block, absolute);
+        left: 1.25*$grid-size;
+        top: 1.25*$grid-size;
+
+        width: 2.5*$grid-size;
+        height: 2.5*$grid-size;
+        border-radius: $toggle-switch-border-radius;
+        @include themify{
+            background-color: themed('color-circle-toggle-btn-rest-off');
+        }
+        transition: $toggle-switch-transition;
+
+        pointer-events: none;
+    }
+
+    .toggle-label {
+        @include md-box(inline-block, relative);
+        margin-left: 2*$grid-size;
+
+        font-family: $font-family-default;
+        font-size: $font-size-default;
+
+        vertical-align: middle;
+    }
+
+    &.toggle-on {
+        &:not(.disabled) .toggle-button {
+            @include themify{
+                border: 1px solid themed('color-border-toggle-btn-rest-on');
+                background-color: themed('color-bg-toggle-btn-rest-on');
+            }
+            &:hover {
+                @include themify{
+                    border: 1px solid themed('color-border-toggle-btn-hover-on');
+                    background-color: themed('color-bg-toggle-btn-hover-on');
+                }
+                + .toggle-switch {
+                    @include themify{
+                        background-color: themed('color-circle-toggle-btn-hover-on');
+                    }
+                }
+            }
+        }
+
+        .toggle-switch {
+            left: 25px;
+            @include themify{
+                background-color: themed('color-circle-toggle-btn-rest-on');
+            }
+        }
+
+        &.disabled {
+            .toggle-button {
+                @include themify{
+                    border: 1px solid themed('color-border-toggle-btn-disabled-on');
+                    background-color: themed('color-bg-toggle-btn-disabled-on');
+                }
+            }
+
+            .toggle-switch {
+                @include themify{
+                    background-color: themed('color-circle-toggle-btn-disabled-on');
+                }
+            }
+        }
+    }
+
+    &.disabled {
+        .toggle-button {
+            @include themify{
+                border: 1px solid themed('color-border-toggle-btn-disabled-off');
+                background-color: themed('color-bg-toggle-btn-disabled-off');
+            }
+            cursor: default;
+        }
+
+        .toggle-switch {
+            @include themify{
+                background-color: themed('color-circle-toggle-btn-disabled-off');
+            }
+        }
+
+        .toggle-label {
+            @include themify{
+                color: themed('color-text-disabled');
+            }
+        }
+    }
+}

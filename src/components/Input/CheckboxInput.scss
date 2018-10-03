@@ -1,0 +1,179 @@
+@import '../../common/constants';
+@import '../../common/mixins';
+@import '../../common/color.controls';
+
+$line-height: 4*$grid-size;
+$line-height-small: 3*$grid-size;
+$outline-focus-border-width: 1px;
+
+.checkbox-container {
+    @include themify{
+        color: themed('color-text-rest');
+        &:not(.disabled) input:focus + .checkbox-button {
+            outline: $outline-focus-border-width dashed themed('color-border-focus');
+            outline-offset: -$outline-focus-border-width;
+        }
+
+        .checkbox-button {
+            border: 1px solid themed('color-border-rest');
+            background-color: themed('color-bg-input-rest');
+        }
+
+        &.disabled {
+            color: themed('color-text-disabled');
+            .checkbox-button {
+                border: 1px solid themed('color-border-disabled');
+                background-color: themed('color-bg-input-rest');
+            }
+        }
+        .checkbox-fill {
+            background-color: themed('color-text-rest');
+        }
+    }
+}
+
+.checkbox-container:hover {
+    @include themify{
+        .checkbox-button {
+            border: 1px solid themed('color-border-selected');
+        }
+
+        &.selected .checkbox-button {
+            color: themed('color-text-white');
+            background-color: themed('color-bg-btn-primary-rest');
+            border: 1px solid themed('color-border-hover');
+        }
+
+        &.disabled .checkbox-button {
+            border: 1px solid themed('color-border-disabled');
+        }
+
+        &.indeterminate .checkbox-button {
+            border: 1px solid themed('color-border-selected');
+            background-color: themed('color-bg-input-rest');
+        }
+    }
+}
+
+.checkbox-container.selected {
+    @include themify{
+        .checkbox-button {
+            border: 1px solid themed('color-border-selected');
+            background-color: themed('color-bg-btn-primary-rest');
+        }
+
+        .checkbox-checkmark {
+            color: themed('color-text-white');
+        }
+
+        &.disabled {
+            .checkbox-button {
+                background-color: themed('color-bg-input-disabled');
+                border: none;
+            }
+
+            .checkbox-checkmark {
+                color: themed('color-text-disabled');
+            }
+        }
+}
+}
+
+.checkbox-container.indeterminate {
+    @include themify{
+        .checkbox-button {
+            border: 1px solid themed('color-border-selected');
+            background-color: themed('color-bg-input-rest');
+        }
+
+        &.disabled {
+            .checkbox-button {
+                border: 1px solid themed('color-border-disabled');
+            }
+
+            .checkbox-fill {
+                border: themed('color-text-disabled');
+            }
+        }
+    }
+}
+
+.checkbox-container {
+    @include md-box(block, relative);
+    font-family: $font-family-default;
+    font-size: $font-size-default;
+    line-height: $line-height;
+
+    & + &:not(.columns) {
+        margin-top: 3*$grid-size;
+    }
+
+    &.columns {
+        display: inline-block;
+
+        margin-right: 2*$grid-size;
+    }
+
+    input {
+        @include md-box(inline-block, absolute);
+
+        top: 1px;
+        left: 1px;
+
+        width: 0px;
+        height: 0px;
+        border: none;
+        outline: none;
+    }
+
+    .checkbox-text {
+        @include md-box(inline-block, relative);
+        vertical-align: top;
+        padding-left: 2*$grid-size;
+    }
+
+    .checkbox-fill {
+        @include md-box(display-none, absolute);
+        left: 1.5*$grid-size;
+        top: 1.5*$grid-size;
+        width: $grid-size;
+        height: $grid-size;
+    }
+
+    .checkbox-button {
+        @include md-box(inline-block, relative);
+        width: 4*$grid-size;
+        height: 4*$grid-size;
+        @include themify{
+            background-color: themed('color-bg-input-rest');
+        }
+        outline: none;
+        vertical-align: top;
+    }
+
+    .checkbox-label {
+        @include md-box(inline-block, relative);
+    }
+
+    .checkbox-checkmark {
+        @include md-box(display-none, absolute);
+        font-size: $font-size-small;
+        line-height: $line-height-small;
+        left: 2px;
+    }
+
+    &.selected {
+        .checkbox-checkmark {
+            display: inline-block;
+        }
+    }
+
+    &.indeterminate {
+        .checkbox-checkmark {
+            display: none;
+        }
+        .checkbox-fill {
+            display: inline-block;
+        }
+    }
+}

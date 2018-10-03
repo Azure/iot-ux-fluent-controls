@@ -1,0 +1,358 @@
+@import '../../common/color.controls';
+@import '../../common/constants';
+@import '../../common/mixins';
+
+$header-height: $layout-nav-item-height;
+$masthead-branding-width: 50%;
+$masthead-brandname-width: 200px;
+$masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
+$masthead-collapse-start: 660px;
+$masthead-button-width: $layout-nav-item-height;
+$masthead-wide-button-width: $masthead-button-width * 4;
+
+.masthead {
+    height: $header-height;
+    @include themify {
+        background-color: themed('color-bg-masthead');
+    }
+}
+
+.masthead-branding {
+    width: $masthead-branding-width;
+    height: $header-height;
+    display: flex;
+    align-items: flex-start;
+
+    &>* {
+        line-height: $header-height;
+        font-size: 20px;
+    }
+
+    &>*+*:before {
+        content: '|';
+        margin: 0px 10px;
+        @include themify {
+            color: themed('color-border-panel');
+        }
+    }
+
+    a {
+        padding: 0 $gutter-small;
+        text-decoration: none;
+        &:hover {
+            @include themify {
+                background-color: themed('color-bg-masthead-hover');
+            }
+        }
+    }
+}
+
+.masthead-toolbar-container {
+    width: 100% - $masthead-branding-width;
+    text-align: right;
+    position: relative;
+
+    .tall {
+        height: auto;
+        @include themify {
+            border-bottom: 1px solid themed('color-border-panel');
+        }
+    }
+}
+
+.masthead-toolbar {
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    list-style-type: none;
+}
+
+
+.masthead {
+    height: $header-height;
+    @include themify {
+        background-color: themed('color-bg-masthead');
+    }
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.masthead {
+    @include themify {
+        color: themed('color-text-white');
+    }
+}
+
+.masthead-toolbar-menu-item, .masthead-toolbar-menu-item a {
+    @include themify {
+        color: themed('color-text-rest');
+    }
+}
+
+.masthead-toolbar-menu-item.sub-menu {
+    .menu-link {
+        padding-left: $gutter-small * 2;
+    }
+}
+
+.masthead-toolbar-menu {
+    @include themify {
+        background-color: themed('color-bg-masthead');
+    }
+
+    margin-top: 0px !important;
+    text-align: left;
+    padding: 0 !important;
+
+    button, .menu-link, .user-label {
+        text-align: inherit;
+        background: none;
+        border: none;
+        padding: 0px $gutter-small;
+        width: 100%;
+
+        &:hover {
+            @include themify {
+                background-color: themed('color-bg-item-hover');
+            }
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        width: $masthead-wide-button-width + 1px; // 1px to account for button border
+    }
+
+
+    .masthead-toolbar-menu-item {
+        line-height: $header-height * 0.8;
+
+        &:not(:last-child) {
+            border-bottom-color: transparent;
+        }
+
+        .menu-link {
+            display: block;
+        }
+
+        button:focus, .menu-link:focus {
+            outline-offset: -1px;
+            @include themify {
+                outline: 1px dashed themed('color-border-focus');
+            }
+        }
+    }
+
+    &.wide {
+        width: calc(100vw - #{$nav-collapsed-width});
+    }
+
+    &.search-bar {
+        right: calc(-#{$masthead-button-width} - #{$masthead-wide-button-width} - 2px); //2px to account for border
+    }
+}
+
+.sub-menu .help-menu {
+    @include themify {
+        border-top: 1px solid themed('color-border-disabled');
+    }
+}
+
+.masthead-toolbar-item {
+    @include themify {
+        border-left: 1px solid themed('color-border-masthead-item');
+    }
+    min-width: $masthead-button-width;
+}
+
+.masthead-toolbar-btn {
+    width: $masthead-button-width!important;
+    height: $header-height!important;
+    line-height: $header-height;
+    justify-content: center;
+    align-items: center;
+    display: flex!important;
+    border: none;
+    white-space: nowrap;
+    text-decoration: none;
+    padding: 0!important;
+    @include themify {
+        background-color: themed('color-bg-masthead') !important;
+    }
+
+    &:hover {
+        @include themify {
+            background-color: themed('color-bg-masthead-hover') !important;
+        }
+        border: 1px solid transparent!important;
+    }
+
+    .user-label {
+        margin-right: $gutter-normal / 2;
+        margin-left: $gutter-normal;
+        text-align: left;
+        color: inherit;
+    }
+
+    width: $masthead-button-width;
+    height: $header-height;
+    line-height: $header-height;
+    justify-content: center;
+    display: inline-flex;
+    border-left: 1px solid;
+    cursor: pointer;
+    white-space: nowrap;
+    vertical-align: top;
+    text-decoration: none;
+
+    &.wide {
+        width: $masthead-wide-button-width;
+    }
+
+    .user-label {
+        margin-right: $gutter-normal / 2;
+        margin-left: $gutter-normal;
+        text-align: left;
+    }
+}
+
+.user-menu-btn {
+    width: $masthead-wide-button-width!important;
+    display: flex;
+    align-content: center;
+}
+
+.user-label {
+    height: $header-height - 2px; // 2px to account for border of outer container.
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    justify-content: space-between;
+    width: 150px - ($gutter-normal *2);
+
+    &>* {
+        height: $header-height / 2;
+        display: block;
+    }
+
+    .name {
+        line-height: $header-height / 2 + 5px;
+    }
+
+    .email {
+        line-height: $header-height / 2 - 10px;
+        @include themify {
+            color: themed('color-text-placeholder');
+        }
+        font-size: $font-size-xsmall;
+        text-transform: uppercase;
+    }
+}
+
+.user-thumbnail {
+    align-self: center;
+    font-size: $font-size-h2;
+    margin-right: $gutter-normal;
+
+    &.hidden {
+        display: none;
+    }
+}
+
+@mixin collapse($count) {
+    $breakpoint: $masthead-collapse-start - $count * $header-height;
+    @media (min-width: $breakpoint + 1) {
+        .collapse-#{$count}-inverse {
+            display: none;
+        }
+    }
+    @media (max-width: $breakpoint) {
+        .collapse-#{$count} {
+            display: none;
+        }
+    }
+}
+
+@for $i from 0 through 10 {
+    @include collapse($i);
+}
+
+@media (max-width: $masthead-application-breakpoint) {
+    .masthead-branding *+* {
+        display: none;
+    }
+}
+
+.masthead-branding {
+    @include rtl {
+        direction: rtl;
+        margin-left: unset;
+        margin-right: 0;
+    }
+}
+
+.masthead-toolbar-container {
+    @include rtl {
+        direction: rtl;
+        text-align: left;
+    }
+}
+
+.masthead-toolbar-menu {
+    @include rtl {
+        direction: rtl;
+        text-align: right;
+
+        &.search-bar {
+            right: unset;
+            left: calc(-#{$masthead-button-width} - #{$masthead-wide-button-width} - 2px); //2px to account for border.
+        }
+    }
+}
+
+.masthead-toolbar-btn {
+    @include rtl {
+        @include themify {
+            border-right: 1px solid themed('color-border-panel');
+        }
+        border-left: 0;
+
+        .user-label {
+            margin-left: $gutter-normal / 2;
+            margin-right: $gutter-normal;
+            text-align: right;
+        }
+    }
+}
+
+.user-thumbnail {
+    @include rtl {
+        margin-left: $gutter-normal;
+        margin-right: 0;
+    }
+}
+
+.masthead-toolbar-item {
+    @include rtl {
+        @include themify {
+            border-right: 1px solid themed('color-border-panel');
+        }
+        border-left: unset;
+    }
+}
+
+.masthead-toolbar-menu-item.sub-menu {
+    @include rtl {
+        .menu-link {
+            padding-right: $gutter-small * 2;
+            padding-left: $gutter-small;
+        }
+    }
+}

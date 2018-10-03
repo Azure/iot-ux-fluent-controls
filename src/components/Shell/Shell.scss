@@ -1,0 +1,59 @@
+@import '~@microsoft/azure-iot-ux-fluent-css/src/normalize';
+@import '~@microsoft/azure-iot-ux-fluent-css/src/icons';
+@import 'colors';
+
+@font-face {
+    font-family: $icon-font-family;
+    src: url('@microsoft/azure-iot-ux-fluent-css/src/fonts/segmdl2.1.61.woff') format('woff'),
+        url('@microsoft/azure-iot-ux-fluent-css/src/fonts/segmdl2.1.61.ttf') format('truetype');
+}
+
+// provide some common styling that everyone requires:
+:global {
+    .link {
+        @include themify {
+            color: themed('color-text-hyperlink-rest');
+        }
+
+        &:hover:not(.disabled) {
+            @include themify {
+                color: themed('color-text-hyperlink-hover');
+            }
+        }
+
+        &:focus:not(.disabled) {
+            outline-offset: -1px;
+            @include themify {
+                outline: 1px dashed themed('color-border-focus');
+            }
+        }
+
+        &:active:not(.disabled) {
+            @include themify {
+                color: themed('color-text-hyperlink-focus');
+            }
+        }
+
+        &.disabled {
+            cursor: not-allowed;
+
+            @include themify {
+                color: themed('color-text-hyperlink-disabled');
+            }
+        }
+    }
+
+    .rtl {
+        direction: rtl;
+    }
+
+    .shell {
+        width: 1366px;
+        margin-left: auto;
+        margin-right: auto;
+        @include themify {
+            color: themed('color-text-rest');
+            background-color: themed('color-bg-content');
+        }
+    }
+}

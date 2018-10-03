@@ -1,0 +1,168 @@
+@import '../../common/constants';
+@import '../../common/mixins';
+@import '../../common/color.controls';
+
+$date-picker-dropdown-width: 65*$grid-size;
+
+$line-height-text: 5*$grid-size;
+$line-height-icon: 4*$grid-size;
+
+$calendar-z-index: 9 * $z-index-large-step + 5 * $z-index-medium-step;
+
+$calc-margin: 5px;
+
+.date-picker-container {
+    @include md-box(relative);
+    width: 100%;
+    font-family: $font-family-default;
+    @include themify{
+        color: themed('color-text-rest');
+    }
+    font-size: $font-family-default;
+    line-height: $line-height-text;
+
+    .date-picker-input-container {
+        @include md-box(block, relative);
+        flex-grow: 1;
+    }
+
+    .date-picker-input {
+        @include md-box(block, relative);
+        width: 100%;
+        height: 8*$grid-size;
+        padding: 2*$grid-size 8*$grid-size 2*$grid-size 3*$grid-size;
+        outline: none;
+
+        &:focus {
+            outline-offset: -1px;
+            @include themify{
+                outline: 1px dashed themed('color-border-focus');
+            }
+        }
+
+        @include themify{
+            border: 1px solid themed('color-border-rest');
+            background-color: themed('color-bg-input-rest');
+
+            &:hover {
+                border:  1px solid themed('color-border-selected');
+            }
+
+            &:active {
+                border:  1px solid themed('color-border-selected');
+            }
+        }
+
+        &:disabled {
+            @include themify{
+                color: themed('color-text-disabled');
+                background-color: themed('color-bg-input-disabled');
+                border: 1px solid themed('color-border-disabled');
+            }
+
+            &::placeholder {
+                @include themify{
+                    color: themed('color-text-disabled');
+                }
+            }
+        }
+
+        &::placeholder {
+            @include themify{
+                color: themed('color-text-placeholder');
+            }
+        }
+
+        &::selection {
+            @include themify{
+                color: themed('color-text-white');
+                background-color: themd('color-bg-item-selected');
+            }
+        }
+
+        &.error:not(:disabled) {
+            @include themify{
+                border: 1px solid themed('color-border-error');
+            }
+        }
+
+        &::-ms-clear {
+            display: none;
+        }
+
+        &:invalid {
+            box-shadow: none;
+        }
+    }
+
+    .date-picker-calendar-icon {
+        @include md-box(absolute);
+        font-size: $font-size-small;
+        line-height: $line-height-icon;
+        top: 0;
+        right: 0;
+        border: none;
+        background-color: transparent;
+
+        &:focus:not(:disabled) {
+            outline-offset: -2px;
+        }
+    }
+}
+
+.date-picker-dropdown {
+    padding-bottom: 2*$grid-size;
+    left: 0px;
+    width: $date-picker-dropdown-width;
+    display: inline-block;
+    z-index: $calendar-z-index;
+    position: absolute;
+
+    &:not(.above) {
+        top: calc(100% + 5px);
+    }
+
+    &.above {
+        bottom: calc(100% + 5px);
+    }
+
+
+    @include themify{
+        background-color: themed('color-bg-input-rest');
+        border: 1px solid themed('color-border-selected');
+        :global(.md-dropdown-container) & {
+            background-color: themed('color-bg-input-rest');
+            border: 1px solid themed('color-border-selected');
+        }
+    }
+
+    .date-picker-dropdown-triangle {
+        @include md-box(block, absolute);
+        width: 2*$grid-size;
+        height: 2*$grid-size;
+        left: 4*$grid-size;
+    }
+
+    &:not(.above) .date-picker-dropdown-triangle {
+        bottom: calc(100% - 3px);
+
+        @include themify{
+            background-color: themed('color-bg-input-rest');
+            border-left: 1px solid themed('color-border-selected');
+            border-top: 1px solid themed('color-border-selected');
+        }
+        transform: rotateZ(45deg);
+    }
+
+    &.above .date-picker-dropdown-triangle {
+        top: calc(100% - 3px);
+
+        @include themify{
+            background-color: themed('color-bg-input-rest');
+            border-right: 1px solid themed('color-border-selected');
+            border-bottom: 1px solid themed('color-border-selected');
+        }
+        transform: rotateZ(45deg);
+    }
+}
+

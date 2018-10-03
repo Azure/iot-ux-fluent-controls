@@ -1,0 +1,107 @@
+@import '../../common/constants';
+@import '../../common/mixins';
+@import '../../common/color.controls';
+
+$management-list-column-basis: 25*$grid-size;
+$management-list-row-height: 12*$grid-size;
+$management-list-select-all-width: 8*$grid-size;
+
+$line-height-small: 4*$grid-size;
+$line-height-sort: 3*$grid-size;
+
+.list-container {
+    @include md-box(flex, relative);
+    width: 100%;
+
+    .column {
+        @include md-box(block, relative);
+        flex-basis: $management-list-column-basis;
+        
+        &.auto-width {
+            flex-grow: 1;
+            flex-shrink: 0;
+        }
+        
+        &.checkbox {
+            flex: 0 0 $management-list-select-all-width;
+        }
+        
+        &:first-child {
+            .column-header {
+                padding-left: 5*$grid-size;
+            }
+
+            .column-content {
+                padding-left: 5*$grid-size;
+            }
+        }
+        
+        .column-header {
+            @include md-box(block, relative);
+            @include md-button-reset();
+            
+            font-family: $font-family-din-regular;
+            font-size: $font-size-small;
+            line-height: $line-height-small;
+            @include themify {
+                color: themed('color-text-rest');
+            }
+            
+            padding-top: 2*$grid-size;
+            padding-right: 5*$grid-size;
+            vertical-align: bottom;            
+
+            white-space: nowrap;
+            
+            &.checkbox {
+                padding-right: 3*$grid-size;            
+            }
+
+            .checkbox-empty {
+                height: $line-height-small;
+            }
+
+            &.checkbox-empty {
+                cursor: initial;
+            }
+
+            .sort-direction::before {
+                line-height: $line-height-sort;
+                margin-left: 2*$grid-size;
+            }
+        }
+
+        .column-content {
+            @include md-box(inline-block, relative);
+            font-family: $font-family-default;
+            font-size: $font-size-default;
+            line-height: $line-height-small;
+            @include themify {
+                color: themed('color-text-rest');
+                background-color: themed('color-bg-table');
+            }
+
+            vertical-align: bottom;
+
+            width: 100%;
+            height: $management-list-row-height;
+            padding-top: 4*$grid-size;
+            padding-right: 5*$grid-size;
+            margin-top: 2*$grid-size;
+            
+            white-space: nowrap;
+
+            &:first-child {
+                padding-left: 5*$grid-size;
+            }
+
+            &.checkbox {
+                padding-right: 3*$grid-size;
+            }
+        }
+
+        .select-all-label {
+            display: none;
+        }
+    }
+}
