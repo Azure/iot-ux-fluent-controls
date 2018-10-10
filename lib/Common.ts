@@ -137,7 +137,7 @@ export class MethodDate {
             this.dateObject.setFullYear(year); // Force 2 digit year to be set correctly
         } else {
             let today = new Date();
-            this.dateObject = new Date(0, 0, 0, hours, minutes, seconds);
+            this.dateObject = new Date();
             this.dateObject.setFullYear(today.getFullYear());
             this.dateObject.setMonth(today.getMonth());
             this.dateObject.setDate(today.getDate());
