@@ -1,9 +1,13 @@
 # CHANGELOG
 
-## v4.0.8
+## v4.0.9
 ### Fixed
 - Handling built-in browser validation for inputs
 - Handling dash and period in number inputs
+
+## v4.0.8
+### Fixed
+- DateTimeField accepts empty string and renders placeholder.
 
 ## v4.0.7
 ### Fixed
