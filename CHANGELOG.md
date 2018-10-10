@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v4.0.9
+### Fixed
+- Calendar component would choose current time first time you are selecting a date. Now defaults to 12:00 AM local
+
 ## v4.0.8
 ### Fixed
 - DateTimeField accepts empty string and renders placeholder.
