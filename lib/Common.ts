@@ -136,7 +136,14 @@ export class MethodDate {
             }
             this.dateObject.setFullYear(year); // Force 2 digit year to be set correctly
         } else {
-            this.dateObject = new Date();
+            let today = new Date();
+            this.dateObject = new Date(0, 0, 0, hours, minutes, seconds);
+            this.dateObject.setFullYear(today.getFullYear());
+            this.dateObject.setMonth(today.getMonth());
+            this.dateObject.setDate(today.getDate());
+            this.dateObject.setHours(hours);
+            this.dateObject.setMinutes(minutes);
+            this.dateObject.setSeconds(seconds);
         }
 
         this.localTimezone = localTimezone;
