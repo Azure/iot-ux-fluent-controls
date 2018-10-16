@@ -11,6 +11,7 @@ describe('<ActionTrigger />', () => {
             className='test-class-name'
         />);
 
-        expect(wrapper.getDOMNode().classList).to.contain('.test-class-name');
+
+        expect(wrapper.hasClass('test-class-name')).to.equal(true);
     });
 });
