@@ -7,7 +7,7 @@
     "scripts": {
         "build": "tsc",
         "watch": "tsc --watch",
-        "test": "mocha --opts ./mocha.opts",
+        "test": "nyc mocha --opts ./mocha.opts",
         "tslint": "tslint './lib/**/*.ts{,x}'",
         "sasslint": "sass-lint -c .sass-lint.yml 'lib/**/*.scss' -v -q",
         "docs": "styleguidist server",
@@ -39,7 +39,6 @@
         "babel-preset-es2015": "^6.24.0",
         "chai": "^4.2.0",
         "chai-enzyme": "^0.8.0",
-        "cheerio": "^1.0.0-rc.1",
         "classnames": "^2.2.5",
         "copyfiles": "^1.2.0",
         "css-loader": "^0.28.5",
