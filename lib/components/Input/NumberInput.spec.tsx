@@ -1,42 +1,47 @@
 import * as React from 'react';
 import * as sinon from 'sinon';
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { NumberInput } from './NumberInput';
-import { TextInputAttributes } from './TextInput';
-import { keyCode } from '../../Common';
-// import { TestHookWrapper } from '../../common/testHookWrapper.spec';
 import { describe, it } from 'mocha';
 
 describe('<NumberInput />', () => {
-    it('handles null case', () => {
-        // let value = '';
-        // const onChange = (newValue) => value = newValue;
-        // const wrapper = new TestHookWrapper<TextInputAttributes>(
-        //     <NumberInput
-        //         name='combo-input'
-        //         initialValue=''
-        //         onChange={onChange}
-        //     />,
-        //     ['container', 'input']
-        // );
+    it('should pass null through change call back when input is empty', () => {
+        const onChange = sinon.spy();
+        const wrapper = mount(<NumberInput
+            name='combo-input'
+            initialValue='3'
+            onChange={onChange}
+        />);
 
-        // const input = wrapper.ref('input');
+        wrapper.find('input').simulate('change', { target: { value: '' } });
+        expect(onChange.called).to.equal(true);
+        expect(onChange.firstCall.args[0]).to.equal(null);
+    });
 
-        // input.input('1');
-        // expect(input.value).to.equal('1');
-        // expect(value).to.equal(1);
+    it('should return a number when a number is input', () => {
+        const onChange = sinon.spy();
+        const wrapper = mount(<NumberInput
+            name='combo-input'
+            initialValue=''
+            onChange={onChange}
+        />);
 
-        // input.input('');
-        // expect(input.value).to.equal('');
-        // expect(value).to.equal(null);
+        wrapper.find('input').simulate('change', { target: { value: '3' } });
+        expect(onChange.called).to.equal(true);
+        expect(onChange.firstCall.args[0]).to.equal(3);
+    });
 
-        // input.input('1');
-        // expect(input.value).to.equal('1');
-        // expect(value).to.equal(1);
+    it('should return invalid when input is not a number or empty', () => {
+        const onChange = sinon.spy();
+        const wrapper = mount(<NumberInput
+            name='combo-input'
+            initialValue=''
+            onChange={onChange}
+        />);
 
-        // input.input('2');
-        // expect(input.value).to.equal('2');
-        // expect(value).to.equal(2);
+        wrapper.find('input').simulate('change', { target: { value: 'foo' } });
+        expect(onChange.called).to.equal(true);
+        expect(onChange.firstCall.args[0]).to.equal('invalid');
     });
 });
