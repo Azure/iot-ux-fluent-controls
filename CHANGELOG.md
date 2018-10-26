@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v4.next
+### Fixed
+- unit tests were not running
+- removed unused dependencies
+
 ## v4.0.8
 ### Fixed
 - DateTimeField accepts empty string and renders placeholder.

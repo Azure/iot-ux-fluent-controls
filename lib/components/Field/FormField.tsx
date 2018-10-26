@@ -1,17 +1,12 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, LabelProps, Elements as Attr} from '../../Attributes';
-import {MethodNode} from '../../Common';
+import {DivProps,  Elements as Attr} from '../../Attributes';
+import {MethodNode, keyCode} from '../../Common';
 import {HorizontalLoader} from '../Loader';
 import {FormLabel, FormLabelAttributes} from './FormLabel';
-import {FormError, FormErrorAttributes} from './FormError';
+import {FormError} from './FormError';
 import { BalloonPosition, BalloonAlignment } from '../Balloon';
 const css = classNames.bind(require('./Field.scss'));
-
-const keyCodes = {
-    Escape: 27,
-    F1: 112
-};
 
 export interface FormFieldType {}
 
@@ -88,14 +83,14 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
 
     handleKeyDown(e: React.KeyboardEvent<any>) {
         // if user pressed Alt + F1 open the tooltip
-        if (e.altKey && e.keyCode === keyCodes.F1) {
+        if (e.altKey && e.keyCode === keyCode.f1) {
             this.setState({
                 tooltipVisible: true
             });
             e.preventDefault();
             e.stopPropagation();
         // if the user pressed escape key, close the tooltip
-        } else if (e.keyCode === keyCodes.Escape) {
+        } else if (e.keyCode === keyCode.escape) {
             this.setState({
                 tooltipVisible: false
             });

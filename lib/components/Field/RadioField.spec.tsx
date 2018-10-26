@@ -1,15 +1,9 @@
 import * as React from 'react';
 import * as sinon from 'sinon';
-import * as classNames from 'classnames/bind';
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { RadioField } from './RadioField';
-import { RadioInputAttributes } from '../Input/RadioInput';
-import { keyCode } from '../../Common';
-import { TestHookWrapper } from '../../common/testHookWrapper.spec';
 import { describe, it } from 'mocha';
-
-const css = classNames.bind(require('../Input/RadioInput.scss'));
 
 describe('<RadioField />', () => {
     it('passes attributes from props.options', () => {
@@ -24,7 +18,7 @@ describe('<RadioField />', () => {
                 }
             };
         };
-        const wrapper = new TestHookWrapper<RadioInputAttributes>(
+        const wrapper = mount(
             <RadioField
                 name='radio-field'
                 value='Option 1'
@@ -40,16 +34,12 @@ describe('<RadioField />', () => {
                     ]
                 }
                 onChange={onChange}
-            />,
-            []
+            />
         );
 
-        expect(wrapper.find('test-radio-1').first().hasClass('test-radio-1')).to.equal(true);
-        expect(wrapper.find('test-radio-1').first().hasClass('test-radio-6')).to.equal(false);
-        expect(wrapper.find('test-radio-1').first().hasClass(css('radio-button'))).to.equal(true);
-
-        expect(wrapper.find('test-radio-6').first().hasClass('test-radio-6')).to.equal(true);
-        expect(wrapper.find('test-radio-6').first().hasClass('test-radio-1')).to.equal(false);
-        expect(wrapper.find('test-radio-6').first().hasClass(css('radio-button'))).to.equal(true);
+        expect(wrapper.find('.test-radio-1.test-radio-6').exists()).to.equal(false);
+        expect(wrapper.find('.test-radio-1').exists()).to.equal(true);
+        expect(wrapper.find('input#radio-field_4').props()).to.contain({'disabled': true});
+        expect(wrapper.find('input#radio-field_3').props()).to.contain({'hidden': true});
     });
 });

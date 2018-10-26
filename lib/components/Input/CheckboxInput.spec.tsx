@@ -1,17 +1,14 @@
 import * as React from 'react';
 import * as sinon from 'sinon';
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { CheckboxInput } from './CheckboxInput';
-import {TestHookWrapper} from '../../common/testHookWrapper.spec';
-import { xdescribe, it } from 'mocha';
+import { describe, it } from 'mocha';
 
-xdescribe('CheckboxInput', () => {
-
-
+describe('CheckboxInput', () => {
     it('should support data test hooks through the Attribute API', () => {
         const onChange = sinon.spy();
-        const wrapper = new TestHookWrapper(<CheckboxInput
+        const wrapper = mount(<CheckboxInput
             name='checkbox-input'
             label='Checkbox Label'
             onChange={onChange}
@@ -23,7 +20,7 @@ xdescribe('CheckboxInput', () => {
             }}
         />);
 
-        wrapper.find('checkbox').simulate('click');
+        wrapper.find('input').simulate('change');
 
         expect(onChange.called).to.equal(true);
     });

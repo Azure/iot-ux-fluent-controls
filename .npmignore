@@ -17,3 +17,6 @@ webpack.*.js
 *.tsx
 *.ts
 !*.d.ts
+
+.nyc_output/
+coverage/

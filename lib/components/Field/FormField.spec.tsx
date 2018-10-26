@@ -1,16 +1,15 @@
 import * as React from 'react';
-import * as sinon from 'sinon';
-import * as classNames from 'classnames/bind';
-import { expect, assert } from 'chai';
+import { expect } from 'chai';
 import { mount } from 'enzyme';
-import FormField, { FormFieldProps } from './FormField';
-import { keyCode } from '../../Common';
-import { TestHookWrapper } from '../../common/testHookWrapper.spec';
+import FormField from './FormField';
 import { describe, it } from 'mocha';
+import { keyCode } from '../../Common';
 
 describe('Form Field Component', () => {
-    it('should toggle tool tip when alt + f1 is pressed', () => {
-        const wrapper = new TestHookWrapper<FormFieldProps>(
+    let wrapper;
+
+    beforeEach(() => {
+        wrapper = mount(
             <FormField
                 name='test-field'
                 tooltip='test tooltip'
@@ -24,77 +23,30 @@ describe('Form Field Component', () => {
                     }
                 }}
             >
-                <div>empty</div>
-            </FormField>,
-            ['children']
-        )
+                <input id='test-field' type='text' />
+            </FormField>
+        );
+    });
 
-        expect(wrapper.state.tooltipVisible).to.equal(false);
-
-        wrapper.ref('children').keyDown(111, {altKey: true});
-
-        expect(wrapper.state.tooltipVisible).to.equal(true);
+    it('should toggle tool tip when alt + f1 is pressed', () => {
+        expect(wrapper.instance().state.tooltipVisible).to.equal(false);
+        wrapper.find('#test-field').simulate('keyDown', { keyCode: keyCode.f1, altKey: true });
+        expect(wrapper.instance().state.tooltipVisible).to.equal(true);
     });
 
     it('should untoggle tool tip when alt + f1 is pressed and then escape is pressed', () => {
-        const wrapper = new TestHookWrapper<FormFieldProps>(
-            <FormField
-                name='test-field'
-                tooltip='test tooltip'
-                attr={{
-                    fieldLabel: {
-                        balloon: {
-                            balloonContent: {
-                                id: 'abc123'
-                            }
-                        }
-                    }
-                }}
-            >
-                <div>empty</div>
-            </FormField>,
-            ['children']
-        )
-
-        expect(wrapper.state.tooltipVisible).to.equal(false);
-
-        wrapper.ref('children').keyDown(111, {altKey: true});
-
-        expect(wrapper.state.tooltipVisible).to.equal(true);
-
-        wrapper.ref('children').keyDown('escape');
-
-        expect(wrapper.state.tooltipVisible).to.equal(false);
+        expect(wrapper.instance().state.tooltipVisible).to.equal(false);
+        wrapper.find('#test-field').simulate('keyDown', { keyCode: keyCode.f1, altKey: true });
+        expect(wrapper.instance().state.tooltipVisible).to.equal(true);
+        wrapper.find('#test-field').simulate('keyDown', { keyCode: keyCode.escape });
+        expect(wrapper.instance().state.tooltipVisible).to.equal(false);
     });
 
     it('should leave tooltip toggled when any key other than escape is pressed', () => {
-        const wrapper = new TestHookWrapper<FormFieldProps>(
-            <FormField
-                name='test-field'
-                tooltip='test tooltip'
-                attr={{
-                    fieldLabel: {
-                        balloon: {
-                            balloonContent: {
-                                id: 'abc123'
-                            }
-                        }
-                    }
-                }}
-            >
-                <div>empty</div>
-            </FormField>,
-            ['children']
-        )
-
-        expect(wrapper.state.tooltipVisible).to.equal(false);
-
-        wrapper.ref('children').keyDown(111, {altKey: true});
-
-        expect(wrapper.state.tooltipVisible).to.equal(true);
-
-        wrapper.ref('children').keyDown(35);
-
-        expect(wrapper.state.tooltipVisible).to.equal(true);
+        expect(wrapper.instance().state.tooltipVisible).to.equal(false);
+        wrapper.find('#test-field').simulate('keyDown', { keyCode: keyCode.f1, altKey: true });
+        expect(wrapper.instance().state.tooltipVisible).to.equal(true);
+        wrapper.find('#test-field').simulate('keyDown', { keyCode: 35 });
+        expect(wrapper.instance().state.tooltipVisible).to.equal(true);
     });
 });
