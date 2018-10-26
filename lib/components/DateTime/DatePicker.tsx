@@ -307,7 +307,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         } else {
             let result = this.parse(newValue);
             if (result.valid) {
-                const isLocal = !!this.props.localTimezone;
                 const initialValue = this.state.initialValue;
                 const dateValue = new MethodDate(
                     this.props.localTimezone,

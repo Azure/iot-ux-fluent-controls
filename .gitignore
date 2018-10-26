@@ -3,3 +3,5 @@ lib/**/*.d.ts
 dist/
 node_modules/
 static/
+.nyc_output/
+coverage/

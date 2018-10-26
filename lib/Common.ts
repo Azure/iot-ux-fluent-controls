@@ -64,7 +64,8 @@ export const keyCode: KeyCode = {
     period: 190,
     dash: 189,
     /** Firefox uses a different keycode for dashes (-) than other browsers... */
-    firefoxDash: 173
+    firefoxDash: 173,
+    f1: 112
 };
 
 export interface KeyCode {
@@ -93,6 +94,7 @@ export interface KeyCode {
     comma: number;
     dash: number;
     firefoxDash: number;
+    f1: number;
 }
 
 export const weekLength: number = 7;
@@ -319,9 +321,9 @@ export interface GridColumn<T> {
     defaultDirection?: SortDirection;
     /**
      * Width style to set on column div
-     * 
+     *
      * If a number is provided, it is used as a pixel value for 'flex-basis'
-     * 
+     *
      * If a string is provided, it is used as the value for 'flex'
      */
     width?: number;
