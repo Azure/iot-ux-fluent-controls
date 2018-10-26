@@ -3,9 +3,7 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import FormField from './FormField';
 import { describe, it } from 'mocha';
-
-const f1 = 112;
-const escape = 27;
+import { keyCode } from '../../Common';
 
 describe('Form Field Component', () => {
     let wrapper;
@@ -32,21 +30,21 @@ describe('Form Field Component', () => {
 
     it('should toggle tool tip when alt + f1 is pressed', () => {
         expect(wrapper.instance().state.tooltipVisible).to.equal(false);
-        wrapper.find('#test-field').simulate('keyDown', { keyCode: f1, altKey: true });
+        wrapper.find('#test-field').simulate('keyDown', { keyCode: keyCode.f1, altKey: true });
         expect(wrapper.instance().state.tooltipVisible).to.equal(true);
     });
 
     it('should untoggle tool tip when alt + f1 is pressed and then escape is pressed', () => {
         expect(wrapper.instance().state.tooltipVisible).to.equal(false);
-        wrapper.find('#test-field').simulate('keyDown', { keyCode: f1, altKey: true });
+        wrapper.find('#test-field').simulate('keyDown', { keyCode: keyCode.f1, altKey: true });
         expect(wrapper.instance().state.tooltipVisible).to.equal(true);
-        wrapper.find('#test-field').simulate('keyDown', { keyCode: escape });
+        wrapper.find('#test-field').simulate('keyDown', { keyCode: keyCode.escape });
         expect(wrapper.instance().state.tooltipVisible).to.equal(false);
     });
 
     it('should leave tooltip toggled when any key other than escape is pressed', () => {
         expect(wrapper.instance().state.tooltipVisible).to.equal(false);
-        wrapper.find('#test-field').simulate('keyDown', { keyCode: f1, altKey: true });
+        wrapper.find('#test-field').simulate('keyDown', { keyCode: keyCode.f1, altKey: true });
         expect(wrapper.instance().state.tooltipVisible).to.equal(true);
         wrapper.find('#test-field').simulate('keyDown', { keyCode: 35 });
         expect(wrapper.instance().state.tooltipVisible).to.equal(true);
