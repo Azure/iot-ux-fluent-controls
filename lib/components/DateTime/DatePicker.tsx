@@ -152,28 +152,14 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                     );
                 }
             } else if (typeof(props.initialValue) === 'string') {
-                const date = MethodDate.fromString(local, props.initialValue);
-                if (date && dateIsValid(date.dateObject, local)) {
+                const parsed = this.parse(props.initialValue);
+                if (parsed.valid) {
+                    console.log('valid');
+                    const date = new MethodDate(local, parsed.year, parsed.month - 1, parsed.date);
                     initialValue = date;
-                    const parsed = this.parse(currentValue);
-                    if (
-                        date.year !== parsed.year ||
-                        date.month !== (parsed.month - 1) ||
-                        date.date !== parsed.date ||
-                        !parsed.valid
-                    ) {
-                        /**
-                         * Here we use props.initialValue to set the value of the text box
-                         *
-                         * This happens if state.value is different from the new initialValue
-                         * or if the text input (state.value) is in an invalid state such as
-                         * empty values or invalid dates like febuary 30th (2/30/2017)
-                         */
-                        value = formatDate(date.dateObject, props.format, local);
-                    }
-                } else {
-                    value = props.initialValue;
                 }
+
+                value = props.initialValue;
             } else {
                 if (props.initialValue) {
                     value = formatDate(
@@ -268,13 +254,11 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         }
 
         if (valid) {
-            const hasVal = !!this.state.initialValue;
             let parsed = new MethodDate(
                 this.props.localTimezone,
-                year, month - 1, date,
-                hasVal ? this.state.initialValue.hours : 0,
-                hasVal ? this.state.initialValue.minutes : 0,
-                hasVal ? this.state.initialValue.seconds : 0,
+                year,
+                month - 1,
+                date
             );
             if (month !== parsed.month + 1 || date !== parsed.date) {
                 valid = false;

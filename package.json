@@ -11,7 +11,8 @@
         "tslint": "tslint './lib/**/*.ts{,x}'",
         "sasslint": "sass-lint -c .sass-lint.yml 'lib/**/*.scss' -v -q",
         "docs": "styleguidist server",
-        "docs:build": "styleguidist build"
+        "docs:build": "styleguidist build",
+        "prepublish": "npm run tslint && npm run test && npm run build"
     },
     "repository": {
         "type": "git",
