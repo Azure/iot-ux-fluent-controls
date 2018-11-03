@@ -6,7 +6,7 @@ import { DateFormat} from '../../Common';
 import { DatePicker} from './DatePicker';
 import { describe, it } from 'mocha';
 
-describe('DatePicker', () => {
+describe.only('DatePicker', () => {
     let clock;
     beforeEach(() => {
         clock = sinon.useFakeTimers();
@@ -20,31 +20,31 @@ describe('DatePicker', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
-            initialValue={'28/09/2017'}
+            initialValue={'2018-12-06T00:00:00.000Z'}
             format={DateFormat.DDMMYYYY}
             onChange={onChange}
         />);
 
-        expect(wrapper.instance().state.value).to.equal('28/09/2017');
+        expect(wrapper.instance().state.value).to.equal('2018-12-06T00:00:00.000Z');
     });
 
     it('should pass through initial value to text box when initial value is not a valid date', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
-            initialValue={'28/28/2017'}
+            initialValue={'2018-28-28T00:00:00.000Z'}
             format={DateFormat.DDMMYYYY}
             onChange={onChange}
         />);
 
-        expect(wrapper.instance().state.value).to.equal('28/28/2017');
+        expect(wrapper.instance().state.value).to.equal('2018-28-28T00:00:00.000Z');
     });
 
     it('should pass invalid through change callback when date value is garbage text', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
-            initialValue='Thu, 28 Sep 2017 17:28:40 GMT'
+            initialValue='2018-10-28T00:00:00.000Z'
             format={DateFormat.DDMMYYYY}
             onChange={onChange}
         />);
@@ -59,7 +59,7 @@ describe('DatePicker', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
-            initialValue='Thu, 28 Sep 2017 17:28:40 GMT'
+            initialValue='2018-10-28T00:00:00.000Z'
             format={DateFormat.DDMMYYYY}
             onChange={onChange}
         />);
@@ -74,7 +74,7 @@ describe('DatePicker', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
-            initialValue='Thu, 28 Sep 2017 17:28:40 GMT'
+            initialValue='2018-10-28T00:00:00.000Z'
             format={DateFormat.DDMMYYYY}
             onChange={onChange}
         />);
@@ -89,7 +89,7 @@ describe('DatePicker', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
-            initialValue='Thu, 28 Sep 2017 17:28:40 GMT'
+            initialValue='2018-10-28T00:00:00.000Z'
             format={DateFormat.DDMMYYYY}
             onChange={onChange}
         />);
@@ -176,7 +176,7 @@ describe('DatePicker', () => {
             name='date-picker'
             format={DateFormat.YYYYMMDD}
             onChange={onChange}
-            initialValue={'2018/09/28'}
+            initialValue={'2018-10-28T00:00:00.000Z'}
         />);
 
         const input = wrapper.find('.date-picker-input');
@@ -185,13 +185,13 @@ describe('DatePicker', () => {
         expect(onChange.firstCall.args[0]).to.equal('2018-09-29T07:00:00.000Z');
     });
 
-    it('should set time to midnight when initial value is not empty and localTimezone is false', () => {
+    it.only('should set time to midnight when initial value is not empty and localTimezone is false', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
             format={DateFormat.YYYYMMDD}
             onChange={onChange}
-            initialValue={'2018/09/28'}
+            initialValue={'2018-10-28T00:00:00.000Z'}
             localTimezone={false}
         />);
 
