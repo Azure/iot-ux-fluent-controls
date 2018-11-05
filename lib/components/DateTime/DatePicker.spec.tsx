@@ -6,7 +6,7 @@ import { DateFormat} from '../../Common';
 import { DatePicker} from './DatePicker';
 import { describe, it } from 'mocha';
 
-describe.only('DatePicker', () => {
+describe('DatePicker', () => {
     let clock;
     beforeEach(() => {
         clock = sinon.useFakeTimers();
@@ -176,7 +176,7 @@ describe.only('DatePicker', () => {
             name='date-picker'
             format={DateFormat.YYYYMMDD}
             onChange={onChange}
-            initialValue={'2018-10-28T00:00:00.000Z'}
+            initialValue={'2018-10-28T00:00:00.000'}
         />);
 
         const input = wrapper.find('.date-picker-input');
@@ -185,7 +185,7 @@ describe.only('DatePicker', () => {
         expect(onChange.firstCall.args[0]).to.equal('2018-09-29T07:00:00.000Z');
     });
 
-    it.only('should set time to midnight when initial value is not empty and localTimezone is false', () => {
+    it('should set time to midnight when initial value is not empty and localTimezone is false', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
