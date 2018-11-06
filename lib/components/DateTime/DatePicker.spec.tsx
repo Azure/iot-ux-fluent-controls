@@ -20,31 +20,31 @@ describe('DatePicker', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
-            initialValue={'2018-12-06T00:00:00.000Z'}
+            initialValue={'2018-12-06T00:00:00.000'}
             format={DateFormat.DDMMYYYY}
             onChange={onChange}
         />);
 
-        expect(wrapper.instance().state.value).to.equal('2018-12-06T00:00:00.000Z');
+        expect(wrapper.instance().state.value).to.equal('06/12/2018');
     });
 
     it('should pass through initial value to text box when initial value is not a valid date', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
-            initialValue={'2018-28-28T00:00:00.000Z'}
+            initialValue={'2018-28-28T00:00:00.000'}
             format={DateFormat.DDMMYYYY}
             onChange={onChange}
         />);
 
-        expect(wrapper.instance().state.value).to.equal('2018-28-28T00:00:00.000Z');
+        expect(wrapper.instance().state.value).to.equal('2018-28-28T00:00:00.000');
     });
 
     it('should pass invalid through change callback when date value is garbage text', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
-            initialValue='2018-10-28T00:00:00.000Z'
+            initialValue='2018-10-28T00:00:00.000'
             format={DateFormat.DDMMYYYY}
             onChange={onChange}
         />);
@@ -59,7 +59,7 @@ describe('DatePicker', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
-            initialValue='2018-10-28T00:00:00.000Z'
+            initialValue='2018-10-28T00:00:00.000'
             format={DateFormat.DDMMYYYY}
             onChange={onChange}
         />);
@@ -74,7 +74,7 @@ describe('DatePicker', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
-            initialValue='2018-10-28T00:00:00.000Z'
+            initialValue='2018-10-28T00:00:00.000'
             format={DateFormat.DDMMYYYY}
             onChange={onChange}
         />);
@@ -89,7 +89,7 @@ describe('DatePicker', () => {
         const onChange = sinon.spy();
         const wrapper = shallow(<DatePicker
             name='date-picker'
-            initialValue='2018-10-28T00:00:00.000Z'
+            initialValue='2018-10-28T00:00:00.000'
             format={DateFormat.DDMMYYYY}
             onChange={onChange}
         />);
