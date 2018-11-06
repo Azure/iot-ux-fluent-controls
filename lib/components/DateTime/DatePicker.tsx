@@ -153,8 +153,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 }
             } else if (typeof(props.initialValue) === 'string') {
                 const date = MethodDate.fromString(local, props.initialValue);
-                // will return null for invalid date
-                if (date) {
+                if (date && dateIsValid(date.dateObject, local)) {
                     initialValue = date;
                     const parsed = this.parse(currentValue);
                     if (
