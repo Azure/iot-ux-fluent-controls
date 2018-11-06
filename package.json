@@ -1,6 +1,6 @@
 {
     "name": "@microsoft/azure-iot-ux-fluent-controls",
-    "version": "4.0.8",
+    "version": "4.0.9",
     "description": "Azure IoT Fluent React Controls",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
@@ -60,6 +60,7 @@
         "react-hot-loader": "^4.1.0",
         "react-styleguidist": "^7.0.6",
         "react-test-renderer": "^16.3.2",
+        "request": "^2.88.0",
         "sass-lint": "^1.11.1",
         "sass-loader": "^6.0.6",
         "sinon": "^7.0.0",

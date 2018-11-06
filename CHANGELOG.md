@@ -5,6 +5,7 @@
 - Calendar component would choose current time first time you are selecting a date. Now defaults to 12:00 AM local
 - unit tests were not running
 - removed unused dependencies
+- updated max-width on buttons to be 100% of the parent width
 
 ## v4.0.8
 ### Fixed
