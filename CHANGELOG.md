@@ -3,6 +3,7 @@
 ## v4.0.9
 ### Fixed
 - Calendar component would choose current time first time you are selecting a date. Now defaults to 12:00 AM local
+- fix off by one issue with date picker
 - unit tests were not running
 - removed unused dependencies
 

@@ -153,11 +153,29 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 }
             } else if (typeof(props.initialValue) === 'string') {
                 const date = MethodDate.fromString(local, props.initialValue);
+                // will return null for invalid date
                 if (date) {
                     initialValue = date;
+                    const parsed = this.parse(currentValue);
+                    if (
+                        date.year !== parsed.year ||
+                        date.month !== (parsed.month - 1) ||
+                        date.date !== parsed.date ||
+                        !parsed.valid
+                    ) {
+                        /**
+                         * Here we use props.initialValue to set the value of the text box
+                         *
+                         * This happens if state.value is different from the new initialValue
+                         * or if the text input (state.value) is in an invalid state such as
+                         * empty values or invalid dates like febuary 30th (2/30/2017)
+                         */
+                        value = formatDate(date.dateObject, props.format, local);
+                    }
+                } else {
+                    value = props.initialValue;
                 }
 
-                value = props.initialValue;
             } else {
                 if (props.initialValue) {
                     value = formatDate(
