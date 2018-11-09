@@ -36,6 +36,8 @@ const initialState = {value: ''};
 </div>
 ```
 
+### utc time
+
 ```jsx
 const initialValue = 'Sep 20, 2010 07:00:00 GMT';
 const initialState = {value: ''};
@@ -47,6 +49,22 @@ const initialState = {value: ''};
         onChange={(newValue) => setState({value: newValue}) }
         initialValue={initialValue}
         localTimezone={false}
+    />
+</div>
+```
+
+### local time
+
+```jsx
+const initialValue = 'Sep 20, 2010 07:00:00 GMT';
+const initialState = {value: ''};
+
+<div>
+    <div>Current Value: {state.value}</div>
+    <DatePicker
+        name='date-picker'
+        onChange={(newValue) => setState({value: newValue}) }
+        initialValue={initialValue}
     />
 </div>
 ```

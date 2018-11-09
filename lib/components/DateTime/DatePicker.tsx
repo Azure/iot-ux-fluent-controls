@@ -447,6 +447,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                             className={css('date-picker-calendar')}
                             year={parsed.year || null}
                             month={parsed.month - 1}
+                            localTimezone={this.props.localTimezone}
                             locale={this.props.locale}
                             attr={this.props.attr.calendar}
                         />
