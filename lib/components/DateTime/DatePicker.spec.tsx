@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 import { DateFormat} from '../../Common';
 import { DatePicker} from './DatePicker';
 import { describe, it } from 'mocha';
+import { adjustForTimezone } from './helpers';
 
 describe('DatePicker', () => {
     let clock;
@@ -125,21 +126,7 @@ describe('DatePicker', () => {
         const input = wrapper.find('.date-picker-input');
         input.simulate('change', {target: {value: '28/09/2018'}});
         expect(onChange.called).to.equal(true);
-        expect(onChange.firstCall.args[0]).to.equal('2018-09-28T07:00:00.000Z');
-    });
-
-    it('should accept mm/dd/yyyy format as a valid input', () => {
-        const onChange = sinon.spy();
-        const wrapper = shallow(<DatePicker
-            name='date-picker'
-            format={DateFormat.MMDDYYYY}
-            onChange={onChange}
-        />);
-
-        const input = wrapper.find('.date-picker-input');
-        input.simulate('change', {target: {value: '09/28/2018'}});
-        expect(onChange.called).to.equal(true);
-        expect(onChange.firstCall.args[0]).to.equal('2018-09-28T07:00:00.000Z');
+        expect(adjustForTimezone(onChange.firstCall.args[0])).to.equal('2018-09-28T00:00:00.000Z'); 
     });
 
     it('should accept iso format as a valid input', () => {
@@ -153,7 +140,7 @@ describe('DatePicker', () => {
         const input = wrapper.find('.date-picker-input');
         input.simulate('change', {target: {value: '2018/09/28'}});
         expect(onChange.called).to.equal(true);
-        expect(onChange.firstCall.args[0]).to.equal('2018-09-28T07:00:00.000Z');
+        expect(adjustForTimezone(onChange.firstCall.args[0])).to.equal('2018-09-28T00:00:00.000Z');
     });
 
     it('should set time to midnight gmt + localoffest when initial value is empty', () => {
@@ -167,7 +154,7 @@ describe('DatePicker', () => {
         const input = wrapper.find('.date-picker-input');
         input.simulate('change', {target: {value: '2018/09/28'}});
         expect(onChange.called).to.equal(true);
-        expect(onChange.firstCall.args[0]).to.equal('2018-09-28T07:00:00.000Z');
+        expect(adjustForTimezone(onChange.firstCall.args[0])).to.equal('2018-09-28T00:00:00.000Z');
     });
 
     it('should set time to midnight gmt + localoffest when initial value is not empty', () => {
@@ -182,7 +169,7 @@ describe('DatePicker', () => {
         const input = wrapper.find('.date-picker-input');
         input.simulate('change', {target: {value: '2018/09/29'}});
         expect(onChange.called).to.equal(true);
-        expect(onChange.firstCall.args[0]).to.equal('2018-09-29T07:00:00.000Z');
+        expect(adjustForTimezone(onChange.firstCall.args[0])).to.equal('2018-09-29T00:00:00.000Z');
     });
 
     it('should set time to midnight when initial value is not empty and localTimezone is false', () => {

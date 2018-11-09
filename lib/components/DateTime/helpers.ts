@@ -52,3 +52,10 @@ export const getLocalMonths = (locale) => {
 
     return monthNames;
 };
+
+export const adjustForTimezone = (dateStr) => {
+    let date = new Date(dateStr);
+    let timeOffsetInMS = date.getTimezoneOffset() * 60000;
+    date.setTime(date.getTime() - timeOffsetInMS);
+    return date.toISOString();
+};
