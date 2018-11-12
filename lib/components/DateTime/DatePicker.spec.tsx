@@ -5,7 +5,13 @@ import { shallow } from 'enzyme';
 import { DateFormat} from '../../Common';
 import { DatePicker} from './DatePicker';
 import { describe, it } from 'mocha';
-import { adjustForTimezone } from './helpers';
+
+const adjustForTimezone = (dateStr) => {
+    let date = new Date(dateStr);
+    let timeOffsetInMS = date.getTimezoneOffset() * 60000;
+    date.setTime(date.getTime() - timeOffsetInMS);
+    return date.toISOString();
+};
 
 describe('DatePicker', () => {
     let clock;
