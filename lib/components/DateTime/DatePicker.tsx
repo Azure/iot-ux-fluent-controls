@@ -174,6 +174,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 } else {
                     value = props.initialValue;
                 }
+
             } else {
                 if (props.initialValue) {
                     value = formatDate(
@@ -268,13 +269,11 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         }
 
         if (valid) {
-            const hasVal = !!this.state.initialValue;
             let parsed = new MethodDate(
                 this.props.localTimezone,
-                year, month - 1, date,
-                hasVal ? this.state.initialValue.hours : 0,
-                hasVal ? this.state.initialValue.minutes : 0,
-                hasVal ? this.state.initialValue.seconds : 0,
+                year,
+                month - 1,
+                date
             );
             if (month !== parsed.month + 1 || date !== parsed.date) {
                 valid = false;
@@ -448,6 +447,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                             className={css('date-picker-calendar')}
                             year={parsed.year || null}
                             month={parsed.month - 1}
+                            localTimezone={this.props.localTimezone}
                             locale={this.props.locale}
                             attr={this.props.attr.calendar}
                         />

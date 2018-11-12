@@ -76,7 +76,7 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     /**
      * callback for clicking calendar icon
      */
-    onExpand?: (expanded: boolean) => void
+    onExpand?: (expanded: boolean) => void;
 
     attr?: DateTimeFieldAttributes & FormFieldAttributes;
 }
