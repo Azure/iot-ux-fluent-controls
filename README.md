@@ -1,4 +1,32 @@
-# Azure IoT React Controls
+# Azure IoT UX Fluent Controls
+
+This project contains common React controls (Form Inputs, DateTime etc.) that match the Azure IoT Fluent design.
+
+# Get started
+```
+npm install --save @microsoft/azure-iot-ux-fluent-controls
+```
+
+# Quick overview
+The full documentation and sample code for the controls is available at https://aka.ms/iotfluentcontrols, but in general, the pattern is:
+
+```tsx
+import { DateField } from '@microsoft/azure-iot-ux-fluent-controls';
+const initialState = {value: 'Sep 20, 2010 07:00:00 GMT'};
+
+<div>
+    <div style={{marginBottom: '20px'}}>
+        Current Value: {state.value}
+    </div>
+    <DateField
+        name='date-picker'
+        label='Default Example (Local)'
+        onChange={(newValue) => setState({value: newValue}) }
+        initialValue={state.value}
+    />
+</div>
+```
+![Image of DateField control](https://i.imgur.com/KAT2EBf.jpg)
 
 ## Contributing
 

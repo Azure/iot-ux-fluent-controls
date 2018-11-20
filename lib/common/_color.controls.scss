@@ -1,15 +1,7 @@
-// The 'colors' file is injected by webpack during build time. The following snippet inside
-// the webpack.config specifies the location of the file:
-//
-//   {
-//      loader: 'sass-loader',
-//      options: {
-//          includePaths: path.resolve(`./template/src/styles`)
-//      }
-//   }
-//
-// This will import './template/src/styles/colors' to be available as 'colors'. This allows
-// the app to specify one color override file for both the controls and the app. Please
-// see https://github.com/webpack-contrib/sass-loader for further documentation.
-
+// Import the colors specified at <project root>/src/styles/_colors.scss.
+// This allows each project to override or extend the colors specified in
+// @microsoft/azure-iot-ux-fluent-css and have it apply to the controls seamlessly.
+// If we take a direct dependency on the css library here, the per-project
+// customization won't be reflected in the controls.
+// To access the project root, start from '~' (the node_modules folder) and move up:
 @import '~/../src/styles/colors';

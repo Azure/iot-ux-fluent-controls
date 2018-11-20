@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## v5.0.0
+### Changed
+- Dependency on a `_colors.scss` existing at the global scope (resolved via webpack `includePath`).
+
+  The controls library now requires the file to exist at `<project root>/src/styles/_colors.scss`. This convention allows the library to be used with an out-of-the-box [create-react-app](https://github.com/facebook/create-react-app) install without ejecting. See the [Azure IoT UX Baseline](https://github.com/Azure/iot-ux-baseline) for an example.
+
+  For ease of use, this file will be automatically created on postinstall if it doesn't already exist.
+
+
 ## v4.0.9
 ### Fixed
 - Calendar component would choose current time first time you are selecting a date. Now defaults to 12:00 AM local

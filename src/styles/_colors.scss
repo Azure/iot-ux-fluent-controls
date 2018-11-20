@@ -1,2 +1,22 @@
-// finally, import the default colors:
+// WARNING: DO NOT MOVE THIS FILE!
+// The @microsoft/azure-iot-ux-fluent-controls library requires a _colors.scss to
+// exist at the <project root>/src/styles/. This allows each project to override or
+// extend the colors specified in @microsoft/azure-iot-ux-fluent-css and have them
+// apply to the controls seamlessly. The following code demonstrates this pattern:
+
+    // // first import the color palette:
+    // @import "~@microsoft/azure-iot-ux-fluent-css/src/color.palette";
+    // // specify overrides/extensions for the themes:
+    // $theme-dark: (
+    //     color-bg-header: $color-grey-1200,
+    //     color-bg-content: #3d4147,
+    //     color-text-header: $color-white,
+    // );
+
+    // $theme-light: (
+    //     color-bg-header: $color-grey-800,
+    //     color-text-header: $color-white,
+    // );
+
+// as a final step, import the default colors (this will preserve any overrides specified above):
 @import "~@microsoft/azure-iot-ux-fluent-css/src/colors";
