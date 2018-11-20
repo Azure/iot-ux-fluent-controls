@@ -1,6 +1,6 @@
 {
     "name": "@microsoft/azure-iot-ux-fluent-controls",
-    "version": "4.0.9",
+    "version": "5.0.0-alpha.1",
     "description": "Azure IoT Fluent React Controls",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
@@ -12,7 +12,8 @@
         "sasslint": "sass-lint -c .sass-lint.yml 'lib/**/*.scss' -v -q",
         "docs": "styleguidist server",
         "docs:build": "styleguidist build",
-        "prepublish": "npm run tslint && npm run test && npm run build"
+        "postinstall": "node ./lib/scripts/postinstall.js",
+        "prepublishOnly": "npm run tslint && npm run test && npm run build"
     },
     "repository": {
         "type": "git",

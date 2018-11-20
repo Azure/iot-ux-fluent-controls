@@ -8,8 +8,8 @@
 //      }
 //   }
 //
-// This will import './template/src/styles/colors' to be available as 'colors'. This allows 
+// This will import './template/src/styles/colors' to be available as 'colors'. This allows
 // the app to specify one color override file for both the controls and the app. Please
 // see https://github.com/webpack-contrib/sass-loader for further documentation.
 
-@import 'colors';
+@import '~/../src/styles/colors';
