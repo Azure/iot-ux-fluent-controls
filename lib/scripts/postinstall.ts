@@ -19,16 +19,20 @@ async function notExists(p: string) {
 }
 
 async function main() {
-    if (await notExists('./src/')) {
-        await mkdir('./src/');
+    const projectRoot = process.env.INIT_CWD;
+    const srcFolder = path.resolve(projectRoot, 'src');
+    if (await notExists(srcFolder)) {
+        await mkdir(srcFolder);
     }
 
-    if (await notExists('./src/styles/')) {
-        await mkdir('./src/styles/');
+    const srcStylesFolder = path.resolve(srcFolder, 'styles');
+    if (await notExists(srcStylesFolder)) {
+        await mkdir(srcStylesFolder);
     }
 
-    if (await notExists('./src/styles/_colors.scss')) {
-        await copyFile(path.resolve(__dirname, '../../src/styles/_colors.scss'), './src/styles/_colors.scss');
+    const srcStylesColorsFile = path.resolve(srcStylesFolder, '_colors.scss');
+    if (await notExists(srcStylesColorsFile)) {
+        await copyFile(path.resolve(__dirname, '../../src/styles/_colors.scss'), srcStylesColorsFile);
     }
 }
 
