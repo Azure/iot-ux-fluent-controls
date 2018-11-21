@@ -1,7 +1,7 @@
 {
     "name": "@microsoft/azure-iot-ux-fluent-controls",
-    "version": "4.0.9",
-    "description": "Azure IoT Fluent React Controls",
+    "version": "5.0.0",
+    "description": "Azure IoT UX Fluent Controls",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
     "scripts": {
@@ -12,13 +12,16 @@
         "sasslint": "sass-lint -c .sass-lint.yml 'lib/**/*.scss' -v -q",
         "docs": "styleguidist server",
         "docs:build": "styleguidist build",
-        "prepublish": "npm run tslint && npm run test && npm run build"
+        "postinstall": "node ./lib/scripts/postinstall.js",
+        "prepublishOnly": "npm run tslint && npm run test && npm run build"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/Azure/iot-ux-fluent-controls/issues"
+        "url": "https://github.com/Azure/iot-ux-fluent-controls.git"
     },
-    "author": "",
+    "homepage": "https://github.com/Azure/iot-ux-fluent-controls#readme",
+    "bugs": "https://github.com/Azure/iot-ux-fluent-controls/issues",
+    "author": "Azure IoT",
     "license": "MIT",
     "engines": {
         "node": ">=8"

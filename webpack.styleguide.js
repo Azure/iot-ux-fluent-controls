@@ -45,14 +45,6 @@ module.exports = {
           },
           {
             loader: 'sass-loader',
-            options: {
-              includePaths: [
-                path.resolve(
-                  __dirname,
-                  'node_modules/@microsoft/azure-iot-ux-fluent-css/src/'
-                ),
-              ],
-            },
           },
         ],
       },
