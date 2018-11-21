@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v5.0.1
+## Changed
+- Rename all component `.scss` files to `.module.scss` to align with [Create React App's convention for CSS modules](https://facebook.github.io/create-react-app/docs/adding-a-css-modules-stylesheet). This is a purely internal change and does not affect public consumption of the controls.
+
 ## v5.0.0
 ### Changed
 - Dependency on a `_colors.scss` existing at the global scope (resolved via webpack `includePath`).
