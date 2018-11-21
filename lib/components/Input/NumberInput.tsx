@@ -6,7 +6,7 @@ import { TextInput, TextInputAttributes } from './TextInput';
 import { MethodNode, keyCode } from '../../Common';
 import { describe, it } from 'mocha';
 
-const css = classNames.bind(require('./TextInput.scss'));
+const css = classNames.bind(require('./TextInput.module.scss'));
 
 export interface NumberInputType { }
 

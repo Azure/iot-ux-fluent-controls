@@ -6,7 +6,7 @@ import { FormField, FormFieldAttributes } from '../Field/FormField';
 import { TimeInput, TimeInputAttributes } from './TimeInput';
 import { DatePicker, DatePickerAttributes } from './DatePicker';
 import { DivProps, SpanProps, Elements as Attr } from '../../Attributes';
-const css = classNames.bind(require('./DateTimeField.scss'));
+const css = classNames.bind(require('./DateTimeField.module.scss'));
 
 export interface DateTimeFieldType { }
 

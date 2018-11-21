@@ -5,7 +5,7 @@ import {DivProps, ButtonProps, Elements as Attr, OptionAttr, mergeAttributes, me
 import {Icon, IconAttributes} from '../Icon';
 import {MethodNode, GridColumn, SortDirection} from '../../Common';
 import {CheckboxInput, CheckboxInputAttributes} from '../Input/CheckboxInput';
-const css = classNames.bind(require('./GenericManagementList.scss'));
+const css = classNames.bind(require('./GenericManagementList.module.scss'));
 
 export interface GenericManagementListComponentType {}
 

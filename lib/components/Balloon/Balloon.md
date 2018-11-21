@@ -137,7 +137,7 @@ let tooltip = 'This is a simple balloon!';
 ```jsx
 let Icon = require('../Icon').Icon;
 const classnames = require('classnames/bind');
-const css = classnames.bind(require('../../../docs/css/Balloon.scss'));
+const css = classnames.bind(require('../../../docs/css/Balloon.module.scss'));
 
 let tooltip = (
     <span>
@@ -155,7 +155,7 @@ let tooltip = (
 ```jsx
 let Icon = require('../Icon').Icon;
 const classnames = require('classnames/bind');
-const css = classnames.bind(require('../../../docs/css/Balloon.scss'));
+const css = classnames.bind(require('../../../docs/css/Balloon.module.scss'));
 
 let tooltip = (
     <span>
@@ -173,7 +173,7 @@ let tooltip = (
 ```jsx
 let Icon = require('../Icon').Icon;
 const classnames = require('classnames/bind');
-const css = classnames.bind(require('../../../docs/css/Balloon.scss'));
+const css = classnames.bind(require('../../../docs/css/Balloon.module.scss'));
 
 let tooltip = (
     <span>
@@ -191,7 +191,7 @@ let tooltip = (
 ```jsx
 let Icon = require('../Icon').Icon;
 const classnames = require('classnames/bind');
-const css = classnames.bind(require('../../../docs/css/Balloon.scss'));
+const css = classnames.bind(require('../../../docs/css/Balloon.module.scss'));
 let tooltip = (
     <span>
         This is a simple balloon!
@@ -208,7 +208,7 @@ let tooltip = (
 ```jsx
 let Icon = require('../Icon').Icon;
 const classnames = require('classnames/bind');
-const css = classnames.bind(require('../../../docs/css/Balloon.scss'));
+const css = classnames.bind(require('../../../docs/css/Balloon.module.scss'));
 
 let tooltip = (
     <span>

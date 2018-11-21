@@ -4,7 +4,7 @@ import {OptionAttr, OptionProps} from '../../Attributes';
 import {MethodNode, FormOption} from '../../Common';
 import {SelectInput, SelectInputAttributes} from '../Input/SelectInput';
 import {FormField, FormFieldAttributes} from './FormField';
-const css = classNames.bind(require('./Field.scss'));
+const css = classNames.bind(require('./Field.module.scss'));
 
 export interface SelectFieldType {}
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, Elements as Attr} from '../../Attributes';
-const css = classNames.bind(require('./Icon.scss'));
+const css = classNames.bind(require('./Icon.module.scss'));
 
 export interface IconBackgroundType {}
 
@@ -17,7 +17,7 @@ export interface IconBackgroundProps extends React.Props<IconBackgroundType> {
     diameter: number;
     /** Center vertically and horizontally in parent element */
     centered?: boolean;
-    
+
     /** Classname to append to top level element */
     className?: string;
 
@@ -26,7 +26,7 @@ export interface IconBackgroundProps extends React.Props<IconBackgroundType> {
 
 /**
  * Background circle for Icons
- * 
+ *
  * @param props Control properties (Defined by `IconBackgroundProps` interface)
  */
 export const IconBackground: React.StatelessComponent<IconBackgroundProps> = (props: IconBackgroundProps) => {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, InputProps, LabelProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
-const css = classNames.bind(require('./RadioInput.scss'));
+const css = classNames.bind(require('./RadioInput.module.scss'));
 
 export interface RadioInputType {}
 

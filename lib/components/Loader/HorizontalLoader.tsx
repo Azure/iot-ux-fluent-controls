@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {Icon, IconSize} from '../Icon';
-const css = classNames.bind(require('./HorizontalLoader.scss'));
+const css = classNames.bind(require('./HorizontalLoader.module.scss'));
 
 export interface HorizontalLoaderType {}
 
@@ -15,7 +15,7 @@ export interface HorizontalLoaderProps extends React.Props<HorizontalLoaderType>
 
 /**
  * HorizontalLoader showing Information, Warning, or Error with text, icon, and optional close button
- * 
+ *
  * @param props Control properties (defined in `HorizontalLoaderProps` interface)
  */
 export const HorizontalLoader: React.StatelessComponent<HorizontalLoaderProps> = (props: HorizontalLoaderProps) => {
@@ -26,7 +26,7 @@ export const HorizontalLoader: React.StatelessComponent<HorizontalLoaderProps> =
     for (let i = 0; i < props.dots; i++) {
         dots.push(<div className={className} key={i}><div /></div>);
     }
-    
+
     return (
         <div className={containerClassName}>
             {dots}

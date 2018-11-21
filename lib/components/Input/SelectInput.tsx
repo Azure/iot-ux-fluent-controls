@@ -1,8 +1,8 @@
-import * as React from 'react'; 
+import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, SelectProps, OptionProps, Elements as Attr, OptionAttr, mergeAttributes} from '../../Attributes';
  import {FormOption, autoFocusRef} from '../../Common';
-const css = classNames.bind(require('./SelectInput.scss'));
+const css = classNames.bind(require('./SelectInput.module.scss'));
 
 export interface SelectInputType {}
 
@@ -20,22 +20,22 @@ export interface SelectInputAttributes {
 export interface SelectInputProps extends React.Props<SelectInputType> {
     /** HTML form element name */
     name: string;
-    /** 
+    /**
      * Current value of HTML select element
-     * 
+     *
      * This must be an Object that is in `SelectInputProps.options`
      */
     value: any;
-    /** 
+    /**
      * List of HTML select element options in the format:
-     * 
+     *
      * `{
      *     label: string,
      *     value: any
      * }`
      */
     options: (FormOption & OptionAttr<OptionProps>)[];
-    
+
     /** Apply error styling to input element */
     error?: boolean;
     /** Add required attribute to HTML input element */
@@ -56,14 +56,14 @@ export interface SelectInputProps extends React.Props<SelectInputType> {
 
 /**
  * Low level select combo box control
- * 
- * IMPORTANT: The options provided to this control must all be UNIQUE. The 
+ *
+ * IMPORTANT: The options provided to this control must all be UNIQUE. The
  * `value` property of option tags is the numerical index of the option in
  * `SelectInput.options` so `SelectInput.value` is compared to each value in
  * `options` (===) to decide which option is the one currently selected.
- * 
+ *
  * (Use the `SelectField` control instead when making a form with standard styling)
- * 
+ *
  * @param props Control properties (defined in `SelectInputProps` interface)
  */
 export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: SelectInputProps) => {
@@ -102,7 +102,7 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
 
     return (
         <Attr.div className={containerClass} attr={props.attr.container}>
-            <Attr.select 
+            <Attr.select
                 name={props.name}
                 value={value}
                 className={comboClass}

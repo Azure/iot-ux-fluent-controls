@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {Elements as Attr, SpanProps} from '../../Attributes';
-const css = classNames.bind(require('./Icon.scss'));
+const css = classNames.bind(require('./Icon.module.scss'));
 
 export enum IconSize {
     // 16px
@@ -31,18 +31,18 @@ export interface IconProps extends React.Props<IconType> {
 
     /**
      * Icon font size as defined by `IconSize` enum
-     * 
+     *
      * `IconSize.[xsmall | small | medium | large | xlarge | xxlarge]`
-     * 
+     *
      * Starts at 16 pixels (`IconSize.xsmall`) and increases 16 pixels at a
      * time until 96 pixels (`IconSize.xxlarge`)
-     * 
+     *
      * Defaults: `IconSize.medium` (48x48 pixels)
      */
     size?: IconSize;
     /**
      * Icon font size
-     * 
+     *
      * Overrides `IconProps.size`
      */
     fontSize?: number;
@@ -55,7 +55,7 @@ export interface IconProps extends React.Props<IconType> {
     className?: string;
     /**
      * Classname for Icon label
-     * 
+     *
      * Even with props.className getting CSS specificity right to modify font-
      * size of the label is problematic.
      */
@@ -66,9 +66,9 @@ export interface IconProps extends React.Props<IconType> {
 
 /**
  * Icon loaded from Segoe UI MDL icons font
- * 
+ *
  * Renders children so this control can be used with text
- * 
+ *
  * @param props Control properties (Defined in `IconProps` interface)
  */
 export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {

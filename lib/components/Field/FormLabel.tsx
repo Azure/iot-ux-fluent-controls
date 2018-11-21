@@ -4,7 +4,7 @@ import {DivProps, LabelProps, mergeAttributeObjects, Elements as Attr} from '../
 import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconAttributes} from '../Icon';
 import {Balloon, BalloonAlignment, BalloonPosition, BalloonAttributes} from '../Balloon';
-const css = classNames.bind(require('./Field.scss'));
+const css = classNames.bind(require('./Field.module.scss'));
 
 export interface FormLabelType {}
 

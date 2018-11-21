@@ -2,7 +2,7 @@ import * as React from 'react';
 import { ButtonProps, NavProps, Elements as Attr } from '../../Attributes';
 import * as classnames from 'classnames/bind';
 
-const cx = classnames.bind(require('./Navigation.scss'));
+const cx = classnames.bind(require('./Navigation.module.scss'));
 
 export interface NavigationAttributes {
     container?: NavProps;

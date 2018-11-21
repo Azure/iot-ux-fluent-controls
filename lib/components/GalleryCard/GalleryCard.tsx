@@ -4,7 +4,7 @@ import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconProps, IconAttributes} from '../Icon';
 import {SolidBackground} from './SolidBackground';
-const css = classNames.bind(require('./GalleryCard.scss'));
+const css = classNames.bind(require('./GalleryCard.module.scss'));
 
 export interface GalleryCardType {}
 

@@ -4,7 +4,7 @@ import {MethodNode} from '../../Common';
 import {NumberInput} from '../Input/NumberInput';
 import {TextInputAttributes} from '../Input/TextInput';
 import {FormField, FormFieldAttributes} from './FormField';
-const css = classNames.bind(require('./Field.scss'));
+const css = classNames.bind(require('./Field.module.scss'));
 
 export interface NumberFieldType {}
 

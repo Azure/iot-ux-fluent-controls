@@ -4,7 +4,7 @@ import { DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr, OptionA
 import { Icon, IconSize } from '../Icon';
 import { Dropdown, DropdownAttributes } from '../Dropdown';
 import { MethodNode, FormOption, keyCode, hasClassName, autoFocusRef } from '../../Common';
-const css = classNames.bind(require('./ComboInput.scss'));
+const css = classNames.bind(require('./ComboInput.module.scss'));
 
 export interface ComboInputType { }
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, ImageProps, Elements as Attr} from '../../Attributes';
-const css = classNames.bind(require('./GalleryCard.scss'));
+const css = classNames.bind(require('./GalleryCard.module.scss'));
 
 export interface ImageBackgroundType {}
 
@@ -18,11 +18,11 @@ export interface ImageBackgroundProps extends React.Props<ImageBackgroundType> {
 
     /**
      * Fixed width and height (284 x ?? pixels)
-     * 
+     *
      * Default: true
      */
     fixed?: boolean;
-    
+
     /** Classname to append to top level element */
     className?: string;
 
@@ -31,9 +31,9 @@ export interface ImageBackgroundProps extends React.Props<ImageBackgroundType> {
 
 /**
  * Image background for `GalleryCard`
- * 
+ *
  * Should usually be marked as `fixed`, otherwise it will have no dimensions
- * 
+ *
  * @param props Control properties (Defined in `ImageBackgroundProps` interface)
  */
 export const ImageBackground: React.StatelessComponent<ImageBackgroundProps> = (props: ImageBackgroundProps) => {

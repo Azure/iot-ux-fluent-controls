@@ -5,7 +5,7 @@ import {Calendar, CalendarAttributes} from './Calendar';
 import {formatDate, placeholders} from './helpers';
 import {MethodDate, dateIsValid, DateFormat, keyCode} from '../../Common';
 import { ActionTriggerButton, ActionTriggerButtonAttributes } from '../ActionTrigger';
-const css = classNames.bind(require('./DatePicker.scss'));
+const css = classNames.bind(require('./DatePicker.module.scss'));
 
 export interface DatePickerType {}
 
