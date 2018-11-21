@@ -20,7 +20,7 @@ ______________________________________________________________________________
 #### CSS Only Default Button
 
 ```jsx
-const css = require('./Button.scss');
+const css = require('./Button.module.scss');
 const classnames = require('classnames');
 
 <button

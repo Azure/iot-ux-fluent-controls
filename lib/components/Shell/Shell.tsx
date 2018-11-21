@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
-const css = classnames.bind(require('./Shell.scss'));
+const css = classnames.bind(require('./Shell.module.scss'));
 
 export interface ShellProperties {
     theme?: string;

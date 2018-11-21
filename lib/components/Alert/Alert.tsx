@@ -4,7 +4,7 @@ import {DivProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize, IconAttributes} from '../Icon';
 import { ActionTriggerAttributes } from '../ActionTrigger/ActionTrigger';
 import ActionTriggerButton from '../ActionTrigger/ActionTriggerButton';
-const css = classNames.bind(require('./Alert.scss'));
+const css = classNames.bind(require('./Alert.module.scss'));
 
 export enum AlertType {
     Information,

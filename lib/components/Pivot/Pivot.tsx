@@ -3,7 +3,7 @@ import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconAttributes} from '../Icon';
-const css = classNames.bind(require('./Pivot.scss'));
+const css = classNames.bind(require('./Pivot.module.scss'));
 
 export const pivotClassName = css('pivot');
 export const menuClassName = css('pivot-menu');

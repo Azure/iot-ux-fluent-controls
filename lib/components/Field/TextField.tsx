@@ -4,7 +4,7 @@ import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconBackground} from '../Icon';
 import {TextInput, TextInputAttributes} from '../Input/TextInput';
 import {FormField, FormFieldAttributes} from './FormField';
-const css = classNames.bind(require('./Field.scss'));
+const css = classNames.bind(require('./Field.module.scss'));
 
 export interface TextFieldType {}
 

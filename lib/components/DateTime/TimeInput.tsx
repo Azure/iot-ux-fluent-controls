@@ -3,7 +3,7 @@ import * as classNames from 'classnames/bind';
 import {DivProps, OptionProps, SelectProps, Elements as Attr} from '../../Attributes';
 import {MethodNode, FormOption, keyCode} from '../../Common';
 import {SelectInput} from '../Input/SelectInput';
-const css = classNames.bind(require('./TimeInput.scss'));
+const css = classNames.bind(require('./TimeInput.module.scss'));
 
 export interface TimeInputType {}
 
@@ -65,7 +65,7 @@ export interface TimeInputState {
 
 /**
  * High level generic form field
- * 
+ *
  * @param props Control properties (defined in `TimeInputProps` interface)
  */
 export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
@@ -121,7 +121,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
 
     handleState(props: TimeInputProps): TimeInputState {
         const time = this.handleTimezone(props.value);
-        
+
         const hoursTz = props.localTimezone ? time.getHours() : time.getUTCHours();
         const hours = !isNaN(hoursTz) ? hoursTz : 0;
         const minutesTz = props.localTimezone ? time.getMinutes() : time.getUTCMinutes();
@@ -193,12 +193,12 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                  ? newHours - 12 : newHours;
             const period = newProps.militaryTime ? '24H'
                 : (newHours > 11 ? 'PM' : 'AM');
-            
+
             newState.hours = hours;
             newState.period = period;
             update = true;
         }
-        
+
         if (update) {
             this.setState(newState);
         }
@@ -216,9 +216,9 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             newState.period = period;
         }
 
-        const hours = !this.props.militaryTime && newState.period === 'PM' 
+        const hours = !this.props.militaryTime && newState.period === 'PM'
             ? newState.hours + 12 : newState.hours;
-        
+
         if (this.props.localTimezone) {
             /** This is required incase the component consumer wants to track the date */
             date.setHours(hours);
@@ -267,7 +267,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             </Attr.option>;
         };
 
-        const period = this.props.militaryTime ? '' : <Attr.select 
+        const period = this.props.militaryTime ? '' : <Attr.select
             name={this.props.name}
             value={this.state.period}
             disabled={this.props.disabled}
@@ -290,7 +290,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             </Attr.option>
         </Attr.select>;
 
-        const secondsInput = this.props.showSeconds !== true ? '' : <Attr.select 
+        const secondsInput = this.props.showSeconds !== true ? '' : <Attr.select
             name={this.props.name}
             value={seconds}
             disabled={this.props.disabled}
@@ -299,17 +299,17 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             className={inputClassName}
             attr={this.props.attr.secondSelect}
         >
-            {this.seconds.map(option => 
+            {this.seconds.map(option =>
                 optionMap(option, this.props.attr.secondOption)
             )}
         </Attr.select>;
 
         return (
             <Attr.div
-            className={css('time-input-container', this.props.className)} 
+            className={css('time-input-container', this.props.className)}
             attr={this.props.attr.container}
             >
-                <Attr.select 
+                <Attr.select
                     name={this.props.name}
                     value={hours}
                     disabled={this.props.disabled}
@@ -322,7 +322,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                         optionMap(option, this.props.attr.hourOption)
                     )}
                 </Attr.select>
-                <Attr.select 
+                <Attr.select
                     name={this.props.name}
                     value={minutes}
                     disabled={this.props.disabled}
@@ -333,10 +333,10 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                 >
                     {this.minutes.map(option =>
                         optionMap(option, this.props.attr.minuteOption)
-                    )}          
+                    )}
                 </Attr.select>
                 {secondsInput}
-                {period}        
+                {period}
             </Attr.div>
         );
     }

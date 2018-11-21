@@ -4,7 +4,7 @@ import { DivProps, ButtonProps, Elements as Attr } from '../../Attributes';
 import { ActionTriggerButton, ActionTriggerButtonAttributes } from '../ActionTrigger/ActionTriggerButton';
 import { getLocalMonths, getLocalWeekdays } from './helpers';
 import { keyCode, MethodDate, weekLength } from '../../Common';
-const css = classNames.bind(require('./Calendar.scss'));
+const css = classNames.bind(require('./Calendar.module.scss'));
 
 export interface CalendarComponentType { }
 

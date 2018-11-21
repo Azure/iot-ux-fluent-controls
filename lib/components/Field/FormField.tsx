@@ -6,7 +6,7 @@ import {HorizontalLoader} from '../Loader';
 import {FormLabel, FormLabelAttributes} from './FormLabel';
 import {FormError} from './FormError';
 import { BalloonPosition, BalloonAlignment } from '../Balloon';
-const css = classNames.bind(require('./Field.scss'));
+const css = classNames.bind(require('./Field.module.scss'));
 
 export interface FormFieldType {}
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, Elements as Attr} from '../../Attributes';
-const css = classNames.bind(require('./Field.scss'));
+const css = classNames.bind(require('./Field.module.scss'));
 
 export interface FormErrorType {}
 
@@ -23,12 +23,12 @@ export interface FormErrorProps extends React.Props<FormErrorType> {
 
 /**
  * Form Error
- * 
+ *
  * @param props Control properties (defined in `FormErrorProps` interface)
  */
 export const FormError: React.StatelessComponent<FormErrorProps> = (props: FormErrorProps) => {
     return (
-        <Attr.div 
+        <Attr.div
             className={css('field-error', {
                 'hidden': props.hidden
             }, props.className)}

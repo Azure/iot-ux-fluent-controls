@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
 import {MethodNode, hasClassName} from '../../Common';
-const css = classNames.bind(require('./Dropdown.scss'));
+const css = classNames.bind(require('./Dropdown.module.scss'));
 
 export interface DropdownType {}
 

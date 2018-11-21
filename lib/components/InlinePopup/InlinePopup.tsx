@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-const cx = classNames.bind(require('./InlinePopup.scss'));
+const cx = classNames.bind(require('./InlinePopup.module.scss'));
 
 const inlinePopupDefaultProps = {
     attr: {

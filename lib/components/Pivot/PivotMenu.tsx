@@ -3,7 +3,7 @@ import * as classNames from 'classnames/bind';
 import {DivProps, AnchorProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects} from '../../Attributes';
 import {PivotOption} from '../../Common';
 import {Pivot, PivotAttributes} from './Pivot';
-const css = classNames.bind(require('./Pivot.scss'));
+const css = classNames.bind(require('./Pivot.module.scss'));
 
 export interface PivotMenuType {}
 

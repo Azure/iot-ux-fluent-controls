@@ -4,7 +4,7 @@ import {OptionAttr, mergeAttributeObjects} from '../../Attributes';
 import {MethodNode, FormOption} from '../../Common';
 import {RadioInput, RadioInputAttributes} from '../Input/RadioInput';
 import {FormField, FormFieldAttributes} from './FormField';
-const css = classNames.bind(require('./Field.scss'));
+const css = classNames.bind(require('./Field.module.scss'));
 
 export interface RadioFieldType {}
 

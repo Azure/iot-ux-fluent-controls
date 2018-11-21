@@ -1,14 +1,14 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
 
-const cx = classnames.bind(require('./Accordion.scss'));
+const cx = classnames.bind(require('./Accordion.module.scss'));
 
 export interface AccordionAttributes {
     ariaRole?: string;
     dataTestHook?: string;
 }
 
-export interface AccordionProperties {    
+export interface AccordionProperties {
     children: React.ReactElement<any> | Array<React.ReactElement<any>> | React.ReactChildren | React.ReactNode;
     expanded?: boolean;
     id: string;
@@ -18,9 +18,9 @@ export interface AccordionProperties {
 }
 
 export class Accordion extends React.PureComponent<AccordionProperties> {
-    public static defaultProps: Partial<AccordionProperties> = {        
+    public static defaultProps: Partial<AccordionProperties> = {
         attr: {
-            ariaRole: null, 
+            ariaRole: null,
             dataTestHook: null
         }
     };

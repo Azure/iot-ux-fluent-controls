@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-const cx = classNames.bind(require('./Thumbnail.scss'));
+const cx = classNames.bind(require('./Thumbnail.module.scss'));
 
 /**
  * Scalable thumbnail for a product or a device

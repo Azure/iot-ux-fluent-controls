@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {Icon, IconSize, IconAttributes} from '../Icon';
 import {Elements as Attr, DivProps} from '../../Attributes';
-const css = classNames.bind(require('./ActionTrigger.scss'));
+const css = classNames.bind(require('./ActionTrigger.module.scss'));
 
 export interface ActionTriggerAttributes {
     container?: DivProps;
@@ -31,7 +31,7 @@ export interface ActionTriggerProps extends React.Props<ActionTriggerComponentTy
 
 /**
  * ActionTrigger showing Information, Warning, or Error with text, icon, and optional close button
- * 
+ *
  * @param props Control properties (defined in `ActionTriggerProps` interface)
  */
 export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (props: ActionTriggerProps) => {
@@ -42,7 +42,7 @@ export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (prop
 
     let suffix;
     if (props.rightIcon) {
-        suffix = <Icon 
+        suffix = <Icon
             icon={props.rightIcon}
             size={IconSize.xsmall}
             className={css('suffix')}

@@ -6,7 +6,7 @@ import { Accordion } from '../Accordion';
 import { Thumbnail } from '../Thumbnail';
 import { MastheadToolbarItemProperties, MastheadToolbarItem } from './MastheadToolbar';
 
-const cx = classnames.bind(require('./Masthead.scss'));
+const cx = classnames.bind(require('./Masthead.module.scss'));
 
 export interface MastheadAttributes {
     userMenuAriaLabel?: string;

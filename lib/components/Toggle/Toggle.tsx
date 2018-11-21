@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, ButtonProps, Elements as Attr} from '../../Attributes';
 import {MethodNode, autoFocusRef} from '../../Common';
-const css = classNames.bind(require('./Toggle.scss'));
+const css = classNames.bind(require('./Toggle.module.scss'));
 
 export interface ToggleType {}
 

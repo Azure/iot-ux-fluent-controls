@@ -1,9 +1,9 @@
-import * as React from 'react'; 
+import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {MethodNode, autoFocusRef} from '../../Common';
 import {DivProps, LabelProps, SpanProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize, IconAttributes} from '../Icon';
-const css = classNames.bind(require('./CheckboxInput.scss'));
+const css = classNames.bind(require('./CheckboxInput.module.scss'));
 
 export interface CheckboxInputType {}
 
@@ -54,9 +54,9 @@ export interface CheckboxInputProps extends React.Props<CheckboxInputType> {
 
 /**
  * Low level checkbox control
- * 
+ *
  * (Use the `CheckboxField` control instead when making a form with standard styling)
- * 
+ *
  * @param props Control properties (defined in `CheckboxInputProps` interface)
  */
 export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (props: CheckboxInputProps) => {
@@ -79,7 +79,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
             hidden={props.hidden}
             attr={props.attr.container}
         >
-            <Attr.label 
+            <Attr.label
                 className={css('checkbox-label')}
                 htmlFor={id}
                 attr={props.attr.label}
@@ -99,7 +99,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                 />
                 <Attr.span
                     className={css('checkbox-button')}
-                    attr={props.attr.checkbox} 
+                    attr={props.attr.checkbox}
                 />
                 <Attr.span
                     className={css('checkbox-text')}
@@ -111,7 +111,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                     className={css('checkbox-fill')}
                     attr={props.attr.indeterminateFill}
                 />
-                <Icon 
+                <Icon
                     icon='checkMark'
                     size={IconSize.xsmall}
                     className={css('checkbox-checkmark')}

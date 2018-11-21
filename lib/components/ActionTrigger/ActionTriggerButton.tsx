@@ -3,7 +3,7 @@ import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
 import {ActionTrigger, ActionTriggerProps, ActionTriggerAttributes} from '../ActionTrigger';
 import {Elements as Attr, ButtonProps} from '../../Attributes';
-const css = classNames.bind(require('./ActionTrigger.scss'));
+const css = classNames.bind(require('./ActionTrigger.module.scss'));
 
 export interface ActionTriggerButtonAttributes {
     button?: ButtonProps;

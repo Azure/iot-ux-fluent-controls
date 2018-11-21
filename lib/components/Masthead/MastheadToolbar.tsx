@@ -1,7 +1,7 @@
 import * as classnames from 'classnames/bind';
 import * as React from 'react';
 import * as InlinePopup from '../InlinePopup';
-const cx = classnames.bind(require('./Masthead.scss'));
+const cx = classnames.bind(require('./Masthead.module.scss'));
 
 export interface MastheadToolbarItemAttributes {
     dataTestHook?: string;
@@ -10,9 +10,9 @@ export interface MastheadToolbarItemAttributes {
 }
 
 export type MastheadToolbarItemProperties = {
-    alignment?: 'right' | 'left';    
+    alignment?: 'right' | 'left';
     content: React.ReactElement<any> | Array<React.ReactElement<any>> | React.ReactChildren | React.ReactNode;
-    contentClass?: string;    
+    contentClass?: string;
     expanded?: boolean;
     icon: string;
     mobileOnly?: boolean;
@@ -34,7 +34,7 @@ export class MastheadToolbarItem  extends React.PureComponent<MastheadToolbarIte
         const {
             alignment,
             content,
-            contentClass,           
+            contentClass,
             expanded,
             icon,
             mobileOnly,

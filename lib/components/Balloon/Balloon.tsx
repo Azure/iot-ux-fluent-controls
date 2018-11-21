@@ -3,7 +3,7 @@ import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, mergeAttributes, Elements as Attr} from '../../Attributes';
 import {Dropdown} from '../Dropdown';
 import {MethodNode} from '../../Common';
-const css = classNames.bind(require('./Balloon.scss'));
+const css = classNames.bind(require('./Balloon.module.scss'));
 
 export interface BalloonType {}
 
