@@ -1,7 +1,7 @@
 {
     "name": "@microsoft/azure-iot-ux-fluent-controls",
-    "version": "5.0.0-alpha.2",
-    "description": "Azure IoT Fluent React Controls",
+    "version": "5.0.0",
+    "description": "Azure IoT UX Fluent Controls",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
     "scripts": {
@@ -17,9 +17,11 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/Azure/iot-ux-fluent-controls/issues"
+        "url": "https://github.com/Azure/iot-ux-fluent-controls.git"
     },
-    "author": "",
+    "homepage": "https://github.com/Azure/iot-ux-fluent-controls#readme",
+    "bugs": "https://github.com/Azure/iot-ux-fluent-controls/issues",
+    "author": "Azure IoT",
     "license": "MIT",
     "engines": {
         "node": ">=8"
