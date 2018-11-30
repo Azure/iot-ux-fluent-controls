@@ -15,7 +15,7 @@ export interface ButtonProps extends React.Props<ButtonComponentType> {
     title?: string;
     /** Button type attribute */
     type?: string;
-    /** Icon name (from icons.scss) */
+    /** Icon name (from icons.css) */
     icon?: string;
     /** Use primary style */
     primary?: boolean;

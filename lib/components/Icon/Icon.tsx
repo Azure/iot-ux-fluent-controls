@@ -26,7 +26,7 @@ export interface IconAttributes {
 }
 
 export interface IconProps extends React.Props<IconType> {
-    /** Icon name (from Segoe UI MDL font) */
+    /** Icon name (from icons.css) */
     icon: string;
 
     /**
