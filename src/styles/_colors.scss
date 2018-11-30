@@ -4,19 +4,13 @@
 // extend the colors specified in @microsoft/azure-iot-ux-fluent-css and have them
 // apply to the controls seamlessly. The following code demonstrates this pattern:
 
-    // // first import the color palette:
-    // @import "~@microsoft/azure-iot-ux-fluent-css/src/color.palette";
-    // // specify overrides/extensions for the themes:
-    // $theme-dark: (
-    //     color-bg-header: $color-grey-1200,
-    //     color-bg-content: #3d4147,
-    //     color-text-header: $color-white,
-    // );
-
-    // $theme-light: (
-    //     color-bg-header: $color-grey-800,
-    //     color-text-header: $color-white,
-    // );
+// // first import the color palette:
+// @import "~@microsoft/azure-iot-ux-fluent-css/src/color.palette";
+// specify overrides/extensions for the themes:
+$theme-dark: (
+    color-bg-input-rest: transparent,
+    color-bg-radio-btn-rest: transparent
+);
 
 // as a final step, import the default colors (this will preserve any overrides specified above):
 @import "~@microsoft/azure-iot-ux-fluent-css/src/colors";
