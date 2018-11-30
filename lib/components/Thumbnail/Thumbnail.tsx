@@ -18,6 +18,12 @@ export interface ThumbnailProperties {
     /** The icon to display. */
     icon?: string;
 
+    /**
+     * The kind of thumbnail icon.
+     * @deprecated use `icon` instead
+     */
+    kind?: 'product' | 'device' | 'user' | 'unknown' | 'missing';
+
     // these allow customization of the styles by passing in other classes
     className?: string;
 
@@ -35,6 +41,18 @@ export interface ThumbnailState {
     /** Flag that is set when the browser has finished loading the image */
     imageLoaded: boolean;
 }
+
+/**
+ * Kind thumbnails load up an icon
+ */
+const kindIcons = {
+    'product': 'icon-alias-product',
+    'device': 'icon-alias-device',
+    'user': 'icon-alias-user',
+    'unknown': 'icon-alias-unknown',
+    'missing': 'icon-alias-missing-image'
+};
+
 export class Thumbnail extends React.PureComponent<ThumbnailProperties, ThumbnailState> {
     constructor(props: ThumbnailProperties) {
         super(props);
@@ -46,7 +64,7 @@ export class Thumbnail extends React.PureComponent<ThumbnailProperties, Thumbnai
         if (this.props.loading) {
             return <div className={className}/>;
         } else {
-            let icon = this.props.icon;
+            let icon = this.props.icon || kindIcons[this.props.kind];
             return <div className={className}>
                 {!!this.props.url
                     ? <img className={cx({ 'hidden': !this.state.imageLoaded })}
