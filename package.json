@@ -1,6 +1,6 @@
 {
     "name": "@microsoft/azure-iot-ux-fluent-controls",
-    "version": "5.0.1",
+    "version": "5.1.1",
     "description": "Azure IoT UX Fluent Controls",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
@@ -27,7 +27,7 @@
         "node": ">=8"
     },
     "devDependencies": {
-        "@microsoft/azure-iot-ux-fluent-css": "^4.0.0",
+        "@microsoft/azure-iot-ux-fluent-css": "^5.0.0",
         "@types/chai": "^4.1.6",
         "@types/classnames": "^2.2.3",
         "@types/enzyme": "^2.8.9",
@@ -78,7 +78,7 @@
         "webpack": "^3.8.1"
     },
     "peerDependencies": {
-        "@microsoft/azure-iot-ux-fluent-css": "^4.0.0",
+        "@microsoft/azure-iot-ux-fluent-css": "^5.0.0",
         "classnames": "^2.2.5",
         "prop-types": "^15.6.1",
         "react": "16.x",
