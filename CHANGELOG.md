@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v5.2.1
+## Changed
+- Fixed postinstall script. npm i was looking for it.
+- Changed input background color on dark-theme to be transparent 
+- Removed unused icons
+- Removed GalleryCard Component
+
 ## v5.1.1
 ## Changed
 - Remove font files and point to files on the server

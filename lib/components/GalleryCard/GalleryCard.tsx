@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
+import {DivProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
-import {Icon, IconSize, IconProps, IconAttributes} from '../Icon';
 import {SolidBackground} from './SolidBackground';
 const css = classNames.bind(require('./GalleryCard.module.scss'));
 
@@ -124,56 +123,6 @@ export const Banner: React.StatelessComponent<BannerProps> = (props: BannerProps
 Banner.defaultProps = {
     attr: {
         container: {}
-    }
-};
-
-export interface GalleryCardIconAttributes {
-    text?: SpanProps;
-}
-
-export interface GalleryCardIconProps extends IconProps {
-    title?: string;
-    attr?: GalleryCardIconAttributes & IconAttributes;
-}
-
-export const GalleryCardIcon: React.StatelessComponent<GalleryCardIconProps> = (props: GalleryCardIconProps) => {
-    let fontSize;
-    if (props.size) {
-        // if the size is set, pass fontSize through
-        fontSize = props.fontSize;
-    } else {
-        // if size is not set, then provide a default override for fontSize
-        fontSize = props.fontSize ? props.fontSize : 72;
-    }
-
-    const outputProps = {
-        icon: props.icon,
-        size: props.size,
-        color: props.color || 'white',
-        centered: props.centered || true,
-        fontSize: fontSize,
-        className: css('gallery-card-icon', props.className)
-    };
-
-    let title;
-    if (props.title) {
-        let className = css('icon-title');
-        title = (
-            <Attr.span className={className} attr={props.attr.text}>
-                {props.title}
-            </Attr.span>
-        );
-    }
-
-    return (<Icon {...outputProps}>{title}</Icon>);
-};
-
-GalleryCardIcon.defaultProps = {
-    icon: undefined,
-    attr: {
-        text: {},
-        container: {},
-        label: {}
     }
 };
 
