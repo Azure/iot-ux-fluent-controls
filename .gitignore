@@ -1,6 +1,5 @@
 lib/**/*.js
 lib/**/*.d.ts
-!lib/scripts/postinstall.js
 dist/
 node_modules/
 static/
