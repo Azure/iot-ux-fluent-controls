@@ -12,7 +12,6 @@
         "sasslint": "sass-lint -c .sass-lint.yml 'lib/**/*.scss' -v -q",
         "docs": "styleguidist server",
         "docs:build": "styleguidist build",
-        "postinstall": "node ./lib/scripts/postinstall.js",
         "prepublishOnly": "npm run tslint && npm run build && npm run test"
     },
     "repository": {
@@ -26,8 +25,11 @@
     "engines": {
         "node": ">=8"
     },
+    "dependencies": {
+        "@microsoft/azure-iot-ux-fluent-css": "^5.0.1",
+        "classnames": "^2.2.5"
+    },
     "devDependencies": {
-        "@microsoft/azure-iot-ux-fluent-css": "^5.0.0",
         "@types/chai": "^4.1.6",
         "@types/classnames": "^2.2.3",
         "@types/enzyme": "^2.8.9",
@@ -43,7 +45,6 @@
         "babel-preset-es2015": "^6.24.0",
         "chai": "^4.2.0",
         "chai-enzyme": "^0.8.0",
-        "classnames": "^2.2.5",
         "copyfiles": "^1.2.0",
         "css-loader": "^0.28.5",
         "enzyme": "^3.7.0",
@@ -78,8 +79,6 @@
         "webpack": "^3.8.1"
     },
     "peerDependencies": {
-        "@microsoft/azure-iot-ux-fluent-css": "^5.0.0",
-        "classnames": "^2.2.5",
         "prop-types": "^15.6.1",
         "react": "16.x",
         "react-dom": "16.x"
