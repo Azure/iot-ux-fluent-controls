@@ -2,6 +2,10 @@
 
 ## v5.2.1
 ## Changed
+- Update font url
+
+## v5.2.0
+## Changed
 - Fixed postinstall script. npm i was looking for it.
 - Changed input background color on dark-theme to be transparent 
 - Removed unused icons
