@@ -10,20 +10,14 @@ $masthead-collapse-start: 660px;
 $masthead-button-width: $layout-nav-item-height;
 $masthead-wide-button-width: $masthead-button-width * 4;
 
-.masthead {
-    height: $header-height;
-    @include themify {
-        background-color: themed('color-bg-masthead');
-    }
-}
-
 .masthead-branding {
     width: $masthead-branding-width;
     height: $header-height;
     display: flex;
     align-items: flex-start;
+    padding: 0px $gutter-small;
 
-    &>* {
+    &, &>* {
         line-height: $header-height;
         font-size: 20px;
     }
@@ -72,20 +66,16 @@ $masthead-wide-button-width: $masthead-button-width * 4;
 
 
 .masthead {
-    height: $header-height;
-    @include themify {
-        background-color: themed('color-bg-masthead');
-    }
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    flex-wrap: nowrap;
-}
-
-.masthead {
     @include themify {
         color: themed('color-text-white');
+        background-color: themed('color-bg-masthead');
     }
+
+    display: flex;
+    height: $header-height;
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: space-between;
 }
 
 .masthead-toolbar-menu-item, .masthead-toolbar-menu-item a {
@@ -144,13 +134,13 @@ $masthead-wide-button-width: $masthead-button-width * 4;
         button:focus, .menu-link:focus {
             outline-offset: -1px;
             @include themify {
-                outline: 1px dashed themed('color-border-focus');
+                outline: 1px dashed themed('color-border-masthead-focus');
             }
         }
     }
 
     &.wide {
-        width: calc(100vw - #{$nav-collapsed-width});
+        width: calc(100vw - #{$layout-nav-collapsed-width});
     }
 
     &.search-bar {
@@ -355,4 +345,25 @@ $masthead-wide-button-width: $masthead-button-width * 4;
             padding-left: $gutter-small;
         }
     }
+}
+
+.nav-container {
+    // show nav in masthead only in small screens:
+    display: none;
+    @media(max-width: $screen-sm) {
+        width: $layout-nav-collapsed-width;
+        display: initial;
+    }
+}
+
+.nav-icon-collapsed {
+    transform: rotate(90deg);
+}
+
+.nav-icon-expanded {
+    transform: rotate(-90deg);
+}
+
+.nav-panel {
+    width: $layout-nav-expanded-width;
 }

@@ -16,7 +16,7 @@ export type MastheadToolbarItemProperties = {
     expanded?: boolean;
     icon: string;
     mobileOnly?: boolean;
-    onClick: () => void;
+    onClick: React.MouseEventHandler<HTMLElement>;
     wide?: boolean;
     attr?: MastheadToolbarItemAttributes;
 };

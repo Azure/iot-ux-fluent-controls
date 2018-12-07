@@ -42,8 +42,25 @@
     }
 
     .shell {
+        display: flex;
+        flex-direction: column; // masthead should be on top of nav-and-workspace
+        height: 100vh;
+
         @include themify {
             color: themed('color-text-rest');
+            background-color: themed('color-bg-content');
         }
     }
+}
+
+.nav-and-workspace {
+    // lay out nav and workspace horizontally:
+    display: flex;
+    height: 100%;
+}
+
+.workspace {
+    // occupy the rest of the screen and scroll internally:
+    flex-grow: 1;
+    overflow: auto;
 }
