@@ -2,70 +2,149 @@
 @import '../../common/constants';
 @import '../../common/mixins';
 
-$nav-expanded-width: 220px;
-
 .navigation {
-    text-align: left;
-    z-index: $z-index-content-global-nav;
-    display: block;
-    position: absolute;
-    top: $layout-nav-item-height;
-    bottom: 0;
-    width: $layout-nav-item-height;
+    width: $layout-nav-collapsed-width;
+
+    // don't allow the size of the nav bar to change:
+    flex-shrink: 0;
+    flex-grow: 0;
+
     transition-property: width, left, box-shadow;
     transition-duration: $interaction-timing;
-
+    
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    
     @include themify {
         background-color: themed('color-bg-navbar');
-        box-shadow: 0px 0px 0px $color-black-transparent-primary;
-    }
-
-    &.expanded {
-        width: $nav-expanded-width;
-        @include themify {
-            box-shadow: 0px 0px 10px $color-black-transparent-primary;
-        }
-        @include rtl {
-            left: calc(100% - #{$nav-expanded-width});
-        }
     }
 
     @include rtl {
-        left: calc(100% - #{$nav-collapsed-width});
-        direction: rtl;
-        text-align: right;
+        .expand-icon {
+            transform: rotate(180deg);
+        }
+    }
+    
+    .scrollable {
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .separator {
+        margin: 0px $gutter-small;
+        @include themify {
+            border-top: 1px solid themed('color-border-navbar-separator');
+        }
+    }
+    
+    &:not(.expanded) {
+        // if the navbar is collapsed, we need to allow items to scroll (using mouse/touch), 
+        // but NOT show the scrollbar. To do this, increase the width of the scrollable
+        // component to something larger than the width of the navbar. Since the navbar
+        // hides overflow, the scrollbar will be hidden.
+        .scrollable {
+            width: 2 * $layout-nav-collapsed-width;
+            
+            :global(.global-nav-item) {
+                // override the width of the nav-item to match the navbar width:
+                width: $layout-nav-collapsed-width;
+            }
+
+            .separator {
+                // override the width of the nav item separator:
+                width:  $layout-nav-collapsed-width - 2*$gutter-small;
+            }
+        }
+    }
+
+    &.expanded {
+        width: $layout-nav-expanded-width;
+
+        .expand-icon {
+            width: 100%;
+            transform: rotate(180deg);
+            text-align: left;
+
+            @include rtl {
+                transform: none;
+            }
+        }
+    }
+    
+    // don't show global-nav for small screens: it should be part of masthead instead.
+    @media(max-width: $screen-sm) {
+        display: none;
     }
 }
 
-.hamburger-button {
-    width: 100%;
-    height: $layout-nav-item-height;
+:global(.global-nav-item) {
+    height: $layout-nav-collapsed-width;
+    width: 100%; // don't hardcode, scrollbar should push out the content.
+    
+    // don't allow the size to change:
+    flex-shrink: 0;
+    flex-grow: 0;
+    
+    // clear styling for <button> elements:
     border: none;
     outline: none;
+    margin: 0;
     padding: 0;
+    
+    // center icon and text and make this non-inline for <a> elements:
+    display: flex;
+    align-items: center;
 
     @include themify {
         color: themed('color-text-white');
         background-color: themed('color-bg-navbar');
 
-        &:active, &:hover, &:focus {
-            color: themed('color-text-white');
+        &:hover {
+            color: themed('color-text-white'); 
             background-color: themed('color-bg-navbar-hover');
+
+            &:global(.global-nav-item-active) {
+                background-color: themed('color-bg-navbar-hover-selected');
+            }
+        }
+
+        &:focus {
+            color: themed('color-text-white');
+            background-color: themed('color-bg-navbar');
+        }
+
+        &:active, &:global(.global-nav-item-active) {
+            color: themed('color-text-white');
+            background-color: themed('color-bg-navbar-selected');
         }
     }
 
     &:focus {
         outline-offset: -1px;
         @include themify {
-            outline: 1px dashed themed('color-border-focus');
+            outline: 1px dashed themed('color-border-navbar-focus');
         }
     }
-
-    @include clickable;
 }
 
-.hamburger-icon {
-    text-align: center;
+:global(.global-nav-item-icon) {
     font-size: $icon-size-xsmall;
-    width: $layout-nav-item-height;
+    padding: 0px $gutter-small;
+
+    svg {
+        height: $icon-size-xsmall;
+        width: $icon-size-xsmall;
+        fill: currentColor;
+    }
+}
+
+:global(.global-nav-item-text) {
+    padding-right: $gutter-small;
+    @include rtl {
+        padding-right: 0;
+        padding-left: $gutter-small;
+    }
 }

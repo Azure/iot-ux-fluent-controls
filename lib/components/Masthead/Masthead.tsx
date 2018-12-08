@@ -5,6 +5,7 @@ import * as InlinePopup from '../InlinePopup';
 import { Accordion } from '../Accordion';
 import { Thumbnail } from '../Thumbnail';
 import { MastheadToolbarItemProperties, MastheadToolbarItem } from './MastheadToolbar';
+import { NavigationProperties } from '../Navigation/Navigation';
 
 const cx = classnames.bind(require('./Masthead.module.scss'));
 
@@ -19,6 +20,7 @@ export interface MastheadProperties {
     toolbarItems?: MastheadToolbarItemProperties[];
     mobileMenuItems?: MastheadMobileMenuItem[];
     attr?: MastheadAttributes;
+    navigation?: NavigationProperties;
 }
 
 export interface MastheadUserProperties {
@@ -26,7 +28,7 @@ export interface MastheadUserProperties {
     displayName: string;
     menuItems: MastheadUserMenuItem[];
     menuExpanded?: boolean;
-    onMenuClick: () => void;
+    onMenuClick: React.MouseEventHandler<HTMLElement>;
     thumbnailUrl?: string;
 }
 
@@ -39,7 +41,7 @@ export type MastheadMobileMenuItem = {
     href: string;
 } | {
     type: 'button';
-    onClick: () => {}; // item is an action button
+    onClick: React.MouseEventHandler<HTMLButtonElement>; // item is an action button
 } | {
     type: 'submenu';
     content: React.ReactElement<any> | Array<React.ReactElement<any>> | React.ReactChildren | React.ReactNode;
@@ -50,7 +52,7 @@ export type MastheadMobileMenuItem = {
 export interface MastheadUserMenuItem {
     key: string;
     label: string;
-    onClick?: () => void;
+    onClick?: React.MouseEventHandler<HTMLElement>;
     href?: string;
 }
 
@@ -164,6 +166,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                 onMenuClick,
                 menuExpanded,
             },
+            navigation,
             attr
         } = this.props;
 
@@ -172,6 +175,19 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
 
         return (
             <div role='banner' className={cx('masthead')}>
+                {navigation && <InlinePopup.Container
+                    expanded={navigation.isExpanded}
+                    onClick={navigation.onClick}
+                    className={cx('nav-container')}
+                >
+                    <InlinePopup.Label className={cx('icon', 'icon-chevronRight', {
+                        'nav-icon-collapsed': !navigation.isExpanded,
+                        'nav-icon-expanded': navigation.isExpanded,
+                    })} />
+                    <InlinePopup.Panel alignment='left' className={cx('nav-panel')}>
+                        {navigation.children}
+                    </InlinePopup.Panel>
+                </InlinePopup.Container>}
                 <div className={cx('masthead-branding', 'inline-text-overflow')} data-test-hook='masthead-application-name'>
                     {this.props.branding}
                 </div>
