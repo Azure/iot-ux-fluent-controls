@@ -106,7 +106,7 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
                 <li key={`item-${key}`}>
                     <ActionTriggerButton
                         key={key}
-                        attr={{ button: { 'aria-label': item.ariaLabel || key, 'data-test-hook': `masthead-btn-${key}`, 'tabIndex': index + 1 } }}
+                        attr={{ button: { 'aria-label': item.ariaLabel || key, 'data-test-hook': `masthead-btn-${key}` } }}
                         icon={item.icon}
                         onClick={() => this.togglePanel(key)}
                         className={cx('masthead-toolbar-btn', { 'selected': key === this.state.selectedItem }, item.className)}
@@ -153,21 +153,22 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
                         <li key={'item-search'}>
                             <ActionTriggerButton
                                 key={'search'}
-                                attr={{ button: { 'aria-label': 'search-button', 'data-test-hook': 'masthead-btn-search', 'tabIndex': 1 } }}
+                                attr={{ button: { 'aria-label': 'search-button', 'data-test-hook': 'masthead-btn-search' } }}
                                 icon={'search'}
                                 onClick={() => { }}
                                 className={cx('masthead-toolbar-btn', { 'selected': 'search' === this.state.selectedItem }, 'sm', { 'hidden': this.props.searchBar })}
                             />
                         </li>
                         {items}
-                        <Thumbnail
-                            key='user-menu'
-                            kind='user'
-                            size='masthead'
-                            attr={{ 'aria-label': userItemAttr.userMenuAriaLabel, 'tabIndex': Object.keys(this.toolbarItems).length + 2 }}
-                            className={cx('masthead-toolbar-btn', 'user-btn')}
-                        />
-
+                        <li key={'user-menu-item'}>
+                            <Thumbnail
+                                key='user-menu'
+                                kind='user'
+                                size='masthead'
+                                attr={{ 'aria-label': userItemAttr.userMenuAriaLabel }}
+                                className={cx('masthead-toolbar-btn', 'user-btn')}
+                            />
+                        </li>
                     </ul>
                 </div>
             </div>,
