@@ -11,11 +11,11 @@ $branding-min-width-size: 120px;
 
 @mixin selected {
     &.selected {
-        background-color: themed('color-text-white');
+        background-color: themed('color-bg-searchbar');
 
         >* {
-            background-color: themed('color-text-white');
-            color: themed('color-text-black');
+            background-color: themed('color-bg-searchbar');
+            color: themed('color-text-rest');
         }
 
         &:focus {
@@ -33,12 +33,12 @@ $branding-min-width-size: 120px;
 
         &:hover,
         &:hover>* {
-            background-color: themed('color-text-white');
+            background-color: themed('color-bg-panel-contextual');
 
             >* {
                 outline: none;
-                background-color: themed('color-text-white');
-                color: themed('color-text-black');
+                background-color: themed('color-bg-panel-contextual');
+                color: themed('color-text-rest');
             }
 
         }

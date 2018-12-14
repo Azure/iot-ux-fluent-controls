@@ -48,7 +48,7 @@ export class ContentPanel extends React.PureComponent<ContentPanelProperties> {
                             {actions.confirm.label}
                         </Button>
                         <Button
-                            className={cx('btn', 'inline-text-overflow')}
+                            className={cx('btn', 'btn-default', 'inline-text-overflow')}
                             attr={{ container: { autoFocus: true } }}
                             onClick={() => this.props.actions.cancel.event()}
                         >
