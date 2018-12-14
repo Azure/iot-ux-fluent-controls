@@ -9,21 +9,19 @@ const cx = classnames.bind(require('./ContentPanel.module.scss'));
 export interface ContentPanelProperties {
     title: string;
     content: React.ReactNode | string;
-    actions?: {
+    actions: {
         confirm?: {
             label: string;
             event: Function;
         };
         cancel: {
             label: string;
-            event: Function;
-
+            event?: Function;
         }
     };
 }
 
 export class ContentPanel extends React.PureComponent<ContentPanelProperties> {
-
     render() {
         const { title, actions, content } = this.props;
         return (
@@ -37,7 +35,7 @@ export class ContentPanel extends React.PureComponent<ContentPanelProperties> {
                 />
                 <div className={cx('title', 'inline-text-overflow')}>{title} </div>
                 <div className={cx('content')}>{content}</div>
-                {actions && [
+                {actions && actions.confirm && [
                     <span className={cx('separator')} />,
                     <div className={cx('actions')}>
                         <Button

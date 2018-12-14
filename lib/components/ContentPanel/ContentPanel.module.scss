@@ -6,7 +6,7 @@ $content-pane-width: 320px;
 $title-font-size: 20px;
 $close-icon-height: $grid-size * 8;
 $title-height: $gutter-xsmall+$title-font-size;
-
+$box-shadow-panel: 0 25.6px 57.6px 0 rgba(0, 0, 0, .12);
 .content-panel {
     width: $content-pane-width;
     height: 100%;
@@ -15,7 +15,7 @@ $title-height: $gutter-xsmall+$title-font-size;
     // border: 1px solid; // for the purpose
     margin-left: calc(100% - #{$content-pane-width});
     padding: $gutter-normal;
-    box-shadow: 0 25.6px 57.6px 0 rgba(0, 0, 0, .12);
+    box-shadow: $box-shadow-panel;
 
     .close-button {
         align-self: flex-end;
@@ -84,9 +84,9 @@ $title-height: $gutter-xsmall+$title-font-size;
             }
 
             .actions {
-                .btn:first-child {
-                    margin-right: 0;
-                    margin-left: $gutter-xsmall;
+                .btn.btn-default {
+                    margin-left: 0;
+                    margin-right: $gutter-xsmall;
                 }
             }
         }

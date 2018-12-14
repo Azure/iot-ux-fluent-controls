@@ -13,7 +13,7 @@ export interface MastheadAttributes {
     userMenuAriaLabel?: string;
 }
 
-export interface ToolbarItem {
+interface ToolbarItem {
     icon: string;
     contentPanel?: ContentPanelProperties;
     className?: string;
@@ -23,7 +23,15 @@ export interface ToolbarItem {
 export interface MastheadProperties {
     branding: MethodNode;
     navigation?: NavigationProperties;
-    searchBar: boolean;
+    toolBarItems: {
+        search?: {
+            key: string;
+            label: string;
+            onClick: Function;
+        };
+        settings: ContentPanelProperties;
+        help: ContentPanelProperties;
+    };
     userItemAttr?: MastheadAttributes;
 }
 
@@ -48,7 +56,7 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
         }
     };
 
-    private togglePanel = (selectedItem) => {
+    private togglePanel: Function = (selectedItem) => {
 
         if (!this.state.selectedItem) {
             this.setState({ selectedItem, showPanel: true });
@@ -66,33 +74,26 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
 
     private toolbarItems: { [key: string]: ToolbarItem } = {
         'settings': {
-            icon: 'settings', contentPanel: {
-                title: 'Settings',
-                content: <div>This is the content of the settings</div>,
+            icon: 'settings',
+            contentPanel: {
+                title: this.props.toolBarItems.settings.title,
+                content: this.props.toolBarItems.settings.content,
                 actions: {
-                    confirm: {
-                        label: 'Confirm',
-                        event: () => alert('action taken')
-                    },
                     cancel: {
-                        label: 'Cancel',
-                        event: () => this.togglePanel('settings')
+                        event: this.props.toolBarItems.settings.actions.cancel.event ? this.props.toolBarItems.settings.actions.cancel.event : () => this.togglePanel('settings'),
+                        label: this.props.toolBarItems.settings.actions.cancel.label
                     }
                 }
             }
         },
         'help': {
             icon: 'help', contentPanel: {
-                title: 'Documental',
-                content: <div>This is the content of the Docs</div>,
+                title: this.props.toolBarItems.help.title,
+                content: this.props.toolBarItems.help.content,
                 actions: {
-                    confirm: {
-                        label: 'Confirm',
-                        event: () => alert('action taken')
-                    },
                     cancel: {
-                        label: 'Cancel',
-                        event: () => this.togglePanel('help')
+                        event: this.props.toolBarItems.help.actions.cancel.event ? this.props.toolBarItems.help.actions.cancel.event : () => this.togglePanel('help'),
+                        label: this.props.toolBarItems.help.actions.cancel.label
                     }
                 }
             }
@@ -100,7 +101,22 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
     };
 
     getToolbarItems() {
-        return Object.keys(this.toolbarItems).map((key, index) => {
+        const { settings, help } = this.props.toolBarItems;
+
+        if (settings && settings.actions && settings.actions.confirm) {
+            this.toolbarItems['settings'].contentPanel.actions.confirm = {
+                label: settings.actions.confirm.label,
+                event: settings.actions.confirm.event
+            };
+        }
+        if (help && help.actions && help.actions.confirm) {
+            this.toolbarItems['help'].contentPanel.actions.confirm = {
+                label: help.actions.confirm.label,
+                event: help.actions.confirm.event
+            };
+        }
+
+        return Object.keys(this.toolbarItems).map((key) => {
             const item = this.toolbarItems[key];
             return (
                 <li key={`item-${key}`}>
@@ -119,7 +135,8 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
     render() {
         const {
             navigation,
-            userItemAttr
+            userItemAttr,
+            toolBarItems
         } = this.props;
         const items = this.getToolbarItems();
 
@@ -150,15 +167,15 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
                 <div className={cx('masthead-branding', 'inline-text-overflow')} data-test-hook='masthead-application-name'>{this.props.branding}</div>
                 <div className={cx('masthead-toolbar-container')}>
                     <ul className={cx('masthead-toolbar')}>
-                        <li key={'item-search'}>
+                        {toolBarItems.search && <li key={'item-search'}>
                             <ActionTriggerButton
-                                key={'search'}
-                                attr={{ button: { 'aria-label': 'search-button', 'data-test-hook': 'masthead-btn-search' } }}
+                                key={toolBarItems.search.key}
+                                attr={{ button: { 'aria-label': toolBarItems.search.key, 'data-test-hook': 'masthead-btn-search' } }}
                                 icon={'search'}
-                                onClick={() => { }}
-                                className={cx('masthead-toolbar-btn', { 'selected': 'search' === this.state.selectedItem }, 'sm', { 'hidden': this.props.searchBar })}
+                                onClick={() => toolBarItems.search.onClick}
+                                className={cx('masthead-toolbar-btn', { 'selected': 'search' === this.state.selectedItem }, 'sm')}
                             />
-                        </li>
+                        </li>}
                         {items}
                         <li key={'user-menu-item'}>
                             <Thumbnail

@@ -6,7 +6,7 @@ ______________________________________________________________________________
 <Masthead
     branding={...props.branding: string}
     navigation={...props.navigation: NavigationProperties}
-    searchBar={...props.searchBar: boolean}
+    toolBarItems: {...props.toolBarItems}
     userItemAttr={...props.attr: MastheadAttributes}
 />
 ```
@@ -15,5 +15,10 @@ ______________________________________________________________________________
 ### Examples
 
 ```jsx
-<Masthead branding={'Fluent Controls Brand'} searchBar={true}/>
+<Masthead branding={'Fluent Controls Brand'} toolBarItems={{
+        search: { key: 'search', label: 'search', onClick: () => { } },
+        settings: { title: 'settings', content: 'settings content', actions: { cancel: { label: 'cancel' } } },
+        help: { title: 'help', content: 'help content', actions: { cancel: {label: 'cancel' } } }
+    }}
+/>
 ```
