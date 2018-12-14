@@ -92,17 +92,9 @@ $box-shadow-panel: 0 25.6px 57.6px 0 rgba(0, 0, 0, .12);
         }
     }
 
-    &.sm {
+    &.sm, &.md {
         @media(max-width: $screen-md) {
             // $screen-sm: 480px;
-            width: 100%;
-            margin-left: 0;
-        }
-    }
-
-    &.md {
-        @media(max-width: $screen-md) {
-            // $screen-md: 768px;
             width: 100%;
             margin-left: 0;
         }

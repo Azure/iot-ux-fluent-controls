@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import { DivProps } from '../../Attributes';
+import { Elements as Attr, DivProps } from '../../Attributes';
 const cx = classNames.bind(require('./Thumbnail.module.scss'));
 
 /**
@@ -65,19 +65,19 @@ export class Thumbnail extends React.PureComponent<ThumbnailProperties, Thumbnai
     render() {
         const className = cx('circle', this.props.size || 'preview', this.props.className);
         if (this.props.loading) {
-            return <div className={className}/>;
+            return <Attr.div className={className}/>;
         } else {
             let icon = this.props.icon || kindIcons[this.props.kind];
-            return <div className={className} {...this.props.attr}>
+            return <Attr.div className={className} {...this.props.attr}>
                 {!!this.props.url
-                    ? <img className={cx({ 'hidden': !this.state.imageLoaded })}
+                    ? <Attr.image className={cx({ 'hidden': !this.state.imageLoaded })}
                         src={this.props.url}
                         onLoad={() => this.setState({imageLoaded: true})}/>
                     : null}
                 {!!icon
-                    ? <span className={cx('icon', icon)}/>
+                    ? <Attr.span className={cx('icon', icon)}/>
                     : null}
-            </div>;
+            </Attr.div>;
         }
     }
 }

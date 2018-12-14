@@ -6,6 +6,7 @@ import { Thumbnail } from '../Thumbnail';
 import { NavigationProperties } from '../Navigation/Navigation';
 import { ActionTriggerButton } from '../ActionTrigger';
 import { ContentPanel, ContentPanelProperties } from '../ContentPanel';
+import { Elements as Attr } from '../../Attributes';
 
 const cx = classnames.bind(require('./Masthead.module.scss'));
 
@@ -48,6 +49,7 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
             selectedItem: '',
             showPanel: false
         };
+        this.cancelEvent.bind(this);
     }
 
     public static defaultProps: Partial<MastheadProperties> = {
@@ -56,20 +58,28 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
         }
     };
 
-    private togglePanel: Function = (selectedItem) => {
-
-        if (!this.state.selectedItem) {
-            this.setState({ selectedItem, showPanel: true });
-        } else {
-            // the panel is already displayed
-            if (this.state.selectedItem === selectedItem) {
-                // hide the panel
-                this.setState({ selectedItem: undefined, showPanel: false });
+    private togglePanel: Function = (selectedItem: string) => {
+        if (this.state) {
+            if (!this.state.selectedItem) {
+                this.setState({ selectedItem, showPanel: true });
             } else {
-                // change the content of the panel
-                this.setState({ selectedItem });
+                // the panel is already displayed
+                if (this.state.selectedItem === selectedItem) {
+                    // hide the panel
+                    this.setState({ selectedItem: undefined, showPanel: false });
+                } else {
+                    // change the content of the panel
+                    this.setState({ selectedItem });
+                }
             }
         }
+    }
+
+    private cancelEvent: Function = (event: Function, item: string) => {
+        if (event) {
+            event();
+        }
+        this.togglePanel(item);
     }
 
     private toolbarItems: { [key: string]: ToolbarItem } = {
@@ -80,7 +90,7 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
                 content: this.props.toolBarItems.settings.content,
                 actions: {
                     cancel: {
-                        event: this.props.toolBarItems.settings.actions.cancel.event ? this.props.toolBarItems.settings.actions.cancel.event : () => this.togglePanel('settings'),
+                        event: () => this.cancelEvent(this.props.toolBarItems.settings.actions.cancel.event, 'settings'),
                         label: this.props.toolBarItems.settings.actions.cancel.label
                     }
                 }
@@ -92,7 +102,7 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
                 content: this.props.toolBarItems.help.content,
                 actions: {
                     cancel: {
-                        event: this.props.toolBarItems.help.actions.cancel.event ? this.props.toolBarItems.help.actions.cancel.event : () => this.togglePanel('help'),
+                        event: () => this.cancelEvent(this.props.toolBarItems.help.actions.cancel.event, 'help'),
                         label: this.props.toolBarItems.help.actions.cancel.label
                     }
                 }
@@ -149,7 +159,7 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
         }
 
         return (
-            [<div key='Masthead' role='banner' className={cx('masthead')}>
+            [<Attr.div key='Masthead' role='banner' className={cx('masthead')}>
                 {navigation &&
                     <InlinePopup.Container
                         expanded={navigation.isExpanded}
@@ -164,8 +174,8 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
                         </InlinePopup.Panel>
                     </InlinePopup.Container>
                 }
-                <div className={cx('masthead-branding', 'inline-text-overflow')} data-test-hook='masthead-application-name'>{this.props.branding}</div>
-                <div className={cx('masthead-toolbar-container')}>
+                <Attr.div className={cx('masthead-branding', 'inline-text-overflow')} data-test-hook='masthead-application-name'>{this.props.branding}</Attr.div>
+                <Attr.div className={cx('masthead-toolbar-container')}>
                     <ul className={cx('masthead-toolbar')}>
                         {toolBarItems.search && <li key={'item-search'}>
                             <ActionTriggerButton
@@ -187,8 +197,8 @@ export class Masthead extends React.Component<MastheadProperties, MastheadState>
                             />
                         </li>
                     </ul>
-                </div>
-            </div>,
+                </Attr.div>
+            </Attr.div>,
                 contextPanel
             ]
         );

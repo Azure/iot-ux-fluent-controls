@@ -17,8 +17,8 @@ ______________________________________________________________________________
 ```jsx
 <Masthead branding={'Fluent Controls Brand'} toolBarItems={{
         search: { key: 'search', label: 'search', onClick: () => { } },
-        settings: { title: 'settings', content: 'settings content', actions: { cancel: { label: 'cancel' } } },
-        help: { title: 'help', content: 'help content', actions: { cancel: {label: 'cancel' } } }
+        settings: { title: 'settings', content: 'settings content', actions: { cancel: { event: () => alert('cancel'), label: 'cancel' } } },
+        help: { title: 'help', content: 'help content', actions: { cancel: { event: () => alert('cancel'), label: 'cancel' } } }
     }}
 />
 ```
