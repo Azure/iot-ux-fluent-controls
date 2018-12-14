@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import { DivProps } from '../../Attributes';
 const cx = classNames.bind(require('./Thumbnail.module.scss'));
 
 /**
@@ -30,6 +31,8 @@ export interface ThumbnailProperties {
     // this is supposed to be one of the presets present - if not passed it defaults to preview
     // size should be controlled by the
     size?: 'preview' | 'masthead' | 'list-item' | 'list-tile' | 'search-result';
+    
+    attr?: DivProps; 
 }
 
 /**
@@ -65,7 +68,7 @@ export class Thumbnail extends React.PureComponent<ThumbnailProperties, Thumbnai
             return <div className={className}/>;
         } else {
             let icon = this.props.icon || kindIcons[this.props.kind];
-            return <div className={className}>
+            return <div className={className} {...this.props.attr}>
                 {!!this.props.url
                     ? <img className={cx({ 'hidden': !this.state.imageLoaded })}
                         src={this.props.url}
