@@ -15,7 +15,7 @@ describe('<ContentPanel />', () => {
         expect(wrapper.contains('test-content')).to.equal(true);
     });
 
-    it('properly passes title and content string', () => {
+    it('properly passes title and content DOM', () => {
         const wrapper = shallow(<ContentPanel
             title='title'
             content={<div>test-content-div</div>}
@@ -33,7 +33,7 @@ describe('<ContentPanel />', () => {
                 cancel: { label: 'action', event: () => alert('cancel triggered') }
             }}
         />);
-        expect(wrapper.html()).to.equal('<div role="complementary" class="content-panel sm md"><button type="button" class="action-trigger-button close-button"><div class="action-trigger-container action-trigger-label-empty"><span aria-label="close-panel" class="icon-xsmall icon-cancel"></span></div></button><div class="title inline-text-overflow">title </div><div class="content"><div>test-content-div</div></div><span class="separator"></span><div class="actions"><button type="button" class="btn btn btn-primary inline-text-overflow">action</button><button type="button" autofocus="" class="btn btn inline-text-overflow">action</button></div></div>');
+        expect(wrapper.html()).to.equal('<div role="complementary" class="content-panel sm md"><button type="button" class="action-trigger-button close-button"><div class="action-trigger-container action-trigger-label-empty"><span aria-label="close-panel" class="icon-xsmall icon-cancel"></span></div></button><div class="title inline-text-overflow">title </div><div class="content"><div>test-content-div</div></div><span class="separator"></span><div class="actions"><button type="button" class="btn btn btn-primary inline-text-overflow">action</button><button type="button" autofocus="" class="btn btn btn-default inline-text-overflow">action</button></div></div>');
     });
 
 });
