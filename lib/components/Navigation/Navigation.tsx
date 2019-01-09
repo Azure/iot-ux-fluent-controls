@@ -13,34 +13,32 @@ export interface NavigationProperties {
     isExpanded: boolean;
     onClick: React.EventHandler<any>;
     attr?: NavigationAttributes;
+    children?: React.ReactNode;
 }
 
-export class Navigation extends React.PureComponent<NavigationProperties> {
-    public static defaultProps: Partial<NavigationProperties> = {
-        attr: {
-            container: {},
-            navButton: {}
-        }
-    };
-
-    render() {
-        return (
-            <Attr.nav
-                className={cx('navigation', { expanded: this.props.isExpanded })}
-                attr={this.props.attr.container}
+export function Navigation({ isExpanded, onClick, attr, children }: NavigationProperties) {
+    return (
+        <Attr.nav
+            className={cx('navigation', { expanded: isExpanded })}
+            attr={attr && attr.container}
+        >
+            <Attr.button
+                className='global-nav-item'
+                key='globalNavButton'
+                onClick={onClick}
+                attr={attr && attr.navButton}
             >
-                <Attr.button
-                    className={cx('hamburger-button')}
-                    key='globalNavButton'
-                    onClick={this.props.onClick}
-                    attr={this.props.attr.navButton}
-                >
-                    <div className={cx('hamburger-icon', 'icon', 'icon-globalNavButton')} />
-                </Attr.button>
-                {this.props.children}
-            </Attr.nav>
-        );
-    }
+                <span className={cx('expand-icon', 'global-nav-item-icon', 'icon', 'icon-chevronRight')} />
+            </Attr.button>
+            <div className={cx('scrollable')}>
+                {children}
+            </div>
+        </Attr.nav>
+    );
+}
+
+export function NavigationItemSeparator() {
+    return <div className={cx('separator')} />;
 }
 
 export default Navigation;
