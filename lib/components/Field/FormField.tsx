@@ -96,6 +96,11 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
             });
             e.preventDefault();
             e.stopPropagation();
+        } else if (e.keyCode === keyCode.tab) {
+            // BUG 3217787: if the user tabs out, close the tooltip and continue to default behavior:
+            this.setState({
+                tooltipVisible: false
+            });
         }
     }
 
