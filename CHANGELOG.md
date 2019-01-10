@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v5.2.2
+## Fixed
+- BUG 3217787: [Form Field] If the user tabs out of a field when the tooltip button is open (Alt+F1), close the tooltip.
+- BUG 2383275: [Management List] Narrator should not read non-interactive column headers as Buttons.
+
 ## v5.2.1
 ## Changed
 - Update font url
