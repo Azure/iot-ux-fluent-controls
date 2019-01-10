@@ -42,6 +42,14 @@ describe('Form Field Component', () => {
         expect(wrapper.instance().state.tooltipVisible).to.equal(false);
     });
 
+    it('should untoggle tool tip when alt + f1 is pressed and then tab is pressed', () => {
+        expect(wrapper.instance().state.tooltipVisible).to.equal(false);
+        wrapper.find('#test-field').simulate('keyDown', { keyCode: keyCode.f1, altKey: true });
+        expect(wrapper.instance().state.tooltipVisible).to.equal(true);
+        wrapper.find('#test-field').simulate('keyDown', { keyCode: keyCode.tab });
+        expect(wrapper.instance().state.tooltipVisible).to.equal(false);
+    });
+
     it('should leave tooltip toggled when any key other than escape is pressed', () => {
         expect(wrapper.instance().state.tooltipVisible).to.equal(false);
         wrapper.find('#test-field').simulate('keyDown', { keyCode: keyCode.f1, altKey: true });

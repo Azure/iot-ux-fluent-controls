@@ -132,10 +132,10 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
     render() {
         let columns = this.props.columns.map(col => []);
         this.props.columns.forEach((column, colIndex) => {
-            let onClick: (event) => void = null;
-            let labelSuffix: MethodNode = '';
             const sortable = column.onAscending && column.onDescending;
             if (sortable) {
+                let labelSuffix: MethodNode = '';
+                let onClick: (event) => void = null;
                 if (this.props.sortedColumn === column) {
                     let icon = '';
                     if (this.props.sortDirection === 'descending') {
@@ -156,19 +156,32 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         ? event => column.onDescending()
                         : event => column.onAscending();
                 }
+                
+                columns[colIndex].push(
+                    <Attr.button
+                        type='button'
+                        className={css('column-header')}
+                        key={`header-${colIndex}`}
+                        onClick={onClick}
+                        attr={this.props.attr.rowHeaderButton}
+                    >
+                        {column.label}{labelSuffix}
+                    </Attr.button>
+                );
+            } else {
+                // BUG 2383275: narrator should not read non-interactive column headers as Buttons,
+                // so if the column is not sortable, emit a <header> tag, not a <button>:
+                columns[colIndex].push(
+                    <Attr.header
+                        className={css('column-header')}
+                        key={`header-${colIndex}`}
+                        attr={this.props.attr.rowHeaderButton}
+                    >
+                        {column.label}
+                    </Attr.header>
+                );
             }
-            columns[colIndex].push(
-                <Attr.button
-                    type='button'
-                    className={css('column-header')}
-                    key={`header-${colIndex}`}
-                    onClick={onClick}
-                    disabled={!sortable}
-                    attr={this.props.attr.rowHeaderButton}
-                >
-                    {column.label}{labelSuffix}
-                </Attr.button>
-            );
+            
             columns[colIndex].push(
                 this.props.rows.map((row, rowIndex) => {
                     let content;
