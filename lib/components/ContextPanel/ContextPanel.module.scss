@@ -1,0 +1,93 @@
+@import '../../common/color.controls';
+@import '../../common/constants';
+@import '../../common/mixins';
+
+$content-pane-width: 320px;
+$title-font-size: 20px;
+$close-icon-height: $grid-size * 8;
+$title-height: $gutter-xsmall+$title-font-size;
+$box-shadow-panel: 0 25.6px 57.6px 0 rgba(0, 0, 0, .12);
+
+.content-panel {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: $content-pane-width;
+    display: flex;
+    flex-direction: column;
+    padding: $gutter-normal;
+    box-shadow: $box-shadow-panel;
+    
+    @include rtl {
+        right: unset;
+        left: 0;
+    }
+
+    @media(max-width: $screen-md) {
+        width: 100%;
+    }
+
+    @include themify {
+        background-color: themed('color-bg-searchbar');
+    }
+}
+
+@keyframes slide-fade-in {
+    0% {
+        transform: translate($content-pane-width, 0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+.close-button {
+    align-self: flex-end;
+    margin: -$gutter-normal;
+}
+
+.title {
+    font-size: $title-font-size;
+    margin-top: 2*$grid-size;
+    margin-bottom: $gutter-big;
+}
+
+.content {
+    flex-grow: 1;
+    flex-shrink: 2;
+    overflow: auto;
+
+    animation-name: slide-fade-in;
+    animation-duration: .5s;
+    animation-timing-function: cubic-bezier(.8, 0, .2, 1);
+    animation-fill-mode: backwards;
+    animation-delay: 80ms;
+}
+
+.separator {
+    margin-left: -$gutter-normal;
+    margin-right: -$gutter-normal;
+    @include themify {
+        border-top: 1px solid themed('color-border-navbar-separator');
+    }
+}
+
+.footer {
+    margin-top: $gutter-normal;
+
+    :global(.btn) {
+        margin: 0;
+        width: 3*$gutter-bigger;
+    }
+
+    :global(.btn):first-child {
+        margin-right: $gutter-xsmall;
+        @include rtl {
+            margin-right: 0;
+            margin-left: $gutter-xsmall;
+        }
+    }
+}
