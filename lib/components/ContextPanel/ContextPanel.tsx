@@ -7,13 +7,14 @@ import { Portal } from './portal';
 const cx = classnames.bind(require('./ContextPanel.module.scss'));
 
 export interface ContextPanelProperties {
+    onClose: React.EventHandler<any>;
     header: React.ReactNode;
     children?: React.ReactNode;
     footer?: React.ReactNode;
-    onClose: React.EventHandler<any>;
     attr?: {
+        container?: DivProps;
         header?: HeaderProps;
-        childContainer?: DivProps;
+        content?: DivProps;
         footer?: FooterProps;
         closeButton?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
     };
@@ -22,15 +23,27 @@ export interface ContextPanelProperties {
 export function ContextPanel({ header, children, footer, onClose, attr }: ContextPanelProperties) {
     return (
         <Portal>
-            <Attr.div key='context-panel' role='dialog' aria-labelledby='context-panel-title' aria-describedby='context-panel-content' className={cx('content-panel')}>
-                <ActionTriggerButton
+            <Attr.div 
+                role='complementary' 
+                aria-labelledby='context-panel-title' 
+                aria-describedby='context-panel-content' 
+                className={cx('content-panel')} 
+                attr={attr && attr.container}
+            >
+                {onClose && <ActionTriggerButton
                     icon='cancel'
                     className={cx('close-button')}
                     onClick={onClose}
                     attr={attr && attr.closeButton}
-                />
-                <Attr.header id='context-panel-title' className={cx('title', 'inline-text-overflow')} attr={attr && attr.header}>{header}</Attr.header>
-                <Attr.div id='context-panel-content' className={cx('content')} attr={attr && attr.childContainer}>
+                />}
+                {header && <Attr.header 
+                    id='context-panel-title' 
+                    className={cx('title', 'inline-text-overflow')} 
+                    attr={attr && attr.header}
+                    >
+                    {header}
+                </Attr.header>}
+                <Attr.div id='context-panel-content' className={cx('content')} attr={attr && attr.content}>
                     {children}
                 </Attr.div>
                 {footer && <React.Fragment>

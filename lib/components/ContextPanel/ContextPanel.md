@@ -4,31 +4,24 @@ ______________________________________________________________________________
 
 ```html
 <ContentPanel
-    title={...props.title: string}
-    content={...props.content: React.ReactNode | string}
-    action: {  
-        confirm:{
-            label: string;
-            event: Function;
-        },
-        cancel:{ 
-            label: string;
-            event: Function;
-        }
-    }
-/>
+    header={...props.header: React.ReactNode}
+    footer={...props.footer: React.ReactNode}
+    onClose={...props.onClose: React.EventHandler<any>}
+>
+    Hello, World!
+</ContentPanel>
 ```
 ______________________________________________________________________________
 
 ### Examples
 
 ```jsx
-<ContentPanel 
-    title={'Content Panel'}
-    content={<div style={{height: '200px', width: '100%', background:'red', color: 'white', padding:'10px'}}>this is a string content</div>}
-    actions={{ 
-        confirm:{ label: 'action', event: ()=> alert('action triggered')},
-        cancel:{ label: 'action', event: ()=> alert('cancel triggered')}
-    }}
-/>
+const Btn = require('../Button').Button;
+<ContextPanel 
+    header='Hello'
+    footer={<Btn icon='cancel' onClick={()=> alert('cancel triggered')} attr={{ container: { autoFocus: true }}}>Cancel</Btn>}
+    onClose={()=> alert('cancel triggered')}
+>
+    This is context panel 1          
+</ContextPanel>
 ```

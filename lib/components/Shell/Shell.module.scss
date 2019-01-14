@@ -57,7 +57,11 @@
     // lay out nav and workspace horizontally:
     display: flex;
     height: 100%;
-    position: relative; // required for context panel
+    width: 100%;
+    
+    // required for context panel:
+    overflow: hidden;
+    position: relative; 
 }
 
 .workspace {

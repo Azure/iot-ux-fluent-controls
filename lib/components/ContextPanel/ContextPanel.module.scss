@@ -2,26 +2,35 @@
 @import '../../common/constants';
 @import '../../common/mixins';
 
-$content-pane-width: 320px;
-$title-font-size: 20px;
-$close-icon-height: $grid-size * 8;
-$title-height: $gutter-xsmall+$title-font-size;
+$content-pane-width: 8*$gutter-bigger;
+$content-pane-min-height: 5*$gutter-bigger; // at least enough for title + actions
+$title-font-size: $gutter-normal;
 $box-shadow-panel: 0 25.6px 57.6px 0 rgba(0, 0, 0, .12);
+
+
+@keyframes slide-in-from-right {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes slide-in-from-left {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+}
 
 .content-panel {
     position: absolute;
     right: 0;
     height: 100%;
+    min-height: $content-pane-min-height;
     width: $content-pane-width;
     display: flex;
     flex-direction: column;
     padding: $gutter-normal;
     box-shadow: $box-shadow-panel;
-    
-    @include rtl {
-        right: unset;
-        left: 0;
-    }
+    z-index: $z-index-flyout-layer;
+    animation-name: slide-in-from-right;
+    animation-duration: $interaction-timing;
 
     @media(max-width: $screen-md) {
         width: 100%;
@@ -30,17 +39,11 @@ $box-shadow-panel: 0 25.6px 57.6px 0 rgba(0, 0, 0, .12);
     @include themify {
         background-color: themed('color-bg-searchbar');
     }
-}
-
-@keyframes slide-fade-in {
-    0% {
-        transform: translate($content-pane-width, 0);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translate(0, 0);
-        opacity: 1;
+    
+    @include rtl {
+        right: unset;
+        left: 0;
+        animation-name: slide-in-from-left;
     }
 }
 
@@ -53,18 +56,14 @@ $box-shadow-panel: 0 25.6px 57.6px 0 rgba(0, 0, 0, .12);
     font-size: $title-font-size;
     margin-top: 2*$grid-size;
     margin-bottom: $gutter-big;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .content {
     flex-grow: 1;
-    flex-shrink: 2;
+    flex-shrink: 1;
     overflow: auto;
-
-    animation-name: slide-fade-in;
-    animation-duration: .5s;
-    animation-timing-function: cubic-bezier(.8, 0, .2, 1);
-    animation-fill-mode: backwards;
-    animation-delay: 80ms;
 }
 
 .separator {
@@ -76,6 +75,8 @@ $box-shadow-panel: 0 25.6px 57.6px 0 rgba(0, 0, 0, .12);
 }
 
 .footer {
+    flex-grow: 0;
+    flex-shrink: 0;
     margin-top: $gutter-normal;
 
     :global(.btn) {
