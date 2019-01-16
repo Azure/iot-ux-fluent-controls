@@ -8,6 +8,7 @@ $masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
 $masthead-collapse-start: 660px;
 $thumbnail-size: $icon-size-base * 2;
 $branding-min-width-size: 120px;
+$search-max-size: 400px;
 
 @mixin selected {
     &.selected {
@@ -23,12 +24,12 @@ $branding-min-width-size: 120px;
 
             >* {
                 outline: none;
-                color: themed('color-text-black');
+                color: themed('color-text-clear');
             }
         }
 
         &:active>* {
-            color: themed('color-text-black');
+            color: themed('color-text-clear');
         }
 
         &:hover,
@@ -57,11 +58,21 @@ $branding-min-width-size: 120px;
     flex-shrink: 0;
     justify-content: space-between;
 
+    .forceHideSearch {
+        display: none !important;
+    }
+
+    .forceShowSearch {
+        display: block !important;
+        width: 100%;
+        max-width: unset;
+    }
+
     .nav-container {
         // show nav in masthead only in small screens:
         display: none;
 
-        @media(max-width: $screen-sm) {
+        @media(max-width: $screen-sm - 1) {
             width: $layout-nav-collapsed-width;
             display: initial;
         }
@@ -90,6 +101,38 @@ $branding-min-width-size: 120px;
         min-width: $branding-min-width-size;
     }
 
+    .search-input-container {
+        @media(max-width: $screen-md - 1) {
+            display: none;
+        }
+    }
+
+    .search-input-button {
+        @media(min-width: $screen-md - 1) {
+            display: inherit;
+        }
+
+        @media(min-width: $screen-md) {
+            display: none;
+        }
+    }
+
+    .more-menu-item {
+        display: none;
+
+        @media(max-width: $screen-sm - 1) {
+            display: inherit;
+        }
+    }
+
+    .show-label {
+        display: none;
+
+        @media(min-width: $screen-sm - 1) {
+            display: inherit;
+        }
+    }
+
     .masthead-toolbar-container {
         width: 100% - $masthead-branding-width;
         text-align: right;
@@ -103,6 +146,23 @@ $branding-min-width-size: 120px;
             flex-wrap: nowrap;
             justify-content: flex-end;
             list-style-type: none;
+
+            .masthead-toolbar-menu ul {
+                list-style: none;
+                padding-left: 0;
+                width: $layout-nav-expanded-width;
+
+                li {
+                    width: 100%;
+                    text-align: left;
+
+                    button {
+                        width: inherit;
+                        justify-content: left;
+                        padding: 0 1px;
+                    }
+                }
+            }
 
             .masthead-toolbar-btn {
                 width: $layout-nav-item-height;
@@ -119,6 +179,8 @@ $branding-min-width-size: 120px;
                 vertical-align: middle;
                 align-content: center;
 
+                //TODO: fix action trigger hover issue
+                // transition: background-color 0.467s cubic-bezier(0.1, 0.9, 0.2, 1) 34ms; 
                 &:focus,
                 &:active {
                     outline-offset: -1px;
@@ -140,20 +202,11 @@ $branding-min-width-size: 120px;
                     }
                 }
 
-                &.sm {
-                    display: none;
+                span span {
 
-                    @media(max-width: $screen-sm) {
+                    // show the label on the inline popup for the ... button
+                    @media(min-width: $screen-sm - 1) {
                         // $screen-sm: 480px;
-                        display: inline-flex;
-                    }
-                }
-
-                &.md {
-                    display: inline-flex;
-
-                    @media(max-width: $screen-md) {
-                        // $screen-md: 768px;
                         display: none;
                     }
                 }
@@ -168,6 +221,10 @@ $branding-min-width-size: 120px;
 
         .masthead-toolbar-container {
             .masthead-toolbar {
+
+                .masthead-toolbar-menu {
+                    background-color: themed('color-bg-searchbar');
+                }
 
                 .masthead-toolbar-btn,
                 .masthead-toolbar-btn>* {
@@ -234,6 +291,12 @@ $branding-min-width-size: 120px;
         .masthead-toolbar-container {
             direction: rtl;
             text-align: left;
+
+            .masthead-toolbar-menu {
+                ul {
+                    padding-right: 0;
+                }
+            }
 
             .masthead-toolbar-btn {
                 @include themify {
