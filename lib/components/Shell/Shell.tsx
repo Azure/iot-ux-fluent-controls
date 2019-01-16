@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as classnames from 'classnames/bind';
 import { Masthead, MastheadProperties } from '../Masthead/Masthead';
 import { Navigation, NavigationProperties } from '../Navigation/Navigation';
+import { Root as ContextPanelRoot } from '../ContextPanel/root';
 
 // reexport Masthead and Nav Properties for easier consumption by consumers:
 export { MastheadProperties } from '../Masthead/Masthead';
@@ -32,6 +33,7 @@ export function Shell({ theme, isRtl, masthead, navigation, children, onClick }:
                     <div className={css('workspace')}>
                         {children}
                     </div>
+                    <ContextPanelRoot />
                 </div>
             </div>
         </div>
