@@ -1,6 +1,6 @@
 ______________________________________________________________________________
 
-### `ContentPanel.props.attr`
+### `ContextPanel.props.attr`
 
 ```html
 <ContextPanel
@@ -19,19 +19,19 @@ ______________________________________________________________________________
 const Btn = require('../Button').Button;
 <ContextPanel 
     header='Hello'
+    children={<div>This is context panel 1</div>}
     footer={<Btn icon='cancel' onClick={()=> alert('cancel triggered')} attr={{ container: { autoFocus: true }}}>Cancel</Btn>}
     onClose={()=> alert('cancel triggered')}
->
-    This is context panel 1          
-</ContextPanel>
+/>
 ```
 
 ```jsx
 const Btn = require('../Button').Button;
 <ContextPanel 
     header={<div>Hello</div>}
-    children={<div>This is context panel 1</div>}
     footer={<Btn icon='cancel' onClick={()=> alert('cancel triggered')} attr={{ container: { autoFocus: true }}}>Cancel</Btn>}
     onClose={()=> alert('cancel triggered')}
-/>
+>
+    This is context panel 1          
+</ContextPanel>
 ```

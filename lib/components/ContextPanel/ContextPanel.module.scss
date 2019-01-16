@@ -5,20 +5,8 @@
 $content-pane-width: 8*$gutter-bigger;
 $content-pane-min-height: 5*$gutter-bigger; // at least enough for title + actions
 $title-font-size: $gutter-normal;
-$box-shadow-panel: 0 25.6px 57.6px 0 rgba(0, 0, 0, .12);
 
-
-@keyframes slide-in-from-right {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(0); }
-}
-
-@keyframes slide-in-from-left {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(0); }
-}
-
-.content-panel {
+.panel {
     position: absolute;
     right: 0;
     height: 100%;
@@ -27,23 +15,20 @@ $box-shadow-panel: 0 25.6px 57.6px 0 rgba(0, 0, 0, .12);
     display: flex;
     flex-direction: column;
     padding: $gutter-normal;
-    box-shadow: $box-shadow-panel;
     z-index: $z-index-flyout-layer;
-    animation-name: slide-in-from-right;
-    animation-duration: $interaction-timing;
 
     @media(max-width: $screen-md) {
         width: 100%;
     }
 
     @include themify {
-        background-color: themed('color-bg-searchbar');
+        background-color: themed('color-bg-panel-contextual');
+        box-shadow: themed('shadow-panel-contextual')
     }
     
     @include rtl {
         right: unset;
         left: 0;
-        animation-name: slide-in-from-left;
     }
 }
 
@@ -70,7 +55,7 @@ $box-shadow-panel: 0 25.6px 57.6px 0 rgba(0, 0, 0, .12);
     margin-left: -$gutter-normal;
     margin-right: -$gutter-normal;
     @include themify {
-        border-top: 1px solid themed('color-border-navbar-separator');
+        border-top: 1px solid themed('color-border-panel-contextual-separator');
     }
 }
 

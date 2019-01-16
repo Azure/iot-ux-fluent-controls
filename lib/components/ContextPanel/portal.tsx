@@ -17,6 +17,12 @@ export class Portal extends React.Component<Properties, State> {
     }
 
     componentDidMount() {
+        // The portal root element won't be present on initial render, or if 
+        // we're rendering server-side. Therefore, wait till this component has
+        // been mounted and then create the portal. This also allows us to use
+        // autoFocus in a descendant (otherwise, the portal element is inserted
+        // in the DOM tree after the children are mounted, meaning that children
+        // will be mounted on a detached DOM node)
         const container = document.getElementById(RootElementId);
         this.setState({ container });
     }

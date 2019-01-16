@@ -27,7 +27,7 @@ export function ContextPanel({ header, children, footer, onClose, attr }: Contex
                 role='complementary' 
                 aria-labelledby='context-panel-title' 
                 aria-describedby='context-panel-content' 
-                className={cx('content-panel')} 
+                className={cx('panel')} 
                 attr={attr && attr.container}
             >
                 {onClose && <ActionTriggerButton
