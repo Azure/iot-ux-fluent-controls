@@ -3,6 +3,7 @@ export * from './components/ActionTrigger';
 export * from './components/Alert';
 export * from './components/Balloon';
 export * from './components/Button';
+export * from './components/ContextPanel';
 export * from './components/DateTime';
 export * from './components/Dropdown';
 export * from './components/Field';
