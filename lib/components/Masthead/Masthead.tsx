@@ -180,7 +180,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                                     <ul role='menu' id='user-menu'>
                                         {[
                                             this.getUserLabel({ email: user.email, displayName: user.displayName }),
-                                            <li className={cx('masthead-toolbar-btn-container', 'user-items')} >
+                                            <li key={'user-item'} className={cx('masthead-toolbar-btn-container', 'user-items')} >
                                                 {user.userMenuItems}
                                             </li>
                                         ]}
