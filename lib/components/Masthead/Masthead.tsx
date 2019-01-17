@@ -90,7 +90,6 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
             search,
             more
         } = this.props;
-        const userLabel = this.getUserLabel({ email: user.email, displayName: user.displayName });
         const items = this.getToolbarItems();
         const hidden = search && search.hidden;
         return (
@@ -181,7 +180,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                                 >
                                     <ul role='menu' id='user-menu'>
                                         {[
-                                            userLabel,
+                                            this.getUserLabel({ email: user.email, displayName: user.displayName }),
                                             <li className={cx('masthead-toolbar-btn-container', 'user-items')} >
                                                 {user.userMenuItems}
                                             </li>
