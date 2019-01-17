@@ -43,7 +43,11 @@ export interface MastheadProperties {
     branding: MethodNode;
     navigation?: NavigationProperties;
     search?: SearchItem;
-    more?: ToolbarItem;
+    more?: {
+        selected: boolean;
+        onClick: React.EventHandler<any>;
+        attr?: InlinePopup.Attributes;
+    };
     toolBarItems?: Array<ToolbarItem>;
     user?: UserItem;
 }
@@ -90,7 +94,6 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
             search,
             more
         } = this.props;
-        const userLabel = this.getUserLabel({ email: user.email, displayName: user.displayName });
         const items = this.getToolbarItems();
         const hidden = search && search.hidden;
         return (
@@ -132,21 +135,16 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                         </li>}
                         {more && !more.selected && items}
                         {more &&
-                            <li key='item-more' className={cx('more-button')}>
+                            <li key='item-more' className={cx('more-button')} title={more.attr && more.attr.ariaLabel}>
                                 <InlinePopup.Container
                                     expanded={more.selected}
                                     onClick={more.onClick}
+                                    attr={more.attr}
                                 >
                                     <InlinePopup.Label
-                                        className={cx('masthead-toolbar-btn', 'more-menu-btn', { active: !!more.selected })}
+                                        className={cx('masthead-toolbar-btn', 'more-menu-btn', { 'selected': more.selected })} onClick={more.onClick} attr={more.attr}
                                     >
-                                        <ActionTriggerButton
-                                            key='more'
-                                            attr={more.attr}
-                                            icon={more.icon}
-                                            onClick={more.onClick}
-                                            className={cx('masthead-toolbar-btn', { 'selected': more.selected })}
-                                        />
+                                        <Attr.span className={cx('icon icon-more')} />
                                     </InlinePopup.Label>
                                     <InlinePopup.Panel
                                         alignment='right'
@@ -181,8 +179,8 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                                 >
                                     <ul role='menu' id='user-menu'>
                                         {[
-                                            userLabel,
-                                            <li className={cx('masthead-toolbar-btn-container', 'user-items')} >
+                                            this.getUserLabel({ email: user.email, displayName: user.displayName }),
+                                            <li key={'user-item'} className={cx('masthead-toolbar-btn-container', 'user-items')} >
                                                 {user.userMenuItems}
                                             </li>
                                         ]}
