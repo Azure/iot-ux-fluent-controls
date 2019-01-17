@@ -43,7 +43,11 @@ export interface MastheadProperties {
     branding: MethodNode;
     navigation?: NavigationProperties;
     search?: SearchItem;
-    more?: ToolbarItem;
+    more?: {
+        selected: boolean;
+        onClick: React.EventHandler<any>;
+        attr?: InlinePopup.Attributes;
+    };
     toolBarItems?: Array<ToolbarItem>;
     user?: UserItem;
 }
@@ -131,21 +135,16 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                         </li>}
                         {more && !more.selected && items}
                         {more &&
-                            <li key='item-more' className={cx('more-button')}>
+                            <li key='item-more' className={cx('more-button')} title={more.attr && more.attr.ariaLabel}>
                                 <InlinePopup.Container
                                     expanded={more.selected}
                                     onClick={more.onClick}
+                                    attr={more.attr}
                                 >
                                     <InlinePopup.Label
-                                        className={cx('masthead-toolbar-btn', 'more-menu-btn', { active: !!more.selected })}
+                                        className={cx('masthead-toolbar-btn', 'more-menu-btn', { 'selected': more.selected })} onClick={more.onClick} attr={more.attr}
                                     >
-                                        <ActionTriggerButton
-                                            key='more'
-                                            attr={more.attr}
-                                            icon={more.icon}
-                                            onClick={more.onClick}
-                                            className={cx('masthead-toolbar-btn', { 'selected': more.selected })}
-                                        />
+                                        <Attr.span className={cx('icon icon-more')} />
                                     </InlinePopup.Label>
                                     <InlinePopup.Panel
                                         alignment='right'
