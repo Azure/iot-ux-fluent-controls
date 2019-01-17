@@ -35,7 +35,8 @@ describe('<Masthead />', () => {
         expect(wrapper.html()).to.contains('masthead');
         expect(wrapper.html()).to.contains('masthead-branding');
         expect(wrapper.html()).to.contains('masthead-toolbar');
-        expect(wrapper.html()).to.contains('search-input-button');
+        expect(wrapper.html()).to.contains('search-button');
         expect(wrapper.html()).to.contains('user-menu-item');
+
     });
 });
