@@ -5,6 +5,7 @@
 $search-max-width:400px;
 $search-min-width:280px;
 $search-icon-width: $grid-size*8;
+$search-icon-height: $grid-size*8;
 $border-radius-size: $grid-size/2;
 .search-input-container {
     position: relative;
@@ -13,7 +14,7 @@ $border-radius-size: $grid-size/2;
     max-width: $search-max-width;
     min-width: $search-min-width;
     width: 100%;
-    height: $search-icon-width;
+    height: $search-icon-height;
     border-radius: $border-radius-size;
 
     .search-prefix-icon {

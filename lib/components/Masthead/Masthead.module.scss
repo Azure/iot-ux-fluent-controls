@@ -108,6 +108,57 @@ $search-max-size: 100 * $grid-size;
         }
     }
 
+    .user-menu-item {
+
+        .user-items,
+        .user-label {
+            text-align: inherit;
+            background: none;
+            border: none;
+            padding: 0 $grid-size*4;
+            width: 100%;
+
+            &>* {
+                height: $layout-nav-item-height / 2;
+                display: block;
+            }
+
+            .name {
+                line-height: #{$layout-nav-item-height / 2 + $grid-size};
+            }
+
+            .email {
+                line-height: #{$layout-nav-item-height / 2 - 3*$grid-size};
+
+                @include themify {
+                    color: themed('color-text-placeholder');
+                }
+
+                font-size: $font-size-xsmall;
+                text-transform: uppercase;
+            }
+        }
+
+        .user-items {
+            padding: 0;
+
+            >* {
+                height: $layout-nav-item-height;
+                padding: 0 $grid-size*4 !important;
+            }
+        }
+    }
+
+    .user-thumbnail {
+        align-self: center;
+        font-size: $font-size-h2;
+        margin-right: $gutter-normal;
+
+        &.hidden {
+            display: none;
+        }
+    }
+
     .masthead-toolbar-container {
         width: 100% - $masthead-branding-width;
         text-align: right;
@@ -255,6 +306,7 @@ $search-max-size: 100 * $grid-size;
 
                 .masthead-toolbar-menu {
                     background-color: themed('color-bg-panel-contextual');
+                    color: themed('color-text-clear');
                     border: 0;
 
                     .masthead-toolbar-btn {
@@ -317,6 +369,21 @@ $search-max-size: 100 * $grid-size;
 
                         @include selected();
                     }
+                }
+            }
+        }
+
+        .user-menu-item {
+            .user-label {
+                .email {
+                    color: themed('color-text-placeholder');
+                }
+            }
+
+            .user-items {
+                >* {
+                    background-color: themed('color-bg-panel-contextual');
+                    color: themed('color-text-clear');
                 }
             }
         }

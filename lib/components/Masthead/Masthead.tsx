@@ -34,6 +34,9 @@ interface UserItem {
     onUserMenuClick?: React.EventHandler<any>;
     userMenuExpanded?: boolean;
     userMenuItems?: MethodNode;
+    thumbnailUrl?: string;
+    displayName: string;
+    email: string;
 }
 
 export interface MastheadProperties {
@@ -68,6 +71,18 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
         });
     }
 
+    getUserLabel = (props: { email: string; displayName: string; }) => {
+        return <li key='user' className={cx('masthead-toolbar-btn-container', 'user-label')}>
+            <span className={cx('name', 'inline-text-overflow')} title={props.displayName}>
+                {props.displayName}
+            </span>
+            <span data-test-hook='masthead-user-email' className={cx('email', 'inline-text-overflow')} title={props.email}>
+                {props.email}
+            </span>
+        </li >;
+    }
+
+
     render() {
         const {
             navigation,
@@ -75,7 +90,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
             search,
             more
         } = this.props;
-
+        const userLabel = this.getUserLabel({ email: user.email, displayName: user.displayName });
         const items = this.getToolbarItems();
         const hidden = search && search.hidden;
         return (
@@ -116,43 +131,45 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                             />
                         </li>}
                         {more && !more.selected && items}
-                        <li key='item-more' className={cx('more-button')}>
-                            <InlinePopup.Container
-                                expanded={more.selected}
-                                onClick={more.onClick}
-                            >
-                                <InlinePopup.Label
-                                    className={cx('masthead-toolbar-btn', 'more-menu-btn', { active: !!more.selected })}
+                        {more &&
+                            <li key='item-more' className={cx('more-button')}>
+                                <InlinePopup.Container
+                                    expanded={more.selected}
+                                    onClick={more.onClick}
                                 >
-                                    <ActionTriggerButton
-                                        key='more'
-                                        attr={more.attr}
-                                        icon={more.icon}
-                                        onClick={more.onClick}
-                                        className={cx('masthead-toolbar-btn', { 'selected': more.selected })}
-                                    />
-                                </InlinePopup.Label>
-                                <InlinePopup.Panel
-                                    alignment='right'
-                                    className={cx('masthead-toolbar-menu')}
-                                >
-                                    <ul role='menu' id='more-menu'>
-                                        {items}
-                                    </ul>
-                                </InlinePopup.Panel>
-                            </InlinePopup.Container>
-                        </li>
+                                    <InlinePopup.Label
+                                        className={cx('masthead-toolbar-btn', 'more-menu-btn', { active: !!more.selected })}
+                                    >
+                                        <ActionTriggerButton
+                                            key='more'
+                                            attr={more.attr}
+                                            icon={more.icon}
+                                            onClick={more.onClick}
+                                            className={cx('masthead-toolbar-btn', { 'selected': more.selected })}
+                                        />
+                                    </InlinePopup.Label>
+                                    <InlinePopup.Panel
+                                        alignment='right'
+                                        className={cx('masthead-toolbar-menu')}
+                                    >
+                                        <ul role='menu' id='more-menu'>
+                                            {items}
+                                        </ul>
+                                    </InlinePopup.Panel>
+                                </InlinePopup.Container>
+                            </li>
+                        }
                         {user && <li key='user-menu' className={cx('user-menu-item')}>
                             <InlinePopup.Container
                                 expanded={user.userMenuExpanded}
                                 onClick={user.onUserMenuClick}
                             >
                                 <InlinePopup.Label
-                                    className={cx('masthead-toolbar-btn', 'user-menu-btn', { active: !!user.userMenuExpanded })}
+                                    className={cx('masthead-toolbar-btn', 'user-menu-btn', { 'selected': !!user.userMenuExpanded })}
                                 >
                                     <Thumbnail
-                                        key='user-menu'
                                         kind='user'
+                                        url={this.props.user && this.props.user.thumbnailUrl}
                                         size='masthead'
                                         attr={{ 'aria-label': user.userMenuAriaLabel }}
                                         className={cx('masthead-toolbar-btn', 'user-btn')}
@@ -162,7 +179,14 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                                     alignment='right'
                                     className={cx('masthead-toolbar-menu')}
                                 >
-                                    {user.userMenuItems}
+                                    <ul role='menu' id='user-menu'>
+                                        {[
+                                            userLabel,
+                                            <li className={cx('masthead-toolbar-btn-container', 'user-items')} >
+                                                {user.userMenuItems}
+                                            </li>
+                                        ]}
+                                    </ul>
                                 </InlinePopup.Panel>
                             </InlinePopup.Container>
                         </li>
