@@ -3,18 +3,19 @@
 @import '../../common/mixins';
 
 $masthead-branding-width: 50%;
-$masthead-brandname-width: 200px;
+$masthead-brandname-width: $grid-size * 50;
 $masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
-$masthead-collapse-start: 660px;
+$masthead-collapse-start: 125 * $grid-size;
 $thumbnail-size: $icon-size-base * 2;
-$branding-min-width-size: 120px;
+$branding-min-width-size: 30 * $grid-size;
+$search-max-size: 100 * $grid-size;
 
 @mixin selected {
     &.selected {
-        background-color: themed('color-bg-searchbar');
+        background-color: themed('color-bg-panel-contextual');
 
         >* {
-            background-color: themed('color-bg-searchbar');
+            background-color: themed('color-bg-panel-contextual');
             color: themed('color-text-rest');
         }
 
@@ -23,12 +24,12 @@ $branding-min-width-size: 120px;
 
             >* {
                 outline: none;
-                color: themed('color-text-black');
+                color: themed('color-text-clear');
             }
         }
 
         &:active>* {
-            color: themed('color-text-black');
+            color: themed('color-text-clear');
         }
 
         &:hover,
@@ -57,11 +58,21 @@ $branding-min-width-size: 120px;
     flex-shrink: 0;
     justify-content: space-between;
 
+    .force-hide-search {
+        display: none !important;
+    }
+
+    .force-show-search {
+        display: block !important;
+        width: 100%;
+        max-width: unset;
+    }
+
     .nav-container {
         // show nav in masthead only in small screens:
         display: none;
 
-        @media(max-width: $screen-sm) {
+        @media(max-width: $screen-sm - 1) {
             width: $layout-nav-collapsed-width;
             display: initial;
         }
@@ -76,6 +87,7 @@ $branding-min-width-size: 120px;
 
         .nav-panel {
             width: $layout-nav-expanded-width;
+            padding: 0;
         }
     }
 
@@ -88,6 +100,64 @@ $branding-min-width-size: 120px;
         font-size: $font-size-h3;
         font-weight: bold;
         min-width: $branding-min-width-size;
+    }
+
+    .search-input-container {
+        @media(max-width: $screen-md - 1) {
+            display: none;
+        }
+    }
+
+    .user-menu-item {
+
+        .user-items,
+        .user-label {
+            text-align: inherit;
+            background: none;
+            border: none;
+            padding: 0 $grid-size*4;
+            width: 100%;
+
+            &>* {
+                height: $layout-nav-item-height / 2;
+                display: block;
+            }
+
+            .name {
+                line-height: #{$layout-nav-item-height / 2 + $grid-size};
+            }
+
+            .email {
+                line-height: #{$layout-nav-item-height / 2 - 3*$grid-size};
+
+                @include themify {
+                    color: themed('color-text-placeholder');
+                }
+
+                font-size: $font-size-xsmall;
+                text-transform: uppercase;
+            }
+        }
+
+        .user-items {
+            padding: 0;
+
+            >* {
+                height: $layout-nav-item-height;
+                padding: 0 $grid-size*4 !important;
+                text-align: left;
+            }
+        }
+    }
+
+    .user-thumbnail {
+        align-self: center;
+        font-size: $font-size-h2;
+        margin-right: $gutter-normal;
+
+        &.hidden {
+            display: none;
+        }
     }
 
     .masthead-toolbar-container {
@@ -103,6 +173,49 @@ $branding-min-width-size: 120px;
             flex-wrap: nowrap;
             justify-content: flex-end;
             list-style-type: none;
+
+
+            // hide the search-button that control the display of search-bar
+            .search-button {
+                @media(min-width: $screen-md) {
+                    display: none;
+                }
+            }
+
+            .more-button {
+                @media(min-width: $screen-sm) {
+                    display: none;
+                }
+            }
+
+            // hide the buttons container if the more button is not selected on small screen
+            // we are reusing the se list of item to populate the toolbar btn container and the inline popup
+            .masthead-toolbar-btn-container:not(.selected-more) {
+                @media(max-width: $screen-sm - 1) {
+                    display: none;
+                }
+            }
+
+            .masthead-toolbar-menu {
+                padding: 0;
+
+                ul {
+                    list-style: none;
+                    padding-left: 0;
+                    width: $layout-nav-expanded-width;
+
+                    .masthead-toolbar-btn-container {
+                        width: 100%;
+                        text-align: left;
+
+                        button {
+                            width: inherit;
+                            justify-content: left;
+                            padding: 0 1px;
+                        }
+                    }
+                }
+            }
 
             .masthead-toolbar-btn {
                 width: $layout-nav-item-height;
@@ -140,20 +253,11 @@ $branding-min-width-size: 120px;
                     }
                 }
 
-                &.sm {
-                    display: none;
+                span span {
 
-                    @media(max-width: $screen-sm) {
+                    // show the label of the action trigger button inside the inline popup of the more button
+                    @media(min-width: $screen-sm) {
                         // $screen-sm: 480px;
-                        display: inline-flex;
-                    }
-                }
-
-                &.md {
-                    display: inline-flex;
-
-                    @media(max-width: $screen-md) {
-                        // $screen-md: 768px;
                         display: none;
                     }
                 }
@@ -166,8 +270,56 @@ $branding-min-width-size: 120px;
         color: themed('color-text-white');
         background-color: themed('color-bg-masthead');
 
+        .nav-container {
+            color: themed('color-text-white');
+
+            .nav-panel {
+                border: 0;
+            }
+
+            .nav-icon-collapsed {
+                background-color: themed('color-bg-masthead');
+                color: themed('color-text-white');
+            }
+
+            .nav-icon-expanded {
+                background-color: themed('color-bg-panel-contextual');
+                color: themed('color-text-clear');
+
+                :hover {
+                    background-color: themed('color-bg-panel-contextual');
+                }
+            }
+
+            :global(.global-nav-item) {
+                background-color: themed('color-bg-panel-contextual');
+                color: themed('color-text-clear');
+
+                &:hover,
+                &:active {
+                    background-color: themed('color-bg-masthead-hover');
+                }
+            }
+        }
+
         .masthead-toolbar-container {
             .masthead-toolbar {
+
+                .masthead-toolbar-menu {
+                    background-color: themed('color-bg-panel-contextual');
+                    color: themed('color-text-clear');
+                    border: 0;
+
+                    .masthead-toolbar-btn {
+                        background-color: themed('color-bg-panel-contextual');
+
+                        >* {
+                            background-color: themed('color-bg-panel-contextual');
+                            color: themed('color-text-clear');
+                        }
+                    }
+
+                }
 
                 .masthead-toolbar-btn,
                 .masthead-toolbar-btn>* {
@@ -221,6 +373,21 @@ $branding-min-width-size: 120px;
                 }
             }
         }
+
+        .user-menu-item {
+            .user-label {
+                .email {
+                    color: themed('color-text-placeholder');
+                }
+            }
+
+            .user-items {
+                >* {
+                    background-color: themed('color-bg-panel-contextual');
+                    color: themed('color-text-clear');
+                }
+            }
+        }
     }
 
     // RTL
@@ -235,12 +402,28 @@ $branding-min-width-size: 120px;
             direction: rtl;
             text-align: left;
 
+            .masthead-toolbar-menu {
+                ul {
+                    padding-right: 0;
+                }
+            }
+
             .masthead-toolbar-btn {
                 @include themify {
                     border-right: 1px solid themed('color-border-panel');
                 }
 
                 border-left: 0;
+            }
+        }
+
+
+        .user-menu-item {
+            .user-label,
+            .user-items {
+                >* {
+                    text-align: right;
+                }
             }
         }
     }

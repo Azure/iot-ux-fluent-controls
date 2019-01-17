@@ -75,7 +75,7 @@
     }
     
     // don't show global-nav for small screens: it should be part of masthead instead.
-    @media(max-width: $screen-sm) {
+    @media(max-width: $screen-sm - 1) {
         display: none;
     }
 }

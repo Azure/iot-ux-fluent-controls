@@ -17,7 +17,7 @@ $title-font-size: $gutter-normal;
     padding: $gutter-normal;
     z-index: $z-index-flyout-layer;
 
-    @media(max-width: $screen-md) {
+    @media(max-width: $screen-sm - 1) {
         width: 100%;
     }
 
