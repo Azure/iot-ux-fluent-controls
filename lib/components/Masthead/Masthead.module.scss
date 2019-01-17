@@ -87,6 +87,7 @@ $search-max-size: 100 * $grid-size;
 
         .nav-panel {
             width: $layout-nav-expanded-width;
+            padding: 0;
         }
     }
 
@@ -143,19 +144,23 @@ $search-max-size: 100 * $grid-size;
                 }
             }
 
-            .masthead-toolbar-menu ul {
-                list-style: none;
-                padding-left: 0;
-                width: $layout-nav-expanded-width;
+            .masthead-toolbar-menu {
+                padding: 0;
 
-                .masthead-toolbar-btn-container {
-                    width: 100%;
-                    text-align: left;
+                ul {
+                    list-style: none;
+                    padding-left: 0;
+                    width: $layout-nav-expanded-width;
 
-                    button {
-                        width: inherit;
-                        justify-content: left;
-                        padding: 0 1px;
+                    .masthead-toolbar-btn-container {
+                        width: 100%;
+                        text-align: left;
+
+                        button {
+                            width: inherit;
+                            justify-content: left;
+                            padding: 0 1px;
+                        }
                     }
                 }
             }

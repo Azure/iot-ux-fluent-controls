@@ -51,14 +51,13 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
         if (!this.props.toolBarItems) {
             return null;
         }
-        return this.props.toolBarItems.map((item) => {
+        return this.props.toolBarItems.map((item, idx) => {
             const { label, icon, onClick, selected, attr } = item;
 
             return (
-                <li className={cx('masthead-toolbar-btn-container', { 'selected-more': this.props.more.selected })}>
+                <li key={idx} className={cx('masthead-toolbar-btn-container', { 'selected-more': this.props.more.selected })}>
                     < ActionTriggerButton
                         label={label}
-                        key={label}
                         attr={attr}
                         icon={icon}
                         onClick={onClick}
