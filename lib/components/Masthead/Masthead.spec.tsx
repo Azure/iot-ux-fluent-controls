@@ -23,6 +23,8 @@ describe('<Masthead />', () => {
             }]}
             user={{
                 userMenuAriaLabel: 'aria-label',
+                displayName: 'test',
+                email: 'test',
                 userMenuItems: [{
                     key: 'test',
                     label: 'test',

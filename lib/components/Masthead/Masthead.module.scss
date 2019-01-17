@@ -145,6 +145,7 @@ $search-max-size: 100 * $grid-size;
             >* {
                 height: $layout-nav-item-height;
                 padding: 0 $grid-size*4 !important;
+                text-align: left;
             }
         }
     }
@@ -413,6 +414,16 @@ $search-max-size: 100 * $grid-size;
                 }
 
                 border-left: 0;
+            }
+        }
+
+
+        .user-menu-item {
+            .user-label,
+            .user-items {
+                >* {
+                    text-align: right;
+                }
             }
         }
     }
