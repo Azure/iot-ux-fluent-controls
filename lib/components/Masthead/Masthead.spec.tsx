@@ -10,8 +10,6 @@ describe('<Masthead />', () => {
             branding='brand'
             search={{ label: 'search', onSubmit: () => { }, value: '', onChange: () => { }, onClick: () => { } }}
             more={{
-                label: 'label',
-                icon: 'icon icon-help',
                 onClick: () => { },
                 selected: false
             }}
@@ -47,8 +45,6 @@ describe('<Masthead />', () => {
             branding='brand'
             search={{ label: 'search', onSubmit: () => { }, value: '', onChange: () => { }, onClick: () => { } }}
             more={{
-                label: 'label',
-                icon: 'icon icon-help',
                 onClick: () => { },
                 selected: false
             }}
@@ -58,7 +54,7 @@ describe('<Masthead />', () => {
                 onClick: () => { },
                 selected: false
             }]}
-            
+
         />);
 
         // Render the masthead
@@ -73,8 +69,6 @@ describe('<Masthead />', () => {
         const wrapper = shallow(<Masthead
             branding='brand'
             more={{
-                label: 'label',
-                icon: 'icon icon-help',
                 onClick: () => { },
                 selected: false
             }}
@@ -109,8 +103,6 @@ describe('<Masthead />', () => {
             branding='brand'
             search={{ label: 'search', onSubmit: () => { }, value: '', onChange: () => { }, onClick: () => { } }}
             more={{
-                label: 'label',
-                icon: 'icon icon-help',
                 onClick: () => { },
                 selected: false
             }}
