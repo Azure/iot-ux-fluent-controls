@@ -6,7 +6,6 @@ $search-max-width:400px;
 $search-min-width:280px;
 $search-icon-width: $grid-size*8;
 $border-radius-size: $grid-size/2;
-$search-input-rest: #AEAEAE; //Fixed value for both the theme
 .search-input-container {
     position: relative;
     display: inline-flex;
@@ -78,7 +77,7 @@ $search-input-rest: #AEAEAE; //Fixed value for both the theme
         }
 
         input.input-component {
-            background-color: $search-input-rest;
+            background-color: themed('color-bg-searchbar-rest');
             color: themed('color-text-black');
 
             &::placeholder {
@@ -88,7 +87,7 @@ $search-input-rest: #AEAEAE; //Fixed value for both the theme
             &:hover,
             &:focus,
             &:active {
-                background-color: themed('color-text-white');
+                background-color: themed('color-bg-searchbar-focus');
             }
 
             &:focus,

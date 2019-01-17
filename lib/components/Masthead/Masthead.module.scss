@@ -3,19 +3,19 @@
 @import '../../common/mixins';
 
 $masthead-branding-width: 50%;
-$masthead-brandname-width: 200px;
+$masthead-brandname-width: $grid-size * 50;
 $masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
-$masthead-collapse-start: 660px;
+$masthead-collapse-start: 125 * $grid-size;
 $thumbnail-size: $icon-size-base * 2;
-$branding-min-width-size: 120px;
-$search-max-size: 400px;
+$branding-min-width-size: 30 * $grid-size;
+$search-max-size: 100 * $grid-size;
 
 @mixin selected {
     &.selected {
-        background-color: themed('color-bg-searchbar');
+        background-color: themed('color-bg-panel-contextual');
 
         >* {
-            background-color: themed('color-bg-searchbar');
+            background-color: themed('color-bg-panel-contextual');
             color: themed('color-text-rest');
         }
 
@@ -58,11 +58,11 @@ $search-max-size: 400px;
     flex-shrink: 0;
     justify-content: space-between;
 
-    .forceHideSearch {
+    .force-hide-search {
         display: none !important;
     }
 
-    .forceShowSearch {
+    .force-show-search {
         display: block !important;
         width: 100%;
         max-width: unset;
@@ -107,32 +107,6 @@ $search-max-size: 400px;
         }
     }
 
-    .search-input-button {
-        @media(min-width: $screen-md - 1) {
-            display: inherit;
-        }
-
-        @media(min-width: $screen-md) {
-            display: none;
-        }
-    }
-
-    .more-menu-item {
-        display: none;
-
-        @media(max-width: $screen-sm - 1) {
-            display: inherit;
-        }
-    }
-
-    .show-label {
-        display: none;
-
-        @media(min-width: $screen-sm - 1) {
-            display: inherit;
-        }
-    }
-
     .masthead-toolbar-container {
         width: 100% - $masthead-branding-width;
         text-align: right;
@@ -147,12 +121,34 @@ $search-max-size: 400px;
             justify-content: flex-end;
             list-style-type: none;
 
+
+            // hide the search-button that control the display of search-bar
+            .search-button {
+                @media(min-width: $screen-md) {
+                    display: none;
+                }
+            }
+
+            .more-button {
+                @media(min-width: $screen-sm) {
+                    display: none;
+                }
+            }
+
+            // hide the buttons container if the more button is not selected on small screen
+            // we are reusing the se list of item to populate the toolbar btn container and the inline popup
+            .masthead-toolbar-btn-container:not(.selected-more) {
+                @media(max-width: $screen-sm - 1) {
+                    display: none;
+                }
+            }
+
             .masthead-toolbar-menu ul {
                 list-style: none;
                 padding-left: 0;
                 width: $layout-nav-expanded-width;
 
-                li {
+                .masthead-toolbar-btn-container {
                     width: 100%;
                     text-align: left;
 
@@ -179,8 +175,6 @@ $search-max-size: 400px;
                 vertical-align: middle;
                 align-content: center;
 
-                //TODO: fix action trigger hover issue
-                // transition: background-color 0.467s cubic-bezier(0.1, 0.9, 0.2, 1) 34ms; 
                 &:focus,
                 &:active {
                     outline-offset: -1px;
@@ -204,8 +198,8 @@ $search-max-size: 400px;
 
                 span span {
 
-                    // show the label on the inline popup for the ... button
-                    @media(min-width: $screen-sm - 1) {
+                    // show the label of the action trigger button inside the inline popup of the more button
+                    @media(min-width: $screen-sm) {
                         // $screen-sm: 480px;
                         display: none;
                     }
@@ -219,11 +213,54 @@ $search-max-size: 400px;
         color: themed('color-text-white');
         background-color: themed('color-bg-masthead');
 
+        .nav-container {
+            color: themed('color-text-white');
+
+            .nav-panel {
+                border: 0;
+            }
+
+            .nav-icon-collapsed {
+                background-color: themed('color-bg-masthead');
+                color: themed('color-text-white');
+            }
+
+            .nav-icon-expanded {
+                background-color: themed('color-bg-panel-contextual');
+                color: themed('color-text-clear');
+
+                :hover {
+                    background-color: themed('color-bg-panel-contextual');
+                }
+            }
+
+            :global(.global-nav-item) {
+                background-color: themed('color-bg-panel-contextual');
+                color: themed('color-text-clear');
+
+                &:hover,
+                &:active {
+                    background-color: themed('color-bg-masthead-hover');
+                }
+            }
+        }
+
         .masthead-toolbar-container {
             .masthead-toolbar {
 
                 .masthead-toolbar-menu {
-                    background-color: themed('color-bg-searchbar');
+                    background-color: themed('color-bg-panel-contextual');
+                    border: 0;
+
+                    .masthead-toolbar-btn {
+                        background-color: themed('color-bg-panel-contextual');
+
+                        >* {
+                            background-color: themed('color-bg-panel-contextual');
+                            color: themed('color-text-clear');
+                        }
+                    }
+
                 }
 
                 .masthead-toolbar-btn,
