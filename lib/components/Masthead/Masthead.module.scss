@@ -247,7 +247,7 @@ $search-max-size: 100 * $grid-size;
                 &.user-btn {
                     width: $thumbnail-size;
                     height: $thumbnail-size;
-                    border-radius: 100%;
+                    border-radius: 50%;
                     
                     :global(.icon) {
                         font-size: $icon-size-base;
