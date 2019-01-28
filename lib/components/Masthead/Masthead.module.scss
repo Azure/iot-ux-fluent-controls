@@ -6,7 +6,7 @@ $masthead-branding-width: 50%;
 $masthead-brandname-width: $grid-size * 50;
 $masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
 $masthead-collapse-start: 125 * $grid-size;
-$thumbnail-size: $icon-size-base * 2;
+$thumbnail-size: 36px; // match @user-thumbnail-size in Thumbnail.module.scss
 $branding-min-width-size: 30 * $grid-size;
 $search-max-size: 100 * $grid-size;
 
@@ -245,11 +245,12 @@ $search-max-size: 100 * $grid-size;
                 }
 
                 &.user-btn {
-                    >:global(.icon-alias-user) {
-                        width: $thumbnail-size;
-                        height: $thumbnail-size;
-                        font-size: $font-size-h5;
-                        border-radius: 50%;
+                    width: $thumbnail-size;
+                    height: $thumbnail-size;
+                    border-radius: 100%;
+                    
+                    :global(.icon) {
+                        font-size: $icon-size-base;
                     }
                 }
 

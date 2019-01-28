@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import { Elements as Attr, DivProps } from '../../Attributes';
+import { Elements as Attr, DivProps, ImageProps } from '../../Attributes';
 const cx = classNames.bind(require('./Thumbnail.module.scss'));
 
 /**
@@ -31,8 +31,13 @@ export interface ThumbnailProperties {
     // this is supposed to be one of the presets present - if not passed it defaults to preview
     // size should be controlled by the
     size?: 'preview' | 'masthead' | 'list-item' | 'list-tile' | 'search-result';
+
+    ariaLabel?: string;
     
-    attr?: DivProps; 
+    attr?: {
+        container?: DivProps;
+        img?: ImageProps;
+    }; 
 }
 
 /**
@@ -56,10 +61,19 @@ const kindIcons = {
     'missing': 'icon-alias-missing-image'
 };
 
-export class Thumbnail extends React.PureComponent<ThumbnailProperties, ThumbnailState> {
+export class Thumbnail extends React.Component<ThumbnailProperties, ThumbnailState> {
+    private imgRef = React.createRef<HTMLImageElement>();
+    
     constructor(props: ThumbnailProperties) {
         super(props);
         this.state = { imageLoaded: false };
+    }
+
+    componentDidMount() {
+        const { current } = this.imgRef;
+        if (current && current.complete) {
+            this.handleImageLoad();
+        }
     }
 
     render() {
@@ -70,15 +84,23 @@ export class Thumbnail extends React.PureComponent<ThumbnailProperties, Thumbnai
             let icon = this.props.icon || kindIcons[this.props.kind];
             return <Attr.div className={className} {...this.props.attr}>
                 {!!this.props.url
-                    ? <Attr.image className={cx({ 'hidden': !this.state.imageLoaded })}
+                    ? <img className={cx({ 'hidden': !this.state.imageLoaded })}
+                        ref={this.imgRef}
                         src={this.props.url}
-                        onLoad={() => this.setState({imageLoaded: true})}/>
+                        aria-label={this.props.ariaLabel}
+                        onLoad={this.handleImageLoad} />
                     : null}
                 {!!icon
-                    ? <Attr.span className={cx('icon', icon)}/>
+                    ? <span className={cx('icon', icon, { 'hidden': this.state.imageLoaded })} />
                     : null}
             </Attr.div>;
         }
+    }
+
+    private handleImageLoad = () => {
+        this.setState({
+            imageLoaded: true
+        });
     }
 }
 

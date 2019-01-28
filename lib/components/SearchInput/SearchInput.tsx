@@ -3,7 +3,6 @@ import * as classNames from 'classnames/bind';
 import { Icon } from '../Icon';
 import TextInput, { TextInputType, TextInputAttributes } from '../Input/TextInput';
 import { ActionTriggerButton } from '../ActionTrigger';
-import { throws } from 'assert';
 const css = classNames.bind(require('./SearchInput.module.scss'));
 
 export const prefixClassName = css('prefix-addon');
@@ -13,8 +12,8 @@ export const postfixClassName = css('postfix-addon');
 
 export interface SearchInputProps extends React.Props<TextInputType> {
     label: string;
-    onClick: (event: any) => void;
-    onChange: (event: any) => void;
+    onSubmit: React.EventHandler<any>;
+    onChange: (newValue: string) => void;
     value: string;
     containerClassName?: string;
     inputClassName?: string;
@@ -23,24 +22,18 @@ export interface SearchInputProps extends React.Props<TextInputType> {
 
 
 export class SearchInput extends React.PureComponent<SearchInputProps> {
-
-    public static defaultProps: Partial<SearchInputProps> = {
-        label: undefined,
-        value: undefined,
-        onChange: undefined,
-        onClick: undefined
-    };
-
     render() {
-
         const postfix = (
             this.props.value
-                ? <ActionTriggerButton onClick={this.props.onClick} icon='forward' className={css('search-button')} attr={{ container: this.props.attr ? this.props.attr.postfix : null }} />
+                ? <ActionTriggerButton onClick={this.props.onSubmit} icon='forward' className={css('search-button')} attr={{ 
+                    button: { title: this.props.label, type: 'submit' },
+                    container: this.props.attr ? this.props.attr.postfix : null 
+                }} />
                 : null
         );
 
         return (
-            <div className={css('search-input-container', this.props.containerClassName)}>
+            <form className={css('search-input-container', this.props.containerClassName)} onSubmit={this.props.onSubmit}>
                 <Icon icon='search' className={css('search-prefix-icon')} />
                 <TextInput
                     name='search-input'
@@ -51,11 +44,16 @@ export class SearchInput extends React.PureComponent<SearchInputProps> {
                     postfix={postfix}
                     postfixClassName={css('search-button-container')}
                     attr={{
-                        input: { className: css('input-component'), autoComplete: 'off' }
+                        input: { 
+                            className: css('input-component'), 
+                            autoComplete: 'off', 
+                            'aria-label': this.props.label,
+                            type: 'search', 
+                            ...(this.props.attr && this.props.attr.input)
+                        }
                     }}
                 />
-
-            </div>
+            </form>
         );
     }
 }

@@ -13,8 +13,6 @@ export * from './components/InlinePopup';
 export * from './components/Input';
 export * from './components/List';
 export * from './components/Loader';
-export * from './components/Masthead';
-export * from './components/Navigation';
 export * from './components/Pivot';
 export * from './components/Shell';
 export * from './components/Thumbnail';

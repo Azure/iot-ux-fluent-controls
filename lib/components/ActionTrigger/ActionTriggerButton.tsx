@@ -41,6 +41,7 @@ export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonPr
             }, props.className)}
             disabled={props.disabled}
             tabIndex={props.tabIndex}
+            title={props.label}
             attr={props.attr.button}
         >
             <ActionTrigger
