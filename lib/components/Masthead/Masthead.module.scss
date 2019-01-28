@@ -6,7 +6,7 @@ $masthead-branding-width: 50%;
 $masthead-brandname-width: $grid-size * 50;
 $masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
 $masthead-collapse-start: 125 * $grid-size;
-$thumbnail-size: 36px; // match @user-thumbnail-size in Thumbnail.module.scss
+$thumbnail-size: 3 * $gutter-xsmall; // match @user-thumbnail-size in Thumbnail.module.scss
 $branding-min-width-size: 30 * $grid-size;
 $search-max-size: 100 * $grid-size;
 

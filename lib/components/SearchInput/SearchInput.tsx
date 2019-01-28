@@ -33,7 +33,7 @@ export class SearchInput extends React.PureComponent<SearchInputProps> {
         );
 
         return (
-            <form className={css('search-input-container', this.props.containerClassName)} onSubmit={this.props.onSubmit}>
+            <form className={css('search-input-container', this.props.containerClassName)} onSubmit={this.props.onSubmit} role='search'>
                 <Icon icon='search' className={css('search-prefix-icon')} />
                 <TextInput
                     name='search-input'

@@ -118,6 +118,7 @@ export class TextInput extends React.PureComponent<TextInputProps> {
             className={cancelClassName}
             onClick={this.onClear}
             tabIndex={-1}
+            aria-label='Cancel'
             attr={this.props.attr.clearButton}
         />;
 
