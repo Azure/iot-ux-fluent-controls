@@ -8,7 +8,7 @@ describe('<SearchInput />', () => {
     it(`properly passes all the params with value null, render Search but not the search button`, () => {
         const wrapper = shallow(<SearchInput
             label='search'
-            onClick={() => alert('onclick')}
+            onSubmit={() => alert('onclick')}
             value=''
             onChange={() => alert('onchange')}
         />);
@@ -18,7 +18,7 @@ describe('<SearchInput />', () => {
     it(`properly passes all the params with value not null, render Search with the search button`, () => {
         const wrapper = shallow(<SearchInput
             label='search'
-            onClick={() => alert('onclick')}
+            onSubmit={() => alert('onclick')}
             value='value'
             onChange={() => alert('onchange')}
         />);

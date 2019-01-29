@@ -8,22 +8,22 @@ describe('<Masthead />', () => {
     it('properly passes all the params, render Masthead', () => {
         const wrapper = shallow(<Masthead
             branding='brand'
-            search={{ label: 'search', onSubmit: () => { }, value: '', onChange: () => { }, onClick: () => { } }}
+            search={{ label: 'search', onSubmit: () => { }, value: '', onChange: () => { }, onExpand: () => { } }}
             more={{
+                title: 'More',
                 onClick: () => { },
                 selected: false
             }}
-            toolBarItems={[{
+            toolbarItems={[{
                 label: 'label',
                 icon: 'icon icon-help',
                 onClick: () => { },
                 selected: false
             }]}
             user={{
-                userMenuAriaLabel: 'aria-label',
                 displayName: 'test',
                 email: 'test',
-                userMenuItems: [{
+                menuItems: [{
                     key: 'test',
                     label: 'test',
                     onClick: () => alert('user')
@@ -43,12 +43,13 @@ describe('<Masthead />', () => {
     it('properly passes all the params and no user, render Masthead without user button', () => {
         const wrapper = shallow(<Masthead
             branding='brand'
-            search={{ label: 'search', onSubmit: () => { }, value: '', onChange: () => { }, onClick: () => { } }}
+            search={{ label: 'search', onSubmit: () => { }, value: '', onChange: () => { }, onExpand: () => { } }}
             more={{
+                title: 'More',
                 onClick: () => { },
                 selected: false
             }}
-            toolBarItems={[{
+            toolbarItems={[{
                 label: 'label',
                 icon: 'icon icon-help',
                 onClick: () => { },
@@ -69,20 +70,20 @@ describe('<Masthead />', () => {
         const wrapper = shallow(<Masthead
             branding='brand'
             more={{
+                title: 'More',
                 onClick: () => { },
                 selected: false
             }}
-            toolBarItems={[{
+            toolbarItems={[{
                 label: 'label',
                 icon: 'icon icon-help',
                 onClick: () => { },
                 selected: false
             }]}
             user={{
-                userMenuAriaLabel: 'aria-label',
                 displayName: 'test',
                 email: 'test',
-                userMenuItems: [{
+                menuItems: [{
                     key: 'test',
                     label: 'test',
                     onClick: () => alert('user')
@@ -101,16 +102,16 @@ describe('<Masthead />', () => {
     it('properly passes all the params and no toolbar, render Masthead without toolbar', () => {
         const wrapper = shallow(<Masthead
             branding='brand'
-            search={{ label: 'search', onSubmit: () => { }, value: '', onChange: () => { }, onClick: () => { } }}
+            search={{ label: 'search', onSubmit: () => { }, value: '', onChange: () => { }, onExpand: () => { } }}
             more={{
+                title: 'More',
                 onClick: () => { },
                 selected: false
             }}
             user={{
-                userMenuAriaLabel: 'aria-label',
                 displayName: 'test',
                 email: 'test',
-                userMenuItems: [{
+                menuItems: [{
                     key: 'test',
                     label: 'test',
                     onClick: () => alert('user')

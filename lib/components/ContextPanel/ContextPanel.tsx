@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
 import { ActionTriggerButton, ActionTriggerButtonAttributes, ActionTriggerAttributes } from '../ActionTrigger';
-import { Elements as Attr, DivProps, HeaderProps, FooterProps } from '../../Attributes';
+import { Elements as Attr, DivProps } from '../../Attributes';
 import { Portal } from './portal';
 
 const cx = classnames.bind(require('./ContextPanel.module.scss'));
@@ -13,9 +13,9 @@ export interface ContextPanelProperties {
     footer?: React.ReactNode;
     attr?: {
         container?: DivProps;
-        header?: HeaderProps;
+        header?: DivProps;
         content?: DivProps;
-        footer?: FooterProps;
+        footer?: DivProps;
         closeButton?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
     };
 }
@@ -36,19 +36,19 @@ export function ContextPanel({ header, children, footer, onClose, attr }: Contex
                     onClick={onClose}
                     attr={attr && attr.closeButton}
                 />}
-                {header && <Attr.header 
+                {header && <Attr.div 
                     id='context-panel-title' 
                     className={cx('title', 'inline-text-overflow')} 
                     attr={attr && attr.header}
                     >
                     {header}
-                </Attr.header>}
+                </Attr.div>}
                 <Attr.div id='context-panel-content' className={cx('content')} attr={attr && attr.content}>
                     {children}
                 </Attr.div>
                 {footer && <React.Fragment>
                     <span className={cx('separator')} />
-                    <Attr.footer className={cx('footer')} attr={attr && attr.footer}>{footer}</Attr.footer>
+                    <Attr.div className={cx('footer')} attr={attr && attr.footer}>{footer}</Attr.div>
                 </React.Fragment>}
             </Attr.div>
         </Portal>
