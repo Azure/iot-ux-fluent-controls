@@ -2,220 +2,216 @@ import * as React from 'react';
 import * as classnames from 'classnames/bind';
 import { MethodNode } from '../../Common';
 import * as InlinePopup from '../InlinePopup';
-import { Accordion } from '../Accordion';
 import { Thumbnail } from '../Thumbnail';
-import { MastheadToolbarItemProperties, MastheadToolbarItem } from './MastheadToolbar';
+import { NavigationProperties } from '../Navigation/Navigation';
+import { ActionTriggerButton, ActionTriggerAttributes, ActionTriggerButtonAttributes } from '../ActionTrigger';
+import { Elements as Attr } from '../../Attributes';
+import { SearchInput } from '../SearchInput/SearchInput';
+import { TextInputAttributes } from '../Input/TextInput';
 
 const cx = classnames.bind(require('./Masthead.module.scss'));
 
-export interface MastheadAttributes {
-    userMenuAriaLabel?: string;
-    mobileMenuAriaLabel?: string;
+export interface MastheadToolbarItem {
+    icon: string; // TODO: update with MethodNode
+    label: string;
+    selected: boolean;
+    onClick: React.EventHandler<any>;
+    attr?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
+}
+
+export interface MastheadSearchItem {
+    /** The placeholder text for the search input */
+    label: string;
+
+    /** The user input value */
+    value: string;
+    
+    /** 
+     * For small screen sizes, the search input is collapsed and replaced with a
+     * toolbar button. When the button is clicked, the input is shown and occupies
+     * the full width of the masthead. This field controls whether or not the full
+     * width expanded view is shown.
+     */
+    expanded?: boolean;
+    
+    /** Event handler to call when the search input should be submitted. */
+    onSubmit: React.EventHandler<any>;
+    
+    /** Event handler to call when the search `value` should be changed. */
+    onChange: (newValue: string) => void;
+    
+    /** Event handler to call when the `expanded` property  should be toggled. */
+    onExpand: React.EventHandler<any>;
+    
+    attr?: TextInputAttributes;
+}
+
+export interface MastheadUserItem {
+    onMenuClick?: React.EventHandler<any>;
+    menuExpanded?: boolean;
+    menuItems?: MethodNode;
+    thumbnailUrl?: string;
+    displayName: string;
+    email: string;
+    attr?: InlinePopup.Attributes;
 }
 
 export interface MastheadProperties {
     branding: MethodNode;
-    user?: MastheadUserProperties;
-    toolbarItems?: MastheadToolbarItemProperties[];
-    mobileMenuItems?: MastheadMobileMenuItem[];
-    attr?: MastheadAttributes;
+    navigation?: NavigationProperties;
+    search?: MastheadSearchItem;
+    more?: {
+        selected: boolean;
+        onClick: React.EventHandler<any>;
+        title: string;
+        attr?: InlinePopup.Attributes;
+    };
+    toolbarItems?: Array<MastheadToolbarItem>;
+    user?: MastheadUserItem;
 }
-
-export interface MastheadUserProperties {
-    email: string;
-    displayName: string;
-    menuItems: MastheadUserMenuItem[];
-    menuExpanded?: boolean;
-    onMenuClick: () => void;
-    thumbnailUrl?: string;
-}
-
-export type MastheadMobileMenuItem = {
-    dataTestHook: string;
-    menuLabel: string;
-    reactKey: string;
-} & ({
-    type: 'link';
-    href: string;
-} | {
-    type: 'button';
-    onClick: () => {}; // item is an action button
-} | {
-    type: 'submenu';
-    content: React.ReactElement<any> | Array<React.ReactElement<any>> | React.ReactChildren | React.ReactNode;
-    expanded?: boolean;
-    onToggle: () => {}; // item is an accordion menu
-});
-
-export interface MastheadUserMenuItem {
-    key: string;
-    label: string;
-    onClick?: () => void;
-    href?: string;
-}
-
-const UserLabel = (props: { email: string; displayName: string; }) =>
-    <div className={cx('user-label')}>
-        <span className={cx('name', 'inline-text-overflow')} title={props.displayName}>
-            {props.displayName}
-        </span>
-        <span data-test-hook='masthead-user-email' className={cx('email', 'inline-text-overflow')} title={props.email}>
-            {props.email}
-        </span>
-    </div>;
 
 export class Masthead extends React.PureComponent<MastheadProperties> {
-    public static defaultProps: Partial<MastheadProperties> = {
-        attr: {
-            userMenuAriaLabel: null,
-            mobileMenuAriaLabel: null
+
+    getToolbarItems = () => {
+        if (!this.props.toolbarItems) {
+            return null;
         }
-    };
+        return this.props.toolbarItems.map((item, idx) => {
+            const { label, icon, onClick, selected, attr } = item;
 
-    componentDidUpdate(prevProps: MastheadProperties) {
-        // close expanded accordions in the mobile menu when the menu closes
-        if (this.props.mobileMenuItems && prevProps.user && prevProps.user.menuExpanded && !this.props.user.menuExpanded) {
-            for (const action of this.props.mobileMenuItems) {
-                if (action.type === 'submenu' && action.expanded) {
-                    action.onToggle();
-                }
-            }
-        }
+            return (
+                <li key={idx} className={cx('masthead-toolbar-btn-container', { 'selected-more': this.props.more.selected })}>
+                    < ActionTriggerButton
+                        label={label}
+                        attr={attr}
+                        icon={icon}
+                        onClick={onClick}
+                        className={cx('masthead-toolbar-btn', { 'selected': selected })}
+                    />
+                </li >
+            );
+        });
     }
 
-    getUserMenuItems() {
-        const {
-            menuItems
-        } = this.props.user;
-
-        return menuItems.map(item =>
-             <li
-                className={cx('masthead-toolbar-menu-item', 'inline-text-overflow')}
-                key={item.key}
-            >
-                <button
-                    aria-label={item.label}
-                    className={cx('inline-text-overflow')}
-                    data-test-hook={`masthead-toolbar-${item.key}`}
-                    onClick={item.onClick}
-                    role='menuitem'
-                >
-                    {item.label}
-                </button>
-            </li>
-        );
+    getUserLabel = (props: { email: string; displayName: string; }) => {
+        return <li key='user' className={cx('masthead-toolbar-btn-container', 'user-label')}>
+            <span className={cx('name', 'inline-text-overflow')} title={props.displayName}>
+                {props.displayName}
+            </span>
+            <span data-test-hook='masthead-user-email' className={cx('email', 'inline-text-overflow')} title={props.email}>
+                {props.email}
+            </span>
+        </li >;
     }
 
-    renderMobileMenu() {
-        return <ul role='menu' id='app-menu'>
-            <li key='user-label' className={cx('masthead-toolbar-menu-item', 'tall', 'inline-text-overflow')}>
-                <UserLabel {...this.props.user} />
-            </li>
-            {
-                this.props.mobileMenuItems &&
-                this.props.mobileMenuItems.map(action => {
-                    switch (action.type) {
-                        case 'link':
-                            return <li
-                                    className={cx('masthead-toolbar-menu-item', 'inline-text-overflow')}
-                                    key={action.reactKey}
-                                >
-                                    <a role='menuitem' href={action.href}>
-                                        {action.menuLabel}
-                                    </a>
-                                </li>;
-                        case 'button':
-                            return <li
-                                    className={cx('masthead-toolbar-menu-item', 'inline-text-overflow')}
-                                    key={action.reactKey}
-                                >
-                                    <button className={cx('inline-text-overflow')} role='menuitem' onClick={action.onClick}>
-                                        {action.menuLabel}
-                                    </button>
-                                </li>;
-                        case 'submenu':
-                            return <li
-                                    className={cx('masthead-toolbar-menu-item', 'tall', 'sub-menu')}
-                                    key={action.reactKey}
-                                >
-                                    <Accordion
-                                        attr={{
-                                            ariaRole: 'menuitem',
-                                            dataTestHook: action.dataTestHook
-                                        }}
-                                        expanded={action.expanded}
-                                        id={action.dataTestHook}
-                                        label={action.menuLabel}
-                                        onToggle={action.onToggle}
-                                    >
-                                        {action.content}
-                                    </Accordion>
-                                </li>;
-                    }
-                })
-            }
-            {this.getUserMenuItems()}
-        </ul>;
-    }
 
     render() {
         const {
-            user: {
-                onMenuClick,
-                menuExpanded,
-            },
-            attr
+            navigation,
+            user,
+            search,
+            more
         } = this.props;
-
-        const menuItems = this.getUserMenuItems();
-        const mobileMenu = this.renderMobileMenu();
-
+        const items = this.getToolbarItems();
+        const expanded = search && search.expanded;
         return (
-            <div role='banner' className={cx('masthead')}>
-                <div className={cx('masthead-branding', 'inline-text-overflow')} data-test-hook='masthead-application-name'>
-                    {this.props.branding}
-                </div>
-                <div className={cx('masthead-toolbar-container')}>
+            <Attr.div key='Masthead' role='banner' className={cx('masthead')}>
+                {navigation &&
+                    <InlinePopup.Container
+                        expanded={navigation.isExpanded}
+                        onClick={navigation.onClick}
+                        className={cx('nav-container', { 'force-hide-search': expanded })}>
+                        <InlinePopup.Label className={cx('icon', 'icon-chevronRight', {
+                            'nav-icon-collapsed': !navigation.isExpanded,
+                            'nav-icon-expanded': navigation.isExpanded,
+                        })} />
+                        <InlinePopup.Panel alignment='left' className={cx('nav-panel')}>
+                            {navigation.children}
+                        </InlinePopup.Panel>
+                    </InlinePopup.Container>
+                }
+                <Attr.span key={'masthead-branding'} className={cx('masthead-branding', 'inline-text-overflow', { 'force-hide-search': expanded })}>{this.props.branding}</Attr.span>
+                {search && <SearchInput
+                    containerClassName={cx('search-input-container', { 'force-show-search': expanded })}
+                    inputClassName={cx('masthead-search-input')}
+                    onChange={search.onChange}
+                    value={search.value}
+                    onSubmit={search.onSubmit}
+                    label={search.label}
+                    attr={search.attr}
+                />}
+                <Attr.div className={cx('masthead-toolbar-container', { 'force-hide-search': expanded })}>
                     <ul className={cx('masthead-toolbar')}>
-                        {
-                            this.props.toolbarItems &&
-                            this.props.toolbarItems.map((action, idx) => <MastheadToolbarItem key={idx} {...action} />)
+                        {search && <li key='item-search' className={cx('search-button')}>
+                            <ActionTriggerButton
+                                key={search.label}
+                                attr={{ button: { title: search.label } }}
+                                icon={'search'}
+                                onClick={search.onExpand}
+                                className={cx('masthead-toolbar-btn')}
+                            />
+                        </li>}
+                        {more && !more.selected && items}
+                        {more &&
+                            <li key='item-more' className={cx('more-button')} title={more.attr && more.attr.ariaLabel}>
+                                <InlinePopup.Container
+                                    expanded={more.selected}
+                                    onClick={more.onClick}
+                                    attr={more.attr}
+                                >
+                                    <InlinePopup.Label
+                                        className={cx('masthead-toolbar-btn', 'more-menu-btn', { 'selected': more.selected })} onClick={more.onClick} attr={more.attr} title={more.title}
+                                    >
+                                        <Attr.span className={cx('icon icon-more')} />
+                                    </InlinePopup.Label>
+                                    <InlinePopup.Panel
+                                        alignment='right'
+                                        className={cx('masthead-toolbar-menu')}
+                                    >
+                                        <ul role='menu' id='more-menu'>
+                                            {items}
+                                        </ul>
+                                    </InlinePopup.Panel>
+                                </InlinePopup.Container>
+                            </li>
                         }
-                        <li key='user-menu' className={cx('masthead-toolbar-item', 'collapse-0')}>
+                        {user && <li key='user-menu' className={cx('user-menu-item')}>
                             <InlinePopup.Container
-                                expanded={menuExpanded}
-                                onClick={onMenuClick}
+                                expanded={user.menuExpanded}
+                                onClick={user.onMenuClick}
                             >
                                 <InlinePopup.Label
-                                    className={cx('masthead-toolbar-btn', 'user-menu-btn', {active: !!menuExpanded})}
-                                    attr={{ ariaLabel: attr.userMenuAriaLabel }}
+                                    className={cx('masthead-toolbar-btn', 'user-menu-btn', { 'selected': !!user.menuExpanded })}
+                                    title={user.displayName}
+                                    attr={user.attr}
                                 >
-                                    <UserLabel {...this.props.user} />
-                                    <Thumbnail kind='user' url={this.props.user && this.props.user.thumbnailUrl} size='masthead' className={cx('user-thumbnail')} />
+                                    <Thumbnail
+                                        kind='user'
+                                        url={user.thumbnailUrl}
+                                        size='masthead'
+                                        ariaLabel={user.displayName}
+                                        className={cx('masthead-toolbar-btn', 'user-btn')}
+                                    />
                                 </InlinePopup.Label>
                                 <InlinePopup.Panel
                                     alignment='right'
                                     className={cx('masthead-toolbar-menu')}
                                 >
                                     <ul role='menu' id='user-menu'>
-                                        {menuItems}
+                                        {[
+                                            this.getUserLabel({ email: user.email, displayName: user.displayName }),
+                                            <li key={'user-item'} className={cx('masthead-toolbar-btn-container', 'user-items')} >
+                                                {user.menuItems}
+                                            </li>
+                                        ]}
                                     </ul>
                                 </InlinePopup.Panel>
                             </InlinePopup.Container>
                         </li>
-                        <MastheadToolbarItem
-                            alignment='right'
-                            attr={{ ariaLabel: attr.mobileMenuAriaLabel, dataTestHook: 'masthead-application-mobile-menu' }}
-                            content={mobileMenu}
-                            expanded={menuExpanded}
-                            icon='more'
-                            key='mobile'
-                            mobileOnly
-                            onClick={onMenuClick}
-                        />
-                    </ul>
-                </div>
-            </div>
+                        }
+                    </ul >
+                </Attr.div >
+            </Attr.div >
         );
     }
 }

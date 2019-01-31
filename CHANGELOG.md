@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.0.0
+### Changed
+- Masthead and Navigation are now part of Shell to ensure good responsive behavior. Pass the MastheadProperties and NavigationProperties to Shell instead of creating the components yourself. For an example of how to initialize Shell correctly, check the [baseline app.tsx](https://github.com/Azure/iot-ux-baseline/blob/master/src/pages/App.tsx).
+
 ## v5.2.2
 ## Fixed
 - BUG 3217787: [Form Field] If the user tabs out of a field when the tooltip button is open (Alt+F1), close the tooltip.
