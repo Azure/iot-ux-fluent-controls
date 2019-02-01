@@ -70,8 +70,9 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
     const id = `${props.name}_checkbox`;
     
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        // Stop propagation and call the onChange handler with the new value.
         event.stopPropagation();
-        props.onChange(event.currentTarget.checked);
+        props.onChange(!props.checked);
     };
 
     return (
@@ -92,7 +93,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                     name={props.name}
                     disabled={props.disabled}
                     hidden={props.hidden}
-                    defaultChecked={props.checked}
+                    checked={props.checked}
                     required={props.required}
                     onChange={onChange}
                     autoFocus={props.autoFocus}

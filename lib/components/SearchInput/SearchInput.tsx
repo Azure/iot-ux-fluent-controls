@@ -49,6 +49,7 @@ export class SearchInput extends React.PureComponent<SearchInputProps> {
                             autoComplete: 'off', 
                             'aria-label': this.props.label,
                             type: 'search', 
+                            onClick: blockPropagation,
                             ...(this.props.attr && this.props.attr.input)
                         }
                     }}
@@ -56,6 +57,10 @@ export class SearchInput extends React.PureComponent<SearchInputProps> {
             </form>
         );
     }
+}
+
+function blockPropagation(event: React.MouseEvent<HTMLInputElement>) {
+    event.stopPropagation();
 }
 
 export default SearchInput;

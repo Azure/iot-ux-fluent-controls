@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v6.0.2
+### Fixed
+- Changed Checkbox and RadioInputs to be controlled components: pass the `checked` parameter instead of `defaultChecked` to fix issue when the checkbox state change did not reflect the new value. Also change the onChange handlers to return the new values from the incoming props instead of relying on the html element.
+- Block search input onClick from propagating upwards - this fixes issue for mobile devices when clicking on the search input dismissed the element.
+
 ## v6.0.1
 ### Fixed
 - The onchange handlers for Checkbox and RadioInputs stopped working in IoT Central; adding a dummy event handler to their parent `label` fixes the issue.
