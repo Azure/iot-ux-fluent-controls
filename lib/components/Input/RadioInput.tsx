@@ -66,7 +66,8 @@ export const RadioInput: React.StatelessComponent<RadioInputProps> = (props: Rad
 
     const id = `${props.name}_${props.value}`;
 
-    const onClick = (event) => {
+    const onClick = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.stopPropagation();
         props.onChange(props.value);
     };
 
@@ -75,6 +76,7 @@ export const RadioInput: React.StatelessComponent<RadioInputProps> = (props: Rad
             <Attr.label
                 className={css('radio-label', classes)}
                 htmlFor={id}
+                onClick={stopPropagation}
                 attr={props.attr.label}
             >
                 <div className={css('radio-wrapper')}>
@@ -110,6 +112,12 @@ export const RadioInput: React.StatelessComponent<RadioInputProps> = (props: Rad
         </Attr.div>
     );
 };
+
+function stopPropagation(e: React.MouseEvent<HTMLElement>) {
+    // HACK! If we don't add this click event handler to the label, React never
+    // fires the input onChange handler in IoT Central.
+    e.stopPropagation();
+}
 
 RadioInput.defaultProps = {
     name: undefined,
