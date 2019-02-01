@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.0.1
+### Fixed
+- The onchange handlers for Checkbox and RadioInputs stopped working in IoT Central; adding a dummy event handler to their parent `label` fixes the issue.
+
 ## v6.0.0
 ### Changed
 - Masthead and Navigation are now part of Shell to ensure good responsive behavior. Pass the MastheadProperties and NavigationProperties to Shell instead of creating the components yourself. For an example of how to initialize Shell correctly, check the [baseline app.tsx](https://github.com/Azure/iot-ux-baseline/blob/master/src/pages/App.tsx).

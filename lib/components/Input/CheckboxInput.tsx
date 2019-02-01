@@ -68,9 +68,10 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
     }, props.className);
 
     const id = `${props.name}_checkbox`;
-
-    const onChange = (event) => {
-        props.onChange(event.target.checked);
+    
+    const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.stopPropagation();
+        props.onChange(event.currentTarget.checked);
     };
 
     return (
@@ -82,6 +83,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
             <Attr.label
                 className={css('checkbox-label')}
                 htmlFor={id}
+                onClick={stopPropagation}
                 attr={props.attr.label}
             >
                 <Attr.input
@@ -90,7 +92,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                     name={props.name}
                     disabled={props.disabled}
                     hidden={props.hidden}
-                    checked={props.checked}
+                    defaultChecked={props.checked}
                     required={props.required}
                     onChange={onChange}
                     autoFocus={props.autoFocus}
@@ -121,6 +123,12 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
         </Attr.div>
     );
 };
+
+function stopPropagation(e: React.MouseEvent<HTMLElement>) {
+    // HACK! If we don't add this click event handler to the label, React never
+    // fires the input onChange handler in IoT Central.
+    e.stopPropagation();
+}
 
 CheckboxInput.defaultProps = {
     name: undefined,
