@@ -27,7 +27,7 @@ export function Shell({ theme, isRtl, masthead, navigation, children, onClick }:
     return (
         <div className={css('theme-' + theme)}>
             <div className={css('shell', { rtl: isRtl })} onClick={onClick}>
-                {masthead && <Masthead {...masthead} navigation={navigation} />}
+                {masthead && <Masthead navigation={navigation} {...masthead} />}
                 <div className={css('nav-and-workspace')}>
                     {navigation && <Navigation {...navigation} />}
                     <div className={css('workspace')}>
