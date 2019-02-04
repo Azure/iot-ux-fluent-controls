@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v6.0.3
+### Fixed
+- Masthead user display name and email are now centered vertically.
+- Shell now allows Masthead to use a different NavigationProperties than the one passed to the main navbar.
+
 ## v6.0.2
 ### Fixed
 - Changed Checkbox and RadioInputs to be controlled components: pass the `checked` parameter instead of `defaultChecked` to fix issue when the checkbox state change did not reflect the new value. Also change the onChange handlers to return the new values from the incoming props instead of relying on the html element.

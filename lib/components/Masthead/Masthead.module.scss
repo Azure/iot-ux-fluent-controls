@@ -118,18 +118,7 @@ $search-max-size: 100 * $grid-size;
             padding: 0 $grid-size*4;
             width: 100%;
 
-            &>* {
-                height: $layout-nav-item-height / 2;
-                display: block;
-            }
-
-            .name {
-                line-height: #{$layout-nav-item-height / 2 + $grid-size};
-            }
-
             .email {
-                line-height: #{$layout-nav-item-height / 2 - 3*$grid-size};
-
                 @include themify {
                     color: themed('color-text-placeholder');
                 }
@@ -206,6 +195,10 @@ $search-max-size: 100 * $grid-size;
 
                     .masthead-toolbar-btn-container {
                         width: 100%;
+                        height: $layout-nav-item-height;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center; // vertically align
                         text-align: left;
 
                         button {
