@@ -11,7 +11,7 @@ import { TextInputAttributes } from '../Input/TextInput';
 
 const cx = classnames.bind(require('./Masthead.module.scss'));
 
-export interface MastheadToolbarItem {
+interface MastheadToolbarItem {
     icon: string; // TODO: update with MethodNode
     label: string;
     selected: boolean;
