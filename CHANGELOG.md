@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.0.4
+### Fixed
+- Handling the error during the download of the thumbnail. Instead to show the broken images symbol, fallback to the default user-icon.
+
 ## v6.0.3
 ### Fixed
 - Masthead user display name and email are now centered vertically.

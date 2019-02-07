@@ -88,13 +88,20 @@ export class Thumbnail extends React.Component<ThumbnailProperties, ThumbnailSta
                         ref={this.imgRef}
                         src={this.props.url}
                         aria-label={this.props.ariaLabel}
-                        onLoad={this.handleImageLoad} />
+                        onLoad={this.handleImageLoad}
+                        onError={this.handleError} />
                     : null}
                 {!!icon
                     ? <span className={cx('icon', icon, { 'hidden': this.state.imageLoaded })} />
                     : null}
             </Attr.div>;
         }
+    }
+
+    private handleError = (error) => {
+        this.setState({
+            imageLoaded: false
+        });
     }
 
     private handleImageLoad = () => {
