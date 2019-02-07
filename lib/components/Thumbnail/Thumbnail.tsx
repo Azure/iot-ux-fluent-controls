@@ -69,13 +69,6 @@ export class Thumbnail extends React.Component<ThumbnailProperties, ThumbnailSta
         this.state = { imageLoaded: false };
     }
 
-    componentDidMount() {
-        const { current } = this.imgRef;
-        if (current && current.complete) {
-            this.handleImageLoad();
-        }
-    }
-
     render() {
         const className = cx('circle', this.props.size || 'preview', this.props.className);
         if (this.props.loading) {
