@@ -29,6 +29,7 @@ $line-height: 4*$grid-size;
         @include md-box();
         width: 100%;
         height: $input-height;
+        line-height: $input-height;
         padding: 0 6*$grid-size 0 3*$grid-size;
         outline: none;
         -webkit-appearance: none;
