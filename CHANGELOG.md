@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.0.5
+### Fixed
+- BUG 3870819: [Select Input] Text in select field should not be cut off with browser zoom.
+
 ## v6.0.4
 ### Fixed
 - Handling the error during the download of the thumbnail. Instead to show the broken images symbol, fallback to the default user-icon.
