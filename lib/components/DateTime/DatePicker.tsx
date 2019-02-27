@@ -423,6 +423,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         disabled={this.props.disabled}
                         methodRef={this.inputRef}
                         attr={this.props.attr.input}
+                        role='combobox'
                     />
                     <ActionTriggerButton
                         icon='calendar'
