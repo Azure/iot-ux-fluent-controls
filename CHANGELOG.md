@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.0.6
+### Fixed
+- BUG 3858806: remove role for text input in DatePicker.
+
 ## v6.0.5
 ### Fixed
 - BUG 3870819: [Select Input] Text in select field should not be cut off with browser zoom.
