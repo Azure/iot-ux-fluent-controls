@@ -67,7 +67,7 @@ export interface MastheadProperties {
         attr?: InlinePopup.Attributes;
     };
     toolbarItems?: Array<MastheadToolbarItem>;
-    user?: React.ReactNode;
+    user?: JSX.Element;
 }
 
 export class Masthead extends React.PureComponent<MastheadProperties> {
@@ -175,6 +175,9 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                                 </InlinePopup.Container>
                             </li>
                         }
+                        {user && <li key='user-menu' className={cx('user-menu-item')}>
+                            {user}
+                        </li>}
                     </ul >
                 </Attr.div >
             </Attr.div >

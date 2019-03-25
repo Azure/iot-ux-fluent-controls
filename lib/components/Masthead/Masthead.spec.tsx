@@ -20,15 +20,7 @@ describe('<Masthead />', () => {
                 onClick: () => { },
                 selected: false
             }]}
-            user={{
-                displayName: 'test',
-                email: 'test',
-                menuItems: [{
-                    key: 'test',
-                    label: 'test',
-                    onClick: () => alert('user')
-                }]
-            }}
+            user={<div></div>}
         />);
 
         // Render the masthead
@@ -55,7 +47,7 @@ describe('<Masthead />', () => {
                 onClick: () => { },
                 selected: false
             }]}
-
+            
         />);
 
         // Render the masthead
@@ -80,15 +72,7 @@ describe('<Masthead />', () => {
                 onClick: () => { },
                 selected: false
             }]}
-            user={{
-                displayName: 'test',
-                email: 'test',
-                menuItems: [{
-                    key: 'test',
-                    label: 'test',
-                    onClick: () => alert('user')
-                }]
-            }}
+            user={<div></div>}
         />);
 
         // Render the masthead
@@ -108,15 +92,7 @@ describe('<Masthead />', () => {
                 onClick: () => { },
                 selected: false
             }}
-            user={{
-                displayName: 'test',
-                email: 'test',
-                menuItems: [{
-                    key: 'test',
-                    label: 'test',
-                    onClick: () => alert('user')
-                }]
-            }}
+            user={<div></div>}
         />);
 
         // Render the masthead
