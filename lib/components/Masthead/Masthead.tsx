@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as classnames from 'classnames/bind';
 import { MethodNode } from '../../Common';
 import * as InlinePopup from '../InlinePopup';
-import { Thumbnail } from '../Thumbnail';
 import { NavigationProperties } from '../Navigation/Navigation';
 import { ActionTriggerButton, ActionTriggerAttributes, ActionTriggerButtonAttributes } from '../ActionTrigger';
 import { Elements as Attr } from '../../Attributes';
@@ -92,18 +91,6 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
             );
         });
     }
-
-    getUserLabel = (props: { email: string; displayName: string; }) => {
-        return <li key='user' className={cx('masthead-toolbar-btn-container', 'user-label')}>
-            <span className={cx('name', 'inline-text-overflow')} title={props.displayName}>
-                {props.displayName}
-            </span>
-            <span data-test-hook='masthead-user-email' className={cx('email', 'inline-text-overflow')} title={props.email}>
-                {props.email}
-            </span>
-        </li >;
-    }
-
 
     render() {
         const {
