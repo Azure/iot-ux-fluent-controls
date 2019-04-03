@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.0.7
+### Changed
+ - Updated the user type in masthead to JSX.Element
+
 ## v6.0.6
 ### Fixed
 - BUG 3858806: remove role for text input in DatePicker.

@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as classnames from 'classnames/bind';
 import { MethodNode } from '../../Common';
 import * as InlinePopup from '../InlinePopup';
-import { Thumbnail } from '../Thumbnail';
 import { NavigationProperties } from '../Navigation/Navigation';
 import { ActionTriggerButton, ActionTriggerAttributes, ActionTriggerButtonAttributes } from '../ActionTrigger';
 import { Elements as Attr } from '../../Attributes';
@@ -67,7 +66,7 @@ export interface MastheadProperties {
         attr?: InlinePopup.Attributes;
     };
     toolbarItems?: Array<MastheadToolbarItem>;
-    user?: MastheadUserItem;
+    user?: React.ReactNode;
 }
 
 export class Masthead extends React.PureComponent<MastheadProperties> {
@@ -92,18 +91,6 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
             );
         });
     }
-
-    getUserLabel = (props: { email: string; displayName: string; }) => {
-        return <li key='user' className={cx('masthead-toolbar-btn-container', 'user-label')}>
-            <span className={cx('name', 'inline-text-overflow')} title={props.displayName}>
-                {props.displayName}
-            </span>
-            <span data-test-hook='masthead-user-email' className={cx('email', 'inline-text-overflow')} title={props.email}>
-                {props.email}
-            </span>
-        </li >;
-    }
-
 
     render() {
         const {
@@ -176,39 +163,8 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                             </li>
                         }
                         {user && <li key='user-menu' className={cx('user-menu-item')}>
-                            <InlinePopup.Container
-                                expanded={user.menuExpanded}
-                                onClick={user.onMenuClick}
-                            >
-                                <InlinePopup.Label
-                                    className={cx('masthead-toolbar-btn', 'user-menu-btn', { 'selected': !!user.menuExpanded })}
-                                    title={user.displayName}
-                                    attr={user.attr}
-                                >
-                                    <Thumbnail
-                                        kind='user'
-                                        url={user.thumbnailUrl}
-                                        size='masthead'
-                                        ariaLabel={user.displayName}
-                                        className={cx('masthead-toolbar-btn', 'user-btn')}
-                                    />
-                                </InlinePopup.Label>
-                                <InlinePopup.Panel
-                                    alignment='right'
-                                    className={cx('masthead-toolbar-menu')}
-                                >
-                                    <ul role='menu' id='user-menu'>
-                                        {[
-                                            this.getUserLabel({ email: user.email, displayName: user.displayName }),
-                                            <li key={'user-item'} className={cx('masthead-toolbar-btn-container', 'user-items')} >
-                                                {user.menuItems}
-                                            </li>
-                                        ]}
-                                    </ul>
-                                </InlinePopup.Panel>
-                            </InlinePopup.Container>
-                        </li>
-                        }
+                            {user}
+                        </li>}
                     </ul >
                 </Attr.div >
             </Attr.div >
