@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v6.0.8
+## v6.0.7
 ### Changed
  - Updated the user type in masthead to JSX.Element
 
