@@ -66,7 +66,7 @@ export interface MastheadProperties {
         attr?: InlinePopup.Attributes;
     };
     toolbarItems?: Array<MastheadToolbarItem>;
-    user?: JSX.Element;
+    user?: React.ReactNode;
 }
 
 export class Masthead extends React.PureComponent<MastheadProperties> {
