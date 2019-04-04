@@ -57,6 +57,7 @@ export interface MastheadUserItem {
 
 export interface MastheadProperties {
     branding: MethodNode;
+    logo?: MethodNode;
     navigation?: NavigationProperties;
     search?: MastheadSearchItem;
     more?: {
@@ -97,7 +98,8 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
             navigation,
             user,
             search,
-            more
+            more,
+            logo
         } = this.props;
         const items = this.getToolbarItems();
         const expanded = search && search.expanded;
@@ -117,6 +119,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                         </InlinePopup.Panel>
                     </InlinePopup.Container>
                 }
+                {logo && <Attr.div key={'masthead-logo'} className={cx('masthead-logo', { 'force-hide-search': expanded })}>{logo}</Attr.div>}
                 <Attr.span key={'masthead-branding'} className={cx('masthead-branding', 'inline-text-overflow', { 'force-hide-search': expanded })}>{this.props.branding}</Attr.span>
                 {search && <SearchInput
                     containerClassName={cx('search-input-container', { 'force-show-search': expanded })}

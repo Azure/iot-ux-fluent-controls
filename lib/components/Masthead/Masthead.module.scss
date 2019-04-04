@@ -4,6 +4,7 @@
 
 $masthead-branding-width: 50%;
 $masthead-brandname-width: $grid-size * 50;
+$masthead-logo-padding: 2*$grid-size 2*$grid-size 2*$grid-size 5*$grid-size;
 $masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
 $masthead-collapse-start: 125 * $grid-size;
 $thumbnail-size: 3 * $gutter-xsmall; // match @user-thumbnail-size in Thumbnail.module.scss
@@ -91,6 +92,10 @@ $search-max-size: 100 * $grid-size;
         }
     }
 
+    .masthead-logo {
+        padding: $masthead-logo-padding;
+        height: $layout-nav-item-height;
+    }
     .masthead-branding {
         width: $masthead-branding-width;
         height: $layout-nav-item-height;

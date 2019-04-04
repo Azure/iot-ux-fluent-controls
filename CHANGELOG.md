@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v6.1.0
+- Add logo to Masthead
+
 ## v6.0.7
 ### Changed
  - Updated the user type in masthead to JSX.Element

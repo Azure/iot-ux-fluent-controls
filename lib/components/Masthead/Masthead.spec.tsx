@@ -21,15 +21,16 @@ describe('<Masthead />', () => {
                 selected: false
             }]}
             user={<div></div>}
+            logo={<img />}
         />);
 
         // Render the masthead
         expect(wrapper.html()).to.contains('masthead');
+        expect(wrapper.html()).to.contains('masthead-logo');
         expect(wrapper.html()).to.contains('masthead-branding');
         expect(wrapper.html()).to.contains('masthead-toolbar-btn-container');
         expect(wrapper.html()).to.contains('search-button');
         expect(wrapper.html()).to.contains('user-menu-item');
-
     });
 
     it('properly passes all the params and no user, render Masthead without user button', () => {
