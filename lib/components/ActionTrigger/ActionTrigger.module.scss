@@ -9,7 +9,7 @@ $line-height: 4.5*$grid-size;
     font-family: $font-family-default;
     font-size: $icon-size-xsmall;
     line-height: $line-height;
-    padding: 1.5*$grid-size 2*$grid-size;
+    padding: 0 $grid-size;
     @include themify {
         color: themed('color-text-rest');
     }
@@ -82,6 +82,7 @@ $line-height: 4.5*$grid-size;
 .action-trigger-button {
     @include md-button-reset();
     line-height: 0px;
+    padding: $grid-size;
 
     &.disabled {
         cursor: not-allowed;
