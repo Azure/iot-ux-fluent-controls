@@ -96,6 +96,7 @@ $search-max-size: 100 * $grid-size;
         padding: $masthead-logo-padding;
         height: $layout-nav-item-height;
     }
+
     .masthead-branding {
         width: $masthead-branding-width;
         height: $layout-nav-item-height;
@@ -308,23 +309,10 @@ $search-max-size: 100 * $grid-size;
                     background-color: themed('color-bg-panel-contextual');
                     color: themed('color-text-clear');
                     border: 0;
-
-                    .masthead-toolbar-btn {
-                        background-color: themed('color-bg-panel-contextual');
-
-                        >* {
-                            background-color: themed('color-bg-panel-contextual');
-                            color: themed('color-text-clear');
-                        }
-                    }
-
                 }
 
                 .masthead-toolbar-btn,
                 .masthead-toolbar-btn>* {
-                    background-color: themed('color-bg-masthead');
-                    color: themed('color-text-white');
-
                     &:focus {
                         outline: 1px dashed themed('color-text-white');
                         color: themed('color-text-white');
@@ -336,10 +324,8 @@ $search-max-size: 100 * $grid-size;
 
                     &:active {
                         outline: 1px dashed themed('color-text-white');
-                        background-color: themed('color-text-white');
 
                         >* {
-                            background-color: themed('color-text-white');
                             @include action-trigger-override();
                         }
 
@@ -351,11 +337,6 @@ $search-max-size: 100 * $grid-size;
                                 @include action-trigger-override();
                             }
                         }
-                    }
-
-                    &:hover,
-                    &:hover>* {
-                        background-color: themed('color-bg-masthead-hover');
                     }
 
                     @include selected();

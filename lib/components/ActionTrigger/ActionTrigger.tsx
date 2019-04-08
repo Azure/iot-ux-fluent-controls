@@ -1,7 +1,10 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, IconSize, IconAttributes} from '../Icon';
-import {Elements as Attr, DivProps} from '../../Attributes';
+
+import { Icon, IconSize, IconAttributes } from '../Icon';
+import { Elements as Attr, DivProps } from '../../Attributes';
+import { StyledElements } from '../../Styled';
+
 const css = classNames.bind(require('./ActionTrigger.module.scss'));
 
 export interface ActionTriggerAttributes {
@@ -10,7 +13,7 @@ export interface ActionTriggerAttributes {
     suffix?: IconAttributes;
 }
 
-export interface ActionTriggerComponentType {}
+export interface ActionTriggerComponentType { }
 
 export interface ActionTriggerProps extends React.Props<ActionTriggerComponentType> {
     /** Icon name (from Segoe UI MDL font) */
@@ -27,6 +30,11 @@ export interface ActionTriggerProps extends React.Props<ActionTriggerComponentTy
     className?: string;
 
     attr?: ActionTriggerAttributes;
+
+    theme?: {
+        colorTextRest: string;
+        colorBackground: string;
+    };
 }
 
 /**
@@ -50,22 +58,24 @@ export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (prop
         />;
     }
 
+    const ContainerDivWrapper = props.theme ? StyledElements.div : Attr.div;
     return (
-        <Attr.div
+        <ContainerDivWrapper
             className={className}
-            attr={props.attr.container || {}}
+            attr={props.attr && props.attr.container || {}}
+            theme={props.theme}
         ><Icon
-                icon={props.icon}
-                labelClassName={css('action-trigger-label')}
-                size={IconSize.xsmall}
-                attr={props.attr.icon || {}}
-        >{props.label}</Icon>{suffix}</Attr.div>
+            icon={props.icon}
+            labelClassName={css('action-trigger-label')}
+            size={IconSize.xsmall}
+            attr={props.attr && props.attr.icon || {}}
+        >{props.label}</Icon>{suffix}</ContainerDivWrapper>
     );
 };
 
 ActionTrigger.defaultProps = {
     icon: undefined,
-    attr: {container: {}, icon: {}, suffix: {}}
+    attr: { container: {}, icon: {}, suffix: {} }
 };
 
 export default ActionTrigger;
