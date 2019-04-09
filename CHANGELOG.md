@@ -4,6 +4,10 @@
 - Add logo to Masthead
 - Update Masthead, ActionTriggerButton to support customized styles
 
+## v6.0.8
+### Fixed
+- Updated ActionTrigger to have correct sizes so outline is not cutted when the element is focused and hover.
+
 ## v6.0.7
 ### Changed
  - Updated the user type in masthead to JSX.Element
