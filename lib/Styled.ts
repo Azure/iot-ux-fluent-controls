@@ -1,13 +1,14 @@
-import styled from 'styled-components';
+import styled, { ThemeProps } from 'styled-components';
 import { Elements } from './Attributes';
 
 export interface ComponentTheme {}
 
-export interface DivTheme {
+export interface DivTheme extends ComponentTheme {
     colorTextRest: string;
     colorBackground: string;
 }
-export interface ButtonTheme {
+
+export interface ButtonTheme extends ComponentTheme {
     colorRest: string;
     colorHover: string;
     colorDisabled: string;
@@ -17,21 +18,21 @@ export interface ButtonTheme {
 
 const div = styled(Elements.div)`
     &&&&&&& {
-        color: ${(props: DivTheme) => props.colorTextRest};
-        background-color: ${(props: DivTheme) => props.colorBackground};
+        color: ${(props: ThemeProps<DivTheme>) => props.theme.colorTextRest};
+        background-color: ${(props: ThemeProps<DivTheme>) => props.theme.colorBackground};
     }
 `;
 
 const button = styled(Elements.button)`
     &&&&& {
-        color: ${(props: { theme: ButtonTheme}) => props.theme.colorTextRest};
-        background-color: ${(props: { theme: ButtonTheme}) => props.theme.colorRest};
+        color: ${(props: ThemeProps<ButtonTheme>) => props.theme.colorTextRest};
+        background-color: ${(props: ThemeProps<ButtonTheme>) => props.theme.colorRest};
         &:hover { 
-            background-color: ${(props: { theme: ButtonTheme}) => props.theme.colorHover};
+            background-color: ${(props: ThemeProps<ButtonTheme>) => props.theme.colorHover};
         }
         &:disabled {
-            color: ${(props: { theme: ButtonTheme}) => props.theme.colorTextDisabled};
-            background-color: ${(props: { theme: ButtonTheme}) => props.theme.colorDisabled};
+            color: ${(props: ThemeProps<ButtonTheme>) => props.theme.colorTextDisabled};
+            background-color: ${(props: ThemeProps<ButtonTheme>) => props.theme.colorDisabled};
         }
     }
 `;

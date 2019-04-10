@@ -48,10 +48,8 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
         attr={props.attr.icon}
     /> : '';
 
-    const ButtonWrapper = props.theme ? StyledElements.button : Attr.button;
-
     return (
-        <ButtonWrapper
+        <StyledElements.button
             type={props.type}
             title={props.title}
             className={css('btn', {
@@ -64,7 +62,7 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
         >
             {icon}
             {props.children}
-        </ButtonWrapper>
+        </StyledElements.button>
     );
 };
 

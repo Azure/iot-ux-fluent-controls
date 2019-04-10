@@ -33,7 +33,7 @@ export interface ActionTriggerButtonProps {
     onClick?: (event) => void;
 
     attr?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
-
+    
     theme?: ActionTriggerButtonTheme;
 }
 
@@ -41,10 +41,8 @@ export interface ActionTriggerButtonProps {
 export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonProps> = (props: ActionTriggerButtonProps) => {
     const { theme, onClick, className, disabled, tabIndex, label, attr, icon, rightIcon } = props;
 
-    const ButtonWrapper = theme ? StyledElements.button : Attr.button;
-
     return (
-        <ButtonWrapper
+        <StyledElements.button
             type='button'
             onClick={onClick}
             className={css('action-trigger-button', {
@@ -63,7 +61,7 @@ export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonPr
                 disabled={disabled}
                 attr={attr}
             />
-        </ButtonWrapper>
+        </StyledElements.button>
     );
 };
 

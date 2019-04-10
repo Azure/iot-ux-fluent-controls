@@ -58,9 +58,8 @@ export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (prop
         />;
     }
 
-    const ContainerDivWrapper = props.theme ? StyledElements.div : Attr.div;
     return (
-        <ContainerDivWrapper
+        <StyledElements.div
             className={className}
             attr={props.attr && props.attr.container || {}}
             theme={props.theme}
@@ -69,7 +68,7 @@ export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (prop
             labelClassName={css('action-trigger-label')}
             size={IconSize.xsmall}
             attr={props.attr && props.attr.icon || {}}
-        >{props.label}</Icon>{suffix}</ContainerDivWrapper>
+        >{props.label}</Icon>{suffix}</StyledElements.div>
     );
 };
 

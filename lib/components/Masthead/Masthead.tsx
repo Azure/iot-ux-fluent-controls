@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
-import styled from 'styled-components';
 
 import { MethodNode } from '../../Common';
 import { StyledElements, ComponentTheme } from '../../Styled';
@@ -125,14 +124,8 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
         const items = this.getToolbarItems();
         const expanded = search && search.expanded;
 
-        // Use style property for banner to speed up initial rendering.
-        const mastheadStyles = theme && {
-            backgroundColor: theme.colorBackground,
-            color: theme.colorTextRest
-        } as React.CSSProperties;
-
         return (
-            <Attr.div key='Masthead' role='banner' className={cx('masthead')} style={mastheadStyles}>
+            <StyledElements.div key='Masthead' role='banner' className={cx('masthead')} theme={theme}>
                 {navigation &&
                     <InlinePopup.Container
                         expanded={navigation.isExpanded}
@@ -148,7 +141,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                     </InlinePopup.Container>
                 }
                 {logo && <Attr.div key={'masthead-logo'} className={cx('masthead-logo', { 'force-hide-search': expanded })}>{logo}</Attr.div>}
-                <Attr.span key={'masthead-branding'} className={cx('masthead-branding', 'inline-text-overflow', { 'force-hide-search': expanded })}>{this.props.branding}</Attr.span>
+                <Attr.span key={'masthead-branding'} className={cx('masthead-branding', 'inline-text-overflow', { 'force-hide-search': expanded })}>{branding}</Attr.span>
                 {search && <SearchInput
                     containerClassName={cx('search-input-container', { 'force-show-search': expanded })}
                     inputClassName={cx('masthead-search-input')}
@@ -205,7 +198,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                         </li>}
                     </ul >
                 </Attr.div>
-            </Attr.div>
+            </StyledElements.div>
         );
     }
 }
