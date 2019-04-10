@@ -10,9 +10,6 @@ $line-height: 4.5*$grid-size;
     font-size: $icon-size-xsmall;
     line-height: $line-height;
     padding: 0 $grid-size;
-    @include themify {
-        color: themed('color-text-rest');
-    }
     text-decoration: none;
     outline: none;
 
@@ -36,13 +33,6 @@ $line-height: 4.5*$grid-size;
             @include themify {
                 color: themed('color-text-disabled');
             }
-        }
-    }
-
-    &:hover:not(.disabled) {
-        @include themify {
-            color: themed('color-text-rest');
-            background-color: themed('color-bg-item-hover');
         }
     }
 

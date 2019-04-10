@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
+
 import { MethodNode } from '../../Common';
+import { StyledElements, ComponentTheme } from '../../Styled';
 import * as InlinePopup from '../InlinePopup';
 import { NavigationProperties } from '../Navigation/Navigation';
 import { ActionTriggerButton, ActionTriggerAttributes, ActionTriggerButtonAttributes } from '../ActionTrigger';
@@ -24,7 +26,7 @@ export interface MastheadSearchItem {
 
     /** The user input value */
     value: string;
-    
+
     /** 
      * For small screen sizes, the search input is collapsed and replaced with a
      * toolbar button. When the button is clicked, the input is shown and occupies
@@ -32,16 +34,16 @@ export interface MastheadSearchItem {
      * width expanded view is shown.
      */
     expanded?: boolean;
-    
+
     /** Event handler to call when the search input should be submitted. */
     onSubmit: React.EventHandler<any>;
-    
+
     /** Event handler to call when the search `value` should be changed. */
     onChange: (newValue: string) => void;
-    
+
     /** Event handler to call when the `expanded` property  should be toggled. */
     onExpand: React.EventHandler<any>;
-    
+
     attr?: TextInputAttributes;
 }
 
@@ -55,8 +57,17 @@ export interface MastheadUserItem {
     attr?: InlinePopup.Attributes;
 }
 
+export interface MastheadTheme extends ComponentTheme {
+    colorBackground: string;
+    colorButtonRest: string;
+    colorButtonHover: string;
+    colorTextRest: string;
+    colorTextDisabled: string;
+}
+
 export interface MastheadProperties {
     branding: MethodNode;
+    logo?: MethodNode;
     navigation?: NavigationProperties;
     search?: MastheadSearchItem;
     more?: {
@@ -67,6 +78,7 @@ export interface MastheadProperties {
     };
     toolbarItems?: Array<MastheadToolbarItem>;
     user?: React.ReactNode;
+    theme?: MastheadTheme;
 }
 
 export class Masthead extends React.PureComponent<MastheadProperties> {
@@ -77,17 +89,23 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
         }
         return this.props.toolbarItems.map((item, idx) => {
             const { label, icon, onClick, selected, attr } = item;
-
             return (
                 <li key={idx} className={cx('masthead-toolbar-btn-container', { 'selected-more': this.props.more.selected })}>
-                    < ActionTriggerButton
+                    <ActionTriggerButton
                         label={label}
                         attr={attr}
                         icon={icon}
                         onClick={onClick}
                         className={cx('masthead-toolbar-btn', { 'selected': selected })}
+                        theme={this.props.theme && {
+                            colorRest: this.props.theme.colorBackground,
+                            colorHover: this.props.theme.colorButtonHover,
+                            colorDisabled: this.props.theme.colorTextRest,
+                            colorTextRest: this.props.theme.colorTextRest,
+                            colorTextDisabled: this.props.theme.colorTextDisabled
+                        }}
                     />
-                </li >
+                </li>
             );
         });
     }
@@ -97,12 +115,17 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
             navigation,
             user,
             search,
-            more
+            more,
+            logo,
+            theme,
+            branding
         } = this.props;
+
         const items = this.getToolbarItems();
         const expanded = search && search.expanded;
+
         return (
-            <Attr.div key='Masthead' role='banner' className={cx('masthead')}>
+            <StyledElements.div key='Masthead' role='banner' className={cx('masthead')} theme={theme}>
                 {navigation &&
                     <InlinePopup.Container
                         expanded={navigation.isExpanded}
@@ -117,7 +140,8 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                         </InlinePopup.Panel>
                     </InlinePopup.Container>
                 }
-                <Attr.span key={'masthead-branding'} className={cx('masthead-branding', 'inline-text-overflow', { 'force-hide-search': expanded })}>{this.props.branding}</Attr.span>
+                {logo && <Attr.div key={'masthead-logo'} className={cx('masthead-logo', { 'force-hide-search': expanded })}>{logo}</Attr.div>}
+                <Attr.span key={'masthead-branding'} className={cx('masthead-branding', 'inline-text-overflow', { 'force-hide-search': expanded })}>{branding}</Attr.span>
                 {search && <SearchInput
                     containerClassName={cx('search-input-container', { 'force-show-search': expanded })}
                     inputClassName={cx('masthead-search-input')}
@@ -136,6 +160,13 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                                 icon={'search'}
                                 onClick={search.onExpand}
                                 className={cx('masthead-toolbar-btn')}
+                                theme={theme && {
+                                    colorRest: theme.colorBackground,
+                                    colorHover: theme.colorButtonHover,
+                                    colorDisabled: theme.colorTextRest,
+                                    colorTextRest: theme.colorTextRest,
+                                    colorTextDisabled: theme.colorTextDisabled
+                                }}
                             />
                         </li>}
                         {more && !more.selected && items}
@@ -166,8 +197,8 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                             {user}
                         </li>}
                     </ul >
-                </Attr.div >
-            </Attr.div >
+                </Attr.div>
+            </StyledElements.div>
         );
     }
 }

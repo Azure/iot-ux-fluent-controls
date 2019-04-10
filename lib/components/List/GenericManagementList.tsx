@@ -129,6 +129,10 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
         }
     };
 
+    constructor(props: Readonly<GenericManagementListProps<T>>) { 
+        super(props);
+    }
+
     render() {
         let columns = this.props.columns.map(col => []);
         this.props.columns.forEach((column, colIndex) => {

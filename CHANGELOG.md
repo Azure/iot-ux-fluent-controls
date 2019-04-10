@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.1.0
+- Add logo to Masthead
+- Update Masthead, ActionTriggerButton to support customized styles
+
 ## v6.0.8
 ### Fixed
 - Updated ActionTrigger to have correct sizes so outline is not cutted when the element is focused and hover.

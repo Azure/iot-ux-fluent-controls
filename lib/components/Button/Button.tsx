@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
 import {SpanProps, ButtonProps as AttrButtonProps, Elements as Attr} from '../../Attributes';
+import { StyledElements, ButtonTheme } from '../../Styled';
 const css = classnames.bind(require('./Button.module.scss'));
 
 export interface ButtonComponentType {}
@@ -32,6 +33,8 @@ export interface ButtonProps extends React.Props<ButtonComponentType> {
     className?: string;
 
     attr?: ButtonAttributes;
+    
+    theme?: ButtonTheme;
 }
 
 /**
@@ -46,7 +49,7 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
     /> : '';
 
     return (
-        <Attr.button
+        <StyledElements.button
             type={props.type}
             title={props.title}
             className={css('btn', {
@@ -55,10 +58,11 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
             onClick={props.onClick}
             disabled={props.disabled}
             attr={props.attr.container}
+            theme={props.theme}
         >
             {icon}
             {props.children}
-        </Attr.button>
+        </StyledElements.button>
     );
 };
 

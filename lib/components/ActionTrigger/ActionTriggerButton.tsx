@@ -1,13 +1,17 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {MethodNode} from '../../Common';
-import {ActionTrigger, ActionTriggerProps, ActionTriggerAttributes} from '../ActionTrigger';
-import {Elements as Attr, ButtonProps} from '../../Attributes';
+
+import { MethodNode } from '../../Common';
+import { StyledElements, ButtonTheme } from '../../Styled';
+import { ActionTrigger, ActionTriggerProps, ActionTriggerAttributes } from '../ActionTrigger';
+import { Elements as Attr, ButtonProps } from '../../Attributes';
 const css = classNames.bind(require('./ActionTrigger.module.scss'));
 
 export interface ActionTriggerButtonAttributes {
     button?: ButtonProps;
 }
+
+export interface ActionTriggerButtonTheme extends ButtonTheme {}
 
 export interface ActionTriggerButtonProps {
     /** Icon name (from Segoe UI MDL font) */
@@ -29,35 +33,41 @@ export interface ActionTriggerButtonProps {
     onClick?: (event) => void;
 
     attr?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
+    
+    theme?: ActionTriggerButtonTheme;
 }
 
+
 export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonProps> = (props: ActionTriggerButtonProps) => {
+    const { theme, onClick, className, disabled, tabIndex, label, attr, icon, rightIcon } = props;
+
     return (
-        <Attr.button
+        <StyledElements.button
             type='button'
-            onClick={props.onClick}
+            onClick={onClick}
             className={css('action-trigger-button', {
-                'disabled': props.disabled
-            }, props.className)}
-            disabled={props.disabled}
-            tabIndex={props.tabIndex}
-            title={props.label}
-            attr={props.attr.button}
+                'disabled': disabled
+            }, className)}
+            disabled={disabled}
+            tabIndex={tabIndex}
+            title={label}
+            attr={attr && attr.button}
+            theme={theme}
         >
             <ActionTrigger
-                icon={props.icon}
-                rightIcon={props.rightIcon}
-                label={props.label}
-                disabled={props.disabled}
-                attr={props.attr}
+                icon={icon}
+                rightIcon={rightIcon}
+                label={label}
+                disabled={disabled}
+                attr={attr}
             />
-        </Attr.button>
+        </StyledElements.button>
     );
 };
 
 ActionTriggerButton.defaultProps = {
     icon: undefined,
-    attr: {button: {}, ...{container: {}, icon: {}, suffix: {}}}
+    attr: { button: {}, ...{ container: {}, icon: {}, suffix: {} } }
 };
 
 export default ActionTriggerButton;
