@@ -30,11 +30,6 @@ export interface ActionTriggerProps extends React.Props<ActionTriggerComponentTy
     className?: string;
 
     attr?: ActionTriggerAttributes;
-
-    theme?: {
-        colorTextRest: string;
-        colorBackground: string;
-    };
 }
 
 /**
@@ -59,16 +54,15 @@ export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (prop
     }
 
     return (
-        <StyledElements.div
+        <Attr.div
             className={className}
             attr={props.attr && props.attr.container || {}}
-            theme={props.theme}
         ><Icon
             icon={props.icon}
             labelClassName={css('action-trigger-label')}
             size={IconSize.xsmall}
             attr={props.attr && props.attr.icon || {}}
-        >{props.label}</Icon>{suffix}</StyledElements.div>
+        >{props.label}</Icon>{suffix}</Attr.div>
     );
 };
 

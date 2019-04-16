@@ -37,7 +37,6 @@ export interface ActionTriggerButtonProps {
     theme?: ActionTriggerButtonTheme;
 }
 
-
 export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonProps> = (props: ActionTriggerButtonProps) => {
     const { theme, onClick, className, disabled, tabIndex, label, attr, icon, rightIcon } = props;
 

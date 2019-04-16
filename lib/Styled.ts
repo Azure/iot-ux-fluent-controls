@@ -1,27 +1,13 @@
 import styled, { ThemeProps } from 'styled-components';
 import { Elements } from './Attributes';
 
-export interface ComponentTheme {}
-
-export interface DivTheme extends ComponentTheme {
-    colorTextRest: string;
-    colorBackground: string;
-}
-
-export interface ButtonTheme extends ComponentTheme {
-    colorRest: string;
-    colorHover: string;
-    colorDisabled: string;
-    colorTextRest: string;
+export interface ButtonTheme {
+    colorRest?: string;
+    colorHover?: string;
+    colorDisabled?: string;
+    colorTextRest?: string;
     colorTextDisabled?: string;
 }
-
-const div = styled(Elements.div)`
-    &&&&&&& {
-        color: ${(props: ThemeProps<DivTheme>) => props.theme.colorTextRest};
-        background-color: ${(props: ThemeProps<DivTheme>) => props.theme.colorBackground};
-    }
-`;
 
 const button = styled(Elements.button)`
     &&&&& {
@@ -38,6 +24,5 @@ const button = styled(Elements.button)`
 `;
 
 export const StyledElements = {
-    div,
     button
 };

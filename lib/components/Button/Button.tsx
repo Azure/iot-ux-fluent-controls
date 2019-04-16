@@ -1,10 +1,13 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
-import {SpanProps, ButtonProps as AttrButtonProps, Elements as Attr} from '../../Attributes';
-import { StyledElements, ButtonTheme } from '../../Styled';
+import styled, { ThemeProps } from 'styled-components';
+
+import { SpanProps, ButtonProps as AttrButtonProps, Elements as Attr } from '../../Attributes';
+import { StyledElements } from '../../Styled';
+import { ShellTheme } from '../Shell';
 const css = classnames.bind(require('./Button.module.scss'));
 
-export interface ButtonComponentType {}
+export interface ButtonComponentType { }
 
 export interface ButtonAttributes {
     container?: AttrButtonProps;
@@ -33,9 +36,21 @@ export interface ButtonProps extends React.Props<ButtonComponentType> {
     className?: string;
 
     attr?: ButtonAttributes;
-    
-    theme?: ButtonTheme;
 }
+
+const StyledPrimaryButton = styled(Attr.button)`
+    &&&&& {
+        color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorPrimaryButtonTextRest};
+        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorPrimaryButtonRest};
+        &:hover { 
+            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorPrimaryButtonHover};
+        }
+        &:disabled {
+            color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorPrimaryButtonTextDisabled};
+            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorPrimaryButtonDisabled};
+        }
+    }
+`;
 
 /**
  * Button showing Information, Warning, or Error with text, icon, and optional close button
@@ -48,8 +63,9 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
         attr={props.attr.icon}
     /> : '';
 
+    const ButtonProxy = props.primary ? StyledPrimaryButton : Attr.button;
     return (
-        <StyledElements.button
+        <ButtonProxy
             type={props.type}
             title={props.title}
             className={css('btn', {
@@ -58,11 +74,10 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
             onClick={props.onClick}
             disabled={props.disabled}
             attr={props.attr.container}
-            theme={props.theme}
         >
             {icon}
             {props.children}
-        </StyledElements.button>
+        </ButtonProxy>
     );
 };
 
