@@ -90,7 +90,7 @@ function toolbarButtonTheme(theme: ShellTheme): ShellTheme {
         colorBgBtnStandardDisabled: theme.colorBgMastheadDisabled,
         colorTextBtnStandardRest: theme.colorTextMastheadRest,
         colorTextBtnStandardDisabled: theme.colorTextMastheadDisabled
-    } : { base: theme.base }; // Theme must be an object.
+    } : { base: 'light' }; // Theme must be an object.
 }
 
 export class Masthead extends React.PureComponent<MastheadProperties> {
