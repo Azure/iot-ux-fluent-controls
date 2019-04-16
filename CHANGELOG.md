@@ -1,4 +1,7 @@
 # CHANGELOG
+## v6.2.0
+- Refactor component styling logic using ThemeProvider in styled component library.
+- Enable styling on Toggle, Checkbox, Pivot & Masthead.
 
 ## v6.1.0
 - Add logo to Masthead

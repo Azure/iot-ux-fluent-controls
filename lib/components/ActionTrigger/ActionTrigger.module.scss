@@ -14,8 +14,6 @@ $line-height: 4.5*$grid-size;
     outline: none;
 
     &.action-trigger-label-empty {
-        padding: $grid-size 1.5*$grid-size;
-
         .label {
             margin: 0;
         }
