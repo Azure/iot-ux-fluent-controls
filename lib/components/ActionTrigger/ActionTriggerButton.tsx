@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 
 import { MethodNode } from '../../Common';
-import { StyledElements, ButtonTheme } from '../../Styled';
+import { StyledElements } from '../../Styled';
 import { ActionTrigger, ActionTriggerProps, ActionTriggerAttributes } from '../ActionTrigger';
 import { Elements as Attr, ButtonProps } from '../../Attributes';
 const css = classNames.bind(require('./ActionTrigger.module.scss'));
@@ -10,8 +10,6 @@ const css = classNames.bind(require('./ActionTrigger.module.scss'));
 export interface ActionTriggerButtonAttributes {
     button?: ButtonProps;
 }
-
-export interface ActionTriggerButtonTheme extends ButtonTheme {}
 
 export interface ActionTriggerButtonProps {
     /** Icon name (from Segoe UI MDL font) */
@@ -32,13 +30,11 @@ export interface ActionTriggerButtonProps {
     /** Button onClick callback */
     onClick?: (event) => void;
 
-    attr?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
-    
-    theme?: ActionTriggerButtonTheme;
+    attr?: ActionTriggerButtonAttributes & ActionTriggerAttributes;    
 }
 
 export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonProps> = (props: ActionTriggerButtonProps) => {
-    const { theme, onClick, className, disabled, tabIndex, label, attr, icon, rightIcon } = props;
+    const { onClick, className, disabled, tabIndex, label, attr, icon, rightIcon } = props;
 
     return (
         <StyledElements.button
@@ -51,7 +47,6 @@ export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonPr
             tabIndex={tabIndex}
             title={label}
             attr={attr && attr.button}
-            theme={theme}
         >
             <ActionTrigger
                 icon={icon}

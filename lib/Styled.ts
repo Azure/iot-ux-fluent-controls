@@ -1,24 +1,18 @@
 import styled, { ThemeProps } from 'styled-components';
-import { Elements } from './Attributes';
 
-export interface ButtonTheme {
-    colorRest?: string;
-    colorHover?: string;
-    colorDisabled?: string;
-    colorTextRest?: string;
-    colorTextDisabled?: string;
-}
+import { ShellTheme } from './components/Shell';
+import { Elements } from './Attributes';
 
 const button = styled(Elements.button)`
     &&&&& {
-        color: ${(props: ThemeProps<ButtonTheme>) => props.theme.colorTextRest};
-        background-color: ${(props: ThemeProps<ButtonTheme>) => props.theme.colorRest};
+        color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnStandardRest};
+        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnStandardRest};
         &:hover { 
-            background-color: ${(props: ThemeProps<ButtonTheme>) => props.theme.colorHover};
+            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnStandardHover};
         }
         &:disabled {
-            color: ${(props: ThemeProps<ButtonTheme>) => props.theme.colorTextDisabled};
-            background-color: ${(props: ThemeProps<ButtonTheme>) => props.theme.colorDisabled};
+            color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnStandardDisabled};
+            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnStandardDisabled};
         }
     }
 `;

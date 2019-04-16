@@ -1,11 +1,11 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
-import styled, { ThemeProvider} from 'styled-components';
+import styled, { ThemeProvider, ThemeProps} from 'styled-components';
 
 import { MethodNode } from '../../Common';
 import * as InlinePopup from '../InlinePopup';
 import { NavigationProperties } from '../Navigation/Navigation';
-import { ActionTriggerButton, ActionTriggerAttributes, ActionTriggerButtonAttributes, ActionTriggerButtonTheme } from '../ActionTrigger';
+import { ActionTriggerButton, ActionTriggerAttributes, ActionTriggerButtonAttributes } from '../ActionTrigger';
 import { Elements as Attr } from '../../Attributes';
 import { SearchInput } from '../SearchInput/SearchInput';
 import { TextInputAttributes } from '../Input/TextInput';
@@ -76,20 +76,21 @@ export interface MastheadProperties {
 // Root container
 const MastheadContainer = styled(Attr.div)`
     &&&& {
-        color: ${props => props.theme.colorHeaderTextRest};
-        background-color: ${props => props.theme.colorHeaderBackground };
+        color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextMastheadRest};
+        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgMasthead };
     }
 `;
 
 // Translates Shell theme to action button theme under current context.
-function toolbarButtonTheme(theme: ShellTheme): ActionTriggerButtonTheme {
+function toolbarButtonTheme(theme: ShellTheme): ShellTheme {
     return theme ? {
-        colorRest: theme.colorHeaderButtonRest,
-        colorHover: theme.colorHeaderButtonHover,
-        colorDisabled: theme.colorHeaderTextRest,
-        colorTextRest: theme.colorHeaderTextRest,
-        colorTextDisabled: theme.colorHeaderTextDisabled
-    } : {}; // Theme must be an object.
+        base: theme.base,
+        colorBgBtnStandardRest: theme.colorBgMasthead,
+        colorBgBtnStandardHover: theme.colorBgMastheadHover,
+        colorBgBtnStandardDisabled: theme.colorBgMastheadDisabled,
+        colorTextBtnStandardRest: theme.colorTextMastheadRest,
+        colorTextBtnStandardDisabled: theme.colorTextMastheadDisabled
+    } : { base: theme.base }; // Theme must be an object.
 }
 
 export class Masthead extends React.PureComponent<MastheadProperties> {

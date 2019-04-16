@@ -16,17 +16,26 @@ const css = classnames.bind(require('./Shell.module.scss'));
 export interface ShellTheme {
     base: string;
 
-    colorHeaderBackground?: string;
-    colorHeaderButtonRest?: string;
-    colorHeaderButtonHover?: string;
-    colorHeaderTextRest?: string;
-    colorHeaderTextDisabled?: string;
+    // Masthead
+    colorBgMasthead?: string;
+    colorBgMastheadHover?: string;
+    colorBgMastheadDisabled?: string;
+    colorTextMastheadRest?: string;
+    colorTextMastheadDisabled?: string;
 
-    colorPrimaryButtonRest?: string;
-    colorPrimaryButtonHover?: string;
-    colorPrimaryButtonDisabled?: string;
-    colorPrimaryButtonTextRest?: string;
-    colorPrimaryButtonTextDisabled?: string;
+    // Primary buttons
+    colorBgBtnPrimaryRest?: string;
+    colorBgBtnPrimaryHover?: string;
+    colorBgBtnPrimaryDisabled?: string;
+    colorTextBtnPrimaryRest?: string;
+    colorTextBtnPrimaryDisabled?: string;
+
+    // Normal buttons
+    colorBgBtnStandardRest?: string;
+    colorBgBtnStandardHover?: string;
+    colorBgBtnStandardDisabled?: string;
+    colorTextBtnStandardRest?: string;
+    colorTextBtnStandardDisabled?: string;
 }
 
 export interface ShellProperties {

@@ -40,7 +40,7 @@ export interface ToggleProps extends React.Props<ToggleType> {
 
 const StyledToggleOnButton = styled(Attr.button)`
     &&&&&& {
-        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme && props.theme.colorPrimaryButtonRest };
+        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest };
     }
 `;
 

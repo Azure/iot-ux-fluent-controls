@@ -37,7 +37,7 @@ export interface PivotProps extends React.Props<PivotType> {
 
 const StyledPivotBorder = styled(Attr.div)`
     &&&& {
-        ${(props: ThemeProps<ShellTheme>) => props.theme && ('border-bottom: 2px solid' + props.theme.colorPrimaryButtonRest) }
+        ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest && ('border-bottom: 2px solid' + props.theme.colorBgBtnPrimaryRest) }
     }
 `;
 
