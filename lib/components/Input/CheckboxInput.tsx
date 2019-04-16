@@ -1,8 +1,10 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import styled, { ThemeProps } from 'styled-components';
 import {MethodNode, autoFocusRef} from '../../Common';
 import {DivProps, LabelProps, SpanProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize, IconAttributes} from '../Icon';
+import {ShellTheme} from '../Shell';
 const css = classNames.bind(require('./CheckboxInput.module.scss'));
 
 export interface CheckboxInputType {}
@@ -52,6 +54,13 @@ export interface CheckboxInputProps extends React.Props<CheckboxInputType> {
     attr?: CheckboxInputAttributes;
 }
 
+const StyledActiveCheckboxButton = styled(Attr.span)`
+    &&&& {
+        color: ${(props: ThemeProps<ShellTheme>) => props.theme && props.theme.colorPrimaryButtonTextRest };
+        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme && props.theme.colorPrimaryButtonRest };
+    }
+`;
+
 /**
  * Low level checkbox control
  *
@@ -75,6 +84,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
         props.onChange(!props.checked);
     };
 
+    const CheckboxInputProxy = props.checked ? StyledActiveCheckboxButton : Attr.span;
     return (
         <Attr.div
             className={containerClass}
@@ -100,7 +110,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                     methodRef={props.autoFocus && autoFocusRef}
                     attr={props.attr.input}
                 />
-                <Attr.span
+                <CheckboxInputProxy
                     className={css('checkbox-button')}
                     attr={props.attr.checkbox}
                 />

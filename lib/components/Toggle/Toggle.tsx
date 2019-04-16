@@ -1,7 +1,11 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import styled, { ThemeProps } from 'styled-components';
+
 import {DivProps, ButtonProps, Elements as Attr} from '../../Attributes';
 import {MethodNode, autoFocusRef} from '../../Common';
+import { ShellTheme } from '../Shell';
+
 const css = classNames.bind(require('./Toggle.module.scss'));
 
 export interface ToggleType {}
@@ -34,6 +38,12 @@ export interface ToggleProps extends React.Props<ToggleType> {
     attr?: ToggleAttributes;
 }
 
+const StyledToggleOnButton = styled(Attr.button)`
+    &&&&&& {
+        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme && props.theme.colorPrimaryButtonRest };
+    }
+`;
+
 /**
  * Toggle button that is an on or off state
  *
@@ -54,9 +64,10 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
     const tabIndex = props.disabled ? -1 : null;
     const label = props.on ? props.onLabel : props.offLabel;
 
+    const ToggleButtonProxy = props.on ? StyledToggleOnButton : Attr.button;
     return (
         <Attr.div className={containerClassName} attr={props.attr.container}>
-            <Attr.button
+            <ToggleButtonProxy
                 type='button'
                 className={css('toggle-button')}
                 onClick={onClick}

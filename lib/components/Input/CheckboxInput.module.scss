@@ -40,7 +40,7 @@ $outline-focus-border-width: 1px;
 
         &.selected .checkbox-button {
             color: themed('color-text-white');
-            background-color: themed('color-bg-btn-primary-rest');
+            // background-color: themed('color-bg-btn-primary-rest');
             border: 1px solid themed('color-border-hover');
         }
 
