@@ -1,4 +1,9 @@
 # CHANGELOG
+
+## v6.2.1
+### Fixed
+ - BUG 4445327: Masthead: hover color regression on action buttons
+
 ## v6.2.0
 - Refactor component styling logic using ThemeProvider in styled component library.
 - Enable styling on Toggle, Checkbox, Pivot & Masthead.

@@ -313,6 +313,7 @@ $search-max-size: 100 * $grid-size;
 
                 .masthead-toolbar-btn,
                 .masthead-toolbar-btn>* {
+
                     &:focus {
                         outline: 1px dashed themed('color-text-white');
                         color: themed('color-text-white');
@@ -337,6 +338,10 @@ $search-max-size: 100 * $grid-size;
                                 @include action-trigger-override();
                             }
                         }
+                    }
+
+                    &:hover {
+                        background-color: themed('color-bg-masthead-hover');
                     }
 
                     @include selected();
