@@ -1,7 +1,7 @@
 # CHANGELOG
 
 ## v6.2.1
-### Fxied
+### Fixed
  - BUG 4445327: Masthead: hover color regression on action buttons
 
 ## v6.2.0
