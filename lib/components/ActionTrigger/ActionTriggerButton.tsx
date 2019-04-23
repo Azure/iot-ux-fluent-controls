@@ -1,10 +1,13 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import styled, { ThemeProvider, ThemeProps} from 'styled-components';
 
 import { MethodNode } from '../../Common';
 import { StyledElements } from '../../Styled';
 import { ActionTrigger, ActionTriggerProps, ActionTriggerAttributes } from '../ActionTrigger';
 import { Elements as Attr, ButtonProps } from '../../Attributes';
+import { ShellTheme  } from '../Shell';
+
 const css = classNames.bind(require('./ActionTrigger.module.scss'));
 
 export interface ActionTriggerButtonAttributes {
@@ -33,11 +36,28 @@ export interface ActionTriggerButtonProps {
     attr?: ActionTriggerButtonAttributes & ActionTriggerAttributes;    
 }
 
+const StyledButton = styled(Attr.button)`
+    &&&&& {
+        color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnStandardRest};
+        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnStandardRest};
+        &:hover { 
+            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnStandardHover};
+        }
+        &:disabled {
+            color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnStandardDisabled};
+            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnStandardDisabled};
+        }
+        >*:hover {
+            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnStandardHover};
+        }
+    }
+`;
+
 export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonProps> = (props: ActionTriggerButtonProps) => {
     const { onClick, className, disabled, tabIndex, label, attr, icon, rightIcon } = props;
 
     return (
-        <StyledElements.button
+        <StyledButton
             type='button'
             onClick={onClick}
             className={css('action-trigger-button', {
@@ -55,7 +75,7 @@ export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonPr
                 disabled={disabled}
                 attr={attr}
             />
-        </StyledElements.button>
+        </StyledButton>
     );
 };
 
