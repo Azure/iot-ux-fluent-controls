@@ -79,7 +79,7 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     onExpand?: (expanded: boolean) => void;
 
     /** React node to render at the far side of the label. */
-    labelExtraAction?: React.ReactNode;
+    labelFarSide?: React.ReactNode;
 
     attr?: DateTimeFieldAttributes & FormFieldAttributes;
 }
@@ -360,7 +360,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                 className={css('datetime-field', this.props.className)}
                 attr={fieldAttr}
                 tooltip={this.props.tooltip}
-                labelExtraAction={this.props.labelExtraAction}
+                labelFarSide={this.props.labelFarSide}
             >
                 <Attr.div
                     className={css('field-content')}

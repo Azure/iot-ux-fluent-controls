@@ -42,7 +42,7 @@ export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
     /** Classname to append to top level element of CheckboxInput */
     inputClassName?: string;
     /** React node to render at the far side of the label. */
-    labelExtraAction?: React.ReactNode;
+    labelFarSide?: React.ReactNode;
 
     attr?: FormFieldAttributes & CheckboxInputAttributes;
 }
@@ -95,7 +95,7 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
             tooltip={props.tooltip}
             className={props.className}
             attr={fieldAttr}
-            labelExtraAction={props.labelExtraAction}
+            labelFarSide={props.labelFarSide}
         >
             <div>
                 <CheckboxInput

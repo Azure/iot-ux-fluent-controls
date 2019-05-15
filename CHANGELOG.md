@@ -2,7 +2,7 @@
 
 ## v6.2.2
 ### Added
- - Added ability to include an extra action to the far side of the label in form fields.
+ - Added ability to include an extra node to the far side of the label in form fields.
 
 ## v6.2.1
 ### Fixed

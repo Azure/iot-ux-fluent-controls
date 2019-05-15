@@ -52,7 +52,7 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
     /** Classname to append to top level element of SelectInput */
     inputClassName?: string;
     /** React node to render at the far side of the label. */
-    labelExtraAction?: React.ReactNode;
+    labelFarSide?: React.ReactNode;
 
     attr?: SelectInputAttributes & FormFieldAttributes;
 }
@@ -103,7 +103,7 @@ export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: S
             tooltip={props.tooltip}
             className={props.className}
             attr={fieldAttr}
-            labelExtraAction={props.labelExtraAction}
+            labelFarSide={props.labelFarSide}
         >
             <SelectInput
                 name={props.name}

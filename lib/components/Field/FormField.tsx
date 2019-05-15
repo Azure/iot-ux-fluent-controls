@@ -43,7 +43,7 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     /** Classname to append to top level error element */
     errorClassName?: string;
     /** React node to render at the far side of the label. */
-    labelExtraAction?: React.ReactNode;
+    labelFarSide?: React.ReactNode;
 
     attr?: FormFieldAttributes;
 }
@@ -140,7 +140,7 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
                     attr={props.attr.fieldLabel}
                     required={props.required}
                     balloonExpanded={this.state.tooltipVisible}
-                    extraAction={props.labelExtraAction}
+                    farSide={props.labelFarSide}
                     {...props.attr.fieldTooltip}
                 >
                     {props.label}

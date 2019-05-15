@@ -58,7 +58,7 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     /** Classname to append to top level element of TextInput */
     inputClassName?: string;
     /** Extra action to render at the far side of the label */
-    labelExtraAction?: React.ReactNode;
+    labelFarSide?: React.ReactNode;
 
     attr?: TextInputAttributes & FormFieldAttributes;
 }
@@ -112,7 +112,7 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
             tooltip={props.tooltip}
             className={props.className}
             attr={fieldAttr}
-            labelExtraAction={props.labelExtraAction}
+            labelFarSide={props.labelFarSide}
         >
             <TextInput
                 name={props.name}

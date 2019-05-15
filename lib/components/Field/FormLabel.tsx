@@ -59,8 +59,8 @@ export interface FormLabelProps extends React.Props<FormLabelType> {
     /** Classname to append to top level element */
     className?: string;
 
-    /** Extra action to render at the far side of the label */
-    extraAction?: React.ReactNode;
+    /** Extra node to render at the far side of the label */
+    farSide?: React.ReactNode;
 
     attr?: FormLabelAttributes;
 }
@@ -121,7 +121,7 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
             <Attr.div
                 className={css('label-inner-container')}
                 attr={props.attr.innerContainer}>
-                {props.extraAction}
+                {props.farSide}
             </Attr.div>
         </Attr.div>
     );

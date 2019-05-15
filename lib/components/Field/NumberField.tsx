@@ -53,7 +53,7 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
     /** Classname to append to top level element of TextInput */
     inputClassName?: string;
     /** React node to render at the far side of the label. */
-    labelExtraAction?: React.ReactNode;
+    labelFarSide?: React.ReactNode;
 
     attr?: TextInputAttributes & FormFieldAttributes;
 }
@@ -100,7 +100,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
             tooltip={props.tooltip}
             className={props.className}
             attr={fieldAttr}
-            labelExtraAction={props.labelExtraAction}
+            labelFarSide={props.labelFarSide}
         >
             <NumberInput
                 name={props.name}

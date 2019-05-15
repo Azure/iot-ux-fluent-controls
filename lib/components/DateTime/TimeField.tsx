@@ -50,7 +50,7 @@ export interface TimeFieldProps extends React.Props<TimeFieldType> {
     /** Classname to append to top level element of TextInput */
     inputClassName?: string;
     /** React node to render at the far side of the label. */
-    labelExtraAction?: React.ReactNode;
+    labelFarSide?: React.ReactNode;
 
     attr?: TimeInputAttributes & FormFieldAttributes;
 }
@@ -71,7 +71,7 @@ export const TimeField: React.StatelessComponent<TimeFieldProps> = (props: TimeF
             required={props.required}
             className={props.className}
             attr={props.attr}
-            labelExtraAction={props.labelExtraAction}
+            labelFarSide={props.labelFarSide}
         >
             <TimeInput
                 name={props.name}
