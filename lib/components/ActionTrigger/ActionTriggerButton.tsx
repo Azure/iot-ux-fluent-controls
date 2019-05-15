@@ -3,7 +3,6 @@ import * as classNames from 'classnames/bind';
 import styled, { ThemeProvider, ThemeProps} from 'styled-components';
 
 import { MethodNode } from '../../Common';
-import { StyledElements } from '../../Styled';
 import { ActionTrigger, ActionTriggerProps, ActionTriggerAttributes } from '../ActionTrigger';
 import { Elements as Attr, ButtonProps } from '../../Attributes';
 import { ShellTheme  } from '../Shell';
