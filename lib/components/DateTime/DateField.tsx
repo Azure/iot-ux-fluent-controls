@@ -62,6 +62,9 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
      */
     onExpand?: (expanded: boolean) => void;
 
+    /** React node to render at the far side of the label. */
+    labelExtraAction?: React.ReactNode;
+
     attr?: DatePickerAttributes & FormFieldAttributes;
 }
 
@@ -112,6 +115,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
             className={props.className}
             attr={fieldAttr}
             tooltip={props.tooltip}
+            labelExtraAction={props.labelExtraAction}
         >
             <DatePicker
                 name={props.name}

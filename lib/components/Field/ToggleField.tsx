@@ -43,6 +43,8 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
     className?: string;
     /** Classname to append to top level element of SelectInput */
     inputClassName?: string;
+    /** React node to render at the far side of the label. */
+    labelExtraAction?: React.ReactNode;
 
     attr?: FormFieldAttributes & ToggleAttributes;
 }
@@ -88,6 +90,7 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
             tooltip={props.tooltip}
             className={props.className}
             attr={fieldAttr}
+            labelExtraAction={props.labelExtraAction}
         >
             <Toggle
                 on={props.value}

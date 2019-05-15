@@ -52,6 +52,8 @@ export interface RadioFieldProps extends React.Props<RadioFieldType> {
     className?: string;
     /** Classname to append to top level element of RadioInput */
     inputClassName?: string;
+    /** React node to render at the far side of the label. */
+    labelExtraAction?: React.ReactNode;
 
     attr?: RadioInputAttributes & FormFieldAttributes;
 }
@@ -139,6 +141,7 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
             tooltip={props.tooltip}
             className={props.className}
             attr={fieldAttr}
+            labelExtraAction={props.labelExtraAction}
         >
             <div>
                 {options}
