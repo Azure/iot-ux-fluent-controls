@@ -43,6 +43,8 @@ export interface TextAreaFieldProps extends React.Props<TextAreaFieldType> {
     className?: string;
     /** Classname to append to top level element of TextArea */
     inputClassName?: string;
+    /** React node to render at the far side of the label. */
+    labelFarSide?: React.ReactNode;
 
     attr?: TextAreaAttributes & FormFieldAttributes;
 }
@@ -85,6 +87,7 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
             tooltip={props.tooltip}
             className={props.className}
             attr={fieldAttr}
+            labelFarSide={props.labelFarSide}
         >
             <TextArea
                 name={props.name}

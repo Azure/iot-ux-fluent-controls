@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.2.2
+### Added
+ - Added ability to include an extra node to the far side of the label in form fields.
+
 ## v6.2.1
 ### Fixed
  - BUG 4445327: Masthead: hover color regression on action buttons

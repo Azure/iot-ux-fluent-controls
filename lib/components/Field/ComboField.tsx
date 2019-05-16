@@ -110,6 +110,8 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
     className?: string;
     /** Classname to append to top level element of ComboInput */
     inputClassName?: string;
+    /** React node to render at the far side of the label. */
+    labelFarSide?: React.ReactNode;
 
     attr?: ComboInputAttributes & FormFieldAttributes;
 }
@@ -181,6 +183,7 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
             tooltip={props.tooltip}
             className={props.className}
             attr={fieldAttr}
+            labelFarSide={props.labelFarSide}
         >
             <div>
                 <ComboInput
