@@ -18,4 +18,3 @@ export * from './components/Shell';
 export * from './components/Thumbnail';
 export * from './components/Toggle';
 export * from './Common';
-export * from './Styled';
