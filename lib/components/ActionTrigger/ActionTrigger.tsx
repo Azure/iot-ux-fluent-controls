@@ -3,7 +3,6 @@ import * as classNames from 'classnames/bind';
 
 import { Icon, IconSize, IconAttributes } from '../Icon';
 import { Elements as Attr, DivProps } from '../../Attributes';
-import { StyledElements } from '../../Styled';
 
 const css = classNames.bind(require('./ActionTrigger.module.scss'));
 

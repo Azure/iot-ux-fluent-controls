@@ -3,7 +3,6 @@ import * as classnames from 'classnames/bind';
 import styled, { ThemeProps } from 'styled-components';
 
 import { SpanProps, ButtonProps as AttrButtonProps, Elements as Attr } from '../../Attributes';
-import { StyledElements } from '../../Styled';
 import { ShellTheme } from '../Shell';
 const css = classnames.bind(require('./Button.module.scss'));
 
