@@ -26,22 +26,14 @@ $line-height: 5*$grid-size;
         }
     }
 
-    .required &::after {
-        content: ' *';
-        @include themify {
-            color: themed('color-text-error');
-        }
-    }
-
-    &.required::after {
-        content: ' *';
-        @include themify {
-            color: themed('color-text-error');
-        }
-    }
-
     & + .field-error {
         margin-top: $grid-size;
+    }
+}
+
+.required  {
+    @include themify {
+        color: themed('color-text-error');
     }
 }
 
@@ -52,6 +44,11 @@ $line-height: 5*$grid-size;
     .label-icon {
         @include md-box(inline-block);
         margin-left: 2*$grid-size;
+
+        @include rtl {
+            margin-left: unset;
+            margin-right: 2*$grid-size;
+        }
     }
 
     .label-balloon {
@@ -66,6 +63,15 @@ $line-height: 5*$grid-size;
 .label-inner-container {
     @include md-box(flex-row);
     align-items: flex-end;
+
+    & .required {
+        margin-left: $grid-size;
+
+        @include rtl {
+            margin-left: unset;
+            margin-right: $grid-size;
+        }
+    }
 }
 
 .field-error {

@@ -110,12 +110,13 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
                 className={css('label-inner-container')}
                 attr={props.attr.innerContainer}>
                 <Attr.label
-                    className={css('label', { 'required': props.required })}
+                    className={css('label')}
                     htmlFor={props.name}
                     attr={props.attr.text}
                 >
                     {props.children}
                 </Attr.label>
+                { props.required && <span className={css('required')}>*</span>}
                 {balloon}
             </Attr.div>
             <Attr.div
