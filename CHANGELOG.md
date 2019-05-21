@@ -1,12 +1,16 @@
 # CHANGELOG
+## v6.2.3
+### Fixed
+- Add the far side container of the form field label only if a far side item is present. 
+- Update styles of far side container of form field label.
 
 ## v6.2.2
 ### Added
- - Added ability to include an extra node to the far side of the label in form fields.
+- Added ability to include an extra node to the far side of the label in form fields.
 
 ## v6.2.1
 ### Fixed
- - BUG 4445327: Masthead: hover color regression on action buttons
+- BUG 4445327: Masthead: hover color regression on action buttons
 
 ## v6.2.0
 - Refactor component styling logic using ThemeProvider in styled component library.
