@@ -63,9 +63,15 @@ $line-height: 5*$grid-size;
     }
 }
 
+.label-farSide-container {
+    @include md-box(flex-row);
+    align-items: flex-end;
+}
+
 .label-inner-container {
     @include md-box(flex-row);
     align-items: flex-end;
+    flex: 1;
 }
 
 .field-error {
