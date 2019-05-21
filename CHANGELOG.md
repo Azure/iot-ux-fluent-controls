@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.2.3
+ - BUG 4640169: White Accent setting causing problem in all the checkbox
+ - Fix hover styles for toggle input
+
 ## v6.2.2
 ### Added
  - Added ability to include an extra node to the far side of the label in form fields.
