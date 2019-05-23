@@ -1,4 +1,10 @@
 # CHANGELOG
+
+## v6.2.5
+### Fixed
+ - BUG 4640169: White Accent setting causing problem in all the checkbox
+ - Fix hover styles for toggle input
+
 ## v6.2.4
 ### Changed
 - Specified InlinePopup button type='button'

@@ -41,11 +41,6 @@ $line-height: 3.5*$grid-size;
                 border: 1px solid themed('color-border-toggle-btn-hover-off');
             }
             cursor: pointer;
-            + .toggle-switch {
-                @include themify{
-                    background-color: themed('color-circle-toggle-btn-hover-off');
-                }
-            }
         }
     }
 
@@ -85,11 +80,6 @@ $line-height: 3.5*$grid-size;
                 @include themify{
                     border: 1px solid themed('color-border-toggle-btn-hover-on');
                     background-color: themed('color-bg-toggle-btn-hover-on');
-                }
-                + .toggle-switch {
-                    @include themify{
-                        background-color: themed('color-circle-toggle-btn-hover-on');
-                    }
                 }
             }
         }

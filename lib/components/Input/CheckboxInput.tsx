@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import styled, { ThemeProps } from 'styled-components';
+import styled, { ThemeProps, ThemeConsumer } from 'styled-components';
 import {MethodNode, autoFocusRef} from '../../Common';
 import {DivProps, LabelProps, SpanProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize, IconAttributes} from '../Icon';
@@ -58,7 +58,6 @@ const StyledActiveCheckboxButton = styled(Attr.span)`
     &&&& {
         color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnPrimaryRest };
         background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest };
-        border: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest && '1px solid ' + props.theme.colorBgBtnPrimaryRest };
     }
 `;
 
@@ -125,12 +124,17 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                     className={css('checkbox-fill')}
                     attr={props.attr.indeterminateFill}
                 />
-                <Icon
-                    icon='checkMark'
-                    size={IconSize.xsmall}
-                    className={css('checkbox-checkmark')}
-                    attr={props.attr.checkmarkIcon}
-                />
+                <ThemeConsumer>
+                    { theme => 
+                        <Icon
+                            icon='checkMark'
+                            size={IconSize.xsmall}
+                            className={css('checkbox-checkmark')}
+                            attr={props.attr.checkmarkIcon}
+                            color={theme.colorTextBtnPrimaryRest}
+                        />
+                    }
+                </ThemeConsumer>
             </Attr.label>
         </Attr.div>
     );

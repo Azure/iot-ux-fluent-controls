@@ -41,6 +41,15 @@ export interface ToggleProps extends React.Props<ToggleType> {
 const StyledToggleOnButton = styled(Attr.button)`
     &&&&&& {
         background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest };
+        &:hover {
+            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryHover };
+        }
+    }
+`;
+
+const StyledToggleOnSwitch = styled(Attr.div)`
+    &&&& {
+        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnPrimaryRest};
     }
 `;
 
@@ -65,6 +74,7 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
     const label = props.on ? props.onLabel : props.offLabel;
 
     const ToggleButtonProxy = props.on ? StyledToggleOnButton : Attr.button;
+    const ToggleSwitchProxy = props.on ? StyledToggleOnSwitch : Attr.div;
     return (
         <Attr.div className={containerClassName} attr={props.attr.container}>
             <ToggleButtonProxy
@@ -81,7 +91,7 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
                 aria-checked={props.on}
                 attr={props.attr.button}
             />
-            <Attr.div className={css('toggle-switch')} attr={props.attr.switch}/>
+            <ToggleSwitchProxy className={css('toggle-switch')} attr={props.attr.switch}/>
             <Attr.div className={css('toggle-label')} attr={props.attr.text}>
                 {label}
             </Attr.div>
