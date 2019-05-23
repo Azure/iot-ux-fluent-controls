@@ -61,6 +61,7 @@ export class Label extends React.Component<Properties & { title?: string }> {
             aria-expanded={!!this.props.expanded}
             aria-describedby={this.props.attr.ariaDescribedBy}
             title={this.props.title}
+            type='button'
             className={cx('inline-popup-label', 'inline-btn', {
                 'disabled': this.props.disabled
             }, this.props.className)}
