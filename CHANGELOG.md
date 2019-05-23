@@ -1,4 +1,8 @@
 # CHANGELOG
+## v6.2.4
+### Changed
+- Specified InlinePopup button type='button'
+
 ## v6.2.3
 ### Fixed
 - Add the far side container of the form field label only if a far side item is present. 
