@@ -131,7 +131,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                             size={IconSize.xsmall}
                             className={css('checkbox-checkmark')}
                             attr={props.attr.checkmarkIcon}
-                            color={theme.colorTextBtnPrimaryRest}
+                            color={theme && theme.colorTextBtnPrimaryRest}
                         />
                     }
                 </ThemeConsumer>
