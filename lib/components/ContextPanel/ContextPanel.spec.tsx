@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import { ContextPanel } from './ContextPanel';
+import { ContextPanelPortal } from './ContextPanel';
 import { describe, it } from 'mocha';
 
 describe('<ContentPanel />', () => {
     it('properly passes header, footer, and content strings', () => {
         const wrapper = shallow(
-            <ContextPanel header='header' footer='footer' onClose={() => {}}>
+            <ContextPanelPortal header='header' footer='footer' onClose={() => {}}>
                 content
-            </ContextPanel>
+            </ContextPanelPortal>
         );
 
         expect(wrapper.contains('header'), 'header');
@@ -19,7 +19,7 @@ describe('<ContentPanel />', () => {
     
     it('works without a footer', () => {
         const wrapper = shallow(
-            <ContextPanel header='header' onClose={() => {}}>content</ContextPanel>
+            <ContextPanelPortal header='header' onClose={() => {}}>content</ContextPanelPortal>
         );
 
         expect(wrapper.contains('header'), 'header');

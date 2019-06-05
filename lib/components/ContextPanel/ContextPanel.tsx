@@ -20,39 +20,45 @@ export interface ContextPanelProperties {
     };
 }
 
-export function ContextPanel({ header, children, footer, onClose, attr }: ContextPanelProperties) {
+export function ContextPanelPortal(props: ContextPanelProperties) {
     return (
         <Portal>
-            <Attr.div 
-                role='complementary' 
-                aria-labelledby='context-panel-title' 
-                aria-describedby='context-panel-content' 
-                className={cx('panel')} 
-                attr={attr && attr.container}
-            >
-                {onClose && <ActionTriggerButton
-                    icon='cancel'
-                    className={cx('close-button')}
-                    onClick={onClose}
-                    attr={attr && attr.closeButton}
-                />}
-                {header && <Attr.div 
-                    id='context-panel-title' 
-                    className={cx('title', 'inline-text-overflow')} 
-                    attr={attr && attr.header}
-                    >
-                    {header}
-                </Attr.div>}
-                <Attr.div id='context-panel-content' className={cx('content')} attr={attr && attr.content}>
-                    {children}
-                </Attr.div>
-                {footer && <React.Fragment>
-                    <span className={cx('separator')} />
-                    <Attr.div className={cx('footer')} attr={attr && attr.footer}>{footer}</Attr.div>
-                </React.Fragment>}
-            </Attr.div>
+            <ContextPanel {...props} />
         </Portal>
     );
 }
 
-export default ContextPanel;
+export function ContextPanel({ header, children, footer, onClose, attr }: ContextPanelProperties) {
+    return (
+        <Attr.div 
+            role='complementary' 
+            aria-labelledby='context-panel-title' 
+            aria-describedby='context-panel-content' 
+            className={cx('panel')} 
+            attr={attr && attr.container}
+        >
+            {onClose && <ActionTriggerButton
+                icon='cancel'
+                className={cx('close-button')}
+                onClick={onClose}
+                attr={attr && attr.closeButton}
+            />}
+            {header && <Attr.div 
+                id='context-panel-title' 
+                className={cx('title', 'inline-text-overflow')} 
+                attr={attr && attr.header}
+                >
+                {header}
+            </Attr.div>}
+            <Attr.div id='context-panel-content' className={cx('content')} attr={attr && attr.content}>
+                {children}
+            </Attr.div>
+            {footer && <React.Fragment>
+                <span className={cx('separator')} />
+                <Attr.div className={cx('footer')} attr={attr && attr.footer}>{footer}</Attr.div>
+            </React.Fragment>}
+        </Attr.div>
+    );
+}
+
+export default ContextPanelPortal;

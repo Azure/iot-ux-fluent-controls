@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v6.3.0
+### Changed
+ - Expose two versions of ContextPanel, with and without portal
+ - Reduce padding between panel title and body
+
 ## v6.2.5
 ### Fixed
  - BUG 4640169: White Accent setting causing problem in all the checkbox
