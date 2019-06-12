@@ -8,6 +8,7 @@ const cx = classnames.bind(require('./ContextPanel.module.scss'));
 
 export interface ContextPanelProperties {
     onClose: React.EventHandler<any>;
+    omitPortal?: boolean;
     header: React.ReactNode;
     children?: React.ReactNode;
     footer?: React.ReactNode;
@@ -20,15 +21,21 @@ export interface ContextPanelProperties {
     };
 }
 
-export function ContextPanelPortal(props: ContextPanelProperties) {
+export function ContextPanel(props: ContextPanelProperties) {
+    const panel = <Panel {...props} />;
+    
+    if (props.omitPortal) {
+        return panel;
+    }
+
     return (
         <Portal>
-            <ContextPanel {...props} />
+            {panel}
         </Portal>
     );
 }
 
-export function ContextPanel({ header, children, footer, onClose, attr }: ContextPanelProperties) {
+function Panel({ header, children, footer, onClose, attr }: ContextPanelProperties) {
     return (
         <Attr.div 
             role='complementary' 
@@ -61,4 +68,4 @@ export function ContextPanel({ header, children, footer, onClose, attr }: Contex
     );
 }
 
-export default ContextPanelPortal;
+export default ContextPanel;
