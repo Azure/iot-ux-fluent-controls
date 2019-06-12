@@ -2,7 +2,7 @@
 
 ## v6.3.0
 ### Changed
- - Expose two versions of ContextPanel, with and without portal
+ - Add the option to get a ContextPanel with or without the portal
  - Reduce padding between panel title and body
 
 ## v6.2.5
