@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.3.1
+### Fixed
+- Fix styling on icon alignment for buttons.
+
 ## v6.3.0
 ### Changed
  - Add the option to get a ContextPanel with or without the portal
