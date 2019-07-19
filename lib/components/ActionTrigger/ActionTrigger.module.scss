@@ -9,7 +9,7 @@ $line-height: 4.5*$grid-size;
     font-family: $font-family-default;
     font-size: $icon-size-xsmall;
     line-height: $line-height;
-    padding: 0 $grid-size;
+    padding: 0.5*$grid-size $grid-size;
     text-decoration: none;
     outline: none;
 
@@ -54,7 +54,7 @@ $line-height: 4.5*$grid-size;
         vertical-align: top;
         font-size: $font-size-default;
         margin-left: 2*$grid-size;
-        margin-top: 1px;
+        line-height: 100%;
 
         max-width: 50*$grid-size;
         overflow: hidden;
