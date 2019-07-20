@@ -30,9 +30,7 @@ $outline-focus-border-width: 1px;
 
     :global(.icon) {
         @include md-box(inline-block);
-        vertical-align: middle;
-        margin-right: 2*$grid-size;
-        margin-top: -0.5*$grid-size;
+        margin: 0 $grid-size;
 
         font-size: $icon-size-xsmall;
         line-height: $line-height;
@@ -135,4 +133,9 @@ $outline-focus-border-width: 1px;
             background-color: themed('color-bg-btn-danger-disabled');
         }
     }
+ }
+
+ .label {
+     line-height: 100%;
+     vertical-align: text-top;
  }
