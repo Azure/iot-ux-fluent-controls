@@ -5,7 +5,7 @@
 $line-height: 4.5*$grid-size;
 
 .action-trigger-container {
-    @include md-box(inline-block, relative, ellipsis);
+    @include md-box(flex, relative, ellipsis);
     font-family: $font-family-default;
     font-size: $icon-size-xsmall;
     line-height: $line-height;
