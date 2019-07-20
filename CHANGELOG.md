@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.3.2
+### Fixed
+- Fix styling on action trigger button right icon.
+
 ## v6.3.1
 ### Fixed
 - Fix styling on icon alignment for buttons.
