@@ -7,10 +7,12 @@ $line-height: 8*$grid-size;
 $outline-focus-border-width: 1px;
 
 :global(.btn-primary), .method-btn-primary, :global(.btn-danger), .method-btn-danger, :global(.btn), .method-btn {
-    @include md-box(inline-block, relative);
+    @include md-box(inline-flex-row, relative);
     font-family: $font-family-default;
     font-size: $font-size-default;
     line-height: $line-height;
+    justify-content: center;
+    align-items: center;
 
     height: 8*$grid-size;
     padding-left: 5*$grid-size;
@@ -133,9 +135,4 @@ $outline-focus-border-width: 1px;
             background-color: themed('color-bg-btn-danger-disabled');
         }
     }
- }
-
- .label {
-     line-height: 100%;
-     vertical-align: text-top;
  }

@@ -75,9 +75,7 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
             attr={props.attr.container}
         >
             {icon}
-            <span className={css('label')}>
-                {props.children}
-            </span>
+            {props.children}
         </ButtonProxy>
     );
 };

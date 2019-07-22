@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.3.3
+### Fixed
+- Fix alignment of items inside action trigger button and buttons.
+
 ## v6.3.2
 ### Fixed
 - Fix styling on action trigger button right icon.
