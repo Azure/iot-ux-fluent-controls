@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.3.4
+### Fixed
+- Fix DatePicker + DateTimeField to return null and set value to empty when the value is removed
+
 ## v6.3.3
 ### Fixed
 - Fix alignment of items inside action trigger button and buttons.
