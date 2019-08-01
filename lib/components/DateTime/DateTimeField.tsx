@@ -238,7 +238,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
 
     onChange = (newDate: string | Date, newTime: string | Date): Date => {
         if (newDate === '') {
-            this.props.onChange(null);
+            this.props.onChange(newDate);
             return null;
         }
         if (newDate === 'invalid' || newTime === 'invalid' || !newDate || !newTime) {
