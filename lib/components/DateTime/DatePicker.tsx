@@ -330,7 +330,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
 
                 this.props.onChange(dateValue.dateObject.toJSON());
             } else {
-                this.props.onChange('invalid');
+                this.props.onChange(newValue === '' ? newValue : 'invalid');
                 this.setState({value: newValue});
             }
         }
