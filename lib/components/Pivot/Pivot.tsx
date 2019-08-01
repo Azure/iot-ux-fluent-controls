@@ -1,8 +1,12 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
+import styled, { ThemeProps } from 'styled-components';
+
 import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconAttributes} from '../Icon';
+import { ShellTheme } from '../Shell';
+
 const css = classNames.bind(require('./Pivot.module.scss'));
 
 export const pivotClassName = css('pivot');
@@ -31,6 +35,12 @@ export interface PivotProps extends React.Props<PivotType> {
     attr?: PivotAttributes;
 }
 
+const StyledPivotBorder = styled(Attr.div)`
+    &&&& {
+        ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest && ('border-bottom: 2px solid' + props.theme.colorBgBtnPrimaryRest) }
+    }
+`;
+
 export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
 
     let contents;
@@ -57,6 +67,8 @@ export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
         );
     }
 
+    const PivotBorderProxy = props.selected ? StyledPivotBorder : Attr.div;
+
     /**
      * Contents are rendered twices to give the pivot height and allow the text
      * to center vertically
@@ -71,7 +83,7 @@ export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
         >
             {contents}
             {contents}
-            <Attr.div
+            <PivotBorderProxy
                 className={css('pivot-border')}
                 attr={props.attr.bottomBorder}
             />

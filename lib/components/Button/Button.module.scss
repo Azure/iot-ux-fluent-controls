@@ -7,10 +7,12 @@ $line-height: 8*$grid-size;
 $outline-focus-border-width: 1px;
 
 :global(.btn-primary), .method-btn-primary, :global(.btn-danger), .method-btn-danger, :global(.btn), .method-btn {
-    @include md-box(inline-block, relative);
+    @include md-box(inline-flex-row, relative);
     font-family: $font-family-default;
     font-size: $font-size-default;
     line-height: $line-height;
+    justify-content: center;
+    align-items: center;
 
     height: 8*$grid-size;
     padding-left: 5*$grid-size;
@@ -30,9 +32,7 @@ $outline-focus-border-width: 1px;
 
     :global(.icon) {
         @include md-box(inline-block);
-        vertical-align: middle;
-        margin-right: 2*$grid-size;
-        margin-top: -0.5*$grid-size;
+        margin: 0 $grid-size;
 
         font-size: $icon-size-xsmall;
         line-height: $line-height;
