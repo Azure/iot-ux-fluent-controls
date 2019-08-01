@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, IconSize, IconAttributes} from '../Icon';
-import {Elements as Attr, DivProps} from '../../Attributes';
+
+import { Icon, IconSize, IconAttributes } from '../Icon';
+import { Elements as Attr, DivProps } from '../../Attributes';
+
 const css = classNames.bind(require('./ActionTrigger.module.scss'));
 
 export interface ActionTriggerAttributes {
@@ -10,7 +12,7 @@ export interface ActionTriggerAttributes {
     suffix?: IconAttributes;
 }
 
-export interface ActionTriggerComponentType {}
+export interface ActionTriggerComponentType { }
 
 export interface ActionTriggerProps extends React.Props<ActionTriggerComponentType> {
     /** Icon name (from Segoe UI MDL font) */
@@ -53,19 +55,19 @@ export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (prop
     return (
         <Attr.div
             className={className}
-            attr={props.attr.container || {}}
+            attr={props.attr && props.attr.container || {}}
         ><Icon
-                icon={props.icon}
-                labelClassName={css('action-trigger-label')}
-                size={IconSize.xsmall}
-                attr={props.attr.icon || {}}
+            icon={props.icon}
+            labelClassName={css('action-trigger-label')}
+            size={IconSize.xsmall}
+            attr={props.attr && props.attr.icon || {}}
         >{props.label}</Icon>{suffix}</Attr.div>
     );
 };
 
 ActionTrigger.defaultProps = {
     icon: undefined,
-    attr: {container: {}, icon: {}, suffix: {}}
+    attr: { container: {}, icon: {}, suffix: {} }
 };
 
 export default ActionTrigger;

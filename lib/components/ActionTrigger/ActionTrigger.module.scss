@@ -5,20 +5,15 @@
 $line-height: 4.5*$grid-size;
 
 .action-trigger-container {
-    @include md-box(inline-block, relative, ellipsis);
+    @include md-box(flex, relative, ellipsis);
     font-family: $font-family-default;
     font-size: $icon-size-xsmall;
     line-height: $line-height;
-    padding: $grid-size 2*$grid-size;
-    @include themify {
-        color: themed('color-text-rest');
-    }
+    padding: 0.5*$grid-size $grid-size;
     text-decoration: none;
     outline: none;
 
     &.action-trigger-label-empty {
-        padding: $grid-size 1.5*$grid-size;
-
         .label {
             margin: 0;
         }
@@ -36,13 +31,6 @@ $line-height: 4.5*$grid-size;
             @include themify {
                 color: themed('color-text-disabled');
             }
-        }
-    }
-
-    &:hover:not(.disabled) {
-        @include themify {
-            color: themed('color-text-rest');
-            background-color: themed('color-bg-item-hover');
         }
     }
 
@@ -66,7 +54,6 @@ $line-height: 4.5*$grid-size;
         vertical-align: top;
         font-size: $font-size-default;
         margin-left: 2*$grid-size;
-        margin-top: 1px;
 
         max-width: 50*$grid-size;
         overflow: hidden;
@@ -82,6 +69,7 @@ $line-height: 4.5*$grid-size;
 .action-trigger-button {
     @include md-button-reset();
     line-height: 0px;
+    padding: $grid-size;
 
     &.disabled {
         cursor: not-allowed;

@@ -10,6 +10,8 @@ export interface FormLabelType {}
 
 export interface FormLabelAttributes {
     container?: DivProps;
+    innerContainer?: DivProps;
+    farSideContainer?: DivProps;
     text?: LabelProps;
     icon?: IconAttributes;
     balloon?: BalloonAttributes;
@@ -58,6 +60,9 @@ export interface FormLabelProps extends React.Props<FormLabelType> {
     /** Classname to append to top level element */
     className?: string;
 
+    /** Extra node to render at the far side of the label */
+    farSide?: React.ReactNode;
+
     attr?: FormLabelAttributes;
 }
 
@@ -102,14 +107,23 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
             className={css('label-container', props.className)}
             attr={props.attr.container}
         >
-            <Attr.label
-                className={css('label', {'required': props.required})}
-                htmlFor={props.name}
-                attr={props.attr.text}
-            >
-                {props.children}
-            </Attr.label>
-            {balloon}
+            <Attr.div
+                className={css('label-inner-container')}
+                attr={props.attr.innerContainer}>
+                <Attr.label
+                    className={css('label', { 'required': props.required })}
+                    htmlFor={props.name}
+                    attr={props.attr.text}
+                >
+                    {props.children}
+                </Attr.label>
+                {balloon}
+            </Attr.div>
+            {props.farSide && <Attr.div
+                className={css('label-farSide-container')}
+                attr={props.attr.farSideContainer}>
+                {props.farSide}
+            </Attr.div>}
         </Attr.div>
     );
 };

@@ -1,5 +1,60 @@
 # CHANGELOG
 
+## v6.3.3
+### Fixed
+- Fix alignment of items inside action trigger button and buttons.
+
+## v6.3.2
+### Fixed
+- Fix styling on action trigger button right icon.
+
+## v6.3.1
+### Fixed
+- Fix styling on icon alignment for buttons.
+
+## v6.3.0
+### Changed
+ - Add the option to get a ContextPanel with or without the portal
+ - Reduce padding between panel title and body
+
+## v6.2.5
+### Fixed
+ - BUG 4640169: White Accent setting causing problem in all the checkbox
+ - Fix hover styles for toggle input
+
+## v6.2.4
+### Changed
+- Specified InlinePopup button type='button'
+
+## v6.2.3
+### Fixed
+- Add the far side container of the form field label only if a far side item is present. 
+- Update styles of far side container of form field label.
+
+## v6.2.2
+### Added
+- Added ability to include an extra node to the far side of the label in form fields.
+
+## v6.2.1
+### Fixed
+- BUG 4445327: Masthead: hover color regression on action buttons
+
+## v6.2.0
+- Refactor component styling logic using ThemeProvider in styled component library.
+- Enable styling on Toggle, Checkbox, Pivot & Masthead.
+
+## v6.1.0
+- Add logo to Masthead
+- Update Masthead, ActionTriggerButton to support customized styles
+
+## v6.0.8
+### Fixed
+- Updated ActionTrigger to have correct sizes so outline is not cutted when the element is focused and hover.
+
+## v6.0.7
+### Changed
+ - Updated the user type in masthead to JSX.Element
+
 ## v6.0.6
 ### Fixed
 - BUG 3858806: remove role for text input in DatePicker.

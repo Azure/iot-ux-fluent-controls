@@ -8,12 +8,16 @@
     font-style: normal;
     font-weight: normal;
     font-family: $font-family-default;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     
     &:before {
         @include md-box(inline-block, relative);
         font-family: $icon-font-family;
         text-decoration: none;
         vertical-align: middle;
+        line-height: 100%;
     }
 
     & > span {

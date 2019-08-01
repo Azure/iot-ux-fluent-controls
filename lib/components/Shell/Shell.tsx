@@ -1,5 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
+import { ThemeProvider } from 'styled-components';
+
 import { Masthead, MastheadProperties } from '../Masthead/Masthead';
 import { Navigation, NavigationProperties } from '../Navigation/Navigation';
 import { Root as ContextPanelRoot } from '../ContextPanel/root';
@@ -10,8 +12,34 @@ export { NavigationProperties, NavigationItemSeparator } from '../Navigation/Nav
 
 const css = classnames.bind(require('./Shell.module.scss'));
 
+/** Root theme that will be passed thru the control tree. */
+export interface ShellTheme {
+    base: string;
+
+    // Masthead
+    colorBgMasthead?: string;
+    colorBgMastheadHover?: string;
+    colorBgMastheadDisabled?: string;
+    colorTextMastheadRest?: string;
+    colorTextMastheadDisabled?: string;
+
+    // Primary buttons
+    colorBgBtnPrimaryRest?: string;
+    colorBgBtnPrimaryHover?: string;
+    colorBgBtnPrimaryDisabled?: string;
+    colorTextBtnPrimaryRest?: string;
+    colorTextBtnPrimaryDisabled?: string;
+
+    // Normal buttons
+    colorBgBtnStandardRest?: string;
+    colorBgBtnStandardHover?: string;
+    colorBgBtnStandardDisabled?: string;
+    colorTextBtnStandardRest?: string;
+    colorTextBtnStandardDisabled?: string;
+}
+
 export interface ShellProperties {
-    theme?: string;
+    theme?: string | ShellTheme;
     isRtl?: boolean;
     masthead?: MastheadProperties;
     navigation?: NavigationProperties;
@@ -20,22 +48,29 @@ export interface ShellProperties {
 }
 
 export function Shell({ theme, isRtl, masthead, navigation, children, onClick }: ShellProperties) {
-    if (theme === undefined) {
-        theme = 'light';
+    // backward compatibility handle string format theme
+    const shellTheme: ShellTheme = typeof theme === 'object' ? theme : {
+        base: theme
+    };
+
+    if (shellTheme.base === undefined) {
+        shellTheme.base = 'light';
     }
 
     return (
-        <div className={css('theme-' + theme)}>
-            <div className={css('shell', { rtl: isRtl })} onClick={onClick}>
-                {masthead && <Masthead navigation={navigation} {...masthead} />}
-                <div className={css('nav-and-workspace')}>
-                    {navigation && <Navigation {...navigation} />}
-                    <div className={css('workspace')}>
-                        {children}
+        <div className={css('theme-' + shellTheme.base)}>
+            <ThemeProvider theme={shellTheme}>
+                <div className={css('shell', { rtl: isRtl })} onClick={onClick}>
+                    {masthead && <Masthead navigation={navigation} {...masthead} />}
+                    <div className={css('nav-and-workspace')}>
+                        {navigation && <Navigation {...navigation} />}
+                        <div className={css('workspace')}>
+                            {children}
+                        </div>
+                        <ContextPanelRoot />
                     </div>
-                    <ContextPanelRoot />
                 </div>
-            </div>
+            </ThemeProvider>
         </div>
     );
 }

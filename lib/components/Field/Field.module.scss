@@ -47,7 +47,7 @@ $line-height: 5*$grid-size;
 
 .label-container {
     @include md-box(flex-row);
-    align-items: flex-end;
+    justify-content: space-between;
 
     .label-icon {
         @include md-box(inline-block);
@@ -61,6 +61,17 @@ $line-height: 5*$grid-size;
     & + .content {
         margin-top: $grid-size;
     }
+}
+
+.label-farSide-container {
+    @include md-box(flex-row);
+    align-items: flex-end;
+}
+
+.label-inner-container {
+    @include md-box(flex-row);
+    align-items: flex-end;
+    flex: 1;
 }
 
 .field-error {

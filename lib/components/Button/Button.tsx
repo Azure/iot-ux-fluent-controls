@@ -1,9 +1,12 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
-import {SpanProps, ButtonProps as AttrButtonProps, Elements as Attr} from '../../Attributes';
+import styled, { ThemeProps } from 'styled-components';
+
+import { SpanProps, ButtonProps as AttrButtonProps, Elements as Attr } from '../../Attributes';
+import { ShellTheme } from '../Shell';
 const css = classnames.bind(require('./Button.module.scss'));
 
-export interface ButtonComponentType {}
+export interface ButtonComponentType { }
 
 export interface ButtonAttributes {
     container?: AttrButtonProps;
@@ -34,6 +37,20 @@ export interface ButtonProps extends React.Props<ButtonComponentType> {
     attr?: ButtonAttributes;
 }
 
+const StyledPrimaryButton = styled(Attr.button)`
+    &&&&& {
+        color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnPrimaryRest};
+        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest};
+        &:hover { 
+            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryHover};
+        }
+        &:disabled {
+            color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnPrimaryDisabled};
+            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryDisabled};
+        }
+    }
+`;
+
 /**
  * Button showing Information, Warning, or Error with text, icon, and optional close button
  *
@@ -45,8 +62,9 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
         attr={props.attr.icon}
     /> : '';
 
+    const ButtonProxy = props.primary ? StyledPrimaryButton : Attr.button;
     return (
-        <Attr.button
+        <ButtonProxy
             type={props.type}
             title={props.title}
             className={css('btn', {
@@ -58,7 +76,7 @@ export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps
         >
             {icon}
             {props.children}
-        </Attr.button>
+        </ButtonProxy>
     );
 };
 
