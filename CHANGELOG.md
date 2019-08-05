@@ -2,7 +2,7 @@
 
 ## v6.3.4
 ### Fixed
-- Fix DatePicker + DateTimeField to return null and set value to empty when the value is removed
+- Fix DatePicker + DateTimeField to return empty string and set value to empty when the value is removed
 
 ## v6.3.3
 ### Fixed
