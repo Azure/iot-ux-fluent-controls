@@ -62,16 +62,6 @@
 
     &.expanded {
         width: $layout-nav-expanded-width;
-
-        .expand-icon {
-            width: 100%;
-            transform: rotate(180deg);
-            text-align: left;
-
-            @include rtl {
-                transform: none;
-            }
-        }
     }
     
     // don't show global-nav for small screens: it should be part of masthead instead.
