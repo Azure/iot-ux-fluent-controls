@@ -28,7 +28,7 @@ export function Navigation({ isExpanded, onClick, attr, children }: NavigationPr
                 onClick={onClick}
                 attr={attr && attr.navButton}
             >
-                <span className={cx('expand-icon', 'global-nav-item-icon', 'icon', 'icon-chevronRight')} />
+                <span className={cx('global-nav-item-icon', 'icon', 'icon-globalNavButton')} />
             </Attr.button>
             <div className={cx('scrollable')}>
                 {children}

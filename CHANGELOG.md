@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v6.3.5
+### Changed
+- Updated the global nav icon to be the hamburger icon and always have it aligned to the left.
+
 ## v6.3.4
 ### Fixed
 - Fix DatePicker + DateTimeField to return empty string and set value to empty when the value is removed
