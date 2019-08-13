@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v7.0.0
+### Changed
+- Add forwarding ref to form fields
+
 ## v6.3.5
 ### Changed
 - Updated the global nav icon to be the hamburger icon and always have it aligned to the left.

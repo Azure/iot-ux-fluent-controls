@@ -54,7 +54,7 @@ export interface TextAreaFieldProps extends React.Props<TextAreaFieldType> {
  *
  * @param props Control properties (defined in `TextAreaFieldProps` interface)
  */
-export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (props: TextAreaFieldProps) => {
+export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = React.forwardRef((props: TextAreaFieldProps, ref: React.RefObject<HTMLTextAreaElement>) => {
     const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const textAreaAttr: TextAreaAttributes = {
         container: props.attr.container,
@@ -102,10 +102,11 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
                 autoFocus={props.autoFocus}
                 required={props.required}
                 attr={textAreaAttr}
+                ref={ref}
             />
         </FormField>
     );
-};
+});
 
 TextAreaField.defaultProps = {
     name: undefined,

@@ -329,6 +329,21 @@ export interface GridColumn<T> {
     width?: number;
 }
 
+const setRef = <T>(ref: React.Ref<T>, value: T) => {
+    if (typeof ref === 'function') {
+        ref(value);
+    } else if (ref != null) {
+        (ref as any).current = value;
+    }
+};
+
+export const mergeRefs = <T>(ref1: React.Ref<T>, ref2: React.Ref<T>) => {
+    return (e: T) => {
+        ref1 && setRef(ref1, e);
+        ref2 && setRef(ref2, e);
+    };
+};
+
 export const autoFocusRef = (e: HTMLElement) => {
     if (e) {
         e.focus();

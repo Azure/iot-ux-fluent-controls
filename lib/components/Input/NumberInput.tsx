@@ -8,11 +8,9 @@ import { describe, it } from 'mocha';
 
 const css = classNames.bind(require('./TextInput.module.scss'));
 
-export interface NumberInputType { }
-
 const invalidNumber = 'invalid';
 
-export interface NumberInputProps extends React.Props<NumberInputType> {
+export interface NumberInputProps {
     /** HTML form element name */
     name: string;
     /** Current value of HTML input element */
@@ -56,12 +54,16 @@ export interface NumberInputState {
     paste?: boolean;
 }
 
+interface NumberInputComponentProps extends NumberInputProps {
+    innerRef: React.Ref<HTMLInputElement>;
+}
+
 /**
  * Low level text input control
  *
  * (Use the `TextField` control instead when making a form with standard styling)
  */
-export class NumberInput extends React.Component<NumberInputProps, NumberInputState> {
+class NumberInputComponent extends React.Component<NumberInputComponentProps, NumberInputState> {
     static defaultProps = {
         name: undefined,
         initialValue: '',
@@ -80,7 +82,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
 
     private paste: boolean;
 
-    constructor(props: NumberInputProps) {
+    constructor(props: NumberInputComponentProps) {
         super(props);
 
         this.paste = false;
@@ -267,9 +269,13 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
                 onChange={this.onChange}
                 required={this.props.required}
                 attr={attr}
+                ref={this.props.innerRef}
             />
         );
     }
 }
+
+export const NumberInput = React.forwardRef((props: NumberInputProps, ref: React.Ref<HTMLInputElement>) => 
+    <NumberInputComponent innerRef={ref} {...props} />);
 
 export default NumberInput;

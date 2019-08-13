@@ -2,14 +2,11 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, ButtonProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize} from '../Icon';
-import {MethodNode, autoFocusRef} from '../../Common';
+import {MethodNode, autoFocusRef, mergeRefs} from '../../Common';
 const css = classNames.bind(require('./TextInput.module.scss'));
 
 export const prefixClassName = css('prefix-addon');
 export const postfixClassName = css('postfix-addon');
-
-export interface TextInputType {}
-
 
 export interface TextInputAttributes {
     container?: DivProps;
@@ -20,7 +17,7 @@ export interface TextInputAttributes {
     clearButton?: ButtonProps;
 }
 
-export interface TextInputProps extends React.Props<TextInputType> {
+export interface TextInputProps {
     /** HTML form element name */
     name: string;
     /** Current value of HTML input element */
@@ -63,14 +60,18 @@ export interface TextInputProps extends React.Props<TextInputType> {
     attr?: TextInputAttributes;
 }
 
+interface TextInputComponentProps extends TextInputProps {
+    innerRef: React.Ref<HTMLInputElement>;
+}
+
 /**
  * Low level text input control
  *
  * (Use the `TextField` control instead when making a form with standard styling)
  */
-export class TextInput extends React.PureComponent<TextInputProps> {
+class TextInputComponent extends React.PureComponent<TextInputComponentProps> {
 
-    public static defaultProps: Partial<TextInputProps> = {
+    public static defaultProps: Partial<TextInputComponentProps> = {
         name: undefined,
         value: undefined,
         onChange: undefined,
@@ -85,7 +86,7 @@ export class TextInput extends React.PureComponent<TextInputProps> {
         }
     };
 
-    constructor(props: TextInputProps) {
+    constructor(props: TextInputComponentProps) {
         super(props);
         this.onChange = this.onChange.bind(this);
         this.onClear = this.onClear.bind(this);
@@ -160,7 +161,7 @@ export class TextInput extends React.PureComponent<TextInputProps> {
                         disabled={this.props.disabled}
                         readOnly={this.props.readOnly}
                         autoFocus={this.props.autoFocus}
-                        methodRef={this.props.autoFocus && autoFocusRef}
+                        methodRef={mergeRefs(this.props.autoFocus && autoFocusRef, this.props.innerRef)}
                         attr={this.props.attr.input}
                     />
                     {clearButton}
@@ -170,5 +171,8 @@ export class TextInput extends React.PureComponent<TextInputProps> {
         );
     }
 }
+
+export const TextInput = React.forwardRef((props: TextInputProps, ref: React.Ref<HTMLInputElement>) => 
+    <TextInputComponent innerRef={ref} {...props} />);
 
 export default TextInput;

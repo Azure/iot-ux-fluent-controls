@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, SelectProps, OptionProps, Elements as Attr, OptionAttr, mergeAttributes} from '../../Attributes';
- import {FormOption, autoFocusRef} from '../../Common';
+ import {FormOption, autoFocusRef, mergeRefs} from '../../Common';
 const css = classNames.bind(require('./SelectInput.module.scss'));
 
 export interface SelectInputType {}
@@ -66,7 +66,7 @@ export interface SelectInputProps extends React.Props<SelectInputType> {
  *
  * @param props Control properties (defined in `SelectInputProps` interface)
  */
-export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: SelectInputProps) => {
+export const SelectInput: React.StatelessComponent<SelectInputProps> = React.forwardRef((props: SelectInputProps, ref: React.Ref<HTMLSelectElement>) => {
     const containerClass = css('combo-container', props.className);
     const comboClass = css(
         'combo', {'error': props.error}
@@ -109,7 +109,7 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
                 onChange={onChange}
                 disabled={props.disabled}
                 autoFocus={props.autoFocus}
-                methodRef={props.autoFocus && autoFocusRef}
+                methodRef={mergeRefs(props.autoFocus && autoFocusRef, ref)}
                 required={props.required}
                 attr={props.attr.select}
             >
@@ -118,7 +118,7 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
             <Attr.span className={arrowClassName} attr={props.attr.chevron}/>
         </Attr.div>
     );
-};
+});
 
 SelectInput.defaultProps = {
     name: undefined,

@@ -3,10 +3,8 @@ import * as classNames from 'classnames/bind';
 import { DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects } from '../../Attributes';
 import { Icon, IconSize } from '../Icon';
 import { Dropdown, DropdownAttributes } from '../Dropdown';
-import { MethodNode, FormOption, keyCode, hasClassName, autoFocusRef } from '../../Common';
+import { MethodNode, FormOption, keyCode, hasClassName, autoFocusRef, mergeRefs } from '../../Common';
 const css = classNames.bind(require('./ComboInput.module.scss'));
-
-export interface ComboInputType { }
 
 export interface ComboInputAttributes extends DropdownAttributes {
     textbox?: DivProps;
@@ -16,7 +14,7 @@ export interface ComboInputAttributes extends DropdownAttributes {
     option?: ButtonProps;
 }
 
-export interface ComboInputProps extends React.Props<ComboInputType> {
+export interface ComboInputProps {
     /** HTML form element name */
     name: string;
     /** Current value of HTML input element */
@@ -135,6 +133,10 @@ const defaultSelect = (newValue: string, option: string) => option === newValue;
 
 const defaultLabel = (newValue: string, option: FormOption) => option.label;
 
+interface ComboInputComponentProps extends ComboInputProps {
+    innerRef: React.Ref<HTMLInputElement>;
+}
+
 /**
  * Low level combo input control
  *
@@ -160,7 +162,7 @@ const defaultLabel = (newValue: string, option: FormOption) => option.label;
  *
  * (Use the `ComboField` control for forms with standard styling)
  */
-export class ComboInput extends React.Component<ComboInputProps, Partial<ComboInputState>> {
+class ComboInputComponent extends React.Component<ComboInputComponentProps, Partial<ComboInputState>> {
     static defaultProps = {
         optionMap: defaultMap,
         optionLabel: defaultLabel,
@@ -183,7 +185,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
     private optionElements: { [value: string]: HTMLSpanElement };
     private currentOption: string;
 
-    constructor(props: ComboInputProps) {
+    constructor(props: ComboInputComponentProps) {
         super(props);
 
         this.state = {
@@ -502,7 +504,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         required={this.props.required}
                         disabled={this.props.disabled}
                         readOnly={this.props.readOnly}
-                        methodRef={this.inputRef}
+                        methodRef={mergeRefs(this.inputRef, this.props.innerRef)}
                         autoFocus={this.props.autoFocus}
                         attr={this.props.attr.input}
                     />
@@ -516,5 +518,8 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         );
     }
 }
+
+export const ComboInput = React.forwardRef((props: ComboInputProps, ref: React.Ref<HTMLInputElement>) => 
+    <ComboInputComponent innerRef={ref} {...props} />);
 
 export default ComboInput;

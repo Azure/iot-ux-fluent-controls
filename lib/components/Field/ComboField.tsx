@@ -146,7 +146,7 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
  *
  * @param props: Object fulfilling `ComboFieldProps` interface
  */
-export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: ComboFieldProps) => {
+export const ComboField: React.StatelessComponent<ComboFieldProps> = React.forwardRef((props: ComboFieldProps, ref: React.RefObject<HTMLInputElement>) => {
     const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const comboAttr: ComboInputAttributes = {
         container: props.attr.container,
@@ -204,11 +204,12 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
                     showLabel={props.showLabel}
                     required={props.required}
                     attr={comboAttr}
+                    ref={ref}
                 />
             </div>
         </FormField>
     );
-};
+});
 
 ComboField.defaultProps = {
     name: undefined,

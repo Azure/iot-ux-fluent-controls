@@ -68,7 +68,7 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
  *
  * @param props Control properties (defined in `TextFieldProps` interface)
  */
-export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextFieldProps) => {
+export const TextField: React.StatelessComponent<TextFieldProps> = React.forwardRef((props: TextFieldProps, ref: React.RefObject<HTMLInputElement>) => {
     const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const errorId = `${props.name}-error`;
     let describedby = errorId;
@@ -131,10 +131,11 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
                 autoFocus={props.autoFocus}
                 required={props.required}
                 attr={textAttr}
+                ref={ref}
             />
         </FormField>
     );
-};
+});
 
 TextField.defaultProps = {
     name: undefined,

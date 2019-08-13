@@ -63,7 +63,7 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
  *
  * @param props Control properties (defined in `NumberFieldProps` interface)
  */
-export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: NumberFieldProps) => {
+export const NumberField: React.StatelessComponent<NumberFieldProps> = React.forwardRef((props: NumberFieldProps, ref: React.RefObject<HTMLInputElement>) => {
     const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const numberAttr: TextInputAttributes = {
         container: props.attr.container,
@@ -119,10 +119,11 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
                 max={props.max}
                 required={props.required}
                 attr={numberAttr}
+                ref={ref}
             />
         </FormField>
     );
-};
+});
 
 NumberField.defaultProps = {
     name: undefined,

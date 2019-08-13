@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import styled, { ThemeProps, ThemeConsumer } from 'styled-components';
-import {MethodNode, autoFocusRef} from '../../Common';
+import {MethodNode, autoFocusRef, mergeRefs} from '../../Common';
 import {DivProps, LabelProps, SpanProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize, IconAttributes} from '../Icon';
 import {ShellTheme} from '../Shell';
@@ -68,7 +68,7 @@ const StyledActiveCheckboxButton = styled(Attr.span)`
  *
  * @param props Control properties (defined in `CheckboxInputProps` interface)
  */
-export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (props: CheckboxInputProps) => {
+export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = React.forwardRef((props: CheckboxInputProps, ref: React.Ref<HTMLInputElement>) => {
     const containerClass = css('checkbox-container', {
         'columns': props.columns,
         'disabled': props.disabled,
@@ -107,7 +107,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                     required={props.required}
                     onChange={onChange}
                     autoFocus={props.autoFocus}
-                    methodRef={props.autoFocus && autoFocusRef}
+                    methodRef={mergeRefs(props.autoFocus && autoFocusRef, ref)}
                     attr={props.attr.input}
                 />
                 <CheckboxInputProxy
@@ -138,7 +138,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
             </Attr.label>
         </Attr.div>
     );
-};
+});
 
 function stopPropagation(e: React.MouseEvent<HTMLElement>) {
     // HACK! If we don't add this click event handler to the label, React never

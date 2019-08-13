@@ -1,10 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, PreProps, TextAreaProps, Elements as Attr} from '../../Attributes';
-import {MethodNode, autoFocusRef} from '../../Common';
+import {MethodNode, autoFocusRef, mergeRefs} from '../../Common';
 const css = classNames.bind(require('./TextArea.module.scss'));
-
-export interface TextAreaType {}
 
 export interface TextAreaAttributes {
     container?: DivProps;
@@ -12,7 +10,7 @@ export interface TextAreaAttributes {
     pre?: PreProps;
 }
 
-export interface TextAreaProps extends React.Props<TextAreaType> {
+export interface TextAreaProps {
     /** HTML form element name */
     name: string;
     /** Current value of HTML input element */
@@ -45,12 +43,16 @@ export interface TextAreaProps extends React.Props<TextAreaType> {
 export interface TextAreaState {
 }
 
+interface TextAreaComponentProps extends TextAreaProps {
+    innerRef: React.Ref<HTMLTextAreaElement>;
+}
+
 /**
  * Low level text input control
  *
  * (Use the `TextField` control instead when making a form with standard styling)
  */
-export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
+class TextAreaComponent extends React.Component<TextAreaComponentProps, TextAreaState> {
     static defaultProps = {
         autogrow: true,
         error: false,
@@ -67,11 +69,11 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
 
     private ghost: HTMLPreElement;
 
-    constructor(props: TextAreaProps) {
+    constructor(props: TextAreaComponentProps) {
         super(props);
     }
 
-    componentDidUpdate(prevProps: TextAreaProps, prevState: TextAreaState) {
+    componentDidUpdate(prevProps: TextAreaComponentProps, prevState: TextAreaState) {
         const height = this.ghost && this.ghost.offsetHeight;
         if (this.props.autogrow && prevProps.value !== this.props.value && height > 52) {
             this.textarea.style.height = `${height}px`;
@@ -94,7 +96,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     disabled={this.props.disabled}
                     readOnly={this.props.readOnly}
                     placeholder={this.props.placeholder}
-                    methodRef={this.bindTextArea}
+                    methodRef={mergeRefs(this.bindTextArea, this.props.innerRef)}
                     autoFocus={this.props.autoFocus}
                     required={this.props.required}
                     attr={this.props.attr.textarea}
@@ -121,5 +123,8 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
 
     private bindGhost = element => this.ghost = element;
 }
+
+export const TextArea = React.forwardRef((props: TextAreaProps, ref: React.Ref<HTMLTextAreaElement>) => 
+    <TextAreaComponent innerRef={ref} {...props} />);
 
 export default TextArea;

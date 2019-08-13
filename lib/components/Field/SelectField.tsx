@@ -67,7 +67,7 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
  *
  * @param props: Object fulfilling `SelectFieldProps` interface
  */
-export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: SelectFieldProps) => {
+export const SelectField: React.StatelessComponent<SelectFieldProps> = React.forwardRef((props: SelectFieldProps, ref: React.RefObject<HTMLSelectElement>) => {
     const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const selectAttr: SelectInputAttributes = {
         container: props.attr.container,
@@ -116,10 +116,11 @@ export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: S
                 autoFocus={props.autoFocus}
                 required={props.required}
                 attr={selectAttr}
+                ref={ref}
             />
         </FormField>
     );
-};
+});
 
 SelectField.defaultProps = {
     name: undefined,

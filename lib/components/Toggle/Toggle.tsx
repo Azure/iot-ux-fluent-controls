@@ -3,7 +3,7 @@ import * as classNames from 'classnames/bind';
 import styled, { ThemeProps } from 'styled-components';
 
 import {DivProps, ButtonProps, Elements as Attr} from '../../Attributes';
-import {MethodNode, autoFocusRef} from '../../Common';
+import {MethodNode, autoFocusRef, mergeRefs} from '../../Common';
 import { ShellTheme } from '../Shell';
 
 const css = classNames.bind(require('./Toggle.module.scss'));
@@ -58,7 +58,7 @@ const StyledToggleOnSwitch = styled(Attr.div)`
  *
  * @param props Control properties (defined in `ToggleProps` interface)
  */
-export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps) => {
+export const Toggle: React.StatelessComponent<ToggleProps> = React.forwardRef((props: ToggleProps, ref: React.Ref<HTMLButtonElement>) => {
     const containerClassName = css('toggle', {
         'toggle-on': props.on,
         'disabled': props.disabled
@@ -84,7 +84,7 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
                 tabIndex={tabIndex}
                 name={props.name}
                 autoFocus={props.autoFocus}
-                methodRef={props.autoFocus && autoFocusRef}
+                methodRef={mergeRefs(props.autoFocus && autoFocusRef, ref)}
                 // https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_switch_role
                 // the switch role represents the states "on" and "off."
                 role='switch'
@@ -97,7 +97,7 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
             </Attr.div>
         </Attr.div>
     );
-};
+});
 
 Toggle.defaultProps = {
     name: undefined,

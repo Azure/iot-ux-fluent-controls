@@ -57,7 +57,8 @@ export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
  *
  * @param props: Object fulfilling `CheckboxFieldProps` interface
  */
-export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (props: CheckboxFieldProps) => {const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
+export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = React.forwardRef((props: CheckboxFieldProps, ref: React.RefObject<HTMLInputElement>) => {
+    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const checkboxAttr: CheckboxInputAttributes = {
         container: props.attr.container,
         input: Object.assign({
@@ -108,11 +109,12 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
                     autoFocus={props.autoFocus}
                     required={props.required}
                     attr={checkboxAttr}
+                    ref={ref}
                 />
             </div>
         </FormField>
     );
-};
+});
 
 CheckboxField.defaultProps = {
     name: undefined,

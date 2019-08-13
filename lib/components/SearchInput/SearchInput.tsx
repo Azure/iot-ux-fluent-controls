@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import { Icon } from '../Icon';
-import TextInput, { TextInputType, TextInputAttributes } from '../Input/TextInput';
+import TextInput, { TextInputAttributes } from '../Input/TextInput';
 import { ActionTriggerButton } from '../ActionTrigger';
 const css = classNames.bind(require('./SearchInput.module.scss'));
 
@@ -10,7 +10,7 @@ export const postfixClassName = css('postfix-addon');
 
 
 
-export interface SearchInputProps extends React.Props<TextInputType> {
+export interface SearchInputProps {
     label: string;
     onSubmit: React.EventHandler<any>;
     onChange: (newValue: string) => void;

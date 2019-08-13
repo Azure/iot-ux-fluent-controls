@@ -54,7 +54,7 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
  *
  * @param props: Object fulfilling `ToggleFieldProps` interface
  */
-export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: ToggleFieldProps) => {
+export const ToggleField: React.StatelessComponent<ToggleFieldProps> = React.forwardRef((props: ToggleFieldProps, ref: React.RefObject<HTMLButtonElement>) => {
     const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const toggleAttr: ToggleAttributes = {
         container: props.attr.container,
@@ -102,10 +102,11 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
                 attr={toggleAttr}
+                ref={ref}
             />
         </FormField>
     );
-};
+});
 
 ToggleField.defaultProps = {
     name: undefined,
