@@ -1,39 +1,27 @@
 @import "~@microsoft/azure-iot-ux-fluent-css/src/normalize";
 @import "../../common/icons";
-@import '../../common/color.controls';
 
 // provide some common styling that everyone requires:
 :global {
     .link {
-        @include themify {
-            color: themed('color-text-hyperlink-rest');
-        }
+        color: var(--color-hyperlink-rest);
 
         &:hover:not(.disabled) {
-            @include themify {
-                color: themed('color-text-hyperlink-hover');
-            }
+            color: var(--color-hyperlink-hover);
         }
 
         &:focus:not(.disabled) {
             outline-offset: -1px;
-            @include themify {
-                outline: 1px dashed themed('color-border-focus');
-            }
+            outline: 1px dashed var(--color-border-focus);
         }
 
         &:active:not(.disabled) {
-            @include themify {
-                color: themed('color-text-hyperlink-focus');
-            }
+            color: var(--color-hyperlink-focus);
         }
 
         &.disabled {
             cursor: not-allowed;
-
-            @include themify {
-                color: themed('color-text-hyperlink-disabled');
-            }
+            color: var(--color-hyperlink-disabled);
         }
     }
 
@@ -45,11 +33,8 @@
         display: flex;
         flex-direction: column; // masthead should be on top of nav-and-workspace
         height: 100vh;
-
-        @include themify {
-            color: themed('color-text-rest');
-            background-color: themed('color-bg-content');
-        }
+        color: var(--color-text-rest);
+        background-color: var(--color-bg-container);
     }
 }
 
