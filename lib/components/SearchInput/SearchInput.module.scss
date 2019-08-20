@@ -1,4 +1,3 @@
-@import '../../common/color.controls';
 @import '../../common/constants';
 @import '../../common/mixins';
 
@@ -70,57 +69,55 @@ $border-radius-size: $grid-size/2;
         }
     }
 
-    @include themify {
-        .search-prefix-icon {
-            // prefix
-            color: themed('color-text-black');
-            background-color: transparent;
+    .search-prefix-icon {
+        // prefix
+        color: var(--color-text-searchbar);
+        background-color: transparent;
+    }
+
+    input.input-component {
+        background-color: var(--color-bg-searchbar-rest);
+        color: var(--color-text-searchbar);
+
+        &::placeholder {
+            color: var(--color-text-searchbar);
         }
 
-        input.input-component {
-            background-color: themed('color-bg-searchbar-rest');
-            color: themed('color-text-black');
+        &:hover,
+        &:focus,
+        &:active {
+            background-color: var(--color-bg-searchbar-focus);
+        }
 
-            &::placeholder {
-                color: themed('color-text-black');
-            }
-
-            &:hover,
-            &:focus,
-            &:active {
-                background-color: themed('color-bg-searchbar-focus');
-            }
-
-            &:focus,
-            &:active {
-                &:not([value=""]) {
-                    +button::before {
-                        color: themed('color-text-black');
-                    }
+        &:focus,
+        &:active {
+            &:not([value=""]) {
+                +button::before {
+                    color: var(--color-text-searchbar);
                 }
             }
         }
+    }
 
-        .search-button {
-            background-color: themed('color-bg-btn-primary-rest');
+    .search-button {
+        background-color: var(--color-bg-btn-primary-rest);
 
-            >div {
-                background-color: themed('color-bg-btn-primary-rest') !important;
-            }
+        >div {
+            background-color: var(--color-bg-btn-primary-rest) !important;
+        }
 
-            &:focus,
-            &:active,
-            &:hover {
-                background-color: themed('color-bg-btn-primary-rest');
-
-                span {
-                    color: themed('color-text-white');
-                }
-            }
+        &:focus,
+        &:active,
+        &:hover {
+            background-color: var(--color-bg-btn-primary-rest);
 
             span {
-                color: themed('color-text-white');
+                color: var(--color-icon-searchbar-btn);
             }
+        }
+
+        span {
+            color: var(--color-icon-searchbar-btn);
         }
     }
 
