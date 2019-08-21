@@ -1,6 +1,4 @@
-@import '../../common/color.controls';
 @import '../../common/constants';
-@import '../../common/mixins';
 
 $img-size: 160px;
 $list-tile-thumbnail-size: 50px;
@@ -32,21 +30,17 @@ $search-thumbnail-size: 64px;
     overflow: hidden;
     flex-grow: 0;
     flex-shrink: 0;
-    @include themify {
-        background-color: themed('color-bg-thumbnail');
-        :global(.icon) {
-            color: themed('color-text-thumbnail');
-        }
-    }
+    background-color: var(--color-bg-thumbnail);
 
     :global(.icon) {
+        color: var(--color-icon-thumbnail);
         text-align: center;
         display: block;
         width: 100%;
     }
 
     &.preview { @include thumbnailSize($img-size, $img-size / 2); }
-    &.masthead { @include thumbnailSize($user-thumbnail-height, $font-size-h2)}
+    &.masthead { @include thumbnailSize($user-thumbnail-height, var(--font-size-h2))}
     &.list-item { @include thumbnailSize($list-thumbnail-size, $list-thumbnail-icon-size) }
     &.search-result { @include thumbnailSize($search-thumbnail-size, $search-thumbnail-icon-size) }
     &.list-tile { @include thumbnailSize($list-tile-thumbnail-size, $list-tile-thumbnail-icon-size) }
