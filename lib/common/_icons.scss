@@ -2,12 +2,10 @@
  * Icons
  */
 
- @import 'constants';
- 
  :global {  // Icons need to be put in the global scope
  
      .icon {
-         font-family: $icon-font-family;
+         font-family: var(--icon-font-family);
          font-style: normal;
          font-weight: normal;
      }

@@ -40,7 +40,7 @@ $line-height-sort: 3*$grid-size;
             @include md-box(block, relative);
             @include md-button-reset();
             
-            font-family: $font-family-din-regular;
+            font-family: var(--font-family-din-regular);
             font-size: $font-size-small;
             line-height: $line-height-small;
             @include themify {

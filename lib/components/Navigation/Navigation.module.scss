@@ -1,4 +1,3 @@
-@import '../../common/color.controls';
 @import '../../common/constants';
 @import '../../common/mixins';
 
@@ -15,10 +14,7 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    
-    @include themify {
-        background-color: themed('color-bg-navbar');
-    }
+    background-color: var(--color-bg-navbar);
 
     @include rtl {
         .expand-icon {
@@ -35,9 +31,7 @@
 
     .separator {
         margin: 0px $gutter-small;
-        @include themify {
-            border-top: 1px solid themed('color-border-navbar-separator');
-        }
+        border-top: 1px solid var(--color-text-navbar);
     }
     
     &:not(.expanded) {
@@ -88,45 +82,34 @@
     display: flex;
     align-items: center;
 
-    @include themify {
-        color: themed('color-text-white');
-        background-color: themed('color-bg-navbar');
+    color: var(--color-text-navbar);
+    background-color: var(--color-bg-navbar);
 
-        &:hover {
-            color: themed('color-text-white'); 
-            background-color: themed('color-bg-navbar-hover');
+    &:hover {
+        background-color: var(--color-bg-navbar-hover);
 
-            &:global(.global-nav-item-active) {
-                background-color: themed('color-bg-navbar-hover-selected');
-            }
+        &:global(.global-nav-item-active) {
+            background-color: var(--color-bg-navbar-selected-hover);
         }
+    }
 
-        &:focus {
-            color: themed('color-text-white');
-            background-color: themed('color-bg-navbar');
-        }
-
-        &:active, &:global(.global-nav-item-active) {
-            color: themed('color-text-white');
-            background-color: themed('color-bg-navbar-selected');
-        }
+    &:active, &:global(.global-nav-item-active) {
+        background-color: var(--color-bg-navbar-selected);
     }
 
     &:focus {
         outline-offset: -1px;
-        @include themify {
-            outline: 1px dashed themed('color-border-navbar-focus');
-        }
+        outline: 1px dashed var(--color-border-navbar-focus);
     }
 }
 
 :global(.global-nav-item-icon) {
-    font-size: $icon-size-xsmall;
+    font-size: var(--icon-size-xsmall);
     padding: 0px $gutter-small;
 
     svg {
-        height: $icon-size-xsmall;
-        width: $icon-size-xsmall;
+        height: var(--icon-size-xsmall);
+        width: var(--icon-size-xsmall);
         fill: currentColor;
     }
 }

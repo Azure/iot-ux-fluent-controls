@@ -1,8 +1,8 @@
-@import '../../common/color.controls';
 @import '../../common/constants';
 @import '../../common/mixins';
 
 $masthead-branding-width: 50%;
+
 $masthead-brandname-width: $grid-size * 50;
 $masthead-logo-padding: 2*$grid-size 2*$grid-size 2*$grid-size 5*$grid-size;
 $masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
@@ -11,45 +11,9 @@ $thumbnail-size: 3 * $gutter-xsmall; // match @user-thumbnail-size in Thumbnail.
 $branding-min-width-size: 30 * $grid-size;
 $search-max-size: 100 * $grid-size;
 
-@mixin selected {
-    &.selected {
-        background-color: themed('color-bg-panel-contextual');
-
-        >* {
-            background-color: themed('color-bg-panel-contextual');
-            color: themed('color-text-rest');
-        }
-
-        &:focus {
-            outline: 1px dashed themed('color-text-black');
-
-            >* {
-                outline: none;
-                color: themed('color-text-clear');
-            }
-        }
-
-        &:active>* {
-            color: themed('color-text-clear');
-        }
-
-        &:hover,
-        &:hover>* {
-            background-color: themed('color-bg-panel-contextual');
-
-            >* {
-                outline: none;
-                background-color: themed('color-bg-panel-contextual');
-                color: themed('color-text-rest');
-            }
-
-        }
-    }
-}
-
 @mixin action-trigger-override {
     outline: none;
-    color: themed('color-text-white');
+    color: var(--color-text-masthead);
 }
 
 .masthead {
@@ -58,6 +22,8 @@ $search-max-size: 100 * $grid-size;
     flex-grow: 0;
     flex-shrink: 0;
     justify-content: space-between;
+    color: var(--color-text-masthead);
+    background-color: var(--color-bg-masthead);
 
     .force-hide-search {
         display: none !important;
@@ -72,23 +38,43 @@ $search-max-size: 100 * $grid-size;
     .nav-container {
         // show nav in masthead only in small screens:
         display: none;
-
-        @media(max-width: $screen-sm - 1) {
-            width: $layout-nav-collapsed-width;
-            display: initial;
-        }
-
-        .nav-icon-collapsed {
-            transform: rotate(90deg);
-        }
-
-        .nav-icon-expanded {
-            transform: rotate(-90deg);
-        }
+        color: var(--color-text-masthead);
 
         .nav-panel {
             width: $layout-nav-expanded-width;
             padding: 0;
+            border: 0;
+        }
+
+        .nav-icon-collapsed {
+            background-color: var(--color-bg-masthead);
+            color: var(--color-text-masthead);
+            transform: rotate(90deg);
+        }
+
+        .nav-icon-expanded {
+            background-color: var(--color-bg-container-panel);
+            color: var(--color-text-regular);
+            transform: rotate(-90deg);
+
+            :hover {
+                background-color: var(--color-bg-container-panel);
+            }
+        }
+
+        :global(.global-nav-item) {
+            background-color: var(--color-bg-container-panel);
+            color: var(--color-text-regular);
+
+            &:hover,
+            &:active {
+                background-color: var(--color-bg-masthead-hover);
+            }
+        }
+
+        @media(max-width: $screen-sm - 1) {
+            width: $layout-nav-collapsed-width;
+            display: initial;
         }
     }
 
@@ -103,7 +89,7 @@ $search-max-size: 100 * $grid-size;
         display: inline-block;
         padding: 0px $gutter-normal;
         line-height: $layout-nav-item-height;
-        font-size: $font-size-h3;
+        font-size: var(--font-size-h3);
         font-weight: bold;
         min-width: $branding-min-width-size;
     }
@@ -114,49 +100,8 @@ $search-max-size: 100 * $grid-size;
         }
     }
 
-    .user-menu-item {
-
-        .user-items,
-        .user-label {
-            text-align: inherit;
-            background: none;
-            border: none;
-            padding: 0 $grid-size*4;
-            width: 100%;
-
-            .email {
-                @include themify {
-                    color: themed('color-text-placeholder');
-                }
-
-                font-size: $font-size-xsmall;
-                text-transform: uppercase;
-            }
-        }
-
-        .user-items {
-            padding: 0;
-
-            >* {
-                height: $layout-nav-item-height;
-                padding: 0 $grid-size*4 !important;
-                text-align: left;
-            }
-        }
-    }
-
-    .user-thumbnail {
-        align-self: center;
-        font-size: $font-size-h2;
-        margin-right: $gutter-normal;
-
-        &.hidden {
-            display: none;
-        }
-    }
-
     .masthead-toolbar-container {
-        width: 100% - $masthead-branding-width;
+        width: calc(100% - #{$masthead-branding-width});
         text-align: right;
         position: relative;
 
@@ -168,7 +113,6 @@ $search-max-size: 100 * $grid-size;
             flex-wrap: nowrap;
             justify-content: flex-end;
             list-style-type: none;
-
 
             // hide the search-button that control the display of search-bar
             .search-button {
@@ -193,6 +137,9 @@ $search-max-size: 100 * $grid-size;
 
             .masthead-toolbar-menu {
                 padding: 0;
+                background-color: var(--color-bg-container-panel);
+                color: var(--color-text-regular);
+                border: 0;
 
                 ul {
                     list-style: none;
@@ -238,19 +185,9 @@ $search-max-size: 100 * $grid-size;
 
                 // align all the icons
                 :before {
-                    width: $icon-size-base;
-                    height: $icon-size-base;
+                    width: var(--icon-size-base);
+                    height: var(--icon-size-base);
                     vertical-align: baseline;
-                }
-
-                &.user-btn {
-                    width: $thumbnail-size;
-                    height: $thumbnail-size;
-                    border-radius: 50%;
-                    
-                    :global(.icon) {
-                        font-size: $icon-size-base;
-                    }
                 }
 
                 span span {
@@ -262,114 +199,70 @@ $search-max-size: 100 * $grid-size;
                     }
                 }
             }
-        }
-    }
 
-    // THEME
-    @include themify {
-        color: themed('color-text-white');
-        background-color: themed('color-bg-masthead');
+            .masthead-toolbar-btn,
+            .masthead-toolbar-btn>* {
+                &:focus {
+                    outline: 1px dashed var(--color-outline-masthead);
+                    color: var(--color-text-masthead);
 
-        .nav-container {
-            color: themed('color-text-white');
-
-            .nav-panel {
-                border: 0;
-            }
-
-            .nav-icon-collapsed {
-                background-color: themed('color-bg-masthead');
-                color: themed('color-text-white');
-            }
-
-            .nav-icon-expanded {
-                background-color: themed('color-bg-panel-contextual');
-                color: themed('color-text-clear');
-
-                :hover {
-                    background-color: themed('color-bg-panel-contextual');
+                    >* {
+                        @include action-trigger-override();
+                    }
                 }
-            }
 
-            :global(.global-nav-item) {
-                background-color: themed('color-bg-panel-contextual');
-                color: themed('color-text-clear');
-
-                &:hover,
                 &:active {
-                    background-color: themed('color-bg-masthead-hover');
-                }
-            }
-        }
+                    outline: 1px dashed var(--color-outline-masthead);
 
-        .masthead-toolbar-container {
-            .masthead-toolbar {
-
-                .masthead-toolbar-menu {
-                    background-color: themed('color-bg-panel-contextual');
-                    color: themed('color-text-clear');
-                    border: 0;
-                }
-
-                .masthead-toolbar-btn,
-                .masthead-toolbar-btn>* {
+                    >* {
+                        @include action-trigger-override();
+                    }
 
                     &:focus {
-                        outline: 1px dashed themed('color-text-white');
-                        color: themed('color-text-white');
+                        outline: 1px dashed var(--color-outline-masthead);
+                        color: var(--color-text-masthead);
 
                         >* {
                             @include action-trigger-override();
                         }
                     }
+                }
 
-                    &:active {
-                        outline: 1px dashed themed('color-text-white');
+                &:hover {
+                    background-color: var(--color-bg-masthead-hover);
+                }
+
+                &.selected {
+                    background-color: var(--color-bg-container-panel);
+
+                    >* {
+                        background-color: var(--color-bg-container-panel);
+                        color: var(--color-text-rest);
+                    }
+
+                    &:focus {
+                        outline: 1px dashed var(--color-outline);
 
                         >* {
-                            @include action-trigger-override();
-                        }
-
-                        &:focus {
-                            outline: 1px dashed themed('color-text-white');
-                            color: themed('color-text-white');
-
-                            >* {
-                                @include action-trigger-override();
-                            }
+                            outline: none;
+                            color: var(--color-text-regular);
                         }
                     }
 
-                    &:hover {
-                        background-color: themed('color-bg-masthead-hover');
+                    &:active>* {
+                        color: var(--color-text-regular);
                     }
 
-                    @include selected();
+                    &:hover,
+                    &:hover>* {
+                        background-color: var(--color-bg-container-panel);
 
-                    &.user-btn {
-                        background-color: transparent;
-
-                        >:global(.icon-alias-user) {
-                            background-color: themed('color-border-masthead-item');
+                        >* {
+                            outline: none;
+                            background-color: var(--color-bg-container-panel);
+                            color: var(--color-text-rest);
                         }
-
-                        @include selected();
                     }
-                }
-            }
-        }
-
-        .user-menu-item {
-            .user-label {
-                .email {
-                    color: themed('color-text-placeholder');
-                }
-            }
-
-            .user-items {
-                >* {
-                    background-color: themed('color-bg-panel-contextual');
-                    color: themed('color-text-clear');
                 }
             }
         }
@@ -394,10 +287,7 @@ $search-max-size: 100 * $grid-size;
             }
 
             .masthead-toolbar-btn {
-                @include themify {
-                    border-right: 1px solid themed('color-border-panel');
-                }
-
+                border-right: 1px solid var(--color-border-panel);
                 border-left: 0;
             }
         }

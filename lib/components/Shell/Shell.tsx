@@ -49,14 +49,21 @@ export interface ShellProperties {
 
 export function Shell({ theme, isRtl, masthead, navigation, children, onClick }: ShellProperties) {
     // backward compatibility handle string format theme
-    const shellTheme: ShellTheme = typeof theme === 'object' ? theme : {
-        base: theme
-    };
+    const shellTheme: ShellTheme = React.useMemo(() => (
+        typeof theme === 'object'
+            ? theme
+            : { base: theme }
+    ), [theme]);
 
     if (shellTheme.base === undefined) {
         shellTheme.base = 'light';
     }
 
+    React.useEffect(() => {
+        document.documentElement.setAttribute('theme', shellTheme.base);
+    }, [shellTheme.base])
+
+    // @todo - remove outer div with theme-#{shellTheme.base}
     return (
         <div className={css('theme-' + shellTheme.base)}>
             <ThemeProvider theme={shellTheme}>
