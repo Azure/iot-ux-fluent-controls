@@ -1,6 +1,5 @@
 @import '../../common/constants';
 @import '../../common/mixins';
-@import '../../common/color.controls';
 
 $calendar-column-width: 8*$grid-size;
 $calendar-chevron-width: 10*$grid-size;
@@ -12,16 +11,15 @@ $line-height-row: $calendar-column-width;
 
 .calendar {
     @include md-box(block, relative);
-    font-family: $font-family-default;
-    font-size: $font-size-default;
+    font-family: var(--font-family-default);
+    font-size: var(--font-size-default);
     padding-bottom: 2*$grid-size;
-    @include themify {
-        color: themed('color-text-rest');
-    }
+    color: var(--color-text-rest);
+
     .calendar-header {
         @include md-box(block, relative);
         margin-left: 2*$grid-size;
-        font-family: $font-family-light;
+        font-family: var(--font-family-light);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -49,10 +47,8 @@ $line-height-row: $calendar-column-width;
         .calendar-month {
             @include md-box(inline-block, relative);
             margin-top: 4*$grid-size;
-            @include themify{
-                color: themed('color-text-rest')
-            }
-            font-size: $font-size-h5;
+            color: var(--color-text-rest);
+            font-size: var(--font-size-h5);
             line-height: $line-height-header;
             text-align: left;
             vertical-align: top;
@@ -88,10 +84,9 @@ $line-height-row: $calendar-column-width;
         margin: 2*$grid-size 0px;
         padding-left: $grid-size;
         padding-bottom: 1.5*$grid-size;
-        @include themify{
-            border-bottom: 1px solid themed('color-border-rest');
-            color: themed('color-text-rest')
-        }
+        border-bottom: 1px solid var(--color-border-rest);
+        color: var(--color-text-rest);
+
         & > div  {
             @include md-box(inline-block, relative);
             width: $calendar-column-width;
@@ -107,15 +102,13 @@ $line-height-row: $calendar-column-width;
         margin-left: $grid-size;
 
         & > button.selected {
-            @include themify{
-                color: themed('color-text-white');
-                background-color: themed('color-bg-btn-primary-rest');
+            color: var(--color-text-active);
+            background-color: var(--color-bg-btn-primary-rest);
 
-                &:focus {
-                    outline: 1px dashed themed('color-outline-btn-primary-focus');
-                    background-color: themed('color-bg-btn-primary-focus');
-                    outline-offset: -2px;
-                }
+            &:focus {
+                outline: 1px dashed var(--color-outline-btn-primary-focus);
+                background-color: var(--color-bg-btn-primary-focus);
+                outline-offset: -2px;
             }
         }
 
@@ -133,9 +126,7 @@ $line-height-row: $calendar-column-width;
             border: none;
 
             &:hover:not(.selected), &:focus:not(.selected)  {
-                @include themify{
-                    background-color: themed('color-bg-item-hover');
-                }
+                background-color: var(--color-bg-hover);
                 cursor: pointer;
             }
 
@@ -145,9 +136,7 @@ $line-height-row: $calendar-column-width;
 
             &:focus:not(.selected) {
                 outline-offset: -2px;
-                @include themify{
-                    outline: 1px dashed themed('color-border-focus');
-                }
+                outline: 1px dashed var(--color-border-focus);
             }
         }
 
@@ -156,9 +145,7 @@ $line-height-row: $calendar-column-width;
         }
 
         button.disabled {
-            @include themify{
-                color: themed('color-text-disabled');
-            }
+            color: var(--color-text-disabled);
         }
     }
 
