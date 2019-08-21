@@ -1,6 +1,5 @@
 @import '../../common/constants';
 @import '../../common/mixins';
-@import '../../common/color.controls';
 
 $pivot-max-width: 50*$grid-size;
 $pivot-min-height: 7*$grid-size;
@@ -16,9 +15,7 @@ $line-height: 4*$grid-size;
 
 .pivot-menu {
     @include md-box(block, relative);
-    @include themify{
-        border-bottom: 1px solid themed('color-border-rest');
-    }
+    border-bottom: 1px solid var(--color-border-rest);
     white-space: nowrap;
     overflow: hidden;
 
@@ -42,60 +39,42 @@ $line-height: 4*$grid-size;
 
     .pivot-icon-label {
         margin-left: 2*$grid-size;
-        font-family: $font-family-default;
-        font-size: $font-size-default;
+        font-family: var(--font-family-default);
+        font-size: var(--font-size-default);
         line-height: $line-height;
-        @include themify {
-            color: themed('color-text-rest');
-        }
+        color: var(--color-text-rest);
     }
 
     &:hover {
-        @include themify {
-            color: themed('color-text-rest');
-        }
+        color: var(--color-text-rest);
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            @include themify {
-                color: themed('color-text-rest');
-            }
+            color: var(--color-text-rest);
         }
     }
 
     &.selected {
-        @include themify {
-            color: themed('color-text-rest');
-        }
+        color: var(--color-text-rest);
 
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            @include themify {
-                color: themed('color-text-rest');
-            }
+            color: var(--color-text-rest);
         }
 
         .pivot-border {
-            @include themify {
-                border-bottom: 2px solid themed('color-border-pivot-tab');
-            }
+            border-bottom: 2px solid var(--color-border-pivot);
         }
 
         outline: none;
     }
 
     &.disabled {
-        @include themify {
-            color: themed('color-text-disabled');
-        }
+        color: var(--color-text-disabled);
 
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            @include themify {
-                color: themed('color-text-disabled');
-            }
+            color: var(--color-text-disabled);
         }
 
         &.selected .pivot-border {
-            @include themify {
-                border-bottom: 2px solid themed('color-border-disabled');
-            }
+            border-bottom: 2px solid var(--color-border-disabled);
         }
     }
 
