@@ -9,7 +9,8 @@ const css = classNames.bind(require('./Alert.module.scss'));
 export enum AlertType {
     Information,
     Warning,
-    Error
+    Error,
+    Success
 }
 
 export interface AlertComponentType {}
@@ -61,9 +62,10 @@ export interface AlertProps extends React.Props<AlertComponentType> {
 export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) => {
     const className = css({
         'alert-container': true,
-        'alert-info': props.type === AlertType.Information,
+        'alert-info': props.type == null || props.type === AlertType.Information,
         'alert-warning': props.type === AlertType.Warning,
         'alert-error': props.type === AlertType.Error,
+        'alert-success': props.type === AlertType.Success,
         'alert-multiline': props.multiline,
         'alert-fixed': !!props.fixed
     }, props.className);
@@ -75,7 +77,9 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
         } else if (props.type === AlertType.Warning) {
             iconName = 'warning';
         } else if (props.type === AlertType.Error) {
-            iconName = 'error';
+            iconName = 'errorBadge';
+        } else if (props.type === AlertType.Success) {
+            iconName = 'checkMark';
         }
     }
 
