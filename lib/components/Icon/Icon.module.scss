@@ -7,14 +7,14 @@
 %icon {
     font-style: normal;
     font-weight: normal;
-    font-family: $font-family-default;
+    font-family: var(--font-family-default);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     
     &:before {
         @include md-box(inline-block, relative);
-        font-family: $icon-font-family;
+        font-family: var(--icon-font-family);
         text-decoration: none;
         vertical-align: middle;
         line-height: 100%;
@@ -38,7 +38,7 @@
 .icon-xsmall {
     @extend %icon;
     .icon-xsmall:before {
-        font-size: $icon-size-xsmall;
+        font-size: var(--icon-size-xsmall);
     }
 
     &.centered {
@@ -49,7 +49,7 @@
 .icon-small {
     @extend %icon;
     .icon-small:before {
-        font-size: $icon-size-small;
+        font-size: var(--icon-size-small);
     }
 
     &.centered {
@@ -60,7 +60,7 @@
 .icon-medium {
     @extend %icon;
     .icon-medium:before {
-        font-size: $icon-size-medium;
+        font-size: var(--icon-size-medium);
     }
 
     &.centered {
@@ -71,7 +71,7 @@
 .icon-large {
     @extend %icon;
     .icon-large:before {
-        font-size: $icon-size-large;
+        font-size: var(--icon-size-large);
     }
 
     &.centered {
@@ -82,7 +82,7 @@
 .icon-xlarge {
     @extend %icon;
     .icon-xlarge:before {
-        font-size: $icon-size-xlarge;
+        font-size: var(--icon-size-xlarge);
     }
 
     &.centered {
@@ -93,7 +93,7 @@
 .icon-xxlarge {
     @extend %icon;
     .icon-xxlarge:before {
-        font-size: $icon-size-xxlarge;
+        font-size: var(--icon-size-xxlarge);
     }
 
     &.centered {
@@ -102,30 +102,30 @@
 }
 
 .icon-background {
-    @include circle($icon-size-medium);
+    @include circle(var(--icon-size-medium));
 
     &.icon-xsmall {
-        @include circle($icon-size-xsmall);
+        @include circle(var(--icon-size-xsmall));
     }
 
     &.icon-small {
-        @include circle($icon-size-small);
+        @include circle(var(--icon-size-small));
     }
 
     &.icon-medium {
-        @include circle($icon-size-medium);
+        @include circle(var(--icon-size-medium));
     }
 
     &.icon-large {
-        @include circle($icon-size-large);
+        @include circle(var(--icon-size-large));
     }
 
     &.icon-xlarge {
-        @include circle($icon-size-xlarge);
+        @include circle(var(--icon-size-xlarge));
     }
 
     &.icon-xxlarge {
-        @include circle($icon-size-xxlarge);
+        @include circle(var(--icon-size-xxlarge));
     }
 
     &.centered {
