@@ -31,7 +31,7 @@
 
     .separator {
         margin: 0px $gutter-small;
-        border-top: 1px solid var(--color-text-navbar);
+        border-top: 1px solid var(--color-border-navbar-separator);
     }
     
     &:not(.expanded) {
