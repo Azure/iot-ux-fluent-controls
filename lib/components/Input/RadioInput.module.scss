@@ -1,6 +1,5 @@
 @import '../../common/constants';
 @import '../../common/mixins';
-@import '../../common/color.controls';
 
 $radio-input-size: 4*$grid-size;
 $line-height: 4*$grid-size;
@@ -8,11 +7,9 @@ $outline-focus-border-width: 1px;
 
 .radio-container {
     @include md-box(block, relative);
-    font-family: $font-family-default;
-    @include themify{
-        color: themed('color-text-rest');
-    }
-    font-size: $font-size-default;
+    font-family: var(--font-family-default);
+    color: var(--color-text-rest);
+    font-size: var(--font-size-default);
     line-height: $line-height;
 
     & + &:not(.columns) {
@@ -32,20 +29,14 @@ $outline-focus-border-width: 1px;
         height: 0px;
         border: none;
         outline: none;
-        @include themify{
-            background-color: themed('color-bg-radio-btn-rest');
-        }   
+        background-color: var(--color-bg-radio-rest);
 
         &:focus ~ .radio-button:not(.disabled) {
-            @include themify {
-                border: 1px dashed themed('color-border-focus');
-            }
+            border: 1px dashed var(--color-border-focus);
         }
 
         &:hover:not(:checked) ~ .radio-button:not(.disabled) {
-            @include themify{
-                border: 1px solid themed('color-border-radio-btn-hover');
-            }
+            border: 1px solid var(--color-border-radio-hover);
         }   
     }
 
@@ -64,20 +55,16 @@ $outline-focus-border-width: 1px;
         border-radius: $grid-size;
 
         &:not(.disabled):hover {
-            @include themify{
-                background-color: themed('color-center-radio-btn-hover');
-            }
+            background-color: var(--color-center-radio-hover);
         }
 
         &.selected {
-            @include themify{
-                background-color: themed('color-center-radio-btn-selected');
-                &:hover, &:focus {
-                    background-color: themed('color-center-radio-btn-selected')
-                }
-                &.disabled {
-                    background-color: themed('color-center-radio-btn-disabled');
-                }
+            background-color: var(--color-center-radio-selected);
+            &:hover, &:focus {
+                background-color: var(--color-center-radio-selected)
+            }
+            &.disabled {
+                background-color: var(--color-center-radio-disabled);
             }
         }
     }
@@ -90,20 +77,16 @@ $outline-focus-border-width: 1px;
         @include md-box(inline-block, relative);
         width: $radio-input-size;
         height: $radio-input-size;
-        @include themify{
-            background-color: themed('color-bg-radio-btn-rest');
-            border: 1px solid themed('color-border-radio-btn-rest');
-        }
+        background-color: var(--color-bg-radio-rest);
+        border: 1px solid var(--color-border-radio-rest);
         border-radius: $radio-input-size / 2;
         outline: none;
         vertical-align: top;
-        @include themify{
-            &.selected {
-                border: 1px solid themed('color-border-radio-btn-selected');
-            }
-            &.disabled {
-                border: 1px solid themed('color-border-radio-btn-disabled')
-            }
+        &.selected {
+            border: 1px solid var(--color-border-radio-selected);
+        }
+        &.disabled {
+            border: 1px solid var(--color-border-radio-disabled);
         }
     }
 
@@ -112,9 +95,7 @@ $outline-focus-border-width: 1px;
         align-items: center;
 
         &.disabled {
-            @include themify{
-                color: themed('color-text-disabled');
-            }
+            color: var(--color-text-disabled);
         }
     }
 

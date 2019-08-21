@@ -15,9 +15,6 @@ export interface ActionTriggerLinkProps {
     /** Action trigger label */
     label?: string;
 
-    /** Disable Action Trigger */
-    disabled?: boolean;
-
     /** Classname to append to top level element */
     className?: string;
 
@@ -43,7 +40,6 @@ export const ActionTriggerLink: React.StatelessComponent<ActionTriggerLinkProps>
                 icon={props.icon}
                 rightIcon={props.rightIcon}
                 label={props.label}
-                disabled={props.disabled}
                 attr={props.attr}
             />
         </Attr.a>
