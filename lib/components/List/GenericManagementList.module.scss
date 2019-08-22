@@ -1,6 +1,5 @@
 @import '../../common/constants';
 @import '../../common/mixins';
-@import '../../common/color.controls';
 
 $management-list-column-basis: 25*$grid-size;
 $management-list-row-height: 12*$grid-size;
@@ -41,11 +40,9 @@ $line-height-sort: 3*$grid-size;
             @include md-button-reset();
             
             font-family: var(--font-family-din-regular);
-            font-size: $font-size-small;
+            font-size: var(--font-size-small);
             line-height: $line-height-small;
-            @include themify {
-                color: themed('color-text-rest');
-            }
+            color: var(--color-text-rest);
             
             padding-top: 2*$grid-size;
             padding-right: 5*$grid-size;
@@ -73,13 +70,11 @@ $line-height-sort: 3*$grid-size;
 
         .column-content {
             @include md-box(inline-block, relative);
-            font-family: $font-family-default;
-            font-size: $font-size-default;
+            font-family: var(--font-family-default);
+            font-size: var(--font-size-default);
             line-height: $line-height-small;
-            @include themify {
-                color: themed('color-text-rest');
-                background-color: themed('color-bg-table');
-            }
+            color: var(--color-text-rest);
+            background-color: var(--color-bg-table);
 
             vertical-align: bottom;
 
