@@ -191,7 +191,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                                     </InlinePopup.Container>
                                 </li>
                             }
-                            {user && <li key='user-menu'>
+                            {user && <li key='user-menu' className={cx('user-menu-item')}>
                                 {user}
                             </li>}
                         </ul >
