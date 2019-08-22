@@ -61,7 +61,7 @@ export function Shell({ theme, isRtl, masthead, navigation, children, onClick }:
 
     React.useEffect(() => {
         document.documentElement.setAttribute('theme', shellTheme.base);
-    }, [shellTheme.base])
+    }, [shellTheme.base]);
 
     // @todo - remove outer div with theme-#{shellTheme.base}
     return (
