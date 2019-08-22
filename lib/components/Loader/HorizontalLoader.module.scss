@@ -1,6 +1,5 @@
 @import '../../common/constants';
 @import '../../common/mixins';
-@import '../../common/color.controls';
 
 @mixin horizontal-loader-keyframes($name, $num-dots: 6, $diameter: 6px, $gap: 12px) {
     $pixels: ($num-dots / 2) * ($diameter + $gap);
@@ -67,9 +66,7 @@
         width: $diameter;
         height: $diameter;
         border-radius: $diameter;
-        @include themify {
-            background-color: themed('color-text-rest');
-        }
+        background-color: var(--color-text-rest);
     }
 
     @for $num from 1 through $num-dots {
