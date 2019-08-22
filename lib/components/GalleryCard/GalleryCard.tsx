@@ -16,8 +16,6 @@ export interface GalleryCardAttributes {
 export interface GalleryCardProps extends React.Props<GalleryCardType> {
     /**
      * Element to display as `GalleryCard` background
-     *
-     * Default: Solid background with color #eaeaea
      * */
     background?: MethodNode;
     /** Banner string to display above the `GalleryCard` background */
