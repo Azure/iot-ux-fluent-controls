@@ -1,6 +1,5 @@
 @import '../../common/constants';
 @import '../../common/mixins';
-@import '../../common/color.controls';
 
 $line-height: 5*$grid-size;
 $line-height-small: 4*$grid-size;
@@ -10,11 +9,9 @@ $dropdown-z-index: $z-index-medium-step;
 .combo-input-container {
     @include md-box(flex, relative);
     width: 100%;
-    font-family: $font-family-default;
-    @include themify{
-        color: themed('color-text-rest');
-    }
-    font-size: $font-size-default;
+    font-family: var(--font-family-default);
+    color: var(--color-text-rest);
+    font-size: var(--font-size-default);
     line-height: $line-height;
 
     .input-container {
@@ -28,17 +25,13 @@ $dropdown-z-index: $z-index-medium-step;
         height: $input-height;
         padding: 2*$grid-size 8*$grid-size 2*$grid-size 3*$grid-size;
         outline: none;
-        @include themify{
-            border: 1px solid themed('color-border-rest');
-            background-color: themed('color-bg-input-rest');
-        }
+        border: 1px solid var(--color-border-rest);
+        background-color: var(--color-bg-input-rest);
 
         &:hover, &:focus, &:active {
             // inputs look really weird with a dashed outline, so standardize
             // on the solid selected border for all the above states:
-            @include themify{
-                border: 1px solid themed('color-border-selected');
-            }
+            border: 1px solid var(--color-border-selected);
         }
 
         &:focus, &:active, &.visible {
@@ -49,45 +42,33 @@ $dropdown-z-index: $z-index-medium-step;
             &.show-cancel:not(.disabled) {
                 + .cancel {
                     display: inline-block;
-                    @include themify{
-                        color: themed('color-text-clear');
-                    }
+                    color: var(--color-text-regular);
                     pointer-events: auto;
                 }
             }
         }
 
         &:disabled {
-            @include themify{
-                color: themed('color-text-disabled');
-                border: 1px solid themed('color-border-disabled');
-                background-color: themed('color-bg-input-disabled');
-            }
+            color: var(--color-text-disabled);
+            border: 1px solid var(--color-border-disabled);
+            background-color: var(--color-bg-input-disabled);
 
             &::placeholder {
-                @include themify{
-                    color: themed('color-text-disabled');
-                }
+                color: var(--color-text-disabled);
             }
         }
 
         &::placeholder {
-            @include themify{
-                color: themed('color-text-placeholder');
-            }
+            color: var(--color-text-placeholder);
         }
 
         &::selection {
-            @include themify{
-                color: themed('color-text-white');
-                background-color: themed('color-bg-item-selected');
-            }
+            color: var(--color-text-active);
+            background-color: var(--color-bg-selected);
         }
 
         &.error:not(:disabled) {
-            @include themify{
-                border: 1px solid themed('color-border-error');
-            }
+            border: 1px solid var(--color-border-error);
         }
 
         &::-ms-clear {
@@ -101,10 +82,8 @@ $dropdown-z-index: $z-index-medium-step;
 
     .cancel {
         @include md-box(display-none, absolute);
-        @include themify{
-            color: themed('color-text-clear');
-        }
-        font-size: $font-size-default;
+        color: var(--color-text-regular);
+        font-size: var(--font-size-default);
         line-height: $line-height-small;
         padding: $grid-size;
         top: $grid-size;
@@ -116,19 +95,15 @@ $dropdown-z-index: $z-index-medium-step;
         cursor: pointer;
 
         &:active, &:focus {
-            @include themify{
-                color: themed('color-text-clear');
-            }
+            color: var(--color-text-regular);
             pointer-events: auto;
         }
     }
 
     .chevron {
         @include md-box(absolute, block);
-        font-size: $font-size-small;
-        @include themify{
-            color: themed('color-text-chevron');
-        }
+        font-size: var(--font-size-small);
+        color: var(--color-text-chevron);
         right: 2*$grid-size;
         top: 2*$grid-size;
         pointer-events: none;
@@ -153,10 +128,8 @@ $dropdown-z-index: $z-index-medium-step;
     width: 100%;
     max-height: $dropdown-max-height;
     overflow-y: auto;
-    @include themify{
-        background-color: themed('color-bg-input-rest');
-        border: 1px solid themed('color-border-rest');
-    }
+    background-color: var(--color-bg-input-rest);
+    border: 1px solid var(--color-border-rest);
 }
 
 .dropdown > div {
@@ -177,42 +150,34 @@ $dropdown-z-index: $z-index-medium-step;
     outline: none;
     border-radius: 0px;
     text-align: left;
-    @include themify{
-        background-color: themed('color-bg-input-rest');
-        color: themed('color-text-rest');
-    }
+    background-color: var(--color-bg-input-rest);
+    color: var(--color-text-rest);
 
     &:not(.disabled) {
         cursor: pointer;
     }
 
     &.selected {
-        @include themify{
-            color: themed('color-text-rest');
-            background-color: themed('color-bg-item-selected');
-        }
+        color: var(--color-text-rest);
+        background-color: var(--color-bg-selected);
     }
 
     &.hover:not(.disabled) {
-        @include themify{
-            &:not(.selected) {
-                background-color: themed('color-bg-item-hover');
-            }
+        &:not(.selected) {
+            background-color: var(--color-bg-hover);
+        }
 
-            &.selected {
-                background-color: themed('color-bg-item-selected');
-            }
+        &.selected {
+            background-color: var(--color-bg-selected);
+        }
 
-            &:active {
-                color: themed('color-text-rest');
-                background-color: themed('color-bg-item-selected');
-            }
+        &:active {
+            color: var(--color-text-rest);
+            background-color: var(--color-bg-selected);
         }
     }
 
     &.disabled {
-        @include themify{
-           color: themed('color-text-disabled');
-        }
+        color: var(--color-text-disabled);
     }
 }

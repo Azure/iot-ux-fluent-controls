@@ -1,6 +1,5 @@
 @import '../../common/constants';
 @import '../../common/mixins';
-@import '../../common/color.controls';
 
 $form-error-height: 5*$grid-size;
 $form-label-balloon-width: 75*$grid-size;
@@ -8,36 +7,26 @@ $form-label-balloon-width: 75*$grid-size;
 $line-height: 5*$grid-size;
 
 .form-field {
-    font-family: $font-family-default;
+    font-family: var(--font-family-default);
     display: block;
 }
 
 .label {
     @include md-box(inline-block);
     color: inherit;
-    font-family: $font-family-default;
-    font-size: $font-size-default;
+    font-family: var(--font-family-default);
+    font-size: var(--font-size-default);
     line-height: $line-height;
     margin-top: $grid-size / 2;
 
-    &.disabled {
-        @include themify {
-            color: themed('color-text-disabled');
-        }
-    }
-
     .required &::after {
         content: ' *';
-        @include themify {
-            color: themed('color-text-error');
-        }
+        color: var(--color-text-error);
     }
 
     &.required::after {
         content: ' *';
-        @include themify {
-            color: themed('color-text-error');
-        }
+        color: var(--color-text-error);
     }
 
     & + .field-error {
@@ -78,13 +67,10 @@ $line-height: 5*$grid-size;
     @include md-box(inline-block, ellipsis);
     height: $form-error-height;
     width: 100%;
+    color: var(--color-text-error);
 
-    @include themify {
-        color: themed('color-text-error');
-    }
-
-    font-family: $font-family-default;
-    font-size: $font-size-small;
+    font-family: var(--font-family-default);
+    font-size: var(--font-size-small);
     line-height: $line-height;
 
     &.hidden {

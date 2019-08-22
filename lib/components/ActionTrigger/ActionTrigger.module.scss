@@ -1,13 +1,12 @@
 @import '../../common/constants';
 @import '../../common/mixins';
-@import '../../common/color.controls';
 
 $line-height: 4.5*$grid-size;
 
 .action-trigger-container {
     @include md-box(flex, relative, ellipsis);
-    font-family: $font-family-default;
-    font-size: $icon-size-xsmall;
+    font-family: var(--font-family-default);
+    font-size: var(--icon-size-xsmall);
     line-height: $line-height;
     padding: 0.5*$grid-size $grid-size;
     text-decoration: none;
@@ -19,25 +18,27 @@ $line-height: 4.5*$grid-size;
         }
     }
 
+    a > & {
+        color: var(--color-hyperlink-rest);
+    }
+
+    a:hover > & {
+        color: var(--color-hyperlink-hover);
+        background-color: var(--color-bg-hover);
+    }
+
     a:focus > & {
         outline-offset: -1px;
-        @include themify {
-            outline: 1px dashed themed('color-border-focus');
-            color: themed('color-text-rest');
-            background-color: themed('color-bg-item-hover');
-        }
-        &.disabled {
-            outline: none;
-            @include themify {
-                color: themed('color-text-disabled');
-            }
+        outline: 1px dashed var(--color-border-focus);
+        color: var(--color-hyperlink-focus);
+
+        &:not(.disabled) {
+            background-color: var(--color-bg-hover);
         }
     }
 
     &.disabled {
-        @include themify {
-            color: themed('color-text-disabled');
-        }
+        color: var(--color-text-disabled);
     }
 
     .suffix {
@@ -52,7 +53,7 @@ $line-height: 4.5*$grid-size;
         @include md-box(inline-block);
         line-height: $line-height;
         vertical-align: top;
-        font-size: $font-size-default;
+        font-size: var(--font-size-default);
         margin-left: 2*$grid-size;
 
         max-width: 50*$grid-size;
@@ -73,32 +74,22 @@ $line-height: 4.5*$grid-size;
 
     &.disabled {
         cursor: not-allowed;
-        @include themify {
-            color: themed('color-text-disabled');
-        }
+        color: var(--color-text-disabled);
     }
 
     &:not(.disabled) {
         &:active {
-            @include themify {
-                background-color: themed('color-bg-item-selected');
-            }
+            background-color: var(--color-bg-selected);
         }
 
         &:hover {
-            @include themify {
-                background-color: themed('color-bg-item-hover');
-            }
+            background-color: var(--color-bg-hover);
         }
 
         &:focus {
             outline-offset: -1px;
-            @include themify{
-                outline: 1px dashed themed('color-border-focus');
-                background-color: themed('color-bg-item-hover');
-            }
+            outline: 1px dashed var(--color-border-focus);
+            background-color: var(--color-bg-hover);
         }
-
-        @include clickable;
     }
 }
