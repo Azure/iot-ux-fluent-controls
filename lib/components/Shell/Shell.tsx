@@ -8,7 +8,7 @@ import { Root as ContextPanelRoot } from '../ContextPanel/root';
 
 // reexport Masthead and Nav Properties for easier consumption by consumers:
 export { MastheadProperties, MastheadSearchItem, MastheadToolbarItem, MastheadUserItem } from '../Masthead/Masthead';
-export { NavigationProperties, NavigationItemSeparator } from '../Navigation/Navigation';
+export { NavigationProperties, NavigationItemSeparator, NavigationItemContainer } from '../Navigation/Navigation';
 
 const css = classnames.bind(require('./Shell.module.scss'));
 

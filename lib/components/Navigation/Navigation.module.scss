@@ -95,6 +95,12 @@
 
     &:active, &:global(.global-nav-item-active) {
         background-color: var(--color-bg-navbar-selected);
+        border-left: 3px solid var(--color-blue-10);
+        font-weight: 600;
+        @include rtl {
+            border-left: none;
+            border-right: 3px solid var(--color-blue-10);
+        }
     }
 
     &:focus {
@@ -120,4 +126,21 @@
         padding-right: 0;
         padding-left: $gutter-small;
     }
+}
+
+:global(.global-nav-item-container-title) {
+    width: 100%;
+    padding: $gutter-small;
+    
+    display: flex;
+    align-items: center;
+
+    font-weight: 600;
+
+    color: var(--color-text-navbar);
+    background-color: var(--color-bg-navbar);
+}
+
+:global(.collapsed-global-nav-item-container-title) {
+    border-top: 1px solid var(--color-border-navbar-separator);
 }
