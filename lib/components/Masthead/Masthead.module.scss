@@ -74,7 +74,7 @@ $search-max-size: 100 * $grid-size;
 
         :global(.global-nav-item-container-title) {
             background-color: var(--color-bg-container-panel);
-            color: var(--color-text-regular);
+            color: var(--color-text-rest);
         }
 
         @media(max-width: $screen-sm - 1) {
