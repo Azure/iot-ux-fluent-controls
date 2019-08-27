@@ -68,7 +68,7 @@ $search-max-size: 100 * $grid-size;
 
             &:hover,
             &:active, &:global(.global-nav-item-active) {
-                background-color: var(--color-gray-30);
+                background-color: var(--color-bg-masthead-active);
             }
         }
 

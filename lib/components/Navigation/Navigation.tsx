@@ -19,7 +19,7 @@ export interface NavigationProperties {
 export interface NavigationItemContainerProperties {
     containerTitle: string;
     isExpanded: boolean;
-    children: JSX.Element[];
+    children: React.ReactChildren;
 }
 
 export function Navigation({ isExpanded, onClick, attr, children }: NavigationProperties) {    
@@ -57,7 +57,7 @@ export function NavigationItemContainer({ containerTitle, isExpanded, children }
                         {containerTitle}
                     </span>
                 </div>
-                : <div className={cx('collapsed-global-nav-item-container-title')}></div>}
+                : <NavigationItemSeparator />}
             {children}
         </>
     );
