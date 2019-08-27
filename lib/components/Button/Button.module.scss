@@ -52,17 +52,21 @@ $outline-focus-border-width: 1px;
     color: var(--color-text-btn-standard);
     background-color: var(--color-bg-btn-standard-rest);
 
-    &:hover:not(:disabled) {
-        background-color: var(--color-bg-btn-standard-hover);
-    }
+    &:not(:disabled) {
+        border: 1px solid var(--color-border-btn-standard);
 
-    &:focus:not(:disabled) {
-        background-color: var(--color-bg-btn-standard-focus);
-        outline: $outline-focus-border-width dashed var(--color-border-focus);
-    }
+        &:hover {
+            background-color: var(--color-bg-btn-standard-hover);
+        }
 
-    &:active:not(:disabled) {
-        background-color: var(--color-bg-btn-standard-selected);
+        &:focus {
+            background-color: var(--color-bg-btn-standard-focus);
+            outline: $outline-focus-border-width dashed var(--color-border-focus);
+        }
+
+        &:active {
+            background-color: var(--color-bg-btn-standard-selected);
+        }
     }
 
     &:disabled {
@@ -75,18 +79,22 @@ $outline-focus-border-width: 1px;
     color: var(--color-text-btn-primary);
     background-color: var(--color-bg-btn-primary-rest);
 
-    &:hover:not(:disabled) {
-        background-color: var(--color-bg-btn-primary-hover);
-    }
+    &:not(:disabled) {
+        border: 1px solid var(--color-border-btn-primary);
+    
+        &:hover {
+            background-color: var(--color-bg-btn-primary-hover);
+        }
 
-    &:focus:not(:disabled) {
-        background-color: var(--color-bg-btn-primary-focus);
-        outline: $outline-focus-border-width dashed var(--color-outline-btn-primary-focus);
-        outline-offset: -2px;
-    }
+        &:focus {
+            background-color: var(--color-bg-btn-primary-focus);
+            outline: $outline-focus-border-width dashed var(--color-outline-btn-primary-focus);
+            outline-offset: -2px;
+        }
 
-    &:active:not(:disabled) {
-        background-color: var(--color-bg-btn-primary-selected);
+        &:active {
+            background-color: var(--color-bg-btn-primary-selected);
+        }
     }
 
     &:disabled {
@@ -99,18 +107,22 @@ $outline-focus-border-width: 1px;
     color: var(--color-text-btn-negative);
     background-color: var(--color-bg-btn-negative-rest);
 
-    &:hover:not(:disabled) {
-        background-color: var(--color-bg-btn-negative-hover);
-    }
+    &:not(:disabled) {
+        border: 1px solid var(--color-border-btn-negative);
 
-    &:focus:not(:disabled) {
-        background-color: var(--color-bg-btn-negative-focus);
-        outline: $outline-focus-border-width dashed var(--color-outline-btn-negative-focus);
-        outline-offset: -2px;
-    }
+        &:hover {
+            background-color: var(--color-bg-btn-negative-hover);
+        }
 
-    &:active:not(:disabled) {
-        background-color: var(--color-bg-btn-negative-selected);
+        &:focus {
+            background-color: var(--color-bg-btn-negative-focus);
+            outline: $outline-focus-border-width dashed var(--color-outline-btn-negative-focus);
+            outline-offset: -2px;
+        }
+
+        &:active {
+            background-color: var(--color-bg-btn-negative-selected);
+        }
     }
 
     &:disabled {

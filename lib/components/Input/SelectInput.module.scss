@@ -72,10 +72,6 @@ $line-height: 4*$grid-size;
             border: 1px solid var(--color-border-disabled);
             background-color: var(--color-bg-input-disabled);
         }
-        &::selection {
-            color: var(--color-text-active);
-            background-color: var(--color-bg-selected);
-        }
 
         &.error:not(:disabled) {
             border: 1px solid var(--color-border-error);

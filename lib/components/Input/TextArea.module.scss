@@ -49,11 +49,6 @@ $line-height: 5*$grid-size;
     &::placeholder {
         color: var(--color-text-placeholder);
     }
-    
-    &::selection {
-        color: var(--color-text-active);
-        background-color: var(--color-bg-selected);
-    }
 
     &.error:not(:disabled) {
         border: 1px solid var(--color-border-error);

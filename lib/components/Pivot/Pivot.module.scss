@@ -42,7 +42,7 @@ $line-height: 4*$grid-size;
         font-family: var(--font-family-default);
         font-size: var(--font-size-default);
         line-height: $line-height;
-        color: var(--color-text-rest);
+        color: var(--color-text-pivot-rest);
     }
 
     &:hover {
@@ -53,10 +53,11 @@ $line-height: 4*$grid-size;
     }
 
     &.selected {
-        color: var(--color-text-rest);
+        color: var(--color-text-pivot-selected);
 
         .pivot-icon, .pivot-label, .pivot-icon-label {
-            color: var(--color-text-rest);
+            color: var(--color-text-pivot-selected);
+            font-weight: 600;
         }
 
         .pivot-border {
