@@ -19,7 +19,7 @@ export interface NavigationProperties {
 export interface NavigationItemContainerProperties {
     containerTitle: string;
     isExpanded: boolean;
-    children: React.ReactChildren;
+    children: React.ReactNode;
 }
 
 export function Navigation({ isExpanded, onClick, attr, children }: NavigationProperties) {    
