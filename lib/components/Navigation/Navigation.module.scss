@@ -90,7 +90,7 @@
     &:active, &:global(.global-nav-item-active) {
         background-color: var(--color-bg-navbar-selected);
         border-left: $grid-size solid var(--color-border-navbar-selected);
-        font-weight: var(--font-weight-nav-bold);
+        font-weight: 600;
         @include rtl {
             border-left: none;
             border-right: $grid-size solid var(--color-border-navbar-selected);
@@ -129,7 +129,7 @@
     display: flex;
     align-items: center;
 
-    font-weight: var(--font-weight-nav-bold);
+    font-weight: 600;
 
     color: var(--color-text-navbar);
     background-color: var(--color-bg-navbar);
