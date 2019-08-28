@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.0-alpha.3
+### Changed
+- Added a NavigationItemContainer component to allow organizing sections with headers on the global navbar
+
 ## v6.3.5
 ### Changed
 - Updated the global nav icon to be the hamburger icon and always have it aligned to the left.

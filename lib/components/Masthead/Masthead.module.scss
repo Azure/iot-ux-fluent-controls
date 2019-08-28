@@ -67,9 +67,14 @@ $search-max-size: 100 * $grid-size;
             color: var(--color-text-regular);
 
             &:hover,
-            &:active {
-                background-color: var(--color-bg-masthead-hover);
+            &:active, &:global(.global-nav-item-active) {
+                background-color: var(--color-bg-masthead-active);
             }
+        }
+
+        :global(.global-nav-item-container-title) {
+            background-color: var(--color-bg-container-panel);
+            color: var(--color-text-rest);
         }
 
         @media(max-width: $screen-sm - 1) {

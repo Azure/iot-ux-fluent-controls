@@ -16,7 +16,13 @@ export interface NavigationProperties {
     children?: React.ReactNode;
 }
 
-export function Navigation({ isExpanded, onClick, attr, children }: NavigationProperties) {
+export interface NavigationItemContainerProperties {
+    containerTitle: string;
+    isExpanded: boolean;
+    children: React.ReactNode;
+}
+
+export function Navigation({ isExpanded, onClick, attr, children }: NavigationProperties) {    
     return (
         <Attr.nav
             className={cx('navigation', { expanded: isExpanded })}
@@ -39,6 +45,22 @@ export function Navigation({ isExpanded, onClick, attr, children }: NavigationPr
 
 export function NavigationItemSeparator() {
     return <div className={cx('separator')} />;
+}
+
+export function NavigationItemContainer({ containerTitle, isExpanded, children }: NavigationItemContainerProperties) {
+    return (
+        <>
+            {isExpanded
+                ? <div className={cx('global-nav-item-container-title')}>
+                    <span className={cx('inline-text-overflow')}
+                        title={containerTitle}>
+                        {containerTitle}
+                    </span>
+                </div>
+                : <NavigationItemSeparator />}
+            {children}
+        </>
+    );
 }
 
 export default Navigation;
