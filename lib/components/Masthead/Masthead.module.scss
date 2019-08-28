@@ -309,6 +309,10 @@ $search-max-size: 100 * $grid-size;
     }
 }
 
+.separator {
+    border-top: 1px solid var(--color-border-panel);
+}
+
 // MIXIN
 @mixin collapse($count) {
     $breakpoint: $masthead-collapse-start - $count * $layout-nav-item-height;
