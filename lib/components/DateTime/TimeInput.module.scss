@@ -67,11 +67,6 @@ $z-index-focus: 2*$z-index-small-step;
             border: 1px solid var(--color-border-disabled);
         }
 
-        &::selection {
-            color: var(--color-text-active);
-            background-color: var(--color-bg-selected);
-        }
-
         &.error:not(:disabled) {
             border: 1px solid var(--color-border-error);
         }

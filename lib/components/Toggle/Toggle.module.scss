@@ -51,6 +51,10 @@ $line-height: 3.5*$grid-size;
         pointer-events: none;
     }
 
+    &:not(.disabled):not(.toggle-on):hover .toggle-switch {
+        background-color: var(--color-circle-toggle-off-hover);
+    }
+
     .toggle-label {
         @include md-box(inline-block, relative);
         margin-left: 2*$grid-size;
