@@ -65,10 +65,17 @@ $search-max-size: 100 * $grid-size;
         :global(.global-nav-item) {
             background-color: var(--color-bg-container-panel);
             color: var(--color-text-regular);
+            border-left: $grid-size solid transparent;
+            @include rtl {
+                border-left: none;
+                border-right: $grid-size solid transparent;
+            }
 
             &:hover,
             &:active, &:global(.global-nav-item-active) {
                 background-color: var(--color-bg-masthead-active);
+                border-color: var(--color-border-navbar-selected);
+                font-weight: 600;
             }
         }
 

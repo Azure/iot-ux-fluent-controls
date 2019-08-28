@@ -21,6 +21,15 @@
             transform: rotate(180deg);
         }
     }
+
+    .global-nav-active-border {
+        height: $layout-nav-collapsed-width;
+        width: $grid-size;
+        background-color: var(--color-border-navbar-selected);
+        z-index: $z-index-large-step;
+        position: absolute;
+        transition: transform 0.3s ease-in-out;
+    }
     
     .scrollable {
         display: flex;
@@ -79,6 +88,13 @@
     color: var(--color-text-navbar);
     background-color: var(--color-bg-navbar);
 
+    padding-left: $grid-size;
+
+    @include rtl {
+        padding-left: 0;
+        padding-right: $grid-size;
+    }
+
     &:hover {
         background-color: var(--color-bg-navbar-hover);
 
@@ -89,12 +105,7 @@
 
     &:active, &:global(.global-nav-item-active) {
         background-color: var(--color-bg-navbar-selected);
-        border-left: $grid-size solid var(--color-border-navbar-selected);
         font-weight: 600;
-        @include rtl {
-            border-left: none;
-            border-right: $grid-size solid var(--color-border-navbar-selected);
-        }
     }
 
     &:focus {

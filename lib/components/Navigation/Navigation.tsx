@@ -23,28 +23,45 @@ export interface NavigationItemContainerProperties {
     children: React.ReactNode;
 }
 
+const NavItemHeight = 48;
+
 export function Navigation({ isExpanded, onClick, attr, children, farBottomChildren }: NavigationProperties) {    
+    const selectedBorderRef = React.createRef<HTMLDivElement>();
+    const topNavItemsContainer = React.createRef<HTMLDivElement>();
+
+    React.useEffect(() => {
+        const items = topNavItemsContainer.current.getElementsByClassName('global-nav-item');
+
+        if (items && items.length > 0) {
+            const activeItemIndex = Array.prototype.findIndex.call(items, 
+                (i: HTMLDivElement) => i.className.includes('global-nav-item-active'));
+
+            if (activeItemIndex > -1) {
+                selectedBorderRef.current.style.transform = `translateY(${activeItemIndex * NavItemHeight}px)`;
+            }
+        }
+    });
+
     return (
         <Attr.nav
             className={cx('navigation', { expanded: isExpanded })}
-            attr={attr && attr.container}
-        >
+            attr={attr && attr.container}>
             <Attr.button
                 className='global-nav-item'
                 key='globalNavButton'
                 onClick={onClick}
-                attr={attr && attr.navButton}
-            >
+                attr={attr && attr.navButton}>
                 <span className={cx('global-nav-item-icon', 'icon', 'icon-globalNavButton')} />
             </Attr.button>
             <div className={cx('scrollable', 'global-nav-items')}>
-                <div>
+                <div ref={topNavItemsContainer}>
+                    <div ref={selectedBorderRef} className={cx('global-nav-active-border')} />
                     {children}
                 </div>
-                <div>
+                {farBottomChildren && <div className={cx('far-bottom-container')}>
                     <NavigationItemSeparator />
                     {farBottomChildren}
-                </div>
+                </div>}
             </div>        
         </Attr.nav>
     );
