@@ -64,7 +64,7 @@ $line-height-close: 4*$grid-size;
                 background-color: var(--color-bg-alert-info-close-hover);
 
                 & > div > span {
-                    font-weight: 600;
+                    font-weight: bold;
                 }
             }
         }
@@ -87,7 +87,7 @@ $line-height-close: 4*$grid-size;
                 background-color: var(--color-bg-alert-warning-close-hover);
 
                 & > div > span {
-                    font-weight: 600;
+                    font-weight: bold;
                 }
             }
         }
@@ -114,7 +114,7 @@ $line-height-close: 4*$grid-size;
                 background-color: var(--color-bg-alert-error-close-hover);
 
                 & > div > span {
-                    font-weight: 600;
+                    font-weight: bold;
                 }
             }
         }
@@ -141,7 +141,7 @@ $line-height-close: 4*$grid-size;
                 background-color: var(--color-bg-alert-success-close-hover);
                 
                 & > div > span {
-                    font-weight: 600;
+                    font-weight: bold;
                 }                
             }
         }

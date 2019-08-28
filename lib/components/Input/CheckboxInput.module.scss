@@ -31,7 +31,7 @@ $outline-focus-border-width: 1px;
 
 .checkbox-container:hover {
     .checkbox-button {
-        border: 1px solid var(--color-border-selected);
+        border: 1px solid var(--color-border-checkbox-hover);
     }
 
     &.selected .checkbox-button {
@@ -44,7 +44,7 @@ $outline-focus-border-width: 1px;
     }
 
     &.indeterminate .checkbox-button {
-        border: 1px solid var(--color-border-selected);
+        border: 1px solid var(--color-border-checkbox-hover);
         background-color: var(--color-bg-input-rest);
     }
 }
@@ -52,7 +52,7 @@ $outline-focus-border-width: 1px;
 .checkbox-container.selected {
     .checkbox-button {
         border: 1px solid var(--color-border-selected);
-        background-color: var(--color-bg-btn-primary-rest);
+        background-color: var(--color-bg-checkbox-selected);
     }
 
     .checkbox-checkmark {
