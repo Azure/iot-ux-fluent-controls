@@ -1,6 +1,8 @@
 @import '../../common/constants';
 @import '../../common/mixins';
 
+$activeBorderHeight: $layout-nav-collapsed-width - (4*$grid-size);
+
 .navigation {
     width: $layout-nav-collapsed-width;
 
@@ -15,37 +17,58 @@
     display: flex;
     flex-direction: column;
     background-color: var(--color-bg-navbar);
+    border-right: 1px solid var(--color-border-navbar-separator);
 
     @include rtl {
+        border-right: none;
+        border-left: 1px solid var(--color-border-navbar-separator);
         .expand-icon {
             transform: rotate(180deg);
         }
     }
 
-    .global-nav-active-border {
-        height: $layout-nav-collapsed-width - (4*$grid-size);
-        width: $grid-size;
-        background-color: var(--color-border-navbar-selected);
-        z-index: $z-index-large-step;
-        position: absolute;
-        transition: transform 0.3s ease-in-out;
-        margin: 2*$grid-size 0 2*$grid-size $grid-size;
-        border-radius: 4*$grid-size;
-
-        @include rtl {
-            margin: 2*$grid-size $grid-size 2*$grid-size 0;
-        }
-    }
-    
     .scrollable {
         display: flex;
         flex-direction: column;
         overflow-x: hidden;
         overflow-y: auto;
+        flex-flow: column nowrap;
+
+        .global-nav-active-border {
+            height: $activeBorderHeight;
+            width: $grid-size;
+            background-color: var(--color-border-navbar-selected);
+            z-index: $z-index-large-step;
+            transition: transform 0.3s ease-in-out;
+            margin: -($activeBorderHeight + 2*$grid-size) 0 2*$grid-size $grid-size;
+            border-radius: 4*$grid-size;
+            box-sizing: border-box;
+            flex: none;
+
+            @include rtl {
+                margin: -($activeBorderHeight + 2*$grid-size) $grid-size 2*$grid-size 0;
+            }
+        }
+
+        .top-container {
+            box-sizing: border-box;
+            flex: 1;
+        }
     }
 
     .separator {
         border-top: 1px solid var(--color-border-navbar-separator);
+    }
+
+    .far-bottom-container {
+        position: relative;
+
+        :global(.global-nav-item-active)::before {
+           @extend .global-nav-active-border;
+           content: '';
+           margin: 0 $grid-size !important;
+           position: absolute;
+        }
     }
     
     &:not(.expanded) {

@@ -37,7 +37,10 @@ export function Navigation({ isExpanded, onClick, attr, children, farBottomChild
                 (i: HTMLDivElement) => i.className.includes('global-nav-item-active'));
 
             if (activeItemIndex > -1) {
-                selectedBorderRef.current.style.transform = `translateY(${activeItemIndex * NavItemHeight}px)`;
+                selectedBorderRef.current.style.display = 'block';
+                selectedBorderRef.current.style.transform = `translateY(${activeItemIndex * NavItemHeight + NavItemHeight}px)`;
+            } else {
+                selectedBorderRef.current.style.display = 'none';
             }
         }
     });
@@ -54,8 +57,8 @@ export function Navigation({ isExpanded, onClick, attr, children, farBottomChild
                 <span className={cx('global-nav-item-icon', 'icon', 'icon-globalNavButton')} />
             </Attr.button>
             <div className={cx('scrollable', 'global-nav-items')}>
-                <div ref={topNavItemsContainer}>
-                    <div ref={selectedBorderRef} className={cx('global-nav-active-border')} />
+                <div ref={selectedBorderRef} className={cx('global-nav-active-border')} />
+                <div ref={topNavItemsContainer} className={cx('top-container')}>
                     {children}
                 </div>
                 {farBottomChildren && <div className={cx('far-bottom-container')}>
