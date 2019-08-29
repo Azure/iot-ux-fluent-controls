@@ -14,6 +14,7 @@ export interface NavigationProperties {
     onClick: React.EventHandler<any>;
     attr?: NavigationAttributes;
     children?: React.ReactNode;
+    farBottomChildren?: React.ReactNode;
 }
 
 export interface NavigationItemContainerProperties {
@@ -22,7 +23,7 @@ export interface NavigationItemContainerProperties {
     children: React.ReactNode;
 }
 
-export function Navigation({ isExpanded, onClick, attr, children }: NavigationProperties) {    
+export function Navigation({ isExpanded, onClick, attr, children, farBottomChildren }: NavigationProperties) {    
     return (
         <Attr.nav
             className={cx('navigation', { expanded: isExpanded })}
@@ -36,9 +37,15 @@ export function Navigation({ isExpanded, onClick, attr, children }: NavigationPr
             >
                 <span className={cx('global-nav-item-icon', 'icon', 'icon-globalNavButton')} />
             </Attr.button>
-            <div className={cx('scrollable')}>
-                {children}
-            </div>
+            <div className={cx('scrollable', 'global-nav-items')}>
+                <div>
+                    {children}
+                </div>
+                <div>
+                    <NavigationItemSeparator />
+                    {farBottomChildren}
+                </div>
+            </div>        
         </Attr.nav>
     );
 }

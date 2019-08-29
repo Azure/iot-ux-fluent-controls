@@ -141,6 +141,8 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                         })} />
                         <InlinePopup.Panel alignment='left' className={cx('nav-panel')}>
                             {navigation.children}
+                            <div className={cx('separator')}></div>
+                            {navigation.farBottomChildren}
                         </InlinePopup.Panel>
                     </InlinePopup.Container>
                 }
