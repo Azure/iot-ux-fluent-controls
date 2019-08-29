@@ -23,12 +23,18 @@
     }
 
     .global-nav-active-border {
-        height: $layout-nav-collapsed-width;
+        height: $layout-nav-collapsed-width - (4*$grid-size);
         width: $grid-size;
         background-color: var(--color-border-navbar-selected);
         z-index: $z-index-large-step;
         position: absolute;
         transition: transform 0.3s ease-in-out;
+        margin: 2*$grid-size 0 2*$grid-size $grid-size;
+        border-radius: 4*$grid-size;
+
+        @include rtl {
+            margin: 2*$grid-size $grid-size 2*$grid-size 0;
+        }
     }
     
     .scrollable {
@@ -87,13 +93,6 @@
 
     color: var(--color-text-navbar);
     background-color: var(--color-bg-navbar);
-
-    padding-left: $grid-size;
-
-    @include rtl {
-        padding-left: 0;
-        padding-right: $grid-size;
-    }
 
     &:hover {
         background-color: var(--color-bg-navbar-hover);
