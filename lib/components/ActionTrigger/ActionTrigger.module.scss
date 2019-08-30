@@ -71,6 +71,7 @@ $line-height: 4.5*$grid-size;
     @include md-button-reset();
     line-height: 0px;
     padding: $grid-size;
+    color: inherit;
 
     &.disabled {
         cursor: not-allowed;
