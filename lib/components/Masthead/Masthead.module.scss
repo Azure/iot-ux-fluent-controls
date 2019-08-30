@@ -189,6 +189,7 @@ $search-max-size: 100 * $grid-size;
                 cursor: pointer;
                 vertical-align: middle;
                 align-content: center;
+                color: inherit;
 
                 &:focus,
                 &:active {
