@@ -48,7 +48,7 @@ $line-height-row: $calendar-column-width;
             @include md-box(inline-block, relative);
             margin-top: 4*$grid-size;
             color: var(--color-text-rest);
-            font-size: var(--font-size-h5);
+            font-size: var(--font-size-h3);
             line-height: $line-height-header;
             text-align: left;
             vertical-align: top;
