@@ -119,6 +119,7 @@ $activeBorderHeight: $layout-nav-collapsed-width - (4*$grid-size);
 
     &:hover {
         background-color: var(--color-bg-navbar-hover);
+        color: inherit;
 
         &:global(.global-nav-item-active) {
             background-color: var(--color-bg-navbar-selected-hover);
@@ -128,17 +129,20 @@ $activeBorderHeight: $layout-nav-collapsed-width - (4*$grid-size);
     &:active, &:global(.global-nav-item-active) {
         background-color: var(--color-bg-navbar-selected);
         font-weight: 600;
+        color: inherit;
     }
 
     &:focus {
         outline-offset: -1px;
         outline: 1px dashed var(--color-border-navbar-focus);
+        color: inherit;
     }
 }
 
 :global(.global-nav-item-icon) {
     font-size: var(--icon-size-xsmall);
     padding: 0px $gutter-small;
+    color: inherit;
 
     svg {
         height: var(--icon-size-xsmall);

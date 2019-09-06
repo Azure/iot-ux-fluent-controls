@@ -101,8 +101,9 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
   overflow: hidden;
 
   header {
-    font-size: var(--font-size-h5);
-    line-height: $line-height-default;
+    font-size: var(--font-size-h4);
+    line-height: var(--line-height-h4);
+    font-weight: var(--font-weight-headings);
     color: var(--color-text-rest);
     margin-bottom: $grid-size;
     flex: 0 0 5*$grid-size;
