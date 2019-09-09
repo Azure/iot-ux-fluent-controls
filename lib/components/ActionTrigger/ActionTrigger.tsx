@@ -58,6 +58,7 @@ export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (prop
             attr={props.attr && props.attr.container || {}}
         ><Icon
             icon={props.icon}
+            className={css('action-trigger-icon')}
             labelClassName={css('action-trigger-label')}
             size={IconSize.xsmall}
             attr={props.attr && props.attr.icon || {}}
