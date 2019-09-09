@@ -55,6 +55,7 @@ $line-height: 4.5*$grid-size;
         vertical-align: top;
         font-size: var(--font-size-default);
         margin-left: 2*$grid-size;
+        color: var(--color-text-rest);
 
         max-width: 50*$grid-size;
         overflow: hidden;
@@ -71,7 +72,6 @@ $line-height: 4.5*$grid-size;
     @include md-button-reset();
     line-height: 0px;
     padding: $grid-size;
-    color: var(--color-text-action-trigger);
 
     &.disabled {
         cursor: not-allowed;
@@ -79,6 +79,10 @@ $line-height: 4.5*$grid-size;
     }
 
     &:not(.disabled) {
+        .action-trigger-icon {
+            color: var(--color-text-action-trigger);
+        }
+
         &:active {
             background-color: var(--color-bg-selected);
         }
