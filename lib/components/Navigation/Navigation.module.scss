@@ -114,7 +114,7 @@ $activeBorderHeight: $layout-nav-collapsed-width - (4*$grid-size);
     display: flex;
     align-items: center;
 
-    color: var(--color-text-navbar);
+    color: var(--color-text-navbar) !important;
     background-color: var(--color-bg-navbar);
 
     &:hover {
@@ -129,7 +129,6 @@ $activeBorderHeight: $layout-nav-collapsed-width - (4*$grid-size);
     &:active, &:global(.global-nav-item-active) {
         background-color: var(--color-bg-navbar-selected);
         font-weight: 600;
-        color: inherit;
     }
 
     &:focus {
