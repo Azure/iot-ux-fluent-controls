@@ -112,12 +112,12 @@ $border-radius-size: $grid-size/2;
             background-color: var(--color-bg-btn-primary-rest);
 
             span {
-                color: var(--color-icon-searchbar-btn);
+                color: var(--color-icon-searchbar-btn) !important;
             }
         }
 
         span {
-            color: var(--color-icon-searchbar-btn);
+            color: var(--color-icon-searchbar-btn) !important;
         }
     }
 
