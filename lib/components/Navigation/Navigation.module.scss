@@ -1,7 +1,7 @@
 @import '../../common/constants';
 @import '../../common/mixins';
 
-$activeBorderHeight: $layout-nav-collapsed-width - (4*$grid-size);
+$activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
 
 .navigation {
     width: $layout-nav-collapsed-width;
@@ -22,9 +22,6 @@ $activeBorderHeight: $layout-nav-collapsed-width - (4*$grid-size);
     @include rtl {
         border-right: none;
         border-left: 1px solid var(--color-border-navbar-separator);
-        .expand-icon {
-            transform: rotate(180deg);
-        }
     }
 
     .scrollable {
@@ -66,7 +63,7 @@ $activeBorderHeight: $layout-nav-collapsed-width - (4*$grid-size);
         :global(.global-nav-item-active)::before {
            @extend .global-nav-active-border;
            content: '';
-           margin: 0 $grid-size !important;
+           margin: 0 -1*(1rem - $grid-size) !important;
            position: absolute;
         }
     }
@@ -97,8 +94,9 @@ $activeBorderHeight: $layout-nav-collapsed-width - (4*$grid-size);
 }
 
 :global(.global-nav-item) {
-    height: $layout-nav-collapsed-width;
+    height: $layout-nav-item-height;
     width: 100%; // don't hardcode, scrollbar should push out the content.
+    padding: 0 1rem;
     
     // don't allow the size to change:
     flex-shrink: 0;
@@ -108,7 +106,6 @@ $activeBorderHeight: $layout-nav-collapsed-width - (4*$grid-size);
     border: none;
     outline: none;
     margin: 0;
-    padding: 0;
     
     // center icon and text and make this non-inline for <a> elements:
     display: flex;
@@ -140,21 +137,17 @@ $activeBorderHeight: $layout-nav-collapsed-width - (4*$grid-size);
 
 :global(.global-nav-item-icon) {
     font-size: var(--icon-size-xsmall);
-    padding: 0px $gutter-small;
+    padding-right: $gutter-normal;
     color: inherit;
+
+    @include rtl {
+        padding: 0 0 0 $gutter-normal;
+    }
 
     svg {
         height: var(--icon-size-xsmall);
         width: var(--icon-size-xsmall);
         fill: currentColor;
-    }
-}
-
-:global(.global-nav-item-text) {
-    padding-right: $gutter-small;
-    @include rtl {
-        padding-right: 0;
-        padding-left: $gutter-small;
     }
 }
 
