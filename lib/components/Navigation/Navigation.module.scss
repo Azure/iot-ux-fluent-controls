@@ -159,16 +159,12 @@ $activeBorderHeight: $layout-nav-collapsed-width - (4*$grid-size);
 }
 
 :global(.global-nav-item-container-title) {
-    width: 100%;
     padding: $gutter-small;
-    
-    display: flex;
-    align-items: center;
-
     font-weight: 600;
 
-    color: var(--color-text-navbar);
-    background-color: var(--color-bg-navbar);
+    &:hover, &:active, &:focus {
+        background-color: unset;
+    }
 }
 
 .global-nav-items {

@@ -78,7 +78,7 @@ export function NavigationItemContainer({ containerTitle, isExpanded, children }
     return (
         <>
             {isExpanded
-                ? <div className={cx('global-nav-item-container-title')}>
+                ? <div className={cx('global-nav-item', 'global-nav-item-container-title')}>
                     <span className={cx('inline-text-overflow')}
                         title={containerTitle}>
                         {containerTitle}
