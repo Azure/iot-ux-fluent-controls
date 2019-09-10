@@ -41,6 +41,7 @@ $line-height: 5*$grid-size;
     .label-icon {
         @include md-box(inline-block);
         margin-left: 2*$grid-size;
+        color: var(--color-text-action-trigger);
     }
 
     .label-balloon {
