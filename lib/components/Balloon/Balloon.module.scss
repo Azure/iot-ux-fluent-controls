@@ -126,6 +126,7 @@ $balloon-width: 65*$grid-size;
     background-color: var(--color-bg-balloon);
     border: 1px solid var(--color-border-controls);
     width: $balloon-width;
+    border-radius: $component-border-radius;
 
     .balloon-inner-container {
         @include md-box(inline-block, relative);

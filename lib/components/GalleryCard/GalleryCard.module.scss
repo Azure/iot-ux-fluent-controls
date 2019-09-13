@@ -50,6 +50,7 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
   margin-bottom: -$grid-size; // to avoid the extra spacing visible on :active
   padding: 0;
   box-sizing: border-box;
+  border-radius: $component-border-radius;
 
   &.fixed {
     height: $gallery-card-height;

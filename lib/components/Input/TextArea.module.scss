@@ -29,6 +29,7 @@ $line-height: 5*$grid-size;
     font-size: var(--font-size-default);
     line-height: $line-height;
     outline: none;
+    border-radius: $component-border-radius;
 
     &:active, &:hover, &:focus {
         // inputs look really weird with a dashed outline, so standardize

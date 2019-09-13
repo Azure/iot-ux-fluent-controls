@@ -11,6 +11,7 @@ $line-height: 4.5*$grid-size;
     padding: 0.5*$grid-size $grid-size;
     text-decoration: none;
     outline: none;
+    border-radius: $component-border-radius;
 
     &.action-trigger-label-empty {
         .label {
@@ -76,6 +77,7 @@ $line-height: 4.5*$grid-size;
     @include md-button-reset();
     line-height: 0px;
     padding: $grid-size;
+    border-radius: $component-border-radius;
 
     &.disabled {
         cursor: not-allowed;

@@ -42,11 +42,6 @@ $border-radius-size: $grid-size/2;
             border-radius: $border-radius-size;
             border: 0 !important;
 
-            &:focus,
-            &:active {
-                border-radius: 0 $border-radius-size $border-radius-size 0;
-            }
-
             &:not([value=""]) {
                 border-radius: $border-radius-size 0 0 $border-radius-size;
             }
@@ -120,10 +115,6 @@ $border-radius-size: $grid-size/2;
         input.input-component {
             padding-right: $search-icon-width;
             padding-left: 0;
-
-            &:active {
-                border-radius: $border-radius-size 0 0 $border-radius-size;
-            }
 
             &:not([value=""]) {
                 border-radius: 0 $border-radius-size $border-radius-size 0;

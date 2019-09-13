@@ -26,8 +26,8 @@ $z-index-focus: 2*$z-index-small-step;
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        border-radius: 0px;
         padding: 0 0 0 $gutter-small;
+        border-radius: $component-border-radius;
 
         @include rtl {
             padding: 0 $gutter-small 0 0;

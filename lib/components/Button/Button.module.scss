@@ -29,6 +29,8 @@ $outline-focus-border-width: 1px;
     vertical-align: middle;
     cursor: pointer;
 
+    border-radius: $component-border-radius;
+
     :global(.icon) {
         @include md-box(inline-block);
         margin: 0 $grid-size;

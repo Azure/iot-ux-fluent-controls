@@ -27,6 +27,7 @@ $line-height-small: 4*$grid-size;
         background-color: var(--color-bg-input-rest);
         outline: none;
         max-width: 100%;
+        border-radius: $component-border-radius;
 
         &:valid {
             padding: 2*$grid-size 3*$grid-size 2*$grid-size 3*$grid-size;

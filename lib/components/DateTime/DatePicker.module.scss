@@ -9,7 +9,7 @@ $calendar-z-index: 9 * $z-index-large-step + 5 * $z-index-medium-step;
 
 $calc-margin: 5px;
 
-$date-picker-input-height: 8*$grid-size;
+$date-picker-input-height: 8*$grid-size; 
 
 .date-picker-container {
     @include md-box(relative);
@@ -35,6 +35,7 @@ $date-picker-input-height: 8*$grid-size;
         outline: none;
         border: 1px solid var(--color-border-rest);
         background-color: var(--color-bg-input-rest);
+        border-radius: $component-border-radius;
 
         &:hover, &:focus {
             border:  1px solid var(--color-border-selected);
@@ -74,15 +75,15 @@ $date-picker-input-height: 8*$grid-size;
     .date-picker-calendar-icon {
         @include md-box(absolute);
         font-size: var(--font-size-small);
-        top: 0;
-        right: 0;
+        top: 1px;
+        right: 1px; // acount for input border
         border: none;
         background-color: transparent;
-        height: $date-picker-input-height;
+        height: calc(#{$date-picker-input-height} - 2.5px); // substract the size of the borders so on hover the button doesn't eat up the border
 
         @include rtl {
             right: unset;
-            left: 0;
+            left: 1px;
         }
 
         &:focus:not(:disabled) {
@@ -98,6 +99,7 @@ $date-picker-input-height: 8*$grid-size;
     display: inline-block;
     z-index: $calendar-z-index;
     position: absolute;
+    border-radius: $component-border-radius;
 
     &:not(.above) {
         top: calc(100% + 5px);

@@ -27,6 +27,7 @@ $dropdown-z-index: $z-index-medium-step;
         outline: none;
         border: 1px solid var(--color-border-rest);
         background-color: var(--color-bg-input-rest);
+        border-radius: $component-border-radius;
 
         &:hover, &:focus, &:active {
             // inputs look really weird with a dashed outline, so standardize
