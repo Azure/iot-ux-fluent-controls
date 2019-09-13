@@ -95,13 +95,18 @@ $outline-focus-border-width: 1px;
     line-height: $line-height;
 
     & + &:not(.columns) {
-        margin-top: 3*$grid-size;
+        margin-top: $gutter-xsmall;
     }
 
     &.columns {
         display: inline-block;
 
-        margin-right: 2*$grid-size;
+        margin-right: $gutter-xxsmall;
+
+        @include rtl {
+            margin-right: 0;
+            margin-left: $gutter-xxsmall;
+        }
     }
 
     input {
@@ -109,6 +114,11 @@ $outline-focus-border-width: 1px;
 
         top: 1px;
         left: 1px;
+
+        @include rtl {
+            left: unset;
+            right: 1px;
+        }
 
         width: 0px;
         height: 0px;
@@ -119,7 +129,12 @@ $outline-focus-border-width: 1px;
     .checkbox-text {
         @include md-box(inline-block, relative);
         vertical-align: top;
-        padding-left: 2*$grid-size;
+        padding-left: $gutter-xxsmall;
+
+        @include rtl {
+            padding-left: unset;
+            padding-right: $gutter-xxsmall;
+        }
     }
 
     .checkbox-fill {
@@ -148,6 +163,7 @@ $outline-focus-border-width: 1px;
         font-size: var(--font-size-small);
         line-height: $line-height-small;
         left: 2px;
+        top: 1px;
     }
 
     &.selected {

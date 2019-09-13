@@ -57,6 +57,10 @@ $line-height: 4.5*$grid-size;
         margin-left: 2*$grid-size;
         color: var(--color-text-rest);
 
+        @include rtl {
+            margin: 0 2*$grid-size 0 0;
+        }
+
         max-width: 50*$grid-size;
         overflow: hidden;
         white-space: nowrap;

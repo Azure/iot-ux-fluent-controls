@@ -4,10 +4,20 @@
 .datetime-field {
     .date-picker {
         padding-right: $grid-size;        
+
+        @include rtl {
+            padding-right: unset;        
+            padding-left: $grid-size;        
+        }
     }
 
     .time-picker {
         padding-left: $grid-size;
+
+        @include rtl {
+            padding-left: unset;        
+            padding-right: $grid-size;        
+        }
     }
 
     .field-content {

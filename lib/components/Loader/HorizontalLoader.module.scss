@@ -29,6 +29,33 @@
             transform: translateX(100%);
         }
     }
+
+    @keyframes #{$name}-rtl {
+        0% {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        15% {
+            opacity: 0;
+            transform: translateX(100%);
+        }
+        33% {
+            opacity: 1;
+            transform: translateX(calc(50% + 48px));
+        }
+        66% {
+            opacity: 1;
+            transform: translateX(calc(50% + 48px));
+        }
+        85% {
+            opacity: 0;
+            transform: translateX(0);
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(0);
+        }
+    }
 }
 
 @mixin horizontal-loader-child($name, $num, $num-dots, $diameter, $gap, $duration, $delay, $timing) {
@@ -40,6 +67,10 @@
     #{$class-name} #{$inner-class-name}:nth-child(#{$num}) {
         animation: #{$name} $duration $total-delay infinite $timing;
         padding-left: $padding;
+
+        @include rtl {
+            animation: #{$name}-rtl $duration $total-delay infinite $timing;
+        }
     }
 }
 
@@ -59,6 +90,12 @@
         @include md-box(inline-block, absolute);
         width: 100%;
         opacity: 0;
+        display: flex;
+        justify-content: flex-start;
+
+        @include rtl {
+            justify-content: flex-end;
+        }
     }
     
     #{$inner-class-name} > div {

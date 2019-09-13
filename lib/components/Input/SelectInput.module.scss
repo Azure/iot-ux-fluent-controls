@@ -16,7 +16,7 @@ $line-height: 4*$grid-size;
         font-size: var(--font-size-small);
         color: var(--color-text-chevron);
         right: 2*$grid-size;
-        top: 2*$grid-size;
+        top: calc((#{$input-height} - var(--font-size-small)) / 2);
         pointer-events: none;
     }
 

@@ -27,7 +27,11 @@ $date-picker-input-height: 8*$grid-size;
         @include md-box(block, relative);
         width: 100%;
         height: $date-picker-input-height;
-        padding: 2*$grid-size 8*$grid-size 2*$grid-size 3*$grid-size;
+        padding: $gutter-xxsmall 8*$grid-size $gutter-xxsmall $gutter-xsmall;
+        @include rtl {
+            padding: $gutter-xxsmall $gutter-xsmall $gutter-xxsmall 8*$grid-size;
+        }
+
         outline: none;
         border: 1px solid var(--color-border-rest);
         background-color: var(--color-bg-input-rest);
@@ -76,6 +80,11 @@ $date-picker-input-height: 8*$grid-size;
         background-color: transparent;
         height: $date-picker-input-height;
 
+        @include rtl {
+            right: unset;
+            left: 0;
+        }
+
         &:focus:not(:disabled) {
             outline-offset: -2px;
         }
@@ -84,7 +93,7 @@ $date-picker-input-height: 8*$grid-size;
 
 .date-picker-dropdown {
     padding-bottom: 2*$grid-size;
-    left: 0px;
+    left: 0;
     width: $date-picker-dropdown-width;
     display: inline-block;
     z-index: $calendar-z-index;
@@ -96,6 +105,11 @@ $date-picker-input-height: 8*$grid-size;
 
     &.above {
         bottom: calc(100% + 5px);
+    }
+
+    @include rtl {
+        left: unset;
+        right: 0;
     }
 
     background-color: var(--color-bg-input-rest);
@@ -110,6 +124,11 @@ $date-picker-input-height: 8*$grid-size;
         width: 2*$grid-size;
         height: 2*$grid-size;
         left: 4*$grid-size;
+
+        @include rtl {
+            left: unset;
+            right: 4*$grid-size;
+        }
     }
 
     &:not(.above) .date-picker-dropdown-triangle {

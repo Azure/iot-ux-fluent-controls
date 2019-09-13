@@ -40,8 +40,13 @@ $line-height: 5*$grid-size;
 
     .label-icon {
         @include md-box(inline-block);
-        margin-left: 2*$grid-size;
+        margin-left: $gutter-xxsmall;
         color: var(--color-text-action-trigger);
+
+        @include rtl {
+            margin-left: unset;
+            margin-right: $gutter-xxsmall;
+        }
     }
 
     .label-balloon {

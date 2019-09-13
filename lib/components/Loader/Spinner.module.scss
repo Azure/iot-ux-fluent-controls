@@ -20,6 +20,25 @@
             transform: rotate(360deg);
         }
     }
+
+    @keyframes #{$name}-rtl {
+        0% {
+            opacity: 0;
+            transform: rotate(360deg);
+        }
+        33% {
+            opacity: 1;
+            transform: rotate(180deg);
+        }
+        66% {
+            opacity: 1;
+            transform: rotate(180deg);
+        }
+        100% {
+            opacity: 0;
+            transform: rotate(0);
+        }
+    }
 }
 
 @mixin spinner-child($name, $num, $num-dots, $diameter, $gap, $duration, $delay, $timing) {
@@ -31,6 +50,11 @@
     #{$class-name} #{$inner-class-name}:nth-child(#{$num}) {
         animation: #{$name} $duration $total-delay infinite $timing;
         padding-left: $padding;
+
+        @include rtl {
+            animation: #{$name}-rtl $duration $total-delay infinite $timing;
+            padding: 0 $padding 0 0;
+        }
     }
 }
 

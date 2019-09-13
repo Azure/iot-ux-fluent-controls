@@ -14,17 +14,17 @@ $line-height-close: 4*$grid-size;
     height: 8*$grid-size;
 
     .alert-icon {
-        @include md-box(inline-block, relative);
-        margin-left: 2*$grid-size;
-        margin-right: 2*$grid-size;
-        margin-top: $grid-size;
+        margin: $grid-size 2*$grid-size;
         flex: 0 0 4*$grid-size;
     }
 
     .alert-text {
-        margin-top: 1.25*$grid-size;
-        margin-right: 3*$grid-size;
+        margin: 1.25*$grid-size 3*$grid-size 0 0;
         padding-bottom: 2*$grid-size;
+
+        @include rtl {
+            margin: 1.25*$grid-size 0 0 3*$grid-size;
+        }
 
         font-family: var(--font-family-light);
         font-size: var(--font-size-default);
@@ -38,6 +38,10 @@ $line-height-close: 4*$grid-size;
 
         & + .close {
             margin-left: 2*$grid-size;
+
+            @include rtl {
+                margin: 0 2*$grid-size 0 0;
+            }
         }
     }
 

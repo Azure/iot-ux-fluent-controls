@@ -13,12 +13,17 @@ $outline-focus-border-width: 1px;
     line-height: $line-height;
 
     & + &:not(.columns) {
-        margin-top: 3*$grid-size;
+        margin-top: $gutter-xsmall;
     }
 
     &.columns {
         display: inline-block;
-        margin-right: 2*$grid-size;
+        margin-right: $gutter-xxsmall;
+
+        @include rtl {
+            margin-left: $gutter-xxsmall;
+            margin-right: unset;
+        }
     }
 
     input {
@@ -30,6 +35,11 @@ $outline-focus-border-width: 1px;
         border: none;
         outline: none;
         background-color: var(--color-bg-radio-rest);
+
+        @include rtl {
+            left: unset;
+            right: 1px;
+        }
 
         &:focus ~ .radio-button:not(.disabled) {
             border: 1px dashed var(--color-border-focus);
@@ -43,7 +53,12 @@ $outline-focus-border-width: 1px;
     .radio-text {
         @include md-box(inline-block, relative);
         vertical-align: top;
-        padding-left: 2*$grid-size;
+        padding-left: $gutter-xxsmall;
+
+        @include rtl {
+            padding-left: unset;
+            padding-right: $gutter-xxsmall;
+        }
     }
 
     .radio-fill {

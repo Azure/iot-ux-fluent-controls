@@ -27,7 +27,11 @@ $z-index-focus: 2*$z-index-small-step;
         -moz-appearance: none;
         appearance: none;
         border-radius: 0px;
-        padding: 0px 0px 0px 4*$grid-size;
+        padding: 0 0 0 $gutter-small;
+
+        @include rtl {
+            padding: 0 $gutter-small 0 0;
+        }
 
         option {
             height: 8*$grid-size;
@@ -73,6 +77,10 @@ $z-index-focus: 2*$z-index-small-step;
     }
 
     .time-input-period {
-        padding: 0px 0px 0px 3*$grid-size;
+        padding: 0 0 0 $gutter-xsmall;
+
+        @include rtl {
+            padding: 0 $gutter-xsmall 0 0;
+        }
     }
 }

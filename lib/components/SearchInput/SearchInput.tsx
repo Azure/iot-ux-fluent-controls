@@ -8,8 +8,6 @@ const css = classNames.bind(require('./SearchInput.module.scss'));
 export const prefixClassName = css('prefix-addon');
 export const postfixClassName = css('postfix-addon');
 
-
-
 export interface SearchInputProps extends React.Props<TextInputType> {
     label: string;
     onSubmit: React.EventHandler<any>;

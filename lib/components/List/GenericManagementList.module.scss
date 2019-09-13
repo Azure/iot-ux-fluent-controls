@@ -6,7 +6,6 @@ $management-list-row-height: 12*$grid-size;
 $management-list-select-all-width: 8*$grid-size;
 
 $line-height-small: 4*$grid-size;
-$line-height-sort: 3*$grid-size;
 
 .list-container {
     @include md-box(flex, relative);
@@ -27,11 +26,19 @@ $line-height-sort: 3*$grid-size;
         
         &:first-child {
             .column-header {
-                padding-left: 5*$grid-size;
+                padding-left: $gutter-normal;
+
+                @include rtl {
+                    padding-right: $gutter-normal;
+                }
             }
 
             .column-content {
-                padding-left: 5*$grid-size;
+                padding-left: $gutter-normal;
+
+                @include rtl {
+                    padding-right: $gutter-normal;
+                }
             }
         }
         
@@ -44,14 +51,21 @@ $line-height-sort: 3*$grid-size;
             line-height: $line-height-small;
             color: var(--color-text-rest);
             
-            padding-top: 2*$grid-size;
-            padding-right: 5*$grid-size;
+            padding: $gutter-xxsmall $gutter-normal 0 0;
             vertical-align: bottom;            
+
+            @include rtl {
+                padding: $gutter-xxsmall 0 0 $gutter-normal;
+            }
 
             white-space: nowrap;
             
             &.checkbox {
-                padding-right: 3*$grid-size;            
+                padding-right: $gutter-xsmall;
+
+                @include rtl {
+                    padding-left: $gutter-xsmall;
+                }
             }
 
             .checkbox-empty {
@@ -62,9 +76,12 @@ $line-height-sort: 3*$grid-size;
                 cursor: initial;
             }
 
-            .sort-direction::before {
-                line-height: $line-height-sort;
-                margin-left: 2*$grid-size;
+            .sort-direction {
+                margin-left: $gutter-xxsmall;
+
+                @include rtl {
+                    margin: 0 $gutter-xxsmall 0 0;
+                }
             }
         }
 
@@ -80,18 +97,28 @@ $line-height-sort: 3*$grid-size;
 
             width: 100%;
             height: $management-list-row-height;
-            padding-top: 4*$grid-size;
-            padding-right: 5*$grid-size;
-            margin-top: 2*$grid-size;
+            padding: $gutter-normal $gutter-normal 0 0;
+            margin-top: $gutter-xxsmall;
+
+            @include rtl {
+                padding: $gutter-normal 0 0 $gutter-normal;
+            }
             
             white-space: nowrap;
 
             &:first-child {
-                padding-left: 5*$grid-size;
+                padding-left: $gutter-normal;
+                @include rtl {
+                    padding-right: $gutter-normal;
+                }
             }
 
             &.checkbox {
-                padding-right: 3*$grid-size;
+                padding-right: $gutter-xsmall;
+
+                @include rtl {
+                    padding-left: $gutter-xsmall;
+                }
             }
         }
 
