@@ -18,7 +18,7 @@ $search-max-size: 100 * $grid-size;
 
 .masthead {
     display: flex;
-    height: $layout-nav-item-height;
+    height: $layout-masthead-height;
     flex-grow: 0;
     flex-shrink: 0;
     justify-content: space-between;
@@ -92,18 +92,22 @@ $search-max-size: 100 * $grid-size;
 
     .masthead-logo {
         padding: $masthead-logo-padding;
-        height: $layout-nav-item-height;
+        height: 100%;
     }
 
     .masthead-branding {
         width: $masthead-branding-width;
-        height: $layout-nav-item-height;
+        height: $layout-masthead-height;
         display: inline-block;
         padding: 0px $gutter-normal;
-        line-height: $layout-nav-item-height;
+        line-height: $layout-masthead-height;
         font-size: var(--font-size-h3);
         font-weight: bold;
         min-width: $branding-min-width-size;
+
+        @media(max-width: $screen-md - 1) {
+            width: 100%;
+        }
     }
 
     .search-input-container {
@@ -116,6 +120,10 @@ $search-max-size: 100 * $grid-size;
         width: calc(100% - #{$masthead-branding-width});
         text-align: right;
         position: relative;
+
+        @media(max-width: $screen-md - 1) {
+            width: auto;
+        }
 
         .masthead-toolbar {
             margin: 0;
@@ -160,7 +168,7 @@ $search-max-size: 100 * $grid-size;
 
                     .masthead-toolbar-btn-container {
                         width: 100%;
-                        height: $layout-nav-item-height;
+                        height: 100%;
                         display: flex;
                         flex-direction: column;
                         justify-content: center; // vertically align
@@ -176,9 +184,8 @@ $search-max-size: 100 * $grid-size;
             }
 
             .masthead-toolbar-btn {
-                width: $layout-nav-item-height;
-                height: $layout-nav-item-height;
-                line-height: $layout-nav-item-height;
+                width: $layout-masthead-height;
+                height: $layout-masthead-height;
                 justify-content: center;
                 align-items: center;
                 border: none;

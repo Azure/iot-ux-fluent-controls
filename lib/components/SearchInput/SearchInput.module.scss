@@ -18,21 +18,16 @@ $border-radius-size: $grid-size/2;
 
     .search-prefix-icon {
         position: absolute;
-        top: $grid-size;
         z-index: 1;
-        margin-right: $search-icon-width/2;
         margin-left: 3*$grid-size;
-        padding: 0;
-        flex: 0 0 $search-icon-width;
-        width: $search-icon-width;
-        max-width: $search-icon-width;
         height: 100%;
-        display: inline-block;
-        box-sizing: border-box;
-        padding-right: $search-icon-width/2;
         border: 0;
         background: transparent;
         outline: none;
+
+        @include rtl {
+            margin: 0 3*$grid-size 0 0; 
+        }
     }
 
     .search-input {
@@ -123,7 +118,7 @@ $border-radius-size: $grid-size/2;
 
     @include rtl {
         input.input-component {
-            padding-right: 13*$grid-size !important;
+            padding-right: $search-icon-width;
             padding-left: 0;
 
             &:active {
