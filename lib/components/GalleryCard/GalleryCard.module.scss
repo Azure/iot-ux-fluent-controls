@@ -43,6 +43,7 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
 
 .card {
   overflow: hidden;
+  position: relative;
   background-color: var(--color-bg-gallery-tile);
   border: 1px solid var(--color-border-tile);
 
