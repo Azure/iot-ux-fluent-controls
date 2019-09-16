@@ -46,10 +46,6 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
   background-color: var(--color-bg-gallery-tile);
   border: 1px solid var(--color-border-tile);
 
-  margin: 0;
-  margin-bottom: -$grid-size; // to avoid the extra spacing visible on :active
-  padding: 0;
-  box-sizing: border-box;
   border-radius: $component-border-radius;
 
   &.fixed {
@@ -67,10 +63,11 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
   width: 100%;
   background-color: transparent;
   transition: $gallery-card-bg-color-transition;
+  border-bottom: 1px solid var(--color-border-tile);
 
   &.fixed {
-    width: $gallery-card-width;
-    height: $gallery-card-background-height;
+    width: calc(#{$gallery-card-width} - 2px);
+    height: calc(#{$gallery-card-background-height} - 2px);
   }
 
   .fullbg & {
