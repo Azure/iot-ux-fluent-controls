@@ -15,9 +15,14 @@ $line-height: 4*$grid-size;
         @include md-box(absolute, block);
         font-size: var(--font-size-small);
         color: var(--color-text-chevron);
-        right: 2*$grid-size;
         top: calc((#{$input-height} - var(--font-size-small)) / 2);
         pointer-events: none;
+        right: 2*$grid-size;
+
+        @include rtl {
+            right: unset;
+            left: 2*$grid-size;
+        }
     }
 
     .combo {
@@ -25,7 +30,6 @@ $line-height: 4*$grid-size;
         width: 100%;
         height: $input-height;
         line-height: $input-height;
-        padding: 0 6*$grid-size 0 3*$grid-size;
         outline: none;
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -33,6 +37,11 @@ $line-height: 4*$grid-size;
         border: 1px solid var(--color-border-rest);
         background-color: var(--color-bg-input-rest);
         border-radius: $component-border-radius;
+        padding: 0 6*$grid-size 0 3*$grid-size;
+
+        @include rtl {
+            padding: 0 3*$grid-size 0 6*$grid-size;
+        }
 
         option {
             height: $option-height;

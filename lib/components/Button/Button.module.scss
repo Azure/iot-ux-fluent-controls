@@ -2,14 +2,12 @@
 @import '../../common/mixins';
 
 $button-max-width: 100%;
-$line-height: 8*$grid-size;
 $outline-focus-border-width: 1px;
 
 :global(.btn-primary), .method-btn-primary, :global(.btn-danger), .method-btn-danger, :global(.btn), .method-btn {
     @include md-box(inline-flex-row, relative);
     font-family: var(--font-family-default);
     font-size: var(--font-size-default);
-    line-height: $line-height;
     justify-content: center;
     align-items: center;
 
@@ -36,7 +34,6 @@ $outline-focus-border-width: 1px;
         margin: 0 $grid-size;
 
         font-size: var(--icon-size-xsmall);
-        line-height: $line-height;
     }
 
     &:not(:disabled) {

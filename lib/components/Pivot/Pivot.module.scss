@@ -11,6 +11,11 @@ $line-height: 4*$grid-size;
     @include md-box(inline-block);
     outline: none !important;
     margin-left: 5*$grid-size;
+
+    @include rtl {
+        margin-left: unset;
+        margin-right: 5*$grid-size;
+    }
 }
 
 .pivot-menu {
@@ -38,11 +43,16 @@ $line-height: 4*$grid-size;
     }
 
     .pivot-icon-label {
-        margin-left: 2*$grid-size;
         font-family: var(--font-family-default);
         font-size: var(--font-size-default);
         line-height: $line-height;
         color: var(--color-text-pivot-rest);
+        margin-left: 2*$grid-size;
+
+        @include rtl {
+            margin-left: unset;
+            margin-right: 2*$grid-size;
+        }
     }
 
     &:hover {
