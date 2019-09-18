@@ -125,7 +125,7 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
 
     &:active, &:global(.global-nav-item-active) {
         background-color: var(--color-bg-navbar-selected);
-        font-weight: 600;
+        @extend %semibold;
     }
 
     &:focus {
@@ -153,7 +153,7 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
 
 :global(.global-nav-item-container-title) {
     padding: $gutter-small;
-    font-weight: 600;
+    @extend %semibold;
 
     &:hover, &:active, &:focus {
         background-color: unset;

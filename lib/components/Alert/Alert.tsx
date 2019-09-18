@@ -108,7 +108,7 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
             <ActionTriggerButton
                 className={css('close-button')}
                 onClick={props.onClose}
-                icon={'cancelLegacy'}
+                icon={'cancel'}
                 attr={{
                     button: {
                         title: closeButtonTitle

@@ -26,6 +26,14 @@
         margin-left: 2*$grid-size;
         margin-bottom: .5*$grid-size;
     }
+
+    &:global(.icon-navigation) {
+        color: var(--color-text-rest) !important;
+    }
+
+    &:global(.icon-delete) {
+        color: var(--color-icon-danger) !important;
+    }
 }
 
 %centered {

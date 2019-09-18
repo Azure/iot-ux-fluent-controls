@@ -75,7 +75,7 @@ $search-max-size: 100 * $grid-size;
             &:active, &:global(.global-nav-item-active) {
                 background-color: var(--color-bg-masthead-active);
                 border-color: var(--color-border-navbar-selected);
-                font-weight: 600;
+                @extend %semibold;
             }
         }
 

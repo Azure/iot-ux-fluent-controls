@@ -80,7 +80,9 @@ export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {
         'icon-large': props.size === IconSize.large,
         'icon-xlarge': props.size === IconSize.xlarge,
         'icon-xxlarge': props.size === IconSize.xxlarge,
-        'centered': props.centered
+        'centered': props.centered,
+        'icon-navigation': props.icon.includes('chevron') || props.icon.toLowerCase() === 'cancel',
+        'icon-delete': props.icon.toLowerCase() === 'delete'
     }, iconClassName, props.className);
 
     let style = { color: props.color };

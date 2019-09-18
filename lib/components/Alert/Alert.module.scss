@@ -75,8 +75,10 @@ $line-height-close: 4*$grid-size;
         }
 
         .close-button-container {
-            color: var(--color-text-alert-info);
-
+            & > span {
+                color: var(--color-text-alert-info) !important;
+            }
+        
             &:hover, &:focus {
                 background: transparent;
             }
@@ -98,7 +100,9 @@ $line-height-close: 4*$grid-size;
         }
 
         .close-button-container {
-            color: var(--color-text-alert-warning);
+            & > span {
+                color: var(--color-text-alert-warning) !important;
+            }
 
             &:hover, &:focus {
                 background: transparent;
@@ -125,7 +129,9 @@ $line-height-close: 4*$grid-size;
         }
 
         .close-button-container {
-            color: var(--color-text-alert-error);
+            & > span {
+                color: var(--color-text-alert-error) !important;
+            }
 
             &:hover, &:focus {
                 background: transparent;
@@ -152,7 +158,9 @@ $line-height-close: 4*$grid-size;
         }
 
         .close-button-container {
-            color: var(--color-text-alert-success);
+            & > span {
+                color: var(--color-text-alert-success) !important;
+            }
 
             &:hover, &:focus {
                 background: transparent;

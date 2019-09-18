@@ -12,9 +12,9 @@ $line-height: 5*$grid-size;
 }
 
 .label {
+    @extend %semibold;
     @include md-box(inline-block);
     color: inherit;
-    font-family: var(--font-family-default);
     font-size: var(--font-size-default);
     line-height: $line-height;
     margin-top: $grid-size / 2;

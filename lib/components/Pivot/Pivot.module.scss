@@ -67,7 +67,7 @@ $line-height: 4*$grid-size;
 
         .pivot-icon, .pivot-label, .pivot-icon-label {
             color: var(--color-text-pivot-selected);
-            font-weight: 600;
+            @extend %semibold;
         }
 
         .pivot-border {

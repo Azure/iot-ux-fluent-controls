@@ -55,14 +55,14 @@ $line-height: 4*$grid-size;
             }
 
             &:checked {
-                background-color: var(--color-bg-selected);
-                color: var(--color-text-active);
+                background-color: var(--color-dropdown-focus);
+                color: var(--color-text-rest);
             }
 
             &:disabled {
-                color: var(--color-text-disabled);
+                color: var(--color-text-dropdown-disabled);
                 border: 1px solid var(--color-border-disabled);
-                background-color: var(--color-bg-input-disabled);
+                background-color: var(--color-dropdown-disabled);
             }
 
             &:hidden {
@@ -73,13 +73,13 @@ $line-height: 4*$grid-size;
         &:active, &:hover, &:focus {
             // inputs look really weird with a dashed outline, so standardize
             // on the solid selected border for all the above states:
-            border: 1px solid var(--color-border-selected);
+            border: 1px solid var(--color-border-dropdown-focus);
         }
 
         &:disabled {
-            color: var(--color-text-disabled);
+            color: var(--color-text-dropdown-disabled);
             border: 1px solid var(--color-border-disabled);
-            background-color: var(--color-bg-input-disabled);
+            background-color: var(--color-dropdown-disabled);
         }
 
         &.error:not(:disabled) {
