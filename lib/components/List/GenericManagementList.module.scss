@@ -45,8 +45,8 @@ $line-height-small: 4*$grid-size;
         .column-header {
             @include md-box(block, relative);
             @include md-button-reset();
+            @extend %semibold;
             
-            font-family: var(--font-family-din-regular);
             font-size: var(--font-size-small);
             line-height: $line-height-small;
             color: var(--color-text-rest);
