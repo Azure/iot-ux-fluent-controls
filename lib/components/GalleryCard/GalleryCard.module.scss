@@ -29,13 +29,13 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
 
     &:hover {
       .card {
-        border: 1px solid var(--color-border-hover);
+        border: 1px solid var(--color-border-tile-hover);
       }
     }
 
     &:focus {
       .card {
-        border: 1px dashed var(--color-border-focus);
+        border: 1px dashed var(--color-border-tile-hover);
       }
     }
   }
@@ -57,6 +57,10 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
 
 .blue {
   background-color: var(--color-bg-gallery-tile-blue) !important;
+
+  span {
+    color: var(--color-icon-gallery-tile-blue)
+  }
 }
 
 %card-background {
