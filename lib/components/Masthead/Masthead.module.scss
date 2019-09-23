@@ -209,8 +209,8 @@ $search-max-size: 100 * $grid-size;
 
                 // align all the icons
                 :before {
-                    width: var(--icon-size-base);
-                    height: var(--icon-size-base);
+                    width: var(--icon-size-standard);
+                    height: var(--icon-size-standard);
                     vertical-align: baseline;
                 }
 
@@ -241,18 +241,9 @@ $search-max-size: 100 * $grid-size;
                     >* {
                         @include action-trigger-override();
                     }
-
-                    &:focus {
-                        outline: 1px dashed var(--color-outline-masthead);
-                        color: var(--color-text-masthead);
-
-                        >* {
-                            @include action-trigger-override();
-                        }
-                    }
                 }
 
-                &:hover {
+                &:hover, &:focus, &:active {
                     background-color: var(--color-bg-masthead-hover);
                 }
 

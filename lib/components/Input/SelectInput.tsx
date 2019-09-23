@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, SelectProps, OptionProps, Elements as Attr, OptionAttr, mergeAttributes} from '../../Attributes';
  import {FormOption, autoFocusRef} from '../../Common';
+import { Icon } from '../Icon';
 const css = classNames.bind(require('./SelectInput.module.scss'));
 
 export interface SelectInputType {}
@@ -71,9 +72,7 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
     const comboClass = css(
         'combo', {'error': props.error}
     );
-    const arrowClassName = css(
-        'arrow', 'icon icon-chevronDown4Legacy'
-    );
+    const arrowClassName = css('arrow');
 
     let value = -1;
     let options = props.options.map((opt, index) => {
@@ -115,7 +114,7 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
             >
                 {options}
             </Attr.select>
-            <Attr.span className={arrowClassName} attr={props.attr.chevron}/>
+            <Icon name='chevronDown' className={arrowClassName} attr={props.attr.chevron}/>
         </Attr.div>
     );
 };

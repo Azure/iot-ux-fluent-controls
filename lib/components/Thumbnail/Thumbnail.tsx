@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import { Elements as Attr, DivProps, ImageProps } from '../../Attributes';
+import { Icon } from '../Icon';
 const cx = classNames.bind(require('./Thumbnail.module.scss'));
 
 /**
@@ -54,11 +55,11 @@ export interface ThumbnailState {
  * Kind thumbnails load up an icon
  */
 const kindIcons = {
-    'product': 'icon-alias-product',
-    'device': 'icon-alias-device',
-    'user': 'icon-alias-user',
-    'unknown': 'icon-alias-unknown',
-    'missing': 'icon-alias-missing-image'
+    'product': 'ScreenCast',
+    'device': 'HardDrive',
+    'user': 'Contact',
+    'unknown': 'StatusCircleQuestionMark',
+    'missing': 'StatusCircleErrorX'
 };
 
 export class Thumbnail extends React.Component<ThumbnailProperties, ThumbnailState> {
@@ -85,7 +86,7 @@ export class Thumbnail extends React.Component<ThumbnailProperties, ThumbnailSta
                         onError={this.handleError} />
                     : null}
                 {!!icon
-                    ? <span className={cx('icon', icon, { 'hidden': this.state.imageLoaded })} />
+                    ? <Icon name={icon} className={cx({ 'hidden': this.state.imageLoaded })} />
                     : null}
             </Attr.div>;
         }

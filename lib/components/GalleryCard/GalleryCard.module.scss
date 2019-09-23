@@ -64,11 +64,13 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
 }
 
 %card-background {
-  @include md-box(inline-block, relative);
+  @include md-box(inline-flex, relative);
   width: 100%;
   background-color: transparent;
   transition: $gallery-card-bg-color-transition;
   border-bottom: 1px solid var(--color-border-tile);
+  align-items: center;
+  justify-content: center;
 
   &.fixed {
     width: calc(#{$gallery-card-width} - 2px);

@@ -171,6 +171,7 @@ $outline-focus-border-width: 1px;
         font-size: var(--font-size-small);
         line-height: $line-height-small;
         color: var(--color-border-hover);
+        top: 2px;
         left: 2px;
 
         @include rtl {

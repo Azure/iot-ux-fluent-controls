@@ -1,21 +1,16 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Elements as Attr, SpanProps} from '../../Attributes';
+import { Elements as Attr, SpanProps } from '../../Attributes';
+import { getIcon } from '@uifabric/styling';
 const css = classNames.bind(require('./Icon.module.scss'));
 
 export enum IconSize {
+    // 12px
+    compact,
     // 16px
-    xsmall = 1,
-    // 32px
-    small,
-    // 48px
-    medium,
+    standard,
     // 64px
     large,
-    // 80px
-    xlarge,
-    // 96px
-    xxlarge
 }
 
 export interface IconType {}
@@ -26,33 +21,22 @@ export interface IconAttributes {
 }
 
 export interface IconProps extends React.Props<IconType> {
-    /** Icon name (from icons.css) */
-    icon: string;
+    /** Icon name (from UI Fabric) */
+    name: string;
 
     /**
      * Icon font size as defined by `IconSize` enum
      *
-     * `IconSize.[xsmall | small | medium | large | xlarge | xxlarge]`
+     * `IconSize.[compact | standard | large]`
      *
-     * Starts at 16 pixels (`IconSize.xsmall`) and increases 16 pixels at a
-     * time until 96 pixels (`IconSize.xxlarge`)
      *
-     * Defaults: `IconSize.medium` (48x48 pixels)
+     * Defaults: `IconSize.standard` (16x16 pixels)
      */
     size?: IconSize;
-    /**
-     * Icon font size
-     *
-     * Overrides `IconProps.size`
-     */
-    fontSize?: number;
-    /** Icon color (accepts string color names and RGB hex values) */
-    color?: string;
-    /** Center vertically and horizontally in parent element */
-    centered?: boolean;
 
     /** Classname to append to top level element */
     className?: string;
+
     /**
      * Classname for Icon label
      *
@@ -61,36 +45,42 @@ export interface IconProps extends React.Props<IconType> {
      */
     labelClassName?: string;
 
+    /**
+     * Icon font size
+     *
+     * Overrides `IconProps.size`
+     */
+    fontSize?: number;
+    
+    /** Icon color (accepts string color names and RGB hex values) */
+    color?: string;
+
     attr?: IconAttributes;
 }
 
 /**
- * Icon loaded from Segoe UI MDL icons font
+ * Icon loaded from Office Fabric UI icons font
  *
  * Renders children so this control can be used with text
  *
  * @param props Control properties (Defined in `IconProps` interface)
  */
 export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {
-    let iconClassName = `icon-${props.icon}`;
-    let cls = css({
-        'icon-xsmall': props.size === IconSize.xsmall,
-        'icon-small': props.size === IconSize.small,
-        'icon-medium': props.size === IconSize.medium,
+    let cls = css('icon', {
+        'icon-compact': props.size === IconSize.compact,
+        'icon-standard': props.size === IconSize.standard,
         'icon-large': props.size === IconSize.large,
-        'icon-xlarge': props.size === IconSize.xlarge,
-        'icon-xxlarge': props.size === IconSize.xxlarge,
-        'centered': props.centered,
-        'icon-navigation': props.icon.includes('chevron') || props.icon.toLowerCase() === 'cancel',
-        'icon-delete': props.icon.toLowerCase() === 'delete'
-    }, iconClassName, props.className);
+        'icon-navigation': props.name.includes('chevron') || props.name.toLowerCase() === 'cancel',
+        'icon-delete': props.name.toLowerCase() === 'delete'
+    }, props.className);
 
+    const iconFabric = getIcon(props.name);
     let style = { color: props.color };
     if (props.fontSize) {
         style['fontSize'] = `${props.fontSize}px`;
     }
 
-    let label;
+    let label: React.ReactNode;
     if (props.children) {
         label = (
             <Attr.span
@@ -103,19 +93,20 @@ export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {
     }
 
     return (
-        <Attr.span
-            className={cls}
-            style={style}
-            attr={props.attr.container}
-        >
+        <Attr.span className={cls} style={style}>
+            <i data-icon-name={props.name}
+                aria-hidden={true}
+                className={iconFabric && iconFabric.subset.className}>
+                {iconFabric && iconFabric.code}
+            </i>
             {label}
         </Attr.span>
     );
 };
 
 Icon.defaultProps = {
-    icon: undefined,
-    size: IconSize.medium,
+    name: undefined,
+    size: IconSize.standard,
     attr: {
         container: {},
         label: {}

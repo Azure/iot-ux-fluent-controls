@@ -32,8 +32,7 @@ $outline-focus-border-width: 1px;
     :global(.icon) {
         @include md-box(inline-block);
         margin: 0 $grid-size;
-
-        font-size: var(--icon-size-xsmall);
+        font-size: var(--icon-size-standard);
     }
 
     &:not(:disabled) {

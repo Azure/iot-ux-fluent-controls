@@ -2,7 +2,7 @@ import { DEFAULT_ENCODING } from 'crypto';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, ButtonProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects} from '../../Attributes';
-import {Icon, IconAttributes} from '../Icon';
+import {Icon, IconAttributes, IconSize} from '../Icon';
 import {MethodNode, GridColumn, SortDirection} from '../../Common';
 import {CheckboxInput, CheckboxInputAttributes} from '../Input/CheckboxInput';
 const css = classNames.bind(require('./GenericManagementList.module.scss'));
@@ -150,8 +150,8 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         onClick = event => column.onDescending();
                     }
                     labelSuffix = <Icon
-                        icon={icon}
-                        fontSize={12}
+                        name={icon}
+                        size={IconSize.compact}
                         className={css('sort-direction')}
                         attr={this.props.attr.rowHeaderChevron}
                     />;

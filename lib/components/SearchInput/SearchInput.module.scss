@@ -125,7 +125,7 @@ $border-radius-size: $grid-size/2;
             .search-button {
                 border-radius: $border-radius-size 0 0 $border-radius-size;
 
-                span::before {
+                span i {
                     transform: rotate(180deg);
                 }
             }

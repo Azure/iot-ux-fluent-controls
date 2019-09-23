@@ -79,11 +79,16 @@ $date-picker-input-height: 8*$grid-size;
         right: 1px; // acount for input border
         border: none;
         background-color: transparent;
-        height: calc(#{$date-picker-input-height} - 2.5px); // substract the size of the borders so on hover the button doesn't eat up the border
+        height: calc(#{$date-picker-input-height} - 2px); // substract the size of the borders so on hover the button doesn't eat up the border
 
         @include rtl {
             right: unset;
             left: 1px;
+        }
+
+        @include rtl {
+            right: unset;
+            left: 0;
         }
 
         &:focus:not(:disabled) {

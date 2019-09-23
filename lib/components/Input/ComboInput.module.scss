@@ -114,7 +114,7 @@ $dropdown-z-index: $z-index-medium-step;
         @include md-box(absolute, block);
         font-size: var(--font-size-small);
         color: var(--color-text-chevron);
-        top: 2*$grid-size;
+        top: calc((#{$input-height} - var(--font-size-small)) / 2);
         pointer-events: none;
         right: 2*$grid-size;
 

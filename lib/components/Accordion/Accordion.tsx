@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
+import { Icon } from '../Icon';
 
 const cx = classnames.bind(require('./Accordion.module.scss'));
 
@@ -37,7 +38,7 @@ export class Accordion extends React.PureComponent<AccordionProperties> {
                 className={cx('accordion-label')}
             >
                 <div className={cx('inline-text-overflow')}>{this.props.label}</div>
-                <i className={cx('icon', {'icon-chevronDown': !this.props.expanded, 'icon-chevronUp': !!this.props.expanded})} />
+                {this.props.expanded ? <Icon name='chevronUp' /> : <Icon name='chevronDown' />}
             </button>
             <div
                 id={`${this.props.id}-content`}

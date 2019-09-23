@@ -136,7 +136,7 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
 }
 
 :global(.global-nav-item-icon) {
-    font-size: var(--icon-size-xsmall);
+    font-size: var(--icon-size-standard);
     padding-right: $gutter-normal;
     color: inherit;
 
@@ -145,8 +145,8 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
     }
 
     svg {
-        height: var(--icon-size-xsmall);
-        width: var(--icon-size-xsmall);
+        height: var(--icon-size-standard);
+        width: var(--icon-size-standard);
         fill: currentColor;
     }
 }

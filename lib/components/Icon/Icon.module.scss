@@ -4,139 +4,31 @@
 @import '../../common/constants';
 @import '../../common/mixins';
 
-%icon {
-    font-style: normal;
-    font-weight: normal;
-    font-family: var(--font-family-default);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    
-    &:before {
-        @include md-box(inline-block, relative);
-        font-family: var(--icon-font-family);
-        text-decoration: none;
-        vertical-align: middle;
+:global {
+    .icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         line-height: 100%;
-    }
 
-    & > span {
-        @include md-box(inline-block, relative);
-        vertical-align: middle;
-        margin-left: 2*$grid-size;
-        margin-bottom: .5*$grid-size;
-    }
+        &.icon-compact {
+            font-size: var(--icon-size-compact);
+        }
 
-    &:global(.icon-navigation) {
-        color: var(--color-text-rest) !important;
-    }
+        &.icon-standard {
+            font-size: var(--icon-size-standard);
+        }
 
-    &:global(.icon-delete) {
-        color: var(--color-icon-danger) !important;
-    }
-}
+        &.icon-large {
+            font-size: var(--icon-size-large);
+        }
+        
+        &:global(.icon-navigation) {
+            color: var(--color-text-rest) !important;
+        }
 
-%centered {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.icon-xsmall {
-    @extend %icon;
-    .icon-xsmall:before {
-        font-size: var(--icon-size-xsmall);
-    }
-
-    &.centered {
-        @extend %centered;
-    }
-}
-
-.icon-small {
-    @extend %icon;
-    .icon-small:before {
-        font-size: var(--icon-size-small);
-    }
-
-    &.centered {
-        @extend %centered;
-    }
-}
-
-.icon-medium {
-    @extend %icon;
-    .icon-medium:before {
-        font-size: var(--icon-size-medium);
-    }
-
-    &.centered {
-        @extend %centered;
-    }
-}
-
-.icon-large {
-    @extend %icon;
-    .icon-large:before {
-        font-size: var(--icon-size-large);
-    }
-
-    &.centered {
-        @extend %centered;
-    }
-}
-
-.icon-xlarge {
-    @extend %icon;
-    .icon-xlarge:before {
-        font-size: var(--icon-size-xlarge);
-    }
-
-    &.centered {
-        @extend %centered;
-    }
-}
-
-.icon-xxlarge {
-    @extend %icon;
-    .icon-xxlarge:before {
-        font-size: var(--icon-size-xxlarge);
-    }
-
-    &.centered {
-        @extend %centered;
-    }
-}
-
-.icon-background {
-    @include circle(var(--icon-size-medium));
-
-    &.icon-xsmall {
-        @include circle(var(--icon-size-xsmall));
-    }
-
-    &.icon-small {
-        @include circle(var(--icon-size-small));
-    }
-
-    &.icon-medium {
-        @include circle(var(--icon-size-medium));
-    }
-
-    &.icon-large {
-        @include circle(var(--icon-size-large));
-    }
-
-    &.icon-xlarge {
-        @include circle(var(--icon-size-xlarge));
-    }
-
-    &.icon-xxlarge {
-        @include circle(var(--icon-size-xxlarge));
-    }
-
-    &.centered {
-        @extend %centered;
+        &:global(.icon-delete) {
+            color: var(--color-icon-danger) !important;
+        }
     }
 }

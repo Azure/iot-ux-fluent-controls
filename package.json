@@ -1,6 +1,6 @@
 {
     "name": "@microsoft/azure-iot-ux-fluent-controls",
-    "version": "7.0.0-alpha.21",
+    "version": "7.0.0-alpha.22",
     "description": "Azure IoT UX Fluent Controls",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
@@ -26,7 +26,8 @@
         "node": ">=8"
     },
     "dependencies": {
-        "@microsoft/azure-iot-ux-fluent-css": "^7.0.0-alpha.20",
+        "@microsoft/azure-iot-ux-fluent-css": "^7.0.0-alpha.22",
+        "@uifabric/icons": "^7.3.0",
         "classnames": "^2.2.5",
         "styled-components": "^4.2.0"
     },

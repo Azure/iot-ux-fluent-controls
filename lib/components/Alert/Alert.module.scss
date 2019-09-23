@@ -68,17 +68,17 @@ $line-height-close: 4*$grid-size;
             &:hover, &:focus {
                 background-color: var(--color-bg-alert-info-close-hover);
 
-                & > div > span {
+                :global(.icon) > i {
                     font-weight: bold;
                 }
             }
         }
 
         .close-button-container {
-            & > span {
+            :global(.icon) {
                 color: var(--color-text-alert-info) !important;
             }
-        
+
             &:hover, &:focus {
                 background: transparent;
             }
@@ -93,14 +93,14 @@ $line-height-close: 4*$grid-size;
             &:hover, &:focus {
                 background-color: var(--color-bg-alert-warning-close-hover);
 
-                & > div > span {
+                :global(.icon) > i {
                     font-weight: bold;
                 }
             }
         }
 
         .close-button-container {
-            & > span {
+            :global(.icon) {
                 color: var(--color-text-alert-warning) !important;
             }
 
@@ -122,14 +122,14 @@ $line-height-close: 4*$grid-size;
             &:hover, &:focus {
                 background-color: var(--color-bg-alert-error-close-hover);
 
-                & > div > span {
+                :global(.icon) > i {
                     font-weight: bold;
                 }
             }
         }
 
         .close-button-container {
-            & > span {
+            :global(.icon) {
                 color: var(--color-text-alert-error) !important;
             }
 
@@ -151,14 +151,14 @@ $line-height-close: 4*$grid-size;
             &:hover, &:focus {
                 background-color: var(--color-bg-alert-success-close-hover);
                 
-                & > div > span {
+                :global(.icon) > i {
                     font-weight: bold;
                 }                
             }
         }
 
         .close-button-container {
-            & > span {
+            :global(.icon) {
                 color: var(--color-text-alert-success) !important;
             }
 

@@ -6,7 +6,7 @@ $line-height: 4.5*$grid-size;
 .action-trigger-container {
     @include md-box(flex, relative, ellipsis);
     font-family: var(--font-family-default);
-    font-size: var(--icon-size-xsmall);
+    font-size: var(--icon-size-standard);
     line-height: $line-height;
     padding: 0.5*$grid-size $grid-size;
     text-decoration: none;
@@ -14,6 +14,8 @@ $line-height: 4.5*$grid-size;
     border-radius: $component-border-radius;
 
     &.action-trigger-label-empty {
+        justify-content: center;
+        
         .label {
             margin: 0;
         }
@@ -44,10 +46,6 @@ $line-height: 4.5*$grid-size;
 
     .suffix {
         margin-left: 2*$grid-size;
-
-        &::before {
-            margin: 0;
-        }
     }
 
     .action-trigger-label {
@@ -66,10 +64,6 @@ $line-height: 4.5*$grid-size;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-
-        &::before {
-            vertical-align: top;
-        }
     }
 }
 

@@ -47,8 +47,8 @@ export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
     if (props.icon) {
         contents = (
             <Icon
-                icon={props.icon}
-                size={IconSize.xsmall}
+                name={props.icon}
+                size={IconSize.standard}
                 className={css('pivot-icon')}
                 labelClassName={css('pivot-icon-label')}
                 attr={props.attr.icon}

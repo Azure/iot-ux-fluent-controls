@@ -443,14 +443,14 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         const clearButton = (this.props.disabled || this.props.readOnly) ? '' :
             <Attr.button
                 type='button'
-                className={css('cancel', 'icon icon-cancel')}
+                className={css('cancel')}
                 onClick={() => {
                     this.inputElement.focus();
                     this.props.onChange('');
                 }}
                 tabIndex={-1}
                 attr={this.props.attr.clearButton}
-            />;
+            ><Icon name='cancel' /></Attr.button>;
 
         const dropdown = this.props.options && this.props.options.length > 0
             && <Attr.div
@@ -507,8 +507,9 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         attr={this.props.attr.input}
                     />
                     {clearButton}
-                    <Attr.span
-                        className={css('chevron', 'icon icon-chevronDown')}
+                    <Icon
+                        name='chevronDown'
+                        className={css('chevron')}
                         attr={this.props.attr.chevron}
                     />
                 </Attr.div>

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ButtonProps, NavProps, Elements as Attr } from '../../Attributes';
 import * as classnames from 'classnames/bind';
+import { Icon } from '../Icon';
 
 const cx = classnames.bind(require('./Navigation.module.scss'));
 
@@ -54,7 +55,7 @@ export function Navigation({ isExpanded, onClick, attr, children, farBottomChild
                 key='globalNavButton'
                 onClick={onClick}
                 attr={attr && attr.navButton}>
-                <span className={cx('global-nav-item-icon', 'icon', 'icon-globalNavButton')} />
+                    <Icon name='CollapseMenu' className={cx('global-nav-item-icon')} />
             </Attr.button>
             <div className={cx('scrollable', 'global-nav-items')}>
                 <div ref={selectedBorderRef} className={cx('global-nav-active-border')} />

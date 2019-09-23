@@ -111,7 +111,7 @@ export class TextInput extends React.PureComponent<TextInputProps> {
             'error': this.props.error,
             'show-cancel': !!this.props.value && this.props.type !== 'number'
         });
-        const cancelClassName = css('cancel', 'icon icon-cancelLegacy');
+        const cancelClassName = css('cancel');
         const clearButton = (this.props.disabled || this.props.readOnly || this.props.type === 'number') ? '' :
         <Attr.button
             type='button'
@@ -120,7 +120,7 @@ export class TextInput extends React.PureComponent<TextInputProps> {
             tabIndex={-1}
             aria-label='Cancel'
             attr={this.props.attr.clearButton}
-        />;
+        ><Icon name='cancel' /></Attr.button>;
 
         let prefix = null;
         if (this.props.prefix) {

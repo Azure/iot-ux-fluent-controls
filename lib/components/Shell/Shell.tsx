@@ -5,12 +5,15 @@ import { ThemeProvider } from 'styled-components';
 import { Masthead, MastheadProperties } from '../Masthead/Masthead';
 import { Navigation, NavigationProperties } from '../Navigation/Navigation';
 import { Root as ContextPanelRoot } from '../ContextPanel/root';
+import { initializeIcons } from '@uifabric/icons';
 
 // reexport Masthead and Nav Properties for easier consumption by consumers:
 export { MastheadProperties, MastheadSearchItem, MastheadToolbarItem, MastheadUserItem } from '../Masthead/Masthead';
 export { NavigationProperties, NavigationItemSeparator, NavigationItemContainer } from '../Navigation/Navigation';
 
 const css = classnames.bind(require('./Shell.module.scss'));
+
+initializeIcons();
 
 /** Root theme that will be passed thru the control tree. */
 export interface ShellTheme {

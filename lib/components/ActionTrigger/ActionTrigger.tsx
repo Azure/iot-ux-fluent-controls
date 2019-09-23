@@ -15,9 +15,9 @@ export interface ActionTriggerAttributes {
 export interface ActionTriggerComponentType { }
 
 export interface ActionTriggerProps extends React.Props<ActionTriggerComponentType> {
-    /** Icon name (from Segoe UI MDL font) */
+    /** Icon name (from UI Fabric) */
     icon: string;
-    /** Icon name for icon on the right of ActionTrigger (from Segoe UI MDL font) */
+    /** Icon name for icon on the right of ActionTrigger (from UI Fabric) */
     rightIcon?: string;
     /** Action trigger label */
     label?: string;
@@ -45,8 +45,8 @@ export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (prop
     let suffix;
     if (props.rightIcon) {
         suffix = <Icon
-            icon={props.rightIcon}
-            size={IconSize.xsmall}
+            name={props.rightIcon}
+            size={IconSize.standard}
             className={css('suffix')}
             attr={props.attr.suffix || {}}
         />;
@@ -57,10 +57,10 @@ export const ActionTrigger: React.StatelessComponent<ActionTriggerProps> = (prop
             className={className}
             attr={props.attr && props.attr.container || {}}
         ><Icon
-            icon={props.icon}
+            name={props.icon}
             className={css('action-trigger-icon')}
             labelClassName={css('action-trigger-label')}
-            size={IconSize.xsmall}
+            size={IconSize.standard}
             attr={props.attr && props.attr.icon || {}}
         >{props.label}</Icon>{suffix}</Attr.div>
     );

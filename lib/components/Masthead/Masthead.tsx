@@ -10,6 +10,7 @@ import { Elements as Attr } from '../../Attributes';
 import { SearchInput } from '../SearchInput/SearchInput';
 import { TextInputAttributes } from '../Input/TextInput';
 import { ShellTheme  } from '../Shell';
+import { Icon } from '../Icon';
 
 const cx = classnames.bind(require('./Masthead.module.scss'));
 
@@ -135,10 +136,12 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                         expanded={navigation.isExpanded}
                         onClick={navigation.onClick}
                         className={cx('nav-container', { 'force-hide-search': expanded })}>
-                        <InlinePopup.Label className={cx('icon', 'icon-chevronRight', {
+                        <InlinePopup.Label className={cx({
                             'nav-icon-collapsed': !navigation.isExpanded,
                             'nav-icon-expanded': navigation.isExpanded,
-                        })} />
+                        })}>
+                            <Icon name='chevronRight' />
+                        </InlinePopup.Label>
                         <InlinePopup.Panel alignment='left' className={cx('nav-panel')}>
                             {navigation.children}
                             <div className={cx('separator')}></div>
@@ -180,7 +183,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                                         <InlinePopup.Label
                                             className={cx('masthead-toolbar-btn', 'more-menu-btn', { 'selected': more.selected })} onClick={more.onClick} attr={more.attr} title={more.title}
                                         >
-                                            <Attr.span className={cx('icon icon-more')} />
+                                            <Icon name='more' />
                                         </InlinePopup.Label>
                                         <InlinePopup.Panel
                                             alignment='right'

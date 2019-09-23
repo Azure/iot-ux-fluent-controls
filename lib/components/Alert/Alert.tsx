@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize, IconAttributes} from '../Icon';
-import { ActionTriggerAttributes } from '../ActionTrigger/ActionTrigger';
 import ActionTriggerButton from '../ActionTrigger/ActionTriggerButton';
 const css = classNames.bind(require('./Alert.module.scss'));
 
@@ -86,8 +85,8 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
     const iconClassName = css('alert-icon');
     const icon = <Icon
         className={iconClassName}
-        size={IconSize.xsmall}
-        icon={iconName}
+        size={IconSize.standard}
+        name={iconName}
         attr={props.attr.icon}
     />;
 
@@ -108,7 +107,7 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
             <ActionTriggerButton
                 className={css('close-button')}
                 onClick={props.onClose}
-                icon={'cancel'}
+                icon='cancel'
                 attr={{
                     button: {
                         title: closeButtonTitle
