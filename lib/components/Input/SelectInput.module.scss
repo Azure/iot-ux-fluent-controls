@@ -23,6 +23,10 @@ $line-height: 4*$grid-size;
             right: unset;
             left: 2*$grid-size;
         }
+
+        &.disabled {
+            color: var(--color-text-dropdown-disabled);
+        }
     }
 
     .combo {
@@ -62,7 +66,6 @@ $line-height: 4*$grid-size;
             &:disabled {
                 color: var(--color-text-dropdown-disabled);
                 border: 1px solid var(--color-border-disabled);
-                background-color: var(--color-dropdown-disabled);
             }
 
             &:hidden {

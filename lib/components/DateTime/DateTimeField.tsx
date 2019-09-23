@@ -365,6 +365,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                 attr={fieldAttr}
                 tooltip={this.props.tooltip}
                 labelFarSide={this.props.labelFarSide}
+                disabled={this.props.disabled}
             >
                 <Attr.div
                     className={css('field-content')}

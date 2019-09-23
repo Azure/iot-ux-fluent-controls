@@ -101,6 +101,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
             className={props.className}
             attr={fieldAttr}
             labelFarSide={props.labelFarSide}
+            disabled={props.disabled}
         >
             <NumberInput
                 name={props.name}

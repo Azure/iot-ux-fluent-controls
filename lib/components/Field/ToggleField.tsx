@@ -91,6 +91,7 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
             className={props.className}
             attr={fieldAttr}
             labelFarSide={props.labelFarSide}
+            disabled={props.disabled}
         >
             <Toggle
                 on={props.value}

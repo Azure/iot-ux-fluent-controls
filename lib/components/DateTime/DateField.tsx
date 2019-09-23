@@ -116,6 +116,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
             attr={fieldAttr}
             tooltip={props.tooltip}
             labelFarSide={props.labelFarSide}
+            disabled={props.disabled}
         >
             <DatePicker
                 name={props.name}

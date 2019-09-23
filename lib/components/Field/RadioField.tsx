@@ -142,6 +142,7 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
             className={props.className}
             attr={fieldAttr}
             labelFarSide={props.labelFarSide}
+            disabled={props.disabled}
         >
             <div>
                 {options}

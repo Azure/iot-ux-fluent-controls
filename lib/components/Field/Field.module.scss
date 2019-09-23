@@ -32,6 +32,10 @@ $line-height: 5*$grid-size;
     & + .field-error {
         margin-top: $grid-size;
     }
+
+    &.disabled {
+        color: var(--color-text-disabled);
+    }
 }
 
 .label-container {

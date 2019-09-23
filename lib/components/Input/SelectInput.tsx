@@ -72,7 +72,8 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
         'combo', {'error': props.error}
     );
     const arrowClassName = css(
-        'arrow', 'icon icon-chevronDown4Legacy'
+        'arrow', 'icon icon-chevronDown4Legacy',
+        { 'disabled': props.disabled }
     );
 
     let value = -1;

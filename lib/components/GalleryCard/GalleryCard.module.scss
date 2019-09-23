@@ -144,4 +144,5 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
   white-space: nowrap;
   text-overflow: ellipsis;
   text-align: center;
+  border-bottom: 1px solid var(--color-border-card-banner);
 }

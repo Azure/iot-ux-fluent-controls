@@ -104,6 +104,7 @@ export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: S
             className={props.className}
             attr={fieldAttr}
             labelFarSide={props.labelFarSide}
+            disabled={props.disabled}
         >
             <SelectInput
                 name={props.name}

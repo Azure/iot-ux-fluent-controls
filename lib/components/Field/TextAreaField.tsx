@@ -88,6 +88,7 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
             className={props.className}
             attr={fieldAttr}
             labelFarSide={props.labelFarSide}
+            disabled={props.disabled}
         >
             <TextArea
                 name={props.name}

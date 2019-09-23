@@ -34,6 +34,8 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     loading?: boolean;
     /** Appends a red asterisk to the label if it is a string */
     required?: boolean;
+    /** Disable HTML input element */
+    disabled?: boolean;
     /** Set error field to display: none */
     hideError?: boolean;
     /** Tooltip text to display in info icon bubble */
@@ -141,6 +143,7 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
                     required={props.required}
                     balloonExpanded={this.state.tooltipVisible}
                     farSide={props.labelFarSide}
+                    disabled={props.disabled}
                     {...props.attr.fieldTooltip}
                 >
                     {props.label}

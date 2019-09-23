@@ -96,6 +96,7 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
             className={props.className}
             attr={fieldAttr}
             labelFarSide={props.labelFarSide}
+            disabled={props.disabled}
         >
             <div>
                 <CheckboxInput

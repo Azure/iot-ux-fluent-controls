@@ -184,6 +184,7 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
             className={props.className}
             attr={fieldAttr}
             labelFarSide={props.labelFarSide}
+            disabled={props.disabled}
         >
             <div>
                 <ComboInput

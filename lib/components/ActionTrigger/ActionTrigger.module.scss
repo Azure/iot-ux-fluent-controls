@@ -56,7 +56,6 @@ $line-height: 4.5*$grid-size;
         vertical-align: top;
         font-size: var(--font-size-default);
         margin-left: 2*$grid-size;
-        color: var(--color-text-rest);
 
         @include rtl {
             margin: 0 2*$grid-size 0 0;

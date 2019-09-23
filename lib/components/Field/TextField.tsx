@@ -113,6 +113,7 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
             className={props.className}
             attr={fieldAttr}
             labelFarSide={props.labelFarSide}
+            disabled={props.disabled}
         >
             <TextInput
                 name={props.name}

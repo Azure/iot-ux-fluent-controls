@@ -508,7 +508,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                     />
                     {clearButton}
                     <Attr.span
-                        className={css('chevron', 'icon icon-chevronDown')}
+                        className={css('chevron', 'icon icon-chevronDown', { 'disabled': this.props.disabled })}
                         attr={this.props.attr.chevron}
                     />
                 </Attr.div>

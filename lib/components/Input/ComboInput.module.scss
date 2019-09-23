@@ -122,6 +122,10 @@ $dropdown-z-index: $z-index-medium-step;
             right: unset;
             left: 2*$grid-size;
         }
+
+        &.disabled {
+            color: var(--color-text-disabled);
+        }
     }
 
     .dropdown:not(.above) {
