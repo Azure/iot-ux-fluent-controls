@@ -155,7 +155,7 @@ $outline-focus-border-width: 1px;
         background-color: var(--color-bg-input-rest);
         outline: none;
         vertical-align: top;
-        border-radius: 4*$grid-size;
+        border-radius: $component-border-radius;
         -webkit-transition: background-color 0.2s ease-out;
         -moz-transition: background-color 0.2s ease-out;
         -o-transition: background-color 0.2s ease-out;
