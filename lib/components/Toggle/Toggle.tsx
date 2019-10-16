@@ -73,8 +73,8 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
     const tabIndex = props.disabled ? -1 : null;
     const label = props.on ? props.onLabel : props.offLabel;
 
-    const ToggleButtonProxy = props.on ? StyledToggleOnButton : Attr.button;
-    const ToggleSwitchProxy = props.on ? StyledToggleOnSwitch : Attr.div;
+    const ToggleButtonProxy = props.on && !props.disabled ? StyledToggleOnButton : Attr.button;
+    const ToggleSwitchProxy = props.on && !props.disabled ? StyledToggleOnSwitch : Attr.div;
     return (
         <Attr.div className={containerClassName} attr={props.attr.container}>
             <ToggleButtonProxy
