@@ -18,6 +18,7 @@ export type SectionProps = AttrProps<HTMLDivElement>;
 export type SelectProps = AttrProps<HTMLSelectElement>;
 export type SpanProps = AttrProps<HTMLSpanElement>;
 export type TextAreaProps = AttrProps<HTMLTextAreaElement>;
+export type HeadingProps = AttrProps<HTMLHeadingElement>;
 
 export type HTMLElementAttr<T extends HTMLElement> = AttrProps<T> & {
     ref?: React.Ref<T>
@@ -185,6 +186,10 @@ const section = AttrElementWrapper<HTMLDivElement>('section');
 const select = AttrElementWrapper<HTMLSelectElement>('select');
 const span = AttrElementWrapper<HTMLSpanElement>('span');
 const textarea = AttrElementWrapper<HTMLTextAreaElement>('textarea');
+const h1 = AttrElementWrapper<HTMLHeadingElement>('h1');
+const h2 = AttrElementWrapper<HTMLHeadingElement>('h2');
+const h3 = AttrElementWrapper<HTMLHeadingElement>('h3');
+const h4 = AttrElementWrapper<HTMLHeadingElement>('h4');
 
 export const Elements = {
     a: a,
@@ -202,6 +207,10 @@ export const Elements = {
     select: select,
     span: span,
     textarea: textarea,
+    h1: h1,
+    h2: h2,
+    h3: h3,
+    h4: h4,
 };
 
 export default Elements;

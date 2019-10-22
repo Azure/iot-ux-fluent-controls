@@ -35,9 +35,6 @@ $title-font-size: $gutter-normal;
 }
 
 .title {
-    font-size: $title-font-size;
-    margin-top: 2*$grid-size;
-    margin-bottom: 4*$grid-size;
     flex-grow: 0;
     flex-shrink: 0;
 }
