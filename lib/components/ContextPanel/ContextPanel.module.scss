@@ -29,17 +29,15 @@ $title-font-size: $gutter-normal;
     }
 }
 
-.close-button {
-    align-self: flex-end;
-    margin: -$gutter-normal;
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: $gutter-normal;
 }
 
 .title {
     font-size: $title-font-size;
-    margin-top: 2*$grid-size;
-    margin-bottom: 4*$grid-size;
-    flex-grow: 0;
-    flex-shrink: 0;
+    height: 100%;
 }
 
 .content {
