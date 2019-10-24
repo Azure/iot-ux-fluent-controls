@@ -4,8 +4,6 @@
 $masthead-branding-width: 50%;
 
 $masthead-brandname-width: $grid-size * 50;
-$masthead-logo-padding: 2 * $grid-size 2 * $grid-size 2 * $grid-size 5 *
-  $grid-size;
 $masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
 $masthead-collapse-start: 125 * $grid-size;
 $thumbnail-size: 3 * $gutter-xsmall; // match @user-thumbnail-size in Thumbnail.module.scss
@@ -85,7 +83,7 @@ $search-max-size: 100 * $grid-size;
   }
 
   .masthead-logo {
-    padding: $masthead-logo-padding;
+    padding: $gutter-xxsmall;
     height: 100%;
   }
 
@@ -219,35 +217,10 @@ $search-max-size: 100 * $grid-size;
       }
 
       &.selected {
-        background-color: var(--color-bg-container-panel);
-
-        > * {
-          background-color: var(--color-bg-container-panel);
-          color: var(--color-text-rest);
-        }
+        background-color: var(--color-bg-container-panel) !important;
 
         &:focus {
           outline: 1px dashed var(--color-outline);
-
-          > * {
-            outline: none;
-            color: var(--color-text-regular);
-          }
-        }
-
-        &:active > * {
-          color: var(--color-text-regular);
-        }
-
-        &:hover,
-        &:hover > * {
-          background-color: var(--color-bg-container-panel);
-
-          > * {
-            outline: none;
-            background-color: var(--color-bg-container-panel);
-            color: var(--color-text-rest);
-          }
         }
       }
 
