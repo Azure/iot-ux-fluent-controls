@@ -13,6 +13,9 @@ $line-height: 5*$grid-size;
         left: 0px;
         right: 0px;
         visibility: hidden;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+        padding-right: 5*$grid-size; // accounts for scroll bar
     }
 }
 
