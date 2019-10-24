@@ -190,7 +190,6 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                                         onClick={more.onClick}
                                         attr={more.attr}>
                                         <StyledButton
-                                            key={search.label}
                                             attr={more.attr}
                                             title={more.title}
                                             onClick={more.onClick}
