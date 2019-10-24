@@ -10,6 +10,7 @@ import { Elements as Attr } from '../../Attributes';
 import { SearchInput } from '../SearchInput/SearchInput';
 import { TextInputAttributes } from '../Input/TextInput';
 import { ShellTheme  } from '../Shell';
+import { Icon } from '../Icon';
 
 const cx = classnames.bind(require('./Masthead.module.scss'));
 
@@ -93,6 +94,15 @@ function toolbarButtonTheme(theme: ShellTheme): ShellTheme {
     } : { base: 'light' }; // Theme must be an object.
 }
 
+const StyledButton = styled(Attr.button)`
+    &&&&& {
+        color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnStandardRest};
+        &:hover { 
+            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnStandardHover};
+        }
+    }
+`;
+
 export class Masthead extends React.PureComponent<MastheadProperties> {
 
     getToolbarItems = () => {
@@ -103,13 +113,13 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
             const { label, icon, onClick, selected, attr } = item;
             return (
                 <li key={idx} className={cx('masthead-toolbar-btn-container', { 'selected-more': this.props.more.selected })}>
-                    <ActionTriggerButton
-                        label={label}
+                    <StyledButton
+                        title={label}
                         attr={attr}
-                        icon={icon}
                         onClick={onClick}
-                        className={cx('masthead-toolbar-btn', { 'selected': selected })}
-                    />
+                        className={cx('masthead-btn', 'masthead-toolbar-btn', { selected })}>
+                            <Icon icon={icon}>{label}</Icon>
+                    </StyledButton>
                 </li>
             );
         });
@@ -135,10 +145,13 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                         expanded={navigation.isExpanded}
                         onClick={navigation.onClick}
                         className={cx('nav-container', { 'force-hide-search': expanded })}>
-                        <InlinePopup.Label className={cx('icon', 'icon-chevronRight', {
-                            'nav-icon-collapsed': !navigation.isExpanded,
-                            'nav-icon-expanded': navigation.isExpanded,
-                        })} />
+                            <StyledButton
+                                className={cx('masthead-btn')}>
+                                    <Icon icon='chevronRight' className={cx({
+                                        'nav-icon-collapsed': !navigation.isExpanded,
+                                        'nav-icon-expanded': navigation.isExpanded, 
+                                    })} />
+                            </StyledButton>
                         <InlinePopup.Panel alignment='left' className={cx('nav-panel')}>
                             {navigation.children}
                             <div className={cx('separator')}></div>
@@ -161,13 +174,13 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                     <Attr.div className={cx('masthead-toolbar-container', { 'force-hide-search': expanded })}>
                         <ul className={cx('masthead-toolbar')}>
                             {search && <li key='item-search' className={cx('search-button')}>
-                                <ActionTriggerButton
+                                <StyledButton
                                     key={search.label}
                                     attr={{ button: { title: search.label } }}
-                                    icon={'search'}
                                     onClick={search.onExpand}
-                                    className={cx('masthead-toolbar-btn')}
-                                />
+                                    className={cx('masthead-btn')}>
+                                        <Icon icon='search'/>
+                                </StyledButton>
                             </li>}
                             {more && !more.selected && items}
                             {more &&
@@ -175,13 +188,14 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                                     <InlinePopup.Container
                                         expanded={more.selected}
                                         onClick={more.onClick}
-                                        attr={more.attr}
-                                    >
-                                        <InlinePopup.Label
-                                            className={cx('masthead-toolbar-btn', 'more-menu-btn', { 'selected': more.selected })} onClick={more.onClick} attr={more.attr} title={more.title}
-                                        >
-                                            <Attr.span className={cx('icon icon-more')} />
-                                        </InlinePopup.Label>
+                                        attr={more.attr}>
+                                        <StyledButton
+                                            attr={more.attr}
+                                            title={more.title}
+                                            onClick={more.onClick}
+                                            className={cx('masthead-btn', 'more-menu-btn', { 'selected': more.selected })}>
+                                                <Icon icon='more'/>
+                                        </StyledButton>
                                         <InlinePopup.Panel
                                             alignment='right'
                                             className={cx('masthead-toolbar-menu')}

@@ -64,7 +64,7 @@ export const Toggle: React.StatelessComponent<ToggleProps> = (props: ToggleProps
         'disabled': props.disabled
     });
 
-    const onClick = (event) => {
+    const onClick = () => {
         if (!props.disabled && props.onChange) {
             props.onChange(!props.on);
         }

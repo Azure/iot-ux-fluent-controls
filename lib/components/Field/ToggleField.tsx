@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
 import {FormField, FormFieldAttributes} from './FormField';
 import {Toggle, ToggleAttributes} from '../Toggle';

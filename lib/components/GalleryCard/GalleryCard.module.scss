@@ -21,21 +21,31 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
   margin: 2.5 * $grid-size; // put some spacing between the tiles by default
 
   &:not(:global(.disabled)) {
-    &:active {
+    &:global(.selected) {
+      .card {
+        box-shadow: var(--depth-3);
+        border: 3px solid var(--color-border-focus);
+      }
+    }
+
+    &:not(:global(.selected)):active {
       .card {
         border: 1px solid var(--color-border-selected);
+        box-shadow: var(--depth-4);
       }
     }
 
-    &:hover {
+    &:not(:global(.selected)):hover {
       .card {
         border: 1px solid var(--color-border-tile-hover);
+        box-shadow: var(--depth-4);
       }
     }
 
-    &:focus {
+    &:not(:global(.selected)):focus {
       .card {
         border: 1px dashed var(--color-border-tile-hover);
+        box-shadow: var(--depth-4);
       }
     }
   }
@@ -46,6 +56,7 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
   position: relative;
   background-color: var(--color-bg-gallery-tile);
   border: 1px solid var(--color-border-tile);
+  box-shadow: var(--depth-1);
 
   border-radius: $component-border-radius;
 

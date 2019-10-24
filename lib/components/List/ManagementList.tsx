@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {MethodNode, GridColumn, SortDirection} from '../../Common';
 import {GenericManagementList, GenericManagementListProps} from './GenericManagementList';
 
 export interface ManagementListComponentType {}

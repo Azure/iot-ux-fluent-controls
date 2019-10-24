@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
-import {MethodNode, hasClassName} from '../../Common';
+import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./Dropdown.module.scss'));
 
 export interface DropdownType {}
@@ -99,9 +99,6 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         left: number
     };
 
-    private mouseX: number;
-    private mouseY: number;
-
     private unmounting: boolean;
 
     constructor(props: DropdownProps) {
@@ -151,7 +148,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         this.repositionDropdown();
     }
 
-    componentDidUpdate(oldProps: DropdownProps, oldState: DropdownState) {
+    componentDidUpdate(_oldProps: DropdownProps, _oldState: DropdownState) {
         this.repositionDropdown();
         if (!this.fixedContainer) {
             return;
@@ -176,7 +173,7 @@ export class Dropdown extends React.Component<DropdownProps, DropdownState> {
         }
     }
 
-    onChange = (event) => {
+    onChange = () => {
         if (!this.animationRequest) {
             this.animationRequest = requestAnimationFrame(() => {
                 this.animationRequest = null;

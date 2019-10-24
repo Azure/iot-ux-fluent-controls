@@ -1,10 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import { DivProps, ButtonProps, InputProps, Elements as Attr } from '../../Attributes';
-import { Icon, IconSize } from '../Icon';
 import { TextInput, TextInputAttributes } from './TextInput';
 import { MethodNode, keyCode } from '../../Common';
-import { describe, it } from 'mocha';
 
 const css = classNames.bind(require('./TextInput.module.scss'));
 
@@ -167,7 +164,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         this.setState({ value: newValue, paste: paste });
     }
 
-    onPaste = (event) => {
+    onPaste = () => {
         this.paste = true;
     }
 
@@ -217,7 +214,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         return outValue;
     }
 
-    componentDidUpdate(oldProps: NumberInputProps, oldState: NumberInputState) {
+    componentDidUpdate(_oldProps: NumberInputProps, oldState: NumberInputState) {
         if (oldState.value === this.state.value) {
             return;
         }

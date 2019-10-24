@@ -58,6 +58,7 @@ const StyledActiveCheckboxButton = styled(Attr.span)`
     &&&& {
         color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnPrimaryRest };
         background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest };
+        border-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest };
     }
 `;
 

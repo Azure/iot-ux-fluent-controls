@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {MethodNode} from '../../Common';
-import {ActionTrigger, ActionTriggerProps, ActionTriggerAttributes} from '../ActionTrigger';
-import {Elements as Attr, AnchorProps, SpanProps, DivProps} from '../../Attributes';
+import {ActionTrigger, ActionTriggerAttributes} from '../ActionTrigger/ActionTrigger';
+import {Elements as Attr, AnchorProps} from '../../Attributes';
 
 export interface ActionTriggerLinkAttributes {
     anchor?: AnchorProps;    

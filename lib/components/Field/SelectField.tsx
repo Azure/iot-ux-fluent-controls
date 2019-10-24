@@ -1,10 +1,8 @@
 import * as React from 'react';
-import * as classNames from 'classnames/bind';
 import {OptionAttr, OptionProps} from '../../Attributes';
 import {MethodNode, FormOption} from '../../Common';
 import {SelectInput, SelectInputAttributes} from '../Input/SelectInput';
 import {FormField, FormFieldAttributes} from './FormField';
-const css = classNames.bind(require('./Field.module.scss'));
 
 export interface SelectFieldType {}
 

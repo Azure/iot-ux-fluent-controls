@@ -1,10 +1,8 @@
 import * as React from 'react';
-import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
 import {NumberInput} from '../Input/NumberInput';
 import {TextInputAttributes} from '../Input/TextInput';
 import {FormField, FormFieldAttributes} from './FormField';
-const css = classNames.bind(require('./Field.module.scss'));
 
 export interface NumberFieldType {}
 
