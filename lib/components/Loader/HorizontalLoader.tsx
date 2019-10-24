@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {Icon, IconSize} from '../Icon';
 const css = classNames.bind(require('./HorizontalLoader.module.scss'));
 
 export interface HorizontalLoaderType {}

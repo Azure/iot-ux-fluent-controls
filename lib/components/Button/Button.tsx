@@ -40,12 +40,16 @@ export interface ButtonProps extends React.Props<ButtonComponentType> {
 const StyledPrimaryButton = styled(Attr.button)`
     &&&&& {
         color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnPrimaryRest};
+        border-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest};
         background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest};
+
         &:hover { 
             background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryHover};
+            border-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryHover};
         }
         &:disabled {
             color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnPrimaryDisabled};
+            border-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryDisabled};
             background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryDisabled};
         }
     }

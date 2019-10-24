@@ -91,7 +91,7 @@ export class Thumbnail extends React.Component<ThumbnailProperties, ThumbnailSta
         }
     }
 
-    private handleError = (error) => {
+    private handleError = () => {
         this.setState({
             imageLoaded: false
         });

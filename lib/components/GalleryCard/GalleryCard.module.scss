@@ -28,21 +28,21 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
       }
     }
 
-    &:active {
+    &:not(:global(.selected)):active {
       .card {
         border: 1px solid var(--color-border-selected);
         box-shadow: var(--depth-4);
       }
     }
 
-    &:hover {
+    &:not(:global(.selected)):hover {
       .card {
         border: 1px solid var(--color-border-tile-hover);
         box-shadow: var(--depth-4);
       }
     }
 
-    &:focus {
+    &:not(:global(.selected)):focus {
       .card {
         border: 1px dashed var(--color-border-tile-hover);
         box-shadow: var(--depth-4);

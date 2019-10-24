@@ -1,10 +1,8 @@
 import * as React from 'react';
-import * as classNames from 'classnames/bind';
 import {OptionAttr, ButtonProps} from '../../Attributes';
 import {MethodNode, FormOption} from '../../Common';
 import {ComboInput, ComboInputAttributes} from '../Input/ComboInput';
 import {FormField, FormFieldAttributes} from './FormField';
-const css = classNames.bind(require('./Field.module.scss'));
 
 export interface ComboFieldType {}
 

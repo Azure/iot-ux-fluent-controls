@@ -1,9 +1,7 @@
 import * as React from 'react';
-import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
 import {TextArea, TextAreaAttributes} from '../Input/TextArea';
 import {FormField, FormFieldAttributes} from './FormField';
-const css = classNames.bind(require('./Field.module.scss'));
 
 export interface TextAreaFieldType {}
 

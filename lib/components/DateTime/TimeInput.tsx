@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, OptionProps, SelectProps, Elements as Attr} from '../../Attributes';
-import {MethodNode, FormOption, keyCode} from '../../Common';
-import {SelectInput} from '../Input/SelectInput';
+import {FormOption} from '../../Common';
 const css = classNames.bind(require('./TimeInput.module.scss'));
 
 export interface TimeInputType {}
@@ -271,7 +270,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             name={this.props.name}
             value={this.state.period}
             disabled={this.props.disabled}
-            onChange={event => this.update('period', this.periodInput.value)}
+            onChange={() => this.update('period', this.periodInput.value)}
             methodRef={element => this.periodInput = element}
             className={css(inputClassName, 'time-input-period')}
             attr={this.props.attr.periodSelect}
@@ -294,7 +293,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             name={this.props.name}
             value={seconds}
             disabled={this.props.disabled}
-            onChange={event => this.update('seconds', this.secondInput.value)}
+            onChange={() => this.update('seconds', this.secondInput.value)}
             methodRef={element => this.secondInput = element}
             className={inputClassName}
             attr={this.props.attr.secondSelect}
@@ -313,7 +312,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                     name={this.props.name}
                     value={hours}
                     disabled={this.props.disabled}
-                    onChange={event => this.update('hours', this.hourInput.value)}
+                    onChange={() => this.update('hours', this.hourInput.value)}
                     methodRef={element => this.hourInput = element}
                     className={inputClassName}
                     attr={this.props.attr.hourSelect}
@@ -326,7 +325,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                     name={this.props.name}
                     value={minutes}
                     disabled={this.props.disabled}
-                    onChange={event => this.update('minutes', this.minuteInput.value)}
+                    onChange={() => this.update('minutes', this.minuteInput.value)}
                     methodRef={element => this.minuteInput = element}
                     className={inputClassName}
                     attr={this.props.attr.minuteSelect}

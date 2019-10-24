@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, SpanProps, PreProps, TextAreaProps, Elements as Attr} from '../../Attributes';
-import {MethodNode, autoFocusRef} from '../../Common';
+import {DivProps, PreProps, TextAreaProps, Elements as Attr} from '../../Attributes';
+import {autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./TextArea.module.scss'));
 
 export interface TextAreaType {}
@@ -71,7 +71,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
         super(props);
     }
 
-    componentDidUpdate(prevProps: TextAreaProps, prevState: TextAreaState) {
+    componentDidUpdate(prevProps: TextAreaProps, _prevState: TextAreaState) {
         const height = this.ghost && this.ghost.offsetHeight;
         if (this.props.autogrow && prevProps.value !== this.props.value && height > 52) {
             this.textarea.style.height = `${height}px`;
@@ -90,7 +90,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     name={this.props.name}
                     value={value}
                     className={css('textarea', {'error': this.props.error})}
-                    onChange={event => this.props.onChange(this.textarea.value)}
+                    onChange={() => this.props.onChange(this.textarea.value)}
                     disabled={this.props.disabled}
                     readOnly={this.props.readOnly}
                     placeholder={this.props.placeholder}

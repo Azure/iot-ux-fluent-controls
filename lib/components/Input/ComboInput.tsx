@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import { DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects } from '../../Attributes';
-import { Icon, IconSize } from '../Icon';
 import { Dropdown, DropdownAttributes } from '../Dropdown';
-import { MethodNode, FormOption, keyCode, hasClassName, autoFocusRef } from '../../Common';
+import { MethodNode, FormOption, keyCode, autoFocusRef } from '../../Common';
 const css = classNames.bind(require('./ComboInput.module.scss'));
 
 export interface ComboInputType { }
@@ -129,11 +128,11 @@ const defaultMap = (option: FormOption) => {
     return '';
 };
 
-const defaultFilter = (newValue: string, option: FormOption) => !option.hidden;
+const defaultFilter = (_newValue: string, option: FormOption) => !option.hidden;
 
 const defaultSelect = (newValue: string, option: string) => option === newValue;
 
-const defaultLabel = (newValue: string, option: FormOption) => option.label;
+const defaultLabel = (_newValue: string, option: FormOption) => option.label;
 
 /**
  * Low level combo input control
@@ -209,7 +208,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
         }
     }
 
-    onFocus(event) {
+    onFocus() {
         this.showDropdown();
     }
 
@@ -405,15 +404,15 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                 <Attr.button
                     type='button'
                     className={optionClassName}
-                    onClick={option.disabled ? undefined : (event) => {
+                    onClick={option.disabled ? undefined : () => {
                         this.props.onChange(option.value);
                         this.hideDropdown();
                         this.inputElement.blur();
                     }}
-                    onMouseEnter={option.disabled ? undefined : (event) => {
+                    onMouseEnter={option.disabled ? undefined : () => {
                         this.setSelection(this.props.optionMap(option));
                     }}
-                    onMouseLeave={option.disabled ? undefined : (event) => {
+                    onMouseLeave={option.disabled ? undefined : () => {
                         this.setSelection(null);
                     }}
                     tabIndex={-1}
@@ -474,7 +473,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                 */
                 onMouseEnter={() => { }}
                 outerEvents={['click', 'focusin']}
-                onOuterEvent={(event) => this.setState({ visible: false })}
+                onOuterEvent={() => this.setState({ visible: false })}
                 attr={mergeAttributeObjects(
                     this.props.attr,
                     {
@@ -497,7 +496,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         className={inputClassName}
                         onChange={event => this.onInputChange(event)}
                         placeholder={this.props.placeholder}
-                        onFocus={event => this.onFocus(event)}
+                        onFocus={() => this.onFocus()}
                         onKeyDown={event => this.onKeyDown(event)}
                         required={this.props.required}
                         disabled={this.props.disabled}

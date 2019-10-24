@@ -1,4 +1,4 @@
-import {hasClassName, DateFormat, weekLength} from '../../Common';
+import {DateFormat, weekLength} from '../../Common';
 
 export const placeholders = [
     'mm/dd/yyyy',

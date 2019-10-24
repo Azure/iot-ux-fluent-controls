@@ -1,4 +1,3 @@
-import { DEFAULT_ENCODING } from 'crypto';
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, ButtonProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects} from '../../Attributes';
@@ -134,20 +133,20 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
     }
 
     render() {
-        let columns = this.props.columns.map(col => []);
+        let columns = this.props.columns.map(() => []);
         this.props.columns.forEach((column, colIndex) => {
             const sortable = column.onAscending && column.onDescending;
             if (sortable) {
                 let labelSuffix: MethodNode = '';
-                let onClick: (event) => void = null;
+                let onClick: () => void = null;
                 if (this.props.sortedColumn === column) {
                     let icon = '';
                     if (this.props.sortDirection === 'descending') {
                         icon = 'chevronDown';
-                        onClick = event => column.onAscending();
+                        onClick = () => column.onAscending();
                     } else {
                         icon = 'chevronUp';
-                        onClick = event => column.onDescending();
+                        onClick = () => column.onDescending();
                     }
                     labelSuffix = <Icon
                         icon={icon}
@@ -157,8 +156,8 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                     />;
                 } else {
                     onClick = column.defaultDirection === 'descending'
-                        ? event => column.onDescending()
-                        : event => column.onAscending();
+                        ? () => column.onDescending()
+                        : () => column.onAscending();
                 }
                 
                 columns[colIndex].push(
