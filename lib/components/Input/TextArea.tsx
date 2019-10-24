@@ -71,6 +71,13 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
         super(props);
     }
 
+    componentDidMount() {
+        const height = this.ghost && this.ghost.offsetHeight;
+        if (this.props.autogrow && height > 52) {
+            this.textarea.style.height = `${height}px`;
+        }
+    }
+
     componentDidUpdate(prevProps: TextAreaProps, prevState: TextAreaState) {
         const height = this.ghost && this.ghost.offsetHeight;
         if (this.props.autogrow && prevProps.value !== this.props.value && height > 52) {
