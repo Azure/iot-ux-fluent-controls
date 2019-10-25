@@ -83,8 +83,12 @@ $search-max-size: 100 * $grid-size;
   }
 
   .masthead-logo {
-    padding: $gutter-xxsmall;
     height: 100%;
+    padding: $gutter-xxsmall 0 $gutter-xxsmall $gutter-xsmall;
+
+    @include rtl {
+      padding: $gutter-xxsmall $gutter-xsmall $gutter-xxsmall $gutter-xxsmall;
+    }
   }
 
   .masthead-branding {
@@ -218,6 +222,7 @@ $search-max-size: 100 * $grid-size;
 
       &.selected {
         background-color: var(--color-bg-container-panel) !important;
+        color: var(--color-text-rest) !important;
 
         &:focus {
           outline: 1px dashed var(--color-outline);
