@@ -69,7 +69,7 @@ $line-height-row: $calendar-column-width;
             text-align: center;
             vertical-align: bottom;
             line-height: $line-height-chevron;
-            padding-top: 2*$grid-size;
+            padding: $grid-size 0;
             width: $calendar-chevron-width;
             text-decoration: none;
 
@@ -83,6 +83,10 @@ $line-height-row: $calendar-column-width;
 
             &:focus {
                 outline-offset: -1px;
+            }
+
+            > div {
+                justify-content: center;
             }
         }
     }
