@@ -6,6 +6,7 @@ $search-min-width:280px;
 $search-icon-width: $grid-size*8;
 $search-icon-height: $grid-size*8;
 $border-radius-size: $grid-size/2;
+
 .search-input-container {
     position: relative;
     display: inline-flex;
@@ -16,7 +17,39 @@ $border-radius-size: $grid-size/2;
     height: $search-icon-height;
     border-radius: $border-radius-size;
 
+    .search-input input.input-component:not([value=""]) {
+        +button::before {
+            display: none;
+            color: var(--color-text-searchbar-rest);
+        }
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+        .search-prefix-icon {
+            color: var(--color-text-searchbar-active);
+        }
+
+        .search-input input.input-component {
+            background-color: var(--color-bg-searchbar-focus);
+            color: var(--color-text-searchbar-active);
+
+            &::placeholder {
+                color: var(--color-text-placeholder);
+            }
+
+            &:not([value=""]) {
+                +button::before {
+                    color: var(--color-text-searchbar-active);
+                }
+            }
+        }
+    }
+
     .search-prefix-icon {
+        color: var(--color-text-searchbar-rest);
+        background-color: transparent;
         position: absolute;
         z-index: 1;
         margin-left: 3*$grid-size;
@@ -38,12 +71,26 @@ $border-radius-size: $grid-size/2;
         border: 0;
 
         input.input-component {
+            background-color: var(--color-bg-searchbar-rest);
+            color: var(--color-text-searchbar-rest);
             padding-left: $search-icon-width;
             border-radius: $border-radius-size;
             border: 0 !important;
 
+            &::placeholder {
+                color: var(--color-text-searchbar-rest);
+            }
+
             &:not([value=""]) {
                 border-radius: $border-radius-size 0 0 $border-radius-size;
+
+                &:hover,
+                &:focus,
+                &:active {
+                    +button::before {
+                        display: block;
+                    }
+                }
             }
         }
 
@@ -54,37 +101,6 @@ $border-radius-size: $grid-size/2;
                 width: $search-icon-width;
                 height: $search-icon-width;
                 border-radius: 0 $border-radius-size $border-radius-size 0;
-            }
-
-        }
-    }
-
-    .search-prefix-icon {
-        // prefix
-        color: var(--color-text-searchbar);
-        background-color: transparent;
-    }
-
-    input.input-component {
-        background-color: var(--color-bg-searchbar-rest);
-        color: var(--color-text-searchbar);
-
-        &::placeholder {
-            color: var(--color-text-searchbar);
-        }
-
-        &:hover,
-        &:focus,
-        &:active {
-            background-color: var(--color-bg-searchbar-focus);
-        }
-
-        &:focus,
-        &:active {
-            &:not([value=""]) {
-                +button::before {
-                    color: var(--color-text-searchbar);
-                }
             }
         }
     }
