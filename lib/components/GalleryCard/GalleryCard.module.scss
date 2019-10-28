@@ -19,6 +19,7 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
 
   display: inline-block; // this is a tile, not a normal <a> tag
   margin: 2.5 * $grid-size; // put some spacing between the tiles by default
+  cursor: pointer;
 
   &:not(:global(.disabled)) {
     &:global(.selected) {
