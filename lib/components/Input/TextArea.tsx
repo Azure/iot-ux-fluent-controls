@@ -3,6 +3,7 @@ import * as classNames from 'classnames/bind';
 import {DivProps, PreProps, TextAreaProps, Elements as Attr} from '../../Attributes';
 import {autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./TextArea.module.scss'));
+const twoLineHeight = 52;
 
 export interface TextAreaType {}
 
@@ -71,9 +72,16 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
         super(props);
     }
 
+    componentDidMount() {
+        const height = this.ghost && this.ghost.offsetHeight;
+        if (this.props.autogrow && height > twoLineHeight) {
+            this.textarea.style.height = `${height}px`;
+        }
+    }
+
     componentDidUpdate(prevProps: TextAreaProps, _prevState: TextAreaState) {
         const height = this.ghost && this.ghost.offsetHeight;
-        if (this.props.autogrow && prevProps.value !== this.props.value && height > 52) {
+        if (this.props.autogrow && prevProps.value !== this.props.value && height > twoLineHeight) {
             this.textarea.style.height = `${height}px`;
         }
     }
