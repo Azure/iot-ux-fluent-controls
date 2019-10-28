@@ -1,6 +1,6 @@
 {
     "name": "@microsoft/azure-iot-ux-fluent-controls",
-    "version": "7.0.0-alpha.30",
+    "version": "7.0.0-alpha.32",
     "description": "Azure IoT UX Fluent Controls",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
