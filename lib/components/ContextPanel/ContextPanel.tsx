@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
 import { ActionTriggerButton, ActionTriggerButtonAttributes, ActionTriggerAttributes } from '../ActionTrigger';
-import { Elements as Attr, DivProps } from '../../Attributes';
+import { Elements as Attr, DivProps, HeadingProps } from '../../Attributes';
 import { Portal } from './portal';
 
 const cx = classnames.bind(require('./ContextPanel.module.scss'));
@@ -14,7 +14,7 @@ export interface ContextPanelProperties {
     footer?: React.ReactNode;
     attr?: {
         container?: DivProps;
-        header?: DivProps;
+        header?: HeadingProps;
         content?: DivProps;
         footer?: DivProps;
         closeButton?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
@@ -45,13 +45,13 @@ function Panel({ header, children, footer, onClose, attr }: ContextPanelProperti
             attr={attr && attr.container}
         >
             <div className={cx('header')}>
-                {header && <Attr.div 
+                {header && <Attr.h2 
                     id='context-panel-title' 
                     className={cx('title', 'inline-text-overflow')} 
                     attr={attr && attr.header}
                     >
                     {header}
-                </Attr.div>}
+                </Attr.h2>}
                 {onClose && <ActionTriggerButton
                     icon='cancel'
                     onClick={onClose}

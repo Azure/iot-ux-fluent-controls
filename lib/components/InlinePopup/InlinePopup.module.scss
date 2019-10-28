@@ -24,7 +24,8 @@ $swatches-horizontal: 3;
         height: 100%;
 
         &.disabled {
-            cursor: not-allowed !important;
+            cursor: not-allowed;
+            color: var(--color-text-disabled);
 
             &:active, &:hover, &:focus {
                 background-color: inherit;

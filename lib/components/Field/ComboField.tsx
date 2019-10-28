@@ -1,10 +1,8 @@
 import * as React from 'react';
-import * as classNames from 'classnames/bind';
 import {OptionAttr, ButtonProps} from '../../Attributes';
 import {MethodNode, FormOption} from '../../Common';
 import {ComboInput, ComboInputAttributes} from '../Input/ComboInput';
 import {FormField, FormFieldAttributes} from './FormField';
-const css = classNames.bind(require('./Field.module.scss'));
 
 export interface ComboFieldType {}
 
@@ -66,6 +64,8 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
     error?: MethodNode;
     /** Error HTML title in case of overflow */
     errorTitle?: string;
+    /** Set error field to display: none */
+    hideError?: boolean;
 
     /** Disable HTML input element */
     disabled?: boolean;
@@ -178,6 +178,7 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
             label={props.label}
             error={props.error}
             errorTitle={props.errorTitle}
+            hideError={props.hideError}
             loading={props.loading}
             required={props.required}
             tooltip={props.tooltip}

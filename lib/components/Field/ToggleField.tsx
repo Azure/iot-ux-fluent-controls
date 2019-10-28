@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
 import {FormField, FormFieldAttributes} from './FormField';
 import {Toggle, ToggleAttributes} from '../Toggle';
@@ -22,6 +21,8 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
     error?: MethodNode;
     /** Error HTML title in case of overflow */
     errorTitle?: string;
+    /** Set error field to display: none */
+    hideError?: boolean;
 
     onLabel?: MethodNode;
     offLabel?: MethodNode;
@@ -85,6 +86,7 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
             label={props.label}
             error={props.error}
             errorTitle={props.errorTitle}
+            hideError={props.hideError}
             loading={props.loading}
             required={props.required}
             tooltip={props.tooltip}

@@ -1,9 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import styled, { ThemeProvider, ThemeProps} from 'styled-components';
+import styled, { ThemeProps} from 'styled-components';
 
-import { MethodNode } from '../../Common';
-import { ActionTrigger, ActionTriggerProps, ActionTriggerAttributes } from '../ActionTrigger';
+import { ActionTrigger, ActionTriggerAttributes } from '../ActionTrigger/ActionTrigger';
 import { Elements as Attr, ButtonProps } from '../../Attributes';
 import { ShellTheme  } from '../Shell';
 

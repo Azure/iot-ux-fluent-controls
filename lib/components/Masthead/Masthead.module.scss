@@ -1,10 +1,9 @@
-@import '../../common/constants';
-@import '../../common/mixins';
+@import "../../common/constants";
+@import "../../common/mixins";
 
 $masthead-branding-width: 50%;
 
 $masthead-brandname-width: $grid-size * 50;
-$masthead-logo-padding: 2*$grid-size 2*$grid-size 2*$grid-size 5*$grid-size;
 $masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
 $masthead-collapse-start: 125 * $grid-size;
 $thumbnail-size: 3 * $gutter-xsmall; // match @user-thumbnail-size in Thumbnail.module.scss
@@ -12,349 +11,309 @@ $branding-min-width-size: 30 * $grid-size;
 $search-max-size: 100 * $grid-size;
 
 @mixin action-trigger-override {
-    outline: none;
-    color: var(--color-text-masthead);
+  outline: none;
+  color: var(--color-text-masthead);
 }
 
 .masthead {
-    display: flex;
-    height: $layout-masthead-height;
-    flex-grow: 0;
-    flex-shrink: 0;
-    justify-content: space-between;
+  display: flex;
+  height: $layout-masthead-height;
+  flex-grow: 0;
+  flex-shrink: 0;
+  justify-content: space-between;
+  color: var(--color-text-masthead);
+  background-color: var(--color-bg-masthead);
+
+  .force-hide-search {
+    display: none !important;
+  }
+
+  .force-show-search {
+    display: block !important;
+    width: 100%;
+    max-width: unset;
+  }
+
+  .nav-container {
+    // show nav in masthead only in small screens:
+    display: none;
     color: var(--color-text-masthead);
-    background-color: var(--color-bg-masthead);
 
-    .force-hide-search {
-        display: none !important;
+    .nav-panel {
+      width: $layout-nav-expanded-width;
+      padding: 0;
+      border: 0;
     }
 
-    .force-show-search {
-        display: block !important;
-        width: 100%;
-        max-width: unset;
+    .nav-icon-collapsed {
+      transform: rotate(90deg);
     }
 
-    .nav-container {
-        // show nav in masthead only in small screens:
-        display: none;
-        color: var(--color-text-masthead);
-
-        .nav-panel {
-            width: $layout-nav-expanded-width;
-            padding: 0;
-            border: 0;
-        }
-
-        .nav-icon-collapsed {
-            background-color: var(--color-bg-masthead);
-            color: var(--color-text-masthead);
-            transform: rotate(90deg);
-        }
-
-        .nav-icon-expanded {
-            background-color: var(--color-bg-container-panel);
-            color: var(--color-text-regular);
-            transform: rotate(-90deg);
-
-            :hover {
-                background-color: var(--color-bg-container-panel);
-            }
-        }
-
-        :global(.global-nav-item) {
-            background-color: var(--color-bg-container-panel);
-            color: var(--color-text-regular) !important;
-            border-left: $grid-size solid transparent;
-            @include rtl {
-                border-left: none;
-                border-right: $grid-size solid transparent;
-            }
-
-            &:hover,
-            &:active, &:global(.global-nav-item-active) {
-                background-color: var(--color-bg-masthead-active);
-                border-color: var(--color-border-navbar-selected);
-                @extend %semibold;
-            }
-        }
-
-        :global(.global-nav-item-container-title) {
-            background-color: var(--color-bg-container-panel);
-            color: var(--color-text-rest);
-        }
-
-        @media(max-width: $screen-sm - 1) {
-            width: $layout-nav-collapsed-width;
-            display: initial;
-        }
+    .nav-icon-expanded {
+      transform: rotate(-90deg);
     }
 
-    .masthead-logo {
-        padding: $masthead-logo-padding;
-        height: 100%;
+    :global(.global-nav-item) {
+      background-color: var(--color-bg-container-panel);
+      color: var(--color-text-regular) !important;
+      border-left: $grid-size solid transparent;
+      @include rtl {
+        border-left: none;
+        border-right: $grid-size solid transparent;
+      }
+
+      &:hover,
+      &:active,
+      &:global(.global-nav-item-active) {
+        background-color: var(--color-bg-masthead-active);
+        border-color: var(--color-border-navbar-selected);
+        @extend %semibold;
+      }
     }
 
-    .masthead-branding {
-        width: $masthead-branding-width;
-        height: $layout-masthead-height;
-        display: inline-block;
-        padding: 0px $gutter-normal;
-        line-height: $layout-masthead-height;
-        font-size: var(--font-size-h3);
-        font-weight: bold;
-        min-width: $branding-min-width-size;
+    :global(.global-nav-item-container-title) {
+      background-color: var(--color-bg-container-panel);
+      color: var(--color-text-rest);
+    }
 
-        @media(max-width: $screen-md - 1) {
+    @media (max-width: $screen-sm - 1) {
+      width: $layout-nav-collapsed-width;
+      display: initial;
+    }
+  }
+
+  .masthead-logo {
+    height: 100%;
+    padding: $gutter-xxsmall 0 $gutter-xxsmall $gutter-xsmall;
+
+    @include rtl {
+      padding: $gutter-xxsmall $gutter-xsmall $gutter-xxsmall $gutter-xxsmall;
+    }
+  }
+
+  .masthead-branding {
+    width: $masthead-branding-width;
+    height: $layout-masthead-height;
+    display: inline-block;
+    padding: 0px $gutter-normal;
+    line-height: $layout-masthead-height;
+    font-size: var(--font-size-h3);
+    font-weight: bold;
+    min-width: $branding-min-width-size;
+
+    @media (max-width: $screen-md - 1) {
+      width: 100%;
+    }
+  }
+
+  .search-input-container {
+    @media (max-width: $screen-md - 1) {
+      display: none;
+    }
+  }
+
+  .masthead-toolbar-container {
+    width: calc(100% - #{$masthead-branding-width});
+    text-align: right;
+    position: relative;
+
+    @media (max-width: $screen-md - 1) {
+      width: auto;
+    }
+
+    .masthead-toolbar {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+      list-style-type: none;
+
+      // hide the search-button that control the display of search-bar
+      .search-button {
+        @media (min-width: $screen-md) {
+          display: none;
+        }
+      }
+
+      .more-button {
+        @media (min-width: $screen-sm) {
+          display: none;
+        }
+      }
+
+      // hide the buttons container if the more button is not selected on small screen
+      // we are reusing the se list of item to populate the toolbar btn container and the inline popup
+      .masthead-toolbar-btn-container:not(.selected-more) {
+        @media (max-width: $screen-sm - 1) {
+          display: none;
+        }
+      }
+
+      .masthead-toolbar-menu {
+        padding: 0;
+        background-color: var(--color-bg-container-panel);
+        color: var(--color-text-regular);
+        border: 0;
+
+        ul {
+          list-style: none;
+          padding-left: 0;
+          width: $layout-nav-expanded-width;
+
+          .masthead-toolbar-btn-container {
             width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; // vertically align
+            text-align: left;
+
+            button {
+              width: inherit;
+              justify-content: left;
+              padding: 0 1px;
+            }
+          }
         }
+      }
+    }
+  }
+
+  .masthead-btn {
+    background-color: transparent;
+    width: $layout-masthead-height;
+    height: $layout-masthead-height;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    white-space: nowrap;
+    text-decoration: none;
+    padding: 0;
+    display: inline-flex;
+    cursor: pointer;
+    vertical-align: middle;
+    align-content: center;
+    color: inherit;
+    color: var(--color-text-masthead);
+
+    > div span {
+      color: inherit;
     }
 
-    .search-input-container {
-        @media(max-width: $screen-md - 1) {
-            display: none;
+    &:focus,
+    &:active {
+      outline-offset: -1px;
+      outline: 1px dashed var(--color-outline-masthead);
+    }
+
+    // align all the icons
+    :before {
+      width: var(--icon-size-base);
+      height: var(--icon-size-base);
+      vertical-align: baseline;
+    }
+
+    &.masthead-toolbar-btn {
+      &:hover {
+        background-color: var(--color-bg-masthead-hover);
+      }
+
+      &.selected {
+        background-color: var(--color-bg-container-panel) !important;
+        color: var(--color-text-rest) !important;
+
+        &:focus {
+          outline: 1px dashed var(--color-outline);
         }
+      }
+
+      @media (max-width: $screen-sm + 1) {
+        color: var(--color-text-rest);
+        &:hover {
+          background-color: var(--color-bg-hover);
+        }
+
+        > span {
+          padding: $gutter-small;
+          width: 100%;
+          justify-content: flex-start;
+        }
+      }
+
+      > span > span {
+        // show the label of the action trigger button inside the inline popup of the more button
+        @media (min-width: $screen-sm) {
+          // $screen-sm: 480px;
+          display: none;
+        }
+      }
+    }
+  }
+
+  // RTL
+  @include rtl {
+    .masthead-branding {
+      direction: rtl;
+      margin-left: unset;
+      margin-right: 0;
     }
 
     .masthead-toolbar-container {
-        width: calc(100% - #{$masthead-branding-width});
-        text-align: right;
-        position: relative;
+      direction: rtl;
+      text-align: left;
 
-        @media(max-width: $screen-md - 1) {
-            width: auto;
+      .masthead-toolbar-menu {
+        ul {
+          padding-right: 0;
         }
+      }
 
-        .masthead-toolbar {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: flex-end;
-            list-style-type: none;
-
-            // hide the search-button that control the display of search-bar
-            .search-button {
-                @media(min-width: $screen-md) {
-                    display: none;
-                }
-            }
-
-            .more-button {
-                @media(min-width: $screen-sm) {
-                    display: none;
-                }
-            }
-
-            // hide the buttons container if the more button is not selected on small screen
-            // we are reusing the se list of item to populate the toolbar btn container and the inline popup
-            .masthead-toolbar-btn-container:not(.selected-more) {
-                @media(max-width: $screen-sm - 1) {
-                    display: none;
-                }
-            }
-
-            .masthead-toolbar-menu {
-                padding: 0;
-                background-color: var(--color-bg-container-panel);
-                color: var(--color-text-regular);
-                border: 0;
-
-                ul {
-                    list-style: none;
-                    padding-left: 0;
-                    width: $layout-nav-expanded-width;
-
-                    .masthead-toolbar-btn-container {
-                        width: 100%;
-                        height: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center; // vertically align
-                        text-align: left;
-
-                        button {
-                            width: inherit;
-                            justify-content: left;
-                            padding: 0 1px;
-                        }
-                    }
-                }
-            }
-
-            .masthead-toolbar-btn {
-                width: $layout-masthead-height;
-                height: $layout-masthead-height;
-                justify-content: center;
-                align-items: center;
-                border: none;
-                white-space: nowrap;
-                text-decoration: none;
-                padding: 0;
-                display: inline-flex;
-                cursor: pointer;
-                vertical-align: middle;
-                align-content: center;
-                color: inherit;
-
-                > div span {
-                    color: inherit;
-                }
-
-                &:focus,
-                &:active {
-                    outline-offset: -1px;
-                }
-
-                // align all the icons
-                :before {
-                    width: var(--icon-size-base);
-                    height: var(--icon-size-base);
-                    vertical-align: baseline;
-                }
-
-                span span {
-
-                    // show the label of the action trigger button inside the inline popup of the more button
-                    @media(min-width: $screen-sm) {
-                        // $screen-sm: 480px;
-                        display: none;
-                    }
-                }
-            }
-
-            .masthead-toolbar-btn,
-            .masthead-toolbar-btn>* {
-                &:focus {
-                    outline: 1px dashed var(--color-outline-masthead);
-                    color: var(--color-text-masthead);
-
-                    >* {
-                        @include action-trigger-override();
-                    }
-                }
-
-                &:active {
-                    outline: 1px dashed var(--color-outline-masthead);
-
-                    >* {
-                        @include action-trigger-override();
-                    }
-
-                    &:focus {
-                        outline: 1px dashed var(--color-outline-masthead);
-                        color: var(--color-text-masthead);
-
-                        >* {
-                            @include action-trigger-override();
-                        }
-                    }
-                }
-
-                &:hover {
-                    background-color: var(--color-bg-masthead-hover);
-                }
-
-                &.selected {
-                    background-color: var(--color-bg-container-panel);
-
-                    >* {
-                        background-color: var(--color-bg-container-panel);
-                        color: var(--color-text-rest);
-                    }
-
-                    &:focus {
-                        outline: 1px dashed var(--color-outline);
-
-                        >* {
-                            outline: none;
-                            color: var(--color-text-regular);
-                        }
-                    }
-
-                    &:active>* {
-                        color: var(--color-text-regular);
-                    }
-
-                    &:hover,
-                    &:hover>* {
-                        background-color: var(--color-bg-container-panel);
-
-                        >* {
-                            outline: none;
-                            background-color: var(--color-bg-container-panel);
-                            color: var(--color-text-rest);
-                        }
-                    }
-                }
-            }
-        }
+      .masthead-toolbar-btn {
+        border-right: 1px solid var(--color-border-panel);
+        border-left: 0;
+      }
     }
 
-    // RTL
-    @include rtl {
-        .masthead-branding {
-            direction: rtl;
-            margin-left: unset;
-            margin-right: 0;
+    .user-menu-item {
+      .user-label,
+      .user-items {
+        > * {
+          text-align: right;
         }
-
-        .masthead-toolbar-container {
-            direction: rtl;
-            text-align: left;
-
-            .masthead-toolbar-menu {
-                ul {
-                    padding-right: 0;
-                }
-            }
-
-            .masthead-toolbar-btn {
-                border-right: 1px solid var(--color-border-panel);
-                border-left: 0;
-            }
-        }
-
-
-        .user-menu-item {
-            .user-label,
-            .user-items {
-                >* {
-                    text-align: right;
-                }
-            }
-        }
+      }
     }
+  }
 }
 
 .separator {
-    border-top: 1px solid var(--color-border-panel);
+  border-top: 1px solid var(--color-border-panel);
 }
 
 // MIXIN
 @mixin collapse($count) {
-    $breakpoint: $masthead-collapse-start - $count * $layout-nav-item-height;
+  $breakpoint: $masthead-collapse-start - $count * $layout-nav-item-height;
 
-    @media (min-width: $breakpoint + 1) {
-        .collapse-#{$count}-inverse {
-            display: none;
-        }
+  @media (min-width: $breakpoint + 1) {
+    .collapse-#{$count}-inverse {
+      display: none;
     }
+  }
 
-    @media (max-width: $breakpoint) {
-        .collapse-#{$count} {
-            display: none;
-        }
+  @media (max-width: $breakpoint) {
+    .collapse-#{$count} {
+      display: none;
     }
+  }
 }
 
 @for $i from 0 through 10 {
-    @include collapse($i);
+  @include collapse($i);
 }
 
 @media (max-width: $masthead-application-breakpoint) {
-    .masthead-branding *+* {
-        display: none;
-    }
+  .masthead-branding * + * {
+    display: none;
+  }
 }

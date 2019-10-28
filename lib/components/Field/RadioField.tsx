@@ -1,10 +1,8 @@
 import * as React from 'react';
-import * as classNames from 'classnames/bind';
 import {OptionAttr, mergeAttributeObjects} from '../../Attributes';
 import {MethodNode, FormOption} from '../../Common';
 import {RadioInput, RadioInputAttributes} from '../Input/RadioInput';
 import {FormField, FormFieldAttributes} from './FormField';
-const css = classNames.bind(require('./Field.module.scss'));
 
 export interface RadioFieldType {}
 
@@ -33,6 +31,8 @@ export interface RadioFieldProps extends React.Props<RadioFieldType> {
     error?: MethodNode;
     /** Error HTML title in case of overflow */
     errorTitle?: string;
+    /** Set error field to display: none */
+    hideError?: boolean;
 
     /** Allow radio buttons to show up in columns */
     columns?: boolean;
@@ -136,6 +136,7 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
             label={props.label}
             error={props.error}
             errorTitle={props.errorTitle}
+            hideError={props.hideError}
             loading={props.loading}
             required={props.required}
             tooltip={props.tooltip}

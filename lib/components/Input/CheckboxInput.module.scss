@@ -32,7 +32,7 @@ $outline-focus-border-width: 1px;
 
 .checkbox-container:hover {
     .checkbox-button {
-        border: 1px solid var(--color-border-checkbox-hover);
+        border: 1px solid var(--color-border-checkbox-hover) !important;
     }
     &:not(.disabled) .checkbox-checkmark {
         display: inline-block;

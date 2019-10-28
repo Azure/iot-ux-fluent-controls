@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
 import {TimeInput, TimeInputAttributes} from './TimeInput';
 import {FormField, FormFieldAttributes} from '../Field/FormField';
@@ -33,6 +32,8 @@ export interface TimeFieldProps extends React.Props<TimeFieldType> {
     error?: MethodNode;
     /** Error HTML title in case of overflow */
     errorTitle?: string;
+    /** Set error field to display: none */
+    hideError?: boolean;
 
     /** Disable HTML input element */
     disabled?: boolean;
@@ -67,6 +68,7 @@ export const TimeField: React.StatelessComponent<TimeFieldProps> = (props: TimeF
             label={props.label}
             error={props.error}
             errorTitle={props.errorTitle}
+            hideError={props.hideError}
             loading={props.loading}
             required={props.required}
             className={props.className}

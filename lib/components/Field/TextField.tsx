@@ -1,10 +1,7 @@
 import * as React from 'react';
-import * as classNames from 'classnames/bind';
 import {MethodNode} from '../../Common';
-import {Icon, IconSize, IconBackground} from '../Icon';
 import {TextInput, TextInputAttributes} from '../Input/TextInput';
 import {FormField, FormFieldAttributes} from './FormField';
-const css = classNames.bind(require('./Field.module.scss'));
 
 export interface TextFieldType {}
 
@@ -28,6 +25,8 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     error?: MethodNode;
     /** Error HTML title in case of overflow */
     errorTitle?: string;
+    /** Set error field to display: none */
+    hideError?: boolean;
 
     /** Node to draw to the left of the input box */
     prefix?: MethodNode;
@@ -107,6 +106,7 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
             label={props.label}
             error={props.error}
             errorTitle={props.errorTitle}
+            hideError={props.hideError}
             loading={props.loading}
             required={props.required}
             tooltip={props.tooltip}

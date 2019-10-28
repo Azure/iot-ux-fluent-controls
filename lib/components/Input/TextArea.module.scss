@@ -13,6 +13,15 @@ $line-height: 5*$grid-size;
         left: 0px;
         right: 0px;
         visibility: hidden;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+        /** 
+         * padding-right is slightly larger than the scrollbar width. If the
+         * ghost text box doesn't account for these it won't have a long enough
+         * height to account for all of the text. It instead gets squished down
+         * more by the scroll bar in the real text area.
+         */
+        padding-right: 6*$grid-size;
     }
 }
 

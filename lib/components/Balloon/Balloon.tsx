@@ -77,15 +77,6 @@ export interface BalloonState {
     align?: BalloonAlignment;
 }
 
-const compareClientRect = (first: ClientRect, second: ClientRect): boolean => {
-    return (
-        first.left === second.left &&
-        first.right === second.right &&
-        first.top === second.top &&
-        first.bottom === second.bottom
-    );
-};
-
 /**
  * SimpleBalloon shows tooltip (with HTML) on hover over child
  *
@@ -141,14 +132,14 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         return false;
     }
 
-    onMouseEnter = (event) => {
+    onMouseEnter = () => {
         this.setState({
             hovered: true,
             visible: true
         });
     }
 
-    onMouseLeave = (event) => {
+    onMouseLeave = () => {
         this.setState({
             hovered: false,
             visible: this.props.expanded
@@ -215,7 +206,7 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
                 }
                 visible={this.state.visible}
                 className={className}
-                positionClassNames={this.props.autoPosition ? positions : []}
+                positionClassNames={autoPosition ? positions : []}
                 onMouseEnter={this.onMouseEnter}
                 onMouseLeave={this.onMouseLeave}
                 attr={{

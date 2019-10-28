@@ -65,20 +65,18 @@ export function Shell({ theme, isRtl, masthead, navigation, children, onClick }:
 
     // @todo - remove outer div with theme-#{shellTheme.base}
     return (
-        <div className={css('theme-' + shellTheme.base)}>
-            <ThemeProvider theme={shellTheme}>
-                <div className={css('shell', { rtl: isRtl })} onClick={onClick}>
-                    {masthead && <Masthead navigation={navigation} {...masthead} />}
-                    <div className={css('nav-and-workspace')}>
-                        {navigation && <Navigation {...navigation} />}
-                        <div className={css('workspace')}>
-                            {children}
-                        </div>
-                        <ContextPanelRoot />
+        <ThemeProvider theme={shellTheme}>
+            <div className={css('shell', { rtl: isRtl })} onClick={onClick}>
+                {masthead && <Masthead navigation={navigation} {...masthead} />}
+                <div className={css('nav-and-workspace')}>
+                    {navigation && <Navigation {...navigation} />}
+                    <div className={css('workspace')}>
+                        {children}
                     </div>
+                    <ContextPanelRoot />
                 </div>
-            </ThemeProvider>
-        </div>
+            </div>
+        </ThemeProvider>
     );
 }
 
