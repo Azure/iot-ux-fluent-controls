@@ -51,6 +51,9 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
     tooltip?: MethodNode;
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
+    
+    /** Callback for the blur event */
+    onBlur?: React.FocusEventHandler<HTMLInputElement>;
 
     /** Classname to append to top level element */
     className?: string;
@@ -128,6 +131,7 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
                 disabled={props.disabled}
                 readOnly={props.readOnly}
                 onChange={props.onChange}
+                onBlur={props.onBlur}
                 className={props.inputClassName}
                 autoFocus={props.autoFocus}
                 required={props.required}
