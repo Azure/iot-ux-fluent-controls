@@ -38,6 +38,9 @@ export interface TextAreaFieldProps extends React.Props<TextAreaFieldType> {
     tooltip?: MethodNode;
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
+    
+    /** Callback for the blur event */
+    onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
 
     /** Classname to append to top level element */
     className?: string;
@@ -99,6 +102,7 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
                 disabled={props.disabled}
                 readOnly={props.readOnly}
                 onChange={props.onChange}
+                onBlur={props.onBlur}
                 className={props.inputClassName}
                 autogrow={props.autogrow}
                 autoFocus={props.autoFocus}
