@@ -47,7 +47,7 @@ function Panel({ header, children, footer, onClose, attr }: ContextPanelProperti
             <div className={cx('header')}>
                 {header && <Attr.h2 
                     id='context-panel-title' 
-                    className={cx('inline-text-overflow')} 
+                    className={cx('title', 'inline-text-overflow')} 
                     attr={attr && attr.header}
                     >
                     {header}
