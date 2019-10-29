@@ -44,19 +44,20 @@ function Panel({ header, children, footer, onClose, attr }: ContextPanelProperti
             className={cx('panel')} 
             attr={attr && attr.container}
         >
-            {onClose && <ActionTriggerButton
-                icon='cancel'
-                className={cx('close-button')}
-                onClick={onClose}
-                attr={attr && attr.closeButton}
-            />}
-            {header && <Attr.h2 
-                id='context-panel-title' 
-                className={cx('title', 'inline-text-overflow')} 
-                attr={attr && attr.header}
-                >
-                {header}
-            </Attr.h2>}
+            <div className={cx('header')}>
+                {header && <Attr.h2 
+                    id='context-panel-title' 
+                    className={cx('title', 'inline-text-overflow')} 
+                    attr={attr && attr.header}
+                    >
+                    {header}
+                </Attr.h2>}
+                {onClose && <ActionTriggerButton
+                    icon='cancel'
+                    onClick={onClose}
+                    attr={attr && attr.closeButton}
+                />}
+            </div>
             <Attr.div id='context-panel-content' className={cx('content')} attr={attr && attr.content}>
                 {children}
             </Attr.div>
