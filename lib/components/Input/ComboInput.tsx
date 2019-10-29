@@ -104,6 +104,9 @@ export interface ComboInputProps extends React.Props<ComboInputType> {
 
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string | FormOption) => void;
+    
+    /** Callback for the blur event */
+    onBlur?: React.FocusEventHandler<HTMLInputElement>;
 
     /** Class to append to top level element */
     className?: string;
@@ -251,6 +254,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                     if (this.state.visible && this.currentOption) {
                         this.props.onChange(this.currentOption);
                         this.hideDropdown();
+                        this.inputElement.blur();
                     } else {
                         this.showDropdown();
                     }
@@ -495,6 +499,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         value={inputValue}
                         className={inputClassName}
                         onChange={event => this.onInputChange(event)}
+                        onBlur={this.props.onBlur}
                         placeholder={this.props.placeholder}
                         onFocus={() => this.onFocus()}
                         onKeyDown={event => this.onKeyDown(event)}

@@ -36,6 +36,9 @@ export interface TextAreaProps extends React.Props<TextAreaType> {
 
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
+    
+    /** Callback for the blur event */
+    onBlur?: React.FocusEventHandler<HTMLTextAreaElement>;
 
     /** Class to append to top level element */
     className?: string;
@@ -99,6 +102,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     value={value}
                     className={css('textarea', {'error': this.props.error})}
                     onChange={() => this.props.onChange(this.textarea.value)}
+                    onBlur={this.props.onBlur}
                     disabled={this.props.disabled}
                     readOnly={this.props.readOnly}
                     placeholder={this.props.placeholder}

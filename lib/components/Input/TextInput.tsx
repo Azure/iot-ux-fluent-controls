@@ -55,6 +55,9 @@ export interface TextInputProps extends React.Props<TextInputType> {
 
     /** Callback for HTML input element `onChange` events */
     onChange: (newValue: string) => void;
+    
+    /** Callback for the blur event */
+    onBlur?: React.FocusEventHandler<HTMLInputElement>;
 
     /** Class to append to top level element */
     className?: string;
@@ -154,6 +157,7 @@ export class TextInput extends React.PureComponent<TextInputProps> {
                         value={this.props.value == null ? '' : this.props.value}
                         className={inputClassName}
                         onChange={this.onChange}
+                        onBlur={this.props.onBlur}
                         placeholder={this.props.placeholder}
                         required={this.props.required}
                         disabled={this.props.disabled}
