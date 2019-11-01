@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, Elements as Attr} from '../../Attributes';
+import { Icon, IconSize } from '../Icon';
 const css = classNames.bind(require('./Field.module.scss'));
 
 export interface FormErrorType {}
@@ -32,10 +33,15 @@ export const FormError: React.StatelessComponent<FormErrorProps> = (props: FormE
             className={css('field-error', {
                 'hidden': props.hidden
             }, props.className)}
-            title={props.title}
             attr={props.attr.container}
         >
-            {props.children}
+            {props.children 
+                ? <>
+                    <Icon icon='errorBadge' size={IconSize.small} className={css('error-badge')} />
+                    <span title={props.title} className={css('inline-text-overflow')}>{props.children}</span>
+                </>
+                : null
+            }
         </Attr.div>
     );
 };
