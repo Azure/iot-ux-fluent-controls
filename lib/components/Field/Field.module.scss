@@ -76,7 +76,7 @@ $line-height: 5*$grid-size;
 .field-error {
     @include md-box(block, ellipsis);
     height: $form-error-height;
-    width: 100%;
+    width: fit-content;
     color: var(--color-text-error);
 
     display: flex;

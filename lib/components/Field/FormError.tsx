@@ -15,6 +15,8 @@ export interface FormErrorProps extends React.Props<FormErrorType> {
     title?: string;
     /** Hide error */
     hidden?: boolean;
+    /** Hide error badge icon */
+    hideIcon?: boolean;
 
     /** Classname to append to top level element */
     className?: string;
@@ -31,14 +33,15 @@ export const FormError: React.StatelessComponent<FormErrorProps> = (props: FormE
     return (
         <Attr.div
             className={css('field-error', {
-                'hidden': props.hidden
+                hidden: props.hidden
             }, props.className)}
+            title={props.title}
             attr={props.attr.container}
         >
             {props.children 
                 ? <>
-                    <Icon icon='errorBadge' size={IconSize.small} className={css('error-badge')} />
-                    <span title={props.title} className={css('inline-text-overflow')}>{props.children}</span>
+                    {!props.hideIcon && <Icon icon='errorBadge' size={IconSize.small} className={css('error-badge')} />}
+                    <span className={css('inline-text-overflow')}>{props.children}</span>
                 </>
                 : null
             }
