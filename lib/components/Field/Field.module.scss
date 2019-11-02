@@ -79,11 +79,23 @@ $line-height: 5*$grid-size;
     width: 100%;
     color: var(--color-text-error);
 
+    display: flex;
+    flex-direction: row;
+
     font-family: var(--font-family-default);
     font-size: var(--font-size-small);
     line-height: $line-height;
 
     &.hidden {
         display: none;
+    }
+}
+
+.error-badge {
+    margin-right: $grid-size;
+
+    @include rtl {
+        margin-right: unset;
+        margin-left: $grid-size;
     }
 }
