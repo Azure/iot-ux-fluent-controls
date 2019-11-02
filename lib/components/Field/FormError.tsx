@@ -35,12 +35,11 @@ export const FormError: React.StatelessComponent<FormErrorProps> = (props: FormE
             className={css('field-error', {
                 hidden: props.hidden
             }, props.className)}
-            title={props.title}
             attr={props.attr.container}
         >
             {props.children 
                 ? <>
-                    {!props.hideIcon && <Icon icon='errorBadge' size={IconSize.small} className={css('error-badge')} />}
+                    {!props.hideIcon && <Icon icon='errorBadge' size={IconSize.small} className={css('error-badge')} attr={{ container: { title: props.title }}} />}
                     <span className={css('inline-text-overflow')}>{props.children}</span>
                 </>
                 : null
