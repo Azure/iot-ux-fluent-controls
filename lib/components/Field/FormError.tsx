@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, Elements as Attr} from '../../Attributes';
+import { Icon, IconSize } from '../Icon';
 const css = classNames.bind(require('./Field.module.scss'));
 
 export interface FormErrorType {}
@@ -14,6 +15,8 @@ export interface FormErrorProps extends React.Props<FormErrorType> {
     title?: string;
     /** Hide error */
     hidden?: boolean;
+    /** Hide error badge icon */
+    hideIcon?: boolean;
 
     /** Classname to append to top level element */
     className?: string;
@@ -30,12 +33,17 @@ export const FormError: React.StatelessComponent<FormErrorProps> = (props: FormE
     return (
         <Attr.div
             className={css('field-error', {
-                'hidden': props.hidden
+                hidden: props.hidden
             }, props.className)}
-            title={props.title}
             attr={props.attr.container}
         >
-            {props.children}
+            {props.children 
+                ? <>
+                    {!props.hideIcon && <Icon icon='errorBadge' size={IconSize.small} className={css('error-badge')} attr={{ container: { title: props.title }}} />}
+                    <span className={css('inline-text-overflow')}>{props.children}</span>
+                </>
+                : null
+            }
         </Attr.div>
     );
 };

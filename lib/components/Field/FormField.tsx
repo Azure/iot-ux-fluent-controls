@@ -158,6 +158,7 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
                 <FormError
                     className={props.errorClassName}
                     hidden={props.hideError}
+                    hideIcon={props.loading}
                     title={props.errorTitle}
                     attr={{container: {
                         'aria-live': 'polite', // this tags are for screen readers to read the error when it appears
