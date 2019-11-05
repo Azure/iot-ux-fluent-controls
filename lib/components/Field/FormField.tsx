@@ -28,8 +28,6 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     label?: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
-    /** Error HTML title in case of overflow */
-    errorTitle?: string;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
     /** Appends a red asterisk to the label if it is a string */
@@ -159,7 +157,7 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
                     className={props.errorClassName}
                     hidden={props.hideError}
                     hideIcon={props.loading}
-                    title={props.errorTitle}
+                    title={typeof error === 'string' && error}
                     attr={{container: {
                         'aria-live': 'polite', // this tags are for screen readers to read the error when it appears
                         'aria-atomic': 'true',

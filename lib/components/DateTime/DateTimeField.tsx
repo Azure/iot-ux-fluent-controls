@@ -28,9 +28,6 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     label?: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
-    /** Error HTML title in case of overflow */
-    errorTitle?: string;
-
     /** Date format in text input */
     format?: DateFormat;
     /** Tab index for calendar control */
@@ -357,7 +354,6 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                 name={this.props.name}
                 label={this.props.label}
                 error={this.props.error}
-                errorTitle={this.props.errorTitle}
                 loading={this.props.loading}
                 required={this.props.required}
                 hideError={this.props.hideError}
