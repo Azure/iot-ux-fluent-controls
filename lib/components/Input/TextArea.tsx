@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, PreProps, TextAreaProps, Elements as Attr} from '../../Attributes';
+import {DivProps, PreProps, TextAreaProps as TextAreaAttr, Elements as Attr} from '../../Attributes';
 import {autoFocusRef} from '../../Common';
 const css = classNames.bind(require('./TextArea.module.scss'));
 const twoLineHeight = 52;
@@ -9,7 +9,7 @@ export interface TextAreaType {}
 
 export interface TextAreaAttributes {
     container?: DivProps;
-    textarea?: TextAreaProps;
+    textarea?: TextAreaAttr;
     pre?: PreProps;
 }
 
