@@ -3,7 +3,7 @@ import * as classNames from 'classnames/bind';
 import {DivProps, LabelProps, mergeAttributeObjects, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconAttributes} from '../Icon';
-import {Balloon, BalloonAlignment, BalloonPosition, BalloonAttributes} from '../Balloon';
+import {Balloon, BalloonAttributes} from '../Balloon';
 const css = classNames.bind(require('./Field.module.scss'));
 
 export interface FormLabelType {}
@@ -36,23 +36,6 @@ export interface FormLabelProps extends React.Props<FormLabelType> {
      */
     balloon?: MethodNode;
     /**
-     * Where to display Balloon relative to child element
-     *
-     * `BalloonPosition.[Top | Bottom | Left | Right]`
-     *
-     * Default: BalloonPosition.Top
-     */
-    balloonPosition?: BalloonPosition;
-    /**
-     * Alignment of Balloon relative to child
-     *
-     * `BalloonAlignment.[Start | Center | End]`
-     *
-     * Default: BalloonAllignment.Center
-     */
-    balloonAlignment?: BalloonAlignment;
-
-    /**
      * force balloon to be visible
      */
     balloonExpanded?: boolean;
@@ -79,16 +62,12 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
     const balloon = props.balloon
         ? <Balloon
             tooltip={props.balloon}
-            align={props.balloonAlignment || BalloonAlignment.Start}
-            position={props.balloonPosition || BalloonPosition.Top}
             className={css('label-icon')}
             multiline
             expanded={props.balloonExpanded}
             attr={mergeAttributeObjects(
                 props.attr.balloon,
-                {balloon: {
-                    className: css('label-balloon'),
-                },
+                {
                 balloonContainer: {
                     role: 'tooltip',
                     'aria-live': 'polite',

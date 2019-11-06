@@ -5,21 +5,6 @@ import {Dropdown} from '../Dropdown';
 import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./Balloon.module.scss'));
 
-export interface BalloonType {}
-
-export enum BalloonPosition {
-    Top = 1,
-    Bottom,
-    Left,
-    Right
-}
-
-export enum BalloonAlignment {
-    Start = 1,
-    Center,
-    End
-}
-
 export interface BalloonAttributes {
     container?: SpanProps;
     balloonContainer?: DivProps;
@@ -27,38 +12,16 @@ export interface BalloonAttributes {
     balloonContent?: SpanProps;
 }
 
-export interface BalloonProps extends React.Props<BalloonType> {
+export interface BalloonProps {
     /** Contents of balloon */
     tooltip: MethodNode;
 
-    /**
-     * Where to display Balloon relative to child element
-     *
-     * `BalloonPosition.[Top | Bottom | Left | Right]`
-     *
-     * Default: BalloonPosition.Top
-     */
-    position?: BalloonPosition;
-    /**
-     * Alignment of Balloon relative to child
-     *
-     * `BalloonAlignment.[Start | Center | End]`
-     *
-     * Default: BalloonAllignment.Center
-     */
-    align?: BalloonAlignment;
     /**
      * Allow Balloon contents to span multiple lines
      *
      * default: true
      */
     multiline?: boolean;
-    /**
-     * Allow balloon to reposition itself if it isn't completely visible
-     *
-     * default: true
-     */
-    autoPosition?: boolean;
 
     /** Classname to append to top level element */
     className?: string;
@@ -73,8 +36,6 @@ export interface BalloonProps extends React.Props<BalloonType> {
 export interface BalloonState {
     hovered?: boolean;
     visible?: boolean;
-    position?: BalloonPosition;
-    align?: BalloonAlignment;
 }
 
 /**
@@ -88,8 +49,6 @@ export interface BalloonState {
 export class Balloon extends React.Component<BalloonProps, BalloonState> {
     static defaultProps = {
         tooltip: undefined,
-        position: BalloonPosition.Top,
-        align: BalloonAlignment.Center,
         expanded: false,
         multiline: true,
         autoPosition: true,
@@ -106,16 +65,12 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         this.state = {
             hovered: false,
             visible: this.props.expanded,
-            position: this.props.position,
-            align: this.props.align
         };
     }
 
     componentWillReceiveProps(newProps: BalloonProps) {
         this.setState({
             visible: this.state.hovered || newProps.expanded,
-            position: newProps.position,
-            align: newProps.align
         });
     }
 
@@ -124,9 +79,6 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
             return true;
         }
         if (this.state.visible !== newState.visible) {
-            return true;
-        }
-        if (this.state.position !== newState.position || this.state.align !== newState.align) {
             return true;
         }
         return false;
@@ -146,57 +98,20 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         });
     }
 
-    getClassName(reverse: boolean): string {
-        let position, reversePosition;
-        switch (this.props.position) {
-            case BalloonPosition.Bottom:
-                position = 'bottom';
-                reversePosition = 'top';
-                break;
-            case BalloonPosition.Left:
-                position = 'left';
-                reversePosition = 'right';
-                break;
-            case BalloonPosition.Right:
-                position = 'right';
-                reversePosition = 'left';
-                break;
-            default:
-                position = 'top';
-                reversePosition = 'bottom';
-        }
-
-        let align;
-        switch (this.props.align) {
-            case BalloonAlignment.Start:
-                align = 'start';
-                break;
-            case BalloonAlignment.End:
-                align = 'end';
-                break;
-            default:
-                align = 'center';
-        }
-
-        return css(`${reverse ? reversePosition : position}-${align}`);
-    }
-
     render() {
         let {
             balloonClassName,
-            autoPosition,
             multiline,
             className
         } = this.props;
 
+
         balloonClassName = css(
             'balloon-dropdown',
-            this.getClassName(false),
             balloonClassName
         );
         className = css('balloon-container', className);
         const innerClassName = css('balloon-inner-container', { multiline });
-        const positions = [this.getClassName(false), this.getClassName(true)];
         return (
             <Dropdown
                 dropdown={
@@ -205,12 +120,13 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
                     </Attr.span>
                 }
                 visible={this.state.visible}
+                // visible={true}
                 className={className}
-                positionClassNames={autoPosition ? positions : []}
                 onMouseEnter={this.onMouseEnter}
                 onMouseLeave={this.onMouseLeave}
+                showArrow={true}
                 attr={{
-                    container: this.props.attr.container,
+                    host: this.props.attr.container,
                     dropdownContainer: this.props.attr.balloonContainer,
                     dropdown: mergeAttributes(
                         this.props.attr.balloon,

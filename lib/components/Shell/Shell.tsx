@@ -63,7 +63,6 @@ export function Shell({ theme, isRtl, masthead, navigation, children, onClick }:
         document.documentElement.setAttribute('theme', shellTheme.base);
     }, [shellTheme.base]);
 
-    // @todo - remove outer div with theme-#{shellTheme.base}
     return (
         <ThemeProvider theme={shellTheme}>
             <div className={css('shell', { rtl: isRtl })} onClick={onClick}>
