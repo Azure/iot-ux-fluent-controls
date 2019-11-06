@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, SpanProps, mergeAttributes, Elements as Attr} from '../../Attributes';
-import {Dropdown} from '../Dropdown';
+import {Dropdown, DropdownPosition, DropdownAlignment} from '../Dropdown';
 import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./Balloon.module.scss'));
 
@@ -30,7 +30,15 @@ export interface BalloonProps {
     /** Forces the balloon to be expanded */
     expanded?: boolean;
 
+    positionHint?: DropdownPosition;
+    alignmentHint?: DropdownAlignment;
+
     attr?: BalloonAttributes;
+    
+    /**
+     * Element for which the balloon will be position relative to.
+     */
+    children: React.ReactNode;
 }
 
 export interface BalloonState {
@@ -120,11 +128,13 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
                     </Attr.span>
                 }
                 visible={this.state.visible}
-                // visible={true}
                 className={className}
                 onMouseEnter={this.onMouseEnter}
                 onMouseLeave={this.onMouseLeave}
                 showArrow={true}
+                positionHint={this.props.positionHint}
+                alignmentHint={this.props.alignmentHint}
+                dropdownSeparation={1}
                 attr={{
                     host: this.props.attr.container,
                     dropdownContainer: this.props.attr.balloonContainer,

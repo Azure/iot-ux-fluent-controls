@@ -4,6 +4,7 @@ import {DivProps, LabelProps, mergeAttributeObjects, Elements as Attr} from '../
 import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconAttributes} from '../Icon';
 import {Balloon, BalloonAttributes} from '../Balloon';
+import { DropdownPosition, DropdownAlignment } from '../Dropdown';
 const css = classNames.bind(require('./Field.module.scss'));
 
 export interface FormLabelType {}
@@ -36,6 +37,18 @@ export interface FormLabelProps extends React.Props<FormLabelType> {
      */
     balloon?: MethodNode;
     /**
+     * Default position of Balloon relative to child element
+     *
+     * `[Top | Bottom | Left | Right]`
+     */
+    balloonPositionHint?: DropdownPosition;
+    /**
+     * Default alignment of Balloon relative to child
+     *
+     * `[Start | Center | End]`
+     */
+    balloonAlignmentHint?: DropdownAlignment;
+    /**
      * force balloon to be visible
      */
     balloonExpanded?: boolean;
@@ -65,6 +78,8 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
             className={css('label-icon')}
             multiline
             expanded={props.balloonExpanded}
+            positionHint={props.balloonPositionHint}
+            alignmentHint={props.balloonAlignmentHint}
             attr={mergeAttributeObjects(
                 props.attr.balloon,
                 {

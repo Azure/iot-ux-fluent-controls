@@ -13,10 +13,13 @@ const ArrowMargin = 12; // $gutter-xsmall
 export enum DropdownPosition {
     Top = 'top',
     Bottom = 'bottom',
+    Left = 'left',
+    Right = 'right'
 }
 
 export enum DropdownAlignment {
     Start = 'start',
+    Center = 'center',
     End = 'end'
 }
 
@@ -53,7 +56,22 @@ export interface DropdownProps {
     onMouseEnter?: (event) => void;
     onMouseLeave?: (event) => void;
 
+    /**
+     * Default position of dropdown relative to child element
+     *
+     * `[Top | Bottom | Left | Right]`
+     *
+     * Default: Top
+     */
     positionHint?: DropdownPosition;
+
+    /**
+     * Default alignment of dropdown relative to child
+     *
+     * `[Start | Center | End]`
+     *
+     * Default: Start
+     */
     alignmentHint?: DropdownAlignment;
 
     outerEvents?: string[];
@@ -64,6 +82,11 @@ export interface DropdownProps {
 
     attr?: DropdownAttributes;
 
+    /**
+     * Element that will be hosting the dropdown. The dropdown
+     * will be positioned relative to this element.
+     * This usually means the element that triggers the popup to appear
+     */
     children: React.ReactNode;
 }
 
@@ -104,50 +127,99 @@ export const Dropdown = React.memo(({ className, onMouseEnter, onMouseLeave, att
             dropdownRef.current.classList.remove(css(`${dropdownPosition.current}-${dropdownAlignment.current}`));
 
             // Reset to defaults so we always prefer default positioning over last positioning
-            dropdownPosition.current = positionHint || DropdownPosition.Top;
-            dropdownAlignment.current = alignmentHint || DropdownAlignment.Start;
+            dropdownPosition.current = positionHint || DropdownPosition.Left;
+            dropdownAlignment.current = alignmentHint || DropdownAlignment.Center;
 
             const hostRect = hostRef.current.getBoundingClientRect();
             const dropdownRect = dropdownRef.current.getBoundingClientRect();
 
-            const horizontalArrowOffset = showArrow ? ArrowSize / 2 + ArrowMargin - hostRect.width / 2 : 0;
-            const verticalArrowOffset = showArrow ? ArrowSize / 2 : 0;
+            const positionArrowOffset = showArrow ? ArrowSize / 2 : 0;
             const marginOffset = dropdownSeparation || 0;
 
-            const dropdownLeftForStart = hostRect.left - horizontalArrowOffset - marginOffset;
-            const dropdownLeftForEnd = hostRect.right - dropdownRect.width + horizontalArrowOffset + marginOffset;
+            // Don't mix top/bottom and left/right
+            // When the user has poistion top or bottom, just switch the dropdown arround those positions
+            if (dropdownPosition.current === DropdownPosition.Top || dropdownPosition.current === DropdownPosition.Bottom) {
+                const alignmentArrowOffset = showArrow ? ArrowSize / 2 + ArrowMargin - hostRect.width / 2 : 0;
+                const dropdownLeftForStart = hostRect.left - alignmentArrowOffset;
+                const dropdownLeftForCenter = hostRect.left - dropdownRect.width / 2 + hostRect.width / 2;
+                const dropdownLeftForEnd = hostRect.right - dropdownRect.width + alignmentArrowOffset;
 
-            if (dropdownAlignment.current === DropdownAlignment.Start && dropdownLeftForStart + dropdownRect.width <= window.innerWidth) {
-                containerRef.current.style.left = `${dropdownLeftForStart}px`;
-            } else if (dropdownAlignment.current === DropdownAlignment.End && hostRect.left - dropdownLeftForEnd > 0) {
-                containerRef.current.style.left = `${dropdownLeftForEnd}px`;
-            } else {
-                if (dropdownLeftForStart + dropdownRect.width <= window.innerWidth) {
+                // We never try to reposition to center, but if the user hinted center we should always try to get that alignment if possible
+                if (dropdownAlignment.current === DropdownAlignment.Start && dropdownLeftForStart + dropdownRect.width <= window.innerWidth) {
                     containerRef.current.style.left = `${dropdownLeftForStart}px`;
-                    dropdownAlignment.current = DropdownAlignment.Start;
-                }
-                else {
+                } else if (dropdownAlignment.current === DropdownAlignment.Center && dropdownLeftForCenter > 0 && dropdownLeftForCenter + dropdownRect.width <= window.innerWidth) {
+                   containerRef.current.style.left = `${dropdownLeftForCenter}px`; 
+                } else if (dropdownAlignment.current === DropdownAlignment.End && hostRect.left - dropdownLeftForEnd > 0) {
                     containerRef.current.style.left = `${dropdownLeftForEnd}px`;
-                    dropdownAlignment.current = DropdownAlignment.End;
-                }
-            }
-
-            const dropdownTopForBottom = hostRect.bottom + verticalArrowOffset + marginOffset;
-            const dropdownTopForTop = hostRect.top - dropdownRect.height - verticalArrowOffset - marginOffset;
-
-            // Try to keep the same position but update the top
-            if (dropdownPosition.current === DropdownPosition.Bottom && dropdownTopForBottom + dropdownRect.height <= window.innerHeight) {
-                containerRef.current.style.top = `${dropdownTopForBottom}px`;
-            } else if (dropdownPosition.current === DropdownPosition.Top && dropdownTopForTop > 0) {
-                containerRef.current.style.top = `${dropdownTopForTop}px`;
-            } else {
-                // We need to update the position
-                if (dropdownTopForBottom + dropdownRect.height <= window.innerHeight) {
-                    containerRef.current.style.top = `${dropdownTopForBottom}px`;
-                    dropdownPosition.current = DropdownPosition.Bottom;
                 } else {
+                    if (dropdownLeftForStart + dropdownRect.width <= window.innerWidth) {
+                        containerRef.current.style.left = `${dropdownLeftForStart}px`;
+                        dropdownAlignment.current = DropdownAlignment.Start;
+                    }
+                    else {
+                        containerRef.current.style.left = `${dropdownLeftForEnd}px`;
+                        dropdownAlignment.current = DropdownAlignment.End;
+                    }
+                }
+
+                const dropdownTopForBottom = hostRect.bottom + positionArrowOffset + marginOffset;
+                const dropdownTopForTop = hostRect.top - dropdownRect.height - positionArrowOffset - marginOffset;
+
+                // Try to keep the same position but update the top
+                if (dropdownPosition.current === DropdownPosition.Bottom && dropdownTopForBottom + dropdownRect.height <= window.innerHeight) {
+                    containerRef.current.style.top = `${dropdownTopForBottom}px`;
+                } else if (dropdownPosition.current === DropdownPosition.Top && dropdownTopForTop > 0) {
                     containerRef.current.style.top = `${dropdownTopForTop}px`;
-                    dropdownPosition.current = DropdownPosition.Top;
+                } else {
+                    // We need to update the position
+                    if (dropdownTopForBottom + dropdownRect.height <= window.innerHeight) {
+                        containerRef.current.style.top = `${dropdownTopForBottom}px`;
+                        dropdownPosition.current = DropdownPosition.Bottom;
+                    } else {
+                        containerRef.current.style.top = `${dropdownTopForTop}px`;
+                        dropdownPosition.current = DropdownPosition.Top;
+                    }
+                }
+            } else {
+                const alignmentArrowOffset = showArrow ? ArrowSize / 2 + ArrowMargin : 0;
+                const dropdownTopForStart = hostRect.top + hostRect.height / 2 - alignmentArrowOffset - marginOffset;
+                const dropdownTopForCenter = hostRect.top + hostRect.height / 2 - dropdownRect.height / 2 - marginOffset;
+                const dropdownTopForEnd = hostRect.bottom - dropdownRect.height - hostRect.height / 2 + alignmentArrowOffset - marginOffset;
+
+                if (dropdownAlignment.current === DropdownAlignment.Start && dropdownTopForStart + dropdownRect.height <= window.innerHeight) {
+                    containerRef.current.style.top = `${dropdownTopForStart}px`;
+                } else if (dropdownAlignment.current === DropdownAlignment.Center && dropdownTopForCenter > 0 && dropdownTopForCenter + dropdownRect.height <= window.innerHeight) {
+                    containerRef.current.style.top = `${dropdownTopForCenter}px`;
+                } else if (dropdownAlignment.current === DropdownAlignment.End && dropdownTopForEnd > 0) {
+                    containerRef.current.style.top = `${dropdownTopForEnd}px`;
+                } else {
+                    if (dropdownTopForStart + dropdownRect.height <= window.innerHeight) {
+                        containerRef.current.style.top = `${dropdownTopForStart}px`;
+                        dropdownAlignment.current = DropdownAlignment.Start;
+                    }
+                    else {
+                        containerRef.current.style.top = `${dropdownTopForEnd}px`;
+                        dropdownAlignment.current = DropdownAlignment.End;
+                    }
+                }
+
+                const dropdownLeftForLeft = hostRect.left - dropdownRect.width - positionArrowOffset - marginOffset;
+                const dropdownLeftForRight = hostRect.right + positionArrowOffset + marginOffset;
+
+                // Try to keep the same position but update the left
+                if (dropdownPosition.current === DropdownPosition.Left && dropdownLeftForLeft > 0) {
+                    containerRef.current.style.left = `${dropdownLeftForLeft}px`;
+                } else if (dropdownPosition.current === DropdownPosition.Right && dropdownLeftForRight + dropdownRect.width <= window.innerWidth) {
+                    containerRef.current.style.left = `${dropdownLeftForRight}px`;
+                } else {
+                    // We need to update the position
+                    if (dropdownLeftForLeft > 0) {
+                        containerRef.current.style.left = `${dropdownLeftForLeft}px`;
+                        dropdownPosition.current = DropdownPosition.Left;
+                    } else {
+                        containerRef.current.style.left = `${dropdownLeftForRight}px`;
+                        dropdownPosition.current = DropdownPosition.Right;
+                    }
                 }
             }
 

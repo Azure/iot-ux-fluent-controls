@@ -25,7 +25,35 @@ $arrow-size: 2*$grid-size;
                 left: $gutter-xsmall;
             } @else if $offset == 'end' {
                 right: $gutter-xsmall;
+            } @else {	
+                left: calc(50% - #{$arrow-size / 2});	
             }
+        } @else if $location == 'left' {	
+            left: calc(#{-1*$grid-size}  - 1px);
+            border-right: unset;
+            border-bottom: inherit;
+            border-left: inherit;
+            border-top: unset;
+            @if $offset == 'start' {	
+                top: $gutter-xsmall;	
+            } @else if $offset == 'end' {	
+                bottom: $gutter-xsmall;	
+            } @else {	
+                top: calc(50% - #{$arrow-size / 2});	
+            }	
+        } @else if $location == 'right' {	
+            border-right: inherit;
+            border-bottom: unset;
+            border-left: unset;
+            border-top: inherit;
+            right: calc(#{-1*$grid-size}  - 1px);
+            @if $offset == 'start' {	
+                top: $gutter-xsmall;	
+            } @else if $offset == 'end' {	
+                bottom: $gutter-xsmall;	
+            } @else {	
+                top: calc(50% - #{$arrow-size / 2});	
+            }	
         } @else if $location == 'bottom' {
             bottom: calc(#{-1*$grid-size}  - 1px);
             border-top: unset;
@@ -36,6 +64,8 @@ $arrow-size: 2*$grid-size;
                 left: $gutter-xsmall;
             } @else if $offset == 'end' {
                 right: $gutter-xsmall;
+            } @else {	
+                left: calc(50% - #{$arrow-size / 2});	
             }
         }
     }
@@ -45,6 +75,12 @@ $arrow-size: 2*$grid-size;
     &.top-start {
         &.with-arrow {
             @include arrow('bottom', 'start');
+        }
+    }
+
+    &.top-center {
+        &.with-arrow {
+            @include arrow('bottom', 'center');
         }
     }
 
@@ -60,9 +96,51 @@ $arrow-size: 2*$grid-size;
         }
     }
 
+    &.bottom-center {
+        &.with-arrow {
+            @include arrow('top', 'center');
+        }
+    }
+
     &.bottom-end {
         &.with-arrow {
             @include arrow('top', 'end');
+        }
+    }
+
+    &.left-start {
+        &.with-arrow {
+            @include arrow('right', 'start');
+        }
+    }
+
+    &.left-center {
+        &.with-arrow {
+            @include arrow('right', 'center');
+        }
+    }
+
+    &.left-end {
+        &.with-arrow {
+            @include arrow('right', 'end');
+        }
+    }
+
+    &.right-start {
+        &.with-arrow {
+            @include arrow('left', 'start');
+        }
+    }
+
+    &.right-center {
+        &.with-arrow {
+            @include arrow('left', 'center');
+        }
+    }
+
+    &.right-end {
+        &.with-arrow {
+            @include arrow('left', 'end');
         }
     }
 }

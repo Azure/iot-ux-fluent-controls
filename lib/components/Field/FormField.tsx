@@ -5,6 +5,7 @@ import {MethodNode, keyCode} from '../../Common';
 import {HorizontalLoader} from '../Loader';
 import {FormLabel, FormLabelAttributes} from './FormLabel';
 import {FormError} from './FormError';
+import { DropdownAlignment, DropdownPosition } from '../Dropdown/Dropdown';
 const css = classNames.bind(require('./Field.module.scss'));
 
 export interface FormFieldType {}
@@ -14,6 +15,10 @@ export interface FormFieldAttributes {
     fieldLabel?: FormLabelAttributes;
     fieldContent?: DivProps;
     fieldError?: DivProps;
+    fieldTooltip?: {
+        balloonPositionHint?: DropdownPosition;
+        balloonAlignmentHint?: DropdownAlignment;
+    };
 }
 
 export interface FormFieldProps extends React.Props<FormFieldType> {
@@ -137,6 +142,7 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
                     balloonExpanded={this.state.tooltipVisible}
                     farSide={props.labelFarSide}
                     disabled={props.disabled}
+                     {...props.attr.fieldTooltip}
                 >
                     {props.label}
                 </FormLabel>}
