@@ -1,7 +1,8 @@
 @import '../../common/constants';
 @import '../../common/mixins';
 
-$balloon-width: 65*$grid-size;
+$balloon-max-width: 65*$grid-size;
+$balloon-min-width: 48*$grid-size;
 
 :global(.md-dropdown-container) {
     .balloon-dropdown {
@@ -14,16 +15,17 @@ $balloon-width: 65*$grid-size;
 }
 
 .balloon-dropdown {
-    @include md-box(inline-flex, relative);
+    display: inline-flex;
     box-shadow: var(--shadow-balloon);
     background-color: var(--color-bg-balloon);
     border: 1px solid var(--color-border-controls);
-    max-width: $balloon-width;
+    max-width: $balloon-max-width;
+    min-width: $balloon-min-width;
     border-radius: $component-border-radius;
 
     .balloon-inner-container {
-        @include md-box(inline-block, relative);
         padding: $gutter-xsmall;
+        overflow: auto;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;

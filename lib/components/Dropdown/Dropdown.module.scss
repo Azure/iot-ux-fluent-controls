@@ -146,15 +146,16 @@ $arrow-size: 2*$grid-size;
 }
 
 .dropdown-host {
-    @include md-box(inline-block, relative);
-
+    position: relative;
+    overflow: hidden;
+    
     :global(.md-dropdown-container) {
         visibility: hidden;
         pointer-events: none;
     }
 
     :global(.md-dropdown) {
-        @include md-box(inline-block, absolute);
+        position: absolute;
         visibility: hidden
     }
 }
