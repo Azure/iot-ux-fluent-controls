@@ -4,16 +4,6 @@
 $balloon-max-width: 65*$grid-size;
 $balloon-min-width: 48*$grid-size;
 
-:global(.md-dropdown-container) {
-    .balloon-dropdown {
-        .balloon-inner-container {
-            &.multiline {
-                white-space: normal;
-            }
-        }
-    }
-}
-
 .balloon-dropdown {
     display: inline-flex;
     box-shadow: var(--shadow-balloon);
@@ -25,9 +15,8 @@ $balloon-min-width: 48*$grid-size;
 
     .balloon-inner-container {
         padding: $gutter-xsmall;
-        overflow: auto;
         overflow: hidden;
-        white-space: nowrap;
+        white-space: normal;
         text-overflow: ellipsis;
         width: 100%;
     }
