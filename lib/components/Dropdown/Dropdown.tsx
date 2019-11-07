@@ -127,8 +127,8 @@ export const Dropdown = React.memo(({ className, onMouseEnter, onMouseLeave, att
             dropdownRef.current.classList.remove(css(`${dropdownPosition.current}-${dropdownAlignment.current}`));
 
             // Reset to defaults so we always prefer default positioning over last positioning
-            dropdownPosition.current = positionHint || DropdownPosition.Left;
-            dropdownAlignment.current = alignmentHint || DropdownAlignment.Center;
+            dropdownPosition.current = positionHint || DropdownPosition.Top;
+            dropdownAlignment.current = alignmentHint || DropdownAlignment.Start;
 
             const hostRect = hostRef.current.getBoundingClientRect();
             const dropdownRect = dropdownRef.current.getBoundingClientRect();
