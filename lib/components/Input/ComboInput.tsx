@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import { DivProps, ButtonProps, SpanProps, InputProps, Elements as Attr, OptionAttr, mergeAttributes, mergeAttributeObjects } from '../../Attributes';
-import { Dropdown, DropdownAttributes } from '../Dropdown';
+import { Dropdown, DropdownAttributes, DropdownPosition } from '../Dropdown';
 import { MethodNode, FormOption, keyCode, autoFocusRef } from '../../Common';
 const css = classNames.bind(require('./ComboInput.module.scss'));
 
@@ -474,6 +474,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                 onMouseEnter={() => { }}
                 outerEvents={['click', 'focusin']}
                 onOuterEvent={() => this.setState({ visible: false })}
+                positionHint={DropdownPosition.Bottom}
                 attr={mergeAttributeObjects(
                     this.props.attr,
                     {
@@ -481,7 +482,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                             className: css('dropdown')
                         },
                     },
-                    ['container', 'dropdownContainer', 'dropdown']
+                    ['host', 'dropdownContainer', 'dropdown']
                 )}
             >
                 <Attr.div

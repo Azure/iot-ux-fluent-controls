@@ -147,7 +147,7 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
 export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: ComboFieldProps) => {
     const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const comboAttr: ComboInputAttributes = {
-        container: props.attr.container,
+        host: props.attr.host,
         input: Object.assign({
             'aria-label': props.label,
             'aria-describedby': tooltipId
@@ -220,7 +220,7 @@ ComboField.defaultProps = {
         fieldLabel: {},
         fieldContent: {},
         fieldError: {},
-        container: {},
+        host: {},
         textbox: {},
         input: {},
         clearButton: {},

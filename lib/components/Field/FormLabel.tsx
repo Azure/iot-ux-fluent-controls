@@ -3,7 +3,8 @@ import * as classNames from 'classnames/bind';
 import {DivProps, LabelProps, mergeAttributeObjects, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconAttributes} from '../Icon';
-import {Balloon, BalloonAlignment, BalloonPosition, BalloonAttributes} from '../Balloon';
+import {Balloon, BalloonAttributes} from '../Balloon';
+import { DropdownPosition, DropdownAlignment } from '../Dropdown';
 const css = classNames.bind(require('./Field.module.scss'));
 
 export interface FormLabelType {}
@@ -36,22 +37,17 @@ export interface FormLabelProps extends React.Props<FormLabelType> {
      */
     balloon?: MethodNode;
     /**
-     * Where to display Balloon relative to child element
+     * Default position of Balloon relative to child element
      *
-     * `BalloonPosition.[Top | Bottom | Left | Right]`
-     *
-     * Default: BalloonPosition.Top
+     * `[Top | Bottom | Left | Right]`
      */
-    balloonPosition?: BalloonPosition;
+    balloonPositionHint?: DropdownPosition;
     /**
-     * Alignment of Balloon relative to child
+     * Default alignment of Balloon relative to child
      *
-     * `BalloonAlignment.[Start | Center | End]`
-     *
-     * Default: BalloonAllignment.Center
+     * `[Start | Center | End]`
      */
-    balloonAlignment?: BalloonAlignment;
-
+    balloonAlignmentHint?: DropdownAlignment;
     /**
      * force balloon to be visible
      */
@@ -79,16 +75,14 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
     const balloon = props.balloon
         ? <Balloon
             tooltip={props.balloon}
-            align={props.balloonAlignment || BalloonAlignment.Start}
-            position={props.balloonPosition || BalloonPosition.Top}
             className={css('label-icon')}
             multiline
             expanded={props.balloonExpanded}
+            positionHint={props.balloonPositionHint}
+            alignmentHint={props.balloonAlignmentHint}
             attr={mergeAttributeObjects(
                 props.attr.balloon,
-                {balloon: {
-                    className: css('label-balloon'),
-                },
+                {
                 balloonContainer: {
                     role: 'tooltip',
                     'aria-live': 'polite',
