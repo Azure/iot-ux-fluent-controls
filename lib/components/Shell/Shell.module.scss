@@ -30,8 +30,6 @@
     }
 
     .shell {
-        display: flex;
-        flex-direction: column; // masthead should be on top of nav-and-workspace
         height: 100vh;
         color: var(--color-text-rest);
         background-color: var(--color-bg-container);
@@ -43,10 +41,10 @@
     display: flex;
     height: 100%;
     width: 100%;
-    
+
     // required for context panel:
     overflow: hidden;
-    position: relative; 
+    position: relative;
 }
 
 .workspace {
