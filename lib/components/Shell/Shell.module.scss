@@ -25,25 +25,29 @@
         }
     }
 
-    .rtl {
-        direction: rtl;
-    }
-
     .shell {
         height: 100vh;
         color: var(--color-text-rest);
         background-color: var(--color-bg-container);
+        // Set positioning to relative so that everything flows from shell
+        position: relative;
+
+        // Flex will help us position the masthead and workspace to take the full height of the 
+        // viewport correctly
+        display: flex;
+        flex-direction: column;
     }
 }
 
 .nav-and-workspace {
+    // this should take all the available space in the screen from shell
+    flex-grow: 1;
+    overflow: hidden;
+
     // lay out nav and workspace horizontally:
     display: flex;
-    height: 100%;
-    width: 100%;
-
-    // required for context panel:
-    overflow: hidden;
+    
+    // Make sure this is now the main element to position all children
     position: relative;
 }
 
@@ -51,4 +55,7 @@
     // occupy the rest of the screen and scroll internally:
     flex-grow: 1;
     overflow: auto;
+
+    // Make sure this is now the main element to position all children
+    position: relative;
 }
