@@ -1,9 +1,9 @@
 @import '../../common/constants';
 @import '../../common/mixins';
 
-$content-pane-width: 8*$gutter-bigger;
-$content-pane-min-height: 5*$gutter-bigger; // at least enough for title + actions
-$title-font-size: $gutter-normal;
+$content-pane-width: 80*$grid-size;
+$content-pane-min-height: 50*$grid-size; // at least enough for title + actions
+$button-width: 30*$grid-size;
 
 .panel {
     position: absolute;
@@ -13,7 +13,6 @@ $title-font-size: $gutter-normal;
     width: $content-pane-width;
     display: flex;
     flex-direction: column;
-    padding: $gutter-normal;
     z-index: $z-index-flyout-layer;
 
     @media(max-width: $screen-sm - 1) {
@@ -27,6 +26,14 @@ $title-font-size: $gutter-normal;
         right: unset;
         left: 0;
     }
+}
+
+.panel-container {
+    padding: $gutter-normal;
+}
+
+.content-container {
+    flex-grow: 1;
 }
 
 .title {
@@ -45,28 +52,13 @@ $title-font-size: $gutter-normal;
     overflow: auto;
 }
 
-.separator {
-    margin-left: -$gutter-normal;
-    margin-right: -$gutter-normal;
-    border-top: 1px solid var(--color-border-container-panel);
-}
-
 .footer {
     flex-grow: 0;
     flex-shrink: 0;
     margin-top: $gutter-normal;
+    border-top: 1px solid var(--color-border-container-panel);
 
     :global(.btn) {
-        margin: 0;
-        width: 3*$gutter-bigger;
-    }
-
-    :global(.btn):first-child {
-        margin-right: $gutter-xsmall;
-        
-        @include rtl {
-            margin-right: 0;
-            margin-left: $gutter-xsmall;
-        }
+        width: $button-width;
     }
 }

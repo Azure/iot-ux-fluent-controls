@@ -1,8 +1,19 @@
 # CHANGELOG
 
-## 7.0.0-alpha.3
+## 7.0.0
+- Adopted fluent styles
+
 ### Changed
 - Added a NavigationItemContainer component to allow organizing sections with headers on the global navbar
+- Adopted fluent CSS library based on CSS custom properties
+- Added on blur handlers to text input elements
+
+### Fixed
+- Minor style fixes in multiple components
+- Made balloon and dropdown aware of their position in the page and how to properly switch position and aligment based on it.
+- Fixed RTL support for all components
+- Added hideError capabilities to all FormField elements
+- Accessibility requirements for form field errors.
 
 ## v6.3.5
 ### Changed

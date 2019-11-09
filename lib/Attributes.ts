@@ -15,6 +15,7 @@ export type NavProps = AttrProps<HTMLDivElement>;
 export type OptionProps = AttrProps<HTMLOptionElement>;
 export type PreProps = AttrProps<HTMLPreElement>;
 export type SectionProps = AttrProps<HTMLDivElement>;
+export type AsideProps = AttrProps<HTMLDivElement>;
 export type SelectProps = AttrProps<HTMLSelectElement>;
 export type SpanProps = AttrProps<HTMLSpanElement>;
 export type TextAreaProps = AttrProps<HTMLTextAreaElement>;
@@ -183,6 +184,7 @@ const nav = AttrElementWrapper<HTMLDivElement>('nav');
 const option = AttrElementWrapper<HTMLOptionElement>('option');
 const pre = AttrElementWrapper<HTMLPreElement>('pre');
 const section = AttrElementWrapper<HTMLDivElement>('section');
+const aside = AttrElementWrapper<HTMLDivElement>('aside');
 const select = AttrElementWrapper<HTMLSelectElement>('select');
 const span = AttrElementWrapper<HTMLSpanElement>('span');
 const textarea = AttrElementWrapper<HTMLTextAreaElement>('textarea');
@@ -204,6 +206,7 @@ export const Elements = {
     option: option,
     pre: pre,
     section: section,
+    aside: aside,
     select: select,
     span: span,
     textarea: textarea,
