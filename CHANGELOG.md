@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.1
+### Fixed
+- Added role='main' and background color to shell workspace
+
 ## 7.0.0
 - Adopted fluent styles
 

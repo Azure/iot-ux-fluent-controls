@@ -68,7 +68,7 @@ export function Shell({ theme, masthead, navigation, children, onClick }: ShellP
                 {masthead && <Masthead navigation={navigation} {...masthead} />}
                 <div className={css('nav-and-workspace')}>
                     {navigation && <Navigation {...navigation} />}
-                    <section className={css('workspace')}>
+                    <section role='main' className={css('workspace')}>
                         {children}
                     </section>
                     <ContextPanelRoot />
