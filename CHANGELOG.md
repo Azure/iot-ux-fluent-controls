@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.2
+### Fixed
+- Made workspace to be a flex container without overflow specified
+
 ## 7.0.1
 ### Fixed
 - Added role='main' and background color to shell workspace

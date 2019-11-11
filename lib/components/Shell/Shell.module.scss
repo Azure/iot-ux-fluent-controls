@@ -54,10 +54,11 @@
 .workspace {
     // occupy the rest of the screen and scroll internally:
     flex-grow: 1;
-    overflow: auto;
 
     // Make sure this is now the main element to position all children
     position: relative;
 
     background-color: var(--color-bg-container);
+    display: flex;
+    flex-direction: column;
 }
