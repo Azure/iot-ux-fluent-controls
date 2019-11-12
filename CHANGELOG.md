@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.3
+### Fixed
+- Add overflow hidden to workspace container
+
 ## 7.0.2
 ### Fixed
 - Made workspace to be a flex container without overflow specified
