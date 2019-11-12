@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.6
+### Changed
+- Added data-test-active to active navigation item
+
 ## 7.0.5
 ### Fixed
 - Fixed height of navigation scrollable container
