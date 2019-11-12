@@ -29,6 +29,7 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
         overflow-x: hidden;
         overflow-y: auto;
         flex-flow: column nowrap;
+        flex-grow: 1;
 
         .global-nav-active-border {
             height: $activeBorderHeight;

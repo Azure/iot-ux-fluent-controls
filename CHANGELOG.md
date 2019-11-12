@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.5
+### Fixed
+- Fixed height of navigation scrollable container
+
 ## 7.0.4
 ### Fixed
 - Fix display of HorizontalLoader under FormField
