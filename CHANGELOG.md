@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.4
+### Fixed
+- Fix display of HorizontalLoader under FormField
+
 ## 7.0.3
 ### Fixed
 - Add overflow hidden to workspace container
