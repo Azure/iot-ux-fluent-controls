@@ -33,8 +33,17 @@ export function Navigation({ isExpanded, onClick, attr, children, farBottomChild
         const items = topNavItemsContainer.current.getElementsByClassName('global-nav-item');
 
         if (items && items.length > 0) {
-            const activeItemIndex = Array.prototype.findIndex.call(items, 
-                (i: HTMLDivElement) => i.className.includes('global-nav-item-active'));
+            let activeItemIndex = -1;
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+                // Only take the first active link as active and set everything else to not active
+                if (item.className.includes('global-nav-item-active') && activeItemIndex === -1) {
+                    activeItemIndex = i;
+                    item.setAttribute('data-active', 'true');
+                } else {
+                    item.removeAttribute('data-active');
+                }
+            }
 
             if (activeItemIndex > -1) {
                 selectedBorderRef.current.style.display = 'block';
