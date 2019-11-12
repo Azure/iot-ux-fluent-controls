@@ -39,9 +39,9 @@ export function Navigation({ isExpanded, onClick, attr, children, farBottomChild
                 // Only take the first active link as active and set everything else to not active
                 if (item.className.includes('global-nav-item-active') && activeItemIndex === -1) {
                     activeItemIndex = i;
-                    item.setAttribute('data-test-active', 'true');
+                    item.setAttribute('data-active', 'true');
                 } else {
-                    item.removeAttribute('data-test-active');
+                    item.removeAttribute('data-active');
                 }
             }
 
