@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.8
+### Fixed
+- Flattened markdown in context panel to have content, footer and header at the same level.
+
 ## 7.0.7
 ### Changed
 - Change `data-active` attribute to be a boolean attribute (i.e., emit \<foo data-active> instead of \<foo data-active="true">)

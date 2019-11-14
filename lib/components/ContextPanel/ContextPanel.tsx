@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
 import { ActionTriggerButton, ActionTriggerButtonAttributes, ActionTriggerAttributes } from '../ActionTrigger';
-import { Elements as Attr, HeadingProps, SectionProps, AsideProps, DivProps } from '../../Attributes';
+import { Elements as Attr, SectionProps, AsideProps, DivProps, HeaderProps, HeadingProps, FooterProps } from '../../Attributes';
 import { Portal } from './portal';
 
 const cx = classnames.bind(require('./ContextPanel.module.scss'));
@@ -15,9 +15,10 @@ export interface ContextPanelProperties {
     attr?: {
         container?: AsideProps;
         contentContainer?: DivProps;
-        header?: HeadingProps;
+        header?: HeaderProps;
+        title?: HeadingProps;
         content?: SectionProps;
-        footer?: SectionProps;
+        footer?: FooterProps;
         closeButton?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
     };
 }
@@ -41,28 +42,25 @@ function Panel({ header, children, footer, onClose, attr }: ContextPanelProperti
         <Attr.aside 
             className={cx('panel')} 
             attr={attr?.container}>
-            <div className={cx('content-container', 'panel-container')}>
-                <div className={cx('header')}>
-                    {header && <Attr.h2 
-                        id='context-panel-title' 
-                        className={cx('title', 'inline-text-overflow')} 
-                        attr={attr?.header}
-                        >
-                        {header}
-                    </Attr.h2>}
-                    {onClose && <ActionTriggerButton
-                        icon='cancel'
-                        onClick={onClose}
-                        attr={attr?.closeButton}
-                    />}
-                </div>
-                <Attr.section className={cx('content')} attr={attr?.content}>
-                    {children}
-                </Attr.section>
-            </div>
-            {footer && <Attr.section className={cx('footer', 'panel-container')} attr={attr?.footer}>
+            <Attr.header className={cx('panel-container')} attr={attr?.header}>
+                {header && <Attr.h2 
+                    id='context-panel-title' 
+                    className={cx('title', 'inline-text-overflow')} 
+                    attr={attr?.title}>
+                    {header}
+                </Attr.h2>}
+                {onClose && <ActionTriggerButton
+                    icon='cancel'
+                    onClick={onClose}
+                    attr={attr?.closeButton}
+                />}
+            </Attr.header>
+            <Attr.section className={cx('content', 'panel-container', { 'with-header': !!header, 'with-footer': !!footer })} attr={attr?.content}>
+                {children}
+            </Attr.section>
+            {footer && <Attr.footer className={cx('panel-container')} attr={attr?.footer}>
                 {footer}
-            </Attr.section>}
+            </Attr.footer>}
         </Attr.aside>
     );
 }
