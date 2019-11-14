@@ -226,7 +226,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         }
     }
 
-    componentWillReceiveProps(newProps: NumberInputProps) {
+    UNSAFE_componentWillReceiveProps(newProps: NumberInputProps) {
         if (this.props.initialValue !== newProps.initialValue) {
             this.setState(this.getInitialState(newProps.initialValue));
         }

@@ -91,6 +91,7 @@ export interface DatePickerState {
  * Low level date picker control
  *
  * (Use the `DateField` control instead when making a form with standard styling)
+ * @deprecated This is not fully localized/accessible. Use https://developer.microsoft.com/en-us/fabric/#/controls/web/datepicker instead.
  */
 export class DatePicker extends React.Component<DatePickerProps, Partial<DatePickerState>> {
     static defaultProps = {
@@ -207,7 +208,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
      *
      * @param newProps new DatePickerProps
      */
-    componentWillReceiveProps(newProps: DatePickerProps) {
+    UNSAFE_componentWillReceiveProps(newProps: DatePickerProps) {
         if ((this.props.initialValue !== newProps.initialValue || this.props.localTimezone !== newProps.localTimezone) && newProps.initialValue !== 'invalid') {
             const newState = this.getInitialState(newProps, this.input.value);
             this.setState({
