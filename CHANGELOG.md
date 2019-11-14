@@ -2,8 +2,8 @@
 
 ## 7.0.7
 ### Changed
-- Change `data-active` attribute to be a boolean attribute (i.e., emit <foo data-active> instead of <foo data-active="true">)
-- Rename componentWillReceiveProps to (UNSAFE_componentWillReceiveProps)[https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html] to avoid deprecation warnings in React 16.11+
+- Change `data-active` attribute to be a boolean attribute (i.e., emit \<foo data-active> instead of \<foo data-active="true">)
+- Rename componentWillReceiveProps to [UNSAFE_componentWillReceiveProps](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html) to avoid deprecation warnings in React 16.11+
 ### Fixed
 - Update handlebars version to fix vulnerability
 
