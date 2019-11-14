@@ -76,7 +76,7 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         };
     }
 
-    componentWillReceiveProps(newProps: BalloonProps) {
+    UNSAFE_componentWillReceiveProps(newProps: BalloonProps) {
         this.setState({
             visible: this.state.hovered || newProps.expanded,
         });

@@ -72,6 +72,7 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
  * High level form text field
  *
  * @param props Control properties (defined in `DateFieldProps` interface)
+ * @deprecated This is not fully localized/accessible. Use https://developer.microsoft.com/en-us/fabric/#/controls/web/datepicker instead.
  */
 export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateFieldProps) => {
     const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;

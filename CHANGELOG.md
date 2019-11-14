@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 7.0.7
+### Changed
+- Change `data-active` attribute to be a boolean attribute (i.e., emit \<foo data-active> instead of \<foo data-active="true">)
+- Rename componentWillReceiveProps to [UNSAFE_componentWillReceiveProps](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html) to avoid deprecation warnings in React 16.11+
+- Add deprecation warnings for Date components because they're not fully localized/accessible. We should use the [Office Fabric control](https://developer.microsoft.com/en-us/fabric/#/controls/web/datepicker) instead.
+### Fixed
+- Update handlebars version to fix vulnerability
+
 ## 7.0.6
 ### Changed
 - Added data-test-active to active navigation item

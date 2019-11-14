@@ -170,7 +170,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
         return time;
     }
 
-    componentWillReceiveProps(newProps) {
+    UNSAFE_componentWillReceiveProps(newProps) {
         let newState: any = {};
         let update = false;
         let newHours = this.state.hours;
