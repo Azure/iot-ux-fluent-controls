@@ -15,11 +15,13 @@ export interface ContextPanelProperties {
     attr?: {
         container?: AsideProps;
         contentContainer?: DivProps;
-        header?: HeaderProps;
-        title?: HeadingProps;
+        header?: {
+            container?: HeaderProps;
+            title?: HeadingProps;
+            closeButton?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
+        }
         content?: SectionProps;
         footer?: FooterProps;
-        closeButton?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
     };
 }
 
@@ -42,23 +44,23 @@ function Panel({ header, children, footer, onClose, attr }: ContextPanelProperti
         <Attr.aside 
             className={cx('panel')} 
             attr={attr?.container}>
-            <Attr.header className={cx('panel-container')} attr={attr?.header}>
-                {header && <Attr.h2 
+            <Attr.header className={cx('header', 'panel-container')} attr={attr?.header?.container}>
+                <Attr.h2 
                     id='context-panel-title' 
                     className={cx('title', 'inline-text-overflow')} 
-                    attr={attr?.title}>
+                    attr={attr?.header?.title}>
                     {header}
-                </Attr.h2>}
-                {onClose && <ActionTriggerButton
+                </Attr.h2>
+                <ActionTriggerButton
                     icon='cancel'
                     onClick={onClose}
-                    attr={attr?.closeButton}
-                />}
+                    attr={attr?.header?.closeButton}
+                />
             </Attr.header>
-            <Attr.section className={cx('content', 'panel-container', { 'with-header': !!header, 'with-footer': !!footer })} attr={attr?.content}>
+            <Attr.section className={cx('content', 'panel-container', { 'with-footer': !!footer })} attr={attr?.content}>
                 {children}
             </Attr.section>
-            {footer && <Attr.footer className={cx('panel-container')} attr={attr?.footer}>
+            {footer && <Attr.footer className={cx('footer', 'panel-container')} attr={attr?.footer}>
                 {footer}
             </Attr.footer>}
         </Attr.aside>
