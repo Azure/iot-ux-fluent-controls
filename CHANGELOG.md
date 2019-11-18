@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.9
+### Changed
+- Added data-test-hook='progressbar' for HorizontalLoader
+
 ## 7.0.8
 ### Fixed
 - Flattened markdown in context panel to have content, footer and header at the same level.
