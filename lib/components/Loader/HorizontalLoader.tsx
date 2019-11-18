@@ -27,7 +27,7 @@ export const HorizontalLoader: React.StatelessComponent<HorizontalLoaderProps> =
     }
 
     return (
-        <div className={containerClassName}>
+        <div className={containerClassName} data-test-hook='progressbar'>
             {dots}
         </div>
     );
