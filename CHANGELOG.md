@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.10
+### Changed
+Changed `selectRowCheckbox` in `GenericManagementListAttributes` to also be a function of a row.
+
 ## 7.0.9
 ### Changed
 - Added data-test-hook='progressbar' for HorizontalLoader
