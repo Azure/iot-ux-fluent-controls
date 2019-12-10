@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.11
+### Changed
+Removed fill color from SVGs in Navigation.
+
 ## 7.0.10
 ### Changed
 Changed `selectRowCheckbox` in `GenericManagementListAttributes` to also be a function of a row.
