@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.12
+### Changed
+Added a `toggleIcon` prop to `Navigation`
+
 ## 7.0.10
 ### Changed
 Changed `selectRowCheckbox` in `GenericManagementListAttributes` to also be a function of a row.
