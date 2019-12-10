@@ -107,7 +107,7 @@ $outline-focus-border-width: 1px;
 
     .radio-label {
         @include md-box(flex-row);
-        align-items: center;
+        align-items: flex-start;
 
         &.disabled {
             color: var(--color-text-disabled);

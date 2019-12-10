@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.12
+### Changed
+Update sytle of RadioInput.
+
 ## 7.0.11
 ### Changed
 Removed fill color from SVGs in Navigation.
