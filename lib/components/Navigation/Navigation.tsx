@@ -12,10 +12,10 @@ export interface NavigationAttributes {
 export interface NavigationProperties {
     isExpanded: boolean;
     onClick: React.EventHandler<any>;
+    toggleIcon: React.ReactNode;
     attr?: NavigationAttributes;
     children?: React.ReactNode;
     farBottomChildren?: React.ReactNode;
-    toggleIcon?: React.ReactNode;
 }
 
 export interface NavigationItemContainerProperties {
@@ -64,10 +64,7 @@ export function Navigation({ isExpanded, onClick, attr, children, farBottomChild
                 key='globalNavButton'
                 onClick={onClick}
                 attr={attr && attr.navButton}>
-                {toggleIcon
-                    ? <i key='icon' className={cx('global-nav-item-icon', 'icon')}>{toggleIcon}</i>
-                    : <span className={cx('global-nav-item-icon', 'icon', 'icon-globalNavButton')} />
-                }
+                <i key='icon' className={cx('global-nav-item-icon', 'icon')}>{toggleIcon}</i>
             </Attr.button>
             <div className={cx('scrollable', 'global-nav-items')}>
                 <div ref={selectedBorderRef} className={cx('global-nav-active-border')} />
