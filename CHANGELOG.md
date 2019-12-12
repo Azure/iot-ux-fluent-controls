@@ -1,12 +1,16 @@
 # CHANGELOG
 
+## 7.0.14
+### Changed
+Updated hover sytle of RadioInput
+
 ## 7.0.13
 ### Changed
 Added conditional support for role="presentation" for thumbnails without alt text
 
 ## 7.0.12
 ### Changed
-Update sytle of RadioInput.
+Updated sytle of RadioInput.
 
 ## 7.0.11
 ### Changed
