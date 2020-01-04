@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.15
+### Changed
+Changed `Thumbnail` to properly spread its `attr` property.
+
 ## 7.0.14
 ### Changed
 Updated hover sytle of RadioInput
