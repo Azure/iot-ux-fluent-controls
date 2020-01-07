@@ -16,8 +16,6 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
      */
     initialValue?: Date | string;
 
-    /** Tab index for calendar control */
-    tabIndex?: number;
     /**
      * Display the date in local timezone instead of GMT
      *
@@ -124,7 +122,6 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
                 initialValue={props.initialValue}
                 locale={props.locale}
                 localTimezone={props.localTimezone}
-                tabIndex={props.tabIndex}
                 showAbove={props.showAbove}
                 format={props.format}
                 error={!!props.error}
@@ -144,7 +141,6 @@ DateField.defaultProps = {
     label: undefined,
     onChange: undefined,
     format: DateFormat.MMDDYYYY,
-    tabIndex: -1,
     localTimezone: true,
     showAbove: false,
     attr: {

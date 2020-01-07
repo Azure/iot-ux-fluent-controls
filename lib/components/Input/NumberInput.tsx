@@ -58,33 +58,68 @@ export interface NumberInputState {
  *
  * (Use the `TextField` control instead when making a form with standard styling)
  */
-export class NumberInput extends React.Component<NumberInputProps, NumberInputState> {
-    static defaultProps = {
-        name: undefined,
-        initialValue: '',
-        onChange: undefined,
-        integer: false,
-        positive: false,
-        step: 'any',
-        attr: {
-            container: {},
-            input: {},
-            inputContainer: {},
-            prefix: {},
-            postfix: {},
+export const NumberInput = React.memo((props: NumberInputProps) => {
+    const value = React.useMemo(() => {
+        if (typeof (props.initialValue) === 'number') {
+            return props.initialValue.toString();
         }
-    };
+        return props.initialValue ?? '';
+    }, [props.initialValue]);
 
-    private paste: boolean;
+    const isPositive = React.useCallback((): boolean => {
+        return typeof (props.min) === 'number' && props.min >= 0;
+    }, [props.min]);
 
-    constructor(props: NumberInputProps) {
-        super(props);
+    const isInteger = React.useCallback((): boolean => {
+        return typeof (props.step) === 'number' && props.step % 1 === 0;
+    }, [props.step]);
 
-        this.paste = false;
-        this.state = this.getInitialState(this.props.initialValue);
-    }
+    const getValue = React.useCallback((value: string): number | 'invalid' => {
+        if (value === '') {
+            return invalidNumber;
+        }
+        const decimalSeparator = '.';
+        const decimalSplit = value.split(decimalSeparator);
+        if (isInteger() && decimalSplit.length > 1) {
+            return invalidNumber;
+        }
 
-    onKeyDown = (event) => {
+        value = value.replace(',', '');
+
+        let outValue = isInteger() ? parseInt(value) : parseFloat(value);
+        if (isPositive() && outValue < 0) {
+            return invalidNumber;
+        }
+
+        if (isNaN(outValue)) {
+            return invalidNumber;
+        }
+
+        return outValue;
+    }, [isInteger, isPositive]);
+
+    const onChange = React.useCallback((newValue: string) => {
+        if (newValue === '' && value !== '') {
+            props.onChange(null);
+            return;
+        }
+
+        /** Reset our state machine */
+        const parsedValue = getValue(newValue);
+        
+        if (parsedValue === invalidNumber) {
+            props.onChange(parsedValue);
+            return;
+        }
+
+        if (isPositive() && parsedValue < 0) {
+            return;
+        }
+
+        props.onChange(parsedValue);
+    }, [isPositive, getValue, props.onChange, value]);
+
+    const onKeyDown = React.useCallback((event: React.KeyboardEvent) => {
         /** So that we don't block any browser shortcuts */
         if (event.ctrlKey || event.altKey) {
             return;
@@ -105,168 +140,55 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         }
 
         if (
-            !this.isPositive()
+            !isPositive()
             /** Firefox uses a different keycode for dashes (-) than other browsers... */
             && (event.keyCode === keyCode.dash || event.keyCode === keyCode.firefoxDash)
-            && this.state.value.indexOf('-') === -1
+            && value?.indexOf('-') === -1
         ) {
             return;
         }
 
         if (
-            !this.isInteger()
+            !isInteger()
             && event.keyCode === keyCode.period
-            && this.state.value.indexOf('.') === -1
+            && value.indexOf('.') === -1
         ) {
             return;
         }
 
         event.preventDefault();
-    }
+    }, [isPositive, isInteger, value]);
 
-    isPositive(): boolean {
-        return typeof (this.props.min) === 'number' && this.props.min >= 0;
-    }
-
-    isInteger(): boolean {
-        return typeof (this.props.step) === 'number' && this.props.step % 1 === 0;
-    }
-
-    onChange = (newValue: string) => {
-        if (newValue === '' && this.state.value !== '') {
-            this.setState({ value: '', paste: false });
-            return;
+    const attr = {
+        ...(props.attr || {}),
+        input: {
+            ...(props.attr?.input || {}),
+            className: css('no-cancel'),
+            step: props.step ?? 'any',
+            min: props.min,
+            max: props.max,
+            onKeyDown,
         }
-        /** Reset our state machine */
-        const parsedValue = this.getValue(newValue);
-        let paste = this.state.paste;
-        if (parsedValue === invalidNumber) {
-            if (this.paste) {
-                this.paste = false;
-                this.setState({ value: newValue, paste: true });
-                return;
-            } else {
-                this.setState({ value: newValue });
-                return;
-            }
-        } else {
-            if (this.paste) {
-                newValue = parsedValue.toString();
-                this.paste = false;
-            }
-            paste = false;
-        }
+    };
 
-        if (this.isPositive() && parsedValue < 0) {
-            return;
-        }
-
-        this.setState({ value: newValue, paste: paste });
-    }
-
-    onPaste = () => {
-        this.paste = true;
-    }
-
-    getInitialState(initialValue: number | string): NumberInputState {
-        let value = '';
-        if (typeof (initialValue) === 'number') {
-            value = initialValue.toString();
-        } else {
-            value = initialValue;
-        }
-
-        if (value === '' || value == null) {
-            value = '';
-        } else if (this.state && typeof (this.state.value) === 'string') {
-            if (parseFloat(this.state.value) === parseFloat(value)) {
-                value = this.state.value;
-            }
-        }
-
-        return {
-            value: value,
-            paste: false
-        };
-    }
-
-    getValue(value: string): number | 'invalid' {
-        if (value === '') {
-            return invalidNumber;
-        }
-        const decimalSeparator = '.';
-        const decimalSplit = value.split(decimalSeparator);
-        if (this.isInteger() && decimalSplit.length > 1) {
-            return invalidNumber;
-        }
-
-        value = value.replace(',', '');
-
-        let outValue = this.isInteger() ? parseInt(value) : parseFloat(value);
-        if (this.isPositive() && outValue < 0) {
-            return invalidNumber;
-        }
-
-        if (isNaN(outValue)) {
-            return invalidNumber;
-        }
-
-        return outValue;
-    }
-
-    componentDidUpdate(_oldProps: NumberInputProps, oldState: NumberInputState) {
-        if (oldState.value === this.state.value) {
-            return;
-        }
-
-        if (this.state.value === '' || this.state.value == null) {
-            this.props.onChange(null);
-        } else {
-            this.props.onChange(this.getValue(this.state.value));
-        }
-    }
-
-    UNSAFE_componentWillReceiveProps(newProps: NumberInputProps) {
-        if (this.props.initialValue !== newProps.initialValue) {
-            this.setState(this.getInitialState(newProps.initialValue));
-        }
-    }
-
-    render() {
-        const inputAttr = this.props.attr && this.props.attr.input
-            ? this.props.attr.input : {};
-        const attr = {
-            ...(this.props.attr || {}),
-            input: {
-                ...inputAttr,
-                className: css('no-cancel'),
-                step: this.props.step,
-                min: this.props.min,
-                max: this.props.max,
-                onKeyDown: this.onKeyDown,
-                onPaste: this.onPaste,
-            }
-        };
-
-        return (
-            <TextInput
-                name={this.props.name}
-                value={this.state.value}
-                placeholder={this.props.placeholder}
-                type='number'
-                className={this.props.className}
-                prefix={this.props.prefix}
-                postfix={this.props.postfix}
-                error={this.props.error}
-                disabled={this.props.disabled}
-                readOnly={this.props.readOnly}
-                autoFocus={this.props.autoFocus}
-                onChange={this.onChange}
-                required={this.props.required}
-                attr={attr}
-            />
-        );
-    }
-}
+    return (
+        <TextInput
+            name={props.name}
+            value={value}
+            placeholder={props.placeholder}
+            type='number'
+            className={props.className}
+            prefix={props.prefix}
+            postfix={props.postfix}
+            error={props.error}
+            disabled={props.disabled}
+            readOnly={props.readOnly}
+            autoFocus={props.autoFocus}
+            onChange={onChange}
+            required={props.required}
+            attr={attr}
+        />
+    );
+});
 
 export default NumberInput;

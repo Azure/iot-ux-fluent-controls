@@ -6,8 +6,6 @@ import { getLocalMonths, getLocalWeekdays } from './helpers';
 import { keyCode, MethodDate, weekLength } from '../../Common';
 const css = classNames.bind(require('./Calendar.module.scss'));
 
-export interface CalendarComponentType { }
-
 export interface CalendarAttributes {
     container?: DivProps;
     header?: DivProps;
@@ -20,7 +18,7 @@ export interface CalendarAttributes {
     dateRow?: DivProps;
 }
 
-export interface CalendarProps extends React.Props<CalendarComponentType> {
+export interface CalendarProps {
     /** Current selected date */
     value?: Date | string;
     /** i18n locale */
@@ -52,8 +50,6 @@ export interface CalendarProps extends React.Props<CalendarComponentType> {
 export interface CalendarState {
     /** Date of the current month open in view */
     currentDate: MethodDate;
-    /** Whether or not props.year/month updates update the view */
-    detached: boolean;
 }
 
 /**
@@ -62,159 +58,89 @@ export interface CalendarState {
  * @param props Control properties (defined in `CalendarProps` interface)
  * @deprecated This is not fully localized/accessible. Use https://developer.microsoft.com/en-us/fabric/#/controls/web/datepicker instead.
  */
-export class Calendar extends React.Component<CalendarProps, Partial<CalendarState>> {
-    static defaultProps = {
-        localTimezone: true,
-        attr: {
-            container: {},
-            header: {},
-            monthHeader: {},
-            prevMonthButton: {},
-            nextMonthButton: {},
-            weekDayHeader: {},
-            dateContainer: {},
-            dateButton: {},
-            dateRow: {},
-        }
-    };
+export const Calendar = React.memo((props: CalendarProps) => {
+    const localTimezone = props.localTimezone ?? true;
 
-    private value: MethodDate;
-    private monthNames: string[];
-    private dayNames: string[];
-    private _container: HTMLDivElement;
-    private nextFocusRow?: number;
-    private nextFocusCol?: number;
-
-
-    constructor(props: CalendarProps) {
-        super(props);
-
-        if (typeof (this.props.value) === 'string') {
-            this.value = MethodDate.fromString(this.props.localTimezone, this.props.value);
-        } else if (this.props.value) {
-            this.value = MethodDate.fromDate(this.props.localTimezone, this.props.value);
-        } else {
-            this.value = new MethodDate(this.props.localTimezone);
-        }
-
-        let currentDate = this.value.copy();
-        if (props.year > 0) {
-            currentDate.year = props.year;
-        }
-        if (props.month === 0 || props.month > 0) {
-            currentDate.month = props.month;
-        }
-        currentDate.date = 1;
-        this.state = {
-            currentDate: currentDate,
-            detached: false
+    const { monthNames, dayNames } = React.useMemo(() => {
+        return {
+            monthNames: getLocalMonths(props.locale),
+            dayNames: getLocalWeekdays(props.locale)
         };
+    }, [props.locale]);
 
-        this.monthNames = getLocalMonths(this.props.locale);
+    const containerRef = React.useRef<HTMLDivElement>();
+    const nextFocusCol = React.useRef<number | undefined>();
+    const nextFocusRow = React.useRef<number | undefined>();
 
-        this.dayNames = getLocalWeekdays(this.props.locale);
-
-        this.onPrevMonth = this.onPrevMonth.bind(this);
-        this.onNextMonth = this.onNextMonth.bind(this);
-        this.onKeyDown = this.onKeyDown.bind(this);
-        this.setContainerRef = this.setContainerRef.bind(this);
-    }
-
-    UNSAFE_componentWillReceiveProps(newProps: CalendarProps) {
-        const date = this.state.currentDate.copy();
-        let update = false;
-        if (newProps.year !== this.props.year && newProps.year > 0) {
-            date.year = newProps.year;
-            update = true;
+    const value = React.useMemo(() => {
+        if (typeof (props.value) === 'string') {
+            return MethodDate.fromString(localTimezone, props.value);
+        } else if (props.value) {
+            return MethodDate.fromDate(localTimezone, props.value);
         }
-        if (
-            typeof (newProps.month) === 'number' &&
-            newProps.month !== this.props.month &&
-            (newProps.month === 0 || newProps.month > 0)
-        ) {
-            date.month = newProps.month;
-            update = true;
-        }
-        if (update && !this.state.detached && date.isValid()) {
-            this.setState({ currentDate: date });
-        }
-        if (this.props.value !== newProps.value || this.props.localTimezone !== newProps.localTimezone) {
-            if (typeof (newProps.value) === 'string') {
-                this.value = MethodDate.fromString(newProps.localTimezone, newProps.value);
-            } else if (newProps.value) {
-                this.value = MethodDate.fromDate(newProps.localTimezone, newProps.value);
-            } else {
-                this.value = new MethodDate(newProps.localTimezone);
+        return new MethodDate(localTimezone);
+    }, [props.value, localTimezone]);
+
+    // We use a date instead of just year and month to delegate the decrement and increment logic to the date object
+    const [displayDate, setDisplayDate] = React.useState(() => getNewDate(value, props.year, props.month));
+    React.useEffect(() => {
+        setDisplayDate(currentDate => getNewDate(currentDate, props.year, props.month));
+    }, [value, props.month, props.year]);
+
+    const decrementMonth = React.useCallback(() => {
+        setDisplayDate(currentDate => {
+            /** Dates are mutable so we're going to copy it over */
+            const newDate = currentDate.copy();
+            const curDate = newDate.date;
+            const targetMonth = newDate.month === 0 ? 11 : newDate.month - 1;
+            newDate.month -= 1;
+
+            if (newDate.month !== targetMonth || newDate.date !== curDate) {
+                newDate.date = 1;
+                newDate.month = targetMonth + 1;
+                newDate.date = 0;
             }
-        }
-    }
 
-    componentDidUpdate() {
-        if (this.nextFocusRow != null && this.nextFocusCol != null) {
-            const nextFocus = this._container.querySelectorAll(`[data-row="${this.nextFocusRow}"][data-col="${this.nextFocusCol}"]`)[0] as HTMLElement;
-            if (nextFocus != null) {
-                nextFocus.focus();
+            return newDate;
+        });
+    }, [setDisplayDate]);
+
+    const incrementMonth = React.useCallback(() => {
+        setDisplayDate(currentDate => {
+            /** Dates are mutable so we're going to copy it over */
+            const newDate = currentDate.copy();
+            const curDate = newDate.date;
+            const targetMonth = newDate.month === 11 ? 0 : newDate.month + 1;
+            newDate.month += 1;
+
+            if (newDate.month !== targetMonth || newDate.date !== curDate) {
+                newDate.date = 1;
+                newDate.month = targetMonth + 1;
             }
-            this.nextFocusRow = undefined;
-            this.nextFocusCol = undefined;
-        }
-    }
 
-    onClick(date: MethodDate) {
-        if (this.props.onChange) {
-            this.props.onChange(date.dateObject);
-            this.setState({
-                currentDate: MethodDate.fromDate(this.props.localTimezone, date.dateObject),
-                detached: false
-            });
-        }
-    }
+            return newDate;
+        });
+    }, [setDisplayDate]);
 
-    onPrevMonth(event) {
+    const onPrevMonth = React.useCallback((event: React.SyntheticEvent) => {
         event.preventDefault();
+        decrementMonth();
+    }, [decrementMonth]);
 
-        this.decrementMonth();
-    }
-
-    onNextMonth(event) {
+    const onNextMonth = React.useCallback((event: React.SyntheticEvent) => {
         event.preventDefault();
+        incrementMonth();
+    }, [incrementMonth]);
 
-        this.incrementMonth();
-    }
+    const onClick = React.useCallback((date: MethodDate) => {
+        props.onChange && props.onChange(date.dateObject);
+        setDisplayDate(MethodDate.fromDate(localTimezone, date.dateObject));
+    }, [props.onChange, localTimezone, setDisplayDate]);
 
-    decrementMonth() {
-        /** Dates are mutable so we're going to copy it over */
-        const newDate = this.state.currentDate.copy();
-        const curDate = newDate.date;
-        const targetMonth = newDate.month === 0 ? 11 : newDate.month - 1;
-        newDate.month -= 1;
-
-        if (newDate.month !== targetMonth || newDate.date !== curDate) {
-            newDate.date = 1;
-            newDate.month = targetMonth + 1;
-            newDate.date = 0;
-        }
-        this.setState({ currentDate: newDate, detached: true });
-    }
-
-    incrementMonth() {
-        /** Dates are mutable so we're going to copy it over */
-        const newDate = this.state.currentDate.copy();
-        const curDate = newDate.date;
-        const targetMonth = newDate.month === 11 ? 0 : newDate.month + 1;
-        newDate.month += 1;
-
-        if (newDate.month !== targetMonth || newDate.date !== curDate) {
-            newDate.date = 1;
-            newDate.month = targetMonth + 1;
-        }
-        this.setState({ currentDate: newDate, detached: true });
-    }
-
-    onKeyDown(e: React.KeyboardEvent<any>) {
+    const onKeyDown = React.useCallback((e: React.KeyboardEvent<HTMLElement>) => {
         const element: HTMLElement = e.currentTarget;
-        const row = parseInt(element.getAttribute('data-row'), 10);
-        const col = parseInt(element.getAttribute('data-col'), 10);
+        const row = parseInt(element.getAttribute('data-row'));
+        const col = parseInt(element.getAttribute('data-col'));
 
         if (!isNaN(row) && !isNaN(col)) {
             let nextRow = row;
@@ -224,16 +150,16 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                 case keyCode.pagedown:
                     e.preventDefault();
                     e.stopPropagation();
-                    this.nextFocusCol = nextCol;
-                    this.nextFocusRow = nextRow;
-                    this.incrementMonth();
+                    nextFocusCol.current = nextCol;
+                    nextFocusRow.current = nextRow;
+                    incrementMonth();
                     break;
                 case keyCode.pageup:
                     e.preventDefault();
                     e.stopPropagation();
-                    this.nextFocusCol = nextCol;
-                    this.nextFocusRow = nextRow;
-                    this.decrementMonth();
+                    nextFocusCol.current = nextCol;
+                    nextFocusRow.current = nextRow;
+                    decrementMonth();
                     break;
                 case keyCode.up:
                     e.preventDefault();
@@ -264,44 +190,41 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                     }
                     break;
             }
-            nextFocus = this._container.querySelectorAll(`[data-row="${nextRow}"][data-col="${nextCol}"]`)[0] as HTMLElement;
+            nextFocus = containerRef.current.querySelectorAll(`[data-row="${nextRow}"][data-col="${nextCol}"]`)[0] as HTMLElement;
             // if we found the next button to focus on, focus it
             if (nextFocus != null) {
                 nextFocus.focus();
             }
         }
-    }
+    }, [incrementMonth, decrementMonth]);
 
-    setContainerRef(element: HTMLDivElement) {
-        this._container = element;
-    }
+    const rowClassName = css('calendar-row');
+    const colClassName = css('disabled');
 
-    render() {
-        const rowClassName = css('calendar-row');
-        const colClassName = css('disabled');
+    const weekdays = dayNames.map(day => {
+        return (
+            <Attr.div key={day} attr={props.attr?.weekDayHeader}>
+                {day}
+            </Attr.div>
+        );
+    });
 
-        const curYear = this.state.currentDate.year;
-        const curMonth = this.state.currentDate.month;
+    const curYear = displayDate.year;
+    const curMonth = displayDate.month;
 
-        const weekdays = this.dayNames.map(day => {
-            return (
-                <Attr.div key={day} attr={this.props.attr.weekDayHeader}>
-                    {day}
-                </Attr.div>
-            );
-        });
-
+    const rows = React.useMemo<MethodDate[][]>(() => {
         // First day of `month`
-        let start = this.state.currentDate.copy();
+        const start = displayDate.copy();
         start.date = 1;
 
         // Last day of `month`
-        let end = this.state.currentDate.copy();
+        const end = displayDate.copy();
         end.date = 1;
         end.month += 1;
         end.date = 0;
 
-        let rows = [], row = [];
+        const rows: MethodDate[][] = [];
+        let row: MethodDate[] = [];
 
         start.date = start.date - start.dateObject.getDay();
         end.date = end.date + (6 - end.dateObject.getDay());
@@ -316,132 +239,165 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             start.date += 1;
         }
 
-        const content = rows.map((row, rowIndex) => {
-            let inner = row.map((col, colIndex) => {
-                const onClick = (event) => {
-                    this.onClick(col);
-                    event.preventDefault();
-                };
+        return rows;
+    }, [displayDate, localTimezone]);
 
-                const date = col.date;
-                const colMonth = col.month;
-                const key = `${colMonth}-${date}`;
-                const ariaLabel = new Date(`${curYear}-${colMonth + 1}-${date}`).toLocaleDateString(this.props.locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    React.useEffect(() => {
+        if (nextFocusRow.current != null && nextFocusCol.current != null) {
+            const nextFocus = containerRef.current.querySelectorAll(`[data-row="${nextFocusRow.current}"][data-col="${nextFocusCol.current}"]`)[0] as HTMLElement;
+            if (nextFocus != null) {
+                nextFocus.focus();
+            }
+            nextFocusRow.current = undefined;
+            nextFocusCol.current = undefined;
+        }
+    });
 
-                /** Grayed out day from another month */
-                if (colMonth !== curMonth) {
-                    return (
-                        <Attr.button
-                            type='button'
-                            aria-label={ariaLabel}
-                            data-row={rowIndex}
-                            data-col={colIndex}
-                            onKeyDown={this.onKeyDown}
-                            className={colClassName}
-                            onClick={onClick}
-                            key={key}
-                            attr={this.props.attr.dateButton}
-                        >
-                            {date}
-                        </Attr.button>
-                    );
-                }
+    const content = rows.map((row, rowIndex) => {
+        let inner = row.map((col, colIndex) => {
+            const handleClick = (event: React.SyntheticEvent) => {
+                onClick(col);
+                event.preventDefault();
+            };
 
-                /** Selected day */
-                if (this.props.value) {
-                    const isSelected = (
-                        this.props.value &&
-                        date === this.value.date &&
-                        col.month === this.value.month &&
-                        col.year === this.value.year
-                    );
-                    if (isSelected) {
-                        return (
-                            <Attr.button
-                                type='button'
-                                aria-label={ariaLabel}
-                                data-row={rowIndex}
-                                data-col={colIndex}
-                                onKeyDown={this.onKeyDown}
-                                className={css('selected')}
-                                onClick={onClick}
-                                key={key}
-                                attr={this.props.attr.dateButton}
-                            >
-                                {date}
-                            </Attr.button>
-                        );
-                    }
-                }
+            const date = col.date;
+            const colMonth = col.month;
+            const key = `${colMonth}-${date}`;
+            const ariaLabel = new Date(`${curYear}-${colMonth + 1}-${date}`).toLocaleDateString(props.locale, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 
-                /** Everything else */
+            /** Grayed out day from another month */
+            if (colMonth !== curMonth) {
                 return (
                     <Attr.button
                         type='button'
                         aria-label={ariaLabel}
                         data-row={rowIndex}
                         data-col={colIndex}
-                        onKeyDown={this.onKeyDown}
-                        onClick={onClick}
+                        onKeyDown={onKeyDown}
+                        className={colClassName}
+                        onClick={handleClick}
                         key={key}
-                        attr={this.props.attr.dateButton}
+                        attr={props.attr?.dateButton}
                     >
                         {date}
                     </Attr.button>
                 );
-            });
+            }
 
+            /** Selected day */
+            if (props.value) {
+                const isSelected = (
+                    date === value.date &&
+                    col.month === value.month &&
+                    col.year === value.year
+                );
+                if (isSelected) {
+                    return (
+                        <Attr.button
+                            type='button'
+                            aria-label={ariaLabel}
+                            data-row={rowIndex}
+                            data-col={colIndex}
+                            onKeyDown={onKeyDown}
+                            className={css('selected')}
+                            onClick={handleClick}
+                            key={key}
+                            attr={props.attr?.dateButton}
+                        >
+                            {date}
+                        </Attr.button>
+                    );
+                }
+            }
+
+            /** Everything else */
             return (
-                <Attr.div
-                    className={rowClassName}
-                    key={rowIndex}
-                    attr={this.props.attr.dateRow}
+                <Attr.button
+                    type='button'
+                    aria-label={ariaLabel}
+                    data-row={rowIndex}
+                    data-col={colIndex}
+                    onKeyDown={onKeyDown}
+                    onClick={handleClick}
+                    key={key}
+                    attr={props.attr?.dateButton}
                 >
-                    {inner}
-                </Attr.div>
+                    {date}
+                </Attr.button>
             );
         });
+
         return (
             <Attr.div
-                methodRef={this.setContainerRef}
-                className={css('calendar', this.props.className)}
-                attr={this.props.attr.container}
+                className={rowClassName}
+                key={rowIndex}
+                attr={props.attr?.dateRow}
             >
-                <Attr.div
-                    className={css('calendar-header')}
-                    attr={this.props.attr.header}
-                >
-                    <Attr.div
-                        className={css('calendar-month')}
-                        attr={this.props.attr.monthHeader}
-                    >
-                        {`${this.monthNames[curMonth]} ${curYear}`}
-                    </Attr.div>
-                    <div className={css('action-bar')}>
-                        <ActionTriggerButton
-                            className={css('calendar-chevron')}
-                            onClick={this.onPrevMonth}
-                            icon='chevronUp'
-                            attr={this.props.attr.prevMonthButton}
-                        />
-                        <ActionTriggerButton
-                            icon='chevronDown'
-                            className={css('calendar-chevron')}
-                            onClick={this.onNextMonth}
-                            attr={this.props.attr.nextMonthButton}
-                        />
-                    </div>
-                </Attr.div>
-                <Attr.div
-                    className={css('calendar-days')}
-                    attr={this.props.attr.dateContainer}
-                >
-                    {weekdays}
-                </Attr.div>
-                {content}
+                {inner}
             </Attr.div>
         );
+    });
+
+    return (
+        <Attr.div
+            methodRef={containerRef}
+            className={css('calendar', props.className)}
+            attr={props.attr?.container}
+        >
+            <Attr.div
+                className={css('calendar-header')}
+                attr={props.attr?.header}
+            >
+                <Attr.div
+                    className={css('calendar-month')}
+                    attr={props.attr?.monthHeader}
+                >
+                    {`${monthNames[curMonth]} ${curYear}`}
+                </Attr.div>
+                <div className={css('action-bar')}>
+                    <ActionTriggerButton
+                        className={css('calendar-chevron')}
+                        onClick={onPrevMonth}
+                        icon='chevronUp'
+                        attr={props.attr?.prevMonthButton}
+                    />
+                    <ActionTriggerButton
+                        icon='chevronDown'
+                        className={css('calendar-chevron')}
+                        onClick={onNextMonth}
+                        attr={props.attr?.nextMonthButton}
+                    />
+                </div>
+            </Attr.div>
+            <Attr.div
+                className={css('calendar-days')}
+                attr={props.attr?.dateContainer}
+            >
+                {weekdays}
+            </Attr.div>
+            {content}
+        </Attr.div>
+    );
+});
+
+function getNewDate(currentDate: MethodDate, year?: number, month?: number) {
+    const newDate = currentDate.copy();
+
+    if (year && year > 0) {
+        newDate.year = year;
     }
+
+    if (month && month >= 0) {
+        newDate.month = month;
+    }
+
+    newDate.date = 1;
+
+    if (newDate.isValid()) {
+        return newDate;
+    }
+
+    return currentDate;
 }
 
 export default Calendar;

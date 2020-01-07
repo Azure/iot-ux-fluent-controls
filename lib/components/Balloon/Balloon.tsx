@@ -54,100 +54,45 @@ export interface BalloonState {
  *
  * @param props Control properties (defined in `SimpleBalloonProps` interface)
  */
-export class Balloon extends React.Component<BalloonProps, BalloonState> {
-    static defaultProps = {
-        tooltip: undefined,
-        expanded: false,
-        multiline: true,
-        autoPosition: true,
-        attr: {
-            container: {},
-            balloonContainer: {},
-            balloon: {},
-        }
-    };
+export const Balloon = React.memo((props: BalloonProps) => {
+    const [hovered, setHovered] = React.useState(false);
 
-    constructor(props: BalloonProps) {
-        super(props);
+    const visible = React.useMemo(() => hovered || props.expanded, 
+        [hovered, props.expanded]);
 
-        this.state = {
-            hovered: false,
-            visible: this.props.expanded,
-        };
-    }
+    const onMouseEnter = React.useCallback(() => setHovered(true), [setHovered]);
+    const onMouseLeave = React.useCallback(() => setHovered(false), [setHovered]);
 
-    UNSAFE_componentWillReceiveProps(newProps: BalloonProps) {
-        this.setState({
-            visible: this.state.hovered || newProps.expanded,
-        });
-    }
-
-    shouldComponentUpdate(newProps: BalloonProps, newState: BalloonState): boolean {
-        if (newProps !== this.props) {
-            return true;
-        }
-        if (this.state.visible !== newState.visible) {
-            return true;
-        }
-        return false;
-    }
-
-    onMouseEnter = () => {
-        this.setState({
-            hovered: true,
-            visible: true
-        });
-    }
-
-    onMouseLeave = () => {
-        this.setState({
-            hovered: false,
-            visible: this.props.expanded
-        });
-    }
-
-    render() {
-        let {
-            balloonClassName,
-            multiline,
-            className
-        } = this.props;
-
-
-        balloonClassName = css(
-            'balloon-dropdown',
-            balloonClassName
-        );
-        className = css('balloon-container', className);
-        const innerClassName = css('balloon-inner-container', { multiline });
-        return (
-            <Dropdown
-                dropdown={
-                    <Attr.span className={innerClassName} attr={this.props.attr.balloonContent}>
-                        {this.props.tooltip}
-                    </Attr.span>
-                }
-                visible={this.state.visible}
-                className={className}
-                onMouseEnter={this.onMouseEnter}
-                onMouseLeave={this.onMouseLeave}
-                showArrow={true}
-                positionHint={this.props.positionHint}
-                alignmentHint={this.props.alignmentHint}
-                dropdownSeparation={1}
-                attr={{
-                    host: this.props.attr.container,
-                    dropdownContainer: this.props.attr.balloonContainer,
-                    dropdown: mergeAttributes(
-                        this.props.attr.balloon,
-                        {className: balloonClassName}
-                    )
-                }}
-            >
-                {this.props.children}
-            </Dropdown>
-        );
-    }
-}
+    const balloonClassName = css('balloon-dropdown', props.balloonClassName);
+    const className = css('balloon-container', props.className);
+    const innerClassName = css('balloon-inner-container', { multiline: props.multiline ?? true });
+    return (
+        <Dropdown
+            dropdown={
+                <Attr.span className={innerClassName} attr={props.attr?.balloonContent}>
+                    {props.tooltip}
+                </Attr.span>
+            }
+            visible={visible}
+            className={className}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+            showArrow={true}
+            positionHint={props.positionHint}
+            alignmentHint={props.alignmentHint}
+            dropdownSeparation={1}
+            attr={{
+                host: props.attr?.container,
+                dropdownContainer: props.attr?.balloonContainer,
+                dropdown: mergeAttributes(
+                    props.attr?.balloon,
+                    {className: balloonClassName}
+                )
+            }}
+        >
+            {props.children}
+        </Dropdown>
+    );
+});
 
 export default Balloon;

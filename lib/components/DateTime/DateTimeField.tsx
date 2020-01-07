@@ -8,8 +8,6 @@ import { DatePicker, DatePickerAttributes } from './DatePicker';
 import { DivProps, SpanProps, Elements as Attr } from '../../Attributes';
 const css = classNames.bind(require('./DateTimeField.module.scss'));
 
-export interface DateTimeFieldType { }
-
 export interface DateTimeFieldAttributes {
     datePicker?: DatePickerAttributes;
     timeInput?: TimeInputAttributes;
@@ -18,7 +16,7 @@ export interface DateTimeFieldAttributes {
     timeColumn?: SpanProps;
 }
 
-export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
+export interface DateTimeFieldProps {
     /** HTML form element name */
     name: string;
     /** Current value of HTML input element */
@@ -30,8 +28,6 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     error?: MethodNode;
     /** Date format in text input */
     format?: DateFormat;
-    /** Tab index for calendar control */
-    tabIndex?: number;
     /** Label for "AM" select option */
     amLabel?: string;
     /** Label for "PM" select option */
@@ -81,338 +77,229 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     attr?: DateTimeFieldAttributes & FormFieldAttributes;
 }
 
-export interface DateTimeFieldState {
-    initialDate: string | Date;
-    lastDate: string;
-    lastTime: string;
-}
-
 /**
  * High level date time field
  *
  * @param props Control properties (defined in `DateTimeFieldProps` interface)
  * @deprecated This is not fully localized/accessible. Use https://developer.microsoft.com/en-us/fabric/#/controls/web/datepicker instead.
  */
-export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<DateTimeFieldState>> {
-    static defaultProps = {
-        format: DateFormat.MMDDYYYY,
-        tabIndex: -1,
-        localTimezone: true,
-        showAbove: false,
-        showSeconds: false,
-        militaryTime: false,
-        attr: {
-            fieldContainer: {},
-            fieldLabel: {},
-            fieldContent: {},
-            fieldError: {},
-            flexContainer: {},
-            dateColumn: {},
-            timeColumn: {},
-            datePicker: {
-                container: {},
-                inputContainer: {},
-                input: {},
-                inputIcon: {},
-                calendar: {},
-            },
-            timeInput: {
-                container: {},
-                hourSelect: {},
-                hourOption: {},
-                minuteSelect: {},
-                minuteOption: {},
-                secondSelect: {},
-                secondOption: {},
-                periodSelect: {},
-                periodOption: {},
-            }
-        }
-    };
+export const DateTimeField = React.memo((props: DateTimeFieldProps) => {
+    const localTimezone = props.localTimezone ?? true;
 
-    constructor(props: DateTimeFieldProps) {
-        super(props);
-
-        this.state = this.getInitialState(props);
-    }
-
-    getInitialState(props: DateTimeFieldProps): DateTimeFieldState {
-        const local = props.localTimezone;
+    const lastValidDateRef = React.useRef<Date>();
+    const currentDate = React.useMemo(() => {
         let invalid = false;
-        let initialValue = null;
+        let initialDate = null;
+
         if (props.initialValue || props.initialValue === '') {
-            if (typeof props.initialValue === 'string') {
-                const date = new Date(props.initialValue);
-                if (dateIsValid(date, local)) {
-                    /**
-                     * This is where DateTimeField receives an initial Date value
-                     * so this is where localTimezone/GMT have to be handled.
-                     *
-                     * Calling new Date(Date.UTC(year, month, date, ...)) creates
-                     * a Date object that looks like the local timezone but actually
-                     * represents a time in GMT
-                     */
-                    initialValue = local
-                        ? date
-                        : new Date(Date.UTC(
-                            date.getUTCFullYear(),
-                            date.getUTCMonth(),
-                            date.getUTCDate(),
-                            date.getUTCHours(),
-                            date.getUTCMinutes(),
-                            date.getUTCSeconds()
-                        ));
+            const date = props.initialValue 
+                ? new Date(props.initialValue)
+                : new Date();
+
+            let hours: number, minutes: number, seconds: number;
+            if (props.initialValue) {
+                if (localTimezone) {
+                    hours = date.getHours();
+                    minutes = date.getMinutes();
+                    seconds = date.getSeconds();
                 } else {
-                    invalid = true;
+                    hours = date.getUTCHours();
+                    minutes = date.getUTCMinutes();
+                    seconds = date.getUTCSeconds();
                 }
             } else {
-                if (!dateIsValid(props.initialValue, local)) {
-                    invalid = true;
-                } else {
-                    /**
-                     * This is where DateTimeField receives an initial Date value
-                     * so this is where localTimezone/GMT have to be handled.
-                     *
-                     * Calling new Date(Date.UTC(year, month, date, ...)) creates
-                     * a Date object that looks like the local timezone but actually
-                     * represents a time in GMT
-                     */
-                    initialValue = local
-                        ? new Date(props.initialValue)
-                        : new Date(Date.UTC(
-                            props.initialValue.getUTCFullYear(),
-                            props.initialValue.getUTCMonth(),
-                            props.initialValue.getUTCDate(),
-                            props.initialValue.getUTCHours(),
-                            props.initialValue.getUTCMinutes(),
-                            props.initialValue.getUTCSeconds()
-                        ));
-                }
+                hours = minutes = seconds = 0;
+            }
+
+            if (dateIsValid(date, localTimezone)) {
+                /**
+                 * This is where DateTimeField receives an initial Date value
+                 * so this is where localTimezone/GMT have to be handled.
+                 *
+                 * Calling new Date(Date.UTC(year, month, date, ...)) creates
+                 * a Date object that looks like the local timezone but actually
+                 * represents a time in GMT
+                 */
+                initialDate = localTimezone
+                    ? new Date(
+                        date.getFullYear(),
+                        date.getMonth(),
+                        date.getDate(),
+                        hours,
+                        minutes,
+                        seconds)
+                    : new Date(Date.UTC(
+                        date.getUTCFullYear(),
+                        date.getUTCMonth(),
+                        date.getUTCDate(),
+                        hours,
+                        minutes,
+                        seconds
+                    ));
+            } else {
+                invalid = true;
             }
         }
 
-        let defaultTime = null;
-        if (invalid) {
-            const date = new Date();
-            defaultTime = props.localTimezone ? date
-                : new Date(Date.UTC(
-                    date.getUTCFullYear(),
-                    date.getUTCMonth(),
-                    date.getUTCDate(),
-                    date.getUTCHours(),
-                    date.getUTCMinutes(),
-                    date.getUTCSeconds()
-                ));
-        }
+        return invalid ? props.initialValue : initialDate.toJSON();
+    }, [props.initialValue, localTimezone]);
 
-        return {
-            initialDate: invalid ? props.initialValue : initialValue.toJSON(),
-            lastTime: invalid ? defaultTime.toJSON() : initialValue.toJSON(),
-            lastDate: invalid ? 'invalid' : initialValue.toJSON()
-        };
+    if (currentDate !== 'invalid') {
+        lastValidDateRef.current = currentDate;
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: DateTimeFieldProps) {
-        if (this.props.initialValue !== newProps.initialValue || this.props.localTimezone !== newProps.localTimezone) {
-            this.setState(this.getInitialState(newProps));
-        }
-    }
-
-    onDatePaste = (newDate: string): boolean => {
+    const onDatePaste = React.useCallback((newDate: string): boolean => {
         const date = new Date(newDate);
-        if (dateIsValid(date, this.props.localTimezone)) {
+        if (dateIsValid(date, localTimezone)) {
             const utcDate = date.toJSON();
-            this.setState({
-                initialDate: date,
-                lastDate: utcDate,
-                lastTime: utcDate
-            });
-            this.props.onChange(utcDate);
+            props.onChange(utcDate);
             return false;
         }
-        this.setState({
-            lastDate: 'invalid'
-        });
-        this.props.onChange('invalid');
+
+        props.onChange('invalid');
         return true;
-    }
+    }, [localTimezone, props.onChange]);
 
-    onChange = (newDate: string | Date, newTime: string | Date): Date => {
+    const onChange = React.useCallback((newDate: string | Date): Date => {
         if (newDate === '') {
-            this.props.onChange(newDate);
-            return null;
-        }
-        if (newDate === 'invalid' || newTime === 'invalid' || !newDate || !newTime) {
-            this.props.onChange('invalid');
+            props.onChange(newDate);
             return null;
         }
 
-        const date = typeof (newDate) === 'string' ? new Date(newDate) : newDate;
-        const time = typeof (newTime) === 'string' ? new Date(newTime) : newTime;
-        const newValue = this.props.localTimezone
-            ? new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                date.getDate(),
-                time.getHours(),
-                time.getMinutes(),
-                time.getSeconds()
-            ) : new Date(Date.UTC(
+        if (newDate === 'invalid' || !newDate) {
+            props.onChange('invalid');
+            return null;
+        }
+
+        const date = new Date(newDate);
+        const newValue = localTimezone
+            ? date
+            : new Date(Date.UTC(
                 date.getUTCFullYear(),
                 date.getUTCMonth(),
                 date.getUTCDate(),
-                time.getUTCHours(),
-                time.getUTCMinutes(),
-                time.getUTCSeconds()
+                date.getUTCHours(),
+                date.getUTCMinutes(),
+                date.getUTCSeconds()
             ));
+
         const utcValue = newValue.toJSON();
         if (utcValue === 'Invalid Date') {
-            this.props.onChange('invalid');
+            props.onChange('invalid');
         } else {
-            this.props.onChange(utcValue);
+            props.onChange(utcValue);
         }
-        return newValue;
-    }
+    }, [props.onChange]);
 
-    onDateChange = (newDate: string) => {
-        const newValue = this.onChange(newDate, this.state.lastTime);
-        if (newValue) {
-            const utcValue = newValue.toJSON();
-            this.setState({
-                lastTime: utcValue,
-                lastDate: utcValue
-            });
-        } else {
-            this.setState({
-                lastDate: newDate
-            });
-        }
+    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
+    const errorId = `${props.name}-error`;
+    let describedby = errorId;
+    if (tooltipId) {
+        describedby += ' ' + tooltipId;
     }
-
-    onTimeChange = (newTime: string) => {
-        const newValue = this.onChange(this.state.lastDate, newTime);
-        if (newValue) {
-            const utcValue = newValue.toJSON();
-            this.setState({
-                initialDate: newValue,
-                lastTime: utcValue,
-                lastDate: utcValue
-            });
-        }
-    }
-
-    render() {
-        const tooltipId = (!!this.props.tooltip) ? `${this.props.name}-tt` : undefined;
-        const errorId = `${this.props.name}-error`;
-        let describedby = errorId;
-        if (tooltipId) {
-            describedby += ' ' + tooltipId;
-        }
-        const dateAttr: DatePickerAttributes = {
-            input: Object.assign({
-                'aria-describedby': describedby
-            }, this.props.attr.datePicker && this.props.attr.datePicker.input),
-            inputContainer: this.props.attr.datePicker && this.props.attr.datePicker.inputContainer,
-            inputIcon: this.props.attr.datePicker && this.props.attr.datePicker.inputIcon,
-            calendar: this.props.attr.datePicker && this.props.attr.datePicker.calendar
-        };
-        const timeAttr: TimeInputAttributes = {
-            hourSelect: {
-                'aria-describedby': describedby,
-                ...(this.props.attr.timeInput && this.props.attr.timeInput.hourSelect)
-            },
-            minuteSelect: {
-                'aria-describedby': describedby,
-                ...(this.props.attr.timeInput && this.props.attr.timeInput.minuteSelect)
-            },
-            secondSelect: {
-                'aria-describedby': describedby,
-                ...(this.props.attr.timeInput && this.props.attr.timeInput.secondSelect)
-            },
-            periodSelect: {
-                'aria-describedby': describedby,
-                ...(this.props.attr.timeInput && this.props.attr.timeInput.periodSelect)
-            },
-            ...(this.props.attr.timeInput && this.props.attr.timeInput)
-        };
-        const fieldAttr: FormFieldAttributes = {
-            fieldLabel: Object.assign({
+    const dateAttr: DatePickerAttributes = {
+        input: Object.assign({
+            'aria-describedby': describedby
+        }, props.attr?.datePicker?.input),
+        inputContainer: props.attr?.datePicker?.inputContainer,
+        inputIcon: props.attr?.datePicker?.inputIcon,
+        calendar: props.attr?.datePicker?.calendar
+    };
+    const timeAttr: TimeInputAttributes = {
+        hourSelect: {
+            'aria-describedby': describedby,
+            ...(props.attr?.timeInput?.hourSelect || {})
+        },
+        minuteSelect: {
+            'aria-describedby': describedby,
+            ...(props.attr?.timeInput?.minuteSelect || {})
+        },
+        secondSelect: {
+            'aria-describedby': describedby,
+            ...(props.attr?.timeInput?.secondSelect || {})
+        },
+        periodSelect: {
+            'aria-describedby': describedby,
+            ...(props.attr?.timeInput?.periodSelect || {})
+        },
+        ...(props.attr?.timeInput || {})
+    };
+    const fieldAttr: FormFieldAttributes = {
+        fieldLabel: Object.assign({
+            balloon: {
                 balloon: {
-                    balloon: {
-                        id: tooltipId
-                    }
+                    id: tooltipId
                 }
-            }, this.props.attr.fieldLabel),
-            fieldError: Object.assign({
-                id: errorId
-            }, this.props.attr.fieldError),
-            fieldContent: this.props.attr.fieldContent,
-            fieldContainer: this.props.attr.fieldContainer
-        };
+            }
+        }, props.attr?.fieldLabel),
+        fieldError: Object.assign({
+            id: errorId
+        }, props.attr?.fieldError),
+        fieldContent: props.attr?.fieldContent,
+        fieldContainer: props.attr?.fieldContainer
+    };
 
-        return (
-            <FormField
-                name={this.props.name}
-                label={this.props.label}
-                error={this.props.error}
-                loading={this.props.loading}
-                required={this.props.required}
-                hideError={this.props.hideError}
-                className={css('datetime-field', this.props.className)}
-                attr={fieldAttr}
-                tooltip={this.props.tooltip}
-                labelFarSide={this.props.labelFarSide}
-                disabled={this.props.disabled}
+    return (
+        <FormField
+            name={props.name}
+            label={props.label}
+            error={props.error}
+            loading={props.loading}
+            required={props.required}
+            hideError={props.hideError}
+            className={css('datetime-field', props.className)}
+            attr={fieldAttr}
+            tooltip={props.tooltip}
+            labelFarSide={props.labelFarSide}
+            disabled={props.disabled}
+        >
+            <Attr.div
+                className={css('field-content')}
+                attr={props.attr?.flexContainer}
             >
-                <Attr.div
-                    className={css('field-content')}
-                    attr={this.props.attr.flexContainer}
+                <Attr.span
+                    className={css('field-date')}
+                    attr={props.attr?.dateColumn}
                 >
-                    <Attr.span
-                        className={css('field-date')}
-                        attr={this.props.attr.dateColumn}
-                    >
-                        <DatePicker
-                            name={this.props.name}
-                            initialValue={this.state.initialDate}
-                            tabIndex={this.props.tabIndex}
-                            error={!!this.props.error}
-                            disabled={this.props.disabled}
-                            locale={this.props.locale}
-                            localTimezone={this.props.localTimezone}
-                            showAbove={this.props.showAbove}
-                            format={this.props.format}
-                            required={this.props.required}
-                            onPaste={this.onDatePaste}
-                            onChange={this.onDateChange}
-                            onExpand={this.props.onExpand}
-                            className={css('date-picker', this.props.inputClassName)}
-                            attr={dateAttr}
-                        />
-                    </Attr.span>
-                    <Attr.span
-                        className={css('field-time')}
-                        attr={this.props.attr.timeColumn}
-                    >
-                        <TimeInput
-                            name={this.props.name}
-                            value={this.state.lastTime}
-                            amLabel={this.props.amLabel}
-                            pmLabel={this.props.pmLabel}
-                            localTimezone={this.props.localTimezone}
-                            showSeconds={this.props.showSeconds}
-                            militaryTime={this.props.militaryTime}
-                            error={!!this.props.error}
-                            disabled={this.props.disabled}
-                            onChange={this.onTimeChange}
-                            className={css('time-picker', this.props.inputClassName)}
-                            attr={timeAttr}
-                        />
-                    </Attr.span>
-                </Attr.div>
-            </FormField>
-        );
-    }
-}
+                    <DatePicker
+                        name={props.name}
+                        initialValue={currentDate}
+                        error={!!props.error}
+                        disabled={props.disabled}
+                        locale={props.locale}
+                        localTimezone={props.localTimezone}
+                        showAbove={props.showAbove}
+                        format={props.format ?? DateFormat.MMDDYYYY}
+                        required={props.required}
+                        onPaste={onDatePaste}
+                        onChange={onChange}
+                        onExpand={props.onExpand}
+                        className={css('date-picker', props.inputClassName)}
+                        attr={dateAttr}
+                    />
+                </Attr.span>
+                <Attr.span
+                    className={css('field-time')}
+                    attr={props.attr?.timeColumn}
+                >
+                    <TimeInput
+                        name={props.name}
+                        value={lastValidDateRef.current}
+                        amLabel={props.amLabel}
+                        pmLabel={props.pmLabel}
+                        localTimezone={props.localTimezone}
+                        showSeconds={props.showSeconds}
+                        militaryTime={props.militaryTime}
+                        error={!!props.error}
+                        disabled={props.disabled}
+                        onChange={onChange}
+                        className={css('time-picker', props.inputClassName)}
+                        attr={timeAttr}
+                    />
+                </Attr.span>
+            </Attr.div>
+        </FormField>
+    );
+});
 
 export default DateTimeField;
