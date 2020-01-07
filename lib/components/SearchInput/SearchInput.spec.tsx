@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { SearchInput } from './SearchInput';
 import { describe, it } from 'mocha';
 
-describe('<SearchInput />', () => {
+xdescribe('<SearchInput />', () => {
     it(`properly passes all the params with value null, render Search but not the search button`, () => {
         const wrapper = shallow(<SearchInput
             label='search'
