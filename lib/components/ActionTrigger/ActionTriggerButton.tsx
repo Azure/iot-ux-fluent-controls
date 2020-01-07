@@ -29,7 +29,7 @@ export interface ActionTriggerButtonProps {
     className?: string;
 
     /** Button onClick callback */
-    onClick?: (event) => void;
+    onClick?: (event: React.SyntheticEvent) => void;
 
     attr?: ActionTriggerButtonAttributes & ActionTriggerAttributes;    
 }
@@ -50,22 +50,18 @@ const StyledButton = styled(Attr.button)`
         }
     }
 `;
-
-export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonProps> = (props: ActionTriggerButtonProps) => {
+export const ActionTriggerButton = React.memo((props: ActionTriggerButtonProps) => {
     const { onClick, className, disabled, tabIndex, label, attr, icon, rightIcon } = props;
 
     return (
         <StyledButton
             type='button'
             onClick={onClick}
-            className={css('action-trigger-button', {
-                'disabled': disabled
-            }, className)}
+            className={css('action-trigger-button', { disabled }, className)}
             disabled={disabled}
             tabIndex={tabIndex}
             title={label}
-            attr={attr && attr.button}
-        >
+            attr={attr?.button}>
             <ActionTrigger
                 icon={icon}
                 rightIcon={rightIcon}
@@ -75,11 +71,6 @@ export const ActionTriggerButton: React.StatelessComponent<ActionTriggerButtonPr
             />
         </StyledButton>
     );
-};
-
-ActionTriggerButton.defaultProps = {
-    icon: undefined,
-    attr: { button: {}, ...{ container: {}, icon: {}, suffix: {} } }
-};
+});
 
 export default ActionTriggerButton;

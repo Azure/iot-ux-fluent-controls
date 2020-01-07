@@ -5,15 +5,13 @@ import {MethodNode} from '../../Common';
 import {SolidBackground} from './SolidBackground';
 const css = classNames.bind(require('./GalleryCard.module.scss'));
 
-export interface GalleryCardType {}
-
 export interface GalleryCardAttributes {
     container?: DivProps;
     content?: DivProps;
     banner?: DivProps;
 }
 
-export interface GalleryCardProps extends React.Props<GalleryCardType> {
+export interface GalleryCardProps {
     /**
      * Element to display as `GalleryCard` background
      * */
@@ -35,6 +33,8 @@ export interface GalleryCardProps extends React.Props<GalleryCardType> {
     /** Data test hook string for testing */
     dataTestHook?: string;
 
+    children?: React.ReactNode;
+
     attr?: GalleryCardAttributes;
 }
 
@@ -46,82 +46,47 @@ export interface GalleryCardProps extends React.Props<GalleryCardType> {
  *
  * @param props Control properties (Defined in `GalleryCardProps` interface)
  */
-export const GalleryCard: React.StatelessComponent<GalleryCardProps> = (props: GalleryCardProps) => {
-    let classNames = css({
+export const GalleryCard = React.memo((props: GalleryCardProps) => {
+    const className = css({
         'card': true,
-        'fixed': !!props.fixed,
+        'fixed': props.fixed == null || props.fixed,
         'fullbg': !props.children
     }, props.className || '');
 
-    let contentClassName = css({
+    const contentClassName = css({
         'card-content': true,
     }, props.contentClassName);
 
-    let outputProps: any = {
-        className: classNames
-    };
-
-    if (props.dataTestHook) {
-        outputProps['data-test-hook'] = props.dataTestHook;
-    }
-
-    const banner = props.banner ? (
-        <Banner attr={{container: props.attr.banner}}>{props.banner}</Banner>
-    ) : null;
-
-
-    const content = props.children ? (
-        <Attr.div className={contentClassName} attr={props.attr.content}>
-            {props.children}
-        </Attr.div>
-    ) : null;
-
     return (
-        <Attr.div {...outputProps} attr={props.attr.container}>
-            {props.background}
-            {content}
-            {banner}
+        <Attr.div className={className} datatesthook={props.dataTestHook} attr={props.attr?.container}>
+            {props.background ?? <SolidBackground />}
+            {props.children && (
+                <Attr.div className={contentClassName} attr={props.attr?.content}>
+                    {props.children}
+                </Attr.div>
+            )}
+            {props.banner && <Banner attr={{container: props.attr?.banner}}>{props.banner}</Banner>}
         </Attr.div>
     );
-};
-
-GalleryCard.defaultProps = {
-    fixed: true,
-    background: <SolidBackground />,
-    attr: {
-        container: {},
-        content: {},
-        banner: {},
-    }
-};
-
-
-export interface BannerType {}
+});
 
 export interface BannerAttributes {
     container?: DivProps;
 }
 
-export interface BannerProps extends React.Props<BannerType> {
+export interface BannerProps {
     className?: string;
+    children: React.ReactNode;
     attr?: BannerAttributes;
 }
 
 /** TODO: Remove this Banner control. GalleryCard banner is now a string */
-export const Banner: React.StatelessComponent<BannerProps> = (props: BannerProps) => {
-    let cls = css({
-        'banner': true,
-    }, props.className);
-
-    return (<Attr.div className={cls} attr={props.attr.container}>
-        {props.children}
-    </Attr.div>);
-};
-
-Banner.defaultProps = {
-    attr: {
-        container: {}
-    }
-};
+export const Banner = React.memo((props: BannerProps) => {
+    return (
+        <Attr.div className={css('banner', props.className)} attr={props.attr?.container}>
+            {props.children}
+        </Attr.div>
+    );
+});
 
 export default GalleryCard;

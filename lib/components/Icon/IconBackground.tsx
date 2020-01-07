@@ -3,18 +3,16 @@ import * as classNames from 'classnames/bind';
 import {DivProps, Elements as Attr} from '../../Attributes';
 const css = classNames.bind(require('./Icon.module.scss'));
 
-export interface IconBackgroundType {}
-
 export interface IconBackgroundAttributes {
     container?: DivProps;
 }
 
-export interface IconBackgroundProps extends React.Props<IconBackgroundType> {
+export interface IconBackgroundProps {
     /** Background color of circle */
     backgroundColor: string;
 
     /** Circle diameter in pixels */
-    diameter: number;
+    diameter?: number;
     /** Center vertically and horizontally in parent element */
     centered?: boolean;
 
@@ -29,9 +27,9 @@ export interface IconBackgroundProps extends React.Props<IconBackgroundType> {
  *
  * @param props Control properties (Defined by `IconBackgroundProps` interface)
  */
-export const IconBackground: React.StatelessComponent<IconBackgroundProps> = (props: IconBackgroundProps) => {
-    let cls = css({
-        'icon-background': true,
+export const IconBackground = React.memo((props: IconBackgroundProps) => {
+    let cls = css('icon-background',
+    {
         'centered': props.centered
     }, props.className);
 
@@ -45,15 +43,7 @@ export const IconBackground: React.StatelessComponent<IconBackgroundProps> = (pr
         style['borderRadius'] = `${props.diameter / 2}px`;
     }
 
-    return (<Attr.div className={cls} style={style} attr={props.attr.container}/>);
-};
-
-IconBackground.defaultProps = {
-    backgroundColor: undefined,
-    diameter: undefined,
-    attr: {
-        container: {}
-    }
-};
+    return (<Attr.div className={cls} style={style} attr={props.attr?.container}/>);
+});
 
 export default IconBackground;

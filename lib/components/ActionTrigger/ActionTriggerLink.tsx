@@ -27,13 +27,13 @@ export interface ActionTriggerLinkProps {
     attr?: ActionTriggerLinkAttributes & ActionTriggerAttributes;
 }
 
-export const ActionTriggerLink: React.StatelessComponent<ActionTriggerLinkProps> = (props: ActionTriggerLinkProps) => {
+export const ActionTriggerLink = React.memo((props: ActionTriggerLinkProps) => {
     return (
         <Attr.a 
             href={props.href}
             onClick={props.onClick}
             className={props.className}
-            attr={props.attr.anchor}
+            attr={props.attr?.anchor}
         >
             <ActionTrigger
                 icon={props.icon}
@@ -43,12 +43,6 @@ export const ActionTriggerLink: React.StatelessComponent<ActionTriggerLinkProps>
             />
         </Attr.a>
     );
-};
-
-ActionTriggerLink.defaultProps = {
-    icon: undefined,
-    href: undefined,
-    attr: {anchor: {}, icon: {}, ...{container: {}, icon: {}, suffix: {}}}
-};
+});
 
 export default ActionTriggerLink;

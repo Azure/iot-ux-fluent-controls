@@ -53,17 +53,17 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
  *
  * @param props: Object fulfilling `ToggleFieldProps` interface
  */
-export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: ToggleFieldProps) => {
+export const ToggleField = React.memo((props: ToggleFieldProps) => {
     const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const toggleAttr: ToggleAttributes = {
-        container: props.attr.container,
-        button: Object.assign({
+        container: Object.assign({
             'aria-label': props.label,
             'aria-describedby': tooltipId
-        }, props.attr.button),
-        border: props.attr.border,
-        switch: props.attr.switch,
-        text: props.attr.text
+        }, props.attr?.container),
+        button: props.attr?.button,
+        switch: props.attr?.switch,
+        border: props.attr?.border,
+        text: props.attr?.text
     };
     const fieldAttr: FormFieldAttributes = {
         fieldLabel: Object.assign({
@@ -72,10 +72,10 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
                     id: tooltipId
                 }
             }
-        }, props.attr.fieldLabel),
-        fieldError: props.attr.fieldError,
-        fieldContent: props.attr.fieldContent,
-        fieldContainer: props.attr.fieldContainer,
+        }, props.attr?.fieldLabel),
+        fieldError: props.attr?.fieldError,
+        fieldContent: props.attr?.fieldContent,
+        fieldContainer: props.attr?.fieldContainer,
     };
 
     return (
@@ -105,24 +105,6 @@ export const ToggleField: React.StatelessComponent<ToggleFieldProps> = (props: T
             />
         </FormField>
     );
-};
-
-ToggleField.defaultProps = {
-    name: undefined,
-    value: undefined,
-    label: undefined,
-    onChange: undefined,
-    attr: {
-        fieldContainer: {},
-        fieldLabel: {},
-        fieldContent: {},
-        fieldError: {},
-        container: {},
-        button: {},
-        border: {},
-        switch: {},
-        text: {},
-    }
-};
+});
 
 export default ToggleField;
