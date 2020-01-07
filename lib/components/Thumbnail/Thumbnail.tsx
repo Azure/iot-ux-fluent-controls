@@ -72,7 +72,7 @@ export const Thumbnail = React.memo((props: ThumbnailProperties) => {
         return <Attr.div className={className}/>;
     } else {
         const icon = props.icon || kindIcons[props.kind];
-        return <Attr.div className={className} {...props.attr.container}>
+        return <Attr.div className={className} {...props.attr?.container}>
             {
                 props.url && <img className={cx({ 'hidden': !imageLoaded })}
                     role={props.attr?.img?.alt ? null : 'presentation'}
