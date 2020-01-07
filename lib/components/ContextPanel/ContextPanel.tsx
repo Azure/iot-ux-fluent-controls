@@ -25,7 +25,7 @@ export interface ContextPanelProperties {
     };
 }
 
-export function ContextPanel(props: ContextPanelProperties) {
+export const ContextPanel = React.memo((props: ContextPanelProperties) => {
     const panel = <Panel {...props} />;
     
     if (props.omitPortal) {
@@ -37,7 +37,7 @@ export function ContextPanel(props: ContextPanelProperties) {
             {panel}
         </Portal>
     );
-}
+});
 
 function Panel({ header, children, footer, onClose, attr }: ContextPanelProperties) {
     return (

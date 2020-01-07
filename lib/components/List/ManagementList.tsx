@@ -1,8 +1,6 @@
 import * as React from 'react';
 import {GenericManagementList, GenericManagementListProps} from './GenericManagementList';
 
-export interface ManagementListComponentType {}
-
 export type ManagementListProps = GenericManagementListProps<any>;
 
 /**

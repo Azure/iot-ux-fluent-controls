@@ -6,8 +6,6 @@ import {MethodNode, GridColumn, SortDirection} from '../../Common';
 import {CheckboxInput, CheckboxInputAttributes} from '../Input/CheckboxInput';
 const css = classNames.bind(require('./GenericManagementList.module.scss'));
 
-export interface GenericManagementListComponentType {}
-
 export interface GenericManagementListAttributes<T> {
     container?: DivProps;
     column?: DivProps;
@@ -21,7 +19,7 @@ export interface GenericManagementListAttributes<T> {
     selectRowCheckbox?: CheckboxInputAttributes | ((row: T) => CheckboxInputAttributes);
 }
 
-export interface GenericManagementListProps<T> extends React.Props<GenericManagementListComponentType> {
+export interface GenericManagementListProps<T> {
     /**
      * List of `GridColumn` objects that provide mappings from row type T to
      * column values and sorting
@@ -127,10 +125,6 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
             selectRowCheckbox: {},
         }
     };
-
-    constructor(props: Readonly<GenericManagementListProps<T>>) { 
-        super(props);
-    }
 
     render() {
         let columns = this.props.columns.map(() => []);

@@ -61,50 +61,31 @@ const kindIcons = {
     'missing': 'icon-alias-missing-image'
 };
 
-export class Thumbnail extends React.Component<ThumbnailProperties, ThumbnailState> {
-    private imgRef = React.createRef<HTMLImageElement>();
-    
-    constructor(props: ThumbnailProperties) {
-        super(props);
-        this.state = { imageLoaded: false };
-    }
+export const Thumbnail = React.memo((props: ThumbnailProperties) => {
+    const [imageLoaded, setImageLoaded] = React.useState(false);
 
-    render() {
-        const className = cx('circle', this.props.size || 'preview', this.props.className);
-        if (this.props.loading) {
-            return <Attr.div className={className}/>;
-        } else {
-            let icon = this.props.icon || kindIcons[this.props.kind];
-            return <Attr.div className={className} {...this.props.attr.container}>
-                {!!this.props.url
-                    ? <img className={cx({ 'hidden': !this.state.imageLoaded })}
-                        role={this.props.attr?.img?.alt ? null : 'presentation'}
-                        alt={this.props.attr?.img?.alt ?? ''}
-                        ref={this.imgRef}
-                        src={this.props.url}
-                        aria-label={this.props.ariaLabel}
-                        onLoad={this.handleImageLoad}
-                        onError={this.handleError}
-                        {...this.props.attr.img} />
-                    : null}
-                {!!icon
-                    ? <span className={cx('icon', icon, { 'hidden': this.state.imageLoaded })} />
-                    : null}
-            </Attr.div>;
-        }
-    }
+    const handleError = React.useCallback(() => setImageLoaded(false), [setImageLoaded]);
+    const handleImageLoad = React.useCallback(() => setImageLoaded(true), [setImageLoaded]);
 
-    private handleError = () => {
-        this.setState({
-            imageLoaded: false
-        });
+    const className = cx('circle', props.size || 'preview', props.className);
+    if (props.loading) {
+        return <Attr.div className={className}/>;
+    } else {
+        const icon = props.icon || kindIcons[props.kind];
+        return <Attr.div className={className} {...props.attr.container}>
+            {
+                props.url && <img className={cx({ 'hidden': !imageLoaded })}
+                    role={props.attr?.img?.alt ? null : 'presentation'}
+                    alt={props.attr?.img?.alt ?? ''}
+                    src={props.url}
+                    aria-label={props.ariaLabel}
+                    onLoad={handleImageLoad}
+                    onError={handleError}
+                    {...(props.attr?.img || {})} />
+            }
+            {icon && <span className={cx('icon', icon, { 'hidden': imageLoaded })} />}
+        </Attr.div>;
     }
-
-    private handleImageLoad = () => {
-        this.setState({
-            imageLoaded: true
-        });
-    }
-}
+});
 
 export default Thumbnail;

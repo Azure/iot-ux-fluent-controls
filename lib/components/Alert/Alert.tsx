@@ -12,8 +12,6 @@ export enum AlertType {
     Success
 }
 
-export interface AlertComponentType {}
-
 export interface AlertAttributes {
     container?: DivProps;
     icon?: IconAttributes;
@@ -21,7 +19,7 @@ export interface AlertAttributes {
     closeButtonTitle?: string;
 }
 
-export interface AlertProps extends React.Props<AlertComponentType> {
+export interface AlertProps {
     /** Icon name (from Segoe UI MDL font) */
     icon?: string;
     /**
@@ -51,6 +49,8 @@ export interface AlertProps extends React.Props<AlertComponentType> {
     className?: string;
 
     attr?: AlertAttributes;
+
+    children?: React.ReactNode;
 }
 
 /**
@@ -58,7 +58,7 @@ export interface AlertProps extends React.Props<AlertComponentType> {
  *
  * @param props Control properties (defined in `AlertProps` interface)
  */
-export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) => {
+export const Alert = React.memo((props: AlertProps) => {
     const className = css({
         'alert-container': true,
         'alert-info': props.type == null || props.type === AlertType.Information,
@@ -71,7 +71,7 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
 
     let iconName = props.icon;
     if (!props.icon) {
-        if (props.type === AlertType.Information) {
+        if (props.type == null || props.type === AlertType.Information) {
             iconName = 'info';
         } else if (props.type === AlertType.Warning) {
             iconName = 'warning';
@@ -87,22 +87,21 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
         className={iconClassName}
         size={IconSize.xsmall}
         icon={iconName}
-        attr={props.attr.icon}
+        attr={props.attr?.icon}
     />;
 
     const textClassName = css('alert-text');
     const text = (
         <Attr.div
             className={textClassName}
-            attr={props.attr.contents}
+            attr={props.attr?.contents}
         >
             {props.children}
         </Attr.div>
     );
 
-    let close;
+    let close: React.ReactNode;
     if (props.onClose) {
-        const closeButtonTitle = props.attr && props.attr.closeButtonTitle ? props.attr.closeButtonTitle : undefined;
         close = (
             <ActionTriggerButton
                 className={css('close-button')}
@@ -110,7 +109,7 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
                 icon={'cancel'}
                 attr={{
                     button: {
-                        title: closeButtonTitle
+                        title: props.attr?.closeButtonTitle
                     },
                     container: {
                         className: css('close-button-container')
@@ -121,21 +120,12 @@ export const Alert: React.StatelessComponent<AlertProps> = (props: AlertProps) =
     }
 
     return (
-        <Attr.div className={className} attr={props.attr.container}>
+        <Attr.div className={className} attr={props.attr?.container}>
             {icon}
             {text}
             {close}
         </Attr.div>
     );
-};
-
-Alert.defaultProps = {
-    type: AlertType.Information,
-    attr: {
-        container: {},
-        icon: {},
-        contents: {}
-    }
-};
+});
 
 export default Alert;

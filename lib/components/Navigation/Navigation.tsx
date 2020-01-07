@@ -25,7 +25,7 @@ export interface NavigationItemContainerProperties {
 
 const NavItemHeight = 40;
 
-export function Navigation({ isExpanded, onClick, attr, children, farBottomChildren }: NavigationProperties) {    
+export const Navigation = React.memo(({ isExpanded, onClick, attr, children, farBottomChildren }: NavigationProperties) => {    
     const selectedBorderRef = React.createRef<HTMLDivElement>();
     const topNavItemsContainer = React.createRef<HTMLDivElement>();
 
@@ -77,7 +77,7 @@ export function Navigation({ isExpanded, onClick, attr, children, farBottomChild
             </div>        
         </Attr.nav>
     );
-}
+});
 
 export function NavigationItemSeparator() {
     return <div className={cx('separator')} />;
