@@ -1,28 +1,38 @@
 # CHANGELOG
 
+## 8.0.0
+### Changed
+- Updated CSS library with new color mapping
+- Updated all controls to use new color mapping the appropriate way
+- Updated icons to support new fluent sizes
+- Removed UNSAFE methods from all controls
+- Added React.memo to some controls and refactored to use hooks
+- Refactored some CSS to remove unused rules
+- Removed StyledComponents
+
 ## 7.0.15
 ### Changed
-Changed `Thumbnail` to properly spread its `attr` property.
+- Changed `Thumbnail` to properly spread its `attr` property.
 
 ## 7.0.14
 ### Changed
-Updated hover sytle of RadioInput
+- Updated hover sytle of RadioInput
 
 ## 7.0.13
 ### Changed
-Added conditional support for role="presentation" for thumbnails without alt text
+- Added conditional support for role="presentation" for thumbnails without alt text
 
 ## 7.0.12
 ### Changed
-Updated sytle of RadioInput.
+- Updated sytle of RadioInput.
 
 ## 7.0.11
 ### Changed
-Removed fill color from SVGs in Navigation.
+- Removed fill color from SVGs in Navigation.
 
 ## 7.0.10
 ### Changed
-Changed `selectRowCheckbox` in `GenericManagementListAttributes` to also be a function of a row.
+- Changed `selectRowCheckbox` in `GenericManagementListAttributes` to also be a function of a row.
 
 ## 7.0.9
 ### Changed

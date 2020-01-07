@@ -1,15 +1,13 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
-import styled, { ThemeProvider, ThemeProps} from 'styled-components';
 
 import { MethodNode } from '../../Common';
 import * as InlinePopup from '../InlinePopup';
 import { NavigationProperties } from '../Navigation/Navigation';
-import { ActionTriggerButton, ActionTriggerAttributes, ActionTriggerButtonAttributes } from '../ActionTrigger';
+import { ActionTriggerAttributes, ActionTriggerButtonAttributes } from '../ActionTrigger';
 import { Elements as Attr } from '../../Attributes';
 import { SearchInput } from '../SearchInput/SearchInput';
 import { TextInputAttributes } from '../Input/TextInput';
-import { ShellTheme  } from '../Shell';
 import { Icon } from '../Icon';
 
 const cx = classnames.bind(require('./Masthead.module.scss'));
@@ -60,7 +58,7 @@ export interface MastheadUserItem {
 }
 
 export interface MastheadProperties {
-    branding: MethodNode;
+    branding: string;
     logo?: MethodNode;
     navigation?: NavigationProperties;
     search?: MastheadSearchItem;
@@ -74,148 +72,107 @@ export interface MastheadProperties {
     user?: React.ReactNode;
 }
 
-// Root container
-const MastheadContainer = styled(Attr.div)`
-    &&&& {
-        color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextMastheadRest};
-        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgMasthead };
-    }
-`;
+export const Masthead = React.memo((props: MastheadProperties) => {
+    const {
+        navigation,
+        user,
+        search,
+        more,
+        logo,
+        branding
+    } = props;
 
-// Translates Shell theme to action button theme under current context.
-function toolbarButtonTheme(theme: ShellTheme): ShellTheme {
-    return theme ? {
-        base: theme.base,
-        colorBgBtnStandardRest: theme.colorBgMasthead,
-        colorBgBtnStandardHover: theme.colorBgMastheadHover,
-        colorBgBtnStandardDisabled: theme.colorBgMastheadDisabled,
-        colorTextBtnStandardRest: theme.colorTextMastheadRest,
-        colorTextBtnStandardDisabled: theme.colorTextMastheadDisabled
-    } : { base: 'light' }; // Theme must be an object.
-}
-
-const StyledButton = styled(Attr.button)`
-    &&&&& {
-        color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnStandardRest};
-        &:hover { 
-            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnStandardHover};
-        }
-    }
-`;
-
-export class Masthead extends React.PureComponent<MastheadProperties> {
-
-    getToolbarItems = () => {
-        if (!this.props.toolbarItems) {
-            return null;
-        }
-        return this.props.toolbarItems.map((item, idx) => {
-            const { label, icon, onClick, selected, attr } = item;
-            return (
-                <li key={idx} className={cx('masthead-toolbar-btn-container', { 'selected-more': this.props.more.selected })}>
-                    <StyledButton
-                        title={label}
-                        attr={attr}
-                        onClick={onClick}
-                        className={cx('masthead-btn', 'masthead-toolbar-btn', { selected })}>
-                            <Icon icon={icon}>{label}</Icon>
-                    </StyledButton>
-                </li>
-            );
-        });
-    }
-
-    render() {
-        const {
-            navigation,
-            user,
-            search,
-            more,
-            logo,
-            branding
-        } = this.props;
-
-        const items = this.getToolbarItems();
-        const expanded = search && search.expanded;
-
+    const items = props.toolbarItems?.map((item, idx) => {
+        const { label, icon, onClick, selected, attr } = item;
         return (
-            <MastheadContainer key='Masthead' role='banner' className={cx('masthead')}>
-                {navigation &&
-                    <InlinePopup.Container
-                        expanded={navigation.isExpanded}
-                        onClick={navigation.onClick}
-                        className={cx('nav-container', { 'force-hide-search': expanded })}>
-                            <StyledButton
-                                className={cx('masthead-btn')}>
-                                    <Icon icon='chevronRight' className={cx({
-                                        'nav-icon-collapsed': !navigation.isExpanded,
-                                        'nav-icon-expanded': navigation.isExpanded, 
-                                    })} />
-                            </StyledButton>
-                        <InlinePopup.Panel alignment='left' className={cx('nav-panel')}>
-                            {navigation.children}
-                            <div className={cx('separator')}></div>
-                            {navigation.farBottomChildren}
-                        </InlinePopup.Panel>
-                    </InlinePopup.Container>
-                }
-                {logo && <Attr.div key={'masthead-logo'} className={cx('masthead-logo', { 'force-hide-search': expanded })}>{logo}</Attr.div>}
-                <Attr.span key={'masthead-branding'} className={cx('masthead-branding', 'inline-text-overflow', { 'force-hide-search': expanded })}>{branding}</Attr.span>
-                {search && <SearchInput
-                    containerClassName={cx('search-input-container', { 'force-show-search': expanded })}
-                    inputClassName={cx('masthead-search-input')}
-                    onChange={search.onChange}
-                    value={search.value}
-                    onSubmit={search.onSubmit}
-                    label={search.label}
-                    attr={search.attr}
-                />}
-                <ThemeProvider theme={toolbarButtonTheme}>
-                    <Attr.div className={cx('masthead-toolbar-container', { 'force-hide-search': expanded })}>
-                        <ul className={cx('masthead-toolbar')}>
-                            {search && <li key='item-search' className={cx('search-button')}>
-                                <StyledButton
-                                    key={search.label}
-                                    attr={{ button: { title: search.label } }}
-                                    onClick={search.onExpand}
-                                    className={cx('masthead-btn')}>
-                                        <Icon icon='search'/>
-                                </StyledButton>
-                            </li>}
-                            {more && !more.selected && items}
-                            {more &&
-                                <li key='item-more' className={cx('more-button')} title={more.attr && more.attr.ariaLabel}>
-                                    <InlinePopup.Container
-                                        expanded={more.selected}
-                                        onClick={more.onClick}
-                                        attr={more.attr}>
-                                        <StyledButton
-                                            attr={more.attr}
-                                            title={more.title}
-                                            onClick={more.onClick}
-                                            className={cx('masthead-btn', 'more-menu-btn', { 'selected': more.selected })}>
-                                                <Icon icon='more'/>
-                                        </StyledButton>
-                                        <InlinePopup.Panel
-                                            alignment='right'
-                                            className={cx('masthead-toolbar-menu')}
-                                        >
-                                            <ul role='menu' id='more-menu'>
-                                                {items}
-                                            </ul>
-                                        </InlinePopup.Panel>
-                                    </InlinePopup.Container>
-                                </li>
-                            }
-                            {user && <li key='user-menu' className={cx('user-menu-item')}>
-                                {user}
-                            </li>}
-                        </ul >
-                    </Attr.div>
-                </ThemeProvider>
-            </MastheadContainer>
+            <li key={idx} className={cx('masthead-toolbar-btn-container', { 'selected-more': props.more?.selected })}>
+                <Attr.button
+                    title={label}
+                    attr={attr}
+                    onClick={onClick}
+                    className={cx('masthead-btn', 'masthead-toolbar-btn', { selected })}>
+                        <Icon icon={icon} labelClassName={cx('inline-text-overflow')}>{label}</Icon>
+                </Attr.button>
+            </li>
         );
-    }
-}
+    });
+    
+    const searchExpanded = search && search.expanded;
+
+    return (
+        <Attr.div key='Masthead' role='banner' className={cx('masthead')}>
+            {navigation && !searchExpanded &&
+                <InlinePopup.Container className={cx('nav-container')}>
+                    <Attr.button
+                        onClick={navigation.onClick}
+                        className={cx('masthead-btn')}>
+                            <Icon icon='chevronRight' className={cx({
+                                'nav-icon-collapsed': !navigation.isExpanded,
+                                'nav-icon-expanded': navigation.isExpanded, 
+                            })} />
+                    </Attr.button>
+                    <InlinePopup.Panel alignment='left' className={cx('nav-panel')} expanded={navigation.isExpanded}>
+                        {navigation.children}
+                        {navigation.farBottomChildren && 
+                            <>
+                                <div className={cx('separator')}></div>
+                                {navigation.farBottomChildren}
+                            </>
+                        }
+                    </InlinePopup.Panel>
+                </InlinePopup.Container>
+            }
+            {logo && !searchExpanded && <Attr.div key={'masthead-logo'} className={cx('masthead-logo')}>{logo}</Attr.div>}
+            {!searchExpanded && <Attr.span key={'masthead-branding'} title={branding} className={cx('masthead-branding', 'inline-text-overflow')}>{branding}</Attr.span>}
+            {search && <SearchInput
+                containerClassName={cx('search-input-container', { 'expanded': searchExpanded })}
+                inputClassName={cx('masthead-search-input')}
+                onChange={search.onChange}
+                value={search.value}
+                onSubmit={search.onSubmit}
+                label={search.label}
+                attr={search.attr}
+            />}
+            {!searchExpanded && <Attr.div className={cx('masthead-toolbar-container')}>
+                <ul className={cx('masthead-toolbar')}>
+                    {search && <li key='item-search' className={cx('search-button')}>
+                        <Attr.button
+                            key={search.label}
+                            attr={{ button: { title: search.label } }}
+                            onClick={search.onExpand}
+                            className={cx('masthead-btn')}>
+                                <Icon icon='search'/>
+                        </Attr.button>
+                    </li>}
+                    {more && !more.selected && items}
+                    {more &&
+                        <li key='item-more' className={cx('more-button')} title={more.attr && more.attr.ariaLabel}>
+                            <InlinePopup.Container attr={more.attr}>
+                                <Attr.button
+                                    attr={more.attr}
+                                    title={more.title}
+                                    onClick={more.onClick}
+                                    className={cx('masthead-btn', 'more-menu-btn', { 'selected': more.selected })}>
+                                        <Icon icon='more'/>
+                                </Attr.button>
+                                <InlinePopup.Panel
+                                    expanded={more.selected}
+                                    alignment='right'
+                                    className={cx('masthead-toolbar-menu')}>
+                                    <ul role='menu' id='more-menu'>
+                                        {items}
+                                    </ul>
+                                </InlinePopup.Panel>
+                            </InlinePopup.Container>
+                        </li>
+                    }
+                    {user && <li key='user-menu' className={cx('user-menu-item')}>
+                        {user}
+                    </li>}
+                </ul >
+            </Attr.div>}
+        </Attr.div>
+    );
+});
 
 export default Masthead;

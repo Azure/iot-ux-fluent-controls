@@ -25,27 +25,21 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
     &:global(.selected) {
       .card {
         box-shadow: var(--depth-3);
-        border: 3px solid var(--color-border-focus);
+        border: 3px solid var(--color-accent);
       }
     }
 
     &:not(:global(.selected)):active {
       .card {
-        border: 1px solid var(--color-border-selected);
+        border: 1px solid var(--color-accent-selected);
         box-shadow: var(--depth-4);
       }
     }
 
-    &:not(:global(.selected)):hover {
-      .card {
-        border: 1px solid var(--color-border-tile-hover);
-        box-shadow: var(--depth-4);
-      }
-    }
-
+    &:not(:global(.selected)):hover,
     &:not(:global(.selected)):focus {
       .card {
-        border: 1px dashed var(--color-border-tile-hover);
+        border: 1px solid var(--color-accent);
         box-shadow: var(--depth-4);
       }
     }
@@ -55,8 +49,9 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
 .card {
   overflow: hidden;
   position: relative;
-  background-color: var(--color-bg-gallery-tile);
-  border: 1px solid var(--color-border-tile);
+  background-color: var(--color-content-background-primary);
+  color: var(--color-foreground-default);
+  border: 1px solid var(--color-foreground-secondary);
   box-shadow: var(--depth-1);
 
   border-radius: $component-border-radius;
@@ -67,20 +62,12 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
   }
 }
 
-.blue {
-  background-color: var(--color-bg-gallery-tile-blue) !important;
-
-  span {
-    color: var(--color-icon-gallery-tile-blue)
-  }
-}
-
 %card-background {
   @include md-box(inline-block, relative);
   width: 100%;
   background-color: transparent;
   transition: $gallery-card-bg-color-transition;
-  border-bottom: 1px solid var(--color-border-tile);
+  border-bottom: 1px solid var(--color-foreground-secondary);
 
   &.fixed {
     width: calc(#{$gallery-card-width} - 2px);
@@ -106,7 +93,15 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
 
 .background-color {
   @extend %card-background;
-  background-color: var(--color-bg-gallery-tile-default);
+  background-color: var(--color-content-background-primary);
+
+  &.blue {
+    background-color: var(--color-accent-selected);
+
+    span {
+      color: var(--color-accent-foreground)
+    }
+  }
 }
 
 .card-content {
@@ -119,7 +114,6 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
     font-size: var(--font-size-h4);
     line-height: var(--line-height-h4);
     font-weight: var(--font-weight-headings);
-    color: var(--color-text-rest);
     margin-bottom: $grid-size;
     flex: 0 0 5*$grid-size;
   }
@@ -128,7 +122,6 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
     @include md-box();
     font-size: var(--font-size-small);
     line-height: $line-height-section;
-    color: var(--color-text-rest);
     overflow: hidden;
   }
 
@@ -149,12 +142,11 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
   left: 0px;
   right: 0px;
   padding: $grid-size;
-  background-color: var(--color-bg-gallery-tile-banner);
-  color: var(--color-text-gallery-tile-banner);
+  background-color: var(--color-foreground-default);
+  color: var(--color-foreground-complementary);
   font-family: var(--font-family-default);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   text-align: center;
-  border-bottom: 1px solid var(--color-border-card-banner);
 }

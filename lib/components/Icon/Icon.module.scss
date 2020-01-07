@@ -11,6 +11,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    padding: 1px;
     
     &:before {
         @include md-box(inline-block, relative);
@@ -35,33 +36,18 @@
     transform: translate(-50%, -50%);
 }
 
-.icon-xsmall {
+.icon-compact {
     @extend %icon;
-    .icon-xsmall:before {
-        font-size: var(--icon-size-xsmall);
-    }
+    font-size: var(--icon-size-compact);
 
     &.centered {
         @extend %centered;
     }
 }
 
-.icon-small {
+.icon-standard {
     @extend %icon;
-    .icon-small:before {
-        font-size: var(--icon-size-small);
-    }
-
-    &.centered {
-        @extend %centered;
-    }
-}
-
-.icon-medium {
-    @extend %icon;
-    .icon-medium:before {
-        font-size: var(--icon-size-medium);
-    }
+    font-size: var(--icon-size-standard);
 
     &.centered {
         @extend %centered;
@@ -70,31 +56,7 @@
 
 .icon-large {
     @extend %icon;
-    .icon-large:before {
-        font-size: var(--icon-size-large);
-    }
-
-    &.centered {
-        @extend %centered;
-    }
-}
-
-.icon-xlarge {
-    @extend %icon;
-    .icon-xlarge:before {
-        font-size: var(--icon-size-xlarge);
-    }
-
-    &.centered {
-        @extend %centered;
-    }
-}
-
-.icon-xxlarge {
-    @extend %icon;
-    .icon-xxlarge:before {
-        font-size: var(--icon-size-xxlarge);
-    }
+    font-size: var(--icon-size-large);
 
     &.centered {
         @extend %centered;
@@ -102,30 +64,18 @@
 }
 
 .icon-background {
-    @include circle(var(--icon-size-medium));
+    @include circle(var(--icon-size-standard));
 
-    &.icon-xsmall {
-        @include circle(var(--icon-size-xsmall));
+    &.icon-compact {
+        @include circle(var(--icon-size-compact));
     }
 
-    &.icon-small {
-        @include circle(var(--icon-size-small));
-    }
-
-    &.icon-medium {
-        @include circle(var(--icon-size-medium));
+    &.icon-standard {
+        @include circle(var(--icon-size-standard));
     }
 
     &.icon-large {
         @include circle(var(--icon-size-large));
-    }
-
-    &.icon-xlarge {
-        @include circle(var(--icon-size-xlarge));
-    }
-
-    &.icon-xxlarge {
-        @include circle(var(--icon-size-xxlarge));
     }
 
     &.centered {

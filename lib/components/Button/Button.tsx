@@ -1,9 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
-import styled, { ThemeProps } from 'styled-components';
 
 import { SpanProps, ButtonProps as AttrButtonProps, Elements as Attr } from '../../Attributes';
-import { ShellTheme } from '../Shell';
 const css = classnames.bind(require('./Button.module.scss'));
 
 export interface ButtonAttributes {
@@ -37,24 +35,6 @@ export interface ButtonProps {
     children?: React.ReactNode;
 }
 
-const StyledPrimaryButton = styled(Attr.button)`
-    &&&&& {
-        color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnPrimaryRest};
-        border-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest};
-        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest};
-
-        &:hover { 
-            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryHover};
-            border-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryHover};
-        }
-        &:disabled {
-            color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnPrimaryDisabled};
-            border-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryDisabled};
-            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryDisabled};
-        }
-    }
-`;
-
 /**
  * Button showing Information, Warning, or Error with text, icon, and optional close button
  *
@@ -66,9 +46,8 @@ export const Button = React.memo((props: ButtonProps) => {
         attr={props.attr?.icon}
     /> : '';
 
-    const ButtonProxy = props.primary ? StyledPrimaryButton : Attr.button;
     return (
-        <ButtonProxy
+        <Attr.button
             type={props.type ?? 'button'}
             title={props.title}
             className={css('btn', {
@@ -80,7 +59,7 @@ export const Button = React.memo((props: ButtonProps) => {
         >
             {icon}
             {props.children}
-        </ButtonProxy>
+        </Attr.button>
     );
 });
 

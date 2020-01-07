@@ -4,40 +4,26 @@ import {Elements as Attr, SpanProps} from '../../Attributes';
 const css = classNames.bind(require('./Icon.module.scss'));
 
 export enum IconSize {
-    // 16px
-    xsmall = 1,
-    // 32px
-    small,
-    // 48px
-    medium,
-    // 64px
+    compact,
+    standard,
     large,
-    // 80px
-    xlarge,
-    // 96px
-    xxlarge
 }
-
-export interface IconType {}
 
 export interface IconAttributes {
     container?: SpanProps;
     label?: SpanProps;
 }
 
-export interface IconProps extends React.Props<IconType> {
+export interface IconProps {
     /** Icon name (from icons.css) */
     icon: string;
 
     /**
      * Icon font size as defined by `IconSize` enum
      *
-     * `IconSize.[xsmall | small | medium | large | xlarge | xxlarge]`
+     * `IconSize.[compact | standard | large]`
      *
-     * Starts at 16 pixels (`IconSize.xsmall`) and increases 16 pixels at a
-     * time until 96 pixels (`IconSize.xxlarge`)
-     *
-     * Defaults: `IconSize.medium` (48x48 pixels)
+     * Defaults: `IconSize.standard`
      */
     size?: IconSize;
     /**
@@ -61,6 +47,7 @@ export interface IconProps extends React.Props<IconType> {
      */
     labelClassName?: string;
 
+    children?: React.ReactNode;
     attr?: IconAttributes;
 }
 
@@ -71,53 +58,40 @@ export interface IconProps extends React.Props<IconType> {
  *
  * @param props Control properties (Defined in `IconProps` interface)
  */
-export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {
-    let iconClassName = `icon-${props.icon}`;
-    let cls = css({
-        'icon-xsmall': props.size === IconSize.xsmall,
-        'icon-small': props.size === IconSize.small,
-        'icon-medium': props.size === IconSize.medium,
+export const Icon = React.memo((props: IconProps) => {
+    const iconClassName = `icon-${props.icon}`;
+    const cls = css({
+        'icon-compact': props.size === IconSize.compact,
+        'icon-standard': props.size == null || props.size === IconSize.standard,
         'icon-large': props.size === IconSize.large,
-        'icon-xlarge': props.size === IconSize.xlarge,
-        'icon-xxlarge': props.size === IconSize.xxlarge,
         'centered': props.centered,
     }, iconClassName, props.className);
 
-    let style = { color: props.color };
-    if (props.fontSize) {
-        style['fontSize'] = `${props.fontSize}px`;
+    const style: any = {};
+    if (props.color) {
+        style.color = props.color;
     }
 
-    let label;
-    if (props.children) {
-        label = (
-            <Attr.span
-                className={props.labelClassName}
-                attr={props.attr.label}
-            >
-                {props.children}
-            </Attr.span>
-        );
+    if (props.fontSize) {
+        style.fontSize = `${props.fontSize}px`;
     }
 
     return (
         <Attr.span
             className={cls}
             style={style}
-            attr={props.attr.container}
+            attr={props.attr?.container}
         >
-            {label}
+            {props.children && (
+                <Attr.span
+                    className={props.labelClassName}
+                    attr={props.attr?.label}
+                >
+                    {props.children}
+                </Attr.span>
+            )}
         </Attr.span>
     );
-};
-
-Icon.defaultProps = {
-    icon: undefined,
-    size: IconSize.medium,
-    attr: {
-        container: {},
-        label: {}
-    }
-};
+});
 
 export default Icon;

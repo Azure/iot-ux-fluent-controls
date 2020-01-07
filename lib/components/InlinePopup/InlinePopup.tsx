@@ -19,13 +19,8 @@ export interface Attributes {
 }
 
 export interface Properties {
-    expanded?: boolean;
-    onClick?: React.EventHandler<any>;
-    className?: string;
-    // force scroll until Panel is in view
-    scrollIntoView?: boolean;
-    // aligns the popup to the left or right
-    alignment?: 'left' | 'right';
+    expanded?: boolean; 
+    className?: string;   
     disabled?: boolean;
     attr?: Attributes;
 }
@@ -34,24 +29,16 @@ export class Container extends React.PureComponent<Properties> {
     public static defaultProps: Partial<Properties> = inlinePopupDefaultProps;
 
     render() {
-        return <div
-            data-test-hook={this.props.attr.dataTestHook}
-            className={cx('inline-popup-container', {
-                'expanded': this.props.expanded,
-                'disabled': this.props.disabled
-            }, this.props.className)}
-        >
-            {React.Children.map(this.props.children, child => React.cloneElement(child as React.ReactElement<any>, {
-                expanded: this.props.expanded,
-                tabIndex: this.props.attr.tabIndex,
-                onClick: this.props.onClick,
-                disabled: this.props.disabled
-            }))}
+        return <div data-test-hook={this.props.attr.dataTestHook} className={cx('inline-popup-container', {
+            'expanded': this.props.expanded,
+            'disabled': this.props.disabled
+        }, this.props.className)}>
+            {this.props.children}
         </div>;
     }
 }
 
-export class Label extends React.Component<Properties & { title?: string }> {
+export class Label extends React.Component<Properties & { title?: string; onClick?: React.EventHandler<any>; }> {
     public static defaultProps: Partial<Properties> = inlinePopupDefaultProps;
 
     render() {
@@ -73,7 +60,7 @@ export class Label extends React.Component<Properties & { title?: string }> {
     }
 }
 
-export class Panel extends React.Component<Properties> {
+export class Panel extends React.Component<Properties & { alignment?: 'left' | 'right'; scrollIntoView?: boolean; }> {
     public static defaultProps: Partial<Properties> = inlinePopupDefaultProps;
     rawElement: HTMLElement;
 

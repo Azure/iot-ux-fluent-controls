@@ -6,9 +6,9 @@ $balloon-min-width: 48*$grid-size;
 
 .balloon-dropdown {
     display: inline-flex;
-    box-shadow: var(--shadow-balloon);
-    background-color: var(--color-bg-balloon);
-    border: 1px solid var(--color-border-controls);
+    box-shadow: 0 8px 10px 0 var(--color-dark-transparent-tenth);
+    background-color: var(--color-content-background-primary);
+    border: 1px solid var(--color-foreground-secondary);
     max-width: $balloon-max-width;
     min-width: $balloon-min-width;
     border-radius: $component-border-radius;

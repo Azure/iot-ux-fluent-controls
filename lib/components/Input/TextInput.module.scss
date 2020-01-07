@@ -1,16 +1,9 @@
 @import '../../common/constants';
 @import '../../common/mixins';
 
-$line-height: 5*$grid-size;
-$line-height-small: 4*$grid-size;
-
-
 .text-input-container {
     @include md-box(flex, relative);
     width: 100%;
-    font-family: var(--font-family-default);
-    font-size: var(--font-size-default);
-    line-height: $line-height;
 
     .input-container {
         @include md-box(block, relative);
@@ -21,9 +14,8 @@ $line-height-small: 4*$grid-size;
         @include md-box(block, relative);
         width: 100%;
         height: $input-height;
-        border: 1px solid var(--color-border-rest);
-        color: var(--color-text-rest);
-        background-color: var(--color-bg-input-rest);
+        border: 1px solid var(--color-foreground-secondary);
+        background-color: var(--color-content-background-primary);
         outline: none;
         max-width: 100%;
         border-radius: $component-border-radius;
@@ -40,7 +32,7 @@ $line-height-small: 4*$grid-size;
         &:active, &:hover, &:focus {
             // inputs look really weird with a dashed outline, so standardize
             // on the solid selected border for all the above states:
-            border: 1px solid var(--color-border-selected);
+            border: 1px solid var(--color-accent-hover);
         }
 
         &:active, &:focus {
@@ -48,28 +40,28 @@ $line-height-small: 4*$grid-size;
                 padding-right: 8*$grid-size;
 
                 + .cancel {
-                    color: var(--color-text-regular);
                     pointer-events: auto;
+                    color: inherit;
                 }
             }
         }
 
         &:disabled {
-            color: var(--color-text-disabled);
-            border: 1px solid var(--color-border-disabled);
-            background-color: var(--color-bg-input-disabled);
+            color: var(--color-foreground-disabled);
+            border: 1px solid var(--color-foreground-disabled);
+            background-color: var(--color-state-disabled);
         }
 
         &::placeholder {
-            color: var(--color-text-disabled);
+            color: var(--color-foreground-disabled);
         }
 
         &::placeholder {
-            color: var(--color-text-placeholder);
+            color: var(--color-foreground-inactive);
         }
 
         &.error:not(:disabled) {
-            border: 1px solid var(--color-border-error);
+            border: 1px solid var(--color-status-danger);
         }
 
         &::-ms-clear {
@@ -85,9 +77,12 @@ $line-height-small: 4*$grid-size;
         @include md-box(absolute, float-right);
         color: transparent;
         font-size: var(--font-size-small);
-        line-height: $line-height-small;
+        line-height: var(--line-size-small);
+        height: var(--line-size-small);
         padding: $grid-size;
-        top: $grid-size;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
         border: none;
         background-color: transparent;
         outline: none;
@@ -101,7 +96,6 @@ $line-height-small: 4*$grid-size;
         }
 
         &:active {
-            color: var(--color-text-regular);
             pointer-events: auto;
         }
 
@@ -112,7 +106,6 @@ $line-height-small: 4*$grid-size;
 
     .prefix {
         @include md-box(table-cell, relative);
-        color: var(--color-text-rest);
         height: $input-height;
         white-space: nowrap;
         flex-grow: 0;
@@ -126,7 +119,6 @@ $line-height-small: 4*$grid-size;
 
     .postfix {
         @include md-box(inline-block, relative);
-        color: var(--color-text-rest);
         height: $input-height;
         white-space: nowrap;
         flex-grow: 0;
@@ -142,10 +134,9 @@ $line-height-small: 4*$grid-size;
 .prefix-addon {
     background-color: transparent;
     padding-right: 2*$grid-size;
-    border-left: 1px solid var(--color-border-rest);
-    border-top:  1px solid var(--color-border-rest);
-    border-bottom:  1px solid var(--color-border-rest);
-    color: var(--color-text-rest);
+    border-left: 1px solid var(--color-foreground-secondary);
+    border-top:  1px solid var(--color-foreground-secondary);
+    border-bottom:  1px solid var(--color-foreground-secondary);
     
     @include rtl {
         padding-right: unset;
@@ -155,10 +146,9 @@ $line-height-small: 4*$grid-size;
 
 .postfix-addon {
     background-color: transparent;
-    border-right:  1px solid var(--color-border-rest);
-    border-top:  1px solid var(--color-border-rest);
-    border-bottom:  1px solid var(--color-border-rest);
-    color: var(--color-text-rest);
+    border-right:  1px solid var(--color-foreground-secondary);
+    border-top:  1px solid var(--color-foreground-secondary);
+    border-bottom:  1px solid var(--color-foreground-secondary);
     padding-left: 2*$grid-size;
 
     @include rtl {

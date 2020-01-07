@@ -2,15 +2,9 @@
 @import '../../common/mixins';
 
 $radio-input-size: 4*$grid-size;
-$line-height: 4*$grid-size;
-$outline-focus-border-width: 1px;
 
 .radio-container {
-    @include md-box(block, relative);
-    font-family: var(--font-family-default);
-    color: var(--color-text-rest);
-    font-size: var(--font-size-default);
-    line-height: $line-height;
+    line-height: var(--line-height-small);
 
     & + &:not(.columns) {
         margin-top: $gutter-xsmall;
@@ -34,7 +28,6 @@ $outline-focus-border-width: 1px;
         height: 0px;
         border: none;
         outline: none;
-        background-color: var(--color-bg-radio-rest);
 
         @include rtl {
             left: unset;
@@ -42,17 +35,11 @@ $outline-focus-border-width: 1px;
         }
 
         &:focus ~ .radio-button:not(.disabled) {
-            border: 1px dashed var(--color-border-focus);
+            border: 1px dashed var(--color-accent);
         }
-
-        &:hover:not(:checked) ~ .radio-button:not(.disabled) {
-            border: 1px solid var(--color-border-radio-hover);
-        }   
     }
 
     .radio-text {
-        @include md-box(inline-block, relative);
-        vertical-align: top;
         padding-left: $gutter-xxsmall;
 
         @include rtl {
@@ -62,21 +49,23 @@ $outline-focus-border-width: 1px;
     }
 
     .radio-fill {
-        @include md-box(inline-block, absolute);
+        position: absolute;
         left: $grid-size;
         top: $grid-size;
         width: 2*$grid-size;
         height: 2*$grid-size;
         border-radius: $grid-size;
+        cursor: pointer;
 
         &.selected {
-            background-color: var(--color-center-radio-selected);
-            &:hover, &:focus {
-                background-color: var(--color-center-radio-selected)
-            }
+            background-color: var(--color-accent);
             &.disabled {
-                background-color: var(--color-center-radio-disabled);
+                background-color: var(--color-foreground-disabled);
             }
+        }
+
+        &.disabled {
+            cursor: not-allowed;
         }
     }
 
@@ -88,16 +77,19 @@ $outline-focus-border-width: 1px;
         @include md-box(inline-block, relative);
         width: $radio-input-size;
         height: $radio-input-size;
-        background-color: var(--color-bg-radio-rest);
-        border: 1px solid var(--color-border-radio-rest);
+        background-color: var(--color-content-background-primary);
+        border: 1px solid var(--color-foreground-default);
         border-radius: $radio-input-size / 2;
         outline: none;
         vertical-align: top;
+        cursor: pointer;
+
         &.selected {
-            border: 1px solid var(--color-border-radio-selected);
+            border: 1px solid var(--color-foreground-default);
         }
         &.disabled {
-            border: 1px solid var(--color-border-radio-disabled);
+            border: 1px solid var(--color-foreground-disabled);
+            cursor: not-allowed;
         }
     }
 
@@ -106,7 +98,16 @@ $outline-focus-border-width: 1px;
         align-items: flex-start;
 
         &.disabled {
-            color: var(--color-text-disabled);
+            color: var(--color-foreground-disabled);
+        }
+
+        &:not(.disabled):not(.selected):hover .radio-fill {
+            background-color: var(--color-foreground-default);
+        }
+
+        &:not(.disabled).selected:hover .radio-fill, 
+        &:not(.disabled).selected:focus .radio-fill {
+            background-color: var(--color-accent-hover);
         }
     }
 

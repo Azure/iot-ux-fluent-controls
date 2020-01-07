@@ -60,9 +60,8 @@ export const ToggleField = React.memo((props: ToggleFieldProps) => {
             'aria-label': props.label,
             'aria-describedby': tooltipId
         }, props.attr?.container),
-        button: props.attr?.button,
-        switch: props.attr?.switch,
-        border: props.attr?.border,
+        switchContainer: props.attr?.switchContainer, 
+        switchCircle: props.attr?.switchCircle,
         text: props.attr?.text
     };
     const fieldAttr: FormFieldAttributes = {

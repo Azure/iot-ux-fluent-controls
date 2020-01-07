@@ -1,10 +1,8 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import styled, { ThemeProps, ThemeConsumer } from 'styled-components';
 import {MethodNode, autoFocusRef} from '../../Common';
 import {DivProps, LabelProps, SpanProps, InputProps, Elements as Attr} from '../../Attributes';
 import {Icon, IconSize, IconAttributes} from '../Icon';
-import {ShellTheme} from '../Shell';
 const css = classNames.bind(require('./CheckboxInput.module.scss'));
 
 export interface CheckboxInputState {
@@ -52,14 +50,6 @@ export interface CheckboxInputProps {
     attr?: CheckboxInputAttributes;
 }
 
-const StyledActiveCheckboxButton = styled(Attr.span)`
-    &&&& {
-        color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnPrimaryRest };
-        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest };
-        border-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest };
-    }
-`;
-
 /**
  * Low level checkbox control
  *
@@ -83,7 +73,6 @@ export const CheckboxInput = React.memo((props: CheckboxInputProps) => {
         props.onChange(!props.checked);
     };
 
-    const CheckboxInputProxy = props.checked ? StyledActiveCheckboxButton : Attr.span;
     return (
         <Attr.div
             className={containerClass}
@@ -109,7 +98,7 @@ export const CheckboxInput = React.memo((props: CheckboxInputProps) => {
                     methodRef={props.autoFocus && autoFocusRef}
                     attr={props.attr?.input}
                 />
-                <CheckboxInputProxy
+                <Attr.span
                     className={css('checkbox-button')}
                     attr={props.attr?.checkbox}
                 />
@@ -123,17 +112,12 @@ export const CheckboxInput = React.memo((props: CheckboxInputProps) => {
                     className={css('checkbox-fill')}
                     attr={props.attr?.indeterminateFill}
                 />
-                <ThemeConsumer>
-                    { theme => 
-                        <Icon
-                            icon='checkMark'
-                            size={IconSize.xsmall}
-                            className={css('checkbox-checkmark')}
-                            attr={props.attr?.checkmarkIcon}
-                            color={theme && theme.colorTextBtnPrimaryRest}
-                        />
-                    }
-                </ThemeConsumer>
+                <Icon
+                    icon='checkMark'
+                    size={IconSize.standard}
+                    className={css('checkbox-checkmark')}
+                    attr={props.attr?.checkmarkIcon}
+                />
             </Attr.label>
         </Attr.div>
     );

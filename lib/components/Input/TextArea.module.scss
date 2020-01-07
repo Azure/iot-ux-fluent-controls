@@ -2,7 +2,6 @@
 @import '../../common/mixins';
 
 $text-area-min-height: 13*$grid-size;
-$line-height: 5*$grid-size;
 
 .textarea-container {
     @include md-box(block, relative);
@@ -31,37 +30,35 @@ $line-height: 5*$grid-size;
     min-height: $text-area-min-height;
     padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
 
-    font-family: var(--font-family-default);
-    color: var(--color-text-rest);
-    border: 1px solid var(--color-border-rest);
-    background-color: var(--color-bg-input-rest);
-    font-size: var(--font-size-default);
-    line-height: $line-height;
+    border: 1px solid var(--color-foreground-secondary);
+    background-color: var(--color-content-background-primary);
     outline: none;
     border-radius: $component-border-radius;
 
     &:active, &:hover, &:focus {
         // inputs look really weird with a dashed outline, so standardize
         // on the solid selected border for all the above states:
-        border: 1px solid var(--color-border-selected);
+        border: 1px solid var(--color-accent-hover);
     }
 
     &:disabled {
-        color: var(--color-text-disabled);
-        border: 1px solid var(--color-border-disabled);
-        background-color: var(--color-bg-input-disabled);
+        color: var(--color-foreground-disabled);
+        border: 1px solid var(--color-foreground-disabled);
+        background-color: var(--color-state-disabled);
+        cursor: not-allowed;
+        resize: none;
 
         &::placeholder {
-            color: var(--color-text-disabled);
+            color: var(--color-foreground-disabled);
         }
     }
 
     &::placeholder {
-        color: var(--color-text-placeholder);
+        color: var(--color-foreground-inactive);
     }
 
     &.error:not(:disabled) {
-        border: 1px solid var(--color-border-error);
+        border: 1px solid var(--color-status-danger);
     }
 
     &::-ms-clear {
