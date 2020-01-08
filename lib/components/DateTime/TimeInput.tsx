@@ -195,6 +195,18 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
         this.setState(newState);
     }
 
+    private optionMap(option, attr) {
+        return <Attr.option
+            value={option.value}
+            key={option.value}
+            disabled={option.disabled}
+            hidden={option.hidden}
+            attr={attr}
+        >
+            {option.label}
+        </Attr.option>;
+    }
+
     render() {
         const hours = this.state.hours < 10 ? `0${this.state.hours}` : this.state.hours;
         const minutes = this.state.minutes < 10 ? `0${this.state.minutes}` : this.state.minutes;
@@ -208,26 +220,14 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
         const numHours = this.props.militaryTime ? 24 : 12;
         for (let index = 0; index < numHours; index++) {
             const value = index < 10 ? `0${index}` : `${index}`;
-            hoursList.push({label: value, value: value});
+            hoursList.push(this.optionMap({label: value, value: value}, this.props.attr.hourOption));
         }
 
         for (let index = 0; index < 60; index++) {
             const value = index < 10 ? `0${index}` : `${index}`;
-            minutesList.push({label: value, value: value});
-            secondsList.push({label: value, value: value});
+            minutesList.push(this.optionMap({label: value, value: value}, this.props.attr.minuteOption));
+            secondsList.push(this.optionMap({label: value, value: value}, this.props.attr.secondOption));
         }
-
-        const optionMap = (option, attr) => {
-            return <Attr.option
-                value={option.value}
-                key={option.value}
-                disabled={option.disabled}
-                hidden={option.hidden}
-                attr={attr}
-            >
-                {option.label}
-            </Attr.option>;
-        };
 
         const period = this.props.militaryTime ? '' : <Attr.select
             name={this.props.name}
@@ -261,9 +261,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             className={inputClassName}
             attr={this.props.attr.secondSelect}
         >
-            {secondsList.map(option =>
-                optionMap(option, this.props.attr.secondOption)
-            )}
+            {secondsList}
         </Attr.select>;
 
         return (
@@ -280,9 +278,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                     className={inputClassName}
                     attr={this.props.attr.hourSelect}
                 >
-                    {hoursList.map(option =>
-                        optionMap(option, this.props.attr.hourOption)
-                    )}
+                    {hoursList}
                 </Attr.select>
                 <Attr.select
                     name={this.props.name}
@@ -293,9 +289,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                     className={inputClassName}
                     attr={this.props.attr.minuteSelect}
                 >
-                    {minutesList.map(option =>
-                        optionMap(option, this.props.attr.minuteOption)
-                    )}
+                    {minutesList}
                 </Attr.select>
                 {secondsInput}
                 {period}
