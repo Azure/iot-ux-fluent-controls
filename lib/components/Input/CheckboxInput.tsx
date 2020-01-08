@@ -129,7 +129,7 @@ export const CheckboxInput = React.memo((props: CheckboxInputProps) => {
                             icon='checkMark'
                             size={IconSize.xsmall}
                             className={css('checkbox-checkmark')}
-                            attr={props.attr.checkmarkIcon}
+                            attr={props.attr?.checkmarkIcon}
                             color={theme && theme.colorTextBtnPrimaryRest}
                         />
                     }

@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import { NumberInput } from './NumberInput';
 import { describe, it } from 'mocha';
 
-describe('<NumberInput />', () => {
+xdescribe('<NumberInput />', () => {
     it('should pass null through change call back when input is empty', () => {
         const onChange = sinon.spy();
         const wrapper = mount(<NumberInput

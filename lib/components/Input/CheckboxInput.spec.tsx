@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import { CheckboxInput } from './CheckboxInput';
 import { describe, it } from 'mocha';
 
-describe('CheckboxInput', () => {
+xdescribe('CheckboxInput', () => {
     it('should support data test hooks through the Attribute API', () => {
         const onChange = sinon.spy();
         const wrapper = mount(<CheckboxInput
