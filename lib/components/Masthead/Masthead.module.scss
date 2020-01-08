@@ -86,7 +86,8 @@ $search-max-size: 100 * $grid-size;
   }
 
   .masthead-logo {
-    height: 100%;
+    display: flex;
+    align-items: center;
     padding: $gutter-xxsmall 0 $gutter-xxsmall $gutter-xsmall;
 
     @include rtl {
