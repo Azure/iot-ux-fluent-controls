@@ -4,9 +4,8 @@
 $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
 
 .navigation {
-    width: $layout-nav-collapsed-width;
-
     // don't allow the size of the nav bar to change:
+    width: $layout-nav-collapsed-width;
     flex-shrink: 0;
     flex-grow: 0;
 
@@ -30,6 +29,7 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
         overflow-x: hidden;
         overflow-y: auto;
         flex-flow: column nowrap;
+        flex-grow: 1;
 
         .global-nav-active-border {
             height: $activeBorderHeight;
@@ -147,7 +147,6 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
     svg {
         height: var(--icon-size-xsmall);
         width: var(--icon-size-xsmall);
-        fill: currentColor;
     }
 }
 
@@ -163,6 +162,5 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
 .global-nav-items {
     display: flex;
     flex-direction: column;
-    height: 100%;
     justify-content: space-between;
 }

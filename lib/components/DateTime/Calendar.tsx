@@ -60,6 +60,7 @@ export interface CalendarState {
  * Calendar control
  *
  * @param props Control properties (defined in `CalendarProps` interface)
+ * @deprecated This is not fully localized/accessible. Use https://developer.microsoft.com/en-us/fabric/#/controls/web/datepicker instead.
  */
 export class Calendar extends React.Component<CalendarProps, Partial<CalendarState>> {
     static defaultProps = {
@@ -119,7 +120,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         this.setContainerRef = this.setContainerRef.bind(this);
     }
 
-    componentWillReceiveProps(newProps: CalendarProps) {
+    UNSAFE_componentWillReceiveProps(newProps: CalendarProps) {
         const date = this.state.currentDate.copy();
         let update = false;
         if (newProps.year !== this.props.year && newProps.year > 0) {

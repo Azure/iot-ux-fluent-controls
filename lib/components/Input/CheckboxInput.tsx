@@ -7,8 +7,6 @@ import {Icon, IconSize, IconAttributes} from '../Icon';
 import {ShellTheme} from '../Shell';
 const css = classNames.bind(require('./CheckboxInput.module.scss'));
 
-export interface CheckboxInputType {}
-
 export interface CheckboxInputState {
     cancelFocused: boolean;
 }
@@ -24,7 +22,7 @@ export interface CheckboxInputAttributes {
     border?: SpanProps;
 }
 
-export interface CheckboxInputProps extends React.Props<CheckboxInputType> {
+export interface CheckboxInputProps {
     /** HTML form element name */
     name: string;
     /** Label for HTML input element */
@@ -69,7 +67,7 @@ const StyledActiveCheckboxButton = styled(Attr.span)`
  *
  * @param props Control properties (defined in `CheckboxInputProps` interface)
  */
-export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (props: CheckboxInputProps) => {
+export const CheckboxInput = React.memo((props: CheckboxInputProps) => {
     const containerClass = css('checkbox-container', {
         'columns': props.columns,
         'disabled': props.disabled,
@@ -90,13 +88,13 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
         <Attr.div
             className={containerClass}
             hidden={props.hidden}
-            attr={props.attr.container}
+            attr={props.attr?.container}
         >
             <Attr.label
                 className={css('checkbox-label')}
                 htmlFor={id}
                 onClick={stopPropagation}
-                attr={props.attr.label}
+                attr={props.attr?.label}
             >
                 <Attr.input
                     id={id}
@@ -109,21 +107,21 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                     onChange={onChange}
                     autoFocus={props.autoFocus}
                     methodRef={props.autoFocus && autoFocusRef}
-                    attr={props.attr.input}
+                    attr={props.attr?.input}
                 />
                 <CheckboxInputProxy
                     className={css('checkbox-button')}
-                    attr={props.attr.checkbox}
+                    attr={props.attr?.checkbox}
                 />
                 <Attr.span
                     className={css('checkbox-text')}
-                    attr={props.attr.text}
+                    attr={props.attr?.text}
                 >
                     {props.label}
                 </Attr.span>
                 <Attr.span
                     className={css('checkbox-fill')}
-                    attr={props.attr.indeterminateFill}
+                    attr={props.attr?.indeterminateFill}
                 />
                 <ThemeConsumer>
                     { theme => 
@@ -131,7 +129,7 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
                             icon='checkMark'
                             size={IconSize.xsmall}
                             className={css('checkbox-checkmark')}
-                            attr={props.attr.checkmarkIcon}
+                            attr={props.attr?.checkmarkIcon}
                             color={theme && theme.colorTextBtnPrimaryRest}
                         />
                     }
@@ -139,28 +137,12 @@ export const CheckboxInput: React.StatelessComponent<CheckboxInputProps> = (prop
             </Attr.label>
         </Attr.div>
     );
-};
+});
 
 function stopPropagation(e: React.MouseEvent<HTMLElement>) {
     // HACK! If we don't add this click event handler to the label, React never
     // fires the input onChange handler in IoT Central.
     e.stopPropagation();
 }
-
-CheckboxInput.defaultProps = {
-    name: undefined,
-    label: undefined,
-    onChange: undefined,
-    attr: {
-        container: {},
-        label: {},
-        input: {},
-        text: {},
-        checkbox: {},
-        indeterminateFill: {},
-        checkmarkIcon: {},
-        border: {},
-    }
-};
 
 export default CheckboxInput;

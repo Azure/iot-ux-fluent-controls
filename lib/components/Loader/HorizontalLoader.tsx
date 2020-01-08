@@ -2,9 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 const css = classNames.bind(require('./HorizontalLoader.module.scss'));
 
-export interface HorizontalLoaderType {}
-
-export interface HorizontalLoaderProps extends React.Props<HorizontalLoaderType> {
+export interface HorizontalLoaderProps {
     /** Icon name (from Segoe UI MDL font) */
     dots?: number;
 
@@ -17,24 +15,21 @@ export interface HorizontalLoaderProps extends React.Props<HorizontalLoaderType>
  *
  * @param props Control properties (defined in `HorizontalLoaderProps` interface)
  */
-export const HorizontalLoader: React.StatelessComponent<HorizontalLoaderProps> = (props: HorizontalLoaderProps) => {
+export const HorizontalLoader = React.memo((props: HorizontalLoaderProps) => {
     const className = css('horizontal-loader-inner');
     const containerClassName = css('horizontal-loader');
+    const numberOfDots = props.dots ?? 6;
 
     let dots = [];
-    for (let i = 0; i < props.dots; i++) {
+    for (let i = 0; i < numberOfDots; i++) {
         dots.push(<div className={className} key={i}><div /></div>);
     }
 
     return (
-        <div className={containerClassName}>
+        <div className={containerClassName} data-test-hook='progressbar'>
             {dots}
         </div>
     );
-};
-
-HorizontalLoader.defaultProps = {
-    dots: 6
-};
+});
 
 export default HorizontalLoader;

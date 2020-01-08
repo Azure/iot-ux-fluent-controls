@@ -62,8 +62,6 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
     label: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
-    /** Error HTML title in case of overflow */
-    errorTitle?: string;
     /** Set error field to display: none */
     hideError?: boolean;
 
@@ -149,7 +147,7 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
 export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: ComboFieldProps) => {
     const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const comboAttr: ComboInputAttributes = {
-        container: props.attr.container,
+        host: props.attr.host,
         input: Object.assign({
             'aria-label': props.label,
             'aria-describedby': tooltipId
@@ -177,7 +175,6 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
             name={props.name}
             label={props.label}
             error={props.error}
-            errorTitle={props.errorTitle}
             hideError={props.hideError}
             loading={props.loading}
             required={props.required}
@@ -223,7 +220,7 @@ ComboField.defaultProps = {
         fieldLabel: {},
         fieldContent: {},
         fieldError: {},
-        container: {},
+        host: {},
         textbox: {},
         input: {},
         clearButton: {},

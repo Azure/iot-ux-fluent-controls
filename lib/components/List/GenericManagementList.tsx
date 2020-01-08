@@ -6,9 +6,7 @@ import {MethodNode, GridColumn, SortDirection} from '../../Common';
 import {CheckboxInput, CheckboxInputAttributes} from '../Input/CheckboxInput';
 const css = classNames.bind(require('./GenericManagementList.module.scss'));
 
-export interface GenericManagementListComponentType {}
-
-export interface GenericManagementListAttributes {
+export interface GenericManagementListAttributes<T> {
     container?: DivProps;
     column?: DivProps;
     rowContent?: DivProps;
@@ -18,10 +16,10 @@ export interface GenericManagementListAttributes {
     selectAllCheckbox?: CheckboxInputAttributes;
     selectAllContainer?: DivProps;
     selectRowContent?: DivProps;
-    selectRowCheckbox?: CheckboxInputAttributes;
+    selectRowCheckbox?: CheckboxInputAttributes | ((row: T) => CheckboxInputAttributes);
 }
 
-export interface GenericManagementListProps<T> extends React.Props<GenericManagementListComponentType> {
+export interface GenericManagementListProps<T> {
     /**
      * List of `GridColumn` objects that provide mappings from row type T to
      * column values and sorting
@@ -90,7 +88,7 @@ export interface GenericManagementListProps<T> extends React.Props<GenericManage
     /** Classname to append to top level element */
     className?: string;
 
-    attr?: GenericManagementListAttributes;
+    attr?: GenericManagementListAttributes<T>;
 }
 
 /**
@@ -127,10 +125,6 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
             selectRowCheckbox: {},
         }
     };
-
-    constructor(props: Readonly<GenericManagementListProps<T>>) { 
-        super(props);
-    }
 
     render() {
         let columns = this.props.columns.map(() => []);
@@ -304,7 +298,10 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                             checked={isSelected}
                             onChange={newValue => this.props.onSelect(row, newValue)}
                             attr={mergeAttributeObjects(
-                                this.props.attr.selectRowCheckbox, {
+                                typeof this.props.attr.selectRowCheckbox === 'function' 
+                                    ? this.props.attr.selectRowCheckbox(row) 
+                                    : this.props.attr.selectRowCheckbox, 
+                                {
                                     checkbox: {
                                         className: css('list-checkbox-button')
                                     },

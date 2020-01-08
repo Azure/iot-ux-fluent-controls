@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as classnames from 'classnames/bind';
 import { ActionTriggerButton, ActionTriggerButtonAttributes, ActionTriggerAttributes } from '../ActionTrigger';
-import { Elements as Attr, DivProps, HeadingProps } from '../../Attributes';
+import { Elements as Attr, SectionProps, AsideProps, DivProps, HeaderProps, HeadingProps, FooterProps } from '../../Attributes';
 import { Portal } from './portal';
 
 const cx = classnames.bind(require('./ContextPanel.module.scss'));
@@ -13,15 +13,19 @@ export interface ContextPanelProperties {
     children?: React.ReactNode;
     footer?: React.ReactNode;
     attr?: {
-        container?: DivProps;
-        header?: HeadingProps;
-        content?: DivProps;
-        footer?: DivProps;
-        closeButton?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
+        container?: AsideProps;
+        contentContainer?: DivProps;
+        header?: {
+            container?: HeaderProps;
+            title?: HeadingProps;
+            closeButton?: ActionTriggerButtonAttributes & ActionTriggerAttributes;
+        }
+        content?: SectionProps;
+        footer?: FooterProps;
     };
 }
 
-export function ContextPanel(props: ContextPanelProperties) {
+export const ContextPanel = React.memo((props: ContextPanelProperties) => {
     const panel = <Panel {...props} />;
     
     if (props.omitPortal) {
@@ -33,39 +37,33 @@ export function ContextPanel(props: ContextPanelProperties) {
             {panel}
         </Portal>
     );
-}
+});
 
 function Panel({ header, children, footer, onClose, attr }: ContextPanelProperties) {
     return (
-        <Attr.div 
-            role='complementary' 
-            aria-labelledby='context-panel-title' 
-            aria-describedby='context-panel-content' 
+        <Attr.aside 
             className={cx('panel')} 
-            attr={attr && attr.container}
-        >
-            <div className={cx('header')}>
-                {header && <Attr.h2 
+            attr={attr?.container}>
+            <Attr.header className={cx('header', 'panel-container')} attr={attr?.header?.container}>
+                <Attr.h2 
                     id='context-panel-title' 
                     className={cx('title', 'inline-text-overflow')} 
-                    attr={attr && attr.header}
-                    >
+                    attr={attr?.header?.title}>
                     {header}
-                </Attr.h2>}
-                {onClose && <ActionTriggerButton
+                </Attr.h2>
+                <ActionTriggerButton
                     icon='cancel'
                     onClick={onClose}
-                    attr={attr && attr.closeButton}
-                />}
-            </div>
-            <Attr.div id='context-panel-content' className={cx('content')} attr={attr && attr.content}>
+                    attr={attr?.header?.closeButton}
+                />
+            </Attr.header>
+            <Attr.section className={cx('content', 'panel-container', { 'with-footer': !!footer })} attr={attr?.content}>
                 {children}
-            </Attr.div>
-            {footer && <React.Fragment>
-                <span className={cx('separator')} />
-                <Attr.div className={cx('footer')} attr={attr && attr.footer}>{footer}</Attr.div>
-            </React.Fragment>}
-        </Attr.div>
+            </Attr.section>
+            {footer && <Attr.footer className={cx('footer', 'panel-container')} attr={attr?.footer}>
+                {footer}
+            </Attr.footer>}
+        </Attr.aside>
     );
 }
 

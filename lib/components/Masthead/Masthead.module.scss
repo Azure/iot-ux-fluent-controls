@@ -16,10 +16,13 @@ $search-max-size: 100 * $grid-size;
 }
 
 .masthead {
-  display: flex;
-  height: $layout-masthead-height;
-  flex-grow: 0;
+  // The masthead should not grow or shrink, it should always be $layout-masthead-height
   flex-shrink: 0;
+  flex-grow: 0;
+  height: $layout-masthead-height;
+
+  // Position its content
+  display: flex;
   justify-content: space-between;
   color: var(--color-text-masthead);
   background-color: var(--color-bg-masthead);
@@ -95,7 +98,7 @@ $search-max-size: 100 * $grid-size;
     width: $masthead-branding-width;
     height: $layout-masthead-height;
     display: inline-block;
-    padding: 0px $gutter-normal;
+    padding: 0px $gutter-small;
     line-height: $layout-masthead-height;
     font-size: var(--font-size-h3);
     font-weight: bold;

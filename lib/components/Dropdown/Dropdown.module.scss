@@ -3,18 +3,160 @@
 
 $dropdown-z-index: $z-index-medium-step;
 $fixed-dropdown-z-index: 9 * $z-index-large-step + 5 * $z-index-medium-step;
+$arrow-size: 2*$grid-size;
 
-.dropdown-container {
-    @include md-box(inline-block, relative);
-    
-    :global(.md-dropdown) {
-        @include md-box(inline-block, absolute);
-        visibility: hidden;
+@mixin arrow($location, $offset: 'start') {
+    &:before {
+        content:'';
+        display:block;
+        width: $arrow-size;
+        height: $arrow-size;
+        background-color: inherit;
+        position: absolute;
+        transform: rotateZ(45deg);
+        
+        @if $location == 'top' {
+            top: calc(#{-1*$grid-size}  - 1px);
+            border-right: unset;
+            border-bottom: unset;
+            border-left: inherit;
+            border-top: inherit;
+            @if $offset == 'start' {
+                left: $gutter-xsmall;
+            } @else if $offset == 'end' {
+                right: $gutter-xsmall;
+            } @else {	
+                left: calc(50% - #{$arrow-size / 2});	
+            }
+        } @else if $location == 'left' {	
+            left: calc(#{-1*$grid-size}  - 1px);
+            border-right: unset;
+            border-bottom: inherit;
+            border-left: inherit;
+            border-top: unset;
+            @if $offset == 'start' {	
+                top: $gutter-xsmall;	
+            } @else if $offset == 'end' {	
+                bottom: $gutter-xsmall;	
+            } @else {	
+                top: calc(50% - #{$arrow-size / 2});	
+            }	
+        } @else if $location == 'right' {	
+            border-right: inherit;
+            border-bottom: unset;
+            border-left: unset;
+            border-top: inherit;
+            right: calc(#{-1*$grid-size}  - 1px);
+            @if $offset == 'start' {	
+                top: $gutter-xsmall;	
+            } @else if $offset == 'end' {	
+                bottom: $gutter-xsmall;	
+            } @else {	
+                top: calc(50% - #{$arrow-size / 2});	
+            }	
+        } @else if $location == 'bottom' {
+            bottom: calc(#{-1*$grid-size}  - 1px);
+            border-top: unset;
+            border-left: unset;
+            border-right: inherit;
+            border-bottom: inherit;            
+            @if $offset == 'start' {
+                left: $gutter-xsmall;
+            } @else if $offset == 'end' {
+                right: $gutter-xsmall;
+            } @else {	
+                left: calc(50% - #{$arrow-size / 2});	
+            }
+        }
+    }
+}
+
+:global(.md-dropdown) {
+    &.top-start {
+        &.with-arrow {
+            @include arrow('bottom', 'start');
+        }
     }
 
+    &.top-center {
+        &.with-arrow {
+            @include arrow('bottom', 'center');
+        }
+    }
+
+    &.top-end {
+        &.with-arrow {
+            @include arrow('bottom', 'end');
+        }
+    }
+
+    &.bottom-start {
+        &.with-arrow {
+            @include arrow('top', 'start');
+        }
+    }
+
+    &.bottom-center {
+        &.with-arrow {
+            @include arrow('top', 'center');
+        }
+    }
+
+    &.bottom-end {
+        &.with-arrow {
+            @include arrow('top', 'end');
+        }
+    }
+
+    &.left-start {
+        &.with-arrow {
+            @include arrow('right', 'start');
+        }
+    }
+
+    &.left-center {
+        &.with-arrow {
+            @include arrow('right', 'center');
+        }
+    }
+
+    &.left-end {
+        &.with-arrow {
+            @include arrow('right', 'end');
+        }
+    }
+
+    &.right-start {
+        &.with-arrow {
+            @include arrow('left', 'start');
+        }
+    }
+
+    &.right-center {
+        &.with-arrow {
+            @include arrow('left', 'center');
+        }
+    }
+
+    &.right-end {
+        &.with-arrow {
+            @include arrow('left', 'end');
+        }
+    }
+}
+
+.dropdown-host {
+    position: relative;
+    overflow: hidden;
+    
     :global(.md-dropdown-container) {
         visibility: hidden;
         pointer-events: none;
+    }
+
+    :global(.md-dropdown) {
+        position: absolute;
+        visibility: hidden
     }
 }
 
@@ -22,7 +164,6 @@ $fixed-dropdown-z-index: 9 * $z-index-large-step + 5 * $z-index-medium-step;
     visibility: visible;
     position: fixed;
     z-index: $fixed-dropdown-z-index;
-    pointer-events: none;
     
     :global(.md-dropdown) {
         visibility: visible;
@@ -31,9 +172,5 @@ $fixed-dropdown-z-index: 9 * $z-index-large-step + 5 * $z-index-medium-step;
         &.interactive {
             pointer-events: auto;
         }
-    }
-
-    &.interactive {
-        pointer-events: auto;
     }
 }

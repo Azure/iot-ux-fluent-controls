@@ -6,14 +6,12 @@ import { SpanProps, ButtonProps as AttrButtonProps, Elements as Attr } from '../
 import { ShellTheme } from '../Shell';
 const css = classnames.bind(require('./Button.module.scss'));
 
-export interface ButtonComponentType { }
-
 export interface ButtonAttributes {
     container?: AttrButtonProps;
     icon?: SpanProps;
 }
 
-export interface ButtonProps extends React.Props<ButtonComponentType> {
+export interface ButtonProps {
     /** Button title attribute */
     title?: string;
     /** Button type attribute */
@@ -35,6 +33,8 @@ export interface ButtonProps extends React.Props<ButtonComponentType> {
     className?: string;
 
     attr?: ButtonAttributes;
+
+    children?: React.ReactNode;
 }
 
 const StyledPrimaryButton = styled(Attr.button)`
@@ -60,37 +60,28 @@ const StyledPrimaryButton = styled(Attr.button)`
  *
  * @param props Control properties (defined in `ButtonProps` interface)
  */
-export const Button: React.StatelessComponent<ButtonProps> = (props: ButtonProps) => {
+export const Button = React.memo((props: ButtonProps) => {
     const icon = props.icon ? <Attr.span
         className={css(`icon icon-${props.icon}`)}
-        attr={props.attr.icon}
+        attr={props.attr?.icon}
     /> : '';
 
     const ButtonProxy = props.primary ? StyledPrimaryButton : Attr.button;
     return (
         <ButtonProxy
-            type={props.type}
+            type={props.type ?? 'button'}
             title={props.title}
             className={css('btn', {
                 'btn-primary': props.primary
             }, props.className)}
             onClick={props.onClick}
             disabled={props.disabled}
-            attr={props.attr.container}
+            attr={props.attr?.container}
         >
             {icon}
             {props.children}
         </ButtonProxy>
     );
-};
-
-Button.defaultProps = {
-    onClick: undefined,
-    type: 'button',
-    attr: {
-        container: {},
-        icon: {}
-    }
-};
+});
 
 export default Button;

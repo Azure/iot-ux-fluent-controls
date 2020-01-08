@@ -28,9 +28,6 @@ export interface DateTimeFieldProps extends React.Props<DateTimeFieldType> {
     label?: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
-    /** Error HTML title in case of overflow */
-    errorTitle?: string;
-
     /** Date format in text input */
     format?: DateFormat;
     /** Tab index for calendar control */
@@ -94,6 +91,7 @@ export interface DateTimeFieldState {
  * High level date time field
  *
  * @param props Control properties (defined in `DateTimeFieldProps` interface)
+ * @deprecated This is not fully localized/accessible. Use https://developer.microsoft.com/en-us/fabric/#/controls/web/datepicker instead.
  */
 export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<DateTimeFieldState>> {
     static defaultProps = {
@@ -214,7 +212,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
         };
     }
 
-    componentWillReceiveProps(newProps: DateTimeFieldProps) {
+    UNSAFE_componentWillReceiveProps(newProps: DateTimeFieldProps) {
         if (this.props.initialValue !== newProps.initialValue || this.props.localTimezone !== newProps.localTimezone) {
             this.setState(this.getInitialState(newProps));
         }
@@ -357,7 +355,6 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                 name={this.props.name}
                 label={this.props.label}
                 error={this.props.error}
-                errorTitle={this.props.errorTitle}
                 loading={this.props.loading}
                 required={this.props.required}
                 hideError={this.props.hideError}

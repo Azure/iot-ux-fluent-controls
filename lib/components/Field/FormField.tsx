@@ -5,7 +5,7 @@ import {MethodNode, keyCode} from '../../Common';
 import {HorizontalLoader} from '../Loader';
 import {FormLabel, FormLabelAttributes} from './FormLabel';
 import {FormError} from './FormError';
-import { BalloonPosition, BalloonAlignment } from '../Balloon';
+import { DropdownAlignment, DropdownPosition } from '../Dropdown/Dropdown';
 const css = classNames.bind(require('./Field.module.scss'));
 
 export interface FormFieldType {}
@@ -16,8 +16,8 @@ export interface FormFieldAttributes {
     fieldContent?: DivProps;
     fieldError?: DivProps;
     fieldTooltip?: {
-        balloonPosition?: BalloonPosition;
-        balloonAlignment?: BalloonAlignment;
+        balloonPositionHint?: DropdownPosition;
+        balloonAlignmentHint?: DropdownAlignment;
     };
 }
 
@@ -28,8 +28,6 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     label?: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
-    /** Error HTML title in case of overflow */
-    errorTitle?: string;
     /** Display horizontal loading animation instead of error */
     loading?: boolean;
     /** Appends a red asterisk to the label if it is a string */
@@ -144,7 +142,7 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
                     balloonExpanded={this.state.tooltipVisible}
                     farSide={props.labelFarSide}
                     disabled={props.disabled}
-                    {...props.attr.fieldTooltip}
+                     {...props.attr.fieldTooltip}
                 >
                     {props.label}
                 </FormLabel>}
@@ -159,7 +157,7 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
                     className={props.errorClassName}
                     hidden={props.hideError}
                     hideIcon={props.loading}
-                    title={props.errorTitle}
+                    title={typeof error === 'string' && error}
                     attr={{container: {
                         'aria-live': 'polite', // this tags are for screen readers to read the error when it appears
                         'aria-atomic': 'true',

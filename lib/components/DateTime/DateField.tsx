@@ -38,8 +38,6 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
     label: MethodNode;
     /** Error to display below input element */
     error?: MethodNode;
-    /** Error HTML title in case of overflow */
-    errorTitle?: string;
     /** Set error field to display: none */
     hideError?: boolean;
 
@@ -74,6 +72,7 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
  * High level form text field
  *
  * @param props Control properties (defined in `DateFieldProps` interface)
+ * @deprecated This is not fully localized/accessible. Use https://developer.microsoft.com/en-us/fabric/#/controls/web/datepicker instead.
  */
 export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateFieldProps) => {
     const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
@@ -111,7 +110,6 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
             name={props.name}
             label={props.label}
             error={props.error}
-            errorTitle={props.errorTitle}
             hideError={props.hideError}
             loading={props.loading}
             required={props.required}

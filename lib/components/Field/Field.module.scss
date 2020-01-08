@@ -43,7 +43,6 @@ $line-height: 5*$grid-size;
     justify-content: space-between;
 
     .label-icon {
-        @include md-box(inline-block);
         margin-left: $gutter-xxsmall;
         color: var(--color-text-action-trigger);
 
@@ -51,10 +50,6 @@ $line-height: 5*$grid-size;
             margin-left: unset;
             margin-right: $gutter-xxsmall;
         }
-    }
-
-    .label-balloon {
-        width: $form-label-balloon-width;
     }
 
     & + .content {
@@ -98,4 +93,8 @@ $line-height: 5*$grid-size;
         margin-right: unset;
         margin-left: $grid-size;
     }
+}
+
+.error-content {
+    width: 100%;
 }

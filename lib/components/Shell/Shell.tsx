@@ -40,14 +40,13 @@ export interface ShellTheme {
 
 export interface ShellProperties {
     theme?: string | ShellTheme;
-    isRtl?: boolean;
     masthead?: MastheadProperties;
     navigation?: NavigationProperties;
     children?: React.ReactNode;
     onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export function Shell({ theme, isRtl, masthead, navigation, children, onClick }: ShellProperties) {
+export function Shell({ theme, masthead, navigation, children, onClick }: ShellProperties) {
     // backward compatibility handle string format theme
     const shellTheme: ShellTheme = React.useMemo(() => (
         typeof theme === 'object'
@@ -63,16 +62,15 @@ export function Shell({ theme, isRtl, masthead, navigation, children, onClick }:
         document.documentElement.setAttribute('theme', shellTheme.base);
     }, [shellTheme.base]);
 
-    // @todo - remove outer div with theme-#{shellTheme.base}
     return (
         <ThemeProvider theme={shellTheme}>
-            <div className={css('shell', { rtl: isRtl })} onClick={onClick}>
+            <div className={css('shell')} onClick={onClick}>
                 {masthead && <Masthead navigation={navigation} {...masthead} />}
                 <div className={css('nav-and-workspace')}>
                     {navigation && <Navigation {...navigation} />}
-                    <div className={css('workspace')}>
+                    <section role='main' className={css('workspace')}>
                         {children}
-                    </div>
+                    </section>
                     <ContextPanelRoot />
                 </div>
             </div>

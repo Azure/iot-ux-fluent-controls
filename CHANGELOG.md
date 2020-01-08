@@ -1,8 +1,83 @@
 # CHANGELOG
 
-## 7.0.0-alpha.3
+## 7.0.15
+### Changed
+Changed `Thumbnail` to properly spread its `attr` property.
+
+## 7.0.14
+### Changed
+Updated hover sytle of RadioInput
+
+## 7.0.13
+### Changed
+Added conditional support for role="presentation" for thumbnails without alt text
+
+## 7.0.12
+### Changed
+Updated sytle of RadioInput.
+
+## 7.0.11
+### Changed
+Removed fill color from SVGs in Navigation.
+
+## 7.0.10
+### Changed
+Changed `selectRowCheckbox` in `GenericManagementListAttributes` to also be a function of a row.
+
+## 7.0.9
+### Changed
+- Added data-test-hook='progressbar' for HorizontalLoader
+
+## 7.0.8
+### Fixed
+- Flattened markdown in context panel to have content, footer and header at the same level.
+
+## 7.0.7
+### Changed
+- Change `data-active` attribute to be a boolean attribute (i.e., emit \<foo data-active> instead of \<foo data-active="true">)
+- Rename componentWillReceiveProps to [UNSAFE_componentWillReceiveProps](https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html) to avoid deprecation warnings in React 16.11+
+- Add deprecation warnings for Date components because they're not fully localized/accessible. We should use the [Office Fabric control](https://developer.microsoft.com/en-us/fabric/#/controls/web/datepicker) instead.
+### Fixed
+- Update handlebars version to fix vulnerability
+
+## 7.0.6
+### Changed
+- Added data-test-active to active navigation item
+
+## 7.0.5
+### Fixed
+- Fixed height of navigation scrollable container
+
+## 7.0.4
+### Fixed
+- Fix display of HorizontalLoader under FormField
+
+## 7.0.3
+### Fixed
+- Add overflow hidden to workspace container
+
+## 7.0.2
+### Fixed
+- Made workspace to be a flex container without overflow specified
+
+## 7.0.1
+### Fixed
+- Added role='main' and background color to shell workspace
+
+## 7.0.0
+- Adopted fluent styles
+
 ### Changed
 - Added a NavigationItemContainer component to allow organizing sections with headers on the global navbar
+- Adopted fluent CSS library based on CSS custom properties
+- Added on blur handlers to text input elements
+
+### Fixed
+- Minor style fixes in multiple components
+- Made balloon and dropdown aware of their position in the page and how to properly switch position and aligment based on it.
+- Fixed RTL support for all components
+- Added hideError capabilities to all FormField elements
+- Accessibility requirements for form field errors.
 
 ## v6.3.5
 ### Changed

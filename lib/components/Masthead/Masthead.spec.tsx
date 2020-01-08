@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { Masthead } from './Masthead';
 import { describe, it } from 'mocha';
 
-describe('<Masthead />', () => {
+xdescribe('<Masthead />', () => {
     it('properly passes all the params, render Masthead', () => {
         const wrapper = shallow(<Masthead
             branding='brand'

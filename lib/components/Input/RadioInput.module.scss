@@ -69,10 +69,6 @@ $outline-focus-border-width: 1px;
         height: 2*$grid-size;
         border-radius: $grid-size;
 
-        &:not(.disabled):hover {
-            background-color: var(--color-center-radio-hover);
-        }
-
         &.selected {
             background-color: var(--color-center-radio-selected);
             &:hover, &:focus {
@@ -107,7 +103,7 @@ $outline-focus-border-width: 1px;
 
     .radio-label {
         @include md-box(flex-row);
-        align-items: center;
+        align-items: flex-start;
 
         &.disabled {
             color: var(--color-text-disabled);
@@ -116,5 +112,11 @@ $outline-focus-border-width: 1px;
 
     &.hidden {
         display: none;
+    }
+
+    &:hover {
+        .radio-fill:not(.disabled):not(.selected) {
+            background-color: var(--color-center-radio-hover);
+        }
     }
 }

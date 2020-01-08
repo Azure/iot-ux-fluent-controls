@@ -19,43 +19,41 @@ export interface SearchInputProps extends React.Props<TextInputType> {
 }
 
 
-export class SearchInput extends React.PureComponent<SearchInputProps> {
-    render() {
-        const postfix = (
-            this.props.value
-                ? <ActionTriggerButton onClick={this.props.onSubmit} icon='forward' className={css('search-button')} attr={{ 
-                    button: { title: this.props.label, type: 'submit' },
-                    container: this.props.attr ? this.props.attr.postfix : null 
-                }} />
-                : null
-        );
+export const SearchInput = React.memo((props: SearchInputProps) => {
+    const postfix = (
+        props.value
+            ? <ActionTriggerButton onClick={props.onSubmit} icon='forward' className={css('search-button')} attr={{ 
+                button: { title: props.label, type: 'submit' },
+                container: props.attr?.postfix 
+            }} />
+            : null
+    );
 
-        return (
-            <form className={css('search-input-container', this.props.containerClassName)} onSubmit={this.props.onSubmit} role='search'>
-                <Icon icon='search' className={css('search-prefix-icon')} />
-                <TextInput
-                    name='search-input'
-                    value={this.props.value == null ? '' : this.props.value}
-                    className={css('search-input', this.props.inputClassName)}
-                    onChange={this.props.onChange}
-                    placeholder={this.props.label}
-                    postfix={postfix}
-                    postfixClassName={css('search-button-container')}
-                    attr={{
-                        input: { 
-                            className: css('input-component'), 
-                            autoComplete: 'off', 
-                            'aria-label': this.props.label,
-                            type: 'search', 
-                            onClick: blockPropagation,
-                            ...(this.props.attr && this.props.attr.input)
-                        }
-                    }}
-                />
-            </form>
-        );
-    }
-}
+    return (
+        <form className={css('search-input-container', props.containerClassName)} onSubmit={props.onSubmit} role='search'>
+            <Icon icon='search' className={css('search-prefix-icon')} />
+            <TextInput
+                name='search-input'
+                value={props.value == null ? '' : props.value}
+                className={css('search-input', props.inputClassName)}
+                onChange={props.onChange}
+                placeholder={props.label}
+                postfix={postfix}
+                postfixClassName={css('search-button-container')}
+                attr={{
+                    input: { 
+                        className: css('input-component'), 
+                        autoComplete: 'off', 
+                        'aria-label': props.label,
+                        type: 'search', 
+                        onClick: blockPropagation,
+                        ...(props.attr?.input)
+                    }
+                }}
+            />
+        </form>
+    );
+});
 
 function blockPropagation(event: React.MouseEvent<HTMLInputElement>) {
     event.stopPropagation();
