@@ -133,10 +133,10 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
     constructor(props: DateTimeFieldProps) {
         super(props);
 
-        this.state = this.getInitialState(props);
+        this.state = DateTimeField.getInitialState(props);
     }
 
-    getInitialState(props: DateTimeFieldProps): DateTimeFieldState {
+    static getInitialState(props: DateTimeFieldProps): DateTimeFieldState {
         const local = props.localTimezone;
         let invalid = false;
         let initialValue = null;
@@ -212,10 +212,8 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
         };
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: DateTimeFieldProps) {
-        if (this.props.initialValue !== newProps.initialValue || this.props.localTimezone !== newProps.localTimezone) {
-            this.setState(this.getInitialState(newProps));
-        }
+    static getDerivedStateFromProps(props: DateTimeFieldProps, _state: DateTimeFieldState): Partial<DateTimeFieldState> | null {
+        return DateTimeField.getInitialState(props);
     }
 
     onDatePaste = (newDate: string): boolean => {
