@@ -42,6 +42,8 @@ export interface FormFieldProps extends React.Props<FormFieldType> {
     className?: string;
     /** Classname to append to top level error element */
     errorClassName?: string;
+    /** Label to be announced before the error message to announce to the user that there's an error */
+    errorAriaLabel?: string;
     /** React node to render at the far side of the label. */
     labelFarSide?: React.ReactNode;
 
@@ -158,6 +160,7 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
                     hidden={props.hideError}
                     hideIcon={props.loading}
                     title={typeof error === 'string' && error}
+                    ariaLabel={props.errorAriaLabel}
                     attr={{container: {
                         'aria-live': 'polite', // this tags are for screen readers to read the error when it appears
                         'aria-atomic': 'true',

@@ -21,6 +21,9 @@ export interface FormErrorProps extends React.Props<FormErrorType> {
     /** Classname to append to top level element */
     className?: string;
 
+    /** Label to be announced before the error message to announce to the user that there's an error */
+    ariaLabel?: string;
+
     attr?: FormErrorAttributes;
 }
 
@@ -39,7 +42,7 @@ export const FormError: React.StatelessComponent<FormErrorProps> = (props: FormE
         >
             {props.children 
                 ? <>
-                    {!props.hideIcon && <Icon icon='errorBadge' size={IconSize.small} className={css('error-badge')} attr={{ container: { title: props.title }}} />}
+                    {!props.hideIcon && <Icon icon='errorBadge' size={IconSize.small} className={css('error-badge')} attr={{ container: { title: props.title, 'aria-label': props.ariaLabel }}} />}
                     <span className={css('inline-text-overflow', 'error-content')} title={props.title}>{props.children}</span>
                 </>
                 : null
@@ -49,6 +52,7 @@ export const FormError: React.StatelessComponent<FormErrorProps> = (props: FormE
 };
 
 FormError.defaultProps = {
+    ariaLabel: 'error',
     attr: {
         container: {}
     }
