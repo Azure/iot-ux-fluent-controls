@@ -72,16 +72,8 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
         props.onChange(props.options[index].value);
     };
 
-    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
-
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: Object.assign({
-            balloon: {
-                balloonContent: {
-                    id: tooltipId
-                }
-            }
-        }, props.attr.fieldLabel),
+        fieldLabel: props.attr.fieldLabel,
         fieldError: props.attr.fieldError,
         fieldContent: props.attr.fieldContent,
         fieldContainer: props.attr.fieldContainer
@@ -93,7 +85,6 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
             label: props.attr.label,
             input: Object.assign({
                 'aria-label': option.label,
-                'aria-describedby': tooltipId
             }, props.attr.input),
             radio: props.attr.radio,
             text: props.attr.text,

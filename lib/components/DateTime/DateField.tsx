@@ -75,12 +75,8 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
  * @deprecated This is not fully localized/accessible. Use https://developer.microsoft.com/en-us/fabric/#/controls/web/datepicker instead.
  */
 export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateFieldProps) => {
-    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const errorId = `${props.name}-error`;
     let describedby = errorId;
-    if (tooltipId) {
-        describedby += ' ' + tooltipId;
-    }
     const dateAttr: DatePickerAttributes = {
         input: Object.assign({
             'aria-label': props.label,
@@ -91,13 +87,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
         calendar: props.attr.calendar
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: Object.assign({
-            balloon: {
-                balloonContent: {
-                    id: tooltipId
-                }
-            }
-        }, props.attr.fieldLabel),
+        fieldLabel: props.attr.fieldLabel,
         fieldError: Object.assign({
             id: errorId
         }, props.attr.fieldError),

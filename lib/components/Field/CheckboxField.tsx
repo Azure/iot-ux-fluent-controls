@@ -55,12 +55,11 @@ export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
  *
  * @param props: Object fulfilling `CheckboxFieldProps` interface
  */
-export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (props: CheckboxFieldProps) => {const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
+export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (props: CheckboxFieldProps) => {
     const checkboxAttr: CheckboxInputAttributes = {
         container: props.attr.container,
         input: Object.assign({
             'aria-label': props.label,
-            'aria-describedby': tooltipId
         }, props.attr.input),
         label: props.attr.label,
         text: props.attr.text,
@@ -70,13 +69,7 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
         border: props.attr.border,
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: Object.assign({
-            balloon: {
-                balloonContent: {
-                    id: tooltipId
-                }
-            }
-        }, props.attr.fieldLabel),
+        fieldLabel: props.attr.fieldLabel,
         fieldError: props.attr.fieldError,
         fieldContent: props.attr.fieldContent,
         fieldContainer: props.attr.fieldContainer

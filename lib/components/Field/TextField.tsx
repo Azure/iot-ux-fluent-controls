@@ -69,12 +69,9 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
  * @param props Control properties (defined in `TextFieldProps` interface)
  */
 export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextFieldProps) => {
-    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const errorId = `${props.name}-error`;
     let describedby = errorId;
-    if (tooltipId) {
-        describedby += ' ' + tooltipId;
-    }
+
     const textAttr: TextInputAttributes = {
         container: props.attr.container,
         input: Object.assign({
@@ -87,13 +84,7 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
         clearButton: props.attr.clearButton
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: Object.assign({
-            balloon: {
-                balloonContent: {
-                    id: tooltipId
-                }
-            }
-        }, props.attr.fieldLabel),
+        fieldLabel: props.attr.fieldLabel,
         fieldError: Object.assign({
             id: errorId
         }, props.attr.fieldError),
