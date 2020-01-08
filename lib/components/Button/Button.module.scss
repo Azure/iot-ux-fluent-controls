@@ -61,6 +61,7 @@ $outline-focus-border-width: 1px;
         &:focus {
             background-color: var(--color-bg-btn-standard-focus);
             outline: $outline-focus-border-width dashed var(--color-border-focus);
+            outline-offset: -2px;
         }
 
         &:active {
