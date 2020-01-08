@@ -12,70 +12,29 @@ $line-height: 3.5*$grid-size;
 
 .toggle {
     @include md-box(inline-block, relative);
+    vertical-align: middle;
+    outline: none;
     line-height: $line-height;
+    background-color: transparent;
+    border: none;
 
-    .toggle-button {
-        @include md-box(inline-block, relative, fill-parent);
-        vertical-align: middle;
-        outline: none;
-        border: 1px solid var(--color-border-toggle-off-rest);
-        background-color: var(--color-bg-toggle-off-rest);
-        border-radius: $border-toggle-radius;
-        width: $toggle-width;
-        height: $toggle-height;
-    }
-
-    &:not(.disabled) .toggle-button {
-        &:focus {
-            outline: 1px dashed var(--color-border-focus);
-            outline-offset: 1px;
-        }
-
-        &:hover {
+    &:not(.disabled):not(.toggle-on):hover,
+    &:not(.disabled):not(.toggle-on):focus {
+        .toggle-switch-container {
             border: 1px solid var(--color-border-toggle-off-hover);
-            cursor: pointer;
+        }
+        .toggle-switch {
+            background-color: var(--color-circle-toggle-off-hover);
         }
     }
 
-    .toggle-switch {
-        @include md-box(block, absolute);
-        left: 1.25*$grid-size;
-        top: 1.25*$grid-size;
-
-        @include rtl {
-            left: unset;
-            right: 1.25*$grid-size;
-        }
-
-        width: 2.5*$grid-size;
-        height: 2.5*$grid-size;
-        border-radius: $toggle-switch-border-radius;
-        background-color: var(--color-circle-toggle-off-rest);
-        transition: $toggle-switch-transition;
-
-        pointer-events: none;
-    }
-
-    &:not(.disabled):not(.toggle-on):hover .toggle-switch {
-        background-color: var(--color-circle-toggle-off-hover);
-    }
-
-    .toggle-label {
-        @include md-box(inline-block, relative);
-        margin-left: 2*$grid-size;
-
-        @include rtl {
-            margin: 0 2*$grid-size 0 0;
-        }
-
-        font-family: var(--font-family-default);
-        font-size: var(--font-size-default);
-
-        vertical-align: middle;
+    &:focus {
+        outline: 1px dashed var(--color-border-focus);
+        outline-offset: 1px;
     }
 
     &.toggle-on {
-        &:not(.disabled) .toggle-button {
+      &:not(.disabled) .toggle-switch-container {
             border: 1px solid var(--color-border-toggle-on-rest);
             background-color: var(--color-bg-toggle-on-rest);
 
@@ -96,7 +55,7 @@ $line-height: 3.5*$grid-size;
         }
 
         &.disabled {
-            .toggle-button {
+            .toggle-switch-container {
                 border: 1px solid var(--color-border-toggle-on-disabled);
                 background-color: var(--color-bg-toggle-on-disabled);
             }
@@ -108,10 +67,9 @@ $line-height: 3.5*$grid-size;
     }
 
     &.disabled {
-        .toggle-button {
+        .toggle-switch-container {
             border: 1px solid var(--color-border-toggle-off-disabled);
-            background-color: var(--color-bg-toggle-off-disabled);
-            cursor: default;
+            cursor: not-allowed;
         }
 
         .toggle-switch {
@@ -122,4 +80,48 @@ $line-height: 3.5*$grid-size;
             color: var(--color-text-disabled);
         }
     }
+}
+
+.toggle-switch-container {
+    display: inline-block;
+    vertical-align: middle;
+    border: 1px solid var(--color-border-toggle-off-rest);
+    background-color: transparent;
+    border-radius: $border-toggle-radius;
+    width: $toggle-width;
+    height: $toggle-height;
+    cursor: pointer;
+}
+
+.toggle-switch {
+    @include md-box(block, absolute);
+    left: 1.25*$grid-size;
+    top: 1.25*$grid-size;
+
+    @include rtl {
+        left: unset;
+        right: 1.25*$grid-size;
+    }
+
+    width: 2.5*$grid-size;
+    height: 2.5*$grid-size;
+    border-radius: $toggle-switch-border-radius;
+    background-color: var(--color-circle-toggle-off-rest);
+    transition: $toggle-switch-transition;
+
+    pointer-events: none;
+}
+
+.toggle-label {
+    @include md-box(inline-block, relative);
+    margin-left: 2*$grid-size;
+
+    @include rtl {
+        margin: 0 2*$grid-size 0 0;
+    }
+
+    font-family: var(--font-family-default);
+    font-size: var(--font-size-default);
+
+    vertical-align: middle;
 }
