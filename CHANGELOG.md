@@ -1,28 +1,42 @@
 # CHANGELOG
 
+## 7.0.16
+### Changed
+- Removed unsafe methods from controls
+
+### Fixed
+- Fixed npm low vulnerabilities.
+- Updated some components to use React.memo
+- Added name property to balloon icon in form fields
+- Fixed color of required mark on form fields
+- Fixed focus indicator outline offset on default buttons
+- Fixed toggle to have appropriate focus behavior
+- Fixed info balloon on form fields to be announced by screen readers
+- Added error indicator for screen readers to error icon in form field errors.
+
 ## 7.0.15
 ### Changed
-Changed `Thumbnail` to properly spread its `attr` property.
+- Changed `Thumbnail` to properly spread its `attr` property.
 
 ## 7.0.14
 ### Changed
-Updated hover sytle of RadioInput
+- Updated hover sytle of RadioInput
 
 ## 7.0.13
 ### Changed
-Added conditional support for role="presentation" for thumbnails without alt text
+- Added conditional support for role="presentation" for thumbnails without alt text
 
 ## 7.0.12
 ### Changed
-Updated sytle of RadioInput.
+- Updated sytle of RadioInput.
 
 ## 7.0.11
 ### Changed
-Removed fill color from SVGs in Navigation.
+- Removed fill color from SVGs in Navigation.
 
 ## 7.0.10
 ### Changed
-Changed `selectRowCheckbox` in `GenericManagementListAttributes` to also be a function of a row.
+- Changed `selectRowCheckbox` in `GenericManagementListAttributes` to also be a function of a row.
 
 ## 7.0.9
 ### Changed
