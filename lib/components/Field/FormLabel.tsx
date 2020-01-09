@@ -80,16 +80,7 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
             expanded={props.balloonExpanded}
             positionHint={props.balloonPositionHint}
             alignmentHint={props.balloonAlignmentHint}
-            attr={mergeAttributeObjects(
-                props.attr.balloon,
-                {
-                balloonContainer: {
-                    role: 'tooltip',
-                    'aria-live': 'polite',
-                    'aria-atomic': 'true'
-                }},
-                ['container', 'balloonContainer', 'balloon', 'balloonContent']
-            )}
+            attr={props.attr.balloon}
         >
             <Icon
                 name={`${props.name}-info`}
@@ -138,7 +129,6 @@ FormLabel.defaultProps = {
         },
         balloon: {
             container: {},
-            balloonContainer: {},
             balloon: {},
         },
     }

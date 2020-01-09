@@ -64,16 +64,24 @@ export function Shell({ theme, masthead, navigation, children, onClick }: ShellP
 
     return (
         <ThemeProvider theme={shellTheme}>
-            <div className={css('shell')} onClick={onClick}>
-                {masthead && <Masthead navigation={navigation} {...masthead} />}
-                <div className={css('nav-and-workspace')}>
-                    {navigation && <Navigation {...navigation} />}
-                    <section role='main' className={css('workspace')}>
-                        {children}
-                    </section>
-                    <ContextPanelRoot />
+            <>
+                <div className={css('shell')} onClick={onClick}>
+                    {masthead && <Masthead navigation={navigation} {...masthead} />}
+                    <div className={css('nav-and-workspace')}>
+                        {navigation && <Navigation {...navigation} />}
+                        <section role='main' className={css('workspace')}>
+                            {children}
+                        </section>
+                        <ContextPanelRoot />
+                    </div>
                 </div>
-            </div>
+                <div 
+                    id='md-dropdown-container'
+                    aria-live='polite'
+                    aria-atomic='true'
+                    className={css('md-dropdown-container')}
+                />
+            </>
         </ThemeProvider>
     );
 }

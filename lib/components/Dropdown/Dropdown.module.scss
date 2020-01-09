@@ -167,10 +167,6 @@ $arrow-size: 2*$grid-size;
     
     :global(.md-dropdown) {
         visibility: visible;
-        pointer-events: none;
-
-        &.interactive {
-            pointer-events: auto;
-        }
+        pointer-events: auto;
     }
 }

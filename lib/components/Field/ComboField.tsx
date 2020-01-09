@@ -145,12 +145,10 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
  * @param props: Object fulfilling `ComboFieldProps` interface
  */
 export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: ComboFieldProps) => {
-    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const comboAttr: ComboInputAttributes = {
         host: props.attr.host,
         input: Object.assign({
             'aria-label': props.label,
-            'aria-describedby': tooltipId
         }, props.attr.input),
         clearButton: props.attr.clearButton,
         textbox: props.attr.textbox,
@@ -159,13 +157,7 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
         option: props.attr.option,
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: Object.assign({
-            balloon: {
-                balloonContent: {
-                    id: tooltipId
-                }
-            }
-        }, props.attr.fieldLabel),
+        fieldLabel: props.attr.fieldLabel,
         fieldError: props.attr.fieldError,
         fieldContent: props.attr.fieldContent,
         fieldContainer: props.attr.fieldContainer

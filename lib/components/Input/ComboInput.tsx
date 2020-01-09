@@ -482,7 +482,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                             className: css('dropdown')
                         },
                     },
-                    ['host', 'dropdownContainer', 'dropdown']
+                    ['host', 'dropdown']
                 )}
             >
                 <Attr.div

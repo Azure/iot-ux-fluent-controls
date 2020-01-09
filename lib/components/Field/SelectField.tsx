@@ -66,25 +66,17 @@ export interface SelectFieldProps extends React.Props<SelectFieldType> {
  * @param props: Object fulfilling `SelectFieldProps` interface
  */
 export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: SelectFieldProps) => {
-    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const selectAttr: SelectInputAttributes = {
         container: props.attr.container,
         select: Object.assign({
             'aria-label': props.label,
-            'aria-describedby': tooltipId
         }, props.attr.select),
         option: props.attr.option,
         chevron: props.attr.chevron,
     };
 
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: Object.assign({
-            balloon: {
-                balloonContent: {
-                    id: tooltipId
-                }
-            }
-        }, props.attr.fieldLabel),
+        fieldLabel: props.attr.fieldLabel,
         fieldError: props.attr.fieldError,
         fieldContent: props.attr.fieldContent,
         fieldContainer: props.attr.fieldContainer

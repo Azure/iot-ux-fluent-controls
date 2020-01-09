@@ -7,7 +7,6 @@ const css = classNames.bind(require('./Balloon.module.scss'));
 
 export interface BalloonAttributes {
     container?: SpanProps;
-    balloonContainer?: DivProps;
     balloon?: SpanProps;
     balloonContent?: SpanProps;
 }
@@ -137,7 +136,6 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
                 dropdownSeparation={1}
                 attr={{
                     host: this.props.attr.container,
-                    dropdownContainer: this.props.attr.balloonContainer,
                     dropdown: mergeAttributes(
                         this.props.attr.balloon,
                         {className: balloonClassName}

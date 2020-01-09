@@ -302,12 +302,8 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
     }
 
     render() {
-        const tooltipId = (!!this.props.tooltip) ? `${this.props.name}-tt` : undefined;
         const errorId = `${this.props.name}-error`;
         let describedby = errorId;
-        if (tooltipId) {
-            describedby += ' ' + tooltipId;
-        }
         const dateAttr: DatePickerAttributes = {
             input: Object.assign({
                 'aria-describedby': describedby
@@ -336,13 +332,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
             ...(this.props.attr.timeInput && this.props.attr.timeInput)
         };
         const fieldAttr: FormFieldAttributes = {
-            fieldLabel: Object.assign({
-                balloon: {
-                    balloon: {
-                        id: tooltipId
-                    }
-                }
-            }, this.props.attr.fieldLabel),
+            fieldLabel: this.props.attr.fieldLabel,
             fieldError: Object.assign({
                 id: errorId
             }, this.props.attr.fieldError),

@@ -56,23 +56,15 @@ export interface TextAreaFieldProps extends React.Props<TextAreaFieldType> {
  * @param props Control properties (defined in `TextAreaFieldProps` interface)
  */
 export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (props: TextAreaFieldProps) => {
-    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const textAreaAttr: TextAreaAttributes = {
         container: props.attr.container,
         textarea: Object.assign({
             'aria-label': props.label,
-            'aria-describedby': tooltipId
         }, props.attr.textarea),
         pre: props.attr.pre
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: Object.assign({
-            balloon: {
-                balloonContent: {
-                    id: tooltipId
-                }
-            }
-        }, props.attr.fieldLabel),
+        fieldLabel: props.attr.fieldLabel,
         fieldError: props.attr.fieldError,
         fieldContent: props.attr.fieldContent,
         fieldContainer: props.attr.fieldContainer

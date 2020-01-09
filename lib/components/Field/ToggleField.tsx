@@ -54,11 +54,9 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
  * @param props: Object fulfilling `ToggleFieldProps` interface
  */
 export const ToggleField = React.memo((props: ToggleFieldProps) => {
-    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const toggleAttr: ToggleAttributes = {
         container: Object.assign({
             'aria-label': props.label,
-            'aria-describedby': tooltipId
         }, props.attr?.container),
         button: props.attr?.button,
         switch: props.attr?.switch,
@@ -66,13 +64,7 @@ export const ToggleField = React.memo((props: ToggleFieldProps) => {
         text: props.attr?.text
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: Object.assign({
-            balloon: {
-                balloonContent: {
-                    id: tooltipId
-                }
-            }
-        }, props.attr?.fieldLabel),
+        fieldLabel: props.attr?.fieldLabel,
         fieldError: props.attr?.fieldError,
         fieldContent: props.attr?.fieldContent,
         fieldContainer: props.attr?.fieldContainer,

@@ -25,7 +25,6 @@ export enum DropdownAlignment {
 
 export interface DropdownAttributes {
     host?: SpanProps;
-    dropdownContainer?: DivProps;
     dropdown?: SpanProps;
 }
 
@@ -98,7 +97,7 @@ export interface DropdownProps {
 export const Dropdown = React.memo(({ className, onMouseEnter, onMouseLeave, attr, dropdown, children, visible, outerEvents, onOuterEvent, positionHint, alignmentHint, showArrow, dropdownSeparation }: DropdownProps) => {
     const dropdownRef = React.useRef<HTMLSpanElement>();
     const hostRef = React.useRef<HTMLSpanElement>();
-    const containerRef = React.useRef<HTMLDivElement>();
+    const containerRef = React.useRef<HTMLDivElement>(document.querySelector('#md-dropdown-container'));
     
     const eventsConnected = React.useRef<boolean>(false);
 
@@ -349,7 +348,7 @@ export const Dropdown = React.memo(({ className, onMouseEnter, onMouseLeave, att
                 data-dropdown-visible='false'
                 attr={attr && attr.host}>
                 <Attr.span
-                    aria-hidden={interactive}
+                    aria-hidden={!visible}
                     className={css('md-dropdown', { interactive, 'with-arrow': showArrow })}
                     attr={attr && attr.dropdown}
                     methodRef={dropdownRef}>
@@ -357,14 +356,6 @@ export const Dropdown = React.memo(({ className, onMouseEnter, onMouseLeave, att
                 </Attr.span>
                 {children}
             </Attr.span>
-            {visible && ReactDOM.createPortal(
-                <Attr.div
-                    className={css('md-dropdown-container', { interactive })}
-                    methodRef={containerRef}
-                    attr={attr && attr.dropdownContainer}>
-                </Attr.div>,
-                document.querySelector('.shell')
-            )}
         </>
     );
 });

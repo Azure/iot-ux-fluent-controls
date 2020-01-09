@@ -62,12 +62,10 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
  * @param props Control properties (defined in `NumberFieldProps` interface)
  */
 export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: NumberFieldProps) => {
-    const tooltipId = (!!props.tooltip) ? `${props.name}-tt` : undefined;
     const numberAttr: TextInputAttributes = {
         container: props.attr.container,
         input: Object.assign({
             'aria-label': props.label,
-            'aria-describedby': tooltipId
         }, props.attr.input),
         inputContainer: props.attr.inputContainer,
         prefix: props.attr.prefix,
@@ -75,13 +73,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
         clearButton: props.attr.clearButton
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: Object.assign({
-            balloon: {
-                balloonContent: {
-                    id: tooltipId
-                }
-            }
-        }, props.attr.fieldLabel),
+        fieldLabel: props.attr.fieldLabel,
         fieldError: props.attr.fieldError,
         fieldContent: props.attr.fieldContent,
         fieldContainer: props.attr.fieldContainer
