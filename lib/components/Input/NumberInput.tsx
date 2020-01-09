@@ -214,7 +214,11 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         return outValue;
     }
 
-    componentDidUpdate(_oldProps: NumberInputProps, oldState: NumberInputState) {
+    componentDidUpdate(oldProps: NumberInputProps, oldState: NumberInputState) {
+        if (oldProps.initialValue !== this.props.initialValue) {	
+            this.setState(NumberInput.getInitialState(this.props.initialValue));	
+        }
+        
         if (oldState.value === this.state.value) {
             return;
         }
