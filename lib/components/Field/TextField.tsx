@@ -75,23 +75,23 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
     let describedby = errorId;
 
     const textAttr: TextInputAttributes = {
-        container: props.attr.container,
+        container: props.attr?.container,
         input: Object.assign({
             'aria-label': props.label,
             'aria-describedby': describedby
-        }, props.attr.input),
-        inputContainer: props.attr.inputContainer,
-        prefix: props.attr.prefix,
-        postfix: props.attr.postfix,
-        clearButton: props.attr.clearButton
+        }, props.attr?.input),
+        inputContainer: props.attr?.inputContainer,
+        prefix: props.attr?.prefix,
+        postfix: props.attr?.postfix,
+        clearButton: props.attr?.clearButton
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: props.attr.fieldLabel,
+        fieldLabel: props.attr?.fieldLabel,
         fieldError: Object.assign({
             id: errorId
-        }, props.attr.fieldError),
-        fieldContent: props.attr.fieldContent,
-        fieldContainer: props.attr.fieldContainer
+        }, props.attr?.fieldError),
+        fieldContent: props.attr?.fieldContent,
+        fieldContainer: props.attr?.fieldContainer
     };
 
     return (

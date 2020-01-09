@@ -59,22 +59,22 @@ export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
  */
 export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (props: CheckboxFieldProps) => {
     const checkboxAttr: CheckboxInputAttributes = {
-        container: props.attr.container,
+        container: props.attr?.container,
         input: Object.assign({
             'aria-label': props.label,
-        }, props.attr.input),
-        label: props.attr.label,
-        text: props.attr.text,
-        checkbox: props.attr.checkbox,
-        indeterminateFill: props.attr.indeterminateFill,
-        checkmarkIcon: props.attr.checkmarkIcon,
-        border: props.attr.border,
+        }, props.attr?.input),
+        label: props.attr?.label,
+        text: props.attr?.text,
+        checkbox: props.attr?.checkbox,
+        indeterminateFill: props.attr?.indeterminateFill,
+        checkmarkIcon: props.attr?.checkmarkIcon,
+        border: props.attr?.border,
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: props.attr.fieldLabel,
-        fieldError: props.attr.fieldError,
-        fieldContent: props.attr.fieldContent,
-        fieldContainer: props.attr.fieldContainer
+        fieldLabel: props.attr?.fieldLabel,
+        fieldError: props.attr?.fieldError,
+        fieldContent: props.attr?.fieldContent,
+        fieldContainer: props.attr?.fieldContainer
     };
 
     return (

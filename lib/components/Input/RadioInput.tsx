@@ -72,12 +72,12 @@ export const RadioInput: React.StatelessComponent<RadioInputProps> = (props: Rad
     };
 
     return (
-        <Attr.div className={containerClass} attr={props.attr.container}>
+        <Attr.div className={containerClass} attr={props.attr?.container}>
             <Attr.label
                 className={css('radio-label', classes)}
                 htmlFor={id}
                 onClick={stopPropagation}
-                attr={props.attr.label}
+                attr={props.attr?.label}
             >
                 <div className={css('radio-wrapper')}>
                     <Attr.input
@@ -91,20 +91,20 @@ export const RadioInput: React.StatelessComponent<RadioInputProps> = (props: Rad
                         onChange={onClick}
                         autoFocus={props.autoFocus}
                         required={props.required}
-                        attr={props.attr.input}
+                        attr={props.attr?.input}
                     />
                     <Attr.span
                         className={css('radio-button', classes)}
-                        attr={props.attr.radio}
+                        attr={props.attr?.radio}
                     />
                     <Attr.span
                         className={css('radio-fill', classes)}
-                        attr={props.attr.fill}
+                        attr={props.attr?.fill}
                     />
                 </div>
                 <Attr.span
                     className={css('radio-text')}
-                    attr={props.attr.text}
+                    attr={props.attr?.text}
                 >
                     {props.label}
                 </Attr.span>

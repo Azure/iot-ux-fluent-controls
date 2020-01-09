@@ -57,12 +57,12 @@ export const Navigation = React.memo(({ isExpanded, onClick, attr, children, far
     return (
         <Attr.nav
             className={cx('navigation', { expanded: isExpanded })}
-            attr={attr && attr.container}>
+            attr={attr?.container}>
             <Attr.button
                 className='global-nav-item'
                 key='globalNavButton'
                 onClick={onClick}
-                attr={attr && attr.navButton}>
+                attr={attr?.navButton}>
                 <span className={cx('global-nav-item-icon', 'icon', 'icon-globalNavButton')} />
             </Attr.button>
             <div className={cx('scrollable', 'global-nav-items')}>

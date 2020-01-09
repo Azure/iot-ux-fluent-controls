@@ -59,17 +59,17 @@ export interface TextAreaFieldProps extends React.Props<TextAreaFieldType> {
  */
 export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (props: TextAreaFieldProps) => {
     const textAreaAttr: TextAreaAttributes = {
-        container: props.attr.container,
+        container: props.attr?.container,
         textarea: Object.assign({
             'aria-label': props.label,
-        }, props.attr.textarea),
-        pre: props.attr.pre
+        }, props.attr?.textarea),
+        pre: props.attr?.pre
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: props.attr.fieldLabel,
-        fieldError: props.attr.fieldError,
-        fieldContent: props.attr.fieldContent,
-        fieldContainer: props.attr.fieldContainer
+        fieldLabel: props.attr?.fieldLabel,
+        fieldError: props.attr?.fieldError,
+        fieldContent: props.attr?.fieldContent,
+        fieldContainer: props.attr?.fieldContainer
     };
     return (
         <FormField

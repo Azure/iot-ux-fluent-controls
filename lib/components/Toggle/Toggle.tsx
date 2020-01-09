@@ -93,8 +93,8 @@ export const Toggle = React.memo((props: ToggleProps) => {
                 className={css('toggle-switch-container')}
                 attr={props.attr?.container}
             />
-            <ToggleSwitchProxy className={css('toggle-switch')} attr={props.attr.switch}/>
-            <Attr.div className={css('toggle-label')} attr={props.attr.text}>
+            <ToggleSwitchProxy className={css('toggle-switch')} attr={props.attr?.switch}/>
+            <Attr.div className={css('toggle-label')} attr={props.attr?.text}>
                 {label}
             </Attr.div>
         </Attr.button>

@@ -28,11 +28,11 @@ export class Accordion extends React.PureComponent<AccordionProperties> {
     render() {
         return <div>
             <button
-                role={this.props.attr.ariaRole}
+                role={this.props.attr?.ariaRole}
                 id={`${this.props.id}-label`}
                 aria-expanded={!!this.props.expanded}
                 aria-controls={`${this.props.id}-content`}
-                data-test-hook={this.props.attr.dataTestHook && `${this.props.attr.dataTestHook}-label`}
+                data-test-hook={this.props.attr?.dataTestHook && `${this.props.attr?.dataTestHook}-label`}
                 onClick={this.props.onToggle}
                 className={cx('accordion-label')}
             >
@@ -43,7 +43,7 @@ export class Accordion extends React.PureComponent<AccordionProperties> {
                 id={`${this.props.id}-content`}
                 role='region'
                 aria-labelledby={`${this.props.id}-label`}
-                data-test-hook={this.props.attr.dataTestHook && `${this.props.attr.dataTestHook}-content`}
+                data-test-hook={this.props.attr?.dataTestHook && `${this.props.attr?.dataTestHook}-content`}
                 className={cx('accordion-content', {open: !!this.props.expanded})}>
                 {this.props.children}
             </div>

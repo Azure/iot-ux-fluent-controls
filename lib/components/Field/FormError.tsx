@@ -38,7 +38,7 @@ export const FormError: React.StatelessComponent<FormErrorProps> = (props: FormE
             className={css('field-error', {
                 hidden: props.hidden
             }, props.className)}
-            attr={props.attr.container}
+            attr={props.attr?.container}
         >
             {props.children 
                 ? <>

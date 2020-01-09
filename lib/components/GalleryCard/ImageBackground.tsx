@@ -40,8 +40,8 @@ export const ImageBackground = React.memo((props: ImageBackgroundProps) => {
         'fixed': props.fixed == null || props.fixed
     }, props.className);
     return (
-        <Attr.div className={cls} attr={props.attr.container}>
-            <Attr.image className={css('background-image')} src={props.src} title={props.title} alt={props.alt} attr={props.attr.image}/>
+        <Attr.div className={cls} attr={props.attr?.container}>
+            <Attr.image className={css('background-image')} src={props.src} title={props.title} alt={props.alt} attr={props.attr?.image}/>
         </Attr.div>
     );
 });

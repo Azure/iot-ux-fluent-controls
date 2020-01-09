@@ -63,20 +63,20 @@ export interface NumberFieldProps extends React.Props<NumberFieldType> {
  */
 export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: NumberFieldProps) => {
     const numberAttr: TextInputAttributes = {
-        container: props.attr.container,
+        container: props.attr?.container,
         input: Object.assign({
             'aria-label': props.label,
-        }, props.attr.input),
-        inputContainer: props.attr.inputContainer,
-        prefix: props.attr.prefix,
-        postfix: props.attr.postfix,
-        clearButton: props.attr.clearButton
+        }, props.attr?.input),
+        inputContainer: props.attr?.inputContainer,
+        prefix: props.attr?.prefix,
+        postfix: props.attr?.postfix,
+        clearButton: props.attr?.clearButton
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: props.attr.fieldLabel,
-        fieldError: props.attr.fieldError,
-        fieldContent: props.attr.fieldContent,
-        fieldContainer: props.attr.fieldContainer
+        fieldLabel: props.attr?.fieldLabel,
+        fieldError: props.attr?.fieldError,
+        fieldContent: props.attr?.fieldContent,
+        fieldContainer: props.attr?.fieldContainer
     };
 
     return (

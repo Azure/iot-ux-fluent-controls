@@ -146,7 +146,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         icon={icon}
                         fontSize={12}
                         className={css('sort-direction')}
-                        attr={this.props.attr.rowHeaderChevron}
+                        attr={this.props.attr?.rowHeaderChevron}
                     />;
                 } else {
                     onClick = column.defaultDirection === 'descending'
@@ -160,7 +160,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         className={css('column-header')}
                         key={`header-${colIndex}`}
                         onClick={onClick}
-                        attr={this.props.attr.rowHeaderButton}
+                        attr={this.props.attr?.rowHeaderButton}
                     >
                         {column.label}{labelSuffix}
                     </Attr.button>
@@ -172,7 +172,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                     <Attr.header
                         className={css('column-header')}
                         key={`header-${colIndex}`}
-                        attr={this.props.attr.rowHeaderButton}
+                        attr={this.props.attr?.rowHeaderButton}
                     >
                         {column.label}
                     </Attr.header>
@@ -201,7 +201,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                             className={css('column-content')}
                             key={rowIndex}
                             htmlFor={`${this.props.name}-select-${rowIndex}_checkbox`}
-                            attr={mergeAttributes(this.props.attr.rowContent, row.attr)}
+                            attr={mergeAttributes(this.props.attr?.rowContent, row.attr)}
                         >
                             {content}
                         </Attr.label>
@@ -221,7 +221,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
             const selectAll = !this.props.onSelectAll
                 ? <Attr.div
                     className={css('checkbox-empty')}
-                    attr={this.props.attr.selectAllEmpty}
+                    attr={this.props.attr?.selectAllEmpty}
                 />
                 : <CheckboxInput
                     name={`${this.props.name}-select-all`}
@@ -236,7 +236,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                     checked={allSelected}
                     onChange={newValue => this.props.onSelectAll(newValue)}
                     attr={mergeAttributeObjects(
-                        this.props.attr.selectAllCheckbox, {
+                        this.props.attr?.selectAllCheckbox, {
                             checkbox: {
                                 className: css('list-checkbox-button')
                             },
@@ -254,7 +254,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                         'checkbox-empty': !this.props.onSelectAll
                     })}
                     key={'select-all'}
-                    attr={this.props.attr.selectAllContainer}
+                    attr={this.props.attr?.selectAllContainer}
                 >
                     {selectAll}
                 </Attr.div>
@@ -283,7 +283,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                     <Attr.div
                         className={css('column-content', 'checkbox')}
                         key={`select-${index}`}
-                        attr={mergeAttributes(this.props.attr.selectRowContent, row.attr)}
+                        attr={mergeAttributes(this.props.attr?.selectRowContent, row.attr)}
                     >
                         <CheckboxInput
                             name={`${this.props.name}-select-${index}`}
@@ -298,9 +298,9 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                             checked={isSelected}
                             onChange={newValue => this.props.onSelect(row, newValue)}
                             attr={mergeAttributeObjects(
-                                typeof this.props.attr.selectRowCheckbox === 'function' 
-                                    ? this.props.attr.selectRowCheckbox(row) 
-                                    : this.props.attr.selectRowCheckbox, 
+                                typeof this.props.attr?.selectRowCheckbox === 'function' 
+                                    ? this.props.attr?.selectRowCheckbox(row) 
+                                    : this.props.attr?.selectRowCheckbox, 
                                 {
                                     checkbox: {
                                         className: css('list-checkbox-button')
@@ -321,7 +321,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
         return (
             <Attr.div
                 className={css('list-container')}
-                attr={this.props.attr.container}
+                attr={this.props.attr?.container}
             >
                 {columns.map((col, index) => {
                     const style: any = {};
@@ -344,7 +344,7 @@ export class GenericManagementList<T> extends React.PureComponent<GenericManagem
                             })}
                             key={index}
                             style={style}
-                            attr={mergeAttributes(this.props.attr.column, column.attr)}
+                            attr={mergeAttributes(this.props.attr?.column, column.attr)}
                         >
                             {col}
                         </Attr.div>

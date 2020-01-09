@@ -93,7 +93,7 @@ export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {
         label = (
             <Attr.span
                 className={props.labelClassName}
-                attr={props.attr.label}
+                attr={props.attr?.label}
             >
                 {props.children}
             </Attr.span>
@@ -104,7 +104,7 @@ export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {
         <Attr.span
             className={cls}
             style={style}
-            attr={props.attr.container}
+            attr={props.attr?.container}
         >
             {label}
         </Attr.span>

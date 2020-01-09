@@ -184,7 +184,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                             </li>}
                             {more && !more.selected && items}
                             {more &&
-                                <li key='item-more' className={cx('more-button')} title={more.attr && more.attr.ariaLabel}>
+                                <li key='item-more' className={cx('more-button')} title={more.attr?.ariaLabel}>
                                     <InlinePopup.Container
                                         expanded={more.selected}
                                         onClick={more.onClick}

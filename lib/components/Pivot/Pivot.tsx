@@ -51,7 +51,7 @@ export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
                 size={IconSize.xsmall}
                 className={css('pivot-icon')}
                 labelClassName={css('pivot-icon-label')}
-                attr={props.attr.icon}
+                attr={props.attr?.icon}
             >
                 {props.text}
             </Icon>
@@ -60,7 +60,7 @@ export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
         contents = (
             <Attr.span
                 className={css('pivot-label')}
-                attr={props.attr.content}
+                attr={props.attr?.content}
             >
                 {props.text}
             </Attr.span>
@@ -79,21 +79,21 @@ export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
                 'disabled': props.disabled,
                 'selected': props.selected,
             })}
-            attr={props.attr.container}
+            attr={props.attr?.container}
         >
             {contents}
             {contents}
             <PivotBorderProxy
                 className={css('pivot-border')}
-                attr={props.attr.bottomBorder}
+                attr={props.attr?.bottomBorder}
             />
             <Attr.div
                 className={css('focus-border')}
-                attr={props.attr.focusBorder}
+                attr={props.attr?.focusBorder}
             />
             <Attr.div
                 className={css('pivot-contents')}
-                attr={props.attr.innerContent}
+                attr={props.attr?.innerContent}
             />
         </Attr.div>
     );
