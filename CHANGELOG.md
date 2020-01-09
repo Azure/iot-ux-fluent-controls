@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.17
+### Changed
+- Use optional chaining when accessing `attr`
+
 ## 7.0.16
 ### Changed
 - Removed unsafe methods from controls
