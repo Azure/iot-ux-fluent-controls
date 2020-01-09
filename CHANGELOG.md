@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 7.0.16
+### Changed
+- Fixed focus state on default buttons
+- Add name to balloon info icon
+- Fixed focus state of toggle after click
+- Updated masthead to center logo
+- Updated some components to hooks
+
 ## 7.0.15
 ### Changed
 Changed `Thumbnail` to properly spread its `attr` property.
