@@ -75,23 +75,23 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
     };
 
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: props.attr.fieldLabel,
-        fieldError: props.attr.fieldError,
-        fieldContent: props.attr.fieldContent,
-        fieldContainer: props.attr.fieldContainer
+        fieldLabel: props.attr?.fieldLabel,
+        fieldError: props.attr?.fieldError,
+        fieldContent: props.attr?.fieldContent,
+        fieldContainer: props.attr?.fieldContainer
     };
 
     const options = props.options.map((option, index) => {
         const radioAttr: RadioInputAttributes = {
-            container: props.attr.container,
-            label: props.attr.label,
+            container: props.attr?.container,
+            label: props.attr?.label,
             input: Object.assign({
                 'aria-label': option.label,
-            }, props.attr.input),
-            radio: props.attr.radio,
-            text: props.attr.text,
-            fill: props.attr.fill,
-            border: props.attr.border
+            }, props.attr?.input),
+            radio: props.attr?.radio,
+            text: props.attr?.text,
+            fill: props.attr?.fill,
+            border: props.attr?.border
         };
 
         return (

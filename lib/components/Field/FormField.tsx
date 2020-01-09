@@ -132,25 +132,25 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
             <Attr.div
                 methodRef={this._self}
                 className={containerClass}
-                attr={props.attr.fieldContainer}
+                attr={props.attr?.fieldContainer}
                 onBlur={this.handleBlur}
             >
                 {(!!props.label) && <FormLabel
                     name={props.name}
                     icon='info'
                     balloon={props.tooltip}
-                    attr={props.attr.fieldLabel}
+                    attr={props.attr?.fieldLabel}
                     required={props.required}
                     balloonExpanded={this.state.tooltipVisible}
                     farSide={props.labelFarSide}
                     disabled={props.disabled}
-                     {...props.attr.fieldTooltip}
+                     {...props.attr?.fieldTooltip}
                 >
                     {props.label}
                 </FormLabel>}
                 <Attr.div
                     className={css('content')}
-                    attr={props.attr.fieldContent}
+                    attr={props.attr?.fieldContent}
                     onKeyDown={this.handleKeyDown}
                 >
                     {props.children}
@@ -164,7 +164,7 @@ export class FormField extends React.PureComponent<FormFieldProps, FormFieldStat
                     attr={{container: {
                         'aria-live': 'polite', // this tags are for screen readers to read the error when it appears
                         'aria-atomic': 'true',
-                        ...props.attr.fieldError }
+                        ...props.attr?.fieldError }
                     }}
                 >
                     {error}

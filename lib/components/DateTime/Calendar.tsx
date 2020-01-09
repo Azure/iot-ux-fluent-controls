@@ -288,7 +288,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
 
         const weekdays = this.dayNames.map(day => {
             return (
-                <Attr.div key={day} attr={this.props.attr.weekDayHeader}>
+                <Attr.div key={day} attr={this.props.attr?.weekDayHeader}>
                     {day}
                 </Attr.div>
             );
@@ -343,7 +343,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                             className={colClassName}
                             onClick={onClick}
                             key={key}
-                            attr={this.props.attr.dateButton}
+                            attr={this.props.attr?.dateButton}
                         >
                             {date}
                         </Attr.button>
@@ -369,7 +369,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                                 className={css('selected')}
                                 onClick={onClick}
                                 key={key}
-                                attr={this.props.attr.dateButton}
+                                attr={this.props.attr?.dateButton}
                             >
                                 {date}
                             </Attr.button>
@@ -387,7 +387,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                         onKeyDown={this.onKeyDown}
                         onClick={onClick}
                         key={key}
-                        attr={this.props.attr.dateButton}
+                        attr={this.props.attr?.dateButton}
                     >
                         {date}
                     </Attr.button>
@@ -398,7 +398,7 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                 <Attr.div
                     className={rowClassName}
                     key={rowIndex}
-                    attr={this.props.attr.dateRow}
+                    attr={this.props.attr?.dateRow}
                 >
                     {inner}
                 </Attr.div>
@@ -408,15 +408,15 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
             <Attr.div
                 methodRef={this.setContainerRef}
                 className={css('calendar', this.props.className)}
-                attr={this.props.attr.container}
+                attr={this.props.attr?.container}
             >
                 <Attr.div
                     className={css('calendar-header')}
-                    attr={this.props.attr.header}
+                    attr={this.props.attr?.header}
                 >
                     <Attr.div
                         className={css('calendar-month')}
-                        attr={this.props.attr.monthHeader}
+                        attr={this.props.attr?.monthHeader}
                     >
                         {`${this.monthNames[curMonth]} ${curYear}`}
                     </Attr.div>
@@ -425,19 +425,19 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                             className={css('calendar-chevron')}
                             onClick={this.onPrevMonth}
                             icon='chevronUp'
-                            attr={this.props.attr.prevMonthButton}
+                            attr={this.props.attr?.prevMonthButton}
                         />
                         <ActionTriggerButton
                             icon='chevronDown'
                             className={css('calendar-chevron')}
                             onClick={this.onNextMonth}
-                            attr={this.props.attr.nextMonthButton}
+                            attr={this.props.attr?.nextMonthButton}
                         />
                     </div>
                 </Attr.div>
                 <Attr.div
                     className={css('calendar-days')}
-                    attr={this.props.attr.dateContainer}
+                    attr={this.props.attr?.dateContainer}
                 >
                     {weekdays}
                 </Attr.div>

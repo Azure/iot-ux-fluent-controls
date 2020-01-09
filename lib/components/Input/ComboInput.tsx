@@ -325,8 +325,8 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             const element = this.optionElements[option];
             const options = this.getVisibleOptions();
             const index = options.map(option => option.value).indexOf(option);
-            const className = this.props.attr.option && this.props.attr.option.className
-                ? this.props.attr.option.className : '';
+            const className = this.props.attr?.option && this.props.attr?.option.className
+                ? this.props.attr?.option.className : '';
 
             if (index > -1) {
                 element.className = css('option', className,
@@ -359,8 +359,8 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             const element = this.optionElements[option];
             const options = this.getVisibleOptions();
             const index = options.map(option => option.value).indexOf(option);
-            const className = this.props.attr.option && this.props.attr.option.className
-                ? this.props.attr.option.className : '';
+            const className = this.props.attr?.option && this.props.attr?.option.className
+                ? this.props.attr?.option.className : '';
 
             if (index > -1) {
                 element.className = css('option', 'hover', className,
@@ -422,7 +422,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                             this.optionElements[this.props.optionMap(option)] = element;
                         }
                     }}
-                    attr={mergeAttributes(this.props.attr.option, option.attr)}
+                    attr={mergeAttributes(this.props.attr?.option, option.attr)}
                 >
                     {this.props.optionLabel(value, option)}
                 </Attr.button>
@@ -448,13 +448,13 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                     this.props.onChange('');
                 }}
                 tabIndex={-1}
-                attr={this.props.attr.clearButton}
+                attr={this.props.attr?.clearButton}
             />;
 
         const dropdown = this.props.options && this.props.options.length > 0
             && <Attr.div
                 className={this.props.dropdownClassName}
-                attr={this.props.attr.dropdown}
+                attr={this.props.attr?.dropdown}
             >
                 {options}
             </Attr.div>;
@@ -487,7 +487,7 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             >
                 <Attr.div
                     className={css('input-container')}
-                    attr={this.props.attr.textbox}
+                    attr={this.props.attr?.textbox}
                 >
                     <Attr.input
                         type='text'
@@ -504,12 +504,12 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
                         readOnly={this.props.readOnly}
                         methodRef={this.inputRef}
                         autoFocus={this.props.autoFocus}
-                        attr={this.props.attr.input}
+                        attr={this.props.attr?.input}
                     />
                     {clearButton}
                     <Attr.span
                         className={css('chevron', 'icon icon-chevronDown', { 'disabled': this.props.disabled })}
-                        attr={this.props.attr.chevron}
+                        attr={this.props.attr?.chevron}
                     />
                 </Attr.div>
             </Dropdown>

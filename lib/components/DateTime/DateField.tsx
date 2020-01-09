@@ -83,18 +83,18 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
         input: Object.assign({
             'aria-label': props.label,
             'aria-describedby': describedby
-        }, props.attr.input),
-        inputContainer: props.attr.inputContainer,
-        inputIcon: props.attr.inputIcon,
-        calendar: props.attr.calendar
+        }, props.attr?.input),
+        inputContainer: props.attr?.inputContainer,
+        inputIcon: props.attr?.inputIcon,
+        calendar: props.attr?.calendar
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: props.attr.fieldLabel,
+        fieldLabel: props.attr?.fieldLabel,
         fieldError: Object.assign({
             id: errorId
-        }, props.attr.fieldError),
-        fieldContent: props.attr.fieldContent,
-        fieldContainer: props.attr.fieldContainer
+        }, props.attr?.fieldError),
+        fieldContent: props.attr?.fieldContent,
+        fieldContainer: props.attr?.fieldContainer
     };
 
     return (

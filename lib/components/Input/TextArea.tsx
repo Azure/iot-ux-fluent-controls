@@ -95,7 +95,7 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
         return (
             <Attr.div
                 className={css('textarea-container', this.props.className)}
-                attr={this.props.attr.container}
+                attr={this.props.attr?.container}
             >
                 <Attr.textarea
                     name={this.props.name}
@@ -109,13 +109,13 @@ export class TextArea extends React.Component<TextAreaProps, TextAreaState> {
                     methodRef={this.bindTextArea}
                     autoFocus={this.props.autoFocus}
                     required={this.props.required}
-                    attr={this.props.attr.textarea}
+                    attr={this.props.attr?.textarea}
                 />
                 {this.props.autogrow ?
                     <Attr.pre
                         className={css('textarea', 'textarea-ghost')}
                         methodRef={this.bindGhost}
-                        attr={this.props.attr.pre}
+                        attr={this.props.attr?.pre}
                     >
                         {value + (value[value.length - 1] === '\n' ? '\n' : '')}
                     </Attr.pre>

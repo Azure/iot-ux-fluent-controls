@@ -220,13 +220,13 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
         const numHours = this.props.militaryTime ? 24 : 12;
         for (let index = 0; index < numHours; index++) {
             const value = index < 10 ? `0${index}` : `${index}`;
-            hoursList.push(this.optionMap({label: value, value: value}, this.props.attr.hourOption));
+            hoursList.push(this.optionMap({label: value, value: value}, this.props.attr?.hourOption));
         }
 
         for (let index = 0; index < 60; index++) {
             const value = index < 10 ? `0${index}` : `${index}`;
-            minutesList.push(this.optionMap({label: value, value: value}, this.props.attr.minuteOption));
-            secondsList.push(this.optionMap({label: value, value: value}, this.props.attr.secondOption));
+            minutesList.push(this.optionMap({label: value, value: value}, this.props.attr?.minuteOption));
+            secondsList.push(this.optionMap({label: value, value: value}, this.props.attr?.secondOption));
         }
 
         const period = this.props.militaryTime ? '' : <Attr.select
@@ -236,17 +236,17 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             onChange={() => this.update('period', this.periodInput.value)}
             methodRef={element => this.periodInput = element}
             className={css(inputClassName, 'time-input-period')}
-            attr={this.props.attr.periodSelect}
+            attr={this.props.attr?.periodSelect}
         >
             <Attr.option
                 value='AM'
-                attr={this.props.attr.periodOption}
+                attr={this.props.attr?.periodOption}
             >
                 {this.props.amLabel}
             </Attr.option>
             <Attr.option
                 value='PM'
-                attr={this.props.attr.periodOption}
+                attr={this.props.attr?.periodOption}
             >
                 {this.props.pmLabel}
             </Attr.option>
@@ -259,7 +259,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
             onChange={() => this.update('seconds', this.secondInput.value)}
             methodRef={element => this.secondInput = element}
             className={inputClassName}
-            attr={this.props.attr.secondSelect}
+            attr={this.props.attr?.secondSelect}
         >
             {secondsList}
         </Attr.select>;
@@ -267,7 +267,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
         return (
             <Attr.div
             className={css('time-input-container', this.props.className)}
-            attr={this.props.attr.container}
+            attr={this.props.attr?.container}
             >
                 <Attr.select
                     name={this.props.name}
@@ -276,7 +276,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                     onChange={() => this.update('hours', this.hourInput.value)}
                     methodRef={element => this.hourInput = element}
                     className={inputClassName}
-                    attr={this.props.attr.hourSelect}
+                    attr={this.props.attr?.hourSelect}
                 >
                     {hoursList}
                 </Attr.select>
@@ -287,7 +287,7 @@ export class TimeInput extends React.Component<TimeInputProps, TimeInputState> {
                     onChange={() => this.update('minutes', this.minuteInput.value)}
                     methodRef={element => this.minuteInput = element}
                     className={inputClassName}
-                    attr={this.props.attr.minuteSelect}
+                    attr={this.props.attr?.minuteSelect}
                 >
                     {minutesList}
                 </Attr.select>

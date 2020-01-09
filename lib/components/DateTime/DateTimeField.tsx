@@ -305,37 +305,37 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
         const dateAttr: DatePickerAttributes = {
             input: Object.assign({
                 'aria-describedby': describedby
-            }, this.props.attr.datePicker && this.props.attr.datePicker.input),
-            inputContainer: this.props.attr.datePicker && this.props.attr.datePicker.inputContainer,
-            inputIcon: this.props.attr.datePicker && this.props.attr.datePicker.inputIcon,
-            calendar: this.props.attr.datePicker && this.props.attr.datePicker.calendar
+            }, this.props.attr?.datePicker && this.props.attr?.datePicker.input),
+            inputContainer: this.props.attr?.datePicker && this.props.attr?.datePicker.inputContainer,
+            inputIcon: this.props.attr?.datePicker && this.props.attr?.datePicker.inputIcon,
+            calendar: this.props.attr?.datePicker && this.props.attr?.datePicker.calendar
         };
         const timeAttr: TimeInputAttributes = {
             hourSelect: {
                 'aria-describedby': describedby,
-                ...(this.props.attr.timeInput && this.props.attr.timeInput.hourSelect)
+                ...(this.props.attr?.timeInput && this.props.attr?.timeInput.hourSelect)
             },
             minuteSelect: {
                 'aria-describedby': describedby,
-                ...(this.props.attr.timeInput && this.props.attr.timeInput.minuteSelect)
+                ...(this.props.attr?.timeInput && this.props.attr?.timeInput.minuteSelect)
             },
             secondSelect: {
                 'aria-describedby': describedby,
-                ...(this.props.attr.timeInput && this.props.attr.timeInput.secondSelect)
+                ...(this.props.attr?.timeInput && this.props.attr?.timeInput.secondSelect)
             },
             periodSelect: {
                 'aria-describedby': describedby,
-                ...(this.props.attr.timeInput && this.props.attr.timeInput.periodSelect)
+                ...(this.props.attr?.timeInput && this.props.attr?.timeInput.periodSelect)
             },
-            ...(this.props.attr.timeInput && this.props.attr.timeInput)
+            ...(this.props.attr?.timeInput && this.props.attr?.timeInput)
         };
         const fieldAttr: FormFieldAttributes = {
-            fieldLabel: this.props.attr.fieldLabel,
+            fieldLabel: this.props.attr?.fieldLabel,
             fieldError: Object.assign({
                 id: errorId
-            }, this.props.attr.fieldError),
-            fieldContent: this.props.attr.fieldContent,
-            fieldContainer: this.props.attr.fieldContainer
+            }, this.props.attr?.fieldError),
+            fieldContent: this.props.attr?.fieldContent,
+            fieldContainer: this.props.attr?.fieldContainer
         };
 
         return (
@@ -354,11 +354,11 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
             >
                 <Attr.div
                     className={css('field-content')}
-                    attr={this.props.attr.flexContainer}
+                    attr={this.props.attr?.flexContainer}
                 >
                     <Attr.span
                         className={css('field-date')}
-                        attr={this.props.attr.dateColumn}
+                        attr={this.props.attr?.dateColumn}
                     >
                         <DatePicker
                             name={this.props.name}
@@ -380,7 +380,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
                     </Attr.span>
                     <Attr.span
                         className={css('field-time')}
-                        attr={this.props.attr.timeColumn}
+                        attr={this.props.attr?.timeColumn}
                     >
                         <TimeInput
                             name={this.props.name}

@@ -121,14 +121,14 @@ export class TextInput extends React.PureComponent<TextInputProps> {
             onClick={this.onClear}
             tabIndex={-1}
             aria-label='Cancel'
-            attr={this.props.attr.clearButton}
+            attr={this.props.attr?.clearButton}
         />;
 
         let prefix = null;
         if (this.props.prefix) {
             const className = css('prefix', this.props.prefixClassName);
             prefix = (
-                <Attr.div className={className} attr={this.props.attr.prefix}>
+                <Attr.div className={className} attr={this.props.attr?.prefix}>
                     {this.props.prefix}
                 </Attr.div>
             );
@@ -138,18 +138,18 @@ export class TextInput extends React.PureComponent<TextInputProps> {
         if (this.props.postfix) {
             const className = css('postfix', this.props.postfixClassName);
             postfix = (
-                <Attr.div className={className} attr={this.props.attr.postfix}>
+                <Attr.div className={className} attr={this.props.attr?.postfix}>
                     {this.props.postfix}
                 </Attr.div>
             );
         }
 
         return (
-            <Attr.div className={containerClassName} attr={this.props.attr.container}>
+            <Attr.div className={containerClassName} attr={this.props.attr?.container}>
                 {prefix}
                 <Attr.div
                     className={inputContainerClassName}
-                    attr={this.props.attr.inputContainer}
+                    attr={this.props.attr?.inputContainer}
                 >
                     <Attr.input
                         type={this.props.type}
@@ -164,7 +164,7 @@ export class TextInput extends React.PureComponent<TextInputProps> {
                         readOnly={this.props.readOnly}
                         autoFocus={this.props.autoFocus}
                         methodRef={this.props.autoFocus && autoFocusRef}
-                        attr={this.props.attr.input}
+                        attr={this.props.attr?.input}
                     />
                     {clearButton}
                 </Attr.div>

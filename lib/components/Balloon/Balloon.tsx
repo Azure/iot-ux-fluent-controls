@@ -122,7 +122,7 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         return (
             <Dropdown
                 dropdown={
-                    <Attr.span className={innerClassName} attr={this.props.attr.balloonContent}>
+                    <Attr.span className={innerClassName} attr={this.props.attr?.balloonContent}>
                         {this.props.tooltip}
                     </Attr.span>
                 }
@@ -135,9 +135,9 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
                 alignmentHint={this.props.alignmentHint}
                 dropdownSeparation={1}
                 attr={{
-                    host: this.props.attr.container,
+                    host: this.props.attr?.container,
                     dropdown: mergeAttributes(
-                        this.props.attr.balloon,
+                        this.props.attr?.balloon,
                         {className: balloonClassName}
                     )
                 }}

@@ -88,7 +88,7 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
                 disabled={opt.disabled}
                 hidden={opt.hidden}
                 className={css({'option-hidden': !!opt.hidden})}
-                attr={mergeAttributes(props.attr.option, opt.attr)}
+                attr={mergeAttributes(props.attr?.option, opt.attr)}
             >
                 {opt.label}
             </Attr.option>
@@ -102,7 +102,7 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
     };
 
     return (
-        <Attr.div className={containerClass} attr={props.attr.container}>
+        <Attr.div className={containerClass} attr={props.attr?.container}>
             <Attr.select
                 name={props.name}
                 value={value}
@@ -112,11 +112,11 @@ export const SelectInput: React.StatelessComponent<SelectInputProps> = (props: S
                 autoFocus={props.autoFocus}
                 methodRef={props.autoFocus && autoFocusRef}
                 required={props.required}
-                attr={props.attr.select}
+                attr={props.attr?.select}
             >
                 {options}
             </Attr.select>
-            <Attr.span className={arrowClassName} attr={props.attr.chevron}/>
+            <Attr.span className={arrowClassName} attr={props.attr?.chevron}/>
         </Attr.div>
     );
 };

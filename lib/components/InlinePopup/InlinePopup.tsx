@@ -35,7 +35,7 @@ export class Container extends React.PureComponent<Properties> {
 
     render() {
         return <div
-            data-test-hook={this.props.attr.dataTestHook}
+            data-test-hook={this.props.attr?.dataTestHook}
             className={cx('inline-popup-container', {
                 'expanded': this.props.expanded,
                 'disabled': this.props.disabled
@@ -43,7 +43,7 @@ export class Container extends React.PureComponent<Properties> {
         >
             {React.Children.map(this.props.children, child => React.cloneElement(child as React.ReactElement<any>, {
                 expanded: this.props.expanded,
-                tabIndex: this.props.attr.tabIndex,
+                tabIndex: this.props.attr?.tabIndex,
                 onClick: this.props.onClick,
                 disabled: this.props.disabled
             }))}
@@ -55,11 +55,11 @@ export class Label extends React.Component<Properties & { title?: string }> {
     public static defaultProps: Partial<Properties> = inlinePopupDefaultProps;
 
     render() {
-        const tabIndex = this.props.attr.tabIndex || 0;
+        const tabIndex = this.props.attr?.tabIndex || 0;
         return <button
-            aria-label={this.props.attr.ariaLabel}
+            aria-label={this.props.attr?.ariaLabel}
             aria-expanded={!!this.props.expanded}
-            aria-describedby={this.props.attr.ariaDescribedBy}
+            aria-describedby={this.props.attr?.ariaDescribedBy}
             title={this.props.title}
             type='button'
             className={cx('inline-popup-label', 'inline-btn', {

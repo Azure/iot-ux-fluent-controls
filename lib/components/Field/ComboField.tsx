@@ -148,21 +148,21 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
  */
 export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: ComboFieldProps) => {
     const comboAttr: ComboInputAttributes = {
-        host: props.attr.host,
+        host: props.attr?.host,
         input: Object.assign({
             'aria-label': props.label,
-        }, props.attr.input),
-        clearButton: props.attr.clearButton,
-        textbox: props.attr.textbox,
-        chevron: props.attr.chevron,
-        dropdown: props.attr.dropdown,
-        option: props.attr.option,
+        }, props.attr?.input),
+        clearButton: props.attr?.clearButton,
+        textbox: props.attr?.textbox,
+        chevron: props.attr?.chevron,
+        dropdown: props.attr?.dropdown,
+        option: props.attr?.option,
     };
     const fieldAttr: FormFieldAttributes = {
-        fieldLabel: props.attr.fieldLabel,
-        fieldError: props.attr.fieldError,
-        fieldContent: props.attr.fieldContent,
-        fieldContainer: props.attr.fieldContainer
+        fieldLabel: props.attr?.fieldLabel,
+        fieldError: props.attr?.fieldError,
+        fieldContent: props.attr?.fieldContent,
+        fieldContainer: props.attr?.fieldContainer
     };
     return (
         <FormField

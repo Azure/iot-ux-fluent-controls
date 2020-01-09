@@ -231,8 +231,8 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
     }
 
     render() {
-        const inputAttr = this.props.attr && this.props.attr.input
-            ? this.props.attr.input : {};
+        const inputAttr = this.props.attr && this.props.attr?.input
+            ? this.props.attr?.input : {};
         const attr = {
             ...(this.props.attr || {}),
             input: {

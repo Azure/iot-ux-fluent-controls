@@ -80,27 +80,27 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
             expanded={props.balloonExpanded}
             positionHint={props.balloonPositionHint}
             alignmentHint={props.balloonAlignmentHint}
-            attr={props.attr.balloon}
+            attr={props.attr?.balloon}
         >
             <Icon
                 icon={props.icon}
                 size={IconSize.xsmall}
-                attr={props.attr.icon}
+                attr={props.attr?.icon}
             />
         </Balloon> : '';
 
     return (
         <Attr.div
             className={css('label-container', props.className)}
-            attr={props.attr.container}
+            attr={props.attr?.container}
         >
             <Attr.div
                 className={css('label-inner-container')}
-                attr={props.attr.innerContainer}>
+                attr={props.attr?.innerContainer}>
                 <Attr.label
                     className={css('label', { 'required': props.required, 'disabled': props.disabled })}
                     htmlFor={props.name}
-                    attr={props.attr.text}
+                    attr={props.attr?.text}
                 >
                     {props.children}
                 </Attr.label>
@@ -108,7 +108,7 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
             </Attr.div>
             {props.farSide && <Attr.div
                 className={css('label-farSide-container')}
-                attr={props.attr.farSideContainer}>
+                attr={props.attr?.farSideContainer}>
                 {props.farSide}
             </Attr.div>}
         </Attr.div>

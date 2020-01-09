@@ -395,12 +395,12 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
             <Attr.div
                 methodRef={this.setContainerRef}
                 className={css('date-picker-container', this.props.className)}
-                attr={this.props.attr.container}
+                attr={this.props.attr?.container}
                 onBlur={this.onBlur}
             >
                 <Attr.div
                     className={css('date-picker-input-container')}
-                    attr={this.props.attr.inputContainer}
+                    attr={this.props.attr?.inputContainer}
                 >
                     <Attr.input
                         type='text'
@@ -413,14 +413,14 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         required={this.props.required}
                         disabled={this.props.disabled}
                         methodRef={this.inputRef}
-                        attr={this.props.attr.input}
+                        attr={this.props.attr?.input}
                     />
                     <ActionTriggerButton
                         icon='calendar'
                         className={css('date-picker-calendar-icon')}
                         onClick={this.onExpand}
                         disabled={this.props.disabled}
-                        attr={this.props.attr.inputIcon}
+                        attr={this.props.attr?.inputIcon}
                         aria-haspopup={true}
                         aria-expanded={this.state.expanded}
                     />
@@ -439,7 +439,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                             month={parsed.month - 1}
                             localTimezone={this.props.localTimezone}
                             locale={this.props.locale}
-                            attr={this.props.attr.calendar}
+                            attr={this.props.attr?.calendar}
                         />
                         <div className={css('date-picker-dropdown-triangle')}></div>
                     </Attr.div>
