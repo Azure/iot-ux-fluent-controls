@@ -21,12 +21,12 @@ $line-height: 5*$grid-size;
 
     .required &::after {
         content: ' *';
-        color: var(--color-text-error);
+        color: var(--color-text-required);
     }
 
     &.required::after {
         content: ' *';
-        color: var(--color-text-error);
+        color: var(--color-text-required);
     }
 
     & + .field-error {
