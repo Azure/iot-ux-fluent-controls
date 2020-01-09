@@ -216,7 +216,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
 
     componentDidUpdate(oldProps: NumberInputProps, oldState: NumberInputState) {
         if (oldProps.initialValue !== this.props.initialValue) {	
-            this.setState(NumberInput.getInitialState(this.props.initialValue));	
+            this.setState(NumberInput.getInitialState(this.props.initialValue, oldState.value));	
         }
         
         if (oldState.value === this.state.value) {
