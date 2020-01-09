@@ -44,6 +44,8 @@ export interface ToggleFieldProps extends React.Props<ToggleFieldType> {
     inputClassName?: string;
     /** React node to render at the far side of the label. */
     labelFarSide?: React.ReactNode;
+    /** Label to be announced before the error message to announce to the user that there's an error */
+    errorAriaLabel?: string;
 
     attr?: FormFieldAttributes & ToggleAttributes;
 }
@@ -82,6 +84,7 @@ export const ToggleField = React.memo((props: ToggleFieldProps) => {
             className={props.className}
             attr={fieldAttr}
             labelFarSide={props.labelFarSide}
+            errorAriaLabel={props.errorAriaLabel}
             disabled={props.disabled}
         >
             <Toggle

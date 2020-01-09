@@ -110,6 +110,8 @@ export interface ComboFieldProps extends React.Props<ComboFieldType> {
     inputClassName?: string;
     /** React node to render at the far side of the label. */
     labelFarSide?: React.ReactNode;
+    /** Label to be announced before the error message to announce to the user that there's an error */
+    errorAriaLabel?: string;
 
     attr?: ComboInputAttributes & FormFieldAttributes;
 }
@@ -174,6 +176,7 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
             className={props.className}
             attr={fieldAttr}
             labelFarSide={props.labelFarSide}
+            errorAriaLabel={props.errorAriaLabel}
             disabled={props.disabled}
         >
             <div>
