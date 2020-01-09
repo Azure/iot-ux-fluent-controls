@@ -75,7 +75,7 @@ export class Thumbnail extends React.Component<ThumbnailProperties, ThumbnailSta
             return <Attr.div className={className}/>;
         } else {
             let icon = this.props.icon || kindIcons[this.props.kind];
-            return <Attr.div className={className} {...this.props.attr.container}>
+            return <Attr.div className={className} {...this.props.attr?.container}>
                 {!!this.props.url
                     ? <img className={cx({ 'hidden': !this.state.imageLoaded })}
                         role={this.props.attr?.img?.alt ? null : 'presentation'}
@@ -85,7 +85,7 @@ export class Thumbnail extends React.Component<ThumbnailProperties, ThumbnailSta
                         aria-label={this.props.ariaLabel}
                         onLoad={this.handleImageLoad}
                         onError={this.handleError}
-                        {...this.props.attr.img} />
+                        {...this.props.attr?.img} />
                     : null}
                 {!!icon
                     ? <span className={cx('icon', icon, { 'hidden': this.state.imageLoaded })} />

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.16
+### Changed
+Changed `Thumbnail` to spread `attr` only when `attr` is defined.
+
 ## 7.0.15
 ### Changed
 Changed `Thumbnail` to properly spread its `attr` property.
