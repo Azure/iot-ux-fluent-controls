@@ -346,11 +346,11 @@ export const Dropdown = React.memo(({ className, onMouseEnter, onMouseLeave, att
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 data-dropdown-visible='false'
-                attr={attr && attr.host}>
+                attr={attr?.host}>
                 <Attr.span
                     aria-hidden={!visible}
                     className={css('md-dropdown', { interactive, 'with-arrow': showArrow })}
-                    attr={attr && attr.dropdown}
+                    attr={attr?.dropdown}
                     methodRef={dropdownRef}>
                     {dropdown}
                 </Attr.span>

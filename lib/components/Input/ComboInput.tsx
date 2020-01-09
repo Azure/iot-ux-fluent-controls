@@ -325,14 +325,11 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             const element = this.optionElements[option];
             const options = this.getVisibleOptions();
             const index = options.map(option => option.value).indexOf(option);
-            const className = this.props.attr?.option && this.props.attr?.option.className
+            const className = this.props.attr?.option?.className
                 ? this.props.attr?.option.className : '';
 
             if (index > -1) {
-                element.className = css('option', className,
-                    options[index].attr && options[index].attr.className
-                        ? options[index].attr.className : ''
-                );
+                element.className = css('option', className, options[index].attr?.className ?? '');
             } else {
                 element.className = css('option', className);
             }
@@ -359,14 +356,10 @@ export class ComboInput extends React.Component<ComboInputProps, Partial<ComboIn
             const element = this.optionElements[option];
             const options = this.getVisibleOptions();
             const index = options.map(option => option.value).indexOf(option);
-            const className = this.props.attr?.option && this.props.attr?.option.className
-                ? this.props.attr?.option.className : '';
+            const className = this.props.attr?.option?.className ?? '';
 
             if (index > -1) {
-                element.className = css('option', 'hover', className,
-                    options[index].attr && options[index].attr.className
-                        ? options[index].attr.className : ''
-                );
+                element.className = css('option', 'hover', className, options[index].attr?.className ?? '');
             } else {
                 element.className = css('option', 'hover', className);
             }

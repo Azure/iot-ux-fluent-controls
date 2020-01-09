@@ -305,29 +305,28 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
         const dateAttr: DatePickerAttributes = {
             input: Object.assign({
                 'aria-describedby': describedby
-            }, this.props.attr?.datePicker && this.props.attr?.datePicker.input),
-            inputContainer: this.props.attr?.datePicker && this.props.attr?.datePicker.inputContainer,
-            inputIcon: this.props.attr?.datePicker && this.props.attr?.datePicker.inputIcon,
-            calendar: this.props.attr?.datePicker && this.props.attr?.datePicker.calendar
+            }, this.props.attr?.datePicker?.input),
+            inputContainer: this.props.attr?.datePicker?.inputContainer,
+            inputIcon: this.props.attr?.datePicker?.inputIcon,
         };
         const timeAttr: TimeInputAttributes = {
             hourSelect: {
                 'aria-describedby': describedby,
-                ...(this.props.attr?.timeInput && this.props.attr?.timeInput.hourSelect)
+                ...(this.props.attr?.timeInput?.hourSelect)
             },
             minuteSelect: {
                 'aria-describedby': describedby,
-                ...(this.props.attr?.timeInput && this.props.attr?.timeInput.minuteSelect)
+                ...(this.props.attr?.timeInput?.minuteSelect)
             },
             secondSelect: {
                 'aria-describedby': describedby,
-                ...(this.props.attr?.timeInput && this.props.attr?.timeInput.secondSelect)
+                ...(this.props.attr?.timeInput?.secondSelect)
             },
             periodSelect: {
                 'aria-describedby': describedby,
-                ...(this.props.attr?.timeInput && this.props.attr?.timeInput.periodSelect)
+                ...(this.props.attr?.timeInput?.periodSelect)
             },
-            ...(this.props.attr?.timeInput && this.props.attr?.timeInput)
+            ...(this.props.attr?.timeInput)
         };
         const fieldAttr: FormFieldAttributes = {
             fieldLabel: this.props.attr?.fieldLabel,
