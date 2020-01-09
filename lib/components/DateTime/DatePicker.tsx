@@ -124,7 +124,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
     constructor(props: DatePickerProps) {
         super(props);
 
-        const newState = this.getInitialState(props, '');
+        const newState = DatePicker.getInitialState(props, '');
         this.state = {
             ...newState,
             expanded: false,
@@ -140,23 +140,23 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
      *
      * @param props DatePickerProps
      */
-    getInitialState(props: DatePickerProps, currentValue: string): DatePickerState {
+    static getInitialState(props: DatePickerProps, currentValue: string, currentInitialValue?: MethodDate): DatePickerState {
         const local = props.localTimezone;
         let value = currentValue;
         let initialValue: MethodDate = null;
         if (props.initialValue) {
             if (props.initialValue === 'invalid') {
-                if (this.state && this.state.initialValue) {
+                if (currentInitialValue) {
                     initialValue = MethodDate.fromString(
                         props.localTimezone,
-                        this.state.initialValue.dateObject.toJSON()
+                        currentInitialValue.dateObject.toJSON()
                     );
                 }
             } else if (typeof(props.initialValue) === 'string') {
                 const date = MethodDate.fromString(local, props.initialValue);
                 if (date && dateIsValid(date.dateObject, local)) {
                     initialValue = date;
-                    const parsed = this.parse(currentValue);
+                    const parsed = DatePicker.parse(currentValue, props.format, props.localTimezone);
                     if (
                         date.year !== parsed.year ||
                         date.month !== (parsed.month - 1) ||
@@ -203,18 +203,8 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         };
     }
 
-    /**
-     * Update the Date/Time object used internally with a new initialValue
-     *
-     * @param newProps new DatePickerProps
-     */
-    UNSAFE_componentWillReceiveProps(newProps: DatePickerProps) {
-        if ((this.props.initialValue !== newProps.initialValue || this.props.localTimezone !== newProps.localTimezone) && newProps.initialValue !== 'invalid') {
-            const newState = this.getInitialState(newProps, this.input.value);
-            this.setState({
-                ...newState,
-            });
-        }
+    static getDerivedStateFromProps(props: DatePickerProps, state: DatePickerState): Partial<DatePickerState> | null {
+        return DatePicker.getInitialState(props, state.value, state.initialValue);
     }
 
     componentDidMount() {
@@ -227,7 +217,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         window.removeEventListener('keydown', this.onKeydown);
     }
 
-    parse(newValue: string) {
+    static parse(newValue: string, format: DateFormat, localTimezone: boolean) {
         let valid = true;
 
         let split = newValue.split('/');
@@ -239,17 +229,17 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         }
 
         let year, month, date;
-        if (this.props.format === DateFormat.DDMMYYYY) {
+        if (format === DateFormat.DDMMYYYY) {
             year = parseInt(split[2]);
             month = parseInt(split[1]);
             date = parseInt(split[0]);
         }
-        else if (this.props.format === DateFormat.MMDDYYYY) {
+        else if (format === DateFormat.MMDDYYYY) {
             year = parseInt(split[2]);
             month = parseInt(split[0]);
             date = parseInt(split[1]);
         }
-        else if (this.props.format === DateFormat.YYYYMMDD) {
+        else if (format === DateFormat.YYYYMMDD) {
             year = parseInt(split[0]);
             month = parseInt(split[1]);
             date = parseInt(split[2]);
@@ -271,7 +261,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
 
         if (valid) {
             let parsed = new MethodDate(
-                this.props.localTimezone,
+                localTimezone,
                 year,
                 month - 1,
                 date
@@ -305,7 +295,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                 this.setState({value: newValue});
             }
         } else {
-            let result = this.parse(newValue);
+            let result = DatePicker.parse(newValue, this.props.format, this.props.localTimezone);
             if (result.valid) {
                 const initialValue = this.state.initialValue;
                 const dateValue = new MethodDate(
@@ -387,7 +377,7 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
 
         const placeholder = placeholders[this.props.format];
 
-        const parsed = this.parse(this.state.value);
+        const parsed = DatePicker.parse(this.state.value, this.props.format, this.props.localTimezone);
         const inputClassName = css('date-picker-input', {
             'error': !!this.props.error || (
                 !parsed.valid && !!this.props.initialValue

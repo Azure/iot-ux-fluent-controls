@@ -81,7 +81,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         super(props);
 
         this.paste = false;
-        this.state = this.getInitialState(this.props.initialValue);
+        this.state = NumberInput.getInitialState(this.props.initialValue);
     }
 
     onKeyDown = (event) => {
@@ -168,7 +168,7 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         this.paste = true;
     }
 
-    getInitialState(initialValue: number | string): NumberInputState {
+    static getInitialState(initialValue: number | string, currentValue?: string): NumberInputState {
         let value = '';
         if (typeof (initialValue) === 'number') {
             value = initialValue.toString();
@@ -178,9 +178,9 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
 
         if (value === '' || value == null) {
             value = '';
-        } else if (this.state && typeof (this.state.value) === 'string') {
-            if (parseFloat(this.state.value) === parseFloat(value)) {
-                value = this.state.value;
+        } else if (typeof(currentValue) === 'string') {
+            if (parseFloat(currentValue) === parseFloat(value)) {
+                value = currentValue;
             }
         }
 
@@ -214,7 +214,11 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
         return outValue;
     }
 
-    componentDidUpdate(_oldProps: NumberInputProps, oldState: NumberInputState) {
+    componentDidUpdate(oldProps: NumberInputProps, oldState: NumberInputState) {
+        if (oldProps.initialValue !== this.props.initialValue) {	
+            this.setState(NumberInput.getInitialState(this.props.initialValue, oldState.value));	
+        }
+        
         if (oldState.value === this.state.value) {
             return;
         }
@@ -223,12 +227,6 @@ export class NumberInput extends React.Component<NumberInputProps, NumberInputSt
             this.props.onChange(null);
         } else {
             this.props.onChange(this.getValue(this.state.value));
-        }
-    }
-
-    UNSAFE_componentWillReceiveProps(newProps: NumberInputProps) {
-        if (this.props.initialValue !== newProps.initialValue) {
-            this.setState(this.getInitialState(newProps.initialValue));
         }
     }
 

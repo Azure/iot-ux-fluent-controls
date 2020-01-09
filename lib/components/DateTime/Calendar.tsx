@@ -78,26 +78,24 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         }
     };
 
-    private value: MethodDate;
     private monthNames: string[];
     private dayNames: string[];
     private _container: HTMLDivElement;
     private nextFocusRow?: number;
     private nextFocusCol?: number;
 
-
     constructor(props: CalendarProps) {
         super(props);
 
+        let currentDate: MethodDate;
         if (typeof (this.props.value) === 'string') {
-            this.value = MethodDate.fromString(this.props.localTimezone, this.props.value);
+            currentDate = MethodDate.fromString(this.props.localTimezone, this.props.value);
         } else if (this.props.value) {
-            this.value = MethodDate.fromDate(this.props.localTimezone, this.props.value);
+            currentDate = MethodDate.fromDate(this.props.localTimezone, this.props.value);
         } else {
-            this.value = new MethodDate(this.props.localTimezone);
+            currentDate = new MethodDate(this.props.localTimezone);
         }
 
-        let currentDate = this.value.copy();
         if (props.year > 0) {
             currentDate.year = props.year;
         }
@@ -120,33 +118,29 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         this.setContainerRef = this.setContainerRef.bind(this);
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: CalendarProps) {
-        const date = this.state.currentDate.copy();
+    static getDerivedStateFromProps(props: CalendarProps, state: CalendarState): Partial<CalendarState> | null {
+        const date = state.currentDate.copy();
         let update = false;
-        if (newProps.year !== this.props.year && newProps.year > 0) {
-            date.year = newProps.year;
+
+        if (props.year > 0) {
+            date.year = props.year;
             update = true;
         }
-        if (
-            typeof (newProps.month) === 'number' &&
-            newProps.month !== this.props.month &&
-            (newProps.month === 0 || newProps.month > 0)
+
+        if (typeof (props.month) === 'number' &&
+            (props.month === 0 || props.month > 0)
         ) {
-            date.month = newProps.month;
+            date.month = props.month;
             update = true;
         }
-        if (update && !this.state.detached && date.isValid()) {
-            this.setState({ currentDate: date });
+
+        if (update && !state.detached && date.isValid()) {
+           return { 
+               currentDate: date
+            };
         }
-        if (this.props.value !== newProps.value || this.props.localTimezone !== newProps.localTimezone) {
-            if (typeof (newProps.value) === 'string') {
-                this.value = MethodDate.fromString(newProps.localTimezone, newProps.value);
-            } else if (newProps.value) {
-                this.value = MethodDate.fromDate(newProps.localTimezone, newProps.value);
-            } else {
-                this.value = new MethodDate(newProps.localTimezone);
-            }
-        }
+
+        return null;
     }
 
     componentDidUpdate() {
@@ -283,6 +277,15 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
         const curYear = this.state.currentDate.year;
         const curMonth = this.state.currentDate.month;
 
+        let currentDate: MethodDate;
+        if (typeof (this.props.value) === 'string') {
+            currentDate = MethodDate.fromString(this.props.localTimezone, this.props.value);
+        } else if (this.props.value) {
+            currentDate = MethodDate.fromDate(this.props.localTimezone, this.props.value);
+        } else {
+            currentDate = new MethodDate(this.props.localTimezone);
+        }
+
         const weekdays = this.dayNames.map(day => {
             return (
                 <Attr.div key={day} attr={this.props.attr.weekDayHeader}>
@@ -351,9 +354,9 @@ export class Calendar extends React.Component<CalendarProps, Partial<CalendarSta
                 if (this.props.value) {
                     const isSelected = (
                         this.props.value &&
-                        date === this.value.date &&
-                        col.month === this.value.month &&
-                        col.year === this.value.year
+                        date === currentDate.date &&
+                        col.month === currentDate.month &&
+                        col.year === currentDate.year
                     );
                     if (isSelected) {
                         return (

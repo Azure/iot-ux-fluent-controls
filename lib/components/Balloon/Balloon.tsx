@@ -75,10 +75,10 @@ export class Balloon extends React.Component<BalloonProps, BalloonState> {
         };
     }
 
-    UNSAFE_componentWillReceiveProps(newProps: BalloonProps) {
-        this.setState({
-            visible: this.state.hovered || newProps.expanded,
-        });
+    static getDerivedStateFromProps(props: BalloonProps, state: BalloonState): Partial<BalloonState> | null {
+        return {
+            visible: state.hovered || props.expanded
+        };
     }
 
     shouldComponentUpdate(newProps: BalloonProps, newState: BalloonState): boolean {
