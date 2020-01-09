@@ -41,6 +41,8 @@ export interface CheckboxFieldProps extends React.Props<CheckboxFieldType> {
     inputClassName?: string;
     /** React node to render at the far side of the label. */
     labelFarSide?: React.ReactNode;
+    /** Label to be announced before the error message to announce to the user that there's an error */
+    errorAriaLabel?: string;
 
     attr?: FormFieldAttributes & CheckboxInputAttributes;
 }
@@ -87,6 +89,7 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
             className={props.className}
             attr={fieldAttr}
             labelFarSide={props.labelFarSide}
+            errorAriaLabel={props.errorAriaLabel}
             disabled={props.disabled}
         >
             <div>

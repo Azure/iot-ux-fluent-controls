@@ -64,6 +64,8 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
 
     /** React node to render at the far side of the label. */
     labelFarSide?: React.ReactNode;
+    /** Label to be announced before the error message to announce to the user that there's an error */
+    errorAriaLabel?: string;
 
     attr?: DatePickerAttributes & FormFieldAttributes;
 }
@@ -107,6 +109,7 @@ export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateF
             attr={fieldAttr}
             tooltip={props.tooltip}
             labelFarSide={props.labelFarSide}
+            errorAriaLabel={props.errorAriaLabel}
             disabled={props.disabled}
         >
             <DatePicker

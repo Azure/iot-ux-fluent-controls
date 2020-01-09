@@ -46,6 +46,8 @@ export interface TextAreaFieldProps extends React.Props<TextAreaFieldType> {
     inputClassName?: string;
     /** React node to render at the far side of the label. */
     labelFarSide?: React.ReactNode;
+    /** Label to be announced before the error message to announce to the user that there's an error */
+    errorAriaLabel?: string;
 
     attr?: TextAreaAttributes & FormFieldAttributes;
 }
@@ -81,6 +83,7 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
             className={props.className}
             attr={fieldAttr}
             labelFarSide={props.labelFarSide}
+            errorAriaLabel={props.errorAriaLabel}
             disabled={props.disabled}
         >
             <TextArea
