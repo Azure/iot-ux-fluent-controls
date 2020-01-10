@@ -5,7 +5,7 @@ import styled, { ThemeProvider, ThemeProps} from 'styled-components';
 import { MethodNode } from '../../Common';
 import * as InlinePopup from '../InlinePopup';
 import { NavigationProperties } from '../Navigation/Navigation';
-import { ActionTriggerButton, ActionTriggerAttributes, ActionTriggerButtonAttributes } from '../ActionTrigger';
+import { ActionTriggerAttributes, ActionTriggerButtonAttributes } from '../ActionTrigger';
 import { Elements as Attr } from '../../Attributes';
 import { SearchInput } from '../SearchInput/SearchInput';
 import { TextInputAttributes } from '../Input/TextInput';

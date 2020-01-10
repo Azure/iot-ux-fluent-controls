@@ -26,20 +26,7 @@ export enum DropdownAlignment {
 export interface DropdownAttributes {
     host?: SpanProps;
     dropdown?: SpanProps;
-}
-
-interface ScrollOffset {
-    top: number;
-    left: number;
-}
-
-interface DropdownOffset {
-    top: number;
-    bottom: number;
-    left: number;
-    right: number;
-    height: number;
-    width: number;
+    dropdownContainer?: DivProps;
 }
 
 export interface DropdownProps {

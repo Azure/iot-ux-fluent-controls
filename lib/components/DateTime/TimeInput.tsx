@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import {DivProps, OptionProps, SelectProps, Elements as Attr} from '../../Attributes';
-import {FormOption} from '../../Common';
 const css = classNames.bind(require('./TimeInput.module.scss'));
 
 export interface TimeInputType {}
