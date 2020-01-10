@@ -148,11 +148,6 @@ $arrow-size: 2*$grid-size;
 .dropdown-host {
     position: relative;
     overflow: hidden;
-    
-    :global(.md-dropdown-container) {
-        visibility: hidden;
-        pointer-events: none;
-    }
 
     :global(.md-dropdown) {
         position: absolute;
@@ -161,12 +156,15 @@ $arrow-size: 2*$grid-size;
 }
 
 :global(.md-dropdown-container) {
-    visibility: visible;
     position: fixed;
     z-index: $fixed-dropdown-z-index;
     
     :global(.md-dropdown) {
         visibility: visible;
-        pointer-events: auto;
+        pointer-events: none;
+
+        &.interactive {
+            pointer-events: auto;
+        }
     }
 }

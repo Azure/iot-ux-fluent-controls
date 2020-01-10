@@ -116,7 +116,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
      * if the pasted string is malformed to give the user a chance to correct it
      */
     private paste: boolean;
-    private input: HTMLInputElement;
     private _containerRef: HTMLElement;
 
     oldSetState: any;
@@ -273,8 +272,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         return { year, month, date, valid };
     }
 
-    inputRef = (element: HTMLInputElement) => this.input = element;
-
     onChange = (event) => {
         let newValue: string = event.target.value;
         if (newValue === '') {
@@ -412,7 +409,6 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
                         onPaste={this.onPaste}
                         required={this.props.required}
                         disabled={this.props.disabled}
-                        methodRef={this.inputRef}
                         attr={this.props.attr?.input}
                     />
                     <ActionTriggerButton

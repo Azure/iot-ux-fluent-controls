@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, LabelProps, mergeAttributeObjects, Elements as Attr} from '../../Attributes';
+import {DivProps, LabelProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconAttributes} from '../Icon';
 import {Balloon, BalloonAttributes} from '../Balloon';

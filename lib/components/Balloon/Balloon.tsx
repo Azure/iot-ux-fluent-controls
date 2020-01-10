@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import {DivProps, SpanProps, mergeAttributes, Elements as Attr} from '../../Attributes';
+import {SpanProps, mergeAttributes, Elements as Attr} from '../../Attributes';
 import {Dropdown, DropdownPosition, DropdownAlignment} from '../Dropdown';
 import {MethodNode} from '../../Common';
 const css = classNames.bind(require('./Balloon.module.scss'));
