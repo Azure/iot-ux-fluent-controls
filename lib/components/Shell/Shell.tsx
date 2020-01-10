@@ -76,10 +76,10 @@ export function Shell({ theme, masthead, navigation, children, onClick }: ShellP
                     </div>
                 </div>
                 <div 
-                    id='md-dropdown-container'
+                    id='popup-container'
                     aria-live='polite'
                     aria-atomic='true'
-                    className={css('md-dropdown-container')}
+                    className={css('popup-container')}
                 />
             </>
         </ThemeProvider>

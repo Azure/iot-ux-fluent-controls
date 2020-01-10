@@ -84,7 +84,7 @@ export interface DropdownProps {
 export const Dropdown = React.memo(({ className, onMouseEnter, onMouseLeave, attr, dropdown, children, visible, outerEvents, onOuterEvent, positionHint, alignmentHint, showArrow, dropdownSeparation }: DropdownProps) => {
     const dropdownRef = React.useRef<HTMLSpanElement>();
     const hostRef = React.useRef<HTMLSpanElement>();
-    const containerRef = React.useRef<HTMLDivElement>(document.querySelector('#md-dropdown-container'));
+    const containerRef = React.useRef<HTMLDivElement>();
     
     const eventsConnected = React.useRef<boolean>(false);
 
@@ -343,6 +343,14 @@ export const Dropdown = React.memo(({ className, onMouseEnter, onMouseLeave, att
                 </Attr.span>
                 {children}
             </Attr.span>
+            {visible && ReactDOM.createPortal(
+                <Attr.div
+                    className={css('md-dropdown-container', { interactive })}
+                    methodRef={containerRef}
+                    attr={attr?.dropdownContainer}>
+                </Attr.div>,
+                document.querySelector('#popup-container')
+            )}
         </>
     );
 });
