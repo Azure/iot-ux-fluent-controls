@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.18
+### Fixed
+- Fixed dropdown container floating around blocking user interaction.
+
 ## 7.0.17
 ### Changed
 - Use optional chaining when accessing `attr`
