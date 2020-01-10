@@ -85,7 +85,7 @@ export const Alert = React.memo((props: AlertProps) => {
     const iconClassName = css('alert-icon');
     const icon = <Icon
         className={iconClassName}
-        size={IconSize.xsmall}
+        size={IconSize.standard}
         icon={iconName}
         attr={props.attr?.icon}
     />;

@@ -91,30 +91,18 @@
 }
 
 .icon-background {
-    @include circle(var(--icon-size-medium));
+    @include circle(var(--icon-size-standard));
 
-    &.icon-xsmall {
-        @include circle(var(--icon-size-xsmall));
+    &.icon-compact {
+        @include circle(var(--icon-size-compact));
     }
 
-    &.icon-small {
-        @include circle(var(--icon-size-small));
-    }
-
-    &.icon-medium {
-        @include circle(var(--icon-size-medium));
+    &.icon-standard {
+        @include circle(var(--icon-size-standard));
     }
 
     &.icon-large {
         @include circle(var(--icon-size-large));
-    }
-
-    &.icon-xlarge {
-        @include circle(var(--icon-size-xlarge));
-    }
-
-    &.icon-xxlarge {
-        @include circle(var(--icon-size-xxlarge));
     }
 
     &.centered {

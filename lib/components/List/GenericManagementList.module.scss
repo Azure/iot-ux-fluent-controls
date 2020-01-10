@@ -49,7 +49,6 @@ $line-height-small: 4*$grid-size;
             
             font-size: var(--font-size-small);
             line-height: $line-height-small;
-            color: var(--color-text-rest);
             
             padding: $gutter-xxsmall $gutter-normal 0 0;
             vertical-align: bottom;            
@@ -90,8 +89,6 @@ $line-height-small: 4*$grid-size;
             font-family: var(--font-family-default);
             font-size: var(--font-size-default);
             line-height: $line-height-small;
-            color: var(--color-text-rest);
-            background-color: var(--color-bg-table);
 
             vertical-align: bottom;
 

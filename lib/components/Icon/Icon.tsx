@@ -4,18 +4,9 @@ import {Elements as Attr, SpanProps} from '../../Attributes';
 const css = classNames.bind(require('./Icon.module.scss'));
 
 export enum IconSize {
-    // 16px
-    xsmall = 1,
-    // 32px
-    small,
-    // 48px
-    medium,
-    // 64px
+    compact,
+    standard,
     large,
-    // 80px
-    xlarge,
-    // 96px
-    xxlarge
 }
 
 export interface IconAttributes {
@@ -30,12 +21,9 @@ export interface IconProps {
     /**
      * Icon font size as defined by `IconSize` enum
      *
-     * `IconSize.[xsmall | small | medium | large | xlarge | xxlarge]`
+     * `IconSize.[compact | standard | large]`
      *
-     * Starts at 16 pixels (`IconSize.xsmall`) and increases 16 pixels at a
-     * time until 96 pixels (`IconSize.xxlarge`)
-     *
-     * Defaults: `IconSize.medium` (48x48 pixels)
+     * Defaults: `IconSize.standard`
      */
     size?: IconSize;
     /**
@@ -60,7 +48,6 @@ export interface IconProps {
     labelClassName?: string;
 
     children?: React.ReactNode;
-
     attr?: IconAttributes;
 }
 
@@ -78,8 +65,6 @@ export const Icon = React.memo((props: IconProps) => {
         'icon-small': props.size === IconSize.small,
         'icon-medium': props.size == null || props.size === IconSize.medium,
         'icon-large': props.size === IconSize.large,
-        'icon-xlarge': props.size === IconSize.xlarge,
-        'icon-xxlarge': props.size === IconSize.xxlarge,
         'centered': props.centered,
     }, iconClassName, props.className);
 

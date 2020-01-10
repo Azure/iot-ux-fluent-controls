@@ -23,31 +23,32 @@ $line-height: 3.5*$grid-size;
     &:not(.disabled):not(.toggle-on):hover,
     &:not(.disabled):not(.toggle-on):focus {
         .toggle-switch-container {
-            border: 1px solid var(--color-border-toggle-off-hover);
+            border: 1px solid var(--color-foreground-default);
         }
+
         .toggle-switch {
-            background-color: var(--color-circle-toggle-off-hover);
+            background-color: var(--color-foreground-default);
         }
     }
 
     &:focus {
-        outline: 1px dashed var(--color-border-focus);
+        outline: 1px dashed var(--color-accent);
     }
 
     &.toggle-on {
-      &:not(.disabled) .toggle-switch-container {
-            border: 1px solid var(--color-border-toggle-on-rest);
-            background-color: var(--color-bg-toggle-on-rest);
+        &:not(.disabled) .toggle-switch-container {
+            border: 1px solid var(--color-accent);
+            background-color: var(--color-accent);
 
             &:hover {
-                border: 1px solid var(--color-border-toggle-on-hover);
-                background-color: var(--color-bg-toggle-on-hover);
+                border: 1px solid var(--color-accent-hover);
+                background-color: var(--color-accent-hover);
             }
         }
 
         .toggle-switch {
             left: 25px;
-            background-color: var(--color-circle-toggle-on-rest);
+            background-color: var(--color-accent-foreground);
 
             @include rtl {
                 left: unset;
@@ -57,28 +58,28 @@ $line-height: 3.5*$grid-size;
 
         &.disabled {
             .toggle-switch-container {
-                border: 1px solid var(--color-border-toggle-on-disabled);
-                background-color: var(--color-bg-toggle-on-disabled);
+                border: 1px solid var(--color-foreground-disabled);
+                background-color: var(--color-foreground-disabled);
             }
 
             .toggle-switch {
-                background-color: var(--color-circle-toggle-on-disabled);
+                background-color: var(--color-state-disabled);
             }
         }
     }
 
     &.disabled {
         .toggle-switch-container {
-            border: 1px solid var(--color-border-toggle-off-disabled);
+            border: 1px solid var(--color-foreground-disabled);
             cursor: not-allowed;
         }
 
         .toggle-switch {
-            background-color: var(--color-circle-toggle-off-disabled);
+            background-color: var(--color-foreground-disabled);
         }
 
         .toggle-label {
-            color: var(--color-text-disabled);
+            color: var(--color-foreground-disabled);
         }
     }
 }
@@ -86,7 +87,7 @@ $line-height: 3.5*$grid-size;
 .toggle-switch-container {
     display: inline-block;
     vertical-align: middle;
-    border: 1px solid var(--color-border-toggle-off-rest);
+    border: 1px solid var(--color-foreground-inactive);
     background-color: transparent;
     border-radius: $border-toggle-radius;
     width: $toggle-width;
@@ -112,7 +113,7 @@ $line-height: 3.5*$grid-size;
     width: 2.5*$grid-size;
     height: 2.5*$grid-size;
     border-radius: $toggle-switch-border-radius;
-    background-color: var(--color-circle-toggle-off-rest);
+    background-color: var(--color-foreground-inactive);
     transition: $toggle-switch-transition;
 
     pointer-events: none;

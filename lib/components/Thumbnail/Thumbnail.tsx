@@ -6,7 +6,6 @@ const cx = classNames.bind(require('./Thumbnail.module.scss'));
 /**
  * Scalable thumbnail for a product or a device
  */
-
 export interface ThumbnailProperties {
     // if we are loading then the loading state is displayed
     // if not and we have a display url, we load the image

@@ -11,15 +11,11 @@ $line-height-row: $calendar-column-width;
 
 .calendar {
     @include md-box(block, relative);
-    font-family: var(--font-family-default);
-    font-size: var(--font-size-default);
     padding-bottom: 2*$grid-size;
-    color: var(--color-text-rest);
 
     .calendar-header {
         @include md-box(block, relative);
         margin-left: $gutter-xxsmall;
-        font-family: var(--font-family-light);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -51,10 +47,9 @@ $line-height-row: $calendar-column-width;
 
         .calendar-month {
             @include md-box(inline-block, relative);
-            margin-top: 4*$grid-size;
-            color: var(--color-text-rest);
+            margin-top: $gutter-xsmall;
             font-size: var(--font-size-h3);
-            line-height: $line-height-header;
+            line-height: var(--line-height-h3);
             text-align: left;
             vertical-align: top;
             width: 100%;
@@ -97,8 +92,7 @@ $line-height-row: $calendar-column-width;
         margin: 2*$grid-size 0px;
         padding-left: $grid-size;
         padding-bottom: 1.5*$grid-size;
-        border-bottom: 1px solid var(--color-border-rest);
-        color: var(--color-text-rest);
+        border-bottom: 1px solid var(--color-foreground-secondary);
 
         @include rtl {
             padding-left: unset;
@@ -120,12 +114,15 @@ $line-height-row: $calendar-column-width;
         margin-left: $grid-size;
 
         & > button.selected {
-            color: var(--color-text-active);
-            background-color: var(--color-bg-btn-primary-rest);
+            color: var(--color-accent-foreground);
+            background-color: var(--color-accent-selected);
+
+            &:hover, &:focus {
+                background-color: var(--color-accent-selected-hover);
+            }
 
             &:focus {
-                outline: 1px dashed var(--color-outline-btn-primary-focus);
-                background-color: var(--color-bg-btn-primary-focus);
+                outline: 1px dashed var(--color-accent-foreground);
                 outline-offset: -2px;
             }
         }
@@ -144,7 +141,7 @@ $line-height-row: $calendar-column-width;
             border: none;
 
             &:hover:not(.selected), &:focus:not(.selected)  {
-                background-color: var(--color-bg-hover);
+                background-color: var(--color-state-hover);
                 cursor: pointer;
             }
 
@@ -154,7 +151,7 @@ $line-height-row: $calendar-column-width;
 
             &:focus:not(.selected) {
                 outline-offset: -2px;
-                outline: 1px dashed var(--color-border-focus);
+                outline: 1px dashed var(--color-accent);
             }
         }
 
@@ -168,7 +165,7 @@ $line-height-row: $calendar-column-width;
         }
 
         button.disabled {
-            color: var(--color-text-disabled);
+            color: var(--color-foreground-disabled);
         }
     }
 

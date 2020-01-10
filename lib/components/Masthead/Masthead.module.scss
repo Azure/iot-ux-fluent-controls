@@ -12,8 +12,8 @@ $masthead-collapse-start: 125 * $grid-size;
   // Position its content
   display: flex;
   align-items: center;
-  color: var(--color-text-masthead);
-  background-color: var(--color-bg-masthead);
+  color: var(--color-masthead-foreground);
+  background-color: var(--color-masthead-background);
 
   .masthead-logo {
     display: flex;
@@ -25,6 +25,7 @@ $masthead-collapse-start: 125 * $grid-size;
       padding: $gutter-xxsmall $gutter-xsmall $gutter-xxsmall $gutter-xxsmall;
     }
   }
+}
 
   .branding-container {
     display: flex;
@@ -39,79 +40,78 @@ $masthead-collapse-start: 125 * $grid-size;
     }
   }
 
-  .masthead-branding {
-    flex-grow: 1;
-    display: block;
-    padding: 0px $gutter-small;
-    font-size: var(--font-size-h3);
-    font-weight: bold;
-    align-self: center;
-  }
+.masthead-branding {
+  flex-grow: 1;
+  display: block;
+  padding: 0px $gutter-small;
+  font-size: var(--font-size-h3);
+  font-weight: bold;
+  align-self: center;
+}
 
-  .search-input-container {
-    &:not(.expanded) {
-      @media (max-width: $screen-md - 1) {
-        display: none;
-      }
-    }
-
-    &.expanded {
-      max-width: unset;
-      padding: 0 $gutter-normal;
+.search-input-container {
+  &:not(.expanded) {
+    @media (max-width: $screen-md - 1) {
+      display: none;
     }
   }
 
-  .masthead-toolbar-container {
-    flex-grow: 1;
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
+  &.expanded {
+    max-width: unset;
+    padding: 0 $gutter-normal;
   }
+}
+
+.masthead-toolbar-container {
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.masthead-toolbar {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  list-style-type: none;
+
+  // hide the search-button that control the display of search-bar
+  .search-button {
+    @media (min-width: $screen-lg) {
+      display: none;
+    }
+  }
+
+  .more-button {
+    @media (min-width: $screen-sm) {
+      display: none;
+    }
   
-  .masthead-toolbar {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    list-style-type: none;
+    .masthead-toolbar-menu {
+      padding: 0;
+      background-color: var(--color-content-background-primary);
+      color: var(--color-foreground-default);
+      border: 0;
 
-    // hide the search-button that control the display of search-bar
-    .search-button {
-      @media (min-width: $screen-lg) {
-        display: none;
-      }
-    }
-
-    .more-button {
-      @media (min-width: $screen-sm) {
-        display: none;
-      }
-    
-      .masthead-toolbar-menu {
+      ul {
+        list-style: none;
         padding: 0;
-        background-color: var(--color-bg-container-panel);
-        color: var(--color-text-regular);
-        border: 0;
+        width: $layout-nav-expanded-width;
 
-        ul {
-          list-style: none;
-          padding-left: 0;
-          width: $layout-nav-expanded-width;
+        .masthead-toolbar-btn-container {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center; // vertically align
+          text-align: left;
 
-          .masthead-toolbar-btn-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; // vertically align
-            text-align: left;
-
-            button {
-              width: inherit;
-              justify-content: left;
-              padding: 0 1px;
-            }
+          button {
+            width: inherit;
+            justify-content: left;
+            padding: 0 1px;
           }
         }
       }
@@ -140,7 +140,7 @@ $masthead-collapse-start: 125 * $grid-size;
   vertical-align: middle;
   align-content: center;
   color: inherit;
-  color: var(--color-text-masthead);
+  color: var(--color-masthead-foreground);
 
   > div span {
     color: inherit;
@@ -149,7 +149,7 @@ $masthead-collapse-start: 125 * $grid-size;
   &:focus,
   &:active {
     outline-offset: -1px;
-    outline: 1px dashed var(--color-outline-masthead);
+    outline: 1px dashed var(--color-masthead-foreground);
   }
 
   // align all the icons
@@ -161,22 +161,22 @@ $masthead-collapse-start: 125 * $grid-size;
 
   &.masthead-toolbar-btn {
     &:hover {
-      background-color: var(--color-bg-masthead-hover);
+      background-color: var(--color-masthead-button-hover);
     }
 
     &.selected {
-      background-color: var(--color-bg-container-panel);
-      color: var(--color-text-rest);
+      background-color: var(--color-content-background-primary);
+      color: var(--color-foreground-default);
 
       &:focus {
-        outline: 1px dashed var(--color-outline);
+        outline: 1px dashed var(--color-accent);
       }
     }
 
     @media (max-width: $screen-sm + 1) {
-      color: var(--color-text-rest);
+      color: var(--color-foreground-default);
       &:hover {
-        background-color: var(--color-bg-hover);
+        background-color: var(--color-state-hover);
       }
 
       > span {
@@ -189,20 +189,18 @@ $masthead-collapse-start: 125 * $grid-size;
     > span > span {
       // show the label of the action trigger button inside the inline popup of the more button
       @media (min-width: $screen-sm) {
-        // $screen-sm: 480px;
         display: none;
       }
     }
   }
 }
 
-
-// ================= Mobile
+// =============== Mobile
 
 .nav-container {
   // show nav in masthead only in small screens:
   display: none;
-  color: var(--color-text-masthead);
+  color: var(--color-masthead-foreground);
 
   .nav-panel {
     width: $layout-nav-expanded-width;
@@ -219,39 +217,39 @@ $masthead-collapse-start: 125 * $grid-size;
   }
 
   :global(.global-nav-item) {
-    background-color: var(--color-bg-container-panel);
-    color: var(--color-text-regular);
+    background-color: var(--color-content-background-primary);
+    color: var(--color-foreground-default);
     border-left: $grid-size solid transparent;
-    
+
     @include rtl {
       border-left: none;
       border-right: $grid-size solid transparent;
     }
 
-    &:hover,
-    &:active {
-      background-color: var(--color-bg-container-panel);
-      color: var(--color-text-regular);
+    &:active,
+    &:hover {
+      background-color: var(--color-content-background-primary);
+      color: var(--color-foreground-default);
     }
-    
+
     &:global(.global-nav-item-active) {
-      background-color: var(--color-bg-masthead-active);
-      border-color: var(--color-border-navbar-selected);
+      background-color: var(--color-state-selected);
+      border-color: var(--color-accent) !important;
       @extend %semibold;
     }
   }
 
   :global(.global-nav-item-container-title) {
-    background-color: var(--color-bg-container-panel);
-    color: var(--color-text-rest);
+    background-color: var(--color-content-background-primary);
+    color: var(--color-foreground-default);
   }
 
   @media (max-width: $screen-sm - 1) {
     width: $layout-nav-collapsed-width;
     display: initial;
   }
-}
+} 
 
 .separator {
-  border-top: 1px solid var(--color-border-panel);
+  border-top: 1px solid var(--color-state-selected-hover);
 }

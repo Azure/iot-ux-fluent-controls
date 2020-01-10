@@ -16,12 +16,12 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    background-color: var(--color-bg-navbar);
-    border-right: 1px solid var(--color-border-navbar-separator);
+    background-color: var(--color-main-nav-background);
+    border-right: 1px solid var(--color-main-nav-foreground-secondary);
 
     @include rtl {
         border-right: none;
-        border-left: 1px solid var(--color-border-navbar-separator);
+        border-left: 1px solid var(--color-main-nav-foreground-secondary);
     }
 
     .scrollable {
@@ -35,7 +35,7 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
         .global-nav-active-border {
             height: $activeBorderHeight;
             width: $grid-size;
-            background-color: var(--color-border-navbar-selected);
+            background-color: var(--color-accent);
             z-index: $z-index-large-step;
             transition: transform 0.3s ease-in-out;
             margin: -($activeBorderHeight + 2*$grid-size) 0 2*$grid-size $grid-size;
@@ -55,7 +55,7 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
     }
 
     .separator {
-        border-top: 1px solid var(--color-border-navbar-separator);
+        border-top: 1px solid var(--color-main-nav-foreground-secondary);
     }
 
     .far-bottom-container {
@@ -112,32 +112,32 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
     display: flex;
     align-items: center;
 
-    color: var(--color-text-navbar) !important;
-    background-color: var(--color-bg-navbar);
+    color: var(--color-main-nav-foreground-primary);
+    background-color: transparent;
 
     &:hover {
-        background-color: var(--color-bg-navbar-hover);
-        color: inherit;
+        background-color: var(--color-main-nav-background-hover);
+        color: var(--color-main-nav-foreground-primary);
 
         &:global(.global-nav-item-active) {
-            background-color: var(--color-bg-navbar-selected-hover);
+            background-color: var(--color-main-nav-background-hover);
         }
     }
 
     &:active, &:global(.global-nav-item-active) {
-        background-color: var(--color-bg-navbar-selected);
+        background-color: var(--color-main-nav-background-selected);
         @extend %semibold;
     }
 
     &:focus {
         outline-offset: -1px;
-        outline: 1px dashed var(--color-border-navbar-focus);
+        outline: 1px dashed var(--color-accent);
         color: inherit;
     }
 }
 
 :global(.global-nav-item-icon) {
-    font-size: var(--icon-size-xsmall);
+    font-size: var(--icon-size-standard);
     padding-right: $gutter-normal;
     color: inherit;
 
@@ -146,8 +146,9 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
     }
 
     svg {
-        height: var(--icon-size-xsmall);
-        width: var(--icon-size-xsmall);
+        height: var(--icon-size-standard);
+        width: var(--icon-size-standard);
+        fill: currentColor;
     }
 }
 

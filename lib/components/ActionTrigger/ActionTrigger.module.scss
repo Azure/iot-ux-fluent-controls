@@ -6,7 +6,7 @@ $line-height: 4.5*$grid-size;
 .action-trigger-container {
     @include md-box(flex, relative, ellipsis);
     font-family: var(--font-family-default);
-    font-size: var(--icon-size-xsmall);
+    font-size: var(--icon-size-standard);
     line-height: $line-height;
     padding: 0.5*$grid-size $grid-size;
     text-decoration: none;
@@ -19,27 +19,23 @@ $line-height: 4.5*$grid-size;
         }
     }
 
-    a > & {
-        color: var(--color-hyperlink-rest);
-    }
-
     a:hover > & {
-        color: var(--color-hyperlink-hover);
-        background-color: var(--color-bg-hover);
+        color: var(--color-accent-hover);
+        background-color: var(--color-state-hover);
     }
 
     a:focus > & {
         outline-offset: -1px;
-        outline: 1px dashed var(--color-border-focus);
-        color: var(--color-hyperlink-focus);
+        outline: 1px dashed var(--color-accent);
 
         &:not(.disabled) {
-            background-color: var(--color-bg-hover);
+            color: var(--color-accent-hover);
+            background-color: var(--color-state-hover);
         }
     }
 
     &.disabled {
-        color: var(--color-text-disabled);
+        color: var(--color-foreground-disabled);
     }
 
     .suffix {
@@ -80,26 +76,25 @@ $line-height: 4.5*$grid-size;
 
     &.disabled {
         cursor: not-allowed;
-        color: var(--color-text-disabled);
+        color: var(--color-foreground-disabled);
     }
 
     &:not(.disabled) {
         .action-trigger-icon {
-            color: var(--color-text-action-trigger);
+            color: var(--color-foreground-default);
         }
 
-        &:active {
-            background-color: var(--color-bg-selected);
-        }
-
-        &:hover {
-            background-color: var(--color-bg-hover);
+        &:hover, &:focus {
+            background-color: var(--color-state-hover);
         }
 
         &:focus {
             outline-offset: -1px;
-            outline: 1px dashed var(--color-border-focus);
-            background-color: var(--color-bg-hover);
+            outline: 1px dashed var(--color-accent);
+        }
+
+        &:active {
+            background-color: var(--color-state-selected);
         }
     }
 }

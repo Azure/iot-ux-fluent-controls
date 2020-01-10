@@ -1,11 +1,9 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import styled, { ThemeProps } from 'styled-components';
 
 import {DivProps, SpanProps, Elements as Attr} from '../../Attributes';
 import {MethodNode} from '../../Common';
 import {Icon, IconSize, IconAttributes} from '../Icon';
-import { ShellTheme } from '../Shell';
 
 const css = classNames.bind(require('./Pivot.module.scss'));
 
@@ -35,44 +33,24 @@ export interface PivotProps extends React.Props<PivotType> {
     attr?: PivotAttributes;
 }
 
-const StyledPivotBorder = styled(Attr.div)`
-    &&&& {
-        ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest && ('border-bottom: 2px solid' + props.theme.colorBgBtnPrimaryRest) }
-    }
-`;
+export const Pivot = React.memo((props: PivotProps) => {
+    const contents = props.icon
+        ? <Icon
+            icon={props.icon}
+            size={IconSize.standard}
+            className={css('pivot-icon')}
+            labelClassName={css('pivot-icon-label')}
+            attr={props.attr?.icon}
+        >
+            {props.text}
+        </Icon>
+        : <Attr.span
+            className={css('pivot-label')}
+            attr={props.attr?.content}
+        >
+            {props.text}
+        </Attr.span>;
 
-export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
-
-    let contents;
-    if (props.icon) {
-        contents = (
-            <Icon
-                icon={props.icon}
-                size={IconSize.xsmall}
-                className={css('pivot-icon')}
-                labelClassName={css('pivot-icon-label')}
-                attr={props.attr?.icon}
-            >
-                {props.text}
-            </Icon>
-        );
-    } else {
-        contents = (
-            <Attr.span
-                className={css('pivot-label')}
-                attr={props.attr?.content}
-            >
-                {props.text}
-            </Attr.span>
-        );
-    }
-
-    const PivotBorderProxy = props.selected ? StyledPivotBorder : Attr.div;
-
-    /**
-     * Contents are rendered twices to give the pivot height and allow the text
-     * to center vertically
-     */
     return (
         <Attr.div
             className={css('pivot-container', {
@@ -82,32 +60,12 @@ export const Pivot: React.StatelessComponent<PivotProps> = (props) => {
             attr={props.attr?.container}
         >
             {contents}
-            {contents}
-            <PivotBorderProxy
+            <Attr.div
                 className={css('pivot-border')}
                 attr={props.attr?.bottomBorder}
             />
-            <Attr.div
-                className={css('focus-border')}
-                attr={props.attr?.focusBorder}
-            />
-            <Attr.div
-                className={css('pivot-contents')}
-                attr={props.attr?.innerContent}
-            />
         </Attr.div>
     );
-};
-
-Pivot.defaultProps = {
-    text: undefined,
-    attr: {
-        container: {},
-        bottomBorder: {},
-        focusBorder: {},
-        content: {},
-        icon: {container: {}, label: {}},
-    }
-};
+});
 
 export default Pivot;

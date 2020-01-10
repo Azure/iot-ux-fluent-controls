@@ -4,31 +4,30 @@
 // provide some common styling that everyone requires:
 :global {
     .link {
-        color: var(--color-hyperlink-rest);
+        color: var(--color-accent-hover);
 
         &:hover:not(.disabled) {
-            color: var(--color-hyperlink-hover);
+            color: var(--color-accent-selected);
         }
 
         &:focus:not(.disabled) {
             outline-offset: -1px;
-            outline: 1px dashed var(--color-border-focus);
+            outline: 1px dashed var(--color-accent);
         }
 
         &:active:not(.disabled) {
-            color: var(--color-hyperlink-focus);
+            color: var(--color-accent);
         }
 
         &.disabled {
             cursor: not-allowed;
-            color: var(--color-hyperlink-disabled);
+            color: var(--color-foreground-disabled);
         }
     }
 
     .shell {
         height: 100vh;
-        color: var(--color-text-rest);
-        background-color: var(--color-bg-container);
+        color: var(--color-foreground-default);
         // Set positioning to relative so that everything flows from shell
         position: relative;
 
@@ -62,7 +61,7 @@
     // Make sure this is now the main element to position all children
     position: relative;
 
-    background-color: var(--color-bg-container);
+    background-color: var(--color-content-background-primary);
     display: flex;
     flex-direction: column;
     overflow: hidden;

@@ -84,7 +84,7 @@ export const FormLabel: React.StatelessComponent<FormLabelProps> = (props: FormL
         >
             <Icon
                 icon={props.icon}
-                size={IconSize.xsmall}
+                size={IconSize.standard}
                 attr={props.attr?.icon}
             />
         </Balloon> : '';

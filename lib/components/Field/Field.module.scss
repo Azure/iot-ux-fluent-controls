@@ -4,10 +4,7 @@
 $form-error-height: 5*$grid-size;
 $form-label-balloon-width: 75*$grid-size;
 
-$line-height: 5*$grid-size;
-
 .form-field {
-    font-family: var(--font-family-default);
     display: block;
 }
 
@@ -15,18 +12,16 @@ $line-height: 5*$grid-size;
     @extend %semibold;
     @include md-box(inline-block);
     color: inherit;
-    font-size: var(--font-size-default);
-    line-height: $line-height;
     margin-top: $grid-size / 2;
 
     .required &::after {
         content: ' *';
-        color: var(--color-text-required);
+        color: var(--color-status-danger);
     }
 
     &.required::after {
         content: ' *';
-        color: var(--color-text-required);
+        color: var(--color-status-danger);
     }
 
     & + .field-error {
@@ -34,7 +29,7 @@ $line-height: 5*$grid-size;
     }
 
     &.disabled {
-        color: var(--color-text-disabled);
+        color: var(--color-foreground-disabled);
     }
 }
 
@@ -44,7 +39,6 @@ $line-height: 5*$grid-size;
 
     .label-icon {
         margin-left: $gutter-xxsmall;
-        color: var(--color-text-action-trigger);
 
         @include rtl {
             margin-left: unset;
@@ -72,14 +66,13 @@ $line-height: 5*$grid-size;
     @include md-box(block, ellipsis);
     height: $form-error-height;
     width: 100%;
-    color: var(--color-text-error);
+    color: var(--color-status-danger);
 
     display: flex;
     flex-direction: row;
 
-    font-family: var(--font-family-default);
     font-size: var(--font-size-small);
-    line-height: $line-height;
+    line-height: var(--line-height-small);
 
     &.hidden {
         display: none;
