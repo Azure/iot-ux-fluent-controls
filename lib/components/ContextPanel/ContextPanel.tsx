@@ -41,7 +41,7 @@ export const ContextPanel = React.memo((props: ContextPanelProperties) => {
 
 function Panel({ header, children, footer, onClose, attr }: ContextPanelProperties) {
     return (
-        <Attr.aside 
+        <Attr.aside
             className={cx('panel')} 
             attr={attr?.container}>
             <Attr.header className={cx('header', 'panel-container')} attr={attr?.header?.container}>
@@ -52,6 +52,7 @@ function Panel({ header, children, footer, onClose, attr }: ContextPanelProperti
                     {header}
                 </Attr.h2>
                 <ActionTriggerButton
+                    autoFocus={true}
                     icon='cancel'
                     onClick={onClose}
                     attr={attr?.header?.closeButton}
