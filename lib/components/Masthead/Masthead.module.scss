@@ -88,6 +88,7 @@ $search-max-size: 100 * $grid-size;
   .masthead-logo {
     display: flex;
     align-items: center;
+    height: 100%;
     padding: $gutter-xxsmall 0 $gutter-xxsmall $gutter-xsmall;
 
     @include rtl {
