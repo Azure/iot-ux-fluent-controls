@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.19
+### Fixed
+- Fixed height on logo for masthead
+
 ## 7.0.18
 ### Fixed
 - Fixed dropdown container floating around blocking user interaction.
