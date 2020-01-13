@@ -148,7 +148,6 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
     svg {
         height: var(--icon-size-standard);
         width: var(--icon-size-standard);
-        fill: currentColor;
     }
 }
 

@@ -24,18 +24,6 @@
             color: var(--color-foreground-disabled);
         }
     }
-
-    .shell {
-        height: 100vh;
-        color: var(--color-foreground-default);
-        // Set positioning to relative so that everything flows from shell
-        position: relative;
-
-        // Flex will help us position the masthead and workspace to take the full height of the 
-        // viewport correctly
-        display: flex;
-        flex-direction: column;
-    }
 }
 
 .popup-container {
