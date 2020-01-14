@@ -1,8 +1,12 @@
 # CHANGELOG
 
-##7.0.19
+## 7.0.20
 ### Changed
 - Added autofocus to button on flyout for a11y purposes
+
+## 7.0.19
+### Fixed
+- Fixed height on logo for masthead
 
 ## 7.0.18
 ### Fixed
