@@ -27,7 +27,7 @@ export interface ContextPanelProperties {
 
 export const ContextPanel = React.memo((props: ContextPanelProperties) => {
     const panel = <Panel {...props} />;
-    
+
     if (props.omitPortal) {
         return panel;
     }
@@ -42,17 +42,17 @@ export const ContextPanel = React.memo((props: ContextPanelProperties) => {
 function Panel({ header, children, footer, onClose, attr }: ContextPanelProperties) {
     return (
         <Attr.aside
-            className={cx('panel')} 
+            className={cx('panel')}
             attr={attr?.container}>
             <Attr.header className={cx('header', 'panel-container')} attr={attr?.header?.container}>
-                <Attr.h2 
-                    id='context-panel-title' 
-                    className={cx('title', 'inline-text-overflow')} 
+                <Attr.h2
+                    id='context-panel-title'
+                    className={cx('title', 'inline-text-overflow')}
                     attr={attr?.header?.title}>
                     {header}
                 </Attr.h2>
                 <ActionTriggerButton
-                    autoFocus={true}
+                    autoFocus
                     icon='cancel'
                     onClick={onClose}
                     attr={attr?.header?.closeButton}
