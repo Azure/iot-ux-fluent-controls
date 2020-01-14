@@ -26,6 +26,7 @@ $search-max-size: 100 * $grid-size;
   justify-content: space-between;
   color: var(--color-text-masthead);
   background-color: var(--color-bg-masthead);
+  border-bottom: 1px solid transparent; // transparent border to separate masthead in high contrast mode 
 
   .force-hide-search {
     display: none !important;

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.20
+### Fixed
+- Added transparent borders to `Masthead` and `SearchInput` to distinguish from content in high contrast mode
+
 ## 7.0.19
 ### Fixed
 - Fixed height on logo for masthead

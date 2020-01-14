@@ -75,7 +75,7 @@ $border-radius-size: $grid-size/2;
             color: var(--color-text-searchbar-rest);
             padding-left: $search-icon-width;
             border-radius: $border-radius-size;
-            border: 0 !important;
+            border-bottom: 1px solid transparent; // transparent border to separate masthead in high contrast mode 
 
             &::placeholder {
                 color: var(--color-text-searchbar-rest);
