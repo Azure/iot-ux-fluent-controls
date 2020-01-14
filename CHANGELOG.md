@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.20
+### Changed
+- Added autofocus to button on flyout for a11y purposes
+
 ## 7.0.19
 ### Fixed
 - Fixed height on logo for masthead
@@ -141,7 +145,7 @@
 
 ## v6.2.3
 ### Fixed
-- Add the far side container of the form field label only if a far side item is present. 
+- Add the far side container of the form field label only if a far side item is present.
 - Update styles of far side container of form field label.
 
 ## v6.2.2
@@ -210,7 +214,7 @@
 ## v5.2.0
 ## Changed
 - Fixed postinstall script. npm i was looking for it.
-- Changed input background color on dark-theme to be transparent 
+- Changed input background color on dark-theme to be transparent
 - Removed unused icons
 - Removed GalleryCard Component
 

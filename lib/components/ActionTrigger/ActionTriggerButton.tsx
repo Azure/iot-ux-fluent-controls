@@ -13,6 +13,7 @@ export interface ActionTriggerButtonAttributes {
 }
 
 export interface ActionTriggerButtonProps {
+    autoFocus?: boolean;
     /** Icon name (from Segoe UI MDL font) */
     icon: string;
     /** Icon name for icon on the right of ActionTrigger (from Segoe UI MDL font) */
@@ -51,10 +52,11 @@ const StyledButton = styled(Attr.button)`
     }
 `;
 export const ActionTriggerButton = React.memo((props: ActionTriggerButtonProps) => {
-    const { onClick, className, disabled, tabIndex, label, attr, icon, rightIcon } = props;
-
+    const { autoFocus, onClick, className, disabled, tabIndex, label, attr, icon, rightIcon } = props;
+    
     return (
         <StyledButton
+            autoFocus={autoFocus}
             type='button'
             onClick={onClick}
             className={css('action-trigger-button', { disabled }, className)}
