@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.21
+### Fixed
+- Fixed padding/margin on toggle switch when toggle container has padding/margin
+
 ## 7.0.20
 ### Changed
 - Added autofocus to button on flyout for a11y purposes

@@ -95,6 +95,11 @@ $line-height: 3.5*$grid-size;
 
 .toggle-switch {
     @include md-box(block, absolute);
+    // We need the margin and padding inherit, so that
+    // the switch will position correctly if the toggle has
+    // any margin or padding
+    padding: inherit;
+    margin: inherit;
     left: 1.25*$grid-size;
     top: 1.25*$grid-size;
 
