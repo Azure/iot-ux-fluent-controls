@@ -202,8 +202,11 @@ export class DatePicker extends React.Component<DatePickerProps, Partial<DatePic
         };
     }
 
-    static getDerivedStateFromProps(props: DatePickerProps, state: DatePickerState): Partial<DatePickerState> | null {
-        return DatePicker.getInitialState(props, state.value, state.initialValue);
+    componentDidUpdate(previousProps: DatePickerProps) {
+        if ((this.props.initialValue !== previousProps.initialValue 
+            || this.props.localTimezone !== previousProps.localTimezone) && this.props.initialValue !== 'invalid') {
+            this.setState(DatePicker.getInitialState(this.props, this.state.value, this.state.initialValue));
+        }
     }
 
     componentDidMount() {
