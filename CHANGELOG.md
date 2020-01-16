@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.22
+### Fixed
+- Fixed date picker to update values only if necesary props changed
+
 ## 7.0.21
 ### Fixed
 - Fixed padding/margin on toggle switch when toggle container has padding/margin
