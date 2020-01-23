@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.23
+### Fixed
+- Added `instanceCount` to `DateField`/`DateTimeField`/`TextField` to ensure unique IDs
+
 ## 7.0.22
 ### Fixed
 - Fixed date picker to update values only if necesary props changed
