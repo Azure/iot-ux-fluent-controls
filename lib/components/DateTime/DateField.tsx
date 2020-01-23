@@ -3,6 +3,8 @@ import {MethodNode, DateFormat} from '../../Common';
 import {DatePicker, DatePickerAttributes} from './DatePicker';
 import {FormField, FormFieldAttributes} from '../Field/FormField';
 
+let instanceCount = 0; // maintain count to ensure unique IDs (ARIA)
+
 export interface DateFieldType {}
 
 export interface DateFieldProps extends React.Props<DateFieldType> {
@@ -77,7 +79,7 @@ export interface DateFieldProps extends React.Props<DateFieldType> {
  * @deprecated This is not fully localized/accessible. Use https://developer.microsoft.com/en-us/fabric/#/controls/web/datepicker instead.
  */
 export const DateField: React.StatelessComponent<DateFieldProps> = (props: DateFieldProps) => {
-    const errorId = `${props.name}-error`;
+    const errorId = `${props.name}-error-${instanceCount++}`;
     let describedby = errorId;
     const dateAttr: DatePickerAttributes = {
         input: Object.assign({

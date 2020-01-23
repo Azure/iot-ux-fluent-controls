@@ -3,6 +3,8 @@ import {MethodNode} from '../../Common';
 import {TextInput, TextInputAttributes} from '../Input/TextInput';
 import {FormField, FormFieldAttributes} from './FormField';
 
+let instanceCount = 0; // maintain count to ensure unique IDs (ARIA)
+
 export interface TextFieldType {}
 
 export interface TextFieldProps extends React.Props<TextFieldType> {
@@ -71,7 +73,7 @@ export interface TextFieldProps extends React.Props<TextFieldType> {
  * @param props Control properties (defined in `TextFieldProps` interface)
  */
 export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextFieldProps) => {
-    const errorId = `${props.name}-error`;
+    const errorId = `${props.name}-error-${instanceCount++}`;
     let describedby = errorId;
 
     const textAttr: TextInputAttributes = {
