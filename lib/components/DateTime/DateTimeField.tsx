@@ -8,6 +8,8 @@ import { DatePicker, DatePickerAttributes } from './DatePicker';
 import { DivProps, SpanProps, Elements as Attr } from '../../Attributes';
 const css = classNames.bind(require('./DateTimeField.module.scss'));
 
+let instanceCount = 0; // maintain count to ensure unique IDs (ARIA)
+
 export interface DateTimeFieldType { }
 
 export interface DateTimeFieldAttributes {
@@ -300,7 +302,7 @@ export class DateTimeField extends React.Component<DateTimeFieldProps, Partial<D
     }
 
     render() {
-        const errorId = `${this.props.name}-error`;
+        const errorId = `${this.props.name}-error-${instanceCount++}`;
         let describedby = errorId;
         const dateAttr: DatePickerAttributes = {
             input: Object.assign({
