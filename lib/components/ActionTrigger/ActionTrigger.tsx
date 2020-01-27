@@ -65,10 +65,10 @@ export const ActionTrigger = React.memo((props: ActionTriggerProps) => {
                     attr={props.attr?.icon}>
                     {props.label}
                 </Icon>
-                : <>
-                    <span className={iconClassName}>{props.icon}</span>
+                : <span className={iconClassName}>
+                    {props.icon}
                     <span className={labelClassName}>{props.label}</span>
-                </>}
+                </span>}
             {suffix}
         </Attr.div>
     );
