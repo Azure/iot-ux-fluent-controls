@@ -14,7 +14,7 @@ export interface ActionTriggerAttributes {
 
 export interface ActionTriggerProps {
     /** Icon name (from Segoe UI MDL font) */
-    icon: string;
+    icon: string | React.ReactNode;
     /** Icon name for icon on the right of ActionTrigger (from Segoe UI MDL font) */
     rightIcon?: string;
     /** Action trigger label */
@@ -39,6 +39,8 @@ export const ActionTrigger = React.memo((props: ActionTriggerProps) => {
         'disabled': props.disabled,
         'action-trigger-label-empty': !props.label
     }, props.className);
+    const iconClassName = css('action-trigger-icon');
+    const labelClassName = css('action-trigger-label');
 
     let suffix: React.ReactNode;
     if (props.rightIcon) {
@@ -54,14 +56,19 @@ export const ActionTrigger = React.memo((props: ActionTriggerProps) => {
         <Attr.div
             className={className}
             attr={props.attr?.container}>
-            <Icon
-                icon={props.icon}
-                className={css('action-trigger-icon')}
-                labelClassName={css('action-trigger-label')}
-                size={IconSize.xsmall}
-                attr={props.attr?.icon}>
-                {props.label}
-            </Icon>
+            {typeof props.icon === 'string' 
+                ? <Icon
+                    icon={props.icon}
+                    className={iconClassName}
+                    labelClassName={labelClassName}
+                    size={IconSize.xsmall}
+                    attr={props.attr?.icon}>
+                    {props.label}
+                </Icon>
+                : <span className={iconClassName}>
+                    {props.icon}
+                    <span className={labelClassName}>{props.label}</span>
+                </span>}
             {suffix}
         </Attr.div>
     );
