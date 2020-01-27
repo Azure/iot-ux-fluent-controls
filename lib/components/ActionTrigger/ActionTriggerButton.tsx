@@ -15,7 +15,7 @@ export interface ActionTriggerButtonAttributes {
 export interface ActionTriggerButtonProps {
     autoFocus?: boolean;
     /** Icon name (from Segoe UI MDL font) */
-    icon: string;
+    icon: string | React.ReactNode;
     /** Icon name for icon on the right of ActionTrigger (from Segoe UI MDL font) */
     rightIcon?: string;
     /** Action trigger label */

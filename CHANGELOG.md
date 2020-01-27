@@ -1,12 +1,16 @@
 # CHANGELOG
 
+## 7.0.24
+### Fixed
+- Changed `icon` prop in `ActionTrigger` to be of type `string | ReactNode`
+
 ## 7.0.23
 ### Fixed
 - Added `instanceCount` to `DateField`/`DateTimeField`/`TextField` to ensure unique IDs
 
 ## 7.0.22
 ### Fixed
-- Fixed date picker to update values only if necesary props changed
+- Fixed date picker to update values only if necessary props changed
 
 ## 7.0.21
 ### Fixed
