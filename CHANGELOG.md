@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 7.0.25
+### Changed
+- Update NavItemHeight to align with office fabric command bar fluent update
+
+### Fixed
+- Add font family to text input cancel button to properly display it
+
 ## 7.0.24
 ### Fixed
 - Changed `icon` prop in `ActionTrigger` to be of type `string | ReactNode`

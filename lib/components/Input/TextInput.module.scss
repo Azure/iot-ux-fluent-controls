@@ -94,6 +94,7 @@ $line-height-small: 4*$grid-size;
         pointer-events: none;
         cursor: pointer;
         right: 2*$grid-size;
+        font-family: var(--icon-font-family);
 
         @include rtl {
             right: unset;
