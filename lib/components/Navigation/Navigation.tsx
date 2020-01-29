@@ -23,7 +23,7 @@ export interface NavigationItemContainerProperties {
     children: React.ReactNode;
 }
 
-const NavItemHeight = 40;
+const NavItemHeight = 44;
 
 export const Navigation = React.memo(({ isExpanded, onClick, attr, children, farBottomChildren }: NavigationProperties) => {    
     const selectedBorderRef = React.createRef<HTMLDivElement>();
