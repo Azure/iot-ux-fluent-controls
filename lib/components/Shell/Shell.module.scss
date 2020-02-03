@@ -39,6 +39,10 @@
     }
 }
 
+.popup-container {
+    color: var(--color-text-rest);
+}
+
 .nav-and-workspace {
     // this should take all the available space in the screen from shell
     flex-grow: 1;
@@ -63,3 +67,4 @@
     flex-direction: column;
     overflow: hidden;
 }
+

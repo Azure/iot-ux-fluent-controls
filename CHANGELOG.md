@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 7.0.26
+### Fixed
+- Fixed text color on dropdown for tooltip
+
 ## 7.0.25
 ### Changed
 - Update NavItemHeight to align with office fabric command bar fluent update
