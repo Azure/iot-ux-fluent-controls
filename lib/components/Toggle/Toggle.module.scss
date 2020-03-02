@@ -17,6 +17,8 @@ $line-height: 3.5*$grid-size;
     line-height: $line-height;
     background-color: transparent;
     border: none;
+    margin: 0 1px;
+    height: $input-height;
 
     &:not(.disabled):not(.toggle-on):hover,
     &:not(.disabled):not(.toggle-on):focus {
@@ -30,7 +32,6 @@ $line-height: 3.5*$grid-size;
 
     &:focus {
         outline: 1px dashed var(--color-border-focus);
-        outline-offset: 1px;
     }
 
     &.toggle-on {
@@ -99,9 +100,9 @@ $line-height: 3.5*$grid-size;
     // the switch will position correctly if the toggle has
     // any margin or padding
     padding: inherit;
-    margin: inherit;
+    margin: 0;
     left: 1.25*$grid-size;
-    top: 1.25*$grid-size;
+    top: 2.75*$grid-size;
 
     @include rtl {
         left: unset;
