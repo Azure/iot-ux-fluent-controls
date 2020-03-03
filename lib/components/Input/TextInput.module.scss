@@ -77,9 +77,8 @@
         @include md-box(absolute, float-right);
         color: transparent;
         font-size: var(--font-size-small);
-        line-height: var(--line-size-small);
-        height: var(--line-size-small);
-        padding: $grid-size;
+        line-height: var(--line-height-small);
+        height: var(--line-height-small);
         top: 0;
         bottom: 0;
         margin: auto 0;

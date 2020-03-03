@@ -100,9 +100,10 @@
 
     .chevron {
         @include md-box(absolute, block);
-        top: $gutter-xxsmall;
+        top: 0;
         pointer-events: none;
         right: $gutter-xxsmall;
+        line-height: $input-height;
 
         @include rtl {
             right: unset;
