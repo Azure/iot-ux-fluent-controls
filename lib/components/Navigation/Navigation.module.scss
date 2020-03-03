@@ -4,6 +4,7 @@
 $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
 
 .navigation {
+    box-sizing: content-box;
     // don't allow the size of the nav bar to change:
     width: $layout-nav-collapsed-width;
     flex-shrink: 0;
@@ -79,7 +80,7 @@ $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
             :global(.global-nav-item), .top-container, .far-bottom-container {
                 // override the width of the nav-item to match the navbar width and take into account the 1px border
                 // that is used to delimitate the nav from the main content
-                width: calc(#{$layout-nav-collapsed-width} - 1px);
+                width: $layout-nav-collapsed-width;
             }
         }
     }
