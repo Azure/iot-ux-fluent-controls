@@ -58,6 +58,7 @@ $pivot-height: 6*$grid-size;
 
     &.selected {
         color: var(--color-foreground-default);
+        font-weight: bold;
 
         .pivot-icon, .pivot-label, .pivot-icon-label {
             color: var(--color-foreground-default);
@@ -95,6 +96,7 @@ $pivot-height: 6*$grid-size;
         @extend .pivot-icon-label;
         white-space: nowrap;
         height: $pivot-height;
+        padding-top: $grid-size;
     }
 
     .pivot-border {
