@@ -1,18 +1,15 @@
 # CHANGELOG
 
-<<<<<<< HEAD
-## 7.0.27
-## Fixed
-- Outline on toggle was hidden when the component didn't have any space to the left
-- Outline on collapsed navigation didn't show correctly one side
-=======
 ## 8.0.0
 ### Changed
 - Updated CSS library with new color mapping
 - Updated all controls to use new color mapping the appropriate way
-- Updated icons to support new fluent sizes
 - Removed StyledComponent
->>>>>>> Remove styled components and use new color mapping
+
+## 7.0.27
+## Fixed
+- Outline on toggle was hidden when the component didn't have any space to the left
+- Outline on collapsed navigation didn't show correctly one side
 
 ## 7.0.26
 ### Fixed
