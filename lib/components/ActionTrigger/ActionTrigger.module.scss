@@ -6,7 +6,7 @@ $line-height: 4.5*$grid-size;
 .action-trigger-container {
     @include md-box(flex, relative, ellipsis);
     font-family: var(--font-family-default);
-    font-size: var(--icon-size-standard);
+    font-size: var(--icon-size-xsmall);
     line-height: $line-height;
     padding: 0.5*$grid-size $grid-size;
     text-decoration: none;

@@ -4,9 +4,12 @@ import {Elements as Attr, SpanProps} from '../../Attributes';
 const css = classNames.bind(require('./Icon.module.scss'));
 
 export enum IconSize {
-    compact,
-    standard,
+    xsmall,
+    small,
+    medium,
     large,
+    xlarge,
+    xxlarge
 }
 
 export interface IconAttributes {
@@ -21,9 +24,9 @@ export interface IconProps {
     /**
      * Icon font size as defined by `IconSize` enum
      *
-     * `IconSize.[compact | standard | large]`
+     * `IconSize.[xsmall | small | medium | large | xlarge | xxlarge]`
      *
-     * Defaults: `IconSize.standard`
+     * Defaults: `IconSize.medium`
      */
     size?: IconSize;
     /**
@@ -65,6 +68,8 @@ export const Icon = React.memo((props: IconProps) => {
         'icon-small': props.size === IconSize.small,
         'icon-medium': props.size == null || props.size === IconSize.medium,
         'icon-large': props.size === IconSize.large,
+        'icon-xlarge': props.size === IconSize.xlarge,
+        'icon-xxlarge': props.size === IconSize.xxlarge,
         'centered': props.centered,
     }, iconClassName, props.className);
 

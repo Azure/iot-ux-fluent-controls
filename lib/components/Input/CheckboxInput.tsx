@@ -114,7 +114,7 @@ export const CheckboxInput = React.memo((props: CheckboxInputProps) => {
                 />
                 <Icon
                     icon='checkMark'
-                    size={IconSize.standard}
+                    size={IconSize.xsmall}
                     className={css('checkbox-checkmark')}
                     attr={props.attr?.checkmarkIcon}
                 />

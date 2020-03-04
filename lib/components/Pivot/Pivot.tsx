@@ -37,7 +37,7 @@ export const Pivot = React.memo((props: PivotProps) => {
     const contents = props.icon
         ? <Icon
             icon={props.icon}
-            size={IconSize.standard}
+            size={IconSize.xsmall}
             className={css('pivot-icon')}
             labelClassName={css('pivot-icon-label')}
             attr={props.attr?.icon}

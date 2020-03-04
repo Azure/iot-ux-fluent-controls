@@ -32,7 +32,7 @@ $button-max-width: 100%;
         @include md-box(inline-block);
         margin: 0 $grid-size;
 
-        font-size: var(--icon-size-standard);
+        font-size: var(--icon-size-xsmall);
     }
 
     &:disabled {

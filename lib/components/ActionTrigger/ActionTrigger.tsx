@@ -46,7 +46,7 @@ export const ActionTrigger = React.memo((props: ActionTriggerProps) => {
     if (props.rightIcon) {
         suffix = <Icon
             icon={props.rightIcon}
-            size={IconSize.standard}
+            size={IconSize.xsmall}
             className={css('suffix')}
             attr={props.attr?.suffix}
         />;
@@ -61,7 +61,7 @@ export const ActionTrigger = React.memo((props: ActionTriggerProps) => {
                     icon={props.icon}
                     className={iconClassName}
                     labelClassName={labelClassName}
-                    size={IconSize.standard}
+                    size={IconSize.xsmall}
                     attr={props.attr?.icon}>
                     {props.label}
                 </Icon>
