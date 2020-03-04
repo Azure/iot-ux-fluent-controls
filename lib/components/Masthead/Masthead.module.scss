@@ -1,19 +1,7 @@
 @import "../../common/constants";
 @import "../../common/mixins";
 
-$masthead-branding-width: 50%;
-
-$masthead-brandname-width: $grid-size * 50;
-$masthead-application-breakpoint: 3 * $masthead-brandname-width - 1;
 $masthead-collapse-start: 125 * $grid-size;
-$thumbnail-size: 3 * $gutter-xsmall; // match @user-thumbnail-size in Thumbnail.module.scss
-$branding-min-width-size: 30 * $grid-size;
-$search-max-size: 100 * $grid-size;
-
-@mixin action-trigger-override {
-  outline: none;
-  color: var(--color-text-masthead);
-}
 
 .masthead {
   // The masthead should not grow or shrink, it should always be $layout-masthead-height
@@ -23,67 +11,9 @@ $search-max-size: 100 * $grid-size;
 
   // Position its content
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   color: var(--color-text-masthead);
   background-color: var(--color-bg-masthead);
-
-  .force-hide-search {
-    display: none !important;
-  }
-
-  .force-show-search {
-    display: block !important;
-    width: 100%;
-    max-width: unset;
-  }
-
-  .nav-container {
-    // show nav in masthead only in small screens:
-    display: none;
-    color: var(--color-text-masthead);
-
-    .nav-panel {
-      width: $layout-nav-expanded-width;
-      padding: 0;
-      border: 0;
-    }
-
-    .nav-icon-collapsed {
-      transform: rotate(90deg);
-    }
-
-    .nav-icon-expanded {
-      transform: rotate(-90deg);
-    }
-
-    :global(.global-nav-item) {
-      background-color: var(--color-bg-container-panel);
-      color: var(--color-text-regular) !important;
-      border-left: $grid-size solid transparent;
-      @include rtl {
-        border-left: none;
-        border-right: $grid-size solid transparent;
-      }
-
-      &:hover,
-      &:active,
-      &:global(.global-nav-item-active) {
-        background-color: var(--color-bg-masthead-active);
-        border-color: var(--color-border-navbar-selected);
-        @extend %semibold;
-      }
-    }
-
-    :global(.global-nav-item-container-title) {
-      background-color: var(--color-bg-container-panel);
-      color: var(--color-text-rest);
-    }
-
-    @media (max-width: $screen-sm - 1) {
-      width: $layout-nav-collapsed-width;
-      display: initial;
-    }
-  }
 
   .masthead-logo {
     display: flex;
@@ -96,66 +26,68 @@ $search-max-size: 100 * $grid-size;
     }
   }
 
-  .masthead-branding {
-    width: $masthead-branding-width;
-    height: $layout-masthead-height;
-    display: inline-block;
-    padding: 0px $gutter-small;
-    line-height: $layout-masthead-height;
-    font-size: var(--font-size-h3);
-    font-weight: bold;
-    min-width: $branding-min-width-size;
+  .branding-container {
+    display: flex;
+    flex-grow: 1;
+    height: 100%;
+    overflow: hidden;
 
-    @media (max-width: $screen-md - 1) {
-      width: 100%;
+    &.with-search {
+      @media (min-width: $screen-lg) {
+        max-width: calc(50% - #{$search-max-width / 2});
+      }
     }
   }
 
+  .masthead-branding {
+    flex-grow: 1;
+    display: block;
+    padding: 0px $gutter-small;
+    font-size: var(--font-size-h3);
+    font-weight: bold;
+    align-self: center;
+  }
+
   .search-input-container {
-    @media (max-width: $screen-md - 1) {
-      display: none;
+    &:not(.expanded) {
+      @media (max-width: $screen-md - 1) {
+        display: none;
+      }
+    }
+
+    &.expanded {
+      max-width: unset;
+      padding: 0 $gutter-normal;
     }
   }
 
   .masthead-toolbar-container {
-    width: calc(100% - #{$masthead-branding-width});
-    text-align: right;
+    flex-grow: 1;
     position: relative;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .masthead-toolbar {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    list-style-type: none;
 
-    @media (max-width: $screen-md - 1) {
-      width: auto;
+    // hide the search-button that control the display of search-bar
+    .search-button {
+      @media (min-width: $screen-lg) {
+        display: none;
+      }
     }
 
-    .masthead-toolbar {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: flex-end;
-      list-style-type: none;
-
-      // hide the search-button that control the display of search-bar
-      .search-button {
-        @media (min-width: $screen-md) {
-          display: none;
-        }
+    .more-button {
+      @media (min-width: $screen-sm) {
+        display: none;
       }
-
-      .more-button {
-        @media (min-width: $screen-sm) {
-          display: none;
-        }
-      }
-
-      // hide the buttons container if the more button is not selected on small screen
-      // we are reusing the se list of item to populate the toolbar btn container and the inline popup
-      .masthead-toolbar-btn-container:not(.selected-more) {
-        @media (max-width: $screen-sm - 1) {
-          display: none;
-        }
-      }
-
+    
       .masthead-toolbar-menu {
         padding: 0;
         background-color: var(--color-bg-container-panel);
@@ -186,139 +118,140 @@ $search-max-size: 100 * $grid-size;
     }
   }
 
-  .masthead-btn {
-    background-color: transparent;
-    width: $layout-masthead-height;
-    height: $layout-masthead-height;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    white-space: nowrap;
-    text-decoration: none;
-    padding: 0;
-    display: inline-flex;
-    cursor: pointer;
-    vertical-align: middle;
-    align-content: center;
+  // hide the buttons container if the more button is not selected on small screen
+  // we are reusing the se list of item to populate the toolbar btn container and the inline popup
+  .masthead-toolbar-btn-container:not(.selected-more) {
+    @media (max-width: $screen-sm - 1) {
+      display: none;
+    }
+  }
+}
+
+.masthead-btn {
+  background-color: transparent;
+  width: $layout-masthead-height;
+  height: $layout-masthead-height;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 0;
+  display: inline-flex;
+  cursor: pointer;
+  vertical-align: middle;
+  align-content: center;
+  color: inherit;
+  color: var(--color-text-masthead);
+
+  > div span {
     color: inherit;
-    color: var(--color-text-masthead);
+  }
 
-    > div span {
-      color: inherit;
+  &:focus,
+  &:active {
+    outline-offset: -1px;
+    outline: 1px dashed var(--color-outline-masthead);
+  }
+
+  // align all the icons
+  :before {
+    width: var(--icon-size-base);
+    height: var(--icon-size-base);
+    vertical-align: baseline;
+  }
+
+  &.masthead-toolbar-btn {
+    &:hover {
+      background-color: var(--color-bg-masthead-hover);
     }
 
-    &:focus,
-    &:active {
-      outline-offset: -1px;
-      outline: 1px dashed var(--color-outline-masthead);
+    &.selected {
+      background-color: var(--color-bg-container-panel) !important;
+      color: var(--color-text-rest) !important;
+
+      &:focus {
+        outline: 1px dashed var(--color-outline);
+      }
     }
 
-    // align all the icons
-    :before {
-      width: var(--icon-size-base);
-      height: var(--icon-size-base);
-      vertical-align: baseline;
-    }
-
-    &.masthead-toolbar-btn {
+    @media (max-width: $screen-sm + 1) {
+      color: var(--color-text-rest);
       &:hover {
-        background-color: var(--color-bg-masthead-hover);
+        background-color: var(--color-bg-hover);
       }
 
-      &.selected {
-        background-color: var(--color-bg-container-panel) !important;
-        color: var(--color-text-rest) !important;
-
-        &:focus {
-          outline: 1px dashed var(--color-outline);
-        }
+      > span {
+        padding: $gutter-small;
+        width: 100%;
+        justify-content: flex-start;
       }
+    }
 
-      @media (max-width: $screen-sm + 1) {
-        color: var(--color-text-rest);
-        &:hover {
-          background-color: var(--color-bg-hover);
-        }
-
-        > span {
-          padding: $gutter-small;
-          width: 100%;
-          justify-content: flex-start;
-        }
-      }
-
-      > span > span {
-        // show the label of the action trigger button inside the inline popup of the more button
-        @media (min-width: $screen-sm) {
-          // $screen-sm: 480px;
-          display: none;
-        }
+    > span > span {
+      // show the label of the action trigger button inside the inline popup of the more button
+      @media (min-width: $screen-sm) {
+        // $screen-sm: 480px;
+        display: none;
       }
     }
   }
+}
 
-  // RTL
-  @include rtl {
-    .masthead-branding {
-      direction: rtl;
-      margin-left: unset;
-      margin-right: 0;
+
+// ================= Mobile
+
+.nav-container {
+  // show nav in masthead only in small screens:
+  display: none;
+  color: var(--color-text-masthead);
+
+  .nav-panel {
+    width: $layout-nav-expanded-width;
+    padding: 0;
+    border: 0;
+  }
+
+  .nav-icon-collapsed {
+    transform: rotate(90deg);
+  }
+
+  .nav-icon-expanded {
+    transform: rotate(-90deg);
+  }
+
+  :global(.global-nav-item) {
+    background-color: var(--color-bg-container-panel);
+    color: var(--color-text-regular);
+    border-left: $grid-size solid transparent;
+    
+    @include rtl {
+      border-left: none;
+      border-right: $grid-size solid transparent;
     }
 
-    .masthead-toolbar-container {
-      direction: rtl;
-      text-align: left;
-
-      .masthead-toolbar-menu {
-        ul {
-          padding-right: 0;
-        }
-      }
-
-      .masthead-toolbar-btn {
-        border-right: 1px solid var(--color-border-panel);
-        border-left: 0;
-      }
+    &:hover,
+    &:active {
+      background-color: var(--color-bg-container-panel);
+      color: var(--color-text-regular);
     }
-
-    .user-menu-item {
-      .user-label,
-      .user-items {
-        > * {
-          text-align: right;
-        }
-      }
+    
+    &:global(.global-nav-item-active) {
+      background-color: var(--color-bg-masthead-active);
+      border-color: var(--color-border-navbar-selected);
+      @extend %semibold;
     }
+  }
+
+  :global(.global-nav-item-container-title) {
+    background-color: var(--color-bg-container-panel);
+    color: var(--color-text-rest);
+  }
+
+  @media (max-width: $screen-sm - 1) {
+    width: $layout-nav-collapsed-width;
+    display: initial;
   }
 }
 
 .separator {
   border-top: 1px solid var(--color-border-panel);
-}
-
-// MIXIN
-@mixin collapse($count) {
-  $breakpoint: $masthead-collapse-start - $count * $layout-nav-item-height;
-
-  @media (min-width: $breakpoint + 1) {
-    .collapse-#{$count}-inverse {
-      display: none;
-    }
-  }
-
-  @media (max-width: $breakpoint) {
-    .collapse-#{$count} {
-      display: none;
-    }
-  }
-}
-
-@for $i from 0 through 10 {
-  @include collapse($i);
-}
-
-@media (max-width: $masthead-application-breakpoint) {
-  .masthead-branding * + * {
-    display: none;
-  }
 }
