@@ -10,7 +10,7 @@ import { Elements as Attr } from '../../Attributes';
 import { SearchInput } from '../SearchInput/SearchInput';
 import { TextInputAttributes } from '../Input/TextInput';
 import { ShellTheme  } from '../Shell';
-import { Icon } from '../Icon';
+import { Icon, IconSize } from '../Icon';
 
 const cx = classnames.bind(require('./Masthead.module.scss'));
 
@@ -147,7 +147,10 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                         className={cx('nav-container', { 'force-hide-search': expanded })}>
                             <StyledButton
                                 className={cx('masthead-btn')}>
-                                    <Icon icon='chevronRight' className={cx({
+                                    <Icon 
+                                        icon='chevronRight'
+                                        size={IconSize.xsmall}
+                                        className={cx({
                                         'nav-icon-collapsed': !navigation.isExpanded,
                                         'nav-icon-expanded': navigation.isExpanded, 
                                     })} />
@@ -179,7 +182,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                                     attr={{ button: { title: search.label } }}
                                     onClick={search.onExpand}
                                     className={cx('masthead-btn')}>
-                                        <Icon icon='search'/>
+                                        <Icon icon='search' size={IconSize.xsmall} />
                                 </StyledButton>
                             </li>}
                             {more && !more.selected && items}
@@ -194,7 +197,7 @@ export class Masthead extends React.PureComponent<MastheadProperties> {
                                             title={more.title}
                                             onClick={more.onClick}
                                             className={cx('masthead-btn', 'more-menu-btn', { 'selected': more.selected })}>
-                                                <Icon icon='more'/>
+                                                <Icon icon='more' size={IconSize.xsmall} />
                                         </StyledButton>
                                         <InlinePopup.Panel
                                             alignment='right'

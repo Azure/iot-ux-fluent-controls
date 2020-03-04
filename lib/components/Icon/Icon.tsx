@@ -18,14 +18,12 @@ export enum IconSize {
     xxlarge
 }
 
-export interface IconType {}
-
 export interface IconAttributes {
     container?: SpanProps;
     label?: SpanProps;
 }
 
-export interface IconProps extends React.Props<IconType> {
+export interface IconProps {
     /** Icon name (from icons.css) */
     icon: string;
 
@@ -61,6 +59,8 @@ export interface IconProps extends React.Props<IconType> {
      */
     labelClassName?: string;
 
+    children?: React.ReactNode;
+
     attr?: IconAttributes;
 }
 
@@ -71,33 +71,25 @@ export interface IconProps extends React.Props<IconType> {
  *
  * @param props Control properties (Defined in `IconProps` interface)
  */
-export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {
-    let iconClassName = `icon-${props.icon}`;
-    let cls = css({
+export const Icon = React.memo((props: IconProps) => {
+    const iconClassName = `icon-${props.icon}`;
+    const cls = css({
         'icon-xsmall': props.size === IconSize.xsmall,
         'icon-small': props.size === IconSize.small,
-        'icon-medium': props.size === IconSize.medium,
+        'icon-medium': props.size == null || props.size === IconSize.medium,
         'icon-large': props.size === IconSize.large,
         'icon-xlarge': props.size === IconSize.xlarge,
         'icon-xxlarge': props.size === IconSize.xxlarge,
         'centered': props.centered,
     }, iconClassName, props.className);
 
-    let style = { color: props.color };
-    if (props.fontSize) {
-        style['fontSize'] = `${props.fontSize}px`;
+    const style: any = { };
+    if (props.color) {
+        style.color = props.color;
     }
 
-    let label;
-    if (props.children) {
-        label = (
-            <Attr.span
-                className={props.labelClassName}
-                attr={props.attr?.label}
-            >
-                {props.children}
-            </Attr.span>
-        );
+    if (props.fontSize) {
+        style.fontSize = `${props.fontSize}px`;
     }
 
     return (
@@ -106,18 +98,16 @@ export const Icon: React.StatelessComponent<IconProps> = (props: IconProps) => {
             style={style}
             attr={props.attr?.container}
         >
-            {label}
+            {props.children && (
+                <Attr.span
+                    className={props.labelClassName}
+                    attr={props.attr?.label}
+                >
+                    {props.children}
+                </Attr.span>
+            )}
         </Attr.span>
     );
-};
-
-Icon.defaultProps = {
-    icon: undefined,
-    size: IconSize.medium,
-    attr: {
-        container: {},
-        label: {}
-    }
-};
+});
 
 export default Icon;
