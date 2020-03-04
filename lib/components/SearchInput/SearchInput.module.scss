@@ -11,7 +11,6 @@ $border-radius-size: $grid-size/2;
     flex-grow: 1;
     position: relative;
     display: inline-flex;
-    margin: $gutter-xxsmall $gutter-normal;
     max-width: $search-max-width;
     min-width: $search-min-width;
     height: $search-icon-height;
@@ -59,7 +58,7 @@ $border-radius-size: $grid-size/2;
         outline: none;
 
         @include rtl {
-            margin: 0 $gutter-xsmall 0 0; 
+            margin: 0 $gutter-xxsmall 0 0; 
         }
     }
 

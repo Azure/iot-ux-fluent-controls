@@ -8,7 +8,7 @@ import { ActionTriggerAttributes, ActionTriggerButtonAttributes } from '../Actio
 import { Elements as Attr, SpanProps, DivProps } from '../../Attributes';
 import { SearchInput } from '../SearchInput/SearchInput';
 import { TextInputAttributes } from '../Input/TextInput';
-import { Icon } from '../Icon';
+import { Icon, IconSize } from '../Icon';
 
 const cx = classnames.bind(require('./Masthead.module.scss'));
 
@@ -102,8 +102,8 @@ export const Masthead = React.memo((props: MastheadProperties) => {
                         <Icon icon={icon} labelClassName={cx('inline-text-overflow')} size={IconSize.xsmall}>{label}</Icon>
                 </Attr.button>
             </li>
-        );
-    });
+        )
+    })
     
     const searchExpanded = search?.expanded;
 
@@ -134,11 +134,11 @@ export const Masthead = React.memo((props: MastheadProperties) => {
                         }
                     </InlinePopup.Panel>
                 </InlinePopup.Container>
-            };
+            }
             {!searchExpanded && <Attr.div className={cx('branding-container', { 'with-search': !!search })} attr={attr?.brandingContainer}>
                 {logo && <Attr.div key='masthead-logo' className={cx('masthead-logo')} attr={attr?.logo}>{logo}</Attr.div>}
                 <Attr.span key='masthead-branding' title={branding} className={cx('masthead-branding', 'inline-text-overflow')} attr={attr?.branding}>{branding}</Attr.span>
-            </Attr.div>; }
+            </Attr.div>}
             {search && <SearchInput
                 containerClassName={cx('search-input-container', { 'expanded': searchExpanded })}
                 inputClassName={cx('masthead-search-input')}
@@ -147,7 +147,7 @@ export const Masthead = React.memo((props: MastheadProperties) => {
                 onSubmit={search.onSubmit}
                 label={search.label}
                 attr={search.attr}
-            />; }
+            />}
             {!searchExpanded && <Attr.div className={cx('masthead-toolbar-container')}>
                 <ul className={cx('masthead-toolbar')}>
                     {search && <li key='item-search' className={cx('search-button')}>
@@ -188,7 +188,7 @@ export const Masthead = React.memo((props: MastheadProperties) => {
                 </ul >
             </Attr.div>}
         </Attr.div>
-    );
-});
+    )
+})
 
 export default Masthead;
