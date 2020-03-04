@@ -4,6 +4,7 @@
 $activeBorderHeight: $layout-nav-item-height - (4*$grid-size);
 
 .navigation {
+    box-sizing: content-box;
     // don't allow the size of the nav bar to change:
     width: $layout-nav-collapsed-width;
     flex-shrink: 0;

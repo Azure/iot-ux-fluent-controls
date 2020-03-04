@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 7.0.27
+## Fixed
+- Outline on toggle was hidden when the component didn't have any space to the left
+- Outline on collapsed navigation didn't show correctly one side
+
 ## 7.0.26
 ### Fixed
 - Fixed text color on dropdown for tooltip
