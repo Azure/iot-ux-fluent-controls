@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as classNames from 'classnames/bind';
 import styled, { ThemeProps } from 'styled-components';
 
-import {DivProps, ButtonProps, Elements as Attr} from '../../Attributes';
+import {DivProps, Elements as Attr} from '../../Attributes';
 import {MethodNode, autoFocusRef} from '../../Common';
 import { ShellTheme } from '../Shell';
 
@@ -13,7 +13,6 @@ export interface ToggleType {}
 export interface ToggleAttributes {
     container?: DivProps;
     switchContainer?: DivProps;
-    border?: DivProps;
     switch?: DivProps;
     text?: DivProps;
 }

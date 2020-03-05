@@ -165,8 +165,8 @@ $masthead-collapse-start: 125 * $grid-size;
     }
 
     &.selected {
-      background-color: var(--color-bg-container-panel) !important;
-      color: var(--color-text-rest) !important;
+      background-color: var(--color-bg-container-panel);
+      color: var(--color-text-rest);
 
       &:focus {
         outline: 1px dashed var(--color-outline);

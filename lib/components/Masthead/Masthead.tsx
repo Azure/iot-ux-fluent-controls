@@ -149,7 +149,7 @@ export const Masthead = React.memo((props: MastheadProperties) => {
                         </StyledButton>
                     <InlinePopup.Panel alignment='left' className={cx('nav-panel')}>
                         {navigation.children}
-                        { navigation.farBottomChildren &&
+                        {navigation.farBottomChildren &&
                             <>
                                 <div className={cx('separator')}></div>
                                 {navigation.farBottomChildren}
@@ -158,7 +158,7 @@ export const Masthead = React.memo((props: MastheadProperties) => {
                     </InlinePopup.Panel>
                 </InlinePopup.Container>
             }
-            { !searchExpanded && <Attr.div className={cx('branding-container', { 'with-search': !!search })} attr={attr?.brandingContainer}>
+            {!searchExpanded && <Attr.div className={cx('branding-container', { 'with-search': !!search })} attr={attr?.brandingContainer}>
                 {logo && <Attr.div key='masthead-logo' className={cx('masthead-logo')} attr={attr?.logo}>{logo}</Attr.div>}
                 <Attr.span key='masthead-branding' title={branding} className={cx('masthead-branding', 'inline-text-overflow')} attr={attr?.branding}>{branding}</Attr.span>
             </Attr.div>}
