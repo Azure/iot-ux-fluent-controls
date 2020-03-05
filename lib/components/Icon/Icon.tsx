@@ -4,11 +4,17 @@ import {Elements as Attr, SpanProps} from '../../Attributes';
 const css = classNames.bind(require('./Icon.module.scss'));
 
 export enum IconSize {
+    // 16px
     xsmall,
+    // 32px
     small,
+    // 48px
     medium,
+    // 64px
     large,
+    // 80px
     xlarge,
+    // 96px
     xxlarge
 }
 
@@ -26,6 +32,9 @@ export interface IconProps {
      *
      * `IconSize.[xsmall | small | medium | large | xlarge | xxlarge]`
      *
+     * Starts at 16 pixels (`IconSize.xsmall`) and increases 16 pixels at a
+     * time until 96 pixels (`IconSize.xxlarge`)
+     * 
      * Defaults: `IconSize.medium`
      */
     size?: IconSize;
@@ -51,6 +60,7 @@ export interface IconProps {
     labelClassName?: string;
 
     children?: React.ReactNode;
+
     attr?: IconAttributes;
 }
 
