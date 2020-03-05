@@ -22,6 +22,7 @@ $line-height-close: 4*$grid-size;
     .alert-text {
         margin: 1.25*$grid-size 3*$grid-size 0 0;
         padding-bottom: 2*$grid-size;
+        color: inherit;
 
         @include rtl {
             margin: 1.25*$grid-size 0 0 3*$grid-size;
@@ -47,8 +48,20 @@ $line-height-close: 4*$grid-size;
     }
 
     .close-button {
+        &:hover, &:focus {
+            background-color: transparent;
+
+            .close-button-container  > span {
+                    font-weight: bold;
+            }
+        }
+
         &:focus {
             outline-offset: -1px;
+        }
+
+        .close-button-container  > span {
+            color: inherit;
         }
     }
 
@@ -59,113 +72,22 @@ $line-height-close: 4*$grid-size;
     &.alert-info {
         background-color: var(--color-bg-alert-info);
         color: var(--color-text-alert-info);
-
-        .alert-text {
-            color: var(--color-text-alert-info);
-        }
-
-        .close-button {
-            &:hover, &:focus {
-                background-color: var(--color-bg-alert-info-close-hover);
-
-                & > div > span {
-                    font-weight: bold;
-                }
-            }
-        }
-
-        .close-button-container {
-            & > span {
-                color: var(--color-text-alert-info) !important;
-            }
-        
-            &:hover, &:focus {
-                background: transparent;
-            }
         }
     }
 
     &.alert-warning {
         background-color: var(--color-bg-alert-warning);
-        color: var(--color-text-alert-warning);
-
-        .close-button {
-            &:hover, &:focus {
-                background-color: var(--color-bg-alert-warning-close-hover);
-
-                & > div > span {
-                    font-weight: bold;
-                }
-            }
-        }
-
-        .close-button-container {
-            & > span {
-                color: var(--color-text-alert-warning) !important;
-            }
-
-            &:hover, &:focus {
-                background: transparent;
-            }
-        }
+        color: var(--color-text-alert-warning);  
     }
 
     &.alert-error {
         background-color: var(--color-bg-alert-error);
         color: var(--color-text-alert-error);
-
-        .alert-text {
-            color: var(--color-text-alert-error);
-        }
-
-        .close-button {
-            &:hover, &:focus {
-                background-color: var(--color-bg-alert-error-close-hover);
-
-                & > div > span {
-                    font-weight: bold;
-                }
-            }
-        }
-
-        .close-button-container {
-            & > span {
-                color: var(--color-text-alert-error) !important;
-            }
-
-            &:hover, &:focus {
-                background: transparent;
-            }
-        }
     }
 
     &.alert-success {
         background-color: var(--color-bg-alert-success);
         color: var(--color-text-alert-success);
-
-        .alert-text {
-            color: var(--color-text-alert-success);
-        }
-
-        .close-button {
-            &:hover, &:focus {
-                background-color: var(--color-bg-alert-success-close-hover);
-                
-                & > div > span {
-                    font-weight: bold;
-                }                
-            }
-        }
-
-        .close-button-container {
-            & > span {
-                color: var(--color-text-alert-success) !important;
-            }
-
-            &:hover, &:focus {
-                background: transparent;
-            }
-        }
     }
 
     &.alert-multiline {
