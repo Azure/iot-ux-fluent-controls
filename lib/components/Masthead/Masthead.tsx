@@ -122,7 +122,7 @@ export const Masthead = React.memo((props: MastheadProperties) => {
                     attr={attr}
                     onClick={onClick}
                     className={cx('masthead-btn', 'masthead-toolbar-btn', { selected })}>
-                        <Icon icon={icon} labelClassName={cx('inline-text-overflow')} icon={IconSize.xsmall}>{label}</Icon>
+                        <Icon icon={icon} labelClassName={cx('inline-text-overflow')} size={IconSize.xsmall}>{label}</Icon>
                 </StyledButton>
             </li>
         );
