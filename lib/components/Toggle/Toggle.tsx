@@ -12,7 +12,7 @@ export interface ToggleType {}
 
 export interface ToggleAttributes {
     container?: DivProps;
-    button?: ButtonProps;
+    switchContainer?: DivProps;
     border?: DivProps;
     switch?: DivProps;
     text?: DivProps;
@@ -91,7 +91,7 @@ export const Toggle = React.memo((props: ToggleProps) => {
             attr={props.attr?.container}>
             <ToggleSwitchContainerProxy 
                 className={css('toggle-switch-container')}
-                attr={props.attr?.container}
+                attr={props.attr?.switchContainer}
             />
             <ToggleSwitchProxy className={css('toggle-switch')} attr={props.attr?.switch}/>
             <Attr.div className={css('toggle-label')} attr={props.attr?.text}>
