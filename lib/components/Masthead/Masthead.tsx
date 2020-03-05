@@ -102,8 +102,8 @@ export const Masthead = React.memo((props: MastheadProperties) => {
                         <Icon icon={icon} labelClassName={cx('inline-text-overflow')} size={IconSize.xsmall}>{label}</Icon>
                 </Attr.button>
             </li>
-        )
-    })
+        );
+    });
     
     const searchExpanded = search?.expanded;
 
@@ -188,7 +188,7 @@ export const Masthead = React.memo((props: MastheadProperties) => {
                 </ul >
             </Attr.div>}
         </Attr.div>
-    )
-})
+    );
+});
 
 export default Masthead;
