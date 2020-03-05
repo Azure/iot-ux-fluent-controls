@@ -62,7 +62,7 @@ $swatches-horizontal: 3;
         margin-top: -1px; // pulls the inline popup panel up and underneath the container
         background-color: var(--color-content-background-secondary);
         border: 1px solid var(--color-foreground-secondary);
-        box-shadow: -3px 3px 10px -3px var(--color-dark-transparent-primary);
+        box-shadow: var(--depth-2);
         border-radius: $component-border-radius;
 
         &.left {

@@ -20,7 +20,7 @@ $button-width: 30*$grid-size;
     }
 
     background-color: var(--color-content-background-primary);
-    box-shadow: 0 25.6px 57.6px 0 var(--color-dark-transparent-tenth);
+    box-shadow: var(--depth-4);
     
     @include rtl {
         right: unset;
