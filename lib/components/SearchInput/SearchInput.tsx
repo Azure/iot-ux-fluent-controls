@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import { Icon } from '../Icon';
+import { Icon, IconSize } from '../Icon';
 import TextInput, { TextInputType, TextInputAttributes } from '../Input/TextInput';
 import { ActionTriggerButton } from '../ActionTrigger';
 const css = classNames.bind(require('./SearchInput.module.scss'));
@@ -31,7 +31,7 @@ export const SearchInput = React.memo((props: SearchInputProps) => {
 
     return (
         <form className={css('search-input-container', props.containerClassName)} onSubmit={props.onSubmit} role='search'>
-            <Icon icon='search' className={css('search-prefix-icon')} />
+            <Icon icon='search' className={css('search-prefix-icon')} size={IconSize.xsmall} />
             <TextInput
                 name='search-input'
                 value={props.value == null ? '' : props.value}
