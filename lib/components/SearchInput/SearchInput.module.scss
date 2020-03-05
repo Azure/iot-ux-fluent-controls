@@ -72,9 +72,25 @@ $border-radius-size: $grid-size/2;
         input.input-component {
             background-color: var(--color-search-background);
             color: var(--color-masthead-foreground);
-            padding-left: $search-icon-width;
             border-radius: $border-radius-size;
             border: 0 !important;
+
+            padding-left: $search-icon-width;
+
+            @include rtl {
+                padding-left: 2*$grid-size;
+                padding-right: $search-icon-width;
+            }
+
+            &:focus,
+            &:active {
+                padding-left: $search-icon-width;
+
+                @include rtl {
+                    padding-left: 8*$grid-size;
+                    padding-right: $search-icon-width;
+                }
+            }
 
             &::placeholder {
                 color: var(--color-masthead-foreground);
@@ -83,7 +99,10 @@ $border-radius-size: $grid-size/2;
             &:not([value=""]) {
                 border-radius: $border-radius-size 0 0 $border-radius-size;
 
-                &:hover,
+                @include rtl {
+                    border-radius: 0 $border-radius-size $border-radius-size 0;
+                }
+
                 &:focus,
                 &:active {
                     +button::before {
@@ -100,6 +119,14 @@ $border-radius-size: $grid-size/2;
                 width: $search-icon-width;
                 height: $search-icon-width;
                 border-radius: 0 $border-radius-size $border-radius-size 0;
+                
+                @include rtl {
+                    border-radius: $border-radius-size 0 0 $border-radius-size;
+    
+                    span::before {
+                        transform: rotate(180deg);
+                    }
+                }
             }
         }
     }
@@ -123,27 +150,6 @@ $border-radius-size: $grid-size/2;
 
         span {
             color: var(--color-search-button-foreground) !important;
-        }
-    }
-
-    @include rtl {
-        input.input-component {
-            padding-right: $search-icon-width;
-            padding-left: 0;
-
-            &:not([value=""]) {
-                border-radius: 0 $border-radius-size $border-radius-size 0;
-            }
-        }
-
-        .search-button-container {
-            .search-button {
-                border-radius: $border-radius-size 0 0 $border-radius-size;
-
-                span::before {
-                    transform: rotate(180deg);
-                }
-            }
         }
     }
 }
