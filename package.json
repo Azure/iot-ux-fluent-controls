@@ -21,7 +21,7 @@
     "author": "Azure IoT",
     "license": "MIT",
     "engines": {
-        "node": ">=8"
+        "node": ">=12"
     },
     "dependencies": {
         "@microsoft/azure-iot-ux-fluent-css": "^8.0.0",
@@ -40,6 +40,7 @@
         "chai-enzyme": "^0.8.0",
         "enzyme": "^3.7.0",
         "enzyme-adapter-react-16": "^1.6.0",
+        "eslint": ">=6.8.0",
         "ignore-styles": "^5.0.1",
         "jsdom": "^15.2.1",
         "json-loader": "^0.5.7",
