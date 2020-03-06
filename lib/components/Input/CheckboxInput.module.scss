@@ -141,7 +141,7 @@
         outline: none;
     }
 
-    &:not(.disabled)  {
+    &:not(.disabled) {
         input:focus + .checkbox-button {
             outline: 1px dashed var(--color-accent);
             outline-offset: -1px;
