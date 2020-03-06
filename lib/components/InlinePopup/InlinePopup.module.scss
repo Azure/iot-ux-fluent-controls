@@ -45,7 +45,7 @@ $swatches-horizontal: 3;
     &.expanded {
         .inline-popup-label {
             background-color: var(--color-state-selected);
-            border: var(--color-accent);
+            border: var(--color-accent-hover);
             border-bottom: 0px;
             z-index: $z-index-flyouts-inline-btn + 1;
 
