@@ -8,9 +8,7 @@
         position: absolute;
         font-size: var(--font-size-small);
         height: var(--line-height-small);
-        top: 0;
-        bottom: 0;
-        margin: auto 0;
+        top: calc((#{$input-height} - var(--line-height-small)) / 2);
         pointer-events: none;
         right: $gutter-xxsmall;
 

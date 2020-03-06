@@ -36,10 +36,16 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
       }
     }
 
-    &:not(:global(.selected)):hover,
-    &:not(:global(.selected)):focus {
+    &:not(:global(.selected)):hover {
       .card {
         border: 1px solid var(--color-accent);
+        box-shadow: var(--depth-4);
+      }
+    }
+
+    &:not(:global(.selected)):focus {
+      .card {
+        border: 1px dashed var(--color-accent);
         box-shadow: var(--depth-4);
       }
     }

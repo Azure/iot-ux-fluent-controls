@@ -135,7 +135,7 @@
     max-height: $dropdown-max-height;
     overflow-y: auto;
     background-color: var(--color-content-background-primary);
-    border: 1px solid var(--color-foreground-secondary);
+    border: 1px solid var(--color-accent-hover);
 }
 
 .dropdown > div {
