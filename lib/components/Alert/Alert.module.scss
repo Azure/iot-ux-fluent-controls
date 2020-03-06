@@ -70,23 +70,23 @@ $line-height-close: 4*$grid-size;
     }
 
     &.alert-info {
-        background-color: var(--color-bg-alert-info);
-        color: var(--color-text-alert-info);
+        background-color: var(--color-global-background-informational);
+        color: var(--color-global-foreground-informational);
     }
 
     &.alert-warning {
-        background-color: var(--color-bg-alert-warning);
-        color: var(--color-text-alert-warning);  
+        background-color: var(--color-global-background-warning);
+        color: var(--color-global-foreground-warning);
     }
 
     &.alert-error {
-        background-color: var(--color-bg-alert-error);
-        color: var(--color-text-alert-error);
+        background-color: var(--color-global-background-error);
+        color: var(--color-global-foreground-error);
     }
 
     &.alert-success {
-        background-color: var(--color-bg-alert-success);
-        color: var(--color-text-alert-success);
+        background-color: var(--color-global-background-success);
+        color: var(--color-global-foreground-success);
     }
 
     &.alert-multiline {

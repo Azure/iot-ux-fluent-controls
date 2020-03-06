@@ -1,18 +1,16 @@
 @import '../../common/constants';
 @import '../../common/mixins';
 
-$line-height-small: 3*$grid-size;
-
 .checkbox-button {
     @include md-box(inline-block, relative);
     width: 4*$grid-size;
     height: 4*$grid-size;
-    background-color: var(--color-bg-input-rest);
+    background-color: var(--color-content-background-primary);
     outline: none;
     vertical-align: top;
     border-radius: $component-border-radius;
     transition: background-color 0.2s ease-out;
-    border: 1px solid var(--color-border-rest);
+    border: 1px solid var(--color-foreground-secondary);
 }
 
 .checkbox-text {
@@ -32,7 +30,7 @@ $line-height-small: 3*$grid-size;
     top: 1.5*$grid-size;
     width: $grid-size;
     height: $grid-size;
-    background-color: var(--color-text-rest);
+    background-color: var(--color-accent-foreground);
 }
 
 .checkbox-label {
@@ -42,7 +40,7 @@ $line-height-small: 3*$grid-size;
 .checkbox-checkmark {
     @include md-box(display-none, absolute);
     line-height: var(--line-height-xsmall);
-    color: var(--color-border-hover);
+    color: var(--color-foreground-default);
     left: 0;
     cursor: pointer;
 
@@ -54,34 +52,34 @@ $line-height-small: 3*$grid-size;
 
 .checkbox-container:hover {
     &:not(.disabled):not(.selected):not(.indeterminate) .checkbox-button {
-        border: 1px solid var(--color-border-checkbox-hover);
+        border: 1px solid var(--color-foreground-default);
     }
     &:not(.disabled):not(.indeterminate) .checkbox-checkmark {
         display: inline-block;
     }
     &.selected:not(.disabled) .checkbox-checkmark {
-        color: var(--color-checkmark-checkbox);
+        color: var(--color-state-selected-hover);
     }
     &.indeterminate:not(.disabled) .checkbox-fill {
-        background-color: var(--color-bg-input-rest);
+        background-color: var(--color-state-selected-hover);
     }
 }
 
 .checkbox-container.selected {
     .checkbox-button {
         border: none;
-        background-color: var(--color-bg-checkbox-selected);
+        background-color: var(--color-accent);
     }
 
     .checkbox-checkmark {
         display: inline-block;
-        color: var(--color-checkmark-checkbox);
+        color: var(--color-accent-foreground);
     }
 
     &.disabled {
         .checkbox-button {
-            background-color: var(--color-bg-input-disabled);
             border: none;
+            background-color: var(--color-state-disabled);
         }
     }
 }
@@ -91,7 +89,7 @@ $line-height-small: 3*$grid-size;
         display: none;
     }
     .checkbox-button {
-        background-color: var(--color-bg-input-rest);
+        background-color: var(--color-accent);
         border: none;
         cursor: pointer;
     }
@@ -103,7 +101,7 @@ $line-height-small: 3*$grid-size;
     &.disabled {
         .checkbox-button {
             border: none;
-            background-color: var(--color-bg-input-disabled);
+            background-color: var(--color-state-disabled);
         }
     }
 }
@@ -111,7 +109,7 @@ $line-height-small: 3*$grid-size;
 .checkbox-container {
     @include md-box(block, relative);
     line-height: var(--line-height-small);
-    color: var(--color-text-rest);
+    color: var(--color-foreground-default);
 
     & + &:not(.columns) {
         margin-top: $gutter-xsmall;
@@ -130,7 +128,6 @@ $line-height-small: 3*$grid-size;
 
     input {
         @include md-box(inline-block, absolute);
-
         left: 1px;
 
         @include rtl {
@@ -146,31 +143,31 @@ $line-height-small: 3*$grid-size;
 
     &:not(.disabled) {
         input:focus + .checkbox-button {
-            outline: 1px dashed var(--color-border-focus);
+            outline: 1px dashed var(--color-accent);
             outline-offset: -1px;
         }
         &.selected, &.indeterminate {
             input:focus + .checkbox-button {
-                outline: 1px dashed var(--color-border-focus);
+                outline: 1px dashed var(--color-accent-foreground);
                 outline-offset: -1px;
             }
         }
     }
 
     &.disabled {
-        color: var(--color-text-disabled);
-        
+        color: var(--color-foreground-disabled);
+
         .checkbox-button {
-            border: 1px solid var(--color-border-disabled);
-            background-color: var(--color-bg-input-rest);
+            border: 1px solid var(--color-foreground-disabled);
+            background-color: var(--color-state-disabled);
             cursor: not-allowed;
         }
         .checkbox-fill {
-            border: var(--color-text-disabled);
+            background-color: var(--color-foreground-disabled);
             cursor: not-allowed;
         }
         .checkbox-checkmark {
-            color: var(--color-text-disabled);
+            color: var(--color-foreground-disabled);
             cursor: not-allowed;
         }
     }

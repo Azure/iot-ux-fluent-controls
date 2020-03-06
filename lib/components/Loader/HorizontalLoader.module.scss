@@ -103,7 +103,7 @@
         width: $diameter;
         height: $diameter;
         border-radius: $diameter;
-        background-color: var(--color-text-rest);
+        background-color: var(--color-foreground-default);
     }
 
     @for $num from 1 through $num-dots {

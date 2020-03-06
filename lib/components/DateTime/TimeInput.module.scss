@@ -1,10 +1,7 @@
 @import '../../common/constants';
 @import '../../common/mixins';
 
-$line-height: 4*$grid-size;
-
 $z-index-hover: $z-index-small-step;
-$z-index-focus: 2*$z-index-small-step;
 
 .time-input {
     @include md-box(inline-block, relative);
@@ -13,21 +10,18 @@ $z-index-focus: 2*$z-index-small-step;
 
 .time-input-container {
     @include md-box(relative, inline-block);
-    font-family: var(--font-family-default);
-    color: var(--color-text-rest);
-    font-size: var(--font-size-default);
-    line-height: $line-height;
 
     .time-input {
         @include md-box();
         width: 12*$grid-size;
         height: 8*$grid-size;
         outline: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
         appearance: none;
         padding: 0 0 0 $gutter-small;
         border-radius: $component-border-radius;
+        background-color: var(--color-content-background-primary);
+        cursor: pointer;
+        border: 1px solid var(--color-foreground-secondary);
 
         @include rtl {
             padding: 0 $gutter-small 0 0;
@@ -37,42 +31,24 @@ $z-index-focus: 2*$z-index-small-step;
             height: 8*$grid-size;
             padding: 0px 4*$grid-size;
 
-            &:first {
-                display: none;
-            }
-
             &:checked {
-                color: var(--color-text-active);
-                background-color: var(--color-bg-selected);
+                background-color: var(--color-state-selected);
             }
         }
 
-        &:focus {
-            outline-offset: -1px;
-            z-index: $z-index-focus;
-            outline: 1px dashed var(--color-border-focus);
-        }
-
-        background-color: var(--color-bg-input-rest);
-        border: 1px solid var(--color-border-rest);
-
-        &:hover {
-            border: 1px solid var(--color-border-selected);
-            z-index: $z-index-hover;
-        }
-
-        &:active {
-            border: 1px solid var(--color-border-selected);
+        &:hover, &:focus, &:active {
+            border: 1px solid var(--color-accent-hover);
         }
 
         &:disabled {
-            color: var(--color-text-disabled);
-            background-color: var(--color-bg-input-disabled);
-            border: 1px solid var(--color-border-disabled);
+            color: var(--color-foreground-disabled);
+            border: 1px solid var(--color-foreground-disabled);
+            background-color: var(--color-state-hover);
+            cursor: not-allowed;
         }
 
         &.error:not(:disabled) {
-            border: 1px solid var(--color-border-error);
+            border: 1px solid var(--color-status-danger);
         }
     }
 

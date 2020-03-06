@@ -1,14 +1,10 @@
 import * as React from 'react';
 import * as classNames from 'classnames/bind';
-import styled, { ThemeProps } from 'styled-components';
 
 import {DivProps, Elements as Attr} from '../../Attributes';
 import {MethodNode, autoFocusRef} from '../../Common';
-import { ShellTheme } from '../Shell';
 
 const css = classNames.bind(require('./Toggle.module.scss'));
-
-export interface ToggleType {}
 
 export interface ToggleAttributes {
     container?: DivProps;
@@ -17,7 +13,7 @@ export interface ToggleAttributes {
     text?: DivProps;
 }
 
-export interface ToggleProps extends React.Props<ToggleType> {
+export interface ToggleProps {
     on?: boolean;
     /** Disable Action Trigger */
     disabled?: boolean;
@@ -36,21 +32,6 @@ export interface ToggleProps extends React.Props<ToggleType> {
 
     attr?: ToggleAttributes;
 }
-
-const StyledToggleSwitchContainer = styled(Attr.div)`
-    &&&&&& {
-        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryRest };
-        &:hover {
-            background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorBgBtnPrimaryHover };
-        }
-    }
-`;
-
-const StyledToggleOnSwitch = styled(Attr.div)`
-    &&&& {
-        background-color: ${(props: ThemeProps<ShellTheme>) => props.theme.colorTextBtnPrimaryRest};
-    }
-`;
 
 /**
  * Toggle button that is an on or off state
@@ -71,11 +52,8 @@ export const Toggle = React.memo((props: ToggleProps) => {
         ? props.onLabel ?? 'On'
         : props.offLabel ?? 'Off';
 
-    const ToggleSwitchContainerProxy = props.on && !props.disabled ? StyledToggleSwitchContainer : Attr.div;
-    const ToggleSwitchProxy = props.on && !props.disabled ? StyledToggleOnSwitch : Attr.div;
-    
     return (
-        <Attr.button
+        <Attr.button 
             type='button'
             className={containerClassName}
             name={props.name}
@@ -88,11 +66,11 @@ export const Toggle = React.memo((props: ToggleProps) => {
             // the switch role represents the states "on" and "off."
             role='switch'
             attr={props.attr?.container}>
-            <ToggleSwitchContainerProxy 
+            <Attr.div
                 className={css('toggle-switch-container')}
                 attr={props.attr?.switchContainer}
             />
-            <ToggleSwitchProxy className={css('toggle-switch')} attr={props.attr?.switch}/>
+            <Attr.div className={css('toggle-switch')} attr={props.attr?.switch}/>
             <Attr.div className={css('toggle-label')} attr={props.attr?.text}>
                 {label}
             </Attr.div>

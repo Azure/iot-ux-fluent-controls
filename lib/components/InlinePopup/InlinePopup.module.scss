@@ -25,33 +25,32 @@ $swatches-horizontal: 3;
 
         &.disabled {
             cursor: not-allowed;
-            color: var(--color-text-disabled);
+            color: var(--color-foreground-disabled);
 
             &:active, &:hover, &:focus {
                 background-color: inherit;
             }
         }
 
-        &:active, &:hover {
-            background-color: var(--color-bg-hover);
+        &:active, &:hover, &:focus {
+            background-color: var(--color-state-hover);
         }
 
         &:focus {
             outline-offset: -1px;
-            background-color: transparent;
-            outline: 1px dashed var(--color-border-focus);
+            outline: 1px dashed var(--color-accent);
         }
     }
 
     &.expanded {
         .inline-popup-label {
-            background-color: var(--color-bg-content);
-            border: 1px solid var(--color-border-rest);
+            background-color: var(--color-state-selected);
+            border: 1px solid var(--color-accent-hover);
             border-bottom: 0px;
             z-index: $z-index-flyouts-inline-btn + 1;
 
             &:active, &:hover, &:focus {
-                background-color: var(--color-bg-hover);
+                background-color: var(--color-state-selected-hover);
             }
         }
     }
@@ -62,9 +61,9 @@ $swatches-horizontal: 3;
         z-index: $z-index-flyouts-inline-btn;
         padding: $grid-size / 2;
         margin-top: -1px; // pulls the inline popup panel up and underneath the container
-        background-color: var(--color-bg-panel);
-        border: 1px solid var(--color-border-rest);
-        box-shadow: var(--shadow-popup-panel);
+        background-color: var(--color-content-background-secondary);
+        border: 1px solid var(--color-accent-hover);
+        box-shadow: var(--depth-2);
         border-radius: $component-border-radius;
 
         &.left {
@@ -102,8 +101,4 @@ $swatches-horizontal: 3;
     flex-grow: 0;
     flex-shrink: 0;
     line-height: 1;
-
-    &:hover, &:focus {
-        background-color: var(--color-bg-hover);
-    }
 }

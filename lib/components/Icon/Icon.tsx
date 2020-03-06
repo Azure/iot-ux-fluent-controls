@@ -5,7 +5,7 @@ const css = classNames.bind(require('./Icon.module.scss'));
 
 export enum IconSize {
     // 16px
-    xsmall = 1,
+    xsmall,
     // 32px
     small,
     // 48px
@@ -34,8 +34,8 @@ export interface IconProps {
      *
      * Starts at 16 pixels (`IconSize.xsmall`) and increases 16 pixels at a
      * time until 96 pixels (`IconSize.xxlarge`)
-     *
-     * Defaults: `IconSize.medium` (48x48 pixels)
+     * 
+     * Defaults: `IconSize.medium`
      */
     size?: IconSize;
     /**

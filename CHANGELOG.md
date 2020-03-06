@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 8.0.0
+### Changed
+- Updated CSS library with new color mapping
+- Updated all controls to use new color mapping the appropriate way
+- Removed StyledComponent
+
 ## 7.0.27
 ## Fixed
 - Outline on toggle was hidden when the component didn't have any space to the left

@@ -1,152 +1,149 @@
 @import '../../common/constants';
 @import '../../common/mixins';
 
-$line-height: 5*$grid-size;
-$line-height-small: 4*$grid-size;
-
-
 .text-input-container {
     @include md-box(flex, relative);
     width: 100%;
-    font-family: var(--font-family-default);
-    font-size: var(--font-size-default);
-    line-height: $line-height;
+}
 
-    .input-container {
-        @include md-box(block, relative);
-        flex-grow: 1;
+.input-container {
+    @include md-box(block, relative);
+    flex-grow: 1;
+}
+
+.input {
+    @include md-box(block, relative);
+    width: 100%;
+    height: $input-height;
+    border: 1px solid var(--color-foreground-secondary);
+    background-color: var(--color-content-background-primary);
+    outline: none;
+    max-width: 100%;
+    border-radius: $component-border-radius;
+    padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
+    text-overflow: ellipsis;
+
+    @include rtl {
+        padding: 2*$grid-size 3*$grid-size 2*$grid-size 2*$grid-size;
     }
 
-    .input {
-        @include md-box(block, relative);
-        width: 100%;
-        height: $input-height;
-        border: 1px solid var(--color-border-rest);
-        color: var(--color-text-rest);
-        background-color: var(--color-bg-input-rest);
-        outline: none;
-        max-width: 100%;
-        border-radius: $component-border-radius;
-        padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
+    &:valid {
+        padding: 2*$grid-size 3*$grid-size 2*$grid-size 3*$grid-size;
+    }
 
-        @include rtl {
-            padding: 2*$grid-size 3*$grid-size 2*$grid-size 2*$grid-size;
-        }
+    &:active, &:hover, &:focus {
+        // inputs look really weird with a dashed outline, so standardize
+        // on the solid selected border for all the above states:
+        border: 1px solid var(--color-accent-hover);
+    }
 
-        &:valid {
-            padding: 2*$grid-size 3*$grid-size 2*$grid-size 3*$grid-size;
-        }
+    &:active, &:focus {
+        &.show-cancel:not(:disabled) {
+            padding-left: 2*$grid-size;
+            padding-right: 8*$grid-size;
 
-        &:active, &:hover, &:focus {
-            // inputs look really weird with a dashed outline, so standardize
-            // on the solid selected border for all the above states:
-            border: 1px solid var(--color-border-selected);
-        }
+            @include rtl {
+                padding-right: 2*$grid-size;
+                padding-left: 8*$grid-size;
+            }
 
-        &:active, &:focus {
-            &.show-cancel:not(:disabled) {
-                padding-right: 8*$grid-size;
-
-                + .cancel {
-                    color: var(--color-text-regular);
-                    pointer-events: auto;
-                }
+            + .cancel {
+                pointer-events: auto;
+                color: inherit;
             }
         }
-
-        &:disabled {
-            color: var(--color-text-disabled);
-            border: 1px solid var(--color-border-disabled);
-            background-color: var(--color-bg-input-disabled);
-        }
-
-        &::placeholder {
-            color: var(--color-text-disabled);
-        }
-
-        &::placeholder {
-            color: var(--color-text-placeholder);
-        }
-
-        &.error:not(:disabled) {
-            border: 1px solid var(--color-border-error);
-        }
-
-        &::-ms-clear {
-            display: none;
-        }
-
-        &:invalid {
-            box-shadow: none;
-        }
     }
 
-    .cancel {
-        @include md-box(absolute, float-right);
-        color: transparent;
-        font-size: var(--font-size-small);
-        line-height: $line-height-small;
-        padding: $grid-size;
-        top: $grid-size;
-        border: none;
-        background-color: transparent;
-        outline: none;
-        pointer-events: none;
-        cursor: pointer;
-        right: 2*$grid-size;
-        font-family: var(--icon-font-family);
-
-        @include rtl {
-            right: unset;
-            left: 2*$grid-size;
-        }
-
-        &:active {
-            color: var(--color-text-regular);
-            pointer-events: auto;
-        }
-
-        &.no-cancel {
-            display: none;
-        }
+    &:disabled {
+        color: var(--color-foreground-disabled);
+        border: 1px solid var(--color-foreground-disabled);
+        background-color: var(--color-state-disabled);
     }
 
-    .prefix {
-        @include md-box(table-cell, relative);
-        color: var(--color-text-rest);
-        height: $input-height;
-        white-space: nowrap;
-        flex-grow: 0;
-        padding-right: 2*$grid-size;
-
-        @include rtl {
-            padding-right: unset;
-            padding-left: 2*$grid-size;
-        }
+    &::placeholder {
+        color: var(--color-foreground-disabled);
     }
 
-    .postfix {
-        @include md-box(inline-block, relative);
-        color: var(--color-text-rest);
-        height: $input-height;
-        white-space: nowrap;
-        flex-grow: 0;
+    &::placeholder {
+        color: var(--color-foreground-inactive);
+    }
+
+    &.error:not(:disabled) {
+        border: 1px solid var(--color-status-danger);
+    }
+
+    &::-ms-clear {
+        display: none;
+    }
+
+    &:invalid {
+        box-shadow: none;
+    }
+}
+
+.cancel {
+    @include md-box(absolute, float-right);
+    color: transparent;
+    font-size: var(--font-size-small);
+    line-height: var(--line-height-small);
+    height: var(--line-height-small);
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    pointer-events: none;
+    cursor: pointer;
+    right: 2*$grid-size;
+    font-family: var(--icon-font-family);
+
+    @include rtl {
+        right: unset;
+        left: 2*$grid-size;
+    }
+
+    &:active {
+        pointer-events: auto;
+    }
+
+    &.no-cancel {
+        display: none;
+    }
+}
+
+.prefix {
+    @include md-box(table-cell, relative);
+    height: $input-height;
+    white-space: nowrap;
+    flex-grow: 0;
+    padding-right: 2*$grid-size;
+
+    @include rtl {
+        padding-right: unset;
         padding-left: 2*$grid-size;
+    }
+}
 
-        @include rtl {
-            padding-left: unset;
-            padding-right: 2*$grid-size;
-        }
+.postfix {
+    @include md-box(inline-block, relative);
+    height: $input-height;
+    white-space: nowrap;
+    flex-grow: 0;
+    padding-left: 2*$grid-size;
+
+    @include rtl {
+        padding-left: unset;
+        padding-right: 2*$grid-size;
     }
 }
 
 .prefix-addon {
     background-color: transparent;
     padding-right: 2*$grid-size;
-    border-left: 1px solid var(--color-border-rest);
-    border-top:  1px solid var(--color-border-rest);
-    border-bottom:  1px solid var(--color-border-rest);
-    color: var(--color-text-rest);
+    border-left: 1px solid var(--color-foreground-secondary);
+    border-top:  1px solid var(--color-foreground-secondary);
+    border-bottom:  1px solid var(--color-foreground-secondary);
     
     @include rtl {
         padding-right: unset;
@@ -156,10 +153,9 @@ $line-height-small: 4*$grid-size;
 
 .postfix-addon {
     background-color: transparent;
-    border-right:  1px solid var(--color-border-rest);
-    border-top:  1px solid var(--color-border-rest);
-    border-bottom:  1px solid var(--color-border-rest);
-    color: var(--color-text-rest);
+    border-right:  1px solid var(--color-foreground-secondary);
+    border-top:  1px solid var(--color-foreground-secondary);
+    border-bottom:  1px solid var(--color-foreground-secondary);
     padding-left: 2*$grid-size;
 
     @include rtl {

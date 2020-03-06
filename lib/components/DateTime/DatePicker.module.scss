@@ -2,21 +2,12 @@
 @import '../../common/mixins';
 
 $date-picker-dropdown-width: 65*$grid-size;
-
-$line-height-text: 5*$grid-size;
-
 $calendar-z-index: 9 * $z-index-large-step + 5 * $z-index-medium-step;
-
 $calc-margin: 5px;
-
-$date-picker-input-height: 8*$grid-size; 
 
 .date-picker-container {
     @include md-box(relative);
     width: 100%;
-    font-family: var(--font-family-default);
-    color: var(--color-text-rest);
-    line-height: $line-height-text;
 
     .date-picker-input-container {
         @include md-box(block, relative);
@@ -26,41 +17,38 @@ $date-picker-input-height: 8*$grid-size;
     .date-picker-input {
         @include md-box(block, relative);
         width: 100%;
-        height: $date-picker-input-height;
+        height: $input-height;
         padding: $gutter-xxsmall 8*$grid-size $gutter-xxsmall $gutter-xsmall;
         @include rtl {
             padding: $gutter-xxsmall $gutter-xsmall $gutter-xxsmall 8*$grid-size;
         }
 
         outline: none;
-        border: 1px solid var(--color-border-rest);
-        background-color: var(--color-bg-input-rest);
+        border: 1px solid var(--color-foreground-secondary);
+        background-color: var(--color-content-background-primary);
         border-radius: $component-border-radius;
 
-        &:hover, &:focus {
-            border:  1px solid var(--color-border-selected);
-        }
-
-        &:active {
-            border:  1px solid var(--color-border-selected);
+        &:hover, &:focus, &:active {
+            border:  1px solid var(--color-accent-hover);
         }
 
         &:disabled {
-            color: var(--color-text-disabled);
-            background-color: var(--color-bg-input-disabled);
-            border: 1px solid var(--color-border-disabled);
+            color: var(--color-foreground-disabled);
+            background-color: var(--color-state-disabled);
+            border: 1px solid var(--color-foreground-disabled);
+            cursor: not-allowed;
 
             &::placeholder {
-                color: var(--color-text-disabled);
+                color: var(--color-foreground-disabled);
             }
         }
 
         &::placeholder {
-            color: var(--color-text-placeholder);
+            color: var(--color-foreground-inactive);
         }
 
         &.error:not(:disabled) {
-            border: 1px solid var(--color-border-error);
+            border: 1px solid var(--color-status-danger);
         }
 
         &::-ms-clear {
@@ -79,7 +67,7 @@ $date-picker-input-height: 8*$grid-size;
         right: 1px; // acount for input border
         border: none;
         background-color: transparent;
-        height: calc(#{$date-picker-input-height} - 2.5px); // substract the size of the borders so on hover the button doesn't eat up the border
+        height: calc(#{$input-height} - 2.5px); // substract the size of the borders so on hover the button doesn't eat up the border
 
         @include rtl {
             right: unset;
@@ -114,11 +102,12 @@ $date-picker-input-height: 8*$grid-size;
         right: 0;
     }
 
-    background-color: var(--color-bg-input-rest);
-    border: 1px solid var(--color-border-selected);
+    background-color: var(--color-content-background-primary);
+    border: 1px solid var(--color-accent-hover);
+    
     :global(.md-dropdown-container) & {
-        background-color: var(--color-bg-input-rest);
-        border: 1px solid var(--color-border-selected);
+        background-color: var(--color-content-background-primary);
+        border: 1px solid var(--color-accent-hover);
     }
 
     .date-picker-dropdown-triangle {
@@ -136,18 +125,18 @@ $date-picker-input-height: 8*$grid-size;
     &:not(.above) .date-picker-dropdown-triangle {
         bottom: calc(100% - 3px);
 
-        background-color: var(--color-bg-input-rest);
-        border-left: 1px solid var(--color-border-selected);
-        border-top: 1px solid var(--color-border-selected);
+        background-color: var(--color-content-background-primary);
+        border-left: 1px solid var(--color-accent-hover);
+        border-top: 1px solid var(--color-accent-hover);
         transform: rotateZ(45deg);
     }
 
     &.above .date-picker-dropdown-triangle {
         top: calc(100% - 3px);
 
-        background-color: var(--color-bg-input-rest);
-        border-right: 1px solid var(--color-border-selected);
-        border-bottom: 1px solid var(--color-border-selected);
+        background-color: var(--color-content-background-primary);
+        border-right: 1px solid var(--color-accent-hover);
+        border-bottom: 1px solid var(--color-accent-hover);
         transform: rotateZ(45deg);
     }
 }
