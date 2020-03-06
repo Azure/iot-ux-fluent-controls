@@ -45,7 +45,7 @@ $swatches-horizontal: 3;
     &.expanded {
         .inline-popup-label {
             background-color: var(--color-state-selected);
-            border: var(--color-accent-hover);
+            border: 1px solid var(--color-accent-hover);
             border-bottom: 0px;
             z-index: $z-index-flyouts-inline-btn + 1;
 
@@ -62,7 +62,7 @@ $swatches-horizontal: 3;
         padding: $grid-size / 2;
         margin-top: -1px; // pulls the inline popup panel up and underneath the container
         background-color: var(--color-content-background-secondary);
-        border: 1px solid var(--color-foreground-secondary);
+        border: 1px solid var(--color-accent-hover);
         box-shadow: var(--depth-2);
         border-radius: $component-border-radius;
 
