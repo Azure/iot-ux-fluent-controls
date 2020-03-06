@@ -4,10 +4,11 @@
 // provide some common styling that everyone requires:
 :global {
     .link {
-        color: var(--color-accent-hover);
+        color: var(--color-accent);
 
+        &:focus:not(.disabled),
         &:hover:not(.disabled) {
-            color: var(--color-accent-selected);
+            color: var(--color-accent-hover);
         }
 
         &:focus:not(.disabled) {
@@ -16,7 +17,7 @@
         }
 
         &:active:not(.disabled) {
-            color: var(--color-accent);
+            color: var(--color-accent-selected);
         }
 
         &.disabled {
