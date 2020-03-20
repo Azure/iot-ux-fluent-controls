@@ -144,12 +144,12 @@ $border-radius-size: $grid-size/2;
             background-color: var(--color-accent);
 
             span {
-                color: var(--color-search-button-foreground) !important;
+                color: var(--color-accent-foreground) !important;
             }
         }
 
         span {
-            color: var(--color-search-button-foreground) !important;
+            color: var(--color-accent-foreground) !important;
         }
     }
 }
