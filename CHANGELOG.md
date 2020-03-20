@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 8.0.1
+### Changed
+- Moved search input to use accent foreground color
+
+### Fixed
+- Added line height to masthead branding to not cut-out text
+
 ## 8.0.0
 ### Changed
 - Updated CSS library with new color mapping
