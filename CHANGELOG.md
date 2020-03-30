@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 8.0.2
+### Changed
+- GalleryCard SolidBackground can no longer receive a color and has a primary and disabled flags to style it properly. To add a specific style you can still pass className.
+
 ## 8.0.1
 ### Changed
 - Moved search input to use accent foreground color
