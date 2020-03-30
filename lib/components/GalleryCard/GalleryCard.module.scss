@@ -24,28 +24,25 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
   &:not(:global(.disabled)) {
     &:global(.selected) {
       .card {
+        border: 3px solid var(--color-accent-selected);
         box-shadow: var(--depth-3);
-        border: 3px solid var(--color-accent);
+      }
+
+      &:active,
+      &:focus,
+      &:hover {
+        .card {
+          border-color: var(--color-accent-selected-hover);
+          box-shadow: var(--depth-4);
+        }
       }
     }
 
-    &:not(:global(.selected)):active {
-      .card {
-        border: 1px solid var(--color-accent-selected);
-        box-shadow: var(--depth-4);
-      }
-    }
-
+    &:not(:global(.selected)):active,
+    &:not(:global(.selected)):focus,
     &:not(:global(.selected)):hover {
       .card {
-        border: 1px solid var(--color-accent);
-        box-shadow: var(--depth-4);
-      }
-    }
-
-    &:not(:global(.selected)):focus {
-      .card {
-        border: 1px dashed var(--color-accent);
+        border: 1px solid var(--color-accent-hover);
         box-shadow: var(--depth-4);
       }
     }
@@ -101,11 +98,23 @@ $card-fixed-content-height: $gallery-card-height - $gallery-card-background-heig
   @extend %card-background;
   background-color: var(--color-content-background-primary);
 
-  &.blue {
-    background-color: var(--color-accent-selected);
+  &.primary:not(.disabled) {
+    background-color: var(--color-accent);
 
     span {
-      color: var(--color-accent-foreground)
+      color: var(--color-accent-foreground);
+      fill: var(--color-accent-foreground);
+      stroke: var(--color-accent-foreground);
+    }
+  }
+
+  &.disabled {
+    background-color: var(--color-state-disabled);
+
+    span {
+      color: var(--color-foreground-disabled);
+      fill: var(--color-foreground-disabled);
+      stroke: var(--color-foreground-disabled);
     }
   }
 }
