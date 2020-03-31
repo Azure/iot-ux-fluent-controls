@@ -20,16 +20,8 @@
     outline: none;
     max-width: 100%;
     border-radius: $component-border-radius;
-    padding: 2*$grid-size 2*$grid-size 2*$grid-size 3*$grid-size;
+    padding: $gutter-xxsmall;
     text-overflow: ellipsis;
-
-    @include rtl {
-        padding: 2*$grid-size 3*$grid-size 2*$grid-size 2*$grid-size;
-    }
-
-    &:valid {
-        padding: 2*$grid-size 3*$grid-size 2*$grid-size 3*$grid-size;
-    }
 
     &:active, &:hover, &:focus {
         // inputs look really weird with a dashed outline, so standardize
@@ -39,12 +31,12 @@
 
     &:active, &:focus {
         &.show-cancel:not(:disabled) {
-            padding-left: 2*$grid-size;
-            padding-right: 8*$grid-size;
+            padding-left: $gutter-xxsmall;
+            padding-right: $gutter-big;
 
             @include rtl {
-                padding-right: 2*$grid-size;
-                padding-left: 8*$grid-size;
+                padding-right: $gutter-xxsmall;
+                padding-left: $gutter-big;
             }
 
             + .cancel {
@@ -95,12 +87,12 @@
     outline: none;
     pointer-events: none;
     cursor: pointer;
-    right: 2*$grid-size;
+    right: $gutter-xxsmall;
     font-family: var(--icon-font-family);
 
     @include rtl {
         right: unset;
-        left: 2*$grid-size;
+        left: $gutter-xxsmall;
     }
 
     &:active {
@@ -117,11 +109,11 @@
     height: $input-height;
     white-space: nowrap;
     flex-grow: 0;
-    padding-right: 2*$grid-size;
+    padding-right: $gutter-xxsmall;
 
     @include rtl {
         padding-right: unset;
-        padding-left: 2*$grid-size;
+        padding-left: $gutter-xxsmall;
     }
 }
 
@@ -130,24 +122,24 @@
     height: $input-height;
     white-space: nowrap;
     flex-grow: 0;
-    padding-left: 2*$grid-size;
+    padding-left: $gutter-xxsmall;
 
     @include rtl {
         padding-left: unset;
-        padding-right: 2*$grid-size;
+        padding-right: $gutter-xxsmall;
     }
 }
 
 .prefix-addon {
     background-color: transparent;
-    padding-right: 2*$grid-size;
+    padding-right: $gutter-xxsmall;
     border-left: 1px solid var(--color-foreground-secondary);
     border-top:  1px solid var(--color-foreground-secondary);
     border-bottom:  1px solid var(--color-foreground-secondary);
     
     @include rtl {
         padding-right: unset;
-        padding-left: 2*$grid-size;
+        padding-left: $gutter-xxsmall;
     } 
 }
 
@@ -156,10 +148,10 @@
     border-right:  1px solid var(--color-foreground-secondary);
     border-top:  1px solid var(--color-foreground-secondary);
     border-bottom:  1px solid var(--color-foreground-secondary);
-    padding-left: 2*$grid-size;
+    padding-left: $gutter-xxsmall;
 
     @include rtl {
         padding-left: unset;
-        padding-right: 2*$grid-size;
+        padding-right: $gutter-xxsmall;
     }
 }
