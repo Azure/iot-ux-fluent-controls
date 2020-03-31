@@ -57,11 +57,9 @@
     &:not(.disabled):not(.indeterminate) .checkbox-checkmark {
         display: inline-block;
     }
-    &.selected:not(.disabled) .checkbox-checkmark {
-        color: var(--color-state-selected-hover);
-    }
-    &.indeterminate:not(.disabled) .checkbox-fill {
-        background-color: var(--color-state-selected-hover);
+    &.selected:not(.disabled) .checkbox-button,
+    &.indeterminate:not(.disabled) .checkbox-button {
+        background-color: var(--color-accent-hover);
     }
 }
 
