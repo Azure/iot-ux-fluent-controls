@@ -50,10 +50,10 @@
         color: var(--color-foreground-disabled);
         border: 1px solid var(--color-foreground-disabled);
         background-color: var(--color-state-disabled);
-    }
 
-    &::placeholder {
-        color: var(--color-foreground-disabled);
+        &::placeholder {
+            color: var(--color-foreground-disabled);
+        }
     }
 
     &::placeholder {
