@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 8.0.3
+### Changed
+- Update controls
+- Made shell use the new link colors
+
+### Fixed
+- Loading indicators use accent color
+- Normalized padding in text input across states to avoid jumpiness
+- Updated colors on checkbox states to use correct accent shades
+
 ## 8.0.2
 ### Changed
 - GalleryCard SolidBackground can no longer receive a color and has a primary and disabled flags to style it properly. To add a specific style you can still pass className.
