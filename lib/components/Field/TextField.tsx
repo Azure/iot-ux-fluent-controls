@@ -80,7 +80,8 @@ export const TextField: React.StatelessComponent<TextFieldProps> = (props: TextF
         container: props.attr?.container,
         input: Object.assign({
             'aria-label': props.label,
-            'aria-describedby': describedby
+            'aria-describedby': describedby,
+            'aria-required': props.required
         }, props.attr?.input),
         inputContainer: props.attr?.inputContainer,
         prefix: props.attr?.prefix,

@@ -87,6 +87,7 @@ export const RadioField: React.StatelessComponent<RadioFieldProps> = (props: Rad
             label: props.attr?.label,
             input: Object.assign({
                 'aria-label': option.label,
+                'aria-required': props.required
             }, props.attr?.input),
             radio: props.attr?.radio,
             text: props.attr?.text,

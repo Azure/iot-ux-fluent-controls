@@ -151,6 +151,7 @@ export const ComboField: React.StatelessComponent<ComboFieldProps> = (props: Com
         host: props.attr?.host,
         input: Object.assign({
             'aria-label': props.label,
+            'aria-required': props.required
         }, props.attr?.input),
         clearButton: props.attr?.clearButton,
         textbox: props.attr?.textbox,
