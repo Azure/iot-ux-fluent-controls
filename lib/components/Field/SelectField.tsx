@@ -72,6 +72,7 @@ export const SelectField: React.StatelessComponent<SelectFieldProps> = (props: S
         container: props.attr?.container,
         select: Object.assign({
             'aria-label': props.label,
+            'aria-required': props.required
         }, props.attr?.select),
         option: props.attr?.option,
         chevron: props.attr?.chevron,

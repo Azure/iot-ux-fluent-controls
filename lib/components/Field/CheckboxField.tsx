@@ -62,6 +62,7 @@ export const CheckboxField: React.StatelessComponent<CheckboxFieldProps> = (prop
         container: props.attr?.container,
         input: Object.assign({
             'aria-label': props.label,
+            'aria-required': props.required
         }, props.attr?.input),
         label: props.attr?.label,
         text: props.attr?.text,

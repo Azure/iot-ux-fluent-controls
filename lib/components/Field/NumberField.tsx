@@ -66,6 +66,7 @@ export const NumberField: React.StatelessComponent<NumberFieldProps> = (props: N
         container: props.attr?.container,
         input: Object.assign({
             'aria-label': props.label,
+            'aria-required': props.required
         }, props.attr?.input),
         inputContainer: props.attr?.inputContainer,
         prefix: props.attr?.prefix,

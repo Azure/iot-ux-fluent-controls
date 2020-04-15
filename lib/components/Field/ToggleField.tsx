@@ -59,6 +59,7 @@ export const ToggleField = React.memo((props: ToggleFieldProps) => {
     const toggleAttr: ToggleAttributes = {
         container: Object.assign({
             'aria-label': props.label,
+            'aria-required': props.required
         }, props.attr?.container),
         switchContainer: props.attr?.switchContainer,
         switch: props.attr?.switch,

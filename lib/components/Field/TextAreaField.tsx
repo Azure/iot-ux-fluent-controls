@@ -62,6 +62,7 @@ export const TextAreaField: React.StatelessComponent<TextAreaFieldProps> = (prop
         container: props.attr?.container,
         textarea: Object.assign({
             'aria-label': props.label,
+            'aria-required': props.required
         }, props.attr?.textarea),
         pre: props.attr?.pre
     };
