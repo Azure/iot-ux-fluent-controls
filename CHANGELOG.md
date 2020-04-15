@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 8.0.4
+### Changed
+- Updated fields to pass in `aria-required={props.required}` to input
+
 ## 8.0.3
 ### Changed
 - Update controls
