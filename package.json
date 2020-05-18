@@ -1,6 +1,6 @@
 {
     "name": "@microsoft/azure-iot-ux-fluent-controls",
-    "version": "8.0.4",
+    "version": "8.0.5",
     "description": "Azure IoT UX Fluent Controls",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
@@ -45,7 +45,7 @@
         "jsdom": "^15.2.1",
         "json-loader": "^0.5.7",
         "mocha": "^7.1.1",
-        "node-sass": "^4.13.1",
+        "node-sass": "^4.14.1",
         "nyc": "^14.1.1",
         "react": "^16.11.0",
         "react-dom": "^16.11.0",

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 8.0.5
+### Fixed
+- When a FormField was rendered with no error, we were setting the FormError's title to `false`, causing a react warning.
+- Updated node-sass to fix npm audit warnings.
+
 ## 8.0.4
 ### Changed
 - Updated fields to pass in `aria-required={props.required}` to input
