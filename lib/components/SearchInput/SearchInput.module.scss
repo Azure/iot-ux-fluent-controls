@@ -15,7 +15,8 @@ $border-radius-size: $grid-size/2;
     min-width: $search-min-width;
     height: $search-icon-height;
     border-radius: $border-radius-size;
-
+    box-shadow: var(--depth-1);
+    
     .search-input input.input-component:not([value=""]) {
         +button::before {
             display: none;

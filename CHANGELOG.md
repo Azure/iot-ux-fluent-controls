@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 8.0.6
+### Changed
+- Added box-shadow to search bar to be accessible on light mastheads.
+
 ## 8.0.5
 ### Fixed
 - When a FormField was rendered with no error, we were setting the FormError's title to `false`, causing a react warning.
