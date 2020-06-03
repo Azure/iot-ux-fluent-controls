@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 8.0.7
+### Changed
+- Added border for all states of toggle control for visibility in high contrast mode
+
 ## 8.0.6
 ### Changed
 - Added box-shadow to search bar to be accessible on light mastheads.
