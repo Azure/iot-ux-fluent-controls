@@ -10,15 +10,6 @@ $toggle-switch-border-radius: 5px;
 
 $line-height: 3.5*$grid-size;
 
-:root {
---color-foreground-inactive: grey;
---color-foreground-default: grey;
---color-accent: lightGrey;
---color-accent-foreground: darkBlue;
-
---color-accent-hover: grey;
-}
-
 .toggle {
     @include md-box(inline-block, relative);
     vertical-align: middle;
